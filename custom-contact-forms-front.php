@@ -13,7 +13,6 @@ if (!class_exists('CustomContactFormsFront')) {
 		var $current_thank_you_message;
 
 		function frontInit() {
-			ccf_utils::startSession();
 			$this->processForms();
 		}
 		
@@ -196,6 +195,7 @@ if (!class_exists('CustomContactFormsFront')) {
 		}
 		
 		function getFormCode($form, $is_widget_form = false) {
+			ccf_utils::startSession();
 			if (empty($form)) return '';
 			$admin_options = parent::getAdminOptions();
 			$form_key = time();
