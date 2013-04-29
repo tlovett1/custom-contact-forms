@@ -223,13 +223,13 @@ if (!class_exists('CustomContactFormsFront')) {
 				$req = ($field->field_required == 1 or $field->field_slug == 'ishuman') ? '* ' : '';
 				$req_long = ($field->field_required == 1) ? ' ' . __('(required)', 'custom-contact-forms') : '';
 				$input_id = 'id="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'-'.$form_key.'"';
-				$field_value = ccf_utils::decodeOption($field->field_value, 1, 1);
+				$field_value = esc_attr( ccf_utils::decodeOption($field->field_value, 1, 1) );
 				$instructions = (empty($field->field_instructions)) ? '' : 'title="' . esc_attr($field->field_instructions) . $req_long . '" ';
 				$tooltip_class = (empty($field->field_instructions)) ? '' : 'ccf-tooltip-field';
 				if ($admin_options['enable_widget_tooltips'] == 0 && $is_widget_form) $instructions = '';
 				if (isset($_SESSION['ccf_fields'][$field->field_slug])) {
 					if ($admin_options['remember_field_values'] == 1)
-						$field_value = $_SESSION['ccf_fields'][$field->field_slug];
+						$field_value = esc_attr( $_SESSION['ccf_fields'][$field->field_slug] );
 				} if ($field->field_slug == 'captcha') {
 					$out .= '<div>' . "\n" . $this->getCaptchaCode($field, $form->id) . "\n" . '</div>' . "\n";
 				} elseif ( $field->field_slug == 'recaptcha' ) {
