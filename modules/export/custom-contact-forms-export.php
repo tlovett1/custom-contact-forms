@@ -132,6 +132,13 @@ if (!class_exists('CustomContactFormsExport')) {
 		function importFromFile($file, $settings = array('mode' => 'clear_import', 'import_general_settings' => false, 'import_forms' => true,'import_fields' => true, 'import_field_options' => true, 'import_styles' => true, 'import_saved_submissions' => false)) {
 			$path = CCF_BASE_PATH. 'import/';
 			$file_name = basename(time() . $file['name']);
+			$file_extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+
+			if ( stripos( $file_extension, 'sql' ) ) {
+				unlink( $file['tmp_name'] );
+				wp_die( 'You can only import .sql files.' );
+			}
+
 			if (move_uploaded_file($file['tmp_name'], $path . $file_name)) {
 				$data = file_get_contents($path . $file_name);
 				$data = preg_replace('/^#.*?[\n\r]*$/ims', '', $data);
