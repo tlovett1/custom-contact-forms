@@ -248,6 +248,10 @@ if (!class_exists('CustomContactFormsFront')) {
 				} elseif ($field->field_type == 'Text') {
 					$maxlength = (empty($field->field_maxlength) or $field->field_maxlength <= 0) ? '' : ' maxlength="'.esc_attr($field->field_maxlength).'"';
 					$out .= '<div>'."\n".'<label for="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'">'. $req .ccf_utils::decodeOption($field->field_label, 1, 1).'</label>'."\n".'<input class="'.esc_attr($field->field_class).' '.$tooltip_class.'" '.$instructions.' '.$input_id.' type="text" name="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'" value="'.$field_value.'"'.$maxlength.''.$code_type.'>'."\n".'</div>' . "\n";
+				} elseif ($field->field_type == 'Fieldset') {
+					if(!empty($fieldset)) $out .= '</fieldset>' . "\n";
+					$fieldset = true;					
+					$out .= '<fieldset id="' . ccf_utils::decodeOption($field->field_slug, 1, 1) . '" class="'.esc_attr($field->field_class).'">'."\n".'<legend for="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'">'. $req .ccf_utils::decodeOption($field->field_label, 1, 1).'</legend>'."\n";
 				} elseif ($field->field_type == 'File') {
 					$file_upload_form = ' enctype="multipart/form-data" ';
 					$out .= '<div>'."\n".'<label for="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'">'. $req .ccf_utils::decodeOption($field->field_label, 1, 1).'</label>'."\n".'<input class="'.esc_attr($field->field_class).' '.$tooltip_class.'" '.$instructions.' '.$input_id.' type="file" name="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'" value="'.$field_value.'"'.$code_type.'>'."\n".'</div>' . "\n";
@@ -299,6 +303,9 @@ if (!class_exists('CustomContactFormsFront')) {
 					if (!empty($options)) $out .= '<div>'."\n".$field_label."\n".$field_options."\n".'</div>' . "\n";
 				}
 			}
+
+			if(!empty($fieldset)) $out .= '</fieldset>' . "\n";
+
 			if (!empty($file_upload_form))
 				$out = '<input type="hidden" name="MAX_FILE_SIZE" value="'.(intval($admin_options['max_file_upload_size']) * 1000 * 1000).'" />' . "\n" . $out;
 			$out = '<form id="'.$form_id.'" method="'.esc_attr($form_method).'" action="'.esc_url($action).'" class="'.esc_attr($style_class).'"'.$file_upload_form.'>' . "\n" . $out;
