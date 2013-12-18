@@ -304,14 +304,13 @@ if (!class_exists('CustomContactFormsFront')) {
 				}
 			}
 
-			if(!empty($fieldset)) $out .= '</fieldset>' . "\n";
-
 			if (!empty($file_upload_form))
 				$out = '<input type="hidden" name="MAX_FILE_SIZE" value="'.(intval($admin_options['max_file_upload_size']) * 1000 * 1000).'" />' . "\n" . $out;
 			$out = '<form id="'.$form_id.'" method="'.esc_attr($form_method).'" action="'.esc_url($action).'" class="'.esc_attr($style_class).'"'.$file_upload_form.'>' . "\n" . $out;
 			$submit_text = (!empty($form->submit_button_text)) ? ccf_utils::decodeOption($form->submit_button_text, 1, 0) : __('Submit', 'custom-contact-forms');
 			$out .= '<input name="form_page" value="'.esc_url($_SERVER['REQUEST_URI']).'" type="hidden"'.$code_type.'>'."\n".'<input type="hidden" name="fid" value="'.esc_attr($form->id).'"'.$code_type.'>'."\n".$hiddens."\n".'<input type="submit" id="submit-' . esc_attr($form->id) . '-'.$form_key.'" class="submit" value="' . $submit_text . '" name="customcontactforms_submit"'.$code_type.'>';
 			if (!empty($add_reset)) $out .= $add_reset;
+			if (!empty($fieldset)) $out .= '</fieldset>' . "\n";
 			$out .= "\n" . '</form>';
 			
 			if ($form->form_style != 0) {
