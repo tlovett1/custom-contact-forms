@@ -245,23 +245,23 @@ if (!class_exists('CustomContactFormsFront')) {
 					$out .= '<div>' . "\n" . $this->getCountriesCode($field, $form->id) . "\n" . '</div>' . "\n";
 				} elseif ($field->field_slug == 'resetButton') {
 					$add_reset = ' <input type="reset" '.$instructions.' class="reset-button '.$field->field_class.' '.$tooltip_class.'" value="' . esc_attr($field->field_value) . '" />';
-				} elseif ($field->field_type == 'Text') {
-					$maxlength = (empty($field->field_maxlength) or $field->field_maxlength <= 0) ? '' : ' maxlength="'.esc_attr($field->field_maxlength).'"';
-					$out .= '<div>'."\n".'<label for="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'">'. $req .ccf_utils::decodeOption($field->field_label, 1, 1).'</label>'."\n".'<input class="'.esc_attr($field->field_class).' '.$tooltip_class.'" '.$instructions.' '.$input_id.' type="text" name="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'" value="'.$field_value.'"'.$maxlength.''.$code_type.'>'."\n".'</div>' . "\n";
 				} elseif ($field->field_type == 'Fieldset') {
 					if(!empty($fieldset)) $out .= '</fieldset>' . "\n";
 					$fieldset = true;					
 					$out .= '<fieldset id="' . ccf_utils::decodeOption($field->field_slug, 1, 1) . '" class="'.esc_attr($field->field_class).'">'."\n".'<legend>'. $req .ccf_utils::decodeOption($field->field_label, 1, 1).'</legend>'."\n";
+				} elseif ($field->field_type == 'Text') {
+					$maxlength = (empty($field->field_maxlength) or $field->field_maxlength <= 0) ? '' : ' maxlength="'.esc_attr($field->field_maxlength).'"';
+					$out .= '<div class="'.esc_attr($field->field_class).' '.$tooltip_class.'">'."\n".'<label for="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'">'. $req .ccf_utils::decodeOption($field->field_label, 1, 1).'</label>'."\n".'<input '.$instructions.' '.$input_id.' type="text" name="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'" value="'.$field_value.'"'.$maxlength.''.$code_type.'>'."\n".'</div>' . "\n";
 				} elseif ($field->field_type == 'File') {
 					$file_upload_form = ' enctype="multipart/form-data" ';
-					$out .= '<div>'."\n".'<label for="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'">'. $req .ccf_utils::decodeOption($field->field_label, 1, 1).'</label>'."\n".'<input class="'.esc_attr($field->field_class).' '.$tooltip_class.'" '.$instructions.' '.$input_id.' type="file" name="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'" value="'.$field_value.'"'.$code_type.'>'."\n".'</div>' . "\n";
+					$out .= '<div class="'.esc_attr($field->field_class).' '.$tooltip_class.'">'."\n".'<label for="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'">'. $req .ccf_utils::decodeOption($field->field_label, 1, 1).'</label>'."\n".'<input '.$instructions.' '.$input_id.' type="file" name="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'" value="'.$field_value.'"'.$code_type.'>'."\n".'</div>' . "\n";
 				} elseif ($field->field_type == 'Date') {
 					$maxlength = (empty($field->field_maxlength) or $field->field_maxlength <= 0) ? '' : ' maxlength="'.$field->field_maxlength.'"';
-					$out .= '<div>'."\n".'<label for="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'">'. $req .ccf_utils::decodeOption($field->field_label, 1, 1).'</label>'."\n".'<input class="'.esc_attr($field->field_class).' ccf-datepicker '.$tooltip_class.'" '.$instructions.' '.$input_id.' type="text" name="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'" value="'.$field_value.'"'.$maxlength.''.$code_type.'>'."\n".'</div>' . "\n";
+					$out .= '<div class="'.esc_attr($field->field_class).' ccf-datepicker '.$tooltip_class.'">'."\n".'<label for="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'">'. $req .ccf_utils::decodeOption($field->field_label, 1, 1).'</label>'."\n".'<input '.$instructions.' '.$input_id.' type="text" name="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'" value="'.$field_value.'"'.$maxlength.''.$code_type.'>'."\n".'</div>' . "\n";
 				} elseif ($field->field_type == 'Hidden') {
 					$hiddens .= '<input type="hidden" name="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'" value="'.$field_value.'" '.$input_id.''.$code_type.'>' . "\n";
 				} elseif ($field->field_type == 'Textarea') {
-					$out .= '<div>'."\n".'<label for="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'">'. $req .ccf_utils::decodeOption($field->field_label, 1, 1).'</label>'."\n".'<textarea class="'.esc_attr($field->field_class).' '.$tooltip_class.'" '.$instructions.' '.$input_id.' rows="5" cols="40" name="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'">'.$field_value.'</textarea>'."\n".'</div>' . "\n";
+					$out .= '<div class="'.esc_attr($field->field_class).' '.$tooltip_class.'">'."\n".'<label for="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'">'. $req .ccf_utils::decodeOption($field->field_label, 1, 1).'</label>'."\n".'<textarea '.$instructions.' '.$input_id.' rows="5" cols="40" name="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'">'.$field_value.'</textarea>'."\n".'</div>' . "\n";
 				} elseif ($field->field_type == 'Dropdown') {
 					$field_options = '';
 					$options = parent::getAttachedFieldOptionsArray($field->id);
@@ -274,8 +274,8 @@ if (!class_exists('CustomContactFormsFront')) {
 						$field_options .= '<option'.$option_sel.''.$option_value.'>' . esc_attr($option->option_label) . '</option>' . "\n";
 					}
 					if (!empty($options)) {
-						if (!$is_widget_form) $out .= '<div>'."\n".'<label for="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'">'. $req .ccf_utils::decodeOption($field->field_label, 1, 1).'</label>'."\n".'<select '.$instructions.' '.$input_id.' name="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'" class="'.esc_attr($field->field_class).' '.$tooltip_class.'">'."\n".$field_options.'</select>'."\n".'</div>' . "\n";
-						else  $out .= '<div>'."\n".'<label for="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'">'. $req .ccf_utils::decodeOption($field->field_label, 1, 1).'</label>'."\n".'<select class="'.esc_attr($field->field_class).' '.$tooltip_class.'" '.$instructions.' '.$input_id.' name="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'">'."\n".$field_options.'</select>'."\n".'</div>' . "\n";
+						if (!$is_widget_form) $out .= '<div class="'.esc_attr($field->field_class).' '.$tooltip_class.'">'."\n".'<label for="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'">'. $req .ccf_utils::decodeOption($field->field_label, 1, 1).'</label>'."\n".'<select '.$instructions.' '.$input_id.' name="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'">'."\n".$field_options.'</select>'."\n".'</div>' . "\n";
+						else  $out .= '<div class="'.esc_attr($field->field_class).' '.$tooltip_class.'">'."\n".'<label for="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'">'. $req .ccf_utils::decodeOption($field->field_label, 1, 1).'</label>'."\n".'<select '.$instructions.' '.$input_id.' name="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'">'."\n".$field_options.'</select>'."\n".'</div>' . "\n";
 					}
 				} elseif ($field->field_type == 'Radio') {
 					$field_options = '';
@@ -283,10 +283,10 @@ if (!class_exists('CustomContactFormsFront')) {
 					foreach ($options as $option_id) {
 						$option = parent::selectFieldOption($option_id);
 						$option_sel = (($field_value == $option->option_label || $field_value == $option->option_value) && !empty($field_value)) ? ' checked="checked"' : '';
-						$field_options .= '<div><input'.$option_sel.' class="'.esc_attr($field->field_class).' '.$tooltip_class.'" type="radio" '.$instructions.' name="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'" value="'.ccf_utils::decodeOption($option->option_value, 1, 1).'"'.$code_type.'> <label class="select" for="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'">' . ccf_utils::decodeOption($option->option_label, 1, 1) . '</label></div>' . "\n";
+						$field_options .= '<div class="'.esc_attr($field->field_class).' '.$tooltip_class.'"><input'.$option_sel.' type="radio" '.$instructions.' name="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'" value="'.ccf_utils::decodeOption($option->option_value, 1, 1).'"'.$code_type.'> <label class="select" for="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'">' . ccf_utils::decodeOption($option->option_label, 1, 1) . '</label></div>' . "\n";
 					}
 					$field_label = (!empty($field->field_label)) ? '<label for="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'">'. $req .ccf_utils::decodeOption($field->field_label, 1, 1).'</label>' : '';
-					if (!empty($options)) $out .= '<div>'."\n".$field_label."\n".$field_options."\n".'</div>' . "\n";
+					if (!empty($options)) $out .= '<div class="'.esc_attr($field->field_class).' '.$tooltip_class.'">'."\n".$field_label."\n".$field_options."\n".'</div>' . "\n";
 				} elseif ($field->field_type == 'Checkbox') {
 					$field_options = '';
 					$options = parent::getAttachedFieldOptionsArray($field->id);
@@ -296,11 +296,11 @@ if (!class_exists('CustomContactFormsFront')) {
 						$field_value_array = (!is_array($field_value)) ? array() : $field_value;
 						$option_sel = (in_array($option->option_label, $field_value_array) || in_array($option->option_value, $field_value_array)) ? ' checked="checked"' : '';
 						$check_value = (empty($option->option_value)) ? esc_html($option->option_label) : ccf_utils::decodeOption($option->option_value, 1, 1);
-						$field_options .= '<div><input'.$option_sel.' class="'.esc_attr($field->field_class).' '.$tooltip_class.'" type="checkbox" '.$instructions.' name="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'['.$z.']" value="'.$check_value.'"'.$code_type.'> <label class="select" for="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'">' . ccf_utils::decodeOption($option->option_label, 1, 1) . '</label></div>' . "\n";
+						$field_options .= '<div class="'.esc_attr($field->field_class).' '.$tooltip_class.'"><input'.$option_sel.' type="checkbox" '.$instructions.' name="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'['.$z.']" value="'.$check_value.'"'.$code_type.'> <label class="select" for="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'">' . ccf_utils::decodeOption($option->option_label, 1, 1) . '</label></div>' . "\n";
 						$z++;
 					}
 					$field_label = (!empty($field->field_label)) ? '<label for="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'">'. $req .ccf_utils::decodeOption($field->field_label, 1, 1).'</label>' : '';
-					if (!empty($options)) $out .= '<div>'."\n".$field_label."\n".$field_options."\n".'</div>' . "\n";
+					if (!empty($options)) $out .= '<div class="'.esc_attr($field->field_class).' '.$tooltip_class.'">'."\n".$field_label."\n".$field_options."\n".'</div>' . "\n";
 				}
 			}
 
