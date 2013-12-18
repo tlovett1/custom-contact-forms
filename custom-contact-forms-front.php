@@ -251,7 +251,7 @@ if (!class_exists('CustomContactFormsFront')) {
 				} elseif ($field->field_type == 'Fieldset') {
 					if(!empty($fieldset)) $out .= '</fieldset>' . "\n";
 					$fieldset = true;					
-					$out .= '<fieldset id="' . ccf_utils::decodeOption($field->field_slug, 1, 1) . '" class="'.esc_attr($field->field_class).'">'."\n".'<legend for="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'">'. $req .ccf_utils::decodeOption($field->field_label, 1, 1).'</legend>'."\n";
+					$out .= '<fieldset id="' . ccf_utils::decodeOption($field->field_slug, 1, 1) . '" class="'.esc_attr($field->field_class).'">'."\n".'<legend>'. $req .ccf_utils::decodeOption($field->field_label, 1, 1).'</legend>'."\n";
 				} elseif ($field->field_type == 'File') {
 					$file_upload_form = ' enctype="multipart/form-data" ';
 					$out .= '<div>'."\n".'<label for="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'">'. $req .ccf_utils::decodeOption($field->field_label, 1, 1).'</label>'."\n".'<input class="'.esc_attr($field->field_class).' '.$tooltip_class.'" '.$instructions.' '.$input_id.' type="file" name="'.ccf_utils::decodeOption($field->field_slug, 1, 1).'" value="'.$field_value.'"'.$code_type.'>'."\n".'</div>' . "\n";
