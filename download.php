@@ -19,4 +19,5 @@ if (!empty($_GET['location']) && preg_match('/^export\/ccf[^\/^\.]+\.(sql|csv)$/
 	echo file_get_contents($_GET['location']);
 }
 exit();
+//  I need to know exactly what the $_GET request is supposed to store, so I can escape it.
 ?>
