@@ -1178,7 +1178,7 @@ if (!class_exists('CustomContactFormsAdmin')) {
 				  <?php _e("Create A Field Option", 'custom-contact-forms'); ?>
 				  </span></h3>
 				<div class="inside">
-                      <form id="ccf-create-field-option" method="post" action="<?php echo $_SERVER['REQUEST_URI']?>">
+                      <form id="ccf-create-field-option" method="post" action="<?php echo esc_url($_SERVER['REQUEST_URI']);?>">
                       <input type="hidden" name="selected_tab" value="field-options" />
                         <ul>
                           <li>
