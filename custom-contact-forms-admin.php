@@ -707,6 +707,7 @@ if (!class_exists('CustomContactFormsAdmin')) {
 						  <option>Checkbox</option>
 						  <option>Radio</option>
 						  <option>Dropdown</option>
+						  <option>Fieldset</option>
 						</select>
 					  </li>
 					  <li>
@@ -822,7 +823,7 @@ if (!class_exists('CustomContactFormsAdmin')) {
 			for ($i = 0, $z = 0; $i < count($fields); $i++, $z++) {
 			if ($fields[$i]->user_field == 0) { $z--; continue; }
 			$attached_options = parent::getAttachedFieldOptionsArray($fields[$i]->id);
-			$field_types = '<option>Text</option><option>Date</option><option>File</option><option>Textarea</option><option>Hidden</option><option>Checkbox</option><option>Radio</option><option>Dropdown</option>';
+			$field_types = '<option>Text</option><option>Date</option><option>File</option><option>Textarea</option><option>Hidden</option><option>Checkbox</option><option>Radio</option><option>Dropdown</option><option>Fieldset</option>';
 			$field_types = str_replace('<option>'.$fields[$i]->field_type.'</option>',  '<option selected="selected">'.$fields[$i]->field_type.'</option>', $field_types);
 			
 			?>
@@ -988,7 +989,7 @@ if (!class_exists('CustomContactFormsAdmin')) {
 			$fields = parent::selectAllFields();
 			for ($i = 0, $z = 0; $i < count($fields); $i++, $z++) {
 			if ($fields[$i]->user_field == 1) { $z--; continue;}
-			$field_types = '<option>Text</option><option>Textarea</option><option>Hidden</option><option>Checkbox</option>';
+			$field_types = '<option>Text</option><option>Textarea</option><option>Hidden</option><option>Checkbox</option><option>Fieldset</option>';
 			$field_types = str_replace('<option>'.$fields[$i]->field_type.'</option>',  '<option selected="selected">'.$fields[$i]->field_type.'</option>', $field_types);
 			
 			?>
