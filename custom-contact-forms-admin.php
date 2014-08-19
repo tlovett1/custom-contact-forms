@@ -7,12 +7,6 @@
 if (!class_exists('CustomContactFormsAdmin')) {
 	class CustomContactFormsAdmin extends CustomContactForms {
 		var $action_complete = '';
-	
-		function adminInit() {
-			$this->downloadExportFile();
-			$this->downloadCSVExportFile();
-			$this->runImport();
-		}
 		
 		function insertUsagePopover() {
 			ccf_utils::load_module('usage_popover/custom-contact-forms-usage-popover.php');
