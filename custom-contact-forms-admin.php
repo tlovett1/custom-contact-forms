@@ -2227,6 +2227,28 @@ if (!class_exists('CustomContactFormsAdmin')) {
 						<?php _e("Default subject to be included in all form emails.", 'custom-contact-forms'); ?>
 					  </li>
 					  <li>
+					  	<label for="admin_panel_access">
+					  		<?php _e("Admin Panel Access:", 'custom-contact-forms'); ?>
+					  	</label>
+					  	<select name="settings[admin_panel_access]">
+					  		<option value="admin" <?php if ($admin_options['admin_panel_access'] == "admin") echo 'selected="selected"'; ?>>
+					  			<?php _e("Administrator", 'custom-contact-forms'); ?>
+					  		</option>
+					  		<option value="editor" <?php if ($admin_options['admin_panel_access'] == "editor") echo 'selected="selected"'; ?>>
+					  			<?php _e("Editor", 'custom-contact-forms'); ?>
+					  		</option>
+					  		<option value="author" <?php if ($admin_options['admin_panel_access'] == "author") echo 'selected="selected"'; ?>>
+					  			<?php _e("Author", 'custom-contact-forms'); ?>
+					  		</option>
+					  		<option value="contributor" <?php if ($admin_options['admin_panel_access'] == "contributor") echo 'selected="selected"'; ?>>
+					  			<?php _e("Contributor", 'custom-contact-forms'); ?>
+					  		</option>
+				  		</select>
+				  	  </li>
+  					  <li class="descrip">
+						<?php _e("Change this to the desired level that you would like to be given access to Custom Contact Forms in the Wordpress admin panel (this page).", 'custom-contact-forms'); ?>
+					  </li>
+					  <li>
 						<label for="enable_dashboard_widget">
 						<?php _e("Enable Dashboard Widget:", 'custom-contact-forms'); ?>
 						</label>

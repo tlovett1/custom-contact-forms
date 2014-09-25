@@ -103,10 +103,21 @@ if (!is_admin()) { /* is front */
 			global $custom_contact_admin;
 			if (!isset($custom_contact_admin)) return;
 			if (function_exists('add_menu_page')) {
-				add_menu_page(__('Custom Contact Forms', 'custom-contact-forms'), __('Custom Contact Forms', 'custom-contact-forms'), 'manage_options', 'custom-contact-forms', array(&$custom_contact_admin, 'printAdminPage'));
-				add_submenu_page('custom-contact-forms', __('Custom Contact Forms', 'custom-contact-forms'), __('Custom Contact Forms', 'custom-contact-forms'), 'manage_options', 'custom-contact-forms', array(&$custom_contact_admin, 'printAdminPage'));
-				add_submenu_page('custom-contact-forms', __('Saved Form Submissions', 'custom-contact-forms'), __('Saved Form Submissions', 'custom-contact-forms'), 'manage_options', 'ccf-saved-form-submissions', array(&$custom_contact_admin, 'printFormSubmissionsPage'));
-				add_submenu_page('custom-contact-forms', __('General Settings', 'custom-contact-forms'), __('General Settings', 'custom-contact-forms'), 'manage_options', 'ccf-settings', array(&$custom_contact_admin, 'printSettingsPage'));
+				$ccfAccessRole = 'manage_options';
+				$admin_options = $custom_contact_admin->getAdminOptions();
+				if (!empty($admin_options['admin_panel_access'])) {
+					if ($admin_options['admin_panel_access'] == 'editor') {
+						$ccfAccessRole = 'edit_pages';
+					} elseif ($admin_options['admin_panel_access'] == 'author') {
+						$ccfAccessRole = 'publish_posts';
+					} elseif ($admin_options['admin_panel_access'] == 'contributor') {
+						$ccfAccessRole = 'edit_posts';
+					}
+				}
+				add_menu_page(__('Custom Contact Forms', 'custom-contact-forms'), __('Custom Contact Forms', 'custom-contact-forms'), $ccfAccessRole, 'custom-contact-forms', array(&$custom_contact_admin, 'printAdminPage'));
+				add_submenu_page('custom-contact-forms', __('Custom Contact Forms', 'custom-contact-forms'), __('Custom Contact Forms', 'custom-contact-forms'), $ccfAccessRole, 'custom-contact-forms', array(&$custom_contact_admin, 'printAdminPage'));
+				add_submenu_page('custom-contact-forms', __('Saved Form Submissions', 'custom-contact-forms'), __('Saved Form Submissions', 'custom-contact-forms'), $ccfAccessRole, 'ccf-saved-form-submissions', array(&$custom_contact_admin, 'printFormSubmissionsPage'));
+				add_submenu_page('custom-contact-forms', __('General Settings', 'custom-contact-forms'), __('General Settings', 'custom-contact-forms'), $ccfAccessRole, 'ccf-settings', array(&$custom_contact_admin, 'printSettingsPage'));
 			}
 		}
 	}
