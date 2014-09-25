@@ -420,6 +420,13 @@ if (!class_exists('CustomContactFormsFront')) {
 						if ($admin_options['mail_function'] == 'smtp') {
 							$mail->IsSMTP();
 							$mail->Host = $admin_options['smtp_host'];
+							if (!empty($admin_options['smtp_encryption'])) {
+								if ($admin_options['smtp_encryption'] === 'ssl') {
+									$mail->SMTPSecure = 'ssl';
+								} elseif ($admin_options['smtp_encryption'] === 'tls') {
+									$mail->SMTPSecure = 'tls';
+								}
+							}
 							if ($admin_options['smtp_authentication'] == 1) {
 								$mail->SMTPAuth = true;
 								$mail->Username = $admin_options['smtp_username'];
@@ -570,6 +577,13 @@ if (!class_exists('CustomContactFormsFront')) {
 						if ($admin_options['mail_function'] == 'smtp') {
 							$mail->IsSMTP();
 							$mail->Host = $admin_options['smtp_host'];
+							if (!empty($admin_options['smtp_encryption'])) {
+								if ($admin_options['smtp_encryption'] === 'ssl') {
+									$mail->SMTPSecure = 'ssl';
+								} elseif ($admin_options['smtp_encryption'] === 'tls') {
+									$mail->SMTPSecure = 'tls';
+								}
+							}
 							if ($admin_options['smtp_authentication'] == 1) {
 								$mail->SMTPAuth = true;
 								$mail->Username = $admin_options['smtp_username'];
