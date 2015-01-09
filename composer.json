@@ -1,0 +1,29 @@
+{
+    "name": "tlovett1/custom-contact-forms",
+    "description": "A form management plugin for WordPress",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Taylor Lovett",
+            "email": "tlovett88@gmail.com"
+        }
+    ],
+	"require-dev": {
+		"wp-api/wp-api": "dev-master#ad9688f450a813fd23d5c008d7d7c9fb58e76b2b"
+	},
+	"repositories": [
+		{
+			"type": "package",
+			"package": {
+				"name": "wp-api/wp-api",
+				"version": "dev-master",
+				"source": {
+					"url": "https://github.com/wp-api/wp-api",
+					"type": "git",
+					"reference": "origin/master"
+				}
+			}
+		}
+	],
+    "minimum-stability": "stable"
+}

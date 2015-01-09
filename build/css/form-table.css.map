@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,YAAa;EACZ,OAAO,EAAE,IAAI",
+"sources": ["../../scss/form-table.scss"],
+"names": [],
+"file": "form-table.css"
+}

@@ -1,4 +1,4 @@
-custom-contact-forms
-====================
+Custom Contact Forms
+=========
 
-Custom Contact Forms is a WordPress plugin
+Readme coming soon!
