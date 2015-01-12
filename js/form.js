@@ -201,8 +201,10 @@
 	if ( forms.length >= 1 ) {
 		_.each( forms, function( form ) {
 
-			var formSubmit = function( event ) {
-				event.preventDefault();
+			var formSubmit = function( evnt ) {
+				evnt = evnt || window.event;
+
+				evnt.preventDefault();
 
 				var fields = form.querySelectorAll( '.field' );
 
@@ -278,6 +280,8 @@
 						$loading.animate( { opacity: 0 } );
 					});
 				}
+
+				return false;
 			};
 
 			if ( form.addEventListener ) {
