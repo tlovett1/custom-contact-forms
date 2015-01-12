@@ -115,6 +115,26 @@
 		}
 	});
 
+	wp.ccf.validators.phone = wp.ccf.validators.phone || validator( false, function() {
+		var phone = this.inputs[0].value;
+
+		if ( phone ) {
+			var re = /^[0-9+.)(\-]+$/;
+			
+			if ( ! re.test( phone ) ) {
+				this.errors[this.inputs[0].getAttribute( 'name' )].phone = this.wrapper.lastChild;
+			} else {
+				if ( 'us' === this.wrapper.getAttribute( 'data-phone-format' ) ) {
+					var strippedPhone = phone.replace( /[^0-9]/, '' );
+
+					if ( strippedPhone.length !== 10 ) {
+						this.errors[this.inputs[0].getAttribute( 'name' )].digits = this.wrapper.lastChild;
+					}
+				}
+			}
+		}
+	});
+
 	wp.ccf.validators.date = wp.ccf.validators.date || function( fieldWrapperElement ) {
 		this.wrapper = fieldWrapperElement;
 		this.errors = {};

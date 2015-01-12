@@ -503,6 +503,7 @@ class CCF_Field_Renderer {
 		$placeholder = get_post_meta( $field_id, 'ccf_field_placeholder', true );
 		$required = get_post_meta( $field_id, 'ccf_field_required', true );
 		$class_name = get_post_meta( $field_id, 'ccf_field_className', true );
+		$phone_format = get_post_meta( $field_id, 'ccf_field_phoneFormat', true );
 
 		$errors = CCF_Form_Handler::factory()->get_errors( $form_id, $slug );
 		$all_errors = CCF_Form_Handler::factory()->get_errors( $form_id );
@@ -518,7 +519,7 @@ class CCF_Field_Renderer {
 		ob_start();
 		?>
 
-		<div data-field-type="single-line-text" class="<?php if ( ! empty( $errors ) ) : ?>field-error<?php endif; ?> field <?php echo esc_attr( $slug ); ?> single-line-text field-<?php echo (int) $field_id; ?> <?php echo esc_attr( $class_name ); ?> <?php if ( ! empty( $required ) ) : ?>field-required<?php endif; ?>">
+		<div data-phone-format="<?php echo esc_attr( $phone_format ); ?>" data-field-type="phone" class="<?php if ( ! empty( $errors ) ) : ?>field-error<?php endif; ?> field <?php echo esc_attr( $slug ); ?> phone field-<?php echo (int) $field_id; ?> <?php echo esc_attr( $class_name ); ?> <?php if ( ! empty( $required ) ) : ?>field-required<?php endif; ?>">
 			<label for="ccf_field_<?php echo esc_attr( $slug ); ?>">
 				<?php if ( ! empty( $required ) ) : ?><span class="required">*</span><?php endif; ?>
 				<?php echo esc_html( $label ); ?>

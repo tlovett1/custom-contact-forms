@@ -56,6 +56,8 @@ class CCF_Form_Renderer {
 			'am-pm_required' => esc_html__( 'AM/PM is required.', 'custom-contact-forms' ),
 			'match' => esc_html__( 'Emails do not match.', 'custom-contact-forms' ),
 			'email' => esc_html__( 'This is not a valid email address.', 'custom-contact-forms' ),
+			'phone' => esc_html__( 'This is not a valid phone number.', 'custom-contact-forms' ),
+			'digits' => esc_html__( 'This phone number is not 10 digits', 'custom-contact-forms' ),
 			'hour' => esc_html__( 'This is not a valid hour.', 'custom-contact-forms' ),
 			'date' => esc_html__( 'This date is not valid.', 'custom-contact-forms' ),
 			'minute' => esc_html__( 'This is not a valid minute.', 'custom-contact-forms' ),
