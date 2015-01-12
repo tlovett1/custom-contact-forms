@@ -138,12 +138,11 @@
 		table {
 			border: 0;
 			border-collapse: collapse;
-			table-layout: fixed;
+			table-layout: auto;
 			width: 100%;
 
 			td, th {
 				padding: 8px 10px;
-				width: 33%;
 			}
 
 			th input {
@@ -152,6 +151,7 @@
 
 			.manage-column {
 				width: auto;
+				width: 33%;
 			}
 
 			tbody {

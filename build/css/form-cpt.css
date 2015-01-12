@@ -93,15 +93,15 @@
   #ccf-submissions .inside table {
     border: 0;
     border-collapse: collapse;
-    table-layout: fixed;
+    table-layout: auto;
     width: 100%; }
     #ccf-submissions .inside table td, #ccf-submissions .inside table th {
-      padding: 8px 10px;
-      width: 33%; }
+      padding: 8px 10px; }
     #ccf-submissions .inside table th input {
       margin: 0; }
     #ccf-submissions .inside table .manage-column {
-      width: auto; }
+      width: auto;
+      width: 33%; }
     #ccf-submissions .inside table tbody tr {
       background-color: #f9f9f9; }
       #ccf-submissions .inside table tbody tr td {
