@@ -131,6 +131,9 @@
 
 		var date = Date.fromISO( dateString );
 
+		window.console.log(date );
+		window.console.log(dateString);
+
 		var hours = date.getHours(),
 			ampm = 'AM';
 
