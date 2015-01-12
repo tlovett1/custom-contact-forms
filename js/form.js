@@ -201,13 +201,8 @@
 	if ( forms.length >= 1 ) {
 		_.each( forms, function( form ) {
 
-			var formSubmit = function( evnt ) {
-				evnt = evnt || window.event;
-				evnt.returnFalse = false;
-
-				if ( evnt.preventDefault ) {
-					evnt.preventDefault();
-				}
+			var formSubmit = function( event ) {
+				$( event ).preventDefault();
 
 				var fields = form.querySelectorAll( '.field' );
 
