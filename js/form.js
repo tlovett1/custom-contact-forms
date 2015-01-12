@@ -120,7 +120,7 @@
 
 		if ( phone ) {
 			var re = /^[0-9+.)(\-]+$/;
-			
+
 			if ( ! re.test( phone ) ) {
 				this.errors[this.inputs[0].getAttribute( 'name' )].phone = this.wrapper.lastChild;
 			} else {

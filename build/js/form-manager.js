@@ -5,37 +5,6 @@
 	wp.ccf = wp.ccf || {};
 	wp.ccf.utils = wp.ccf.utils || {};
 
-	// ie8 polyfil for Date
-	var D = new Date( '2011-06-02T09:34:29+02:00' );
-	if ( ! D || +D !== 1307000069000 ) {
-		Date.fromISO = function( s ){
-			var day, tz,
-				rx=/^(\d{4}\-\d\d\-\d\d([tT ][\d:\.]*)?)([zZ]|([+\-])(\d\d):(\d\d))?$/,
-				p= rx.exec( s ) || [];
-			if ( p[1] ){
-				day = p[1].split( /\D/ );
-				for ( var i= 0, L = day.length; i < L; i++ ){
-					day[i] = parseInt( day[i], 10 ) || 0;
-				};
-				day[1] -= 1;
-				day = new Date( Date.UTC.apply( Date, day ) );
-				if( ! day.getDate() ) return NaN;
-				if( p[5] ){
-					tz = ( parseInt( p[5], 10 ) * 60 );
-					if ( p[6] ) tz += parseInt( p[6], 10 );
-					if  (p[4] == '+' ) tz *= -1;
-					if ( tz ) day.setUTCMinutes( day.getUTCMinutes() + tz );
-				}
-				return day;
-			}
-			return NaN;
-		};
-	} else {
-		Date.fromISO = function( s ){
-			return new Date( s );
-		};
-	}
-
 	wp.ccf.utils.cleanDateFields = function( object ) {
 		delete object.date;
 		delete object.date_gmt;
@@ -62,23 +31,9 @@
 	};
 
 	wp.ccf.utils.getPrettyPostDate = function( date ) {
-		window.console.log( 'DATE - ' + date);
-		date = Date.fromISO( date );
+		date = moment( date );
 
-		var hours = date.getHours(),
-			ampm = 'AM';
-
-		if ( hours >= 12 ) {
-			ampm = 'PM';
-			hours = hours - 12;
-		}
-
-		if ( hours === 0 ) {
-			hours = 12;
-		}
-
-		return hours + ':' + ( '0' + date.getMinutes() ).slice( -2 ) + ' ' + ampm + ' ' + ( date.getMonth() + 1 ) +
-			'/' + date.getDate() + '/' + date.getFullYear();
+		return date.format( 'h:mm a M/D/YYYY' );
 	};
 
 	wp.ccf.utils.wordChop = function( string, maxLength ) {
@@ -117,7 +72,8 @@
 	};
 
 	wp.ccf.utils.getPrettyFieldDate = function( value ) {
-		var dateString = '';
+		var dateString = '',
+			output = '';
 
 		if ( value.hour && value.minute && value['am-pm'] ) {
 			dateString += value.hour + ':' + value.minute + ' ' + value['am-pm'];
@@ -125,45 +81,31 @@
 
 		if ( value.date ) {
 			dateString += ' ' + value.date;
-		} else {
-			var today = new Date();
-			dateString += ' ' + ( today.getMonth() + 1 ) + '/' + today.getDate() + '/' + today.getFullYear();
 		}
 
-		var date = Date.fromISO( dateString );
-
-		window.console.log(date );
-		window.console.log(dateString);
-
-		var hours = date.getHours(),
-			ampm = 'AM';
-
-		if ( hours >= 12 ) {
-			ampm = 'PM';
-			hours = hours - 12;
+		if ( ! dateString ) {
+			return '-';
 		}
 
-		if ( hours === 0 ) {
-			hours = 12;
-		}
+		var date = moment( dateString );
 
-		var returnDate = '';
+		if ( ! date.isValid() ) {
+			return ccfSettings.invalidDate;
+		}
 
 		if ( value.hour && value.minute && value['am-pm'] ) {
-			returnDate = hours + ':' + ( '0' + date.getMinutes() ).slice( -2 ) + ' ' + ampm;
+			output += date.format( 'h:mm a' );
 		}
 
 		if ( value.date ) {
-			if ( returnDate ) {
-				returnDate += ' ';
+			if ( output ) {
+				output += ' ';
 			}
 
-			returnDate += ( date.getMonth() + 1 ) + '/' + date.getDate() + '/' + date.getFullYear();
-		} if ( ! returnDate ) {
-			returnDate = '-';
+			output += date.format( 'M/D/YYYY' );
 		}
 
-		return returnDate;
+		return output;
 	};
 
 	wp.ccf.utils.getPrettyFieldName = function( value ) {
