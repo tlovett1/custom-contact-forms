@@ -284,14 +284,12 @@
 					});
 				}
 
+				console.log('submit!');
+
 				return false;
 			};
 
-			if ( form.addEventListener ) {
-				form.addEventListener( 'submit', formSubmit );
-			} else if ( form.attachEvent ) {
-				form.attachEvent( 'submit', formSubmit );
-			}
+			$( form ).on( 'submit', formSubmit );
 
 		});
 	}
