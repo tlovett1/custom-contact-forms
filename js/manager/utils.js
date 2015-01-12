@@ -118,15 +118,15 @@
 	wp.ccf.utils.getPrettyFieldDate = function( value ) {
 		var dateString = '';
 
+		if ( value.hour && value.minute && value['am-pm'] ) {
+			dateString += ' ' + value.hour + ':' + value.minute + ' ' + value['am-pm'];
+		}
+
 		if ( value.date ) {
 			dateString += value.date;
 		} else {
 			var today = new Date();
 			dateString += ( today.getMonth() + 1 ) + '/' + today.getDate() + '/' + today.getFullYear();
-		}
-
-		if ( value.hour && value.minute && value['am-pm'] ) {
-			dateString += ' ' + value.hour + ':' + value.minute + ' ' + value['am-pm'];
 		}
 
 		var date = Date.fromISO( dateString );
