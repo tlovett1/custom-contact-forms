@@ -1096,10 +1096,6 @@ class CCF_Form_Manager {
 					</td>
 				<% } %>
 			<% } ); %>
-			<td></td>
-			<td class="actions">
-				fff
-			</td>
 		</script>
 
 
