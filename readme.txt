@@ -1,5 +1,5 @@
 === Custom Contact Forms ===
-Contributors: Taylor Lovett
+Contributors: tlovett1
 Donate link: http://www.taylorlovett.com
 Tags: contact form, web form, custom contact form, custom forms, captcha form, contact fields, form mailers, forms
 Requires at least: 3.9
