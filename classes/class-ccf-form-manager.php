@@ -1036,20 +1036,6 @@ class CCF_Form_Manager {
 						<th scope="col" class="manage-column column-actions"></th>
 					</tr>
 				</thead>
-				<tfoot>
-					<tr>
-						<% _.each( columns, function( column ) { %>
-							<th scope="col" class="manage-column column-<%- column %>">
-								<% if ( 'date' === column ) { %>
-									<?php esc_html_e( 'Date', 'custom-contact-forms' ); ?>
-								<% } else { %>
-									<%- column %>
-								<% } %>
-							</th>
-						<% } ); %>
-						<th scope="col" class="manage-column column-actions"></th>
-					</tr>
-				</tfoot>
 
 				<tbody class="submission-rows">
 					<tr>
