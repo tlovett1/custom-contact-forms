@@ -59,7 +59,7 @@ are internal, and labels are visible to the end form user. If a choice does not 
 
 * `Email` - A simple field that will ensure user input is a valid email address.
 
-  __Require Confirmation__ - Enabling this will insert another input box where the user must type the same email again.
+  * __Require Confirmation__ - Enabling this will insert another input box where the user must type the same email again.
 
 * `Name` - A field with two input boxes, one for first and one for last name.
 * `Date/Time` - A field to ask for dates and time. You can configure the field to only ask for date or time if you choose.
@@ -70,17 +70,17 @@ are internal, and labels are visible to the end form user. If a choice does not 
 * `Website` - A simple field that will ensure user input is a valid URL.
 * `Address` - A field for US and international addresses.
 
-  __Type__ - Allows you to prompt the user for a United States or international address.
+  * __Type__ - Allows you to prompt the user for a United States or international address.
 
 * `Phone` - A simple field that will ensure user input is a valid phone number.
 
-  __Format__ - Allows you to prompt the user for a United States or international phone number.
+  * __Format__ - Allows you to prompt the user for a United States or international phone number.
 
 ##### Structure Fields
 
 * `HTML` - An easy way to insert arbitrary HTML into the middle of a form.
 
-  __HTML Content__: Supports all HTML tags except `<script>`.
+  * __HTML Content__: Supports all HTML tags except `<script>`.
 
 * `Section Header` - Inserts a pre-styled heading to break up your form visually.
 
