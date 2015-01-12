@@ -102,6 +102,8 @@
       width: auto; }
     #ccf-submissions .inside table tbody tr {
       background-color: #f9f9f9; }
+      #ccf-submissions .inside table tbody tr td {
+        width: auto; }
       #ccf-submissions .inside table tbody tr .spinner {
         float: none;
         display: block; }
