@@ -93,7 +93,8 @@
   #ccf-submissions .inside table {
     border: 0;
     border-collapse: collapse;
-    table-layout: fixed; }
+    table-layout: fixed;
+    width: 100%; }
     #ccf-submissions .inside table td, #ccf-submissions .inside table th {
       padding: 8px 10px; }
     #ccf-submissions .inside table th input {
