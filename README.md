@@ -59,27 +59,33 @@ are internal, and labels are visible to the end form user. If a choice does not 
 
 * `Email` - A simple field that will ensure user input is a valid email address.
 
-  `Require Confirmation` - Enabling this will insert another input box where the user must type the same email again.
+  __Require Confirmation__ - Enabling this will insert another input box where the user must type the same email again.
 
 * `Name` - A field with two input boxes, one for first and one for last name.
 * `Date/Time` - A field to ask for dates and time. You can configure the field to only ask for date or time if you choose.
 
-  `Enable Date Select` - Will prompt the user for a date selection.
-  `Enable Time Select` - Will prompt the user for a time selection.
+  * __Enable Date Select__ - Will prompt the user for a date selection.
+  * __Enable Time Select__ - Will prompt the user for a time selection.
 
 * `Website` - A simple field that will ensure user input is a valid URL.
 * `Address` - A field for US and international addresses.
 
-  `Type` - Allows you to prompt the user for a United States or international address.
+  __Type__ - Allows you to prompt the user for a United States or international address.
 
 * `Phone` - A simple field that will ensure user input is a valid phone number.
 
-  `Format` - Allows you to prompt the user for a United States or international phone number.
+  __Format__ - Allows you to prompt the user for a United States or international phone number.
 
 ##### Structure Fields
 
 * `HTML` - An easy way to insert arbitrary HTML into the middle of a form.
+
+  __HTML Content__: Supports all HTML tags except `<script>`.
+
 * `Section Header` - Inserts a pre-styled heading to break up your form visually.
+
+  * __Heading__ - Main section heading.
+  * __Sub Heading__ - Smaller text below main heading.
 
 ### Submissions
 
