@@ -39,7 +39,8 @@ easier. This makes it easier to develop with CCF.
 
 #### Field Types
 
-You can create forms using the following field types:
+You can create forms using a number of field types. Certain field types of special field settings that are
+described below:
 
 ##### Normal Fields
 
@@ -50,19 +51,35 @@ You can create forms using the following field types:
 * `Radio Buttons` - A list of choices where only one can be chosen.
 * `Hidden` - A hidden field.
 
+__Note__: Choiceable fields all handle choices the same way. Choices can be set with a `value` and a `label`. Values
+are internal, and labels are visible to the end form user. If a choice does not have a `value`, the choice will not
+"count". Meaning the field will not be considered filled out if it's required.
+
 ##### Special Fields
 
 * `Email` - A simple field that will ensure user input is a valid email address.
+
+  `Require Confirmation` - Enabling this will insert another input box where the user must type the same email again.
+
 * `Name` - A field with two input boxes, one for first and one for last name.
 * `Date/Time` - A field to ask for dates and time. You can configure the field to only ask for date or time if you choose.
+
+  `Enable Date Select` - Will prompt the user for a date selection.
+  `Enable Time Select` - Will prompt the user for a time selection.
+
 * `Website` - A simple field that will ensure user input is a valid URL.
 * `Address` - A field for US and international addresses.
+
+  `Type` - Allows you to prompt the user for a United States or international address.
+
 * `Phone` - A simple field that will ensure user input is a valid phone number.
+
+  `Format` - Allows you to prompt the user for a United States or international phone number.
 
 ##### Structure Fields
 
-* `HTML`
-* `Section Header`
+* `HTML` - An easy way to insert arbitrary HTML into the middle of a form.
+* `Section Header` - Inserts a pre-styled heading to break up your form visually.
 
 ### Submissions
 
