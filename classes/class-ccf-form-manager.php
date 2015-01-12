@@ -1135,7 +1135,7 @@ class CCF_Form_Manager {
 
 
 		<script type="text/html" id="ccf-no-submissions-row-template">
-			<td colspan="<%- columns.length + 1 %>"><?php esc_html_e( 'There are no submissions.', 'custom-contact-forms' ); ?></td>
+			<td colspan="<%- columns.length + 1 %>" class="no-submissions"><?php esc_html_e( 'There are no submissions.', 'custom-contact-forms' ); ?></td>
 		</script>
 
 		<script type="text/html" id="ccf-submissions-controller-template">
