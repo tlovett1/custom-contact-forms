@@ -191,8 +191,8 @@ class CCF_Field_Renderer {
 				<?php endforeach; ?>
 			</select>
 
-			<?php if ( CCF_Form_Handler::factory()->get_errors( $form_id, $slug ) ) : ?>
-				<div class="error"><?php echo esc_html( CCF_Form_Handler::factory()->get_errors( $form_id, $slug )['required'] ); ?></div>
+			<?php if ( ! empty( $errors['required'] ) ) : ?>
+				<div class="error"><?php echo esc_html( $errors['required'] ); ?></div>
 			<?php endif; ?>
 		</div>
 
