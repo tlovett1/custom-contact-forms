@@ -103,7 +103,7 @@
     #ccf-submissions .inside table tbody tr {
       background-color: #f9f9f9; }
       #ccf-submissions .inside table tbody tr td {
-        width: auto; }
+        width: 33%; }
       #ccf-submissions .inside table tbody tr .spinner {
         float: none;
         display: block; }
