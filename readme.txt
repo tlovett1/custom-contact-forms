@@ -1,10 +1,10 @@
 === Custom Contact Forms ===
 Contributors: Taylor Lovett
 Donate link: http://www.taylorlovett.com
-Tags: contact form, web form, custom contact form, custom forms, captcha form, contact fields, form mailers
-Requires at least: 2.8.1
-Tested up to: 3.4.1
-Stable tag: 5.1.0.4
+Tags: contact form, web form, custom contact form, custom forms, captcha form, contact fields, form mailers, forms
+Requires at least: 3.9
+Tested up to: 4.1
+Stable tag: 6.0
 
 Build beautiful custom forms the WordPress way.
 
@@ -29,10 +29,10 @@ For questions, feature requests, and support concerning the Custom Contact Forms
 = Changelog ==
 
 = 6.0 =
-Plugin completely rebuilt.
+* Plugin completely rebuilt.
 
 = 5.1.0.4 =
-Security fix
+* Security fix
 
 = 5.1.0.3 =
 *   custom-contact-forms-front.php - $field_value properly escaped
