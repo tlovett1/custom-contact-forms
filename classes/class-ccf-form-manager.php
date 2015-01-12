@@ -1021,7 +1021,7 @@ class CCF_Form_Manager {
 		</script>
 
 		<script type="text/html" id="ccf-submission-table-template">
-			<table class="widefat fixed" cellpadding="0" cellspacing="0">
+			<table class="widefat fixed" cellpadding="0" cellspacing="0" width="100%">
 
 				<tbody class="submission-rows">
 
