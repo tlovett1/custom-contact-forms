@@ -337,10 +337,13 @@
       .ccf-main-modal .ccf-form-pane .right-sidebar .repeatable-choices .choice input[type='text'] {
         width: 100px;
         display: inline-block; }
-      .ccf-main-modal .ccf-form-pane .right-sidebar .repeatable-choices .choice a {
-        color: #444; }
-        .ccf-main-modal .ccf-form-pane .right-sidebar .repeatable-choices .choice a:before {
+      .ccf-main-modal .ccf-form-pane .right-sidebar .repeatable-choices .choice .move {
+        color: inherit; }
+        .ccf-main-modal .ccf-form-pane .right-sidebar .repeatable-choices .choice .move:before {
           cursor: move; }
+      .ccf-main-modal .ccf-form-pane .right-sidebar .repeatable-choices .choice .add, .ccf-main-modal .ccf-form-pane .right-sidebar .repeatable-choices .choice .delete {
+        cursor: pointer;
+        color: inherit; }
   .ccf-main-modal .ccf-existing-form-pane {
     display: none;
     position: absolute;

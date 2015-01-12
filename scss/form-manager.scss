@@ -500,11 +500,17 @@
 						display: inline-block;
 					}
 
-					a {
-						color: #444;
+					.move {
+						color: inherit;
+
 						&:before {
 							cursor: move;
 						}
+					}
+
+					.add, .delete {
+						cursor: pointer;
+						color: inherit;
 					}
 				}
 			}
