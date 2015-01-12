@@ -1021,11 +1021,11 @@ class CCF_Form_Manager {
 		</script>
 
 		<script type="text/html" id="ccf-submission-table-template">
-			<table>
+			<table class="widefat fixed" cellpadding="0" cellspacing="0">
 				<thead>
 					<tr>
 						<% _.each( columns, function( column ) { %>
-							<th class="manage-column column-<%- column %>">
+							<th scope="col" class="manage-column column-<%- column %>">
 								<% if ( 'date' === column ) { %>
 									<?php esc_html_e( 'Date', 'custom-contact-forms' ); ?>
 								<% } else { %>
@@ -1033,9 +1033,23 @@ class CCF_Form_Manager {
 								<% } %>
 							</th>
 						<% } ); %>
-						<th class="manage-column column-actions"></th>
+						<th scope="col" class="manage-column column-actions"></th>
 					</tr>
 				</thead>
+				<tfoot>
+					<tr>
+						<% _.each( columns, function( column ) { %>
+							<th scope="col" class="manage-column column-<%- column %>">
+								<% if ( 'date' === column ) { %>
+									<?php esc_html_e( 'Date', 'custom-contact-forms' ); ?>
+								<% } else { %>
+									<%- column %>
+								<% } %>
+							</th>
+						<% } ); %>
+						<th scope="col" class="manage-column column-actions"></th>
+					</tr>
+				</tfoot>
 
 				<tbody class="submission-rows">
 					<tr>
@@ -1050,9 +1064,72 @@ class CCF_Form_Manager {
 
 		<script type="text/html" id="ccf-submission-row-template">
 			<% _.each( currentColumns, function( column ) { %>
-				<td colspan="1">sdfsdf f</td>
+				<% if ( 'date' === column ) { %>
+					<td colspan="1"><%- utils.getPrettyPostDate( submission.date ) %></td>
+				<% } else { %>
+					<td colspan="1">
+						<% if ( submission.data[column] ) { %>
+							<% if ( submission.data[column] instanceof Object ) { var output = '', i = 0; %>
+								<% if ( utils.isFieldDate( submission.data[column] ) ) { %>
+									<%- utils.getPrettyFieldDate( submission.data[column] ) %>
+								<% } else if ( utils.isFieldName( submission.data[column] ) ) { %>
+									<%- utils.getPrettyFieldName( submission.data[column] ) %>
+								<% } else if ( utils.isFieldAddress( submission.data[column] ) ) { %>
+									<%- utils.wordChop( utils.getPrettyFieldAddress( submission.data[column] ), 30 ) %>
+								<% } else { %>
+									<% for ( var key in submission.data[column] ) { if ( submission.data[column].hasOwnProperty( key ) ) {
+										if ( i > 0 ) {
+											output += ', ';
+										}
+										output += submission.data[column][key];
+
+										i++;
+									} } %>
+									<%- utils.wordChop( output, 30 ) %>
+								<% } %>
+							<% } else { %>
+								<%- utils.wordChop( submission.data[column] ) %>
+							<% } %>
+						<% } else { %>
+							<span><?php esc_html_e( '-', 'custom-contact-forms' ); ?></span>
+						<% } %>
+					</td>
+				<% } %>
 			<% } ); %>
-			<td class="actions">sdfsdf
+			<td class="actions">
+				<a href="#TB_inline?height=300&amp;width=400&amp;inlineId=submission-content" data-submission-date="<%- submission.date %>" data-submission-id="<%- submission.ID %>" class="view"  data-icon="&#xe601;"></a>
+				<a class="delete" data-icon="&#xe602;"></a>
+
+				<div class="submission-wrapper" id="ccf-submission-content-<%- submission.ID %>">
+					<div class="ccf-submission-content">
+						<% _.each( columns, function( column ) { %>
+							<div class="field-slug">
+								<%- column %>
+							</div>
+							<div class="field-content">
+								<% if ( submission.data[column] ) { %>
+									<% if ( submission.data[column] instanceof Object ) { %>
+										<% if ( utils.isFieldDate( submission.data[column] ) ) { %>
+											<%- utils.getPrettyFieldDate( submission.data[column] ) %>
+										<% } else if ( utils.isFieldName( submission.data[column] ) ) { %>
+											<%- utils.getPrettyFieldName( submission.data[column] ) %>
+										<% } else if ( utils.isFieldAddress( submission.data[column] ) ) { %>
+											<%- utils.getPrettyFieldAddress( submission.data[column] ) %>
+										<% } else { %>
+											<% for ( var key in submission.data[column] ) { if ( submission.data[column].hasOwnProperty( key ) ) { %>
+												<% if ( isNaN( key ) ) { %><strong><%- key %>:</strong> <% } %><%- submission.data[column][key] %><br>
+											<% } } %>
+										<% } %>
+									<% } else { %>
+										<%- submission.data[column] %>
+									<% } %>
+								<% } else { %>
+									<span>-</span>
+								<% } %>
+							</div>
+						<% } ); %>
+					</div>
+				</div>
 			</td>
 		</script>
 
