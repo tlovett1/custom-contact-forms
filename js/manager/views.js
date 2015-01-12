@@ -1258,7 +1258,7 @@
 			},
 
 			render: function() {
-				this.el.innerHTML = this.template( {
+				this.$el.html( this.template( {
 					submission: this.model.toJSON(),
 					currentColumns: this.parent.columns,
 					columns: wp.ccf.currentForm.getFieldSlugs( true ),
@@ -1272,7 +1272,7 @@
 						getPrettyFieldAddress: wp.ccf.utils.getPrettyFieldAddress,
 						getPrettyFieldName: wp.ccf.utils.getPrettyFieldName
 					}
-				} );
+				} ) );
 
 				return this;
 			}
