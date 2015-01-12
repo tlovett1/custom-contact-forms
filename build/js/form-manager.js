@@ -119,14 +119,14 @@
 		var dateString = '';
 
 		if ( value.hour && value.minute && value['am-pm'] ) {
-			dateString += ' ' + value.hour + ':' + value.minute + ' ' + value['am-pm'];
+			dateString += value.hour + ':' + value.minute + ' ' + value['am-pm'];
 		}
 
 		if ( value.date ) {
-			dateString += value.date;
+			dateString += ' ' + value.date;
 		} else {
 			var today = new Date();
-			dateString += ( today.getMonth() + 1 ) + '/' + today.getDate() + '/' + today.getFullYear();
+			dateString += ' ' + ( today.getMonth() + 1 ) + '/' + today.getDate() + '/' + today.getFullYear();
 		}
 
 		var date = Date.fromISO( dateString );
