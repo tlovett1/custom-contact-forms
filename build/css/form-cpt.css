@@ -117,6 +117,7 @@
         background-color: #fff; }
       #ccf-submissions .inside table tbody tr td.no-submissions {
         text-align: center;
+        width: auto;
         padding-bottom: 8px; }
   #ccf-submissions .inside .ccf-pagination {
     border-top: 1px solid #eee;
