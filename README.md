@@ -158,11 +158,11 @@ bash bin/install-wp-tests.sh wordpress_test root '' localhost latest
 
 where:
 
-* wordpress_test is the name of the test database (all data will be deleted!)
-* root is the MySQL user name
-* root is the MySQL user password (if you're running VVV). Blank if you're running VIP Quickstart.
-* localhost is the MySQL server host
-* latest is the WordPress version; could also be 3.7, 3.6.2 etc.
+* `wordpress_test` is the name of the test database (all data will be deleted!)
+* `root` is the MySQL user name
+* `root` is the MySQL user password (if you're running VVV). Blank if you're running VIP Quickstart.
+* `localhost` is the MySQL server host
+* `latest` is the WordPress version; could also be 3.7, 3.6.2 etc.
 
 Run the plugin tests:
 ```
