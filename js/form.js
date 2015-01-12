@@ -203,8 +203,11 @@
 
 			var formSubmit = function( evnt ) {
 				evnt = evnt || window.event;
+				evnt.returnFalse = false;
 
-				evnt.preventDefault();
+				if ( evnt.preventDefault ) {
+					evnt.preventDefault();
+				}
 
 				var fields = form.querySelectorAll( '.field' );
 
