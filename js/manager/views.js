@@ -646,6 +646,7 @@
 
 			events: {
 				'blur input': 'save',
+				'change select': 'save',
 				'change select.form-completion-action-type': 'toggleCompletionFields',
 				'change select.form-send-email-notifications': 'toggleNotificationFields'
 			},

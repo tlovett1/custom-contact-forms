@@ -350,6 +350,14 @@ class CCF_API extends WP_JSON_Posts {
 			update_post_meta( $result, 'ccf_form_completion_redirect_url', esc_url_raw( $data['completionRedirectUrl'] ) );
 		}
 
+		if ( isset( $data['sendEmailNotifications'] ) ) {
+			update_post_meta( $result, 'ccf_form_send_email_notifications', (bool) $data['sendEmailNotifications'] );
+		}
+
+		if ( isset( $data['emailNotificationAddresses'] ) ) {
+			update_post_meta( $result, 'ccf_form_email_notification_addresses', sanitize_text_field( $data['emailNotificationAddresses'] ) );
+		}
+
 		$response = json_ensure_response( $this->get_post( $result ) );
 		$response->set_status( 201 );
 		$response->header( 'Location', json_url( '/ccf/forms/' . $result ) );
