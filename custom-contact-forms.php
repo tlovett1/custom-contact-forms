@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Custom Contact Forms
  * Plugin URI: http://www.taylorlovett.com
- * Description: Build beautiful custom forms the WordPress way. View live previews of your forms while you build them; no more unnecessary page reloads.
+ * Description: Build beautiful custom forms the WordPress way. View live previews of your forms while you build them.
  * Author: Taylor Lovett
  * Version: 6.0
  * Author URI: http://www.taylorlovett.com

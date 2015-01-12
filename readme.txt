@@ -6,7 +6,7 @@ Requires at least: 3.9
 Tested up to: 4.1
 Stable tag: 6.0
 
-Build beautiful custom forms the WordPress way.
+Build beautiful custom forms the WordPress way. View live previews of your forms while you build them.
 
 == Description ==
 
@@ -18,12 +18,15 @@ just contact forms.
 For detailed install and usage instructions, please visit [Github](http://github.com/tlovett1/custom-contact-forms).
 
 == Installation ==
+
 Please refer to [Github](http://github.com/tlovett1/custom-contact-forms) for detailed installation instructions.
 
 == Configuring and Using the Plugin ==
+
 Please refer to [Github](http://github.com/tlovett1/custom-contact-forms) for detailed configuration instructions.
 
 == Support ==
+
 For questions, feature requests, and support concerning the Custom Contact Forms plugin, please refer to [Github](http://github.com/tlovett1/custom-contact-forms).
 
 = Changelog ==
