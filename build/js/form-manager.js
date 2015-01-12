@@ -62,6 +62,7 @@
 	};
 
 	wp.ccf.utils.getPrettyPostDate = function( date ) {
+		window.console.log( 'DATE - ' + date);
 		date = Date.fromISO( date );
 
 		var hours = date.getHours(),
