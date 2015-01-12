@@ -98,10 +98,8 @@
       padding: 8px 10px; }
     #ccf-submissions .inside table th input {
       margin: 0; }
-    #ccf-submissions .inside table .column-actions {
-      width: 50px; }
-    #ccf-submissions .inside table .column-date {
-      width: 22%; }
+    #ccf-submissions .inside table .manage-column {
+      width: auto; }
     #ccf-submissions .inside table tbody tr {
       background-color: #f9f9f9; }
       #ccf-submissions .inside table tbody tr .spinner {
