@@ -1065,9 +1065,9 @@ class CCF_Form_Manager {
 		<script type="text/html" id="ccf-submission-row-template">
 			<% _.each( currentColumns, function( column ) { %>
 				<% if ( 'date' === column ) { %>
-					<td><%- utils.getPrettyPostDate( submission.date ) %></td>
+					<td colspan="1"><%- utils.getPrettyPostDate( submission.date ) %></td>
 				<% } else { %>
-					<td>
+					<td colspan="1">
 						<% if ( submission.data[column] ) { %>
 							<% if ( submission.data[column] instanceof Object ) { var output = '', i = 0; %>
 								<% if ( utils.isFieldDate( submission.data[column] ) ) { %>
