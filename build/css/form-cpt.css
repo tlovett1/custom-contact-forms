@@ -96,11 +96,10 @@
     table-layout: fixed;
     width: 100%; }
     #ccf-submissions .inside table td, #ccf-submissions .inside table th {
-      padding: 8px 10px; }
+      padding: 8px 10px;
+      width: 33%; }
     #ccf-submissions .inside table th input {
       margin: 0; }
-    #ccf-submissions .inside table .manage-column {
-      width: auto; }
     #ccf-submissions .inside table tbody tr {
       background-color: #f9f9f9; }
       #ccf-submissions .inside table tbody tr td {
