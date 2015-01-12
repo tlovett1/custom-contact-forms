@@ -283,8 +283,6 @@
 					});
 				}
 
-				console.log('submit!');
-
 				return false;
 			};
 

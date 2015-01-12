@@ -5,17 +5,8 @@
 	wp.ccf = wp.ccf || {};
 	wp.ccf.utils = wp.ccf.utils || {};
 
-	// ie8 polyfill
-	/*var stringify = JSON.stringify;
-	JSON.stringify = function( o ) {
-		window.console.log(o.description);
-		var output = stringify( o );
-		window.console.log(output);
-		return output;
-	};*/
-
 	// ie8 polyfil for Date
-	var D= new Date( '2011-06-02T09:34:29+02:00' );
+	var D = new Date( '2011-06-02T09:34:29+02:00' );
 	if ( ! D || +D !== 1307000069000 ) {
 		Date.fromISO = function( s ){
 			var day, tz,
@@ -163,7 +154,7 @@
 				returnDate += ' ';
 			}
 
-			returnDate += date.getMonth() + '/' + date.getDate() + '/' + date.getFullYear();
+			returnDate += ( date.getMonth() + 1 ) + '/' + date.getDate() + '/' + date.getFullYear();
 		} if ( ! returnDate ) {
 			returnDate = '-';
 		}
