@@ -169,6 +169,10 @@ Run the plugin tests:
 phpunit
 ```
 
+#### Extending the Plugin
+
+Coming soon.
+
 #### Issues
 If you identify any errors or have an idea for improving the plugin, please
 [open an issue](https://github.com/tlovett1/custom-contact-forms/issues?state=open).
