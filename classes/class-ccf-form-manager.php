@@ -1021,10 +1021,42 @@ class CCF_Form_Manager {
 		</script>
 
 		<script type="text/html" id="ccf-submission-table-template">
-			<table class="widefat fixed" cellpadding="0" cellspacing="0" width="100%">
+			<table class="widefat fixed" cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<% _.each( columns, function( column ) { %>
+							<th scope="col" class="manage-column column-<%- column %>">
+								<% if ( 'date' === column ) { %>
+									<?php esc_html_e( 'Date', 'custom-contact-forms' ); ?>
+								<% } else { %>
+									<%- column %>
+								<% } %>
+							</th>
+						<% } ); %>
+						<th scope="col" class="manage-column column-actions"></th>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<% _.each( columns, function( column ) { %>
+							<th scope="col" class="manage-column column-<%- column %>">
+								<% if ( 'date' === column ) { %>
+									<?php esc_html_e( 'Date', 'custom-contact-forms' ); ?>
+								<% } else { %>
+									<%- column %>
+								<% } %>
+							</th>
+						<% } ); %>
+						<th scope="col" class="manage-column column-actions"></th>
+					</tr>
+				</tfoot>
 
 				<tbody class="submission-rows">
-
+					<tr>
+						<td colspan="<%- columns.length + 1 %>">
+							<div class="spinner"></div>
+						</td>
+					</tr>
 				</tbody>
 			</table>
 			<div class="ccf-pagination"></div>
@@ -1067,6 +1099,37 @@ class CCF_Form_Manager {
 			<td class="actions">
 				<a href="#TB_inline?height=300&amp;width=400&amp;inlineId=submission-content" data-submission-date="<%- submission.date %>" data-submission-id="<%- submission.ID %>" class="view"  data-icon="&#xe601;"></a>
 				<a class="delete" data-icon="&#xe602;"></a>
+
+				<div class="submission-wrapper" id="ccf-submission-content-<%- submission.ID %>">
+					<div class="ccf-submission-content">
+						<% _.each( columns, function( column ) { %>
+							<div class="field-slug">
+								<%- column %>
+							</div>
+							<div class="field-content">
+								<% if ( submission.data[column] ) { %>
+									<% if ( submission.data[column] instanceof Object ) { %>
+										<% if ( utils.isFieldDate( submission.data[column] ) ) { %>
+											<%- utils.getPrettyFieldDate( submission.data[column] ) %>
+										<% } else if ( utils.isFieldName( submission.data[column] ) ) { %>
+											<%- utils.getPrettyFieldName( submission.data[column] ) %>
+										<% } else if ( utils.isFieldAddress( submission.data[column] ) ) { %>
+											<%- utils.getPrettyFieldAddress( submission.data[column] ) %>
+										<% } else { %>
+											<% for ( var key in submission.data[column] ) { if ( submission.data[column].hasOwnProperty( key ) ) { %>
+												<% if ( isNaN( key ) ) { %><strong><%- key %>:</strong> <% } %><%- submission.data[column][key] %><br>
+											<% } } %>
+										<% } %>
+									<% } else { %>
+										<%- submission.data[column] %>
+									<% } %>
+								<% } else { %>
+									<span>-</span>
+								<% } %>
+							</div>
+						<% } ); %>
+					</div>
+				</div>
 			</td>
 		</script>
 
@@ -1079,7 +1142,7 @@ class CCF_Form_Manager {
 			<% var i = 0; _.each( columns, function( column ) {  %>
 
 				<label for="ccf-column-<%- column %>">
-					<input class="submission-column-checkbox" type="checkbox" id="ccf-column-<%- column %>" <% if ( i < 4 ) { %>checked<% } %> value="<%- column %>">
+					<input class="submission-column-checkbox" type="checkbox" id="ccf-column-<%- column %>" <% if ( i < 4 || 'date' === column ) { %>checked<% } %> value="<%- column %>">
 					<% if ( 'date' === column ) { %>
 						<?php esc_html_e( 'Date', 'custom-contact-forms' ); ?>
 					<% } else { %>
