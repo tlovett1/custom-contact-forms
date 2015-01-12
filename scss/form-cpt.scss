@@ -133,61 +133,7 @@
 		padding: 0;
 		margin: 0;
 
-
-
-		table {
-			border: 0;
-			border-collapse: collapse;
-			table-layout: auto;
-			width: 100%;
-
-			td, th {
-				padding: 8px 10px;
-			}
-
-			th input {
-				margin: 0;
-			}
-
-			tbody {
-				tr {
-					background-color: #f9f9f9;
-
-					td {
-						width: auto;
-					}
-
-					.spinner {
-						float: none;
-						display: block;
-					}
-
-					.actions {
-						text-align: right;
-
-						a {
-							cursor: pointer;
-							color: inherit;
-							padding-left: 4px;
-						}
-					}
-
-					.submission-wrapper {
-						display: none;
-					}
-
-					&:nth-child(2n-1) {
-						background-color: #fff;
-					}
-
-					td.no-submissions {
-						text-align: center;
-						width: auto;
-						padding-bottom: 8px;
-					}
-				}
-			}
-		}
+		
 
 		.ccf-pagination {
 			border-top: 1px solid #eee;

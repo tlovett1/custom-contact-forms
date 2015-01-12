@@ -90,36 +90,6 @@
 #ccf-submissions .inside {
   padding: 0;
   margin: 0; }
-  #ccf-submissions .inside table {
-    border: 0;
-    border-collapse: collapse;
-    table-layout: auto;
-    width: 100%; }
-    #ccf-submissions .inside table td, #ccf-submissions .inside table th {
-      padding: 8px 10px; }
-    #ccf-submissions .inside table th input {
-      margin: 0; }
-    #ccf-submissions .inside table tbody tr {
-      background-color: #f9f9f9; }
-      #ccf-submissions .inside table tbody tr td {
-        width: auto; }
-      #ccf-submissions .inside table tbody tr .spinner {
-        float: none;
-        display: block; }
-      #ccf-submissions .inside table tbody tr .actions {
-        text-align: right; }
-        #ccf-submissions .inside table tbody tr .actions a {
-          cursor: pointer;
-          color: inherit;
-          padding-left: 4px; }
-      #ccf-submissions .inside table tbody tr .submission-wrapper {
-        display: none; }
-      #ccf-submissions .inside table tbody tr:nth-child(2n-1) {
-        background-color: #fff; }
-      #ccf-submissions .inside table tbody tr td.no-submissions {
-        text-align: center;
-        width: auto;
-        padding-bottom: 8px; }
   #ccf-submissions .inside .ccf-pagination {
     border-top: 1px solid #eee;
     margin-top: 0;
