@@ -201,7 +201,7 @@
 	if ( forms.length >= 1 ) {
 		_.each( forms, function( form ) {
 
-			form.addEventListener( 'submit', function( event ) {
+			var formSubmit = function( event ) {
 				event.preventDefault();
 
 				var fields = form.querySelectorAll( '.field' );
@@ -232,8 +232,6 @@
 						}
 					}
 				});
-
-				console.log( errors );
 
 				if ( errors.length ) {
 					var docViewTop = $( window ).scrollTop();
@@ -280,7 +278,13 @@
 						$loading.animate( { opacity: 0 } );
 					});
 				}
-			});
+			};
+
+			if ( form.addEventListener ) {
+				form.addEventListener( 'submit', formSubmit );
+			} else if ( form.attachEvent ) {
+				form.attachEvent( 'submit', formSubmit );
+			}
 
 		});
 	}
