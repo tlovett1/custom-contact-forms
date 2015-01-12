@@ -91,7 +91,9 @@
   padding: 0;
   margin: 0; }
   #ccf-submissions .inside table {
-    border: 0; }
+    border: 0;
+    border-collapse: collapse;
+    table-layout: fixed; }
     #ccf-submissions .inside table td, #ccf-submissions .inside table th {
       padding: 8px 10px; }
     #ccf-submissions .inside table th input {

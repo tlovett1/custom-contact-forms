@@ -1052,7 +1052,7 @@ class CCF_Form_Manager {
 				</tfoot>
 
 				<tbody class="submission-rows">
-				
+
 				</tbody>
 			</table>
 			<div class="ccf-pagination"></div>

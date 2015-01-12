@@ -137,6 +137,8 @@
 
 		table {
 			border: 0;
+			border-collapse: collapse;
+			table-layout: fixed;
 
 			td, th {
 				padding: 8px 10px;
