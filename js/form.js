@@ -202,7 +202,11 @@
 		_.each( forms, function( form ) {
 
 			var formSubmit = function( event ) {
-				$( event ).preventDefault();
+				event.returnFalse = false;
+
+				if ( event.preventDefault ) {
+					event.preventDefault();
+				}
 
 				var fields = form.querySelectorAll( '.field' );
 
