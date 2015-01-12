@@ -1021,11 +1021,11 @@ class CCF_Form_Manager {
 		</script>
 
 		<script type="text/html" id="ccf-submission-table-template">
-			<table class="widefat fixed">
+			<table class="widefat fixed" cellpadding="0" cellspacing="0">
 				<thead>
 					<tr>
 						<% _.each( columns, function( column ) { %>
-							<th scope="col" id="cb" class="manage-column column-<%- column %>">
+							<th scope="col" class="manage-column column-<%- column %>">
 								<% if ( 'date' === column ) { %>
 									<?php esc_html_e( 'Date', 'custom-contact-forms' ); ?>
 								<% } else { %>
@@ -1039,7 +1039,7 @@ class CCF_Form_Manager {
 				<tfoot>
 					<tr>
 						<% _.each( columns, function( column ) { %>
-							<th scope="col" id="cb" class="manage-column column-<%- column %>">
+							<th scope="col" class="manage-column column-<%- column %>">
 								<% if ( 'date' === column ) { %>
 									<?php esc_html_e( 'Date', 'custom-contact-forms' ); ?>
 								<% } else { %>
