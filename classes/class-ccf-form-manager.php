@@ -1095,37 +1095,6 @@ class CCF_Form_Manager {
 			<td class="actions">
 				<a href="#TB_inline?height=300&amp;width=400&amp;inlineId=submission-content" data-submission-date="<%- submission.date %>" data-submission-id="<%- submission.ID %>" class="view"  data-icon="&#xe601;"></a>
 				<a class="delete" data-icon="&#xe602;"></a>
-
-				<div class="submission-wrapper" id="ccf-submission-content-<%- submission.ID %>">
-					<div class="ccf-submission-content">
-						<% _.each( columns, function( column ) { %>
-							<div class="field-slug">
-								<%- column %>
-							</div>
-							<div class="field-content">
-								<% if ( submission.data[column] ) { %>
-									<% if ( submission.data[column] instanceof Object ) { %>
-										<% if ( utils.isFieldDate( submission.data[column] ) ) { %>
-											<%- utils.getPrettyFieldDate( submission.data[column] ) %>
-										<% } else if ( utils.isFieldName( submission.data[column] ) ) { %>
-											<%- utils.getPrettyFieldName( submission.data[column] ) %>
-										<% } else if ( utils.isFieldAddress( submission.data[column] ) ) { %>
-											<%- utils.getPrettyFieldAddress( submission.data[column] ) %>
-										<% } else { %>
-											<% for ( var key in submission.data[column] ) { if ( submission.data[column].hasOwnProperty( key ) ) { %>
-												<% if ( isNaN( key ) ) { %><strong><%- key %>:</strong> <% } %><%- submission.data[column][key] %><br>
-											<% } } %>
-										<% } %>
-									<% } else { %>
-										<%- submission.data[column] %>
-									<% } %>
-								<% } else { %>
-									<span>-</span>
-								<% } %>
-							</div>
-						<% } ); %>
-					</div>
-				</div>
 			</td>
 		</script>
 
