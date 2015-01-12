@@ -22,6 +22,23 @@ plugin uploader.
 You can create and manage forms within a post by clicking the `Add Form` button next to the `Add Media`
 button. You can also create and manage forms by clicking the `Forms` menu item in the administration panel.
 
+### Form Settings
+
+Each form has a number of settings that you should understand.
+
+* `Title` - The main title for the form. This will be shown to the end user above the form.
+* `Description` - A form description that will be shown to the end user below the form title.
+* `Button Text` - This text will be shown to the end user on the submit button.
+* `On form completion` - When a form is completed you can show a message or perform a browser redirect
+
+  * `Completion Message` - If you choose to show a message, you can customize the message to be shown.
+  * `Redirect URL` - If you choose to perform a redirect, you can customize the redirect URL.
+
+* `Send email notifications` - When a form is completed you can show a message or perform a browser redirect
+
+  * `Completion Message` - If you choose to show a message, you can customize the message to be shown.
+  * `Redirect URL` - If you choose to perform a redirect, you can customize the redirect URL.
+
 ### Fields
 
 The building block of forms are fields. Each field has it's own set of settings that you can change on a
@@ -90,6 +107,16 @@ are internal, and labels are visible to the end form user. If a choice does not 
 ### Submissions
 
 CCF provides a very pretty table view for navigating your form submissions.
+
+#### View Form Submissions
+
+Click the `Forms` item in the administration menu. Click on the specific form for which you want to view submissions.
+Scroll to the `Submissions` meta box. Click one the eye icon to view more information for a specific submission.
+
+#### Customizing the Form Submissions Table
+
+In the `Submissions` meta box, you can add and remove columns. Click the cog icon at the top of the meta box to open
+the screen options panel. In this panel you can check which columns you would like to see in the table.
 
 ## Development
 
