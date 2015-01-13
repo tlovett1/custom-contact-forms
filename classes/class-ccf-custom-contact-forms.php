@@ -18,6 +18,35 @@ class CCF_Custom_Contact_Forms {
 		add_action( 'plugins_loaded', array( $this, 'manually_load_api' ), 100 );
 		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 		add_filter( 'plugin_row_meta', array( $this, 'filter_plugin_row_meta' ), 10, 4 );
+		add_action( 'admin_notices', array( $this, 'permalink_warning' ) );
+		add_action( 'admin_init', array( $this, 'flush_rewrites' ), 10000 );
+	}
+
+	/**
+	 * Flush rewrites if necessary
+	 *
+	 * @since 6.0
+	 */
+	public function flush_rewrites() {
+		$flush_rewrites = get_option( 'ccf_flush_rewrites' );
+
+		if ( ! empty( $flush_rewrites ) ) {
+			flush_rewrite_rules();
+
+			delete_option( 'ccf_flush_rewrites' );
+		}
+	}
+
+	public function permalink_warning() {
+		$permalink_structure = get_option( 'permalink_structure' );
+
+		if ( empty( $permalink_structure ) ) {
+			?>
+			<div class="update-nag">
+				<?php printf( __( 'Custom Contact Forms will not work unless pretty permalinks (not default) are enabled. Please update your <a href="%s">permalinks settings</a>.', 'custom-contact-forms' ), esc_url( admin_url( 'options-permalink.php' ) ) ); ?>
+			</div>
+			<?php
+		}
 	}
 
 	/**

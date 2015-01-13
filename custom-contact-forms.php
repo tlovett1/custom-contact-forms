@@ -4,7 +4,7 @@
  * Plugin URI: http://www.taylorlovett.com
  * Description: Build beautiful custom forms the WordPress way. View live previews of your forms while you build them.
  * Author: Taylor Lovett
- * Version: 6.0
+ * Version: 6.0.1
  * Author URI: http://www.taylorlovett.com
  */
 
@@ -34,3 +34,14 @@ CCF_Form_Manager::factory();
 CCF_Form_Renderer::factory();
 CCF_Field_Renderer::factory();
 CCF_Form_Handler::factory();
+
+/**
+ * Flush the rewrites at the end of init after the plugin is been activated.
+ *
+ * @since 6.0
+ */
+function ccf_flush_rewrites() {
+	update_option( 'ccf_flush_rewrites', true );
+}
+
+register_activation_hook( __FILE__, 'ccf_flush_rewrites' );
