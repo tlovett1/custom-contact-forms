@@ -10,6 +10,9 @@ Build beautiful custom forms the WordPress way. View live previews of your forms
 
 == Description ==
 
+__Note: Version 6.0 breaks backwards compatibility. This means you will need to rebuild your forms when upgrading to 6.0.
+It's worth it; I promise!__
+
 Custom Contact Forms enables you to build forms the WordPress way. User experience is at the top of the list for this plugin.
 Build forms in the media manager instead of going to separate areas of your site. Live previews of your forms are generated
 on the fly making your life much easier. Custom Contact Forms is a legacy name. The plugin is built for much more than
