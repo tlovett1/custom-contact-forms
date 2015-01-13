@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: Custom Contact Forms\n"
 "Report-Msgid-Bugs-To: https://github.com/tlovett1/editorial-access-manager/"
 "issues\n"
-"POT-Creation-Date: 2015-01-12 14:57-0500\n"
-"PO-Revision-Date: 2015-01-12 14:58-0500\n"
+"POT-Creation-Date: 2015-01-13 10:17-0500\n"
+"PO-Revision-Date: 2015-01-13 10:17-0500\n"
 "Last-Translator: Taylor Lovett <tlovett88@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: en\n"
@@ -53,6 +53,18 @@ msgstr ""
 #: ../classes/class-ccf-api.php:652
 #: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:381
 msgid "Deleted post"
+msgstr ""
+
+#: ../classes/class-ccf-custom-contact-forms.php:46
+#, php-format
+msgid ""
+"Custom Contact Forms will not work unless pretty permalinks (not default) "
+"are enabled. Please update your <a href=\"%s\">permalinks settings</a>."
+msgstr ""
+
+#: ../classes/class-ccf-custom-contact-forms.php:66
+#, php-format
+msgid "<a href=\"%s\">Forms and Submissions</a>"
 msgstr ""
 
 #: ../classes/class-ccf-form-cpt.php:74
@@ -157,6 +169,11 @@ msgstr ""
 msgid "Form"
 msgstr ""
 
+#: ../classes/class-ccf-form-cpt.php:368 ../classes/class-ccf-form-cpt.php:371
+#: ../classes/class-ccf-form-manager.php:56
+msgid "New Form"
+msgstr ""
+
 #: ../classes/class-ccf-form-cpt.php:369
 msgid "Add New Form"
 msgstr ""
@@ -165,13 +182,12 @@ msgstr ""
 msgid "Edit Form"
 msgstr ""
 
-#: ../classes/class-ccf-form-cpt.php:371
-#: ../classes/class-ccf-form-manager.php:56
-msgid "New Form"
-msgstr ""
-
 #: ../classes/class-ccf-form-cpt.php:372
 msgid "Forms and Submissions"
+msgstr ""
+
+#: ../classes/class-ccf-form-cpt.php:373
+msgid "View Form"
 msgstr ""
 
 #: ../classes/class-ccf-form-cpt.php:374
