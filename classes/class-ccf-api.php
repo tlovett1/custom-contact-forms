@@ -321,6 +321,10 @@ class CCF_API extends WP_JSON_Posts {
 	public function create_form( $data ) {
 		unset( $data['ID'] );
 
+		if ( isset( $data['author'] ) ) {
+			unset( $data['author'] );
+		}
+
 		$result = $this->insert_post( $data );
 		if ( $result instanceof WP_Error ) {
 			return $result;
@@ -570,6 +574,10 @@ class CCF_API extends WP_JSON_Posts {
 
 		if ( empty( $form['ID'] ) ) {
 			return new WP_Error( 'json_invalid_ccf_form', esc_html__( 'Invalid form.', 'custom-contact-forms' ), array( 'status' => 404 ) );
+		}
+
+		if ( isset( $data['author'] ) ) {
+			unset( $data['author'] );
 		}
 
 		$result = $this->insert_post( $data );
