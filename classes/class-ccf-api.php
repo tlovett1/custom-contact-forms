@@ -321,6 +321,7 @@ class CCF_API extends WP_JSON_Posts {
 	public function create_form( $data ) {
 		unset( $data['ID'] );
 
+		// @todo: remove hack. Needed for broken API
 		if ( isset( $data['author'] ) ) {
 			unset( $data['author'] );
 		}
@@ -576,6 +577,7 @@ class CCF_API extends WP_JSON_Posts {
 			return new WP_Error( 'json_invalid_ccf_form', esc_html__( 'Invalid form.', 'custom-contact-forms' ), array( 'status' => 404 ) );
 		}
 
+		// @todo: remove hack. Needed for broken API
 		if ( isset( $data['author'] ) ) {
 			unset( $data['author'] );
 		}
