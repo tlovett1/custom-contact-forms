@@ -496,7 +496,6 @@ class CCF_Form_Handler {
 				'post_status' => 'publish',
 				'post_type' => 'ccf_submission',
 				'post_parent' => $form_id,
-				'post_author' => 1,
 				'post_title' => 'Form Submission ' . $form_id,
 			));
 

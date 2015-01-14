@@ -380,7 +380,6 @@ class CCF_API extends WP_JSON_Posts {
 				if ( empty( $choice['ID'] ) ) {
 					$args = array(
 						'post_title' => $choice['label'] . '-' . (int) $field_id,
-						'post_author' => 1,
 						'post_status' => 'publish',
 						'post_parent' => $field_id,
 						'post_type' => 'ccf_choice',
@@ -434,7 +433,6 @@ class CCF_API extends WP_JSON_Posts {
 			if ( empty( $field['ID'] ) ) {
 				$args = array(
 					'post_title' => $field['slug'] . '-' . (int) $form_id,
-					'post_author' => 1,
 					'post_status' => 'publish',
 					'post_parent' => $form_id,
 					'post_type' => 'ccf_field',
@@ -652,31 +650,4 @@ class CCF_API extends WP_JSON_Posts {
 			return array( 'message' => esc_html__( 'Deleted post', 'custom-contact-forms' ) );
 		}
 	}
-
-	/**
-	 * Prepare a form for output
-	 *
-	 * @param array $post
-	 * @param string $context
-	 * @since 6.0
-	 * @return array
-	 */
-	/*protected function prepare_form( $post, $context = 'edit' ) {
-		$_post = parent::prepare_post( $post, $context );
-
-		// Override entity meta keys with the correct links
-		$_post['meta'] = array(
-			'links' => array(
-				'self' => json_url( '/ccf/forms/' . $post['ID'] ),
-				'author' => json_url( '/users/' . $post['post_author'] ),
-				'collection' => json_url( '/ccf/forms' ),
-			),
-		);
-
-		if ( ! empty( $post['post_parent'] ) ) {
-			$_post['meta']['links']['up'] = json_url(  '/ccf/forms/' . $post['ID'] );
-		}
-
-		return apply_filters( "json_prepare_ccf_form", $_post, $post, $context );
-	}*/
 }
