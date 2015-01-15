@@ -23,20 +23,28 @@ class CCF_Upgrader {
 		$upgraded_forms = get_option( 'ccf_upgraded_forms', null );
 
 		if ( null === $upgraded_forms ) {
-			$forms = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}customcontactforms_forms" );
 
-			if ( ! empty( $forms ) ) {
-				$nonce = wp_create_nonce( 'ccf_upgrade' );
+			if ( $wpdb->get_var( "SHOW TABLES LIKE '{$wpdb->prefix}customcontactforms_forms'" ) === $wpdb->prefix . 'customcontactforms_forms' ) {
 
-				?>
-				<div class="update-nag">
-					<p>
-						<?php esc_html_e( 'Did you just upgrade to a post 6.0 version of Custom Contact Forms? If so, you might need to upgrade your database to use your old forms.', 'custom-contact-forms' ); ?>
-						<a href="<?php echo esc_url( admin_url( '?ccf_upgrade=1&nonce=' . $nonce ) ); ?>" class="button"><?php esc_html_e( 'Upgrade', 'custom-contact-forms' ); ?></a>
-						<a href="<?php echo esc_url( admin_url( '?ccf_upgrade=0&nonce=' . $nonce ) ); ?>" class="button"><?php esc_html_e( 'Dismiss', 'custom-contact-forms' ); ?></a>
-					</p>
-				</div>
-			<?php
+				$forms = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}customcontactforms_forms" );
+
+				if ( ! empty( $forms ) ) {
+					$nonce = wp_create_nonce( 'ccf_upgrade' );
+
+					?>
+					<div class="update-nag">
+						<p>
+							<?php esc_html_e( 'Did you just upgrade to a post 6.0 version of Custom Contact Forms? If so, you might need to upgrade your database to use your old forms.', 'custom-contact-forms' ); ?>
+							<a href="<?php echo esc_url( admin_url( '?ccf_upgrade=1&nonce=' . $nonce ) ); ?>" class="button"><?php esc_html_e( 'Upgrade', 'custom-contact-forms' ); ?></a>
+							<a href="<?php echo esc_url( admin_url( '?ccf_upgrade=0&nonce=' . $nonce ) ); ?>" class="button"><?php esc_html_e( 'Dismiss', 'custom-contact-forms' ); ?></a>
+						</p>
+					</div>
+					<?php
+				} else {
+					update_option( 'ccf_upgraded_forms', array() );
+				}
+			} else {
+				update_option( 'ccf_upgraded_forms', array() );
 			}
 		}
 	}
@@ -56,6 +64,11 @@ class CCF_Upgrader {
 		<?php
 	}
 
+	/**
+	 * Upgrade from old plugin version to 6.0+
+	 *
+	 * @since 6.0
+	 */
 	public function upgrade() {
 		global $wpdb;
 
