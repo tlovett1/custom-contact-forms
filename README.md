@@ -3,8 +3,7 @@ Custom Contact Forms [![Build Status](https://travis-ci.org/tlovett1/custom-cont
 
 Build beautiful custom forms the WordPress way.
 
-__Note: Version 6.0 breaks backwards compatibility. This means you will need to rebuild your forms when upgrading to 6.0.
-It's worth it; I promise!__
+__Note: Version 6.0 breaks backwards compatibility. You will need to perform a database update after upgrading from anything pre 6.0. You may also need to reconfigure some of your forms.__
 
 ## Purpose
 

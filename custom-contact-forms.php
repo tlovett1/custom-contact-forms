@@ -4,7 +4,7 @@
  * Plugin URI: http://www.taylorlovett.com
  * Description: Build beautiful custom forms the WordPress way. View live previews of your forms while you build them.
  * Author: Taylor Lovett
- * Version: 6.0.3
+ * Version: 6.1
  * Author URI: http://www.taylorlovett.com
  */
 
@@ -23,6 +23,7 @@ require_once( dirname( __FILE__ ) . '/classes/class-ccf-form-manager.php' );
 require_once( dirname( __FILE__ ) . '/classes/class-ccf-field-renderer.php' );
 require_once( dirname( __FILE__ ) . '/classes/class-ccf-form-renderer.php' );
 require_once( dirname( __FILE__ ) . '/classes/class-ccf-form-handler.php' );
+require_once( dirname( __FILE__ ) . '/classes/class-ccf-upgrader.php' );
 
 CCF_Custom_Contact_Forms::factory();
 CCF_Constants::factory();
@@ -34,6 +35,7 @@ CCF_Form_Manager::factory();
 CCF_Form_Renderer::factory();
 CCF_Field_Renderer::factory();
 CCF_Form_Handler::factory();
+CCF_Upgrader::factory();
 
 /**
  * Flush the rewrites at the end of init after the plugin is been activated.

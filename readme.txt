@@ -4,14 +4,13 @@ Donate link: http://www.taylorlovett.com
 Tags: contact form, web form, custom contact form, custom forms, captcha form, contact fields, form mailers, forms
 Requires at least: 3.9
 Tested up to: 4.1
-Stable tag: 6.0.3
+Stable tag: 6.1
 
 Build beautiful custom forms the WordPress way. View live previews of your forms while you build them.
 
 == Description ==
 
-__Note: Version 6.0 breaks backwards compatibility. This means you will need to rebuild your forms when upgrading to 6.0.
-It's worth it; I promise!__
+__Note: Version 6.0 breaks backwards compatibility. You will need to perform a database update after upgrading from anything pre 6.0. You may also need to reconfigure some of your forms.__
 
 Custom Contact Forms enables you to build forms the WordPress way. User experience is at the top of the list for this plugin.
 Build forms in the media manager instead of going to separate areas of your site. Live previews of your forms are generated
@@ -33,6 +32,9 @@ Please refer to [Github](http://github.com/tlovett1/custom-contact-forms) for de
 For questions, feature requests, and support concerning the Custom Contact Forms plugin, please refer to [Github](http://github.com/tlovett1/custom-contact-forms).
 
 = Changelog ==
+
+= 6.1.0 =
+* Pre-6.0 upgrader added
 
 = 6.0.3 =
 * Make Google library URL protocol agnostic

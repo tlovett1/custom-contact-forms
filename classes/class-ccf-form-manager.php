@@ -1102,7 +1102,7 @@ class CCF_Form_Manager {
 
 				<div class="submission-wrapper" id="ccf-submission-content-<%- submission.ID %>">
 					<div class="ccf-submission-content">
-						<% _.each( columns, function( column ) { %>
+						<% for ( column in submission.data ) { %>
 							<div class="field-slug">
 								<%- column %>
 							</div>
@@ -1127,7 +1127,7 @@ class CCF_Form_Manager {
 									<span>-</span>
 								<% } %>
 							</div>
-						<% } ); %>
+						<% } %>
 					</div>
 				</div>
 			</td>
