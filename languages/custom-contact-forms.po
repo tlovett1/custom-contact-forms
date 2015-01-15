@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: Custom Contact Forms\n"
 "Report-Msgid-Bugs-To: https://github.com/tlovett1/editorial-access-manager/"
 "issues\n"
-"POT-Creation-Date: 2015-01-13 10:17-0500\n"
-"PO-Revision-Date: 2015-01-13 10:17-0500\n"
+"POT-Creation-Date: 2015-01-14 22:25-0500\n"
+"PO-Revision-Date: 2015-01-14 22:25-0500\n"
 "Last-Translator: Taylor Lovett <tlovett88@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: en\n"
@@ -23,34 +23,34 @@ msgstr ""
 "X-Textdomain-Support: yes\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../classes/class-ccf-api.php:244 ../classes/class-ccf-api.php:514
-#: ../classes/class-ccf-api.php:539 ../classes/class-ccf-api.php:568
-#: ../classes/class-ccf-api.php:634
+#: ../classes/class-ccf-api.php:244 ../classes/class-ccf-api.php:517
+#: ../classes/class-ccf-api.php:542 ../classes/class-ccf-api.php:571
+#: ../classes/class-ccf-api.php:642
 msgid "Invalid form ID."
 msgstr ""
 
-#: ../classes/class-ccf-api.php:249 ../classes/class-ccf-api.php:499
-#: ../classes/class-ccf-api.php:519
+#: ../classes/class-ccf-api.php:249 ../classes/class-ccf-api.php:502
+#: ../classes/class-ccf-api.php:522
 msgid "Sorry, you cannot view forms."
 msgstr ""
 
-#: ../classes/class-ccf-api.php:545 ../classes/class-ccf-api.php:574
+#: ../classes/class-ccf-api.php:548 ../classes/class-ccf-api.php:577
 msgid "Invalid form."
 msgstr ""
 
-#: ../classes/class-ccf-api.php:549
+#: ../classes/class-ccf-api.php:552
 msgid "Sorry, you cannot view this form."
 msgstr ""
 
-#: ../classes/class-ccf-api.php:645
+#: ../classes/class-ccf-api.php:653
 msgid "The form cannot be deleted."
 msgstr ""
 
-#: ../classes/class-ccf-api.php:649
+#: ../classes/class-ccf-api.php:657
 msgid "Permanently deleted form"
 msgstr ""
 
-#: ../classes/class-ccf-api.php:652
+#: ../classes/class-ccf-api.php:660
 #: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:381
 msgid "Deleted post"
 msgstr ""
@@ -302,12 +302,12 @@ msgstr ""
 msgid "AM/PM is required."
 msgstr ""
 
-#: ../classes/class-ccf-form-handler.php:572
+#: ../classes/class-ccf-form-handler.php:571
 #, php-format
 msgid "%s: Form Submission to \"%s\""
 msgstr ""
 
-#: ../classes/class-ccf-form-handler.php:583
+#: ../classes/class-ccf-form-handler.php:582
 #: ../classes/class-ccf-form-renderer.php:117
 msgid "Thank you for your submission."
 msgstr ""
@@ -796,6 +796,24 @@ msgstr ""
 
 #: ../classes/class-ccf-form-renderer.php:60
 msgid "This phone number is not 10 digits"
+msgstr ""
+
+#: ../classes/class-ccf-upgrader.php:34
+msgid ""
+"Did you just upgrade to a post 6.0 version of Custom Contact Forms? If so, "
+"you might need to upgrade your database to use your old forms."
+msgstr ""
+
+#: ../classes/class-ccf-upgrader.php:35
+msgid "Upgrade"
+msgstr ""
+
+#: ../classes/class-ccf-upgrader.php:36
+msgid "Dismiss"
+msgstr ""
+
+#: ../classes/class-ccf-upgrader.php:53
+msgid "Database update complete."
 msgstr ""
 
 #: ../vendor/wp-api/wp-api/lib/class-wp-json-comments.php:42
