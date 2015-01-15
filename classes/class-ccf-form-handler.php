@@ -563,6 +563,13 @@ class CCF_Form_Handler {
 						<?php
 					}
 
+					?>
+					<div>
+						<?php esc_html_e( 'Form submitted from:', 'custom-contact-forms' ); ?>:
+						<?php echo esc_url( untrailingslashit( site_url() ) . $_SERVER['REQUEST_URI'] ); ?>
+					</div>
+					<?php
+
 					$message .= ob_get_clean();
 
 					$headers = array( 'MIME-Version: 1.0', 'Content-type: text/html; charset=iso-8859-1' );
