@@ -88,6 +88,8 @@ class CCF_Custom_Contact_Forms {
 	 */
 	public function manually_load_api() {
 		if ( ! class_exists( 'WP_JSON_Server' ) ) {
+			add_filter( 'json_url', 'set_url_scheme' );
+
 			require( dirname( __FILE__ ) . '/../vendor/wp-api/wp-api/plugin.php' );
 
 			add_action( 'wp_json_server_before_serve', array( $this, 'api_init' ) );
