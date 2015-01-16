@@ -326,6 +326,16 @@ class CCF_API extends WP_JSON_Posts {
 			unset( $data['author'] );
 		}
 
+		// @todo: remove hack. Needed for broken API
+		if ( isset( $data['date'] ) ) {
+			unset( $data['date'] );
+		}
+
+		// @todo: remove hack. Needed for broken API
+		if ( isset( $data['date_gmt'] ) ) {
+			unset( $data['date_gmt'] );
+		}
+
 		$result = $this->insert_post( $data );
 		if ( $result instanceof WP_Error ) {
 			return $result;
@@ -580,6 +590,16 @@ class CCF_API extends WP_JSON_Posts {
 		// @todo: remove hack. Needed for broken API
 		if ( isset( $data['author'] ) ) {
 			unset( $data['author'] );
+		}
+
+		// @todo: remove hack. Needed for broken API
+		if ( isset( $data['date'] ) ) {
+			unset( $data['date'] );
+		}
+
+		// @todo: remove hack. Needed for broken API
+		if ( isset( $data['date_gmt'] ) ) {
+			unset( $data['date_gmt'] );
 		}
 
 		$result = $this->insert_post( $data );
