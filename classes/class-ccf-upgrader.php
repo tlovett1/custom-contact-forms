@@ -34,7 +34,7 @@ class CCF_Upgrader {
 					?>
 					<div class="update-nag">
 						<p>
-							<?php esc_html_e( 'Did you just upgrade to a post 6.0 version of Custom Contact Forms? If so, you might need to upgrade your database to use your old forms.', 'custom-contact-forms' ); ?>
+							<?php esc_html_e( 'Did you just upgrade to a post 6.0 version of Custom Contact Forms? If so, you might need to upgrade your database to use your old forms. Please backup your database before running the upgrade.', 'custom-contact-forms' ); ?>
 							<a href="<?php echo esc_url( admin_url( '?ccf_upgrade=1&nonce=' . $nonce ) ); ?>" class="button"><?php esc_html_e( 'Upgrade', 'custom-contact-forms' ); ?></a>
 							<a href="<?php echo esc_url( admin_url( '?ccf_upgrade=0&nonce=' . $nonce ) ); ?>" class="button"><?php esc_html_e( 'Dismiss', 'custom-contact-forms' ); ?></a>
 						</p>
