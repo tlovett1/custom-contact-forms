@@ -18,7 +18,7 @@ class CCF_Form_CPT {
 		add_action( 'init', array( $this, 'setup_cpt' ) );
 		add_filter( 'manage_edit-ccf_form_columns', array( $this, 'filter_columns' ) ) ;
 		add_action( 'manage_ccf_form_posts_custom_column', array( $this, 'action_columns' ), 10, 2 );
-		add_action( 'admin_enqueue_scripts', array( $this, 'action_admin_enqueue_scripts' ), 11 );
+		add_action( 'admin_enqueue_scripts', array( $this, 'action_admin_enqueue_scripts' ), 9 );
 		add_action( 'edit_form_after_title', array( $this, 'action_edit_form_after_title' ) );
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
 		add_filter( 'post_row_actions', array( $this, 'filter_post_row_actions' ), 10, 2 );

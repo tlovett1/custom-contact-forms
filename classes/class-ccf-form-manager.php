@@ -16,7 +16,7 @@ class CCF_Form_Manager {
 	public function setup() {
 		add_action( 'media_buttons', array( $this, 'action_media_buttons' ) );
 		add_action( 'admin_footer', array( $this, 'print_templates' ) );
-		add_action( 'admin_enqueue_scripts' , array( $this, 'action_admin_enqueue_scripts_css' ), 11 );
+		add_action( 'admin_enqueue_scripts' , array( $this, 'action_admin_enqueue_scripts_css' ), 9 );
 		add_filter( 'mce_css', array( $this, 'filter_mce_css' ) );
 	}
 
