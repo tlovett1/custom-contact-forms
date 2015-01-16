@@ -4,7 +4,7 @@ Donate link: http://www.taylorlovett.com
 Tags: contact form, web form, custom contact form, custom forms, captcha form, contact fields, form mailers, forms
 Requires at least: 3.9
 Tested up to: 4.1
-Stable tag: 6.1.1
+Stable tag: 6.1.2
 
 Build beautiful custom forms the WordPress way. View live previews of your forms while you build them.
 
@@ -32,6 +32,10 @@ Please refer to [Github](http://github.com/tlovett1/custom-contact-forms) for de
 For questions, feature requests, and support concerning the Custom Contact Forms plugin, please refer to [Github](http://github.com/tlovett1/custom-contact-forms).
 
 = Changelog ==
+
+= 6.1.2 =
+* Force JSON url to obey current protocol
+* Enqueue scripts earlier
 
 = 6.1.1 =
 * Make sure to check for existence of legacy table before trying to read from it.
