@@ -566,7 +566,7 @@ class CCF_Form_Handler {
 					if ( ! empty( $_POST['form_page'] ) ) {
 						?>
 						<div>
-							<?php esc_html_e( 'Form submitted from:', 'custom-contact-forms' ); ?>:
+							<?php esc_html_e( 'Form submitted from', 'custom-contact-forms' ); ?>:
 							<?php echo esc_url( $_POST['form_page'] ); ?>
 						</div>
 						<?php
