@@ -158,6 +158,7 @@ class CCF_Form_Renderer {
 					</div>
 
 					<input type="hidden" name="form_id" value="<?php echo (int) $form_id; ?>">
+					<input type="hidden" name="form_page" value="<?php echo esc_url( untrailingslashit( site_url() ) . $_SERVER['REQUEST_URI'] ); ?>">
 					<input type="text" name="my_information" style="display: none;">
 					<input type="hidden"  name="ccf_form" value="1">
 					<input type="hidden" name="form_nonce" value="<?php echo wp_create_nonce( 'ccf_form' ); ?>">
