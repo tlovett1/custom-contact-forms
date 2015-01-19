@@ -37,6 +37,7 @@ For questions, feature requests, and support concerning the Custom Contact Forms
 * Add reCAPTCHA field
 * Fix some localization of date field
 * Fix spinner for non-root WP installs
+* Strip slashes off of email field values
 
 = 6.1.4 =
 * Decode html entities on model sync. Escape entities on output.
