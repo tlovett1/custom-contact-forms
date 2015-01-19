@@ -242,7 +242,7 @@ class CCF_Form_CPT {
 			<h1>
 				<span class="ccf-form-cpt-title">
 					<?php if ( ! empty( $title ) ) : ?>
-						<?php echo $title; ?>
+						<?php echo esc_html( $title ); ?>
 					<?php else: ?>
 						<?php esc_html_e( '(No title)', 'custom-contact-forms' ); ?>
 					<?php endif; ?>

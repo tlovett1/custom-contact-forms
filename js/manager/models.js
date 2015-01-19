@@ -17,12 +17,43 @@
 		return Backbone.Model.prototype.set.call( this, key, value, options );
 	};
 
+	/**
+	 * We decode HTML entities after syncing then escape on output. The
+	 * point of this is to prevent double escaping.
+	 */
+	var _modelDecode = function( excludeKeys ) {
+		for ( var key in this.attributes ) {
+			if ( excludeKeys.indexOf( key ) === -1 ) {
+				var value = this.get( key );
+
+				if ( typeof value === 'string' && value !== '' ) {
+					value = new String( value )
+						.replace( /&amp;/g, '&' )
+						.replace( /&lt;/g, '<' )
+						.replace( /&gt;/g, '>' )
+						.replace( /&quot;/g, '"' )
+						.replace( /&#8221;/g, '”' )
+						.replace( /&#8216;/g, "‘" )
+						.replace( /&#039;/g, "'" );
+
+					this.set( key, value );
+				}
+			}
+		}
+
+		return this;
+	};
+
 	wp.ccf.models.FieldChoice = wp.ccf.models.FieldChoice || Backbone.Model.extend(
 		{
 			defaults: {
 				label: '',
 				value: '',
 				selected: false
+			},
+
+			decode: function() {
+				return _modelDecode.call( this, [] );
 			},
 
 			set: _modelSet
@@ -35,6 +66,10 @@
 			urlRoot: WP_API_Settings.root + '/ccf/forms',
 
 			set: _modelSet,
+
+			initialize: function() {
+				this.on( 'sync', this.decode, this );
+			},
 
 			defaults: function() {
 				var defaults = {
@@ -54,6 +89,13 @@
 				wp.ccf.utils.cleanDateFields( defaults );
 
 				return defaults;
+			},
+
+			decode: function() {
+				var keys = _.keys( wp.api.models.Post.prototype.defaults );
+				keys = _.without( keys, 'title' );
+
+				return _modelDecode.call( this, keys );
 			},
 
 			getFieldSlugs: function( mutableOnly ) {
@@ -93,7 +135,9 @@
 
 									if ( choices && choices.length > 0 ) {
 										for ( var z = 0; z < newField.choices; z++ ) {
-											choices.at( z ).set( newField.choices[z] );
+											var choice = choices.at( z );
+											choice.set( newField.choices[z] );
+											choice.decode();
 										}
 									}
 
@@ -101,6 +145,7 @@
 								}
 
 								field.set( newField );
+								field.decode();
 							}
 						}
 
@@ -109,7 +154,10 @@
 						var newFields = [];
 
 						_.each( response.fields, function( field ) {
-							newFields.push( new wp.ccf.models.Fields[field.type]( field ) );
+							var fieldModel = new wp.ccf.models.Fields[field.type]( field );
+							fieldModel.decode();
+
+							newFields.push( fieldModel );
 						});
 
 						response.fields = new wp.ccf.collections.Fields( newFields, { formId: response.ID } );
@@ -158,6 +206,10 @@
 
 			required: function() {
 				return [ 'slug' ];
+			},
+
+			decode: function() {
+				return _modelDecode.call( this, _.keys( wp.api.models.Post.prototype.defaults ) );
 			},
 
 			hasRequiredAttributes: function() {
@@ -366,7 +418,10 @@
 					var choices = [];
 
 					_.each( attributes.choices, function( choice ) {
-						choices.push( new wp.ccf.models.FieldChoice( choice ) );
+						var choiceModel = new wp.ccf.models.FieldChoice( choice );
+						choiceModel.decode();
+
+						choices.push( choiceModel );
 					});
 
 					this.set( 'choices', new wp.ccf.collections.FieldChoices( choices ) );
