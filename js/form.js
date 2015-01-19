@@ -15,7 +15,7 @@
 		var setupCaptcha = function( formId ) {
 			grecaptcha.render( recaptchas[i], {
 				sitekey: recaptchas[i].getAttribute( 'data-sitekey' ),
-				theme: 'light',
+				theme: ccfSettings.recaptcha_theme,
 				callback: function() {
 					_verifiedRecaptcha[formId] = true;
 				}

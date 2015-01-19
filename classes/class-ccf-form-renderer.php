@@ -58,6 +58,7 @@ class CCF_Form_Renderer {
 			'match' => esc_html__( 'Emails do not match.', 'custom-contact-forms' ),
 			'email' => esc_html__( 'This is not a valid email address.', 'custom-contact-forms' ),
 			'recaptcha' => esc_html__( 'Your reCAPTCHA response was incorrect.', 'custom-contact-forms' ),
+			'recaptcha_theme' => apply_filters( 'ccf_recaptcha_theme', 'light' ),
 			'phone' => esc_html__( 'This is not a valid phone number.', 'custom-contact-forms' ),
 			'digits' => esc_html__( 'This phone number is not 10 digits', 'custom-contact-forms' ),
 			'hour' => esc_html__( 'This is not a valid hour.', 'custom-contact-forms' ),
