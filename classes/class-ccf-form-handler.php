@@ -561,28 +561,28 @@ class CCF_Form_Handler {
 								<?php if ( is_array( $field ) ) { ?>
 									<?php if ( CCF_Submission_CPT::factory()->is_field_date( $field ) ) { ?>
 
-										<?php echo esc_html( CCF_Submission_CPT::factory()->get_pretty_field_date( $field ) ); ?>
+										<?php echo esc_html( stripslashes( CCF_Submission_CPT::factory()->get_pretty_field_date( $field ) ) ); ?>
 
 									<?php } elseif ( CCF_Submission_CPT::factory()->is_field_name( $field ) ) { ?>
 
-										<?php echo esc_html( CCF_Submission_CPT::factory()->get_pretty_field_name( $field ) ); ?>
+										<?php echo esc_html( stripslashes( CCF_Submission_CPT::factory()->get_pretty_field_name( $field ) ) ); ?>
 
 									<?php } elseif ( CCF_Submission_CPT::factory()->is_field_address( $field ) ) { ?>
 
-										<?php echo esc_html( CCF_Submission_CPT::factory()->get_pretty_field_address( $field ) ); ?>
+										<?php echo esc_html( stripslashes( CCF_Submission_CPT::factory()->get_pretty_field_address( $field ) ) ); ?>
 
 									<?php } else { ?>
 
 										<?php foreach ( $field as $key => $value ) { ?>
 											<?php if ( is_int( $key ) ) { ?>
-												<strong><?php echo esc_html( $key ); ?>:</strong>
+												<strong><?php echo esc_html( stripslashes( $key ) ); ?>:</strong>
 											<?php } ?>
-											<?php echo esc_html( $value ); ?><br>
+											<?php echo esc_html( stripslashes( $value ) ); ?><br>
 										<?php } ?>
 
 									<?php } ?>
 								<?php } else { ?>
-									<?php echo esc_html( $field ); ?>
+									<?php echo esc_html( stripslashes( $field ) ); ?>
 								<?php } ?>
 							<?php } else { ?>
 								<span>-</span>
