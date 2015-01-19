@@ -66,6 +66,14 @@ class CCF_API extends WP_JSON_Posts {
 				'sanitize' => 'esc_attr',
 				'escape' => 'esc_attr',
 			),
+			'siteKey' => array(
+				'sanitize' => 'esc_attr',
+				'escape' => 'esc_attr',
+			),
+			'secretKey' => array(
+				'sanitize' => 'esc_attr',
+				'escape' => 'esc_attr',
+			),
 			'phoneFormat' => array(
 				'sanitize' => 'esc_attr',
 				'escape' => 'esc_attr',

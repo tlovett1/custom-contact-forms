@@ -29,6 +29,9 @@ class CCF_Form_Handler {
 				'sanitizer' => 'sanitize_text_field',
 				'validator' => array( $this, 'not_empty' ),
 			),
+			'recaptcha' => array(
+				'validator' => array( $this, 'valid_recaptcha' ),
+			),
 			'paragraph-text' => array(
 				'sanitizer' => 'sanitize_text_field',
 				'validator' => array( $this, 'not_empty' ),
@@ -109,6 +112,22 @@ class CCF_Form_Handler {
 	public function not_empty( $value, $field_id, $required ) {
 		if ( $required && empty( $value ) ) {
 			return array( 'required' => esc_html__( 'This field is required.', 'custom-contact-forms' ) );
+		}
+
+		return true;
+	}
+
+	public function valid_recaptcha( $value, $field_id, $required ) {
+		$secret = get_post_meta( $field_id, 'ccf_field_secretKey', true );
+
+		$response = wp_remote_get( 'https://www.google.com/recaptcha/api/siteverify?secret=' . $secret . '&response=' . $value );
+
+		$data = wp_remote_retrieve_body( $response );
+
+		$data = json_decode( $data );
+
+		if ( empty( $data->success ) ) {
+			return array( 'recaptcha' => esc_html__( 'Your reCAPTCHA response was incorrect.', 'custom-contact-forms' ) );
 		}
 
 		return true;
@@ -466,25 +485,35 @@ class CCF_Form_Handler {
 		$submission = array();
 
 		$skip_fields = apply_filters( 'ccf_skip_fields', array( 'html', 'section-header' ), $form->ID );
+		$save_skip_fields = apply_filters( 'ccf_save_skip_fields', array( 'recaptcha' ), $form->ID );
 
 		foreach ( $fields as $field_id ) {
 			$field_id = (int) $field_id;
 
 			$type = get_post_meta( $field_id, 'ccf_field_type', true );
+
 			if ( in_array( $type, $skip_fields ) ) {
 				continue;
 			}
 
 			$slug = get_post_meta( $field_id, 'ccf_field_slug', true );
 
-			$value = ( isset( $_POST['ccf_field_' . $slug] ) ) ? $_POST['ccf_field_' . $slug] : '';
+			$custom_value_mapping = array( 'recaptcha' => 'g-recaptcha-response' );
+
+			if ( in_array( $type, array_keys( $custom_value_mapping ) ) ) {
+				$value = ( isset( $_POST[$custom_value_mapping[$type]] ) ) ? $_POST[$custom_value_mapping[$type]] : '';
+			} else {
+				$value = ( isset( $_POST['ccf_field_' . $slug] ) ) ? $_POST['ccf_field_' . $slug] : '';
+			}
 
 			$validation = $this->process_field( $field_id, $value );
 
 			if ( $validation['error'] !== null ) {
 				$errors[$slug] = $validation['error'];
 			} else {
-				$submission[$slug] = $validation['sanitized_value'];
+				if ( ! in_array( $type, $save_skip_fields ) ) {
+					$submission[$slug] = $validation['sanitized_value'];
+				}
 			}
 		}
 
@@ -626,10 +655,14 @@ class CCF_Form_Handler {
 				$return['sanitized_value'] = array();
 
 				foreach ( $value as $key => $single_value ) {
-					$return['sanitized_value'][$key] = call_user_func( apply_filters( 'ccf_field_sanitizer', $this->field_callbacks[$type]['sanitizer'], $single_value, $field_id, $type ), $single_value, $field_id );
+					if ( ! empty( $this->field_callbacks[$type]['sanitizer'] ) ) {
+						$return['sanitized_value'][$key] = call_user_func( apply_filters( 'ccf_field_sanitizer', $this->field_callbacks[$type]['sanitizer'], $single_value, $field_id, $type ), $single_value, $field_id );
+					}
 				}
 			} else {
-				$return['sanitized_value'] = call_user_func( apply_filters( 'ccf_field_sanitizer', $this->field_callbacks[$type]['sanitizer'], $value, $field_id, $type ), $value, $field_id );
+				if ( ! empty( $this->field_callbacks[$type]['sanitizer'] ) ) {
+					$return['sanitized_value'] = call_user_func( apply_filters( 'ccf_field_sanitizer', $this->field_callbacks[$type]['sanitizer'], $value, $field_id, $type ), $value, $field_id );
+				}
 			}
 		}
 

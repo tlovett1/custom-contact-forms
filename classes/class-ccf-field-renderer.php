@@ -56,6 +56,40 @@ class CCF_Field_Renderer {
 	}
 
 	/**
+	 * Get reCAPTCHA field HTML, including any errors from the last form submission.
+	 *
+	 * @param int $field_id
+	 * @param int $form_id
+	 * @since 6..2
+	 * @return string
+	 */
+	public function recaptcha( $field_id, $form_id ) {
+		$slug = get_post_meta( $field_id, 'ccf_field_slug', true );
+		$label = get_post_meta( $field_id, 'ccf_field_label', true );
+		$class_name = get_post_meta( $field_id, 'ccf_field_className', true );
+		$site_key = get_post_meta( $field_id, 'ccf_field_siteKey', true );
+
+		$errors = CCF_Form_Handler::factory()->get_errors( $form_id, $slug );
+
+		ob_start();
+		?>
+
+		<div data-field-type="recaptcha" class="<?php if ( ! empty( $errors ) ) : ?>field-error<?php endif; ?> field <?php echo esc_attr( $slug ); ?> single-line-text field-<?php echo (int) $field_id; ?> <?php echo esc_attr( $class_name ); ?> <?php if ( ! empty( $required ) ) : ?>field-required<?php endif; ?>">
+			<label for="ccf_field_<?php echo esc_attr( $slug ); ?>">
+				<span class="required">*</span>
+				<?php echo esc_html( $label ); ?>
+			</label>
+			<div class="ccf-recaptcha-wrapper" data-form-id="<?php echo (int) $form_id; ?>" data-sitekey="<?php echo esc_attr( $site_key ); ?>"></div>
+			<?php if ( ! empty( $errors ) ) : ?>
+				<div class="error"><?php echo esc_html( $errors['recaptcha'] ); ?></div>
+			<?php endif; ?>
+		</div>
+
+		<?php
+		return ob_get_clean();
+	}
+
+	/**
 	 * Get section header layout field HTML
 	 *
 	 * @param int $field_id
@@ -775,36 +809,36 @@ class CCF_Field_Renderer {
 			<?php } else if ( empty( $show_date ) && ! empty( $show_time ) ) { ?>
 				<div class="hour">
 					<input maxlength="2" class="<?php if ( ! empty( $errors['hour_required'] ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> name="ccf_field_<?php echo esc_attr( $slug ); ?>[hour]" value="<?php if ( ! empty( $hour_post_value ) ) { echo esc_attr( $hour_post_value ); } ?>" id="ccf_field_<?php echo esc_attr( $slug ); ?>-hour" type="text">
-					<label for="ccf_field_<?php echo esc_attr( $slug ); ?>-hour" class="sub-label">HH</label>
+					<label for="ccf_field_<?php echo esc_attr( $slug ); ?>-hour" class="sub-label"><?php esc_html_e( 'HH', 'custom-contact-forms' ); ?></label>
 				</div>
 				<div class="minute">
 					<input maxlength="2" class="<?php if ( ! empty( $errors['minutes_required'] ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> name="ccf_field_<?php echo esc_attr( $slug ); ?>[minute]" value="<?php if ( ! empty( $minute_post_value ) ) { echo esc_attr( $minute_post_value ); } ?>" id="ccf_field_<?php echo esc_attr( $slug ); ?>-minute" type="text">
-					<label for="ccf_field_<?php echo esc_attr( $slug ); ?>-minute" class="sub-label">MM</label>
+					<label for="ccf_field_<?php echo esc_attr( $slug ); ?>-minute" class="sub-label"><?php esc_html_e( 'MM', 'custom-contact-forms' ); ?></label>
 				</div>
 				<div class="am-pm">
 					<select class="<?php if ( ! empty( $errors['am-pm_required'] ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> name="ccf_field_<?php echo esc_attr( $slug ); ?>[am-pm]" id="ccf_field_<?php echo esc_attr( $slug ); ?>-am-pm">
-						<option <?php if ( ! empty( $am_pm_post_value ) ) { selected( 'am', $am_pm_post_value ); } ?> value="am">AM</option>
-						<option <?php if ( ! empty( $am_pm_post_value ) ) { selected( 'pm', $am_pm_post_value ); } ?> value="pm">PM</option>
+						<option <?php if ( ! empty( $am_pm_post_value ) ) { selected( 'am', $am_pm_post_value ); } ?> value="am"><?php esc_html_e( 'AM', 'custom-contact-forms' ); ?></option>
+						<option <?php if ( ! empty( $am_pm_post_value ) ) { selected( 'pm', $am_pm_post_value ); } ?> value="pm"><?php esc_html_e( 'PM', 'custom-contact-forms' ); ?></option>
 					</select>
 				</div>
 			<?php } else { ?>
 				<div class="left">
 					<input value="<?php if ( ! empty( $date_post_value ) ) { echo esc_attr( $date_post_value ); } ?>" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> name="ccf_field_<?php echo esc_attr( $slug ); ?>[date]" class="<?php if ( ! empty( $errors['date_required'] ) ) : ?>field-error-input<?php endif; ?> ccf-datepicker field-input" id="ccf_field_<?php echo esc_attr( $slug ); ?>-date" type="text">
-					<label for="ccf_field_<?php echo esc_attr( $slug ); ?>-date" class="sub-label">Date</label>
+					<label for="ccf_field_<?php echo esc_attr( $slug ); ?>-date" class="sub-label"><?php esc_html_e( 'Date', 'custom-contact-forms' ); ?></label>
 				</div>
 				<div class="right">
 					<div class="hour">
 						<input class="<?php if ( ! empty( $errors['hour_required'] ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> maxlength="2" name="ccf_field_<?php echo esc_attr( $slug ); ?>[hour]" value="<?php if ( ! empty( $hour_post_value ) ) { echo esc_attr( $hour_post_value ); } ?>" id="ccf_field_<?php echo esc_attr( $slug ); ?>-hour" type="text">
-						<label class="sub-label" for="ccf_field_<?php echo esc_attr( $slug ); ?>-hour">HH</label>
+						<label class="sub-label" for="ccf_field_<?php echo esc_attr( $slug ); ?>-hour"><?php esc_html_e( 'HH', 'custom-contact-forms' ); ?></label>
 					</div>
 					<div class="minute">
 						<input class="<?php if ( ! empty( $errors['minutes_required'] ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> maxlength="2" name="ccf_field_<?php echo esc_attr( $slug ); ?>[minute]" value="<?php if ( ! empty( $minute_post_value ) ) { echo esc_attr( $minute_post_value ); } ?>" id="ccf_field_<?php echo esc_attr( $slug ); ?>-minute" type="text">
-						<label class="sub-label" for="ccf_field_<?php echo esc_attr( $slug ); ?>-minute">MM</label>
+						<label class="sub-label" for="ccf_field_<?php echo esc_attr( $slug ); ?>-minute"><?php esc_html_e( 'MM', 'custom-contact-forms' ); ?></label>
 					</div>
 					<div class="am-pm">
 						<select class="<?php if ( ! empty( $errors['am-pm_required'] ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> name="ccf_field_<?php echo esc_attr( $slug ); ?>[am-pm]" id="ccf_field_<?php echo esc_attr( $slug ); ?>-am-pm">
-							<option <?php if ( ! empty( $am_pm_post_value ) ) { selected( 'am', $am_pm_post_value ); } ?> value="am">AM</option>
-							<option <?php if ( ! empty( $am_pm_post_value ) ) { selected( 'pm', $am_pm_post_value ); } ?> value="pm">PM</option>
+							<option <?php if ( ! empty( $am_pm_post_value ) ) { selected( 'am', $am_pm_post_value ); } ?> value="am"><?php esc_html_e( 'AM', 'custom-contact-forms' ); ?></option>
+							<option <?php if ( ! empty( $am_pm_post_value ) ) { selected( 'pm', $am_pm_post_value ); } ?> value="pm"><?php esc_html_e( 'PM', 'custom-contact-forms' ); ?></option>
 						</select>
 					</div>
 				</div>
@@ -916,6 +950,9 @@ class CCF_Field_Renderer {
 				break;
 			case 'radio':
 				$field_html = $this->radio( $field_id, $form_id );
+				break;
+			case 'recaptcha':
+				$field_html = $this->recaptcha( $field_id, $form_id );
 				break;
 			case 'html':
 				$field_html = $this->html( $field_id, $form_id );

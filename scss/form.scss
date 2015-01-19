@@ -30,7 +30,7 @@
 		clear: both;
 		overflow: auto;
 
-		&[data-field-type="dropdown"], &[data-field-type="radio"], &[data-field-type="checkboxes"], &[data-field-type="date"] {
+		&[data-field-type="recaptcha"],&[data-field-type="dropdown"], &[data-field-type="radio"], &[data-field-type="checkboxes"], &[data-field-type="date"] {
 			.error {
 				float: none;
 			}

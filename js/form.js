@@ -3,14 +3,31 @@
 
 	window.wp = window.wp || {};
 
-	var datepickers = document.querySelectorAll( '.ccf-datepicker' );
-
-	for ( var i = 0; i < datepickers.length; i++ ) {
-		$( datepickers[i] ).datepicker();
-	}
-
 	wp.ccf = wp.ccf || {};
 	wp.ccf.validators = wp.ccf.validators || {};
+
+
+	var _verifiedRecaptcha = {};
+
+	window.ccfRecaptchaOnload = function() {
+		var recaptchas = document.querySelectorAll( '.ccf-recaptcha-wrapper' );
+
+		var setupCaptcha = function( formId ) {
+			grecaptcha.render( recaptchas[i], {
+				sitekey: recaptchas[i].getAttribute( 'data-sitekey' ),
+				theme: 'light',
+				callback: function() {
+					_verifiedRecaptcha[formId] = true;
+				}
+			});
+		};
+
+		for ( var i = 0; i < recaptchas.length; i++ ) {
+			var formId = recaptchas[i].getAttribute( 'data-form-id' );
+
+			setupCaptcha( formId );
+		}
+	};
 
 	var choiceValidator = function( fieldWrapperElement ) {
 		this.wrapper = fieldWrapperElement;
@@ -115,6 +132,38 @@
 		}
 	});
 
+	wp.ccf.validators.recaptcha = wp.ccf.validators.recaptcha || function( fieldWrapperElement, formId ) {
+		this.wrapper = fieldWrapperElement;
+		this.inputs = this.wrapper.querySelectorAll( '.g-recaptcha-response' );
+		this.errors = {};
+
+		var oldErrorNodes = this.wrapper.querySelectorAll( '.error' );
+		for ( var i = oldErrorNodes.length - 1; i >= 0; i-- ) {
+			oldErrorNodes[i].parentNode.removeChild( oldErrorNodes[i] );
+		}
+
+		if ( ! _verifiedRecaptcha[formId] ) {
+			this.errors['g-recaptcha-response'] = {};
+			this.errors['g-recaptcha-response'].recaptcha = this.wrapper.lastChild;
+		}
+
+		var newErrorNode;
+
+		for ( var field in this.errors ) {
+			if ( this.errors.hasOwnProperty( field ) ) {
+
+				for ( var errorKey in this.errors[field] ) {
+					newErrorNode = document.createElement( 'div' );
+					newErrorNode.className = 'error ' + errorKey + '-error';
+					newErrorNode.setAttribute( 'data-field-name', field );
+					newErrorNode.innerHTML = ccfSettings[errorKey];
+
+					this.errors[field][errorKey].parentNode.insertBefore( newErrorNode, this.errors[field][errorKey].nextSibling );
+				}
+			}
+		}
+	};
+
 	wp.ccf.validators.phone = wp.ccf.validators.phone || validator( false, function() {
 		var phone = this.inputs[0].value;
 
@@ -216,98 +265,112 @@
 
 	wp.ccf.validators.radio = wp.ccf.validators.radio || choiceValidator;
 
-	var forms = document.querySelectorAll( '.ccf-form-wrapper' );
+	/**
+	 * Register listeners on DOM
+	 */
+	$( document ).ready( function() {
+		var datepickers = document.querySelectorAll( '.ccf-datepicker' );
 
-	if ( forms.length >= 1 ) {
-		_.each( forms, function( form ) {
+		for ( var i = 0; i < datepickers.length; i++ ) {
+			$( datepickers[i] ).datepicker();
+		}
 
-			var formSubmit = function( event ) {
-				event.returnFalse = false;
+		var forms = document.querySelectorAll( '.ccf-form-wrapper' );
 
-				if ( event.preventDefault ) {
-					event.preventDefault();
-				}
+		if ( forms.length >= 1 ) {
+			_.each( forms, function( form ) {
 
-				var fields = form.querySelectorAll( '.field' );
+				var formId = parseInt( form.getAttribute( 'data-form-id' ) );
 
-				var errors = [];
+				var formSubmit = function( event ) {
+					event.returnFalse = false;
 
-				_.each( fields, function( field ) {
-					if ( field.className.match( / skip-field/i ) ) {
-						return;
+					if ( event.preventDefault ) {
+						event.preventDefault();
 					}
 
-					var type = field.getAttribute( 'data-field-type' );
+					var fields = form.querySelectorAll( '.field' );
 
-					var validation = new ( wp.ccf.validators[type] )( field );
+					var errors = [];
 
-					if ( _.size( validation.errors ) ) {
-						var validationErrors = 0;
-						for ( var key in validation.errors ) {
-							if ( validation.errors.hasOwnProperty( key ) ) {
-								if (_.size( validation.errors[key] ) ) {
-									validationErrors++;
+					_.each( fields, function( field ) {
+						if ( field.className.match( / skip-field/i ) ) {
+							return;
+						}
+
+						var type = field.getAttribute( 'data-field-type' );
+
+						var validation = new ( wp.ccf.validators[type] )( field, formId );
+
+						if ( _.size( validation.errors ) ) {
+							var validationErrors = 0;
+							for ( var key in validation.errors ) {
+								if ( validation.errors.hasOwnProperty( key ) ) {
+									if (_.size( validation.errors[key] ) ) {
+										validationErrors++;
+									}
 								}
 							}
-						}
 
-						if ( validationErrors > 0 ) {
-							errors.push( validation );
-						}
-					}
-				});
-
-				if ( errors.length ) {
-					var docViewTop = $( window ).scrollTop();
-					var docViewBottom = docViewTop + $( window ).height();
-
-					var $firstError = $( errors[0].wrapper );
-					var $firstErrorOffset = $firstError.offset();
-
-					var top = $firstErrorOffset.top;
-					var bottom = top + $firstError.height();
-
-					if ( ! ( docViewTop <= top && docViewBottom >= bottom ) ) {
-						$( 'html, body' ).animate( {
-							scrollTop: $firstError.offset().top
-						}, 500 );
-					}
-				} else {
-					var $form = $( this.querySelectorAll( '.ccf-form' )[0] );
-
-					form.className = form.className.replace( / loading/i, '' ) + ' loading';
-
-					var $loading = $( form.querySelectorAll( '.loading-img' )[0] );
-					$loading.animate( { opacity: 100 } );
-
-					$.ajax( {
-						url: ccfSettings.ajaxurl,
-						type: 'post',
-						data: $form.serialize()
-					}).done( function( data ) {
-						if ( data.success ) {
-							if ( 'text' === data.action_type && data.completion_message ) {
-								form.innerHTML = data.completion_message;
-
-								$( 'html, body' ).animate( {
-									scrollTop: $( form ).offset().top
-								}, 500 );
-							} else if ( 'redirect' === data.action_type && data.completion_redirect_url ) {
-								document.location = data.completion_redirect_url;
+							if ( validationErrors > 0 ) {
+								errors.push( validation );
 							}
-
 						}
-					}).complete( function() {
-						form.className = form.className.replace( / loading/i, '' );
-						$loading.animate( { opacity: 0 } );
 					});
-				}
 
-				return false;
-			};
+					if ( errors.length ) {
+						var docViewTop = $( window ).scrollTop();
+						var docViewBottom = docViewTop + $( window ).height();
 
-			$( form ).on( 'submit', formSubmit );
+						var $firstError = $( errors[0].wrapper );
+						var $firstErrorOffset = $firstError.offset();
 
-		});
-	}
+						var top = $firstErrorOffset.top;
+						var bottom = top + $firstError.height();
+
+						if ( ! ( docViewTop <= top && docViewBottom >= bottom ) ) {
+							$( 'html, body' ).animate( {
+								scrollTop: $firstError.offset().top
+							}, 500 );
+						}
+					} else {
+						var $form = $( this.querySelectorAll( '.ccf-form' )[0] );
+
+						form.className = form.className.replace( / loading/i, '' ) + ' loading';
+
+						var $loading = $( form.querySelectorAll( '.loading-img' )[0] );
+						$loading.animate( { opacity: 100 } );
+
+						$.ajax( {
+							url: ccfSettings.ajaxurl,
+							type: 'post',
+							data: $form.serialize()
+						}).done( function( data ) {
+							if ( data.success ) {
+								if ( 'text' === data.action_type && data.completion_message ) {
+									form.innerHTML = data.completion_message;
+
+									$( 'html, body' ).animate( {
+										scrollTop: $( form ).offset().top
+									}, 500 );
+								} else if ( 'redirect' === data.action_type && data.completion_redirect_url ) {
+									document.location = data.completion_redirect_url;
+								}
+
+							}
+						}).complete( function() {
+							form.className = form.className.replace( / loading/i, '' );
+							$loading.animate( { opacity: 0 } );
+							_verifiedRecaptcha[formId] = false;
+						});
+					}
+
+					return false;
+				};
+
+				$( form ).on( 'submit', formSubmit );
+
+			});
+		}
+	});
 })( jQuery, ccfSettings );

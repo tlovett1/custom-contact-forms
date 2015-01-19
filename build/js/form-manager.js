@@ -565,6 +565,26 @@
 		}
 	);
 
+	wp.ccf.models.Fields.recaptcha = wp.ccf.models.Fields.recaptcha || wp.ccf.models.StandardField.extend(
+		{
+			defaults: function() {
+				var defaults = {
+					type: 'recaptcha',
+					siteKey: '',
+					secretKey: ''
+				};
+
+				return _.defaults( defaults, this.constructor.__super__.defaults() );
+			},
+
+			required: function() {
+				return [ 'siteKey', 'secretKey' ];
+			},
+
+			isImmutable: true
+		}
+	);
+
 	wp.ccf.models.Fields.address = wp.ccf.models.Fields.address || wp.ccf.models.StandardField.extend(
 		{
 			defaults: function() {
@@ -923,6 +943,25 @@
 				this.model.set( 'placeholder', this.el.querySelectorAll( '.field-placeholder' )[0].value );
 				this.model.set( 'className', this.el.querySelectorAll( '.field-class-name' )[0].value );
 				this.model.set( 'required', ( this.el.querySelectorAll( '.field-required' )[0].value == 1 ) ? true : false  );
+
+				return this;
+			}
+		}
+	);
+
+	wp.ccf.views.Fields.recaptcha = wp.ccf.views.Fields.recaptcha || wp.ccf.views.FieldBase.extend(
+		{
+			template: _.template( document.getElementById( 'ccf-recaptcha-template' ).innerHTML ),
+
+			initialize: function() {
+
+			},
+
+			saveField: function() {
+				this.model.set( 'label', this.el.querySelectorAll( '.field-label' )[0].value );
+				this.model.set( 'siteKey', this.el.querySelectorAll( '.field-site-key' )[0].value );
+				this.model.set( 'secretKey', this.el.querySelectorAll( '.field-secret-key' )[0].value );
+				this.model.set( 'className', this.el.querySelectorAll( '.field-class-name' )[0].value );
 
 				return this;
 			}

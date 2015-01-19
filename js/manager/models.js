@@ -348,6 +348,26 @@
 		}
 	);
 
+	wp.ccf.models.Fields.recaptcha = wp.ccf.models.Fields.recaptcha || wp.ccf.models.StandardField.extend(
+		{
+			defaults: function() {
+				var defaults = {
+					type: 'recaptcha',
+					siteKey: '',
+					secretKey: ''
+				};
+
+				return _.defaults( defaults, this.constructor.__super__.defaults() );
+			},
+
+			required: function() {
+				return [ 'siteKey', 'secretKey' ];
+			},
+
+			isImmutable: true
+		}
+	);
+
 	wp.ccf.models.Fields.address = wp.ccf.models.Fields.address || wp.ccf.models.StandardField.extend(
 		{
 			defaults: function() {

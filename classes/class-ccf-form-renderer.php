@@ -43,9 +43,10 @@ class CCF_Form_Renderer {
 		}
 
 		wp_enqueue_style('ccf-jquery-ui', '//ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/jquery-ui.css');
+		wp_enqueue_script( 'ccf-google-recaptcha', '//www.google.com/recaptcha/api.js?onload=ccfRecaptchaOnload&render=explicit' );
 		wp_enqueue_style( 'ccf-form', plugins_url( $css_form_path, dirname( __FILE__ ) ) );
 
-		wp_enqueue_script( 'ccf-form', plugins_url( $js_path, dirname( __FILE__ ) ), array( 'jquery-ui-datepicker', 'underscore' ), '1.1', true );
+		wp_enqueue_script( 'ccf-form', plugins_url( $js_path, dirname( __FILE__ ) ), array( 'jquery-ui-datepicker', 'underscore', 'ccf-google-recaptcha' ), '1.1', false );
 
 		$localized = array(
 			'ajaxurl' => esc_url_raw( admin_url( 'admin-ajax.php' ) ),
@@ -56,6 +57,7 @@ class CCF_Form_Renderer {
 			'am-pm_required' => esc_html__( 'AM/PM is required.', 'custom-contact-forms' ),
 			'match' => esc_html__( 'Emails do not match.', 'custom-contact-forms' ),
 			'email' => esc_html__( 'This is not a valid email address.', 'custom-contact-forms' ),
+			'recaptcha' => esc_html__( 'Your reCAPTCHA response was incorrect.', 'custom-contact-forms' ),
 			'phone' => esc_html__( 'This is not a valid phone number.', 'custom-contact-forms' ),
 			'digits' => esc_html__( 'This phone number is not 10 digits', 'custom-contact-forms' ),
 			'hour' => esc_html__( 'This is not a valid hour.', 'custom-contact-forms' ),
@@ -124,8 +126,8 @@ class CCF_Form_Renderer {
 		} else {
 			?>
 
-			<div class="ccf-form-wrapper form-id-<?php echo (int) $form_id; ?>">
-				<form class="ccf-form" method="post" action="">
+			<div class="ccf-form-wrapper form-id-<?php echo (int) $form_id; ?>" data-form-id="<?php echo (int) $form_id; ?>">
+				<form class="ccf-form" method="post" action="" data-form-id="<?php echo (int) $form_id; ?>">
 
 					<?php $title = get_the_title( $form_id ); if ( ! empty( $title ) && apply_filters( 'ccf_show_form_title', true, $form_id ) ) : ?>
 						<div class="form-title">

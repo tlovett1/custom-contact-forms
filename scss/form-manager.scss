@@ -125,6 +125,10 @@
 			border-bottom: 1px solid #e5e5e5;
 			padding: 10px 20px;
 
+			.recaptcha-preview-img {
+				margin-top: 7px;
+			}
+
 			.left {
 				float: left;
 				clear: both;
@@ -316,7 +320,6 @@
 			border-top: 1px solid #e5e5e5;
 
 			.spinner {
-				background: url('/wp-admin/images/wpspin_light.gif') no-repeat;
 				display: none;
 				float: right;
 				width: 16px;

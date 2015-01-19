@@ -151,6 +151,25 @@
 		}
 	);
 
+	wp.ccf.views.Fields.recaptcha = wp.ccf.views.Fields.recaptcha || wp.ccf.views.FieldBase.extend(
+		{
+			template: _.template( document.getElementById( 'ccf-recaptcha-template' ).innerHTML ),
+
+			initialize: function() {
+
+			},
+
+			saveField: function() {
+				this.model.set( 'label', this.el.querySelectorAll( '.field-label' )[0].value );
+				this.model.set( 'siteKey', this.el.querySelectorAll( '.field-site-key' )[0].value );
+				this.model.set( 'secretKey', this.el.querySelectorAll( '.field-secret-key' )[0].value );
+				this.model.set( 'className', this.el.querySelectorAll( '.field-class-name' )[0].value );
+
+				return this;
+			}
+		}
+	);
+
 	wp.ccf.views.Fields['section-header'] = wp.ccf.views.Fields['section-header'] || wp.ccf.views.FieldBase.extend(
 		{
 			template: _.template( document.getElementById( 'ccf-section-header-template' ).innerHTML ),

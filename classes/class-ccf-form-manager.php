@@ -109,7 +109,7 @@ class CCF_Form_Manager {
 			<div class="bottom">
 				<input type="button" class="button insert-form-button" value="<?php esc_html_e( 'Insert into post', 'custom-contact-forms' ); ?>">
 				<input type="button" class="button button-primary save-button" value="<?php esc_html_e( 'Save Form', 'custom-contact-forms' ); ?>">
-				<div class="spinner"></div>
+				<div class="spinner" style="background: url( '<?php echo esc_url( admin_url( 'images/wpspin_light.gif' ) ); ?>' ) no-repeat;"></div>
 			</div>
 		</script>
 
@@ -222,7 +222,7 @@ class CCF_Form_Manager {
 				<h2 aria-hidden="true">Basic</h2>
 				<div class="section-content">
 					<div>
-						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Slug', 'custom-contact-forms' ); ?> (a-z, 0-9, -, _):</label>
+						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Unique Slug', 'custom-contact-forms' ); ?> (a-z, 0-9, -, _):</label>
 						<input id="ccf-field-slug" class="field-slug" type="text" value="<%- field.slug %>">
 					</div>
 					<div>
@@ -257,12 +257,44 @@ class CCF_Form_Manager {
 			</div>
 		</script>
 
+		<script type="text/html" id="ccf-recaptcha-template">
+			<div class="accordion-section expanded">
+				<h2 aria-hidden="true">Basic</h2>
+				<div class="section-content">
+					<p><?php _e( 'reCAPTCHA is a simple captcha service provided by Google. <a target="_blank" href="https://www.google.com/recaptcha/intro/index.html">Learn more</a>', 'custom-contact-forms' ); ?></p>
+					<div>
+						<label for="ccf-field-label"><?php esc_html_e( 'Label:', 'custom-contact-forms' ); ?></label>
+						<input id="ccf-field-label" class="field-label" type="text" value="<%- field.label %>">
+					</div>
+					<div>
+						<label for="ccf-field-site-key"><?php esc_html_e( 'Site Key:', 'custom-contact-forms' ); ?></label>
+						<input id="ccf-field-site-key" class="field-site-key" type="text" value="<%- field.siteKey %>">
+						<a href="http://google.com/recaptcha/" target="_blank"><?php _e( "Don't have one?", 'custom-contact-forms' ); ?></a>
+					</div>
+					<div>
+						<label for="ccf-field-secret-key"><?php esc_html_e( 'Secret Key:', 'custom-contact-forms' ); ?></label>
+						<input id="ccf-field-secret-key" class="field-secret-key" type="text" value="<%- field.secretKey %>">
+						<a href="http://google.com/recaptcha/" target="_blank"><?php _e( "Don't have one?", 'custom-contact-forms' ); ?></a>
+					</div>
+				</div>
+			</div>
+			<div class="accordion-section">
+				<h2 aria-hidden="true"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></h2>
+				<div class="section-content">
+					<div>
+						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
+						<input id="ccf-field-class-name" class="field-class-name" type="text" value="<%- field.className %>">
+					</div>
+				</div>
+			</div>
+		</script>
+
 		<script type="text/html" id="ccf-website-template">
 			<div class="accordion-section expanded">
 				<h2 aria-hidden="true">Basic</h2>
 				<div class="section-content">
 					<div>
-						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Slug', 'custom-contact-forms' ); ?> (a-z, 0-9, -, _):</label>
+						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Unique Slug', 'custom-contact-forms' ); ?> (a-z, 0-9, -, _):</label>
 						<input id="ccf-field-slug" class="field-slug" type="text" value="<%- field.slug %>">
 					</div>
 					<div>
@@ -348,7 +380,7 @@ class CCF_Form_Manager {
 				<h2 aria-hidden="true"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></h2>
 				<div class="section-content">
 					<div>
-						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Slug', 'custom-contact-forms' ); ?> (a-z, 0-9, -, _):</label>
+						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Unique Slug', 'custom-contact-forms' ); ?> (a-z, 0-9, -, _):</label>
 						<input id="ccf-field-slug" class="field-slug" type="text" value="<%- field.slug %>">
 					</div>
 					<div>
@@ -388,7 +420,7 @@ class CCF_Form_Manager {
 				<h2 aria-hidden="true"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></h2>
 				<div class="section-content">
 					<div>
-						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Slug (a-z, 0-9, -, _):', 'custom-contact-forms' ); ?></label>
+						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Unique Slug (a-z, 0-9, -, _):', 'custom-contact-forms' ); ?></label>
 						<input id="ccf-field-slug" class="field-slug" type="text" value="<%- field.slug %>">
 					</div>
 					<div>
@@ -413,7 +445,7 @@ class CCF_Form_Manager {
 				<h2 aria-hidden="true"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></h2>
 				<div class="section-content">
 					<div>
-						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Slug (a-z, 0-9, -, _):', 'custom-contact-forms' ); ?></label>
+						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Unique Slug (a-z, 0-9, -, _):', 'custom-contact-forms' ); ?></label>
 						<input id="ccf-field-slug" class="field-slug" type="text" value="<%- field.slug %>">
 					</div>
 					<div>
@@ -445,7 +477,7 @@ class CCF_Form_Manager {
 				<h2 aria-hidden="true"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></h2>
 				<div class="section-content">
 					<div>
-						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Slug (a-z, 0-9, -, _):', 'custom-contact-forms' ); ?></label>
+						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Unique Slug (a-z, 0-9, -, _):', 'custom-contact-forms' ); ?></label>
 						<input id="ccf-field-slug" class="field-slug" type="text" value="<%- field.slug %>">
 					</div>
 					<div>
@@ -497,7 +529,7 @@ class CCF_Form_Manager {
 				<h2 aria-hidden="true"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></h2>
 				<div class="section-content">
 					<div>
-						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Slug (a-z, 0-9, -, _):', 'custom-contact-forms' ); ?></label>
+						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Unique Slug (a-z, 0-9, -, _):', 'custom-contact-forms' ); ?></label>
 						<input id="ccf-field-slug" class="field-slug" type="text" value="<%- field.slug %>">
 					</div>
 					<div>
@@ -544,7 +576,7 @@ class CCF_Form_Manager {
 				<h2 aria-hidden="true"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></h2>
 				<div class="section-content">
 					<div>
-						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Slug (a-z, 0-9, -, _):', 'custom-contact-forms' ); ?></label>
+						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Unique Slug (a-z, 0-9, -, _):', 'custom-contact-forms' ); ?></label>
 						<input id="ccf-field-slug" class="field-slug" type="text" value="<%- field.slug %>">
 					</div>
 					<div>
@@ -583,7 +615,7 @@ class CCF_Form_Manager {
 				<h2 aria-hidden="true"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></h2>
 				<div class="section-content">
 					<div>
-						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Slug (a-z, 0-9, -, _):', 'custom-contact-forms' ); ?></label>
+						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Unique Slug (a-z, 0-9, -, _):', 'custom-contact-forms' ); ?></label>
 						<input id="ccf-field-slug" class="field-slug" type="text" value="<%- field.slug %>">
 					</div>
 					<div>
@@ -643,7 +675,7 @@ class CCF_Form_Manager {
 				<h2 aria-hidden="true"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></h2>
 				<div class="section-content">
 					<div>
-						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Slug (a-z, 0-9, -, _):', 'custom-contact-forms' ); ?></label>
+						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Unique Slug (a-z, 0-9, -, _):', 'custom-contact-forms' ); ?></label>
 						<input id="ccf-field-slug" class="field-slug" type="text" value="<%- field.slug %>">
 					</div>
 					<div>
@@ -680,7 +712,7 @@ class CCF_Form_Manager {
 				<h2 aria-hidden="true"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></h2>
 				<div class="section-content">
 					<div>
-						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Slug (a-z, 0-9, -, _):', 'custom-contact-forms' ); ?></label>
+						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Unique Slug (a-z, 0-9, -, _):', 'custom-contact-forms' ); ?></label>
 						<input id="ccf-field-slug" class="field-slug" type="text" value="<%- field.slug %>">
 					</div>
 					<div>
@@ -717,7 +749,7 @@ class CCF_Form_Manager {
 				<h2 aria-hidden="true"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></h2>
 				<div class="section-content">
 					<div>
-						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Slug (a-z, 0-9, -, _):', 'custom-contact-forms' ); ?></label>
+						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Unique Slug (a-z, 0-9, -, _):', 'custom-contact-forms' ); ?></label>
 						<input id="ccf-field-slug" class="field-slug" type="text" value="<%- field.slug %>">
 					</div>
 					<div>
@@ -758,6 +790,11 @@ class CCF_Form_Manager {
 		<script type="text/html" id="ccf-single-line-text-preview-template">
 			<label><%- field.label %> <% if ( field.required ) { %><span>*</span><% } %></label>
 			<input disabled type="text" placeholder="<%- field.placeholder %>" value="<%- field.value %>">
+		</script>
+
+		<script type="text/html" id="ccf-recaptcha-preview-template">
+			<label><%- field.label %> <% if ( field.required ) { %><span>*</span><% } %></label>
+			<img class="recaptcha-preview-img" src="<?php echo plugins_url( 'img/recaptcha.png', dirname( __FILE__ )); ?>">
 		</script>
 
 		<script type="text/html" id="ccf-paragraph-text-preview-template">
@@ -1054,7 +1091,7 @@ class CCF_Form_Manager {
 				<tbody class="submission-rows">
 					<tr>
 						<td colspan="<%- columns.length + 1 %>">
-							<div class="spinner"></div>
+							<div class="spinner" style="background: url( '<?php echo esc_url( admin_url( 'images/wpspin_light.gif' ) ); ?>' ) no-repeat;"></div>
 						</td>
 					</tr>
 				</tbody>
@@ -1208,6 +1245,7 @@ class CCF_Form_Manager {
 				'website' => __( 'Website', 'custom-contact-forms' ),
 				'address' => __( 'Address', 'custom-contact-forms' ),
 				'phone' => __( 'Phone', 'custom-contact-forms' ),
+				'recaptcha' => __( 'reCAPTCHA', 'custom-contact-forms' ),
 			));
 
 			wp_register_script( 'moment', plugins_url( '/bower_components/moment/moment.js', dirname( __FILE__ ) ) );
@@ -1226,7 +1264,7 @@ class CCF_Form_Manager {
 				'invalidDate' => esc_html__( 'Invalid date', 'custom-contact-forms' ),
 				'allLabels' => array_merge( $field_labels, $structure_field_labels, $special_field_labels ),
 				'thickboxTitle' => esc_html__( 'Form Submission', 'custom-contact-forms' ),
-				'skipFields' => apply_filters( 'ccf_no_submission_display_fields', array( 'html', 'section-header' ) ),
+				'skipFields' => apply_filters( 'ccf_no_submission_display_fields', array( 'html', 'section-header', 'recaptcha' ) ),
 			) );
 
 			wp_enqueue_style( 'ccf-form-manager', plugins_url( $css_path, dirname( __FILE__ ) ) );

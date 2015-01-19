@@ -20,7 +20,7 @@
     margin-bottom: 24px;
     clear: both;
     overflow: auto; }
-    .ccf-form-wrapper .field[data-field-type="dropdown"] .error, .ccf-form-wrapper .field[data-field-type="radio"] .error, .ccf-form-wrapper .field[data-field-type="checkboxes"] .error, .ccf-form-wrapper .field[data-field-type="date"] .error {
+    .ccf-form-wrapper .field[data-field-type="recaptcha"] .error, .ccf-form-wrapper .field[data-field-type="dropdown"] .error, .ccf-form-wrapper .field[data-field-type="radio"] .error, .ccf-form-wrapper .field[data-field-type="checkboxes"] .error, .ccf-form-wrapper .field[data-field-type="date"] .error {
       float: none; }
     .ccf-form-wrapper .field .error {
       color: #ff0000;
