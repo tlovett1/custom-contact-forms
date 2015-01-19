@@ -17,7 +17,7 @@ class CCF_Custom_Contact_Forms {
 	public function setup() {
 		add_action( 'plugins_loaded', array( $this, 'manually_load_api' ), 100 );
 		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
-		add_filter( 'plugin_row_meta', array( $this, 'filter_plugin_row_meta' ), 10, 4 );
+		add_filter( 'plugin_action_links', array( $this, 'filter_plugin_action_links' ), 10, 2 );
 		add_action( 'admin_notices', array( $this, 'permalink_warning' ) );
 		add_action( 'admin_init', array( $this, 'flush_rewrites' ), 10000 );
 	}
@@ -50,23 +50,21 @@ class CCF_Custom_Contact_Forms {
 	}
 
 	/**
-	 * Add forms and form submissions link to meta
+	 * Add forms and form submissions link to plugin actions
 	 *
-	 * @param array $plugin_meta
+	 * @param array $plugin_actions
 	 * @param string $plugin_file
-	 * @param string $plugin_data
-	 * @param string $status
-	 * @since 6.0
+	 * @since 6.1.4
 	 * @return array
 	 */
-	public function filter_plugin_row_meta( $plugin_meta, $plugin_file, $plugin_data, $status ) {
-		$new_meta = array();
+	public function filter_plugin_action_links( $plugin_actions, $plugin_file ) {
+		$new_actions = array();
 
-		if ( 'custom-contact-forms/custom-contact-forms.php' === $plugin_file ) {
-			$new_meta['ccf_forms'] = sprintf( __( '<a href="%s">Forms and Submissions</a>', 'custom-contact-forms' ), esc_url( admin_url( 'edit.php?post_type=ccf_form' ) ) );
+		if ( basename( plugin_dir_path( dirname( __FILE__ ) ) ) . '/custom-contact-forms.php' === $plugin_file ) {
+			$new_actions['ccf_forms'] = sprintf( __( '<a href="%s">Forms and Submissions</a>', 'custom-contact-forms' ), esc_url( admin_url( 'edit.php?post_type=ccf_form' ) ) );
 		}
 
-		return array_merge( $new_meta, $plugin_meta );
+		return array_merge( $new_actions, $plugin_actions );
 	}
 
 	/**
