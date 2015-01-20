@@ -43,8 +43,6 @@ class CCFTestFieldErrors extends CCFTestBase {
 
 		CCF_Form_Handler::factory()->submit_listen();
 
-		$errors = CCF_Form_Handler::factory()->errors_by_form;
-
 		$this->assertTrue( ! empty( CCF_Form_Handler::factory()->errors_by_form[$form_response->data['ID']][$slug . '1']['recaptcha'] ) );
 	}
 
