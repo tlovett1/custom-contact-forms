@@ -29,6 +29,26 @@ class CCFTestFieldErrors extends CCFTestBase {
 	}
 
 	/**
+	 * Test that empty recaptcha field produces an error
+	 *
+	 * @since 6.2
+	 */
+	public function testRecaptchaText() {
+		$slug = 'recaptcha';
+		$form_response = $this->_createForm( array( array( 'type' => 'recaptcha', 'slug' => $slug ) ) );
+
+		$_POST['form_id'] = $form_response->data['ID'];
+		$_POST['ccf_form'] = true;
+		$_POST['form_nonce'] = wp_create_nonce( 'ccf_form' );
+
+		CCF_Form_Handler::factory()->submit_listen();
+
+		$errors = CCF_Form_Handler::factory()->errors_by_form;
+
+		$this->assertTrue( ! empty( CCF_Form_Handler::factory()->errors_by_form[$form_response->data['ID']][$slug . '1']['recaptcha'] ) );
+	}
+
+	/**
 	 * Test paragraph field errors
 	 *
 	 * @since 6.0
