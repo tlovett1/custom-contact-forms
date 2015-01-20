@@ -267,12 +267,12 @@ class CCF_Form_Manager {
 						<input id="ccf-field-label" class="field-label" type="text" value="<%- field.label %>">
 					</div>
 					<div>
-						<label for="ccf-field-site-key"><?php esc_html_e( 'Site Key:', 'custom-contact-forms' ); ?></label>
+						<label for="ccf-field-site-key"><span class="required">*</span> <?php esc_html_e( 'Site Key:', 'custom-contact-forms' ); ?></label>
 						<input id="ccf-field-site-key" class="field-site-key" type="text" value="<%- field.siteKey %>">
 						<a href="http://google.com/recaptcha/" target="_blank"><?php _e( "Don't have one?", 'custom-contact-forms' ); ?></a>
 					</div>
 					<div>
-						<label for="ccf-field-secret-key"><?php esc_html_e( 'Secret Key:', 'custom-contact-forms' ); ?></label>
+						<label for="ccf-field-secret-key"><span class="required">*</span> <?php esc_html_e( 'Secret Key:', 'custom-contact-forms' ); ?></label>
 						<input id="ccf-field-secret-key" class="field-secret-key" type="text" value="<%- field.secretKey %>">
 						<a href="http://google.com/recaptcha/" target="_blank"><?php _e( "Don't have one?", 'custom-contact-forms' ); ?></a>
 					</div>

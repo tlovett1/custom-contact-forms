@@ -889,6 +889,27 @@
 				}
 			},
 
+			getNextFieldOrd: function() {
+				var fields = this.model.get( 'fields' );
+				var ord = fields.length + 1;
+
+				fields.each( function( field ) {
+					var slug = field.get( 'slug' );
+					var regex = /\-([0-9]+)$/g;
+					var matches = regex.exec( slug );
+
+					if ( matches && matches[1] ) {
+						var fieldOrd = parseInt( matches[1] );
+
+						if ( fieldOrd >= ord ) {
+							ord = fieldOrd + 1;
+						}
+					}
+				});
+
+				return ord;
+			},
+
 			render: function( form ) {
 				var SELF = this;
 
@@ -965,8 +986,7 @@
 							var defaults = {};
 
 							if ( typeof wp.ccf.models.Fields[type].prototype.defaults().slug !== 'undefined' ) {
-								var ord = SELF.model.get( 'fields').where( { 'type': type } ).length + 1;
-								defaults.slug = type + '-' + ord;
+								defaults.slug = type + '-' + SELF.getNextFieldOrd();
 							}
 
 							var field = new wp.ccf.models.Fields[type]( defaults );
