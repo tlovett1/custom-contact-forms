@@ -66,7 +66,7 @@ class CCF_Form_Renderer {
 			'minute' => esc_html__( 'This is not a valid minute.', 'custom-contact-forms' ),
 			'website' => esc_html__( "This is not a valid URL. URL's must start with http(s)://", 'custom-contact-forms' ),
 		);
-		wp_localize_script( 'ccf-form', 'ccfSettings', $localized );
+		wp_localize_script( 'ccf-form', 'ccfSettings', apply_filters( 'ccf_localized_form_messages', $localized ) );
 	}
 
 	/**
