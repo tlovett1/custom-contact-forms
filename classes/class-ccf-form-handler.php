@@ -611,7 +611,7 @@ class CCF_Form_Handler {
 					foreach ( $email_addresses as $email ) {
 						$subject = sprintf( __( '%s: Form Submission to "%s"', 'custom-contact-forms' ), esc_html( get_bloginfo( 'name' ) ), esc_html( get_the_title( $form_id ) ) );
 						$subject = apply_filters( 'ccf_email_subject', $subject, $form_id, $email, $form_page );
-						wp_mail( $email, $subject, $message, $headers );
+						wp_mail( $email, $subject, apply_filters( 'ccf_email_content', $message, $form_id, $email, $form_page ), $headers );
 					}
 				}
 			}
