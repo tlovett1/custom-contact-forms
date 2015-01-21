@@ -1,10 +1,10 @@
 === Custom Contact Forms ===
 Contributors: tlovett1
-Donate link: http://www.taylorlovett.com
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HR34W94MM53RQ
 Tags: contact form, web form, custom contact form, custom forms, captcha form, contact fields, form mailers, forms
 Requires at least: 3.9
 Tested up to: 4.1
-Stable tag: 6.2.1
+Stable tag: 6.2.2
 
 Build beautiful custom forms the WordPress way. View live previews of your forms while you build them.
 
@@ -32,6 +32,11 @@ Please refer to [Github](http://github.com/tlovett1/custom-contact-forms) for de
 For questions, feature requests, and support concerning the Custom Contact Forms plugin, please refer to [Github](http://github.com/tlovett1/custom-contact-forms).
 
 = Changelog ==
+
+= 6.2.2 =
+* Properly conditionally enqueue JS/CSS with SCRIPT_DEBUG
+* Make email message and subject filterable
+* Make tinymce preview inclusion filterable
 
 = 6.2.1 =
 * Effectively calculate unique field slug
