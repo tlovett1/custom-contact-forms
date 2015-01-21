@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: contact form, web form, custom contact form, custom forms, captcha form, contact fields, form mailers, forms
 Requires at least: 3.9
 Tested up to: 4.1
-Stable tag: 6.2.2
+Stable tag: 6.2.3
 
 Build beautiful custom forms the WordPress way. View live previews of your forms while you build them.
 
@@ -33,6 +33,8 @@ For questions, feature requests, and support concerning the Custom Contact Forms
 
 = Changelog ==
 
+= 6.2.3 =
+* Fix form.min.js URL
 = 6.2.2 =
 * Properly conditionally enqueue JS/CSS with SCRIPT_DEBUG
 * Make email message and subject filterable

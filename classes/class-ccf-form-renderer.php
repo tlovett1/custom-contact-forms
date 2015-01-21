@@ -39,7 +39,7 @@ class CCF_Form_Renderer {
 			$js_path = '/js/form.js';
 		} else {
 			$css_form_path = '/build/css/form.min.css';
-			$js_path = '/build/css/form.min.js';
+			$js_path = '/build/js/form.min.js';
 		}
 
 		wp_enqueue_style('ccf-jquery-ui', '//ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/jquery-ui.css');
