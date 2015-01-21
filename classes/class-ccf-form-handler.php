@@ -542,6 +542,7 @@ class CCF_Form_Handler {
 			$email_addresses_field = get_post_meta( $form_id, 'ccf_form_email_notification_addresses', true );
 
 			if ( ! empty( $send_email_notifications ) && ! empty( $email_addresses_field ) ) {
+				$email_addresses_field = str_replace( ';', ',', $email_addresses_field );
 				$email_addresses = explode( ',', $email_addresses_field );
 				$email_addresses = array_map( 'trim', $email_addresses );
 
@@ -592,7 +593,9 @@ class CCF_Form_Handler {
 						<?php
 					}
 
+					$form_page = null;
 					if ( ! empty( $_POST['form_page'] ) ) {
+						$form_page = $_POST['form_page'];
 						?>
 						<div>
 							<?php esc_html_e( 'Form submitted from', 'custom-contact-forms' ); ?>:
@@ -606,7 +609,9 @@ class CCF_Form_Handler {
 					$headers = array( 'MIME-Version: 1.0', 'Content-type: text/html; charset=iso-8859-1' );
 
 					foreach ( $email_addresses as $email ) {
-						wp_mail( $email, sprintf( __( '%s: Form Submission to "%s"', 'custom-contact-forms' ), esc_html( get_bloginfo( 'name' ) ), esc_html( get_the_title( $form_id ) ) ), $message, $headers );
+						$subject = sprintf( __( '%s: Form Submission to "%s"', 'custom-contact-forms' ), esc_html( get_bloginfo( 'name' ) ), esc_html( get_the_title( $form_id ) ) );
+						$subject = apply_filters( 'ccf_email_subject', $subject, $form_id, $email, $form_page );
+						wp_mail( $email, $subject, $message, $headers );
 					}
 				}
 			}
