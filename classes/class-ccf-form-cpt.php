@@ -257,7 +257,7 @@ class CCF_Form_CPT {
 	}
 
 	public function action_admin_enqueue_scripts() {
-		if ( ! defined( SCRIPT_DEBUG ) || ! SCRIPT_DEBUG ) {
+		if ( defined( SCRIPT_DEBUG ) && SCRIPT_DEBUG ) {
 			$admin_css_path = '/build/css/admin.css';
 			$form_cpt_css_path = '/build/css/form-cpt.css';
 			$form_table_css_path = '/build/css/form-table.css';

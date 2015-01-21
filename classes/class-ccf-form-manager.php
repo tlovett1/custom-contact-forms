@@ -32,7 +32,7 @@ class CCF_Form_Manager {
 			return $css;
 		}
 
-		if ( ! defined( WP_DEBUG ) || ! WP_DEBUG ) {
+		if ( defined( SCRIPT_DEBUG ) && SCRIPT_DEBUG ) {
 			$css_path = '/build/css/form-mce.css';
 		} else {
 			$css_path = '/build/css/form-mce.min.css';
@@ -1218,7 +1218,7 @@ class CCF_Form_Manager {
 
 		if ( 'post.php' == $pagenow || 'post-new.php' == $pagenow ) {
 
-			if ( ! defined( WP_DEBUG ) || ! WP_DEBUG ) {
+			if ( defined( SCRIPT_DEBUG ) && SCRIPT_DEBUG ) {
 				$js_manager_path = '/build/js/form-manager.js';
 				$js_mce_path = '/js/form-mce.js';
 				$css_path = '/build/css/form-manager.css';

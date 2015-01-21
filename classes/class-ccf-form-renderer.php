@@ -34,7 +34,7 @@ class CCF_Form_Renderer {
 			}
 		}
 
-		if ( ! defined( WP_DEBUG ) || ! WP_DEBUG ) {
+		if ( defined( SCRIPT_DEBUG ) && SCRIPT_DEBUG ) {
 			$css_form_path = '/build/css/form.css';
 			$js_path = '/js/form.js';
 		} else {
