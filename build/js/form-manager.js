@@ -1213,6 +1213,8 @@
 
 				SELF.el.innerHTML = SELF.template( { field: SELF.model.toJSON() } );
 
+				SELF.checkSlug();
+
 				var choicesCollection = SELF.model.get( 'choices' );
 
 				var choices = this.el.querySelectorAll( '.repeatable-choices' )[0];
