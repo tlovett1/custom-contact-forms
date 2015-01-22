@@ -618,10 +618,28 @@ class CCF_Form_Handler {
 
 					$headers = array( 'MIME-Version: 1.0', 'Content-type: text/html; charset=iso-8859-1' );
 
+					$email_notification_from_type = get_post_meta( $form_id, 'ccf_form_email_notification_from_type', true );
+
+					if ( 'custom' === $email_notification_from_type ) {
+						$custom_email = get_post_meta( $form_id, 'ccf_form_email_notification_from_address', true );
+
+						if ( ! empty( $custom_email ) ) {
+							$headers[] = 'From: ' . sanitize_email( $custom_email );
+							$headers[] = 'Reply-To: ' . sanitize_email( $custom_email );
+						}
+					} elseif ( 'field' === $email_notification_from_type ) {
+						$email_field = get_post_meta( $form_id, 'ccf_form_email_notification_from_field', true );
+
+						if ( ! empty( $email_field ) && ! empty( $submission[$email_field] ) ) {
+							$headers[] = 'From: ' . sanitize_email( $submission[$email_field] );
+							$headers[] = 'Reply-To: ' . sanitize_email( $submission[$email_field] );
+						}
+					}
+
 					foreach ( $email_addresses as $email ) {
 						$subject = sprintf( __( '%s: Form Submission to "%s"', 'custom-contact-forms' ), esc_html( get_bloginfo( 'name' ) ), esc_html( get_the_title( $form_id ) ) );
 						$subject = apply_filters( 'ccf_email_subject', $subject, $form_id, $email, $form_page );
-						wp_mail( $email, $subject, apply_filters( 'ccf_email_content', $message, $form_id, $email, $form_page ), $headers );
+						wp_mail( $email, $subject, apply_filters( 'ccf_email_content', $message, $form_id, $email, $form_page ), apply_filters( 'ccf_email_headers', $headers, $form_id, $email, $form_page ) );
 					}
 				}
 			}

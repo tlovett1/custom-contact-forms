@@ -100,6 +100,7 @@ class CCF_Form_Manager {
 					</div>
 				</div>
 				<div class="accordion-section ccf-form-settings"></div>
+				<div class="accordion-section ccf-form-notifications"></div>
 			</div>
 
 			<div class="form-content">
@@ -151,18 +152,54 @@ class CCF_Form_Manager {
 					<label for="ccf_form_completion_message"><?php esc_html_e( 'Completion Message:', 'custom-contact-forms' ); ?></label>
 					<textarea class="widefat form-completion-message" id="ccf_form_completion_message" name="completion-message"><%- form.completionMessage %></textarea>
 				</p>
+			</div>
+		</script>
 
+		<script type="text/html" id="ccf-form-notifications-template">
+			<h2 aria-hidden="true"><?php esc_html_e( 'Form Notifications', 'custom-contact-forms' ); ?></h2>
+			<div class="section-content">
 				<p>
-					<label for="ccf_form_send_email_notifications"><?php esc_html_e( 'Send email notifications:', 'custom-contact-forms' ); ?></label>
+					<label for="ccf_form_send_email_notifications"><?php esc_html_e( 'Send Email Notifications:', 'custom-contact-forms' ); ?></label>
 
 					<select name="send_email_notifications" class="form-send-email-notifications" id="ccf_form_send_email_notifications">
 						<option value="1"><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
 						<option value="0" <% if ( ! form.sendEmailNotifications ) { %>selected<% } %>><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
 					</select>
 				</p>
-				<p class="email-notification-addresses">
-					<label for="ccf_form_email_notification_addresses"><?php esc_html_e( 'Email Addresses (comma separated):', 'custom-contact-forms' ); ?></label>
+
+				<p class="email-notification-setting">
+					<label for="ccf_form_email_notification_addresses"><?php esc_html_e( '"To" Email Addresses (comma separated):', 'custom-contact-forms' ); ?></label>
 					<input class="widefat form-email-notification-addresses" id="ccf_form_email_notification_addresses" name="email-notification-addresses" value="<%- form.emailNotificationAddresses %>">
+				</p>
+
+				<p class="email-notification-setting">
+					<label for="ccf_form_email_notification_from_type"><?php esc_html_e( '"From" Email Address Type:', 'custom-contact-forms' ); ?></label>
+					<select name="email_notification_from_type" class="form-email-notification-from-type" id="ccf_form_email_notification_from_type">
+						<option value="default"><?php esc_html_e( 'WordPress Default', 'custom-contact-forms' ); ?></option>
+						<option value="custom" <% if ( 'custom' === form.emailNotificationFromType ) { %>selected<% } %>><?php esc_html_e( 'Custom Email', 'custom-contact-forms' ); ?></option>
+						<option value="field" <% if ( 'field' === form.emailNotificationFromType ) { %>selected<% } %>><?php esc_html_e( 'Form Field', 'custom-contact-forms' ); ?></option>
+					</select>
+
+					<div class="explain"><?php esc_html_e( 'You can set the notification emails from address to be the WP default, a custom email address, or pull the address from a field in the form.', 'custom-contact-forms' ); ?></div>
+				</p>
+
+				<p class="email-notification-from-address">
+					<label for="ccf_form_email_notification_from_address"><?php esc_html_e( 'Custom "From" Email Address:', 'custom-contact-forms' ); ?></label>
+					<input class="widefat form-email-notification-from-address" id="ccf_form_email_notification_from_address" name="email-notification-from-address" value="<%- form.emailNotificationFromAddress %>">
+				</p>
+
+				<p class="email-notification-from-field">
+					<label for="ccf_form_email_notification_from_field"><?php esc_html_e( 'Pull "From" Email Dynamically from Field:', 'custom-contact-forms' ); ?></label>
+					<% if ( emailFields.length < 1 ) { %>
+						<strong><?php esc_html_e( 'There are no email fields in your form.', 'custom-contact-forms' ); ?></strong>
+						<input type="hidden" name="email_notification_from_field" value="" class="form-email-notification-from-field">
+					<% } else { %>
+						<select name="email_notification_from_field" class="form-email-notification-from-field" id="ccf_form_email_notification_from_field">
+							<% _.each( emailFields, function( field ) { %>
+								<option <% if ( field.get( 'slug' ) === form.emailNotificationFromField ) { %>selected<% }%>><%- field.get( 'slug' ) %></option>
+							<% }); %>
+						</select>
+					<% } %>
 				</p>
 			</div>
 		</script>

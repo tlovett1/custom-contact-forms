@@ -228,6 +228,9 @@ class CCF_API extends WP_JSON_Posts {
 			$_post['completionMessage'] = esc_html( get_post_meta( $post['ID'], 'ccf_form_completion_message', true ) );
 			$_post['sendEmailNotifications'] = (bool) get_post_meta( $post['ID'], 'ccf_form_send_email_notifications', true );
 			$_post['emailNotificationAddresses'] = esc_html( get_post_meta( $post['ID'], 'ccf_form_email_notification_addresses', true ) );
+			$_post['emailNotificationFromType'] = esc_html( get_post_meta( $post['ID'], 'ccf_form_email_notification_from_type', true ) );
+			$_post['emailNotificationFromAddress'] = esc_html( get_post_meta( $post['ID'], 'ccf_form_email_notification_from_address', true ) );
+			$_post['emailNotificationFromField'] = esc_html( get_post_meta( $post['ID'], 'ccf_form_email_notification_from_field', true ) );
 
 			$submissions = get_children( array( 'post_parent' => $post['ID'], 'numberposts' => array( 'ccf_max_submissions', 5000, $post ) ) );
 			$_post['submissions'] = esc_html( count( $submissions ) );
@@ -379,6 +382,18 @@ class CCF_API extends WP_JSON_Posts {
 
 		if ( isset( $data['emailNotificationAddresses'] ) ) {
 			update_post_meta( $result, 'ccf_form_email_notification_addresses', sanitize_text_field( $data['emailNotificationAddresses'] ) );
+		}
+
+		if ( isset( $data['emailNotificationFromType'] ) ) {
+			update_post_meta( $result, 'ccf_form_email_notification_from_type', sanitize_text_field( $data['emailNotificationFromType'] ) );
+		}
+
+		if ( isset( $data['emailNotificationFromAddress'] ) ) {
+			update_post_meta( $result, 'ccf_form_email_notification_from_address', sanitize_text_field( $data['emailNotificationFromAddress'] ) );
+		}
+
+		if ( isset( $data['emailNotificationFromField'] ) ) {
+			update_post_meta( $result, 'ccf_form_email_notification_from_field', sanitize_text_field( $data['emailNotificationFromField'] ) );
 		}
 
 		$response = json_ensure_response( $this->get_post( $result ) );
@@ -645,6 +660,18 @@ class CCF_API extends WP_JSON_Posts {
 
 		if ( isset( $data['emailNotificationAddresses'] ) ) {
 			update_post_meta( $result, 'ccf_form_email_notification_addresses', sanitize_text_field( $data['emailNotificationAddresses'] ) );
+		}
+
+		if ( isset( $data['emailNotificationFromType'] ) ) {
+			update_post_meta( $result, 'ccf_form_email_notification_from_type', sanitize_text_field( $data['emailNotificationFromType'] ) );
+		}
+
+		if ( isset( $data['emailNotificationFromAddress'] ) ) {
+			update_post_meta( $result, 'ccf_form_email_notification_from_address', sanitize_text_field( $data['emailNotificationFromAddress'] ) );
+		}
+
+		if ( isset( $data['emailNotificationFromField'] ) ) {
+			update_post_meta( $result, 'ccf_form_email_notification_from_field', sanitize_text_field( $data['emailNotificationFromField'] ) );
 		}
 
 		$response = json_ensure_response( $this->get_post( $result ) );

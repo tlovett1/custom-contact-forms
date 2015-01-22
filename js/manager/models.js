@@ -83,7 +83,10 @@
 					completionRedirectUrl: '',
 					completionMessage: '',
 					sendEmailNotifications: false,
-					emailNotificationAddresses: ccfSettings.adminEmail
+					emailNotificationAddresses: ccfSettings.adminEmail,
+					emailNotificationFromType: 'default',
+					emailNotificationFromAddress: '',
+					emailNotificationFromField: ''
 				};
 
 				defaults = _.defaults( defaults, this.constructor.__super__.defaults );
