@@ -813,7 +813,7 @@ class CCF_Form_Manager {
 					<option><?php esc_html_e( 'An example choice', 'custom-contact-forms' ); ?></option>
 				<%} else { %>
 					<% field.choices.each( function( choice ) { %>
-						<option value="<%- choice.get( 'value' ) %>"><%- choice.get( 'label' ) %></option>
+						<option <% if ( choice.get( 'selected' ) ) { %>selected<% } %> value="<%- choice.get( 'value' ) %>"><%- choice.get( 'label' ) %></option>
 					<% }); %>
 				<% } %>
 			</select>
