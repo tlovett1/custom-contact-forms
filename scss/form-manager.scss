@@ -468,7 +468,13 @@
 			.field-error {
 				input {
 					border-color: #ff0000;
+					border-width: 2px;
 				}
+			}
+
+			.field-duplicate-slug input {
+				border-color: #ffe6a5;
+				border-width: 2px;
 			}
 
 			input[type=text] {

@@ -319,7 +319,11 @@
         .ccf-main-modal .ccf-form-pane .right-sidebar label .required {
           color: red; }
       .ccf-main-modal .ccf-form-pane .right-sidebar .field-error input {
-        border-color: #ff0000; }
+        border-color: #ff0000;
+        border-width: 2px; }
+      .ccf-main-modal .ccf-form-pane .right-sidebar .field-duplicate-slug input {
+        border-color: #ffe6a5;
+        border-width: 2px; }
       .ccf-main-modal .ccf-form-pane .right-sidebar input[type=text] {
         width: 100%;
         display: block;

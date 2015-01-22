@@ -101,15 +101,32 @@
 			},
 
 			checkSlug: function() {
-				var slugSelection = this.el.querySelectorAll( '.field-slug' );
+				var slugSelection = this.el.querySelectorAll( '.field-slug');
 
 				if ( slugSelection.length > 0 ) {
 					var slug = slugSelection[0];
+					var duplicate = false;
 
 					if ( slug.value && ! slug.value.match( /^[a-zA-Z0-9\-_]+$/ ) ) {
 						slug.parentNode.className = slug.parentNode.className.replace( / field-error/i, '' ) + ' field-error';
 					} else {
 						slug.parentNode.className = slug.parentNode.className.replace( / field-error/i, '' );
+					}
+
+					if ( this.collection.length > 0 && '' !== slug.value ) {
+						this.collection.each( function( field ) {
+							if ( field !== this.model && slug.value === field.get( 'slug' ) ) {
+								duplicate = true;
+							}
+						}, this );
+
+						if ( duplicate ) {
+							slug.parentNode.className = slug.parentNode.className.replace( / field-duplicate-slug/i, '' ) + ' field-duplicate-slug';
+						} else {
+							slug.parentNode.className = slug.parentNode.className.replace( / field-duplicate-slug/i, '' );
+						}
+					} else {
+						slug.parentNode.className = slug.parentNode.className.replace( / field-duplicate-slug/i, '' );
 					}
 				}
 
@@ -526,7 +543,7 @@
 						}
 					}
 
-					this.currentFieldView = new wp.ccf.views.Fields[type]( { model: field } );
+					this.currentFieldView = new wp.ccf.views.Fields[type]( { model: field, collection: this.form.get( 'fields' ) } );
 
 					this.currentFieldView.render();
 
