@@ -101,6 +101,12 @@ are internal, and labels are visible to the end form user. If a choice does not 
 
   * __Format__ - Allows you to prompt the user for a United States or international phone number.
 
+* `reCAPTCHA` - A Captcha field using Google's free reCAPTCHA technology. You will need to
+[sign up](https://www.google.com/recaptcha) for reCAPTCHA before this field will work.
+
+  * __Site Key__ - Your Google reCAPTCHA site key.
+  * __Secret Key__ - Your Google reCATPCHA secret key.
+
 ##### Structure Fields
 
 * `HTML` - An easy way to insert arbitrary HTML into the middle of a form.
