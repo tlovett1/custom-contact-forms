@@ -479,6 +479,7 @@ class CCF_Form_Handler {
 		}
 
 		$fields = get_post_meta( $form->ID, 'ccf_attached_fields', true );
+		$field_slug_to_id = array();
 
 		$errors = array();
 
@@ -497,6 +498,9 @@ class CCF_Form_Handler {
 			}
 
 			$slug = get_post_meta( $field_id, 'ccf_field_slug', true );
+
+			// We will use this later when emailing a submission
+			$field_slug_to_id[$slug] = $field_id;
 
 			$custom_value_mapping = array( 'recaptcha' => 'g-recaptcha-response' );
 
@@ -552,10 +556,16 @@ class CCF_Form_Handler {
 					ob_start();
 
 					foreach ( $submission as $slug => $field ) {
+						$field_id = $field_slug_to_id[$slug];
+						$label = get_post_meta( $field_id, 'ccf_field_label', true );
 						?>
 
 						<div>
-							<b><?php echo esc_html( $slug ); ?>:</b>
+							<?php if ( ! empty( $label ) ) : ?>
+								<b><?php echo esc_html( $label ); ?> (<?php echo esc_html( $slug ); ?>):</b>
+							<?php else : ?>
+								<b><?php echo esc_html( $slug ); ?>:</b>
+							<?php endif; ?>
 						</div>
 						<div style="margin-bottom: 10px;">
 							<?php if ( ! empty( $field ) ) { ?>
