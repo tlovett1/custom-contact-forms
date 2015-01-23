@@ -631,8 +631,13 @@ class CCF_Form_Handler {
 						$email_field = get_post_meta( $form_id, 'ccf_form_email_notification_from_field', true );
 
 						if ( ! empty( $email_field ) && ! empty( $submission[$email_field] ) ) {
-							$headers[] = 'From: ' . sanitize_email( $submission[$email_field] );
-							$headers[] = 'Reply-To: ' . sanitize_email( $submission[$email_field] );
+							if ( is_array( $submission[$email_field] ) && ! empty( $submission[$email_field]['confirm'] ) ) {
+								$headers[] = 'From: ' . sanitize_email( $submission[$email_field]['confirm'] );
+								$headers[] = 'Reply-To: ' . sanitize_email( $submission[$email_field]['confirm'] );
+							} else {
+								$headers[] = 'From: ' . sanitize_email( $submission[$email_field] );
+								$headers[] = 'Reply-To: ' . sanitize_email( $submission[$email_field] );
+							}
 						}
 					}
 
