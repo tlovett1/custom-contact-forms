@@ -263,6 +263,21 @@
 		}
 	);
 
+	wp.ccf.models.Fields.file = wp.ccf.models.Fields.file || wp.ccf.models.StandardField.extend(
+		{
+			defaults: function() {
+				var defaults = {
+					type: 'file',
+					fileExtensions: '',
+					maxFileSize: ccfSettings.maxFileSize,
+					multiFileUpload: false
+				};
+
+				return _.defaults( defaults, this.constructor.__super__.defaults() );
+			}
+		}
+	);
+
 	wp.ccf.models.Fields['paragraph-text'] = wp.ccf.models.Fields['paragraph-text'] || wp.ccf.models.StandardField.extend(
 		{
 			defaults: function() {

@@ -168,6 +168,26 @@
 		}
 	);
 
+	wp.ccf.views.Fields.file = wp.ccf.views.Fields.file || wp.ccf.views.FieldBase.extend(
+		{
+			template: wp.ccf.utils.template( 'ccf-file-template' ),
+
+			initialize: function() {
+
+			},
+
+			saveField: function() {
+
+				this.model.set( 'slug', this.el.querySelectorAll( '.field-slug' )[0].value );
+				this.model.set( 'label', this.el.querySelectorAll( '.field-label' )[0].value );
+				this.model.set( 'className', this.el.querySelectorAll( '.field-class-name' )[0].value );
+				this.model.set( 'required', ( this.el.querySelectorAll( '.field-required' )[0].value == 1 ) ? true : false  );
+
+				return this;
+			}
+		}
+	);
+
 	wp.ccf.views.Fields.recaptcha = wp.ccf.views.Fields.recaptcha || wp.ccf.views.FieldBase.extend(
 		{
 			template: wp.ccf.utils.template( 'ccf-recaptcha-template' ),

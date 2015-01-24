@@ -491,6 +491,21 @@
 		}
 	);
 
+	wp.ccf.models.Fields.file = wp.ccf.models.Fields.file || wp.ccf.models.StandardField.extend(
+		{
+			defaults: function() {
+				var defaults = {
+					type: 'file',
+					fileExtensions: '',
+					maxFileSize: ccfSettings.maxFileSize,
+					multiFileUpload: false
+				};
+
+				return _.defaults( defaults, this.constructor.__super__.defaults() );
+			}
+		}
+	);
+
 	wp.ccf.models.Fields['paragraph-text'] = wp.ccf.models.Fields['paragraph-text'] || wp.ccf.models.StandardField.extend(
 		{
 			defaults: function() {
@@ -972,6 +987,26 @@
 				this.model.set( 'label', this.el.querySelectorAll( '.field-label' )[0].value );
 				this.model.set( 'value', this.el.querySelectorAll( '.field-value' )[0].value );
 				this.model.set( 'placeholder', this.el.querySelectorAll( '.field-placeholder' )[0].value );
+				this.model.set( 'className', this.el.querySelectorAll( '.field-class-name' )[0].value );
+				this.model.set( 'required', ( this.el.querySelectorAll( '.field-required' )[0].value == 1 ) ? true : false  );
+
+				return this;
+			}
+		}
+	);
+
+	wp.ccf.views.Fields.file = wp.ccf.views.Fields.file || wp.ccf.views.FieldBase.extend(
+		{
+			template: wp.ccf.utils.template( 'ccf-file-template' ),
+
+			initialize: function() {
+
+			},
+
+			saveField: function() {
+
+				this.model.set( 'slug', this.el.querySelectorAll( '.field-slug' )[0].value );
+				this.model.set( 'label', this.el.querySelectorAll( '.field-label' )[0].value );
 				this.model.set( 'className', this.el.querySelectorAll( '.field-class-name' )[0].value );
 				this.model.set( 'required', ( this.el.querySelectorAll( '.field-required' )[0].value == 1 ) ? true : false  );
 

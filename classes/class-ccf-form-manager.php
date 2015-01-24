@@ -298,6 +298,53 @@ class CCF_Form_Manager {
 			</div>
 		</script>
 
+		<script type="text/html" id="ccf-file-template">
+			<div class="accordion-section expanded">
+				<h2 aria-hidden="true">Basic</h2>
+				<div class="section-content">
+					<div>
+						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Unique Slug', 'custom-contact-forms' ); ?> (a-z, 0-9, -, _):</label>
+						<input id="ccf-field-slug" class="field-slug" type="text" value="{{ field.slug }}">
+					</div>
+					<div>
+						<label for="ccf-field-label"><?php esc_html_e( 'Label:', 'custom-contact-forms' ); ?></label>
+						<input id="ccf-field-label" class="field-label" type="text" value="{{ field.label }}">
+					</div>
+					<div>
+						<label for="ccf-field-file-extensions"><?php esc_html_e( 'Allowed File Extensions (comma separate):', 'custom-contact-forms' ); ?></label>
+						<input id="ccf-field-file-extensions" class="field-file-extensions" type="text" value="{{ field.fileExtensions }}">
+					</div>
+					<div>
+						<label for="ccf-field-multi-file-upload"><?php esc_html_e( 'Enable Multi-File Upload', 'custom-contact-forms' ); ?></label>
+						<select id="ccf-field-required" class="field-required">
+							<option value="1"><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
+							<option value="0" <# if ( ! field.required ) { #>selected="selected"<# } #>><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
+						</select>
+					</div>
+					<div>
+						<label for="ccf-field-max-file-size"><?php esc_html_e( 'Max File Size:', 'custom-contact-forms' ); ?></label>
+						<input id="ccf-field-max-file-size" class="field-max-file-size" type="text" value="{{ field.maxFileSize }}">
+					</div>
+					<div>
+						<label for="ccf-field-required"><?php esc_html_e( 'Required:', 'custom-contact-forms' ); ?></label>
+						<select id="ccf-field-required" class="field-required">
+							<option value="1"><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
+							<option value="0" <# if ( ! field.required ) { #>selected="selected"<# } #>><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="accordion-section">
+				<h2 aria-hidden="true"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></h2>
+				<div class="section-content">
+					<div>
+						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
+						<input id="ccf-field-class-name" class="field-class-name" type="text" value="{{ field.className }}">
+					</div>
+				</div>
+			</div>
+		</script>
+
 		<script type="text/html" id="ccf-recaptcha-template">
 			<div class="accordion-section expanded">
 				<h2 aria-hidden="true">Basic</h2>
@@ -1272,6 +1319,7 @@ class CCF_Form_Manager {
 				'radio' => __( 'Radio Buttons', 'custom-contact-forms' ),
 				'paragraph-text' => __( 'Paragraph Text', 'custom-contact-forms' ),
 				'hidden' => __( 'Hidden', 'custom-contact-forms' ),
+				'file' => __( 'File Upload', 'custom-contact-forms' ),
 			));
 
 			$structure_field_labels = apply_filters( 'ccf_structure_field_labels', array(
@@ -1302,6 +1350,7 @@ class CCF_Form_Manager {
 				'postsPerPage' => (int) get_option( 'posts_per_page' ),
 				'structureFieldLabels' => $structure_field_labels,
 				'specialFieldLabels' => $special_field_labels,
+				'maxFileSize' => wp_max_upload_size(),
 				'invalidDate' => esc_html__( 'Invalid date', 'custom-contact-forms' ),
 				'allLabels' => array_merge( $field_labels, $structure_field_labels, $special_field_labels ),
 				'thickboxTitle' => esc_html__( 'Form Submission', 'custom-contact-forms' ),
