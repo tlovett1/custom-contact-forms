@@ -14,7 +14,7 @@
 		delete object.modified_tz;
 	};
 
-	wp.ccf.utils.template = function ( template ) {
+	wp.ccf.utils.template = _.memoize( function( id ) {
 		// Use WordPress style Backbone template syntax
 		var options = {
 			evaluate:    /<#([\s\S]+?)#>/g,
@@ -22,8 +22,8 @@
 			escape:      /\{\{([^\}]+?)\}\}(?!\})/g
 		};
 
-		return _.template( template, null, options );
-	};
+		return _.template( document.getElementById( id ).innerHTML, null, options );
+	});
 
 	wp.ccf.utils.insertFormShortcode = function( form ) {
 		var existingForm = wp.ccf.forms.findWhere( { ID: form.get( 'ID' ) } );
@@ -818,7 +818,7 @@
 
 	wp.ccf.views.FieldChoice = Backbone.View.extend(
 		{
-			template: wp.ccf.utils.template( document.getElementById( 'ccf-field-choice-template' ).innerHTML ),
+			template: wp.ccf.utils.template( 'ccf-field-choice-template' ),
 			className: 'choice',
 
 			events: {
@@ -960,7 +960,7 @@
 
 	wp.ccf.views.Fields['single-line-text'] = wp.ccf.views.Fields['single-line-text'] || wp.ccf.views.FieldBase.extend(
 		{
-			template: wp.ccf.utils.template( document.getElementById( 'ccf-single-line-text-template' ).innerHTML ),
+			template: wp.ccf.utils.template( 'ccf-single-line-text-template' ),
 
 			initialize: function() {
 
@@ -982,7 +982,7 @@
 
 	wp.ccf.views.Fields.recaptcha = wp.ccf.views.Fields.recaptcha || wp.ccf.views.FieldBase.extend(
 		{
-			template: wp.ccf.utils.template( document.getElementById( 'ccf-recaptcha-template' ).innerHTML ),
+			template: wp.ccf.utils.template( 'ccf-recaptcha-template' ),
 
 			initialize: function() {
 
@@ -1001,7 +1001,7 @@
 
 	wp.ccf.views.Fields['section-header'] = wp.ccf.views.Fields['section-header'] || wp.ccf.views.FieldBase.extend(
 		{
-			template: wp.ccf.utils.template( document.getElementById( 'ccf-section-header-template' ).innerHTML ),
+			template: wp.ccf.utils.template( 'ccf-section-header-template' ),
 
 			initialize: function() {
 
@@ -1019,7 +1019,7 @@
 
 	wp.ccf.views.Fields.html = wp.ccf.views.Fields.html || wp.ccf.views.FieldBase.extend(
 		{
-			template: wp.ccf.utils.template( document.getElementById( 'ccf-html-template' ).innerHTML ),
+			template: wp.ccf.utils.template( 'ccf-html-template' ),
 
 			initialize: function() {
 
@@ -1036,7 +1036,7 @@
 
 	wp.ccf.views.Fields['paragraph-text'] = wp.ccf.views.Fields['paragraph-text'] || wp.ccf.views.FieldBase.extend(
 		{
-			template: wp.ccf.utils.template( document.getElementById( 'ccf-paragraph-text-template' ).innerHTML ),
+			template: wp.ccf.utils.template( 'ccf-paragraph-text-template' ),
 
 			saveField: function() {
 
@@ -1054,7 +1054,7 @@
 
 	wp.ccf.views.Fields.hidden = wp.ccf.views.Fields.hidden || wp.ccf.views.FieldBase.extend(
 		{
-			template: wp.ccf.utils.template( document.getElementById( 'ccf-hidden-template' ).innerHTML ),
+			template: wp.ccf.utils.template( 'ccf-hidden-template' ),
 
 			saveField: function() {
 
@@ -1069,7 +1069,7 @@
 
 	wp.ccf.views.Fields.date = wp.ccf.views.Fields.date || wp.ccf.views.FieldBase.extend(
 		{
-			template: wp.ccf.utils.template( document.getElementById( 'ccf-date-template' ).innerHTML ),
+			template: wp.ccf.utils.template( 'ccf-date-template' ),
 
 			saveField: function() {
 
@@ -1101,7 +1101,7 @@
 
 	wp.ccf.views.Fields.name = wp.ccf.views.Fields.name || wp.ccf.views.FieldBase.extend(
 		{
-			template: wp.ccf.utils.template( document.getElementById( 'ccf-name-template' ).innerHTML ),
+			template: wp.ccf.utils.template( 'ccf-name-template' ),
 
 			saveField: function() {
 
@@ -1117,7 +1117,7 @@
 
 	wp.ccf.views.Fields.website = wp.ccf.views.Fields.website || wp.ccf.views.FieldBase.extend(
 		{
-			template: wp.ccf.utils.template( document.getElementById( 'ccf-website-template' ).innerHTML ),
+			template: wp.ccf.utils.template( 'ccf-website-template' ),
 
 			saveField: function() {
 
@@ -1135,7 +1135,7 @@
 
 	wp.ccf.views.Fields.phone = wp.ccf.views.Fields.phone || wp.ccf.views.FieldBase.extend(
 		{
-			template: wp.ccf.utils.template( document.getElementById( 'ccf-phone-template' ).innerHTML ),
+			template: wp.ccf.utils.template( 'ccf-phone-template' ),
 
 			saveField: function() {
 
@@ -1154,7 +1154,7 @@
 
 	wp.ccf.views.Fields.address = wp.ccf.views.Fields.address || wp.ccf.views.FieldBase.extend(
 		{
-			template: wp.ccf.utils.template( document.getElementById( 'ccf-address-template' ).innerHTML ),
+			template: wp.ccf.utils.template( 'ccf-address-template' ),
 
 			saveField: function() {
 
@@ -1171,7 +1171,7 @@
 
 	wp.ccf.views.Fields.email = wp.ccf.views.Fields.email || wp.ccf.views.FieldBase.extend(
 		{
-			template: wp.ccf.utils.template( document.getElementById( 'ccf-email-template' ).innerHTML ),
+			template: wp.ccf.utils.template( 'ccf-email-template' ),
 
 			saveField: function() {
 
@@ -1207,7 +1207,7 @@
 
 	wp.ccf.views.ChoiceableField = wp.ccf.views.ChoiceableField || wp.ccf.views.FieldBase.extend(
 		{
-			template: wp.ccf.utils.template( document.getElementById( 'ccf-dropdown-template' ).innerHTML ),
+			template: wp.ccf.utils.template( 'ccf-dropdown-template' ),
 
 			initialize: function() {
 				var choices = this.model.get( 'choices' );
@@ -1278,7 +1278,7 @@
 
 	wp.ccf.views.Fields.dropdown = wp.ccf.views.Fields.dropdown || wp.ccf.views.ChoiceableField.extend(
 		{
-			template: wp.ccf.utils.template( document.getElementById( 'ccf-dropdown-template' ).innerHTML ),
+			template: wp.ccf.utils.template( 'ccf-dropdown-template' ),
 			events: function() {
 				return this.constructor.__super__.events;
 			}
@@ -1287,7 +1287,7 @@
 
 	wp.ccf.views.Fields.radio = wp.ccf.views.Fields.radio || wp.ccf.views.ChoiceableField.extend(
 		{
-			template: wp.ccf.utils.template( document.getElementById( 'ccf-radio-template' ).innerHTML ),
+			template: wp.ccf.utils.template( 'ccf-radio-template' ),
 			events: function() {
 				return this.constructor.__super__.events;
 			}
@@ -1296,7 +1296,7 @@
 
 	wp.ccf.views.Fields.checkboxes = wp.ccf.views.Fields.checkboxes || wp.ccf.views.ChoiceableField.extend(
 		{
-			template: wp.ccf.utils.template( document.getElementById( 'ccf-checkboxes-template' ).innerHTML ),
+			template: wp.ccf.utils.template( 'ccf-checkboxes-template' ),
 			events: function() {
 				return this.constructor.__super__.events;
 			}
@@ -1342,7 +1342,7 @@
 				var context = {};
 
 				if ( ! field ) {
-					var template = wp.ccf.utils.template( document.getElementById( 'ccf-empty-field-template' ).innerHTML );
+					var template = wp.ccf.utils.template( 'ccf-empty-field-template' );
 					this.el.innerHTML = template( context );
 				} else {
 					var type = field.get( 'type' );
@@ -1377,7 +1377,7 @@
 
 	wp.ccf.views.FieldRowPlaceholder = wp.ccf.views.FieldRowPlaceholder || Backbone.View.extend(
 		{
-			template: wp.ccf.utils.template( document.getElementById( 'ccf-field-row-template').innerHTML ),
+			template: wp.ccf.utils.template( 'ccf-field-row-template'),
 			tagName: 'div',
 			className: 'field',
 
@@ -1398,7 +1398,7 @@
 
 	wp.ccf.views.FieldRow = wp.ccf.views.FieldRow || Backbone.View.extend(
 		{
-			template: wp.ccf.utils.template( document.getElementById( 'ccf-field-row-template').innerHTML ),
+			template: wp.ccf.utils.template( 'ccf-field-row-template'),
 			tagName: 'div',
 			className: 'field',
 
@@ -1492,7 +1492,7 @@
 
 	wp.ccf.views.FormSettings = wp.ccf.views.FormSettings || Backbone.View.extend(
 		{
-			template: wp.ccf.utils.template( document.getElementById( 'ccf-form-settings-template' ).innerHTML ),
+			template: wp.ccf.utils.template( 'ccf-form-settings-template' ),
 
 			events: {
 				'blur input': 'save',
@@ -1575,7 +1575,7 @@
 
 	wp.ccf.views.FormNotifications = wp.ccf.views.FormNotifications || Backbone.View.extend(
 		{
-			template: wp.ccf.utils.template( document.getElementById( 'ccf-form-notifications-template' ).innerHTML ),
+			template: wp.ccf.utils.template( 'ccf-form-notifications-template' ),
 
 			events: {
 				'blur input': 'save',
@@ -1688,7 +1688,7 @@
 
 	wp.ccf.views.FormPane = wp.ccf.views.FormPane || Backbone.View.extend( _.defaults(
 		{
-			template: wp.ccf.utils.template( document.getElementById( 'ccf-form-pane-template' ).innerHTML ),
+			template: wp.ccf.utils.template( 'ccf-form-pane-template' ),
 			subViews: {
 				'field-sidebar': wp.ccf.views.FieldSidebar,
 				'form-settings': wp.ccf.views.FormSettings,
@@ -1942,7 +1942,7 @@
 	wp.ccf.views.ExistingFormTableRow = wp.ccf.views.ExistingFormTableRow || Backbone.View.extend(
 		{
 			tagName: 'tr',
-			template: wp.ccf.utils.template( document.getElementById( 'ccf-existing-form-table-row-template').innerHTML ),
+			template: wp.ccf.utils.template( 'ccf-existing-form-table-row-template'),
 			events: {
 				'click .edit': 'triggerMainViewChange',
 				'click .delete': 'triggerDelete',
@@ -1991,7 +1991,7 @@
 	wp.ccf.views.EmptyFormTableRow = wp.ccf.views.EmptyFormTableRow || Backbone.View.extend(
 		{
 			tagName: 'tr',
-			template: wp.ccf.utils.template( document.getElementById( 'ccf-empty-form-table-row-template').innerHTML ),
+			template: wp.ccf.utils.template( 'ccf-empty-form-table-row-template'),
 
 			render: function() {
 				this.$el.html( this.template() );
@@ -2002,7 +2002,7 @@
 
 	wp.ccf.views.ExistingFormTable = wp.ccf.views.ExistingFormTable || Backbone.View.extend(
 		{
-			template: wp.ccf.utils.template( document.getElementById( 'ccf-existing-form-table-template').innerHTML ),
+			template: wp.ccf.utils.template( 'ccf-existing-form-table-template'),
 
 			initialize: function() {
 				this.parent = arguments.parent;
@@ -2067,7 +2067,7 @@
 
 	wp.ccf.views.ExistingFormPane = wp.ccf.views.ExistingFormPane || Backbone.View.extend( _.defaults(
 		{
-			template: wp.ccf.utils.template( document.getElementById( 'ccf-existing-form-pane-template' ).innerHTML ),
+			template: wp.ccf.utils.template( 'ccf-existing-form-pane-template' ),
 			subViews: {
 				'existing-form-table': wp.ccf.views.ExistingFormTable
 			},
@@ -2092,7 +2092,7 @@
 		{
 			tagName: 'div',
 			className: 'ccf-main-modal',
-			template: wp.ccf.utils.template( document.getElementById( 'ccf-main-modal-template' ).innerHTML ),
+			template: wp.ccf.utils.template( 'ccf-main-modal-template' ),
 			events: {
 				'click .close-icon': 'hide',
 				'click .main-menu a': 'menuClick'
@@ -2188,7 +2188,7 @@
 	wp.ccf.views.SubmissionRow = wp.ccf.views.SubmissionRow || Backbone.View.extend(
 		{
 			tagName: 'tr',
-			template: wp.ccf.utils.template( document.getElementById( 'ccf-submission-row-template' ).innerHTML ),
+			template: wp.ccf.utils.template( 'ccf-submission-row-template' ),
 			events: {
 				'click .view': 'view',
 				'click .delete': 'delete'
@@ -2248,7 +2248,7 @@
 
 	wp.ccf.views.SubmissionsTable = wp.ccf.views.SubmissionsTable || Backbone.View.extend(
 		{
-			template: wp.ccf.utils.template( document.getElementById( 'ccf-submission-table-template' ).innerHTML ),
+			template: wp.ccf.utils.template( 'ccf-submission-table-template' ),
 			events: {
 				'click .prev:not(.disabled)': 'previousPage',
 				'click .next:not(.disabled)': 'nextPage',
@@ -2324,7 +2324,7 @@
 
 	wp.ccf.views.Pagination = wp.ccf.views.Pagination || Backbone.View.extend(
 		{
-			template: wp.ccf.utils.template( document.getElementById( 'ccf-pagination-template' ).innerHTML ),
+			template: wp.ccf.utils.template( 'ccf-pagination-template' ),
 
 			events: {
 				'click .prev:not(.disabled)': 'previousPage',
@@ -2380,7 +2380,7 @@
 	wp.ccf.views.EmptySubmissionTableRow = wp.ccf.views.EmptySubmissionTableRow || Backbone.View.extend(
 		{
 			tagName: 'tr',
-			template: wp.ccf.utils.template( document.getElementById( 'ccf-no-submissions-row-template').innerHTML ),
+			template: wp.ccf.utils.template( 'ccf-no-submissions-row-template'),
 
 			initialize: function( options ) {
 				this.parent = options.parent;
@@ -2395,7 +2395,7 @@
 
 	wp.ccf.views.SubmissionColumnController = wp.ccf.views.SubmissionColumnController || Backbone.View.extend(
 		{
-			template: wp.ccf.utils.template( document.getElementById( 'ccf-submissions-controller-template').innerHTML ),
+			template: wp.ccf.utils.template( 'ccf-submissions-controller-template'),
 
 			events: {
 				'click input[type=checkbox]': 'triggerTableRebuild'
