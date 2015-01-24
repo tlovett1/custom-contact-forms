@@ -13,6 +13,11 @@ WordPress media manager modal. CCF does not have as many features as some of it'
 you with just what you need. Custom Contact Forms is a legacy plugin name. The plugin can handle all types of forms not
 just contact forms.
 
+## Requirements
+
+* WordPress 3.9+
+* PHP 5.2.4+
+
 ## Installation
 
 Install the plugin in WordPress, you can download a
