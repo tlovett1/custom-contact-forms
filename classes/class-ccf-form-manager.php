@@ -180,7 +180,7 @@ class CCF_Form_Manager {
 						<option value="field" <# if ( 'field' === form.emailNotificationFromType ) { #>selected<# } #>><?php esc_html_e( 'Form Field', 'custom-contact-forms' ); ?></option>
 					</select>
 
-					<div class="explain"><?php esc_html_e( 'You can set the notification emails from address to be the WP default, a custom email address, or pull the address from a field in the form.', 'custom-contact-forms' ); ?></div>
+					<span class="explain"><?php esc_html_e( 'You can set the notification emails from address to be the WP default, a custom email address, or pull the address from a field in the form.', 'custom-contact-forms' ); ?></span>
 				</p>
 
 				<p class="email-notification-from-address">
