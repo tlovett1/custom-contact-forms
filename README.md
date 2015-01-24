@@ -137,6 +137,18 @@ Scroll to the `Submissions` meta box. Click one the eye icon to view more inform
 In the `Submissions` meta box, you can add and remove columns. Click the cog icon at the top of the meta box to open
 the screen options panel. In this panel you can check which columns you would like to see in the table.
 
+## Frequently Asked Questions
+
+* __My form(s) will not save. What's wrong?__
+
+  You most likely have a theme or plugin conflict. Try deactivating other plugins and activating a default theme. If
+  forms still won't save, please create an issue.
+
+* __When I save, delete, or edit a form, I get a HTTP 501 error. What should I do?__
+
+  CCF uses RESTful HTTP verbs such as PUT and DELETE. If your web server does not support those HTTP requests, the
+  plugin will not work. You will need to contact your host to resolve this.
+
 ## Development
 
 #### Setup
