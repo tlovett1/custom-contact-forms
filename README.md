@@ -47,10 +47,20 @@ Each form has a number of settings that you should understand.
   * `Completion Message` - If you choose to show a message, you can customize the message to be shown.
   * `Redirect URL` - If you choose to perform a redirect, you can customize the redirect URL.
 
-* `Send email notifications` - When a form is completed you can show a message or perform a browser redirect
+### Form Notifications
 
-  * `Completion Message` - If you choose to show a message, you can customize the message to be shown.
-  * `Redirect URL` - If you choose to perform a redirect, you can customize the redirect URL.
+* `Send email notifications` - When a form is completed, you can have an email sent with submission information.
+
+  If email notifications are turned on, you can configure the following:
+
+  * `"To" Email Addresses` - Enter email addresses here that should receive the notification. Multiple email addresses
+  should be comma separated.
+  * `"From" Email Address Type` - This allows you to set what email address the notification is sent from. `WordPress
+  Default` will use the default WordPress email address. `Custom Email` will allow you to manually type in a from
+  address. `Form Field` will allow you to choose an email field within the form to dynamically pull a from email
+  address.
+
+
 
 ### Fields
 
