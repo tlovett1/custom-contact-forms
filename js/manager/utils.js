@@ -14,6 +14,17 @@
 		delete object.modified_tz;
 	};
 
+	wp.ccf.utils.template = function ( template ) {
+		// Use WordPress style Backbone template syntax
+		var options = {
+			evaluate:    /<#([\s\S]+?)#>/g,
+			interpolate: /\{\{\{([\s\S]+?)\}\}\}/g,
+			escape:      /\{\{([^\}]+?)\}\}(?!\})/g
+		};
+
+		return _.template( template, null, options );
+	};
+
 	wp.ccf.utils.insertFormShortcode = function( form ) {
 		var existingForm = wp.ccf.forms.findWhere( { ID: form.get( 'ID' ) } );
 		if ( ! existingForm ) {

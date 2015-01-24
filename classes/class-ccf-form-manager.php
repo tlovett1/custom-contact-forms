@@ -55,14 +55,14 @@ class CCF_Form_Manager {
 				<a class="close-icon">&times;</a>
 				<div class="main-menu">
 					<h1><?php esc_html_e( 'Manage Forms', 'custom-contact-forms' ); ?></h1>
-					<% if ( ! single ) { %>
+					<# if ( ! single ) { #>
 						<ul>
 							<li><a class="selected menu-item" data-view="form-pane" href="#form-pane"><?php esc_html_e( 'New Form', 'custom-contact-forms' ); ?></a></li>
 							<li><a class="menu-item" data-view="existing-form-pane" href="#existing-form-pane"><?php esc_html_e( 'Existing Forms', 'custom-contact-forms' ); ?></a></li>
 						</ul>
-					<% } %>
+					<# } #>
 				</div>
-				<div class="ccf-form-pane <% if ( single ) { %>single<% } %>"></div>
+				<div class="ccf-form-pane <# if ( single ) { #>single<# } #>"></div>
 				<div class="ccf-existing-form-pane"></div>
 			</div>
 		</script>
@@ -72,7 +72,7 @@ class CCF_Form_Manager {
 				<div class="right">
 					<a aria-hidden="true" data-icon="&#xe602;" class="delete"></a>
 				</div>
-				<span class="label"><%- label %></span>
+				<span class="label">{{ label }}</span>
 			</h4>
 
 			<div class="preview"></div>
@@ -123,17 +123,17 @@ class CCF_Form_Manager {
 			<div class="section-content">
 				<p>
 					<label for="ccf_form_title"><?php esc_html_e( 'Form Title:', 'custom-contact-forms' ); ?></label>
-					<input class="widefat form-title" id="ccf_form_title" name="title" type="text" value="<%- form.title %>">
+					<input class="widefat form-title" id="ccf_form_title" name="title" type="text" value="{{ form.title }}">
 				</p>
 
 				<p>
 					<label for="ccf_form_description"><?php esc_html_e( 'Form Description:', 'custom-contact-forms' ); ?></label>
-					<textarea class="widefat form-description" id="ccf_form_description" name="description"><%- form.description %></textarea>
+					<textarea class="widefat form-description" id="ccf_form_description" name="description">{{ form.description }}</textarea>
 				</p>
 
 				<p>
 					<label for="ccf_form_button_text"><?php esc_html_e( 'Button Text:', 'custom-contact-forms' ); ?></label>
-					<input class="widefat form-button-text" id="ccf_form_button_text" name="text" type="text" value="<%- form.buttonText %>">
+					<input class="widefat form-button-text" id="ccf_form_button_text" name="text" type="text" value="{{ form.buttonText }}">
 				</p>
 
 				<p>
@@ -141,16 +141,16 @@ class CCF_Form_Manager {
 
 					<select name="completion_action_type" class="form-completion-action-type" id="ccf_form_completion_action_type">
 						<option value="text"><?php esc_html_e( 'Show text', 'custom-contact-forms' ); ?></option>
-						<option value="redirect" <% if ( 'redirect' === form.completionActionType ) { %>selected<% } %>><?php esc_html_e( 'Redirect', 'custom-contact-forms' ); ?></option>
+						<option value="redirect" <# if ( 'redirect' === form.completionActionType ) { #>selected<# } #>><?php esc_html_e( 'Redirect', 'custom-contact-forms' ); ?></option>
 					</select>
 				</p>
 				<p class="completion-redirect-url">
 					<label for="ccf_form_completion_redirect_url"><?php esc_html_e( 'Redirect URL:', 'custom-contact-forms' ); ?></label>
-					<input class="widefat form-completion-redirect-url" id="ccf_form_completion_redirect_url" name="text" type="text" value="<%- form.completionRedirectUrl %>">
+					<input class="widefat form-completion-redirect-url" id="ccf_form_completion_redirect_url" name="text" type="text" value="{{ form.completionRedirectUrl }}">
 				</p>
 				<p class="completion-message">
 					<label for="ccf_form_completion_message"><?php esc_html_e( 'Completion Message:', 'custom-contact-forms' ); ?></label>
-					<textarea class="widefat form-completion-message" id="ccf_form_completion_message" name="completion-message"><%- form.completionMessage %></textarea>
+					<textarea class="widefat form-completion-message" id="ccf_form_completion_message" name="completion-message">{{ form.completionMessage }}</textarea>
 				</p>
 			</div>
 		</script>
@@ -163,21 +163,21 @@ class CCF_Form_Manager {
 
 					<select name="send_email_notifications" class="form-send-email-notifications" id="ccf_form_send_email_notifications">
 						<option value="1"><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
-						<option value="0" <% if ( ! form.sendEmailNotifications ) { %>selected<% } %>><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
+						<option value="0" <# if ( ! form.sendEmailNotifications ) { #>selected<# } #>><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
 					</select>
 				</p>
 
 				<p class="email-notification-setting">
 					<label for="ccf_form_email_notification_addresses"><?php esc_html_e( '"To" Email Addresses (comma separated):', 'custom-contact-forms' ); ?></label>
-					<input class="widefat form-email-notification-addresses" id="ccf_form_email_notification_addresses" name="email-notification-addresses" value="<%- form.emailNotificationAddresses %>">
+					<input class="widefat form-email-notification-addresses" id="ccf_form_email_notification_addresses" name="email-notification-addresses" value="{{ form.emailNotificationAddresses }}">
 				</p>
 
 				<p class="email-notification-setting">
 					<label for="ccf_form_email_notification_from_type"><?php esc_html_e( '"From" Email Address Type:', 'custom-contact-forms' ); ?></label>
 					<select name="email_notification_from_type" class="form-email-notification-from-type" id="ccf_form_email_notification_from_type">
 						<option value="default"><?php esc_html_e( 'WordPress Default', 'custom-contact-forms' ); ?></option>
-						<option value="custom" <% if ( 'custom' === form.emailNotificationFromType ) { %>selected<% } %>><?php esc_html_e( 'Custom Email', 'custom-contact-forms' ); ?></option>
-						<option value="field" <% if ( 'field' === form.emailNotificationFromType ) { %>selected<% } %>><?php esc_html_e( 'Form Field', 'custom-contact-forms' ); ?></option>
+						<option value="custom" <# if ( 'custom' === form.emailNotificationFromType ) { #>selected<# } #>><?php esc_html_e( 'Custom Email', 'custom-contact-forms' ); ?></option>
+						<option value="field" <# if ( 'field' === form.emailNotificationFromType ) { #>selected<# } #>><?php esc_html_e( 'Form Field', 'custom-contact-forms' ); ?></option>
 					</select>
 
 					<div class="explain"><?php esc_html_e( 'You can set the notification emails from address to be the WP default, a custom email address, or pull the address from a field in the form.', 'custom-contact-forms' ); ?></div>
@@ -185,21 +185,21 @@ class CCF_Form_Manager {
 
 				<p class="email-notification-from-address">
 					<label for="ccf_form_email_notification_from_address"><?php esc_html_e( 'Custom "From" Email Address:', 'custom-contact-forms' ); ?></label>
-					<input class="widefat form-email-notification-from-address" id="ccf_form_email_notification_from_address" name="email-notification-from-address" value="<%- form.emailNotificationFromAddress %>">
+					<input class="widefat form-email-notification-from-address" id="ccf_form_email_notification_from_address" name="email-notification-from-address" value="{{ form.emailNotificationFromAddress }}">
 				</p>
 
 				<p class="email-notification-from-field">
 					<label for="ccf_form_email_notification_from_field"><?php esc_html_e( 'Pull "From" Email Dynamically from Field:', 'custom-contact-forms' ); ?></label>
-					<% if ( emailFields.length < 1 ) { %>
+					<# if ( emailFields.length < 1 ) { #>
 						<strong><?php esc_html_e( 'There are no email fields in your form.', 'custom-contact-forms' ); ?></strong>
 						<input type="hidden" name="email_notification_from_field" value="" class="form-email-notification-from-field">
-					<% } else { %>
+					<# } else { #>
 						<select name="email_notification_from_field" class="form-email-notification-from-field" id="ccf_form_email_notification_from_field">
-							<% _.each( emailFields, function( field ) { %>
-								<option <% if ( field.get( 'slug' ) === form.emailNotificationFromField ) { %>selected<% }%>><%- field.get( 'slug' ) %></option>
-							<% }); %>
+							<# _.each( emailFields, function( field ) { #>
+								<option <# if ( field.get( 'slug' ) === form.emailNotificationFromField ) { #>selected<# }#>>{{ field.get( 'slug' ) }}</option>
+							<# }); #>
 						</select>
-					<% } %>
+					<# } #>
 				</p>
 			</div>
 		</script>
@@ -211,15 +211,15 @@ class CCF_Form_Manager {
 		</script>
 
 		<script type="text/html" id="ccf-pagination-template">
-			<span class="num-items"><%- totalObjects %> <?php esc_html_e( 'items', 'custom-contact-forms' ); ?></span>
+			<span class="num-items">{{ totalObjects }} <?php esc_html_e( 'items', 'custom-contact-forms' ); ?></span>
 
-			<a class="first <% if ( currentPage <= 1 ) { %>disabled<% } %>">&laquo;</a>
-			<a class="prev <% if ( currentPage <= 1 ) { %>disabled<% } %>">&lsaquo;</a>
+			<a class="first <# if ( currentPage <= 1 ) { #>disabled<# } #>">&laquo;</a>
+			<a class="prev <# if ( currentPage <= 1 ) { #>disabled<# } #>">&lsaquo;</a>
 
-			<span class="pages"><%- currentPage %> of <%- totalPages %></span>
+			<span class="pages">{{ currentPage }} of {{ totalPages }}</span>
 
-			<a class="next <% if ( currentPage >= totalPages ) { %>disabled<% } %>">&rsaquo;</a>
-			<a class="last <% if ( currentPage >= totalPages ) { %>disabled<% } %>">&raquo;</a>
+			<a class="next <# if ( currentPage >= totalPages ) { #>disabled<# } #>">&rsaquo;</a>
+			<a class="last <# if ( currentPage >= totalPages ) { #>disabled<# } #>">&raquo;</a>
 		</script>
 
         <script type="text/html" id="ccf-existing-form-table-template">
@@ -264,21 +264,21 @@ class CCF_Form_Manager {
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Unique Slug', 'custom-contact-forms' ); ?> (a-z, 0-9, -, _):</label>
-						<input id="ccf-field-slug" class="field-slug" type="text" value="<%- field.slug %>">
+						<input id="ccf-field-slug" class="field-slug" type="text" value="{{ field.slug }}">
 					</div>
 					<div>
 						<label for="ccf-field-label"><?php esc_html_e( 'Label:', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-label" class="field-label" type="text" value="<%- field.label %>">
+						<input id="ccf-field-label" class="field-label" type="text" value="{{ field.label }}">
 					</div>
 					<div>
 						<label for="ccf-field-value"><?php esc_html_e( 'Initial Value:', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-value" class="field-value" type="text" value="<%- field.value %>">
+						<input id="ccf-field-value" class="field-value" type="text" value="{{ field.value }}">
 					</div>
 					<div>
 						<label for="ccf-field-required"><?php esc_html_e( 'Required:', 'custom-contact-forms' ); ?></label>
 						<select id="ccf-field-required" class="field-required">
 							<option value="1"><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
-							<option value="0" <% if ( ! field.required ) { %>selected="selected"<% } %>><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
+							<option value="0" <# if ( ! field.required ) { #>selected="selected"<# } #>><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
 						</select>
 					</div>
 				</div>
@@ -288,11 +288,11 @@ class CCF_Form_Manager {
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-class-name" class="field-class-name" type="text" value="<%- field.className %>">
+						<input id="ccf-field-class-name" class="field-class-name" type="text" value="{{ field.className }}">
 					</div>
 					<div>
 						<label for="ccf-field-placeholder"><?php esc_html_e( 'Placeholder Text:', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-placeholder" class="field-placeholder" type="text" value="<%- field.placeholder %>">
+						<input id="ccf-field-placeholder" class="field-placeholder" type="text" value="{{ field.placeholder }}">
 					</div>
 				</div>
 			</div>
@@ -305,16 +305,16 @@ class CCF_Form_Manager {
 					<p><?php _e( 'reCAPTCHA is a simple captcha service provided by Google. <a target="_blank" href="https://www.google.com/recaptcha/intro/index.html">Learn more</a>', 'custom-contact-forms' ); ?></p>
 					<div>
 						<label for="ccf-field-label"><?php esc_html_e( 'Label:', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-label" class="field-label" type="text" value="<%- field.label %>">
+						<input id="ccf-field-label" class="field-label" type="text" value="{{ field.label }}">
 					</div>
 					<div>
 						<label for="ccf-field-site-key"><span class="required">*</span> <?php esc_html_e( 'Site Key:', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-site-key" class="field-site-key" type="text" value="<%- field.siteKey %>">
+						<input id="ccf-field-site-key" class="field-site-key" type="text" value="{{ field.siteKey }}">
 						<a href="http://google.com/recaptcha/" target="_blank"><?php _e( "Don't have one?", 'custom-contact-forms' ); ?></a>
 					</div>
 					<div>
 						<label for="ccf-field-secret-key"><span class="required">*</span> <?php esc_html_e( 'Secret Key:', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-secret-key" class="field-secret-key" type="text" value="<%- field.secretKey %>">
+						<input id="ccf-field-secret-key" class="field-secret-key" type="text" value="{{ field.secretKey }}">
 						<a href="http://google.com/recaptcha/" target="_blank"><?php _e( "Don't have one?", 'custom-contact-forms' ); ?></a>
 					</div>
 				</div>
@@ -324,7 +324,7 @@ class CCF_Form_Manager {
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-class-name" class="field-class-name" type="text" value="<%- field.className %>">
+						<input id="ccf-field-class-name" class="field-class-name" type="text" value="{{ field.className }}">
 					</div>
 				</div>
 			</div>
@@ -336,21 +336,21 @@ class CCF_Form_Manager {
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Unique Slug', 'custom-contact-forms' ); ?> (a-z, 0-9, -, _):</label>
-						<input id="ccf-field-slug" class="field-slug" type="text" value="<%- field.slug %>">
+						<input id="ccf-field-slug" class="field-slug" type="text" value="{{ field.slug }}">
 					</div>
 					<div>
 						<label for="ccf-field-label"><?php esc_html_e( 'Label:', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-label" class="field-label" type="text" value="<%- field.label %>">
+						<input id="ccf-field-label" class="field-label" type="text" value="{{ field.label }}">
 					</div>
 					<div>
 						<label for="ccf-field-value"><?php esc_html_e( 'Initial Value:', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-value" class="field-value" type="text" value="<%- field.value %>">
+						<input id="ccf-field-value" class="field-value" type="text" value="{{ field.value }}">
 					</div>
 					<div>
 						<label for="ccf-field-required"><?php esc_html_e( 'Required:', 'custom-contact-forms' ); ?></label>
 						<select id="ccf-field-required" class="field-required">
 							<option value="1"><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
-							<option value="0" <% if ( ! field.required ) { %>selected="selected"<% } %>><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
+							<option value="0" <# if ( ! field.required ) { #>selected="selected"<# } #>><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
 						</select>
 					</div>
 				</div>
@@ -360,11 +360,11 @@ class CCF_Form_Manager {
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-class-name" class="field-class-name" type="text" value="<%- field.className %>">
+						<input id="ccf-field-class-name" class="field-class-name" type="text" value="{{ field.className }}">
 					</div>
 					<div>
 						<label for="ccf-field-placeholder"><?php esc_html_e( 'Placeholder Text:', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-placeholder" class="field-placeholder" type="text" value="<%- field.placeholder %>">
+						<input id="ccf-field-placeholder" class="field-placeholder" type="text" value="{{ field.placeholder }}">
 					</div>
 				</div>
 			</div>
@@ -376,7 +376,7 @@ class CCF_Form_Manager {
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-html"><?php esc_html_e( 'HTML Content:', 'custom-contact-forms' ); ?></label>
-						<textarea id="ccf-field-html" class="field-html"><%- field.html %></textarea>
+						<textarea id="ccf-field-html" class="field-html">{{ field.html }}</textarea>
 					</div>
 				</div>
 			</div>
@@ -385,7 +385,7 @@ class CCF_Form_Manager {
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-class-name" class="field-class-name" type="text" value="<%- field.className %>">
+						<input id="ccf-field-class-name" class="field-class-name" type="text" value="{{ field.className }}">
 					</div>
 				</div>
 			</div>
@@ -397,11 +397,11 @@ class CCF_Form_Manager {
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-heading"><?php esc_html_e( 'Heading:', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-heading" class="field-heading" type="text" value="<%- field.heading %>">
+						<input id="ccf-field-heading" class="field-heading" type="text" value="{{ field.heading }}">
 					</div>
 					<div>
 						<label for="ccf-field-subheading"><?php esc_html_e( 'Sub Heading:', 'custom-contact-forms' ); ?></label>
-						<textarea id="ccf-field-subheading" class="field-subheading" type="text"><%- field.subheading %></textarea>
+						<textarea id="ccf-field-subheading" class="field-subheading" type="text">{{ field.subheading }}</textarea>
 					</div>
 				</div>
 			</div>
@@ -410,7 +410,7 @@ class CCF_Form_Manager {
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-class-name" class="field-class-name" type="text" value="<%- field.className %>">
+						<input id="ccf-field-class-name" class="field-class-name" type="text" value="{{ field.className }}">
 					</div>
 				</div>
 			</div>
@@ -422,21 +422,21 @@ class CCF_Form_Manager {
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Unique Slug', 'custom-contact-forms' ); ?> (a-z, 0-9, -, _):</label>
-						<input id="ccf-field-slug" class="field-slug" type="text" value="<%- field.slug %>">
+						<input id="ccf-field-slug" class="field-slug" type="text" value="{{ field.slug }}">
 					</div>
 					<div>
 						<label for="ccf-field-label"><?php esc_html_e( 'Label:', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-label" class="field-label" type="text" value="<%- field.label %>">
+						<input id="ccf-field-label" class="field-label" type="text" value="{{ field.label }}">
 					</div>
 					<div>
 						<label for="ccf-field-value"><?php esc_html_e( 'Initial Value:', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-value" class="field-value" type="text" value="<%- field.value %>">
+						<input id="ccf-field-value" class="field-value" type="text" value="{{ field.value }}">
 					</div>
 					<div>
 						<label for="ccf-field-required"><?php esc_html_e( 'Required:', 'custom-contact-forms' ); ?></label>
 						<select id="ccf-field-required" class="field-required">
 							<option value="1"><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
-							<option value="0" <% if ( ! field.required ) { %>selected="selected"<% } %>><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
+							<option value="0" <# if ( ! field.required ) { #>selected="selected"<# } #>><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
 						</select>
 					</div>
 				</div>
@@ -446,11 +446,11 @@ class CCF_Form_Manager {
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-class-name" class="field-class-name" type="text" value="<%- field.className %>">
+						<input id="ccf-field-class-name" class="field-class-name" type="text" value="{{ field.className }}">
 					</div>
 					<div>
 						<label for="ccf-field-placeholder"><?php esc_html_e( 'Placeholder Text:', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-placeholder" class="field-placeholder" type="text" value="<%- field.placeholder %>">
+						<input id="ccf-field-placeholder" class="field-placeholder" type="text" value="{{ field.placeholder }}">
 					</div>
 				</div>
 			</div>
@@ -462,11 +462,11 @@ class CCF_Form_Manager {
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Unique Slug (a-z, 0-9, -, _):', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-slug" class="field-slug" type="text" value="<%- field.slug %>">
+						<input id="ccf-field-slug" class="field-slug" type="text" value="{{ field.slug }}">
 					</div>
 					<div>
 						<label for="ccf-field-value"><?php esc_html_e( 'Initial Value:', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-value" class="field-value" type="text" value="<%- field.value %>">
+						<input id="ccf-field-value" class="field-value" type="text" value="{{ field.value }}">
 					</div>
 				</div>
 			</div>
@@ -475,7 +475,7 @@ class CCF_Form_Manager {
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-class-name" class="field-class-name" type="text" value="<%- field.className %>">
+						<input id="ccf-field-class-name" class="field-class-name" type="text" value="{{ field.className }}">
 					</div>
 				</div>
 			</div>
@@ -487,17 +487,17 @@ class CCF_Form_Manager {
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Unique Slug (a-z, 0-9, -, _):', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-slug" class="field-slug" type="text" value="<%- field.slug %>">
+						<input id="ccf-field-slug" class="field-slug" type="text" value="{{ field.slug }}">
 					</div>
 					<div>
 						<label for="ccf-field-label"><?php esc_html_e( 'Label:', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-label" class="field-label" type="text" value="<%- field.label %>">
+						<input id="ccf-field-label" class="field-label" type="text" value="{{ field.label }}">
 					</div>
 					<div>
 						<label for="ccf-field-required"><?php esc_html_e( 'Required:', 'custom-contact-forms' ); ?></label>
 						<select id="ccf-field-required" class="field-required">
 							<option value="1"><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
-							<option value="0" <% if ( ! field.required ) { %>selected="selected"<% } %>><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
+							<option value="0" <# if ( ! field.required ) { #>selected="selected"<# } #>><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
 						</select>
 					</div>
 				</div>
@@ -507,7 +507,7 @@ class CCF_Form_Manager {
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-class-name" class="field-class-name" type="text" value="<%- field.className %>">
+						<input id="ccf-field-class-name" class="field-class-name" type="text" value="{{ field.className }}">
 					</div>
 				</div>
 			</div>
@@ -519,31 +519,31 @@ class CCF_Form_Manager {
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Unique Slug (a-z, 0-9, -, _):', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-slug" class="field-slug" type="text" value="<%- field.slug %>">
+						<input id="ccf-field-slug" class="field-slug" type="text" value="{{ field.slug }}">
 					</div>
 					<div>
 						<label for="ccf-field-label"><?php esc_html_e( 'Label:', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-label" class="field-label" type="text" value="<%- field.label %>">
+						<input id="ccf-field-label" class="field-label" type="text" value="{{ field.label }}">
 					</div>
-					<% if ( ! field.showTime ) { %>
+					<# if ( ! field.showTime ) { #>
 						<div>
 							<label for="ccf-field-value"><?php esc_html_e( 'Initial Value:', 'custom-contact-forms' ); ?></label>
-							<input id="ccf-field-value" class="field-value" type="text" value="<%- field.value %>">
+							<input id="ccf-field-value" class="field-value" type="text" value="{{ field.value }}">
 						</div>
-					<% } %>
+					<# } #>
 					<div>
 						<label for="ccf-field-required"><?php esc_html_e( 'Required:', 'custom-contact-forms' ); ?></label>
 						<select id="ccf-field-required" class="field-required">
 							<option value="1"><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
-							<option value="0" <% if ( ! field.required ) { %>selected="selected"<% } %>><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
+							<option value="0" <# if ( ! field.required ) { #>selected="selected"<# } #>><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
 						</select>
 					</div>
 					<div>
-						<input type="checkbox" <% if ( field.showDate ) { %>checked="checked"<% } %> class="field-show-date" value="1" id="ccf-field-show-date">
+						<input type="checkbox" <# if ( field.showDate ) { #>checked="checked"<# } #> class="field-show-date" value="1" id="ccf-field-show-date">
 						<label for="ccf-show-date"><?php esc_html_e( 'Enable Date Select', 'custom-contact-forms' ); ?></label>
 					</div>
 					<div>
-						<input type="checkbox" <% if ( field.showTime ) { %>checked="checked"<% } %> class="field-show-time" value="1" id="ccf-field-show-time">
+						<input type="checkbox" <# if ( field.showTime ) { #>checked="checked"<# } #> class="field-show-time" value="1" id="ccf-field-show-time">
 						<label for="ccf-show-time"><?php esc_html_e( 'Enable Time Select', 'custom-contact-forms' ); ?></label>
 					</div>
 				</div>
@@ -553,14 +553,14 @@ class CCF_Form_Manager {
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-class-name" class="field-class-name" type="text" value="<%- field.className %>">
+						<input id="ccf-field-class-name" class="field-class-name" type="text" value="{{ field.className }}">
 					</div>
-					<% if ( ! ( field.showTime && field.showDate ) ) { %>
+					<# if ( ! ( field.showTime && field.showDate ) ) { #>
 						<div>
 							<label for="ccf-field-placeholder"><?php esc_html_e( 'Placeholder Text:', 'custom-contact-forms' ); ?></label>
-							<input id="ccf-field-placeholder" class="field-placeholder" type="text" value="<%- field.placeholder %>">
+							<input id="ccf-field-placeholder" class="field-placeholder" type="text" value="{{ field.placeholder }}">
 						</div>
-					<% } %>
+					<# } #>
 				</div>
 			</div>
 		</script>
@@ -571,28 +571,28 @@ class CCF_Form_Manager {
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Unique Slug (a-z, 0-9, -, _):', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-slug" class="field-slug" type="text" value="<%- field.slug %>">
+						<input id="ccf-field-slug" class="field-slug" type="text" value="{{ field.slug }}">
 					</div>
 					<div>
 						<label for="ccf-field-label"><?php esc_html_e( 'Label:', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-label" class="field-label" type="text" value="<%- field.label %>">
+						<input id="ccf-field-label" class="field-label" type="text" value="{{ field.label }}">
 					</div>
 					<div>
 						<label for="ccf-field-value"><?php esc_html_e( 'Initial Value:', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-value" class="field-value" type="text" value="<%- field.value %>">
+						<input id="ccf-field-value" class="field-value" type="text" value="{{ field.value }}">
 					</div>
 					<div>
 						<label for="ccf-field-phone-format"><?php esc_html_e( 'Format:', 'custom-contact-forms' ); ?></label>
 						<select id="ccf-field-phone-format" class="field-phone-format">
 							<option value="us">(xxx) xxx-xxxx</option>
-							<option value="international" <% if ( 'international' === field.format ) { %>selected="selected"<% } %>><?php esc_html_e( 'International', 'custom-contact-forms' ); ?></option>
+							<option value="international" <# if ( 'international' === field.format ) { #>selected="selected"<# } #>><?php esc_html_e( 'International', 'custom-contact-forms' ); ?></option>
 						</select>
 					</div>
 					<div>
 						<label for="ccf-field-required"><?php esc_html_e( 'Required:', 'custom-contact-forms' ); ?></label>
 						<select id="ccf-field-required" class="field-required">
 							<option value="1"><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
-							<option value="0" <% if ( ! field.required ) { %>selected="selected"<% } %>><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
+							<option value="0" <# if ( ! field.required ) { #>selected="selected"<# } #>><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
 						</select>
 					</div>
 				</div>
@@ -602,11 +602,11 @@ class CCF_Form_Manager {
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-class-name" class="field-class-name" type="text" value="<%- field.className %>">
+						<input id="ccf-field-class-name" class="field-class-name" type="text" value="{{ field.className }}">
 					</div>
 					<div>
 						<label for="ccf-field-placeholder"><?php esc_html_e( 'Placeholder Text:', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-placeholder" class="field-placeholder" type="text" value="<%- field.placeholder %>">
+						<input id="ccf-field-placeholder" class="field-placeholder" type="text" value="{{ field.placeholder }}">
 					</div>
 				</div>
 			</div>
@@ -618,24 +618,24 @@ class CCF_Form_Manager {
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Unique Slug (a-z, 0-9, -, _):', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-slug" class="field-slug" type="text" value="<%- field.slug %>">
+						<input id="ccf-field-slug" class="field-slug" type="text" value="{{ field.slug }}">
 					</div>
 					<div>
 						<label for="ccf-field-label"><?php esc_html_e( 'Label:', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-label" class="field-label" type="text" value="<%- field.label %>">
+						<input id="ccf-field-label" class="field-label" type="text" value="{{ field.label }}">
 					</div>
 					<div>
 						<label for="ccf-field-address-type"><?php esc_html_e( 'Type:', 'custom-contact-forms' ); ?></label>
 						<select id="ccf-field-address-type" class="field-address-type">
 							<option value="us"><?php esc_html_e( 'United States', 'custom-contact-forms' ); ?></option>
-							<option value="international" <% if ( 'international' === field.format ) { %>selected="selected"<% } %>><?php esc_html_e( 'International', 'custom-contact-forms' ); ?></option>
+							<option value="international" <# if ( 'international' === field.format ) { #>selected="selected"<# } #>><?php esc_html_e( 'International', 'custom-contact-forms' ); ?></option>
 						</select>
 					</div>
 					<div>
 						<label for="ccf-field-required"><?php esc_html_e( 'Required:', 'custom-contact-forms' ); ?></label>
 						<select id="ccf-field-required" class="field-required">
 							<option value="1"><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
-							<option value="0" <% if ( ! field.required ) { %>selected="selected"<% } %>><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
+							<option value="0" <# if ( ! field.required ) { #>selected="selected"<# } #>><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
 						</select>
 					</div>
 				</div>
@@ -645,7 +645,7 @@ class CCF_Form_Manager {
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-class-name" class="field-class-name" type="text" value="<%- field.className %>">
+						<input id="ccf-field-class-name" class="field-class-name" type="text" value="{{ field.className }}">
 					</div>
 				</div>
 			</div>
@@ -657,30 +657,30 @@ class CCF_Form_Manager {
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Unique Slug (a-z, 0-9, -, _):', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-slug" class="field-slug" type="text" value="<%- field.slug %>">
+						<input id="ccf-field-slug" class="field-slug" type="text" value="{{ field.slug }}">
 					</div>
 					<div>
 						<label for="ccf-field-label"><?php esc_html_e( 'Label:', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-label" class="field-label" type="text" value="<%- field.label %>">
+						<input id="ccf-field-label" class="field-label" type="text" value="{{ field.label }}">
 					</div>
-					<% if ( ! field.emailConfirmation ) { %>
+					<# if ( ! field.emailConfirmation ) { #>
 						<div>
 							<label for="ccf-field-value"><?php esc_html_e( 'Initial Value:', 'custom-contact-forms' ); ?></label>
-							<input id="ccf-field-value" class="field-value" type="text" value="<%- field.value %>">
+							<input id="ccf-field-value" class="field-value" type="text" value="{{ field.value }}">
 						</div>
-					<% } %>
+					<# } #>
 					<div>
 						<label for="ccf-field-required"><?php esc_html_e( 'Required:', 'custom-contact-forms' ); ?></label>
 						<select id="ccf-field-required" class="field-required">
 							<option value="1"><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
-							<option value="0" <% if ( ! field.required ) { %>selected="selected"<% } %>><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
+							<option value="0" <# if ( ! field.required ) { #>selected="selected"<# } #>><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
 						</select>
 					</div>
 					<div>
 						<label for="ccf-field-email-confirmation"><?php esc_html_e( 'Require Confirmation:', 'custom-contact-forms' ); ?></label>
 						<select id="ccf-field-email-confirmation" class="field-email-confirmation">
 							<option value="1"><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
-							<option value="0" <% if ( ! field.emailConfirmation ) { %>selected="selected"<% } %>><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
+							<option value="0" <# if ( ! field.emailConfirmation ) { #>selected="selected"<# } #>><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
 						</select>
 					</div>
 				</div>
@@ -690,23 +690,23 @@ class CCF_Form_Manager {
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-class-name" class="field-class-name" type="text" value="<%- field.className %>">
+						<input id="ccf-field-class-name" class="field-class-name" type="text" value="{{ field.className }}">
 					</div>
-					<% if ( ! field.emailConfirmation ) { %>
+					<# if ( ! field.emailConfirmation ) { #>
 						<div>
 							<label for="ccf-field-placeholder"><?php esc_html_e( 'Placeholder Text:', 'custom-contact-forms' ); ?></label>
-							<input id="ccf-field-placeholder" class="field-placeholder" type="text" value="<%- field.placeholder %>">
+							<input id="ccf-field-placeholder" class="field-placeholder" type="text" value="{{ field.placeholder }}">
 						</div>
-					<% } %>
+					<# } #>
 				</div>
 			</div>
 		</script>
 
 		<script type="text/html" id="ccf-field-choice-template">
 			<a aria-hidden="true" data-icon="&#xe606;" class="move"></a>
-			<input class="choice-selected" <% if ( choice.selected ) { %>checked<% } %> name="selected" type="checkbox" value="1">
-			<input class="choice-label" type="text" placeholder="<?php esc_html_e( 'Label', 'custom-contact-forms' ); ?>" value="<%- choice.label %>">
-			<input class="choice-value" type="text" placeholder="<?php esc_html_e( 'Value', 'custom-contact-forms' ); ?>" value="<%- choice.value %>">
+			<input class="choice-selected" <# if ( choice.selected ) { #>checked<# } #> name="selected" type="checkbox" value="1">
+			<input class="choice-label" type="text" placeholder="<?php esc_html_e( 'Label', 'custom-contact-forms' ); ?>" value="{{ choice.label }}">
+			<input class="choice-value" type="text" placeholder="<?php esc_html_e( 'Value', 'custom-contact-forms' ); ?>" value="{{ choice.value }}">
 			<a aria-hidden="true" data-icon="&#xe605;" class="add"></a>
 			<a aria-hidden="true" data-icon="&#xe604;" class="delete"></a>
 		</script>
@@ -717,17 +717,17 @@ class CCF_Form_Manager {
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Unique Slug (a-z, 0-9, -, _):', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-slug" class="field-slug" type="text" value="<%- field.slug %>">
+						<input id="ccf-field-slug" class="field-slug" type="text" value="{{ field.slug }}">
 					</div>
 					<div>
 						<label for="ccf-field-label"><?php esc_html_e( 'Label:', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-label" class="field-label" type="text" value="<%- field.label %>">
+						<input id="ccf-field-label" class="field-label" type="text" value="{{ field.label }}">
 					</div>
 					<div>
 						<label for="ccf-field-required"><?php esc_html_e( 'Required:', 'custom-contact-forms' ); ?></label>
 						<select id="ccf-field-required" class="field-required">
 							<option value="1"><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
-							<option value="0" <% if ( ! field.required ) { %>selected="selected"<% } %>><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
+							<option value="0" <# if ( ! field.required ) { #>selected="selected"<# } #>><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
 						</select>
 					</div>
 					<div>
@@ -742,7 +742,7 @@ class CCF_Form_Manager {
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-class-name" class="field-class-name" type="text" value="<%- field.className %>">
+						<input id="ccf-field-class-name" class="field-class-name" type="text" value="{{ field.className }}">
 					</div>
 				</div>
 			</div>
@@ -754,17 +754,17 @@ class CCF_Form_Manager {
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Unique Slug (a-z, 0-9, -, _):', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-slug" class="field-slug" type="text" value="<%- field.slug %>">
+						<input id="ccf-field-slug" class="field-slug" type="text" value="{{ field.slug }}">
 					</div>
 					<div>
 						<label for="ccf-field-label"><?php esc_html_e( 'Label:', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-label" class="field-label" type="text" value="<%- field.label %>">
+						<input id="ccf-field-label" class="field-label" type="text" value="{{ field.label }}">
 					</div>
 					<div>
 						<label for="ccf-field-required"><?php esc_html_e( 'Required:', 'custom-contact-forms' ); ?></label>
 						<select id="ccf-field-required" class="field-required">
 							<option value="1"><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
-							<option value="0" <% if ( ! field.required ) { %>selected="selected"<% } %>><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
+							<option value="0" <# if ( ! field.required ) { #>selected="selected"<# } #>><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
 						</select>
 					</div>
 					<div>
@@ -779,7 +779,7 @@ class CCF_Form_Manager {
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-class-name" class="field-class-name" type="text" value="<%- field.className %>">
+						<input id="ccf-field-class-name" class="field-class-name" type="text" value="{{ field.className }}">
 					</div>
 				</div>
 			</div>
@@ -791,17 +791,17 @@ class CCF_Form_Manager {
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Unique Slug (a-z, 0-9, -, _):', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-slug" class="field-slug" type="text" value="<%- field.slug %>">
+						<input id="ccf-field-slug" class="field-slug" type="text" value="{{ field.slug }}">
 					</div>
 					<div>
 						<label for="ccf-field-label"><?php esc_html_e( 'Label:', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-label" class="field-label" type="text" value="<%- field.label %>">
+						<input id="ccf-field-label" class="field-label" type="text" value="{{ field.label }}">
 					</div>
 					<div>
 						<label for="ccf-field-required"><?php esc_html_e( 'Required:', 'custom-contact-forms' ); ?></label>
 						<select id="ccf-field-required" class="field-required">
 							<option value="1"><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
-							<option value="0" <% if ( ! field.required ) { %>selected="selected"<% } %>><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
+							<option value="0" <# if ( ! field.required ) { #>selected="selected"<# } #>><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
 						</select>
 					</div>
 					<div>
@@ -816,7 +816,7 @@ class CCF_Form_Manager {
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-class-name" class="field-class-name" type="text" value="<%- field.className %>">
+						<input id="ccf-field-class-name" class="field-class-name" type="text" value="{{ field.className }}">
 					</div>
 				</div>
 			</div>
@@ -829,80 +829,80 @@ class CCF_Form_Manager {
 		</script>
 
 		<script type="text/html" id="ccf-single-line-text-preview-template">
-			<label><%- field.label %> <% if ( field.required ) { %><span>*</span><% } %></label>
-			<input disabled type="text" placeholder="<%- field.placeholder %>" value="<%- field.value %>">
+			<label>{{ field.label }} <# if ( field.required ) { #><span>*</span><# } #></label>
+			<input disabled type="text" placeholder="{{ field.placeholder }}" value="{{ field.value }}">
 		</script>
 
 		<script type="text/html" id="ccf-recaptcha-preview-template">
-			<label><%- field.label %> <% if ( field.required ) { %><span>*</span><% } %></label>
+			<label>{{ field.label }} <# if ( field.required ) { #><span>*</span><# } #></label>
 			<img class="recaptcha-preview-img" src="<?php echo plugins_url( 'img/recaptcha.png', dirname( __FILE__ )); ?>">
 		</script>
 
 		<script type="text/html" id="ccf-paragraph-text-preview-template">
-			<label><%- field.label %> <% if ( field.required ) { %><span>*</span><% } %></label>
-			<textarea placeholder="<%- field.placeholder %>" disabled><%- field.value %></textarea>
+			<label>{{ field.label }} <# if ( field.required ) { #><span>*</span><# } #></label>
+			<textarea placeholder="{{ field.placeholder }}" disabled>{{ field.value }}</textarea>
 		</script>
 
 		<script type="text/html" id="ccf-dropdown-preview-template">
-			<label><%- field.label %> <% if ( field.required ) { %><span>*</span><% } %></label>
+			<label>{{ field.label }} <# if ( field.required ) { #><span>*</span><# } #></label>
 			<select>
-				<% if ( field.choices.length === 0 || ( field.choices.length === 1 && ! field.choices.at( 0 ).get( 'label' ) && ! field.choices.at( 0 ).get( 'value' ) ) ) { %>
+				<# if ( field.choices.length === 0 || ( field.choices.length === 1 && ! field.choices.at( 0 ).get( 'label' ) && ! field.choices.at( 0 ).get( 'value' ) ) ) { #>
 					<option><?php esc_html_e( 'An example choice', 'custom-contact-forms' ); ?></option>
-				<%} else { %>
-					<% field.choices.each( function( choice ) { %>
-						<option <% if ( choice.get( 'selected' ) ) { %>selected<% } %> value="<%- choice.get( 'value' ) %>"><%- choice.get( 'label' ) %></option>
-					<% }); %>
-				<% } %>
+				<#} else { #>
+					<# field.choices.each( function( choice ) { #>
+						<option <# if ( choice.get( 'selected' ) ) { #>selected<# } #> value="{{ choice.get( 'value' ) }}">{{ choice.get( 'label' ) }}</option>
+					<# }); #>
+				<# } #>
 			</select>
 		</script>
 
 		<script type="text/html" id="ccf-radio-preview-template">
-			<label><%- field.label %> <% if ( field.required ) { %><span>*</span><% } %></label>
-			<% if ( field.choices.length === 0 || ( field.choices.length === 1 && ! field.choices.at( 0 ).get( 'label' ) && ! field.choices.at( 0 ).get( 'value' ) ) ) { %>
+			<label>{{ field.label }} <# if ( field.required ) { #><span>*</span><# } #></label>
+			<# if ( field.choices.length === 0 || ( field.choices.length === 1 && ! field.choices.at( 0 ).get( 'label' ) && ! field.choices.at( 0 ).get( 'value' ) ) ) { #>
 				<div>
 					<input type="radio" value="1" checked="checked"> <label><?php esc_html_e( 'An example choice', 'custom-contact-forms' ); ?></label>
 				</div>
-			<%} else { %>
-				<% field.choices.each( function( choice ) { %>
+			<#} else { #>
+				<# field.choices.each( function( choice ) { #>
 					<div class="choice">
-						<input type="radio" value="<%- choice.get( 'value' ) %>" <% if ( choice.get( 'selected' ) ) { %>checked="checked"<% } %>> <label><%- choice.get( 'label' ) %></label>
+						<input type="radio" value="{{ choice.get( 'value' ) }}" <# if ( choice.get( 'selected' ) ) { #>checked="checked"<# } #>> <label>{{ choice.get( 'label' ) }}</label>
 					</div>
-				<% }); %>
-			<% } %>
+				<# }); #>
+			<# } #>
 		</script>
 
 		<script type="text/html" id="ccf-checkboxes-preview-template">
-			<label><%- field.label %> <% if ( field.required ) { %><span>*</span><% } %></label>
-			<% if ( field.choices.length === 0 || ( field.choices.length === 1 && ! field.choices.at( 0 ).get( 'label' ) && ! field.choices.at( 0 ).get( 'value' ) ) ) { %>
+			<label>{{ field.label }} <# if ( field.required ) { #><span>*</span><# } #></label>
+			<# if ( field.choices.length === 0 || ( field.choices.length === 1 && ! field.choices.at( 0 ).get( 'label' ) && ! field.choices.at( 0 ).get( 'value' ) ) ) { #>
 				<div>
 					<input type="checkbox" value="1" checked="checked"> <label><?php esc_html_e( 'An example choice', 'custom-contact-forms' ); ?></label>
 				</div>
-			<%} else { %>
-				<% field.choices.each( function( choice ) { %>
+			<#} else { #>
+				<# field.choices.each( function( choice ) { #>
 					<div class="choice">
-						<input type="checkbox" value="<%- choice.get( 'value' ) %>" <% if ( choice.get( 'selected' ) ) { %>checked="checked"<% } %>> <label><%- choice.get( 'label' ) %></label>
+						<input type="checkbox" value="{{ choice.get( 'value' ) }}" <# if ( choice.get( 'selected' ) ) { #>checked="checked"<# } #>> <label>{{ choice.get( 'label' ) }}</label>
 					</div>
-				<% }); %>
-			<% } %>
+				<# }); #>
+			<# } #>
 		</script>
 
 		<script type="text/html" id="ccf-html-preview-template">
-			<% if ( typeof mce !== 'undefined' ) { %>
-				<%= field.html %>
-			<% } else { %>
+			<# if ( typeof mce !== 'undefined' ) { #>
+				{{{ field.html }}}
+			<# } else { #>
 				<pre>&lt;pre&gt;<?php esc_html_e( 'Arbitrary block of HTML.', 'custom-contact-forms' ); ?>&lt;/pre&gt;</pre>
-			<% } %>
+			<# } #>
 		</script>
 
 		<script type="text/html" id="ccf-section-header-preview-template">
 			<div class="heading">
-				<% if ( field.heading ) { %><%- field.heading %><% } else { %><?php esc_html_e( 'Section Heading', 'custom-contact-forms' ); ?><% } %>
+				<# if ( field.heading ) { #>{{ field.heading }}<# } else { #><?php esc_html_e( 'Section Heading', 'custom-contact-forms' ); ?><# } #>
 			</div>
-			<div class="subheading"><% if ( field.subheading ) { %><%- field.subheading %><% } else { %><?php esc_html_e( 'This is the sub-heading text.', 'custom-contact-forms' ); ?><% } %></div>
+			<div class="subheading"><# if ( field.subheading ) { #>{{ field.subheading }}<# } else { #><?php esc_html_e( 'This is the sub-heading text.', 'custom-contact-forms' ); ?><# } #></div>
 		</script>
 
 		<script type="text/html" id="ccf-name-preview-template">
-			<label><%- field.label %> <% if ( field.required ) { %><span>*</span><% } %></label>
+			<label>{{ field.label }} <# if ( field.required ) { #><span>*</span><# } #></label>
 			<div class="left">
 				<input type="text">
 				<label class="sub-label"><?php esc_html_e( 'First', 'custom-contact-forms' ); ?></label>
@@ -914,10 +914,10 @@ class CCF_Form_Manager {
 		</script>
 
 		<script type="text/html" id="ccf-date-preview-template">
-			<label><%- field.label %> <% if ( field.required ) { %><span>*</span><% } %></label>
-			<% if ( field.showDate && ! field.showTime ) { %>
-				<input value="<%- field.value %>" class="ccf-datepicker" disabled type="text">
-			<% } else if ( ! field.showDate && field.showTime ) { %>
+			<label>{{ field.label }} <# if ( field.required ) { #><span>*</span><# } #></label>
+			<# if ( field.showDate && ! field.showTime ) { #>
+				<input value="{{ field.value }}" class="ccf-datepicker" disabled type="text">
+			<# } else if ( ! field.showDate && field.showTime ) { #>
 				<div class="full">
 					<div class="hour">
 						<input type="text">
@@ -934,7 +934,7 @@ class CCF_Form_Manager {
 						</select>
 					</div>
 				</div>
-			<% } else { %>
+			<# } else { #>
 				<div class="left">
 					<input class="ccf-datepicker" disabled type="text">
 					<label class="sub-label"><?php esc_html_e( 'Date', 'custom-contact-forms' ); ?></label>
@@ -955,12 +955,12 @@ class CCF_Form_Manager {
 						</select>
 					</div>
 				</div>
-			<% } %>
+			<# } #>
 		</script>
 
 		<script type="text/html" id="ccf-address-preview-template">
-			<label><%- field.label %> <% if ( field.required ) { %><span>*</span><% } %></label>
-			<% if ( field.addressType === 'us' ) { %>
+			<label>{{ field.label }} <# if ( field.required ) { #><span>*</span><# } #></label>
+			<# if ( field.addressType === 'us' ) { #>
 				<div class="full">
 					<input type="text">
 					<label class="sub-label"><?php esc_html_e( 'Street Address', 'custom-contact-forms' ); ?></label>
@@ -985,7 +985,7 @@ class CCF_Form_Manager {
 					<input type="text">
 					<label class="sub-label"><?php esc_html_e( 'ZIP Code', 'custom-contact-forms' ); ?></label>
 				</div>
-			<% } else if ( field.addressType === 'international' ) { %>
+			<# } else if ( field.addressType === 'international' ) { #>
 				<div class="full">
 					<input type="text">
 					<label class="sub-label"><?php esc_html_e( 'Street Address', 'custom-contact-forms' ); ?></label>
@@ -1014,14 +1014,14 @@ class CCF_Form_Manager {
 					</select>
 					<label class="sub-label"><?php esc_html_e( 'Country', 'custom-contact-forms' ); ?></label>
 				</div>
-			<% } %>
+			<# } #>
 		</script>
 
 		<script type="text/html" id="ccf-email-preview-template">
-			<label><%- field.label %> <% if ( field.required ) { %><span>*</span><% } %></label>
-			<% if ( ! field.emailConfirmation ) { %>
-				<input placeholder="<% if ( field.placeholder ) { %><%- field.placeholder %><% } else { %><?php esc_html_e( 'email@example.com', 'custom-contact-forms' ); ?><% } %>" disabled type="text" value="<%- field.value %>">
-			<% } else { %>
+			<label>{{ field.label }} <# if ( field.required ) { #><span>*</span><# } #></label>
+			<# if ( ! field.emailConfirmation ) { #>
+				<input placeholder="<# if ( field.placeholder ) { #>{{ field.placeholder }}<# } else { #><?php esc_html_e( 'email@example.com', 'custom-contact-forms' ); ?><# } #>" disabled type="text" value="{{ field.value }}">
+			<# } else { #>
 				<div class="left">
 					<input type="text">
 					<div class="sub-label"><?php esc_html_e( 'Email', 'custom-contact-forms' ); ?></div>
@@ -1030,38 +1030,38 @@ class CCF_Form_Manager {
 					<input type="text">
 					<div class="sub-label"><?php esc_html_e( 'Confirm Email', 'custom-contact-forms' ); ?></div>
 				</div>
-			<% } %>
+			<# } #>
 		</script>
 
 		<script type="text/html" id="ccf-website-preview-template">
-			<label><%- field.label %> <% if ( field.required ) { %><span>*</span><% } %></label>
-			<input placeholder="<% if ( field.placeholder ) { %><%- field.placeholder %><% } else { %>http://<% } %>" disabled type="text" value="<%- field.value %>">
+			<label>{{ field.label }} <# if ( field.required ) { #><span>*</span><# } #></label>
+			<input placeholder="<# if ( field.placeholder ) { #>{{ field.placeholder }}<# } else { #>http://<# } #>" disabled type="text" value="{{ field.value }}">
 		</script>
 
 		<script type="text/html" id="ccf-phone-preview-template">
-			<label><%- field.label %> <% if ( field.required ) { %><span>*</span><% } %></label>
-			<input placeholder="<% if ( field.placeholder ) { %><%- field.placeholder %><% } else { %>(301) 101-8976<% } %>" disabled type="text" value="<%- field.value %>">
+			<label>{{ field.label }} <# if ( field.required ) { #><span>*</span><# } #></label>
+			<input placeholder="<# if ( field.placeholder ) { #>{{ field.placeholder }}<# } else { #>(301) 101-8976<# } #>" disabled type="text" value="{{ field.value }}">
 		</script>
 
 		<script type="text/html" id="ccf-existing-form-table-row-template">
 
-			<td><%- form.ID %></td>
+			<td>{{ form.ID }}</td>
 			<td>
-				<a class="edit edit-form title" data-view="form-pane" data-form-id="<%- form.ID %>" href="#form-pane-<%- form.ID %>"><% if ( form.title ) { %><%- form.title %><% } else { %><%- '<?php esc_html_e( '(No title)', 'custom-contact-forms' ); ?>' %><% } %></a>
+				<a class="edit edit-form title" data-view="form-pane" data-form-id="{{ form.ID }}" href="#form-pane-{{ form.ID }}"><# if ( form.title ) { #>{{ form.title }}<# } else { #>{{ '<?php esc_html_e( '(No title)', 'custom-contact-forms' ); ?>' }}<# } #></a>
 				<div class="actions">
-					<a class="edit edit-form" data-view="form-pane" data-form-id="<%- form.ID %>" href="#form-pane-<%- form.ID %>"><?php esc_html_e( 'Edit', 'custom-contact-forms' ); ?></a> |
+					<a class="edit edit-form" data-view="form-pane" data-form-id="{{ form.ID }}" href="#form-pane-{{ form.ID }}"><?php esc_html_e( 'Edit', 'custom-contact-forms' ); ?></a> |
 					<a class="insert-form-button"><?php esc_html_e( 'Insert into post', 'custom-contact-forms' ); ?></a> |
 					<a class="delete"><?php esc_html_e( 'Trash', 'custom-contact-forms' ); ?></a>
 				</div>
 			</td>
 			<td>
-				<%- utils.getPrettyPostDate( form.date ) %>
+				{{ utils.getPrettyPostDate( form.date ) }}
 			</td>
 			<td>
-				<%- form.author.username %>
+				{{ form.author.username }}
 			</td>
 			<td>
-				<%- form.fields.length %>
+				{{ form.fields.length }}
 			</td>
 			<td>
 				0
@@ -1069,25 +1069,25 @@ class CCF_Form_Manager {
 		</script>
 
 		<script type="text/html" id="ccf-form-mce-preview">
-			<div class="ccf-form-preview form-id-<%- form.ID %>">
-				<% if ( form.title ) { %>
-					<h2><%- form.title %></h2>
-				<% } %>
+			<div class="ccf-form-preview form-id-{{ form.ID }}">
+				<# if ( form.title ) { #>
+					<h2>{{ form.title }}</h2>
+				<# } #>
 
-				<% if ( form.description && form.description != '' ) { %>
-					<p><%- form.description %></p>
-				<% } %>
+				<# if ( form.description && form.description != '' ) { #>
+					<p>{{ form.description }}</p>
+				<# } #>
 
-				<% if ( form.fields ) { %>
-					<% _.each( form.fields, function( field ) { %>
-						<div class="field <%- field.type %> field-<%- field.ID %>">
-							<%= field.preview %>
+				<# if ( form.fields ) { #>
+					<# _.each( form.fields, function( field ) { #>
+						<div class="field {{ field.type }} field-{{ field.ID }}">
+							{{{ field.preview }}}
 						</div>
-					<% } ); %>
-				<% } %>
+					<# } ); #>
+				<# } #>
 
 				<div class="field-submit">
-					<input type="button" value="<%- form.buttonText %>">
+					<input type="button" value="{{ form.buttonText }}">
 				</div>
 			</div>
 		</script>
@@ -1102,36 +1102,36 @@ class CCF_Form_Manager {
 			<table class="widefat fixed" cellpadding="0" cellspacing="0">
 				<thead>
 					<tr>
-						<% _.each( columns, function( column ) { %>
-							<th scope="col" class="manage-column column-<%- column %>">
-								<% if ( 'date' === column ) { %>
+						<# _.each( columns, function( column ) { #>
+							<th scope="col" class="manage-column column-{{ column }}">
+								<# if ( 'date' === column ) { #>
 									<?php esc_html_e( 'Date', 'custom-contact-forms' ); ?>
-								<% } else { %>
-									<%- column %>
-								<% } %>
+								<# } else { #>
+									{{ column }}
+								<# } #>
 							</th>
-						<% } ); %>
+						<# } ); #>
 						<th scope="col" class="manage-column column-actions"></th>
 					</tr>
 				</thead>
 				<tfoot>
 					<tr>
-						<% _.each( columns, function( column ) { %>
-							<th scope="col" class="manage-column column-<%- column %>">
-								<% if ( 'date' === column ) { %>
+						<# _.each( columns, function( column ) { #>
+							<th scope="col" class="manage-column column-{{ column }}">
+								<# if ( 'date' === column ) { #>
 									<?php esc_html_e( 'Date', 'custom-contact-forms' ); ?>
-								<% } else { %>
-									<%- column %>
-								<% } %>
+								<# } else { #>
+									{{ column }}
+								<# } #>
 							</th>
-						<% } ); %>
+						<# } ); #>
 						<th scope="col" class="manage-column column-actions"></th>
 					</tr>
 				</tfoot>
 
 				<tbody class="submission-rows">
 					<tr>
-						<td colspan="<%- columns.length + 1 %>">
+						<td colspan="{{ columns.length + 1 }}">
 							<div class="spinner" style="background: url( '<?php echo esc_url( admin_url( 'images/wpspin_light.gif' ) ); ?>' ) no-repeat;"></div>
 						</td>
 					</tr>
@@ -1141,71 +1141,71 @@ class CCF_Form_Manager {
 		</script>
 
 		<script type="text/html" id="ccf-submission-row-template">
-			<% _.each( currentColumns, function( column ) { %>
-				<% if ( 'date' === column ) { %>
-					<td colspan="1"><%- utils.getPrettyPostDate( submission.date ) %></td>
-				<% } else { %>
+			<# _.each( currentColumns, function( column ) { #>
+				<# if ( 'date' === column ) { #>
+					<td colspan="1">{{ utils.getPrettyPostDate( submission.date ) }}</td>
+				<# } else { #>
 					<td colspan="1">
-						<% if ( submission.data[column] ) { %>
-							<% if ( submission.data[column] instanceof Object ) { var output = '', i = 0; %>
-								<% if ( utils.isFieldDate( submission.data[column] ) ) { %>
-									<%- utils.getPrettyFieldDate( submission.data[column] ) %>
-								<% } else if ( utils.isFieldName( submission.data[column] ) ) { %>
-									<%- utils.getPrettyFieldName( submission.data[column] ) %>
-								<% } else if ( utils.isFieldAddress( submission.data[column] ) ) { %>
-									<%- utils.wordChop( utils.getPrettyFieldAddress( submission.data[column] ), 30 ) %>
-								<% } else { %>
-									<% for ( var key in submission.data[column] ) { if ( submission.data[column].hasOwnProperty( key ) ) {
+						<# if ( submission.data[column] ) { #>
+							<# if ( submission.data[column] instanceof Object ) { var output = '', i = 0; #>
+								<# if ( utils.isFieldDate( submission.data[column] ) ) { #>
+									{{ utils.getPrettyFieldDate( submission.data[column] ) }}
+								<# } else if ( utils.isFieldName( submission.data[column] ) ) { #>
+									{{ utils.getPrettyFieldName( submission.data[column] ) }}
+								<# } else if ( utils.isFieldAddress( submission.data[column] ) ) { #>
+									{{ utils.wordChop( utils.getPrettyFieldAddress( submission.data[column] ), 30 ) }}
+								<# } else { #>
+									<# for ( var key in submission.data[column] ) { if ( submission.data[column].hasOwnProperty( key ) ) {
 										if ( i > 0 ) {
 											output += ', ';
 										}
 										output += submission.data[column][key];
 
 										i++;
-									} } %>
-									<%- utils.wordChop( output, 30 ) %>
-								<% } %>
-							<% } else { %>
-								<%- utils.wordChop( submission.data[column] ) %>
-							<% } %>
-						<% } else { %>
+									} } #>
+									{{ utils.wordChop( output, 30 ) }}
+								<# } #>
+							<# } else { #>
+								{{ utils.wordChop( submission.data[column] ) }}
+							<# } #>
+						<# } else { #>
 							<span><?php esc_html_e( '-', 'custom-contact-forms' ); ?></span>
-						<% } %>
+						<# } #>
 					</td>
-				<% } %>
-			<% } ); %>
+				<# } #>
+			<# } ); #>
 			<td class="actions">
-				<a href="#TB_inline?height=300&amp;width=400&amp;inlineId=submission-content" data-submission-date="<%- submission.date %>" data-submission-id="<%- submission.ID %>" class="view"  data-icon="&#xe601;"></a>
+				<a href="#TB_inline?height=300&amp;width=400&amp;inlineId=submission-content" data-submission-date="{{ submission.date }}" data-submission-id="{{ submission.ID }}" class="view"  data-icon="&#xe601;"></a>
 				<a class="delete" data-icon="&#xe602;"></a>
 
-				<div class="submission-wrapper" id="ccf-submission-content-<%- submission.ID %>">
+				<div class="submission-wrapper" id="ccf-submission-content-{{ submission.ID }}">
 					<div class="ccf-submission-content">
-						<% for ( column in submission.data ) { %>
+						<# for ( column in submission.data ) { #>
 							<div class="field-slug">
-								<%- column %>
+								{{ column }}
 							</div>
 							<div class="field-content">
-								<% if ( submission.data[column] ) { %>
-									<% if ( submission.data[column] instanceof Object ) { %>
-										<% if ( utils.isFieldDate( submission.data[column] ) ) { %>
-											<%- utils.getPrettyFieldDate( submission.data[column] ) %>
-										<% } else if ( utils.isFieldName( submission.data[column] ) ) { %>
-											<%- utils.getPrettyFieldName( submission.data[column] ) %>
-										<% } else if ( utils.isFieldAddress( submission.data[column] ) ) { %>
-											<%- utils.getPrettyFieldAddress( submission.data[column] ) %>
-										<% } else { %>
-											<% for ( var key in submission.data[column] ) { if ( submission.data[column].hasOwnProperty( key ) ) { %>
-												<% if ( isNaN( key ) ) { %><strong><%- key %>:</strong> <% } %><%- submission.data[column][key] %><br>
-											<% } } %>
-										<% } %>
-									<% } else { %>
-										<%- submission.data[column] %>
-									<% } %>
-								<% } else { %>
+								<# if ( submission.data[column] ) { #>
+									<# if ( submission.data[column] instanceof Object ) { #>
+										<# if ( utils.isFieldDate( submission.data[column] ) ) { #>
+											{{ utils.getPrettyFieldDate( submission.data[column] ) }}
+										<# } else if ( utils.isFieldName( submission.data[column] ) ) { #>
+											{{ utils.getPrettyFieldName( submission.data[column] ) }}
+										<# } else if ( utils.isFieldAddress( submission.data[column] ) ) { #>
+											{{ utils.getPrettyFieldAddress( submission.data[column] ) }}
+										<# } else { #>
+											<# for ( var key in submission.data[column] ) { if ( submission.data[column].hasOwnProperty( key ) ) { #>
+												<# if ( isNaN( key ) ) { #><strong>{{ key }}:</strong> <# } #>{{ submission.data[column][key] }}<br>
+											<# } } #>
+										<# } #>
+									<# } else { #>
+										{{ submission.data[column] }}
+									<# } #>
+								<# } else { #>
 									<span>-</span>
-								<% } %>
+								<# } #>
 							</div>
-						<% } %>
+						<# } #>
 					</div>
 				</div>
 			</td>
@@ -1213,22 +1213,22 @@ class CCF_Form_Manager {
 
 
 		<script type="text/html" id="ccf-no-submissions-row-template">
-			<td colspan="<%- columns.length + 1 %>" class="no-submissions"><?php esc_html_e( 'There are no submissions.', 'custom-contact-forms' ); ?></td>
+			<td colspan="{{ columns.length + 1 }}" class="no-submissions"><?php esc_html_e( 'There are no submissions.', 'custom-contact-forms' ); ?></td>
 		</script>
 
 		<script type="text/html" id="ccf-submissions-controller-template">
-			<% var i = 0; _.each( columns, function( column ) {  %>
+			<# var i = 0; _.each( columns, function( column ) {  #>
 
-				<label for="ccf-column-<%- column %>">
-					<input class="submission-column-checkbox" type="checkbox" id="ccf-column-<%- column %>" <% if ( i < 4 || 'date' === column ) { %>checked<% } %> value="<%- column %>">
-					<% if ( 'date' === column ) { %>
+				<label for="ccf-column-{{ column }}">
+					<input class="submission-column-checkbox" type="checkbox" id="ccf-column-{{ column }}" <# if ( i < 4 || 'date' === column ) { #>checked<# } #> value="{{ column }}">
+					<# if ( 'date' === column ) { #>
 						<?php esc_html_e( 'Date', 'custom-contact-forms' ); ?>
-					<% } else { %>
-						<%- column %>
-					<% } %>
+					<# } else { #>
+						{{ column }}
+					<# } #>
 				</label>
 
-			<% i++; }); %>
+			<# i++; }); #>
 		</script>
 
 		<?php

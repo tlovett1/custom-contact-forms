@@ -6,7 +6,7 @@
 		forms: {},
 
 		View: {
-			template: _.template( document.getElementById( 'ccf-form-mce-preview').innerHTML ),
+			template: wp.ccf.utils.template( document.getElementById( 'ccf-form-mce-preview').innerHTML ),
 
 			type: 'video',
 
@@ -72,7 +72,7 @@
 						var template = document.getElementById( 'ccf-' + field.get( 'type' ) + '-preview-template' );
 
 						if ( template ) {
-							var preview = _.template( template.innerHTML )( { field: field.toJSON(), mce: true } );
+							var preview = wp.ccf.utils.template( template.innerHTML )( { field: field.toJSON(), mce: true } );
 							field.set( 'preview', preview );
 						}
 					});
@@ -91,7 +91,7 @@
 						if ( this.formFetch.state() === 'resolved' ) {
 							return this.template( { form: form.toJSON() } );
 						} else {
-							return _.template( document.getElementById( 'ccf-form-mce-error-preview' ).innerHTML )();
+							return wp.ccf.utils.template( document.getElementById( 'ccf-form-mce-error-preview' ).innerHTML )();
 						}
 					}
 				}

@@ -31,7 +31,7 @@
 	};
 
 	wp.ccf.preview.prototype = {
-		template: _.template(  document.getElementById( 'ccf-form-mce-preview').innerHTML ),
+		template: wp.ccf.utils.template(  document.getElementById( 'ccf-form-mce-preview').innerHTML ),
 
 		fetch: function() {
 			var SELF = this;
@@ -64,7 +64,7 @@
 				var template = document.getElementById( 'ccf-' + field.get( 'type' ) + '-preview-template' );
 
 				if ( template ) {
-					var preview = _.template( template.innerHTML )( { field: field.toJSON(), mce: true } );
+					var preview = wp.ccf.utils.template( template.innerHTML )( { field: field.toJSON(), mce: true } );
 					field.set( 'preview', preview );
 				}
 			});
