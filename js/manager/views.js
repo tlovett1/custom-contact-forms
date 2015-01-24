@@ -670,7 +670,7 @@
 				if ( previewTemplate ) {
 					var preview = this.el.querySelectorAll( '.preview' )[0];
 					preview.style.display = 'block';
-					preview.innerHTML = wp.ccf.utils.template( previewTemplate.innerHTML )( { field: this.model.toJSON() } );
+					preview.innerHTML = wp.ccf.utils.template( 'ccf-' + this.model.get( 'type' ) + '-preview-template' )( { field: this.model.toJSON() } );
 				}
 
 				return this;
