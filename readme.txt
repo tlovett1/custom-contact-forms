@@ -33,7 +33,7 @@ Please refer to [Github](http://github.com/tlovett1/custom-contact-forms) for de
 
 For questions, feature requests, and support concerning the Custom Contact Forms plugin, please refer to [Github](http://github.com/tlovett1/custom-contact-forms).
 
-= Changelog ==
+== Changelog ==
 
 = 6.3.2 =
 * Change underscores style templating to account for when ASP tags are turned on.
