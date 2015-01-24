@@ -5,6 +5,8 @@ Tags: contact form, web form, custom contact form, custom forms, captcha form, c
 Requires at least: 3.9
 Tested up to: 4.1
 Stable tag: 6.3.2
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Build beautiful custom forms the WordPress way. View live previews of your forms while you build them.
 
