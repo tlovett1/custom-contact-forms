@@ -634,7 +634,7 @@ class CCF_Form_Handler {
 
 										<?php $i = 0; foreach ( $field as $value ) : ?>
 											<?php if ( ! empty( $value ) ) : ?>
-												<?php if ( $i !== 0 ) : ?>, <br><?php endif; ?>
+												<?php if ( $i !== 0 ) : ?><br><?php endif; ?>
 												<?php echo esc_html( stripslashes( $value ) ); ?>
 												<?php $i++; ?>
 											<?php endif; ?>
