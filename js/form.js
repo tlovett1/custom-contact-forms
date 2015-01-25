@@ -44,13 +44,15 @@
 			var found = false;
 
 			_.each( this.inputs, function( input ) {
-				if ( input.checked || input.selected ) {
+				if ( ( input.checked && input.value ) || input.selected ) {
 					found = true;
 				}
 			});
 
 			if ( ! found ) {
-				this.errors.required = true;
+				this.errors[this.inputs[this.inputs.length - 1].getAttribute( 'name' )] = {
+					required: true
+				};
 
 				var newErrorNode = document.createElement( 'div' );
 				newErrorNode.className = 'error required-error';
@@ -306,7 +308,7 @@
 							var validationErrors = 0;
 							for ( var key in validation.errors ) {
 								if ( validation.errors.hasOwnProperty( key ) ) {
-									if (_.size( validation.errors[key] ) ) {
+									if ( _.size( validation.errors[key] ) ) {
 										validationErrors++;
 									}
 								}

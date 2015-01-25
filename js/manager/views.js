@@ -815,8 +815,8 @@
 				var emailNotificationFromType = this.el.querySelectorAll( '.form-email-notification-from-type' )[0];
 
 				if ( parseInt( sendEmailNotifications ) ) {
-					for ( i = 0; i < emailNotificationSettings; i++ ) {
-						emailNotificationAddresses.style.display = 'block';
+					for ( i = 0; i < emailNotificationSettings.length; i++ ) {
+						emailNotificationSettings[i].style.display = 'block';
 					}
 
 					emailNotificationFromAddress.style.display = 'none';
@@ -828,8 +828,8 @@
 						emailNotificationFromField.style.display = 'block';
 					}
 				} else {
-					for ( i = 0; i < emailNotificationSettings; i++ ) {
-						emailNotificationAddresses.style.display = 'none';
+					for ( i = 0; i < emailNotificationSettings.length; i++ ) {
+						emailNotificationSettings[i].style.display = 'none';
 					}
 
 					emailNotificationFromAddress.style.display = 'none';

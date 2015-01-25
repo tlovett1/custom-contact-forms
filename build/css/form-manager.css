@@ -281,7 +281,8 @@
           display: none; }
       .ccf-main-modal .ccf-form-pane .left-sidebar .explain {
         margin-top: 5px;
-        font-style: italic; }
+        font-style: italic;
+        display: block; }
     .ccf-main-modal .ccf-form-pane .form-content {
       box-sizing: border-box;
       position: absolute;
