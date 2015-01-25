@@ -33,51 +33,6 @@ class CCF_Submission_CPT {
 	}
 
 	/**
-	 * Check if a field is a date
-	 *
-	 * @param array|string $value
-	 * @since 6.0
-	 * @return bool
-	 */
-	public function is_field_date( $value ) {
-		if ( ! empty( $value['date'] ) || ( ! empty( $value['hour'] ) && ! empty( $value['minute'] ) && ! empty( $value['am-pm'] ) ) ) {
-			return true;
-		}
-
-		return false;
-	}
-
-	/**
-	 * Check if a field is an name
-	 *
-	 * @param array|string $value
-	 * @since 6.0
-	 * @return bool
-	 */
-	public function is_field_name( $value ) {
-		if ( ! empty( $value['first'] ) || ! empty( $value['last'] ) ) {
-			return true;
-		}
-
-		return false;
-	}
-
-	/**
-	 * Check if a field is an address
-	 *
-	 * @param array|string $value
-	 * @since 6.0
-	 * @return bool
-	 */
-	public function is_field_address( $value ) {
-		if ( ! empty( $value['street'] ) && ! empty( $value['city'] ) && ! empty( $value['zipcode'] ) && ! empty( $value['line_two'] ) ) {
-			return true;
-		}
-
-		return false;
-	}
-
-	/**
 	 * Get prettified field date
 	 *
 	 * @param array $value

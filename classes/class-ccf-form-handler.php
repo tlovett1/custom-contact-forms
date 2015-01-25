@@ -65,15 +65,15 @@ class CCF_Form_Handler {
 			),
 			'dropdown' => array(
 				'sanitizer' => 'sanitize_text_field',
-				'validator' => array( $this, 'not_empty' ),
+				'validator' => array( $this, 'not_empty_choiceable' ),
 			),
 			'checkboxes' => array(
 				'sanitizer' => 'sanitize_text_field',
-				'validator' => array( $this, 'not_empty' ),
+				'validator' => array( $this, 'not_empty_choiceable' ),
 			),
 			'radio' => array(
 				'sanitizer' => 'sanitize_text_field',
-				'validator' => array( $this, 'not_empty' ),
+				'validator' => array( $this, 'not_empty_choiceable' ),
 			),
 		) );
 	}
@@ -111,6 +111,43 @@ class CCF_Form_Handler {
 	 */
 	public function not_empty( $value, $field_id, $required ) {
 		if ( $required && empty( $value ) ) {
+			return array( 'required' => esc_html__( 'This field is required.', 'custom-contact-forms' ) );
+		}
+
+		return true;
+	}
+
+	/**
+	 * Simple callback to determine if a choiceable is "empty"
+	 *
+	 * @param mixed $value
+	 * @param int $field_id
+	 * @param bool $required
+	 * @since 6.4
+	 * @return array|bool
+	 */
+	public function not_empty_choiceable( $value, $field_id, $required ) {
+		$error = false;
+
+		if ( $required ) {
+			if ( ! is_array( $value ) ) {
+				if ( empty( $value ) ) {
+					$error = true;
+				}
+			} else {
+				$error = true;
+
+				if ( ! empty( $value ) ) {
+					foreach ( $value as $something ) {
+						if ( ! empty ( $something ) ) {
+							$error = false;
+						}
+					}
+				}
+			}
+		}
+
+		if ( $error ) {
 			return array( 'required' => esc_html__( 'This field is required.', 'custom-contact-forms' ) );
 		}
 
@@ -558,6 +595,7 @@ class CCF_Form_Handler {
 					foreach ( $submission as $slug => $field ) {
 						$field_id = $field_slug_to_id[$slug];
 						$label = get_post_meta( $field_id, 'ccf_field_label', true );
+						$type = get_post_meta( $field_id, 'ccf_field_type', true );
 						?>
 
 						<div>
@@ -568,36 +606,54 @@ class CCF_Form_Handler {
 							<?php endif; ?>
 						</div>
 						<div style="margin-bottom: 10px;">
-							<?php if ( ! empty( $field ) ) { ?>
-								<?php if ( is_array( $field ) ) { ?>
-									<?php if ( CCF_Submission_CPT::factory()->is_field_date( $field ) ) { ?>
+							<?php if ( ! empty( $field ) ) : ?>
 
-										<?php echo esc_html( stripslashes( CCF_Submission_CPT::factory()->get_pretty_field_date( $field ) ) ); ?>
+								<?php if ( 'date' === $type ) : ?>
 
-									<?php } elseif ( CCF_Submission_CPT::factory()->is_field_name( $field ) ) { ?>
+									<?php echo esc_html( stripslashes( CCF_Submission_CPT::factory()->get_pretty_field_date( $field ) ) ); ?>
 
-										<?php echo esc_html( stripslashes( CCF_Submission_CPT::factory()->get_pretty_field_name( $field ) ) ); ?>
+								<?php elseif ( 'name' === $type ) : ?>
 
-									<?php } elseif ( CCF_Submission_CPT::factory()->is_field_address( $field ) ) { ?>
+									<?php echo esc_html( stripslashes( CCF_Submission_CPT::factory()->get_pretty_field_name( $field ) ) ); ?>
 
-										<?php echo esc_html( stripslashes( CCF_Submission_CPT::factory()->get_pretty_field_address( $field ) ) ); ?>
+								<?php elseif ( 'address' === $type ) : ?>
 
-									<?php } else { ?>
+									<?php echo esc_html( stripslashes( CCF_Submission_CPT::factory()->get_pretty_field_address( $field ) ) ); ?>
 
-										<?php foreach ( $field as $key => $value ) { ?>
-											<?php if ( is_int( $key ) ) { ?>
-												<strong><?php echo esc_html( stripslashes( $key ) ); ?>:</strong>
-											<?php } ?>
-											<?php echo esc_html( stripslashes( $value ) ); ?><br>
-										<?php } ?>
+								<?php elseif ( 'email' === $type ) : ?>
 
-									<?php } ?>
-								<?php } else { ?>
+									<?php if ( is_array( $field ) ) : ?>
+										<?php echo esc_html( stripslashes( $field['email'] ) ); ?>
+									<?php else : ?>
+										<?php echo esc_html( stripslashes( $field ) ); ?>
+									<?php endif; ?>
+
+								<?php elseif ( 'dropdown' === $type || 'radio' === $type || 'checkboxes' === $type ) : ?>
+
+									<?php if ( is_array( $field ) ) : ?>
+
+										<?php $i = 0; foreach ( $field as $value ) : ?>
+											<?php if ( ! empty( $value ) ) : ?>
+												<?php if ( $i !== 0 ) : ?>, <br><?php endif; ?>
+												<?php echo esc_html( stripslashes( $value ) ); ?>
+												<?php $i++; ?>
+											<?php endif; ?>
+										<?php endforeach; ?>
+
+										<?php if ( 0 === $i ) : ?>
+											<span>-</span>
+										<?php endif; ?>
+
+									<?php else : ?>
+										<?php echo esc_html( stripslashes( $field ) ); ?>
+									<?php endif; ?>
+
+								<?php else : ?>
 									<?php echo esc_html( stripslashes( $field ) ); ?>
-								<?php } ?>
-							<?php } else { ?>
+								<?php endif; ?>
+							<?php else : ?>
 								<span>-</span>
-							<?php } ?>
+							<?php endif; ?>
 						</div>
 
 						<?php
