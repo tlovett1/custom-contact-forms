@@ -1154,6 +1154,8 @@ class CCF_Form_Manager {
 									{{ utils.wordChop( utils.getPrettyFieldName( submission.data[column] ), 30 ) }}
 								<# } else if ( utils.isFieldAddress( submission.data[column] ) ) { #>
 									{{ utils.wordChop( utils.getPrettyFieldAddress( submission.data[column] ), 30 ) }}
+								<# } else if ( utils.isFieldEmailConfirm( submission.data[column] ) ) { #>
+									{{ utils.wordChop( utils.getPrettyFieldEmailConfirm( submission.data[column] ), 30 ) }}
 								<# } else { #>
 									<# for ( var key in submission.data[column] ) { if ( submission.data[column].hasOwnProperty( key ) ) {
 										if ( submission.data[column][key] !== '' ) {
@@ -1201,6 +1203,8 @@ class CCF_Form_Manager {
 											{{ utils.getPrettyFieldName( submission.data[column] ) }}
 										<# } else if ( utils.isFieldAddress( submission.data[column] ) ) { #>
 											{{ utils.getPrettyFieldAddress( submission.data[column] ) }}
+										<# } else if ( utils.isFieldEmailConfirm( submission.data[column] ) ) { #>
+											{{ utils.getPrettyFieldEmailConfirm( submission.data[column] ) }}
 										<# } else { #>
 											<# for ( var key in submission.data[column] ) { if ( submission.data[column].hasOwnProperty( key ) ) {
 												if ( submission.data[column][key] !== '' ) {

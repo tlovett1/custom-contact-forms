@@ -1422,9 +1422,11 @@
 						isFieldDate: wp.ccf.utils.isFieldDate,
 						isFieldName: wp.ccf.utils.isFieldName,
 						isFieldAddress: wp.ccf.utils.isFieldAddress,
+						isFieldEmailConfirm: wp.ccf.utils.isFieldEmailConfirm,
 						getPrettyFieldDate: wp.ccf.utils.getPrettyFieldDate,
 						getPrettyFieldAddress: wp.ccf.utils.getPrettyFieldAddress,
-						getPrettyFieldName: wp.ccf.utils.getPrettyFieldName
+						getPrettyFieldName: wp.ccf.utils.getPrettyFieldName,
+						getPrettyFieldEmailConfirm: wp.ccf.utils.getPrettyFieldEmailConfirm
 					}
 				} ) );
 
