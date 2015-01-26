@@ -1149,27 +1149,35 @@ class CCF_Form_Manager {
 						<# if ( submission.data[column] ) { #>
 							<# if ( submission.data[column] instanceof Object ) { var output = '', i = 0; #>
 								<# if ( utils.isFieldDate( submission.data[column] ) ) { #>
-									{{ utils.getPrettyFieldDate( submission.data[column] ) }}
+									{{ utils.wordChop( utils.getPrettyFieldDate( submission.data[column] ), 30 ) }}
 								<# } else if ( utils.isFieldName( submission.data[column] ) ) { #>
-									{{ utils.getPrettyFieldName( submission.data[column] ) }}
+									{{ utils.wordChop( utils.getPrettyFieldName( submission.data[column] ), 30 ) }}
 								<# } else if ( utils.isFieldAddress( submission.data[column] ) ) { #>
 									{{ utils.wordChop( utils.getPrettyFieldAddress( submission.data[column] ), 30 ) }}
 								<# } else { #>
 									<# for ( var key in submission.data[column] ) { if ( submission.data[column].hasOwnProperty( key ) ) {
-										if ( i > 0 ) {
-											output += ', ';
-										}
-										output += submission.data[column][key];
+										if ( submission.data[column][key] !== '' ) {
+											if ( i > 0 ) {
+												output += ', ';
+											}
+											output += submission.data[column][key];
 
-										i++;
+											i++;
+										}
 									} } #>
-									{{ utils.wordChop( output, 30 ) }}
+
+									<# if ( output ) { #>
+										{{ utils.wordChop( output, 30 ) }}
+									<# } else { #>
+										<span>-</span>
+									<# } #>
+
 								<# } #>
 							<# } else { #>
-								{{ utils.wordChop( submission.data[column] ) }}
+								{{ utils.wordChop( submission.data[column], 30 ) }}
 							<# } #>
 						<# } else { #>
-							<span><?php esc_html_e( '-', 'custom-contact-forms' ); ?></span>
+							<span>-</span>
 						<# } #>
 					</td>
 				<# } #>
@@ -1186,7 +1194,7 @@ class CCF_Form_Manager {
 							</div>
 							<div class="field-content">
 								<# if ( submission.data[column] ) { #>
-									<# if ( submission.data[column] instanceof Object ) { #>
+									<# if ( submission.data[column] instanceof Object ) { var output = '', i = 0; #>
 										<# if ( utils.isFieldDate( submission.data[column] ) ) { #>
 											{{ utils.getPrettyFieldDate( submission.data[column] ) }}
 										<# } else if ( utils.isFieldName( submission.data[column] ) ) { #>
@@ -1194,9 +1202,22 @@ class CCF_Form_Manager {
 										<# } else if ( utils.isFieldAddress( submission.data[column] ) ) { #>
 											{{ utils.getPrettyFieldAddress( submission.data[column] ) }}
 										<# } else { #>
-											<# for ( var key in submission.data[column] ) { if ( submission.data[column].hasOwnProperty( key ) ) { #>
-												<# if ( isNaN( key ) ) { #><strong>{{ key }}:</strong> <# } #>{{ submission.data[column][key] }}<br>
-											<# } } #>
+											<# for ( var key in submission.data[column] ) { if ( submission.data[column].hasOwnProperty( key ) ) {
+												if ( submission.data[column][key] !== '' ) {
+													if ( i > 0 ) {
+														output += ', ';
+													}
+													output += submission.data[column][key];
+
+													i++;
+												}
+											} } #>
+
+											<# if ( output ) { #>
+												{{ output }}
+											<# } else { #>
+												-
+											<# } #>
 										<# } #>
 									<# } else { #>
 										{{ submission.data[column] }}
