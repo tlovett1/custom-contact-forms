@@ -1609,8 +1609,10 @@
 			},
 
 			destroy: function() {
-				wp.ccf.dispatcher.off( 'saveFormSettings', this.save );
+				wp.ccf.dispatcher.off( 'saveFormNotifications', this.save );
 				wp.ccf.dispatcher.off( 'mainViewChange', this.save );
+				this.undelegateEvents();
+				this.unbind();
 			},
 
 			toggleNotificationFields: function() {
