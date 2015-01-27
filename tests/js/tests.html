@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="utf-8">
+	<title>CCF JS Tests</title>
+
+	<!-- Load local QUnit. -->
+	<link rel="stylesheet" href="../../bower_components/qunit/qunit/qunit.css" media="screen">
+	<script src="../../bower_components/qunit/qunit/qunit.js"></script>
+
+	<!-- Load dependencies -->
+	<script src="../../bower_components/jquery/dist/jquery.js" type="text/javascript"></script>
+	<script src="../../bower_components/jquery-migrate/jquery-migrate.js" type="text/javascript"></script>
+</head>
+<body>
+
+<h1 id="qunit-header">CCF JS Tests</h1>
+<h2 id="qunit-banner"></h2>
+<div id="qunit-testrunner-toolbar"></div>
+<h2 id="qunit-userAgent"></h2>
+<ol id="qunit-tests"></ol>
+
+<div id="qunit-fixture">
+
+</div>
+
+<!-- Load dependencies -->
+<script src="../../bower_components/underscore/underscore.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+	$.fn.datepicker = function() {
+		return this;
+	};
+
+	var ccfSettings = {
+		"ajaxurl":"http:\/\/examplesite.com\/wp-admin\/admin-ajax.php",
+		"required": "This field is required.",
+		"date_required": "Date is required.",
+		"hour_required": "Hour is required.",
+		"minute_required": "Minute is required.",
+		"am-pm_required": "AM\/PM is required.",
+		"match": "Emails do not match.",
+		"email": "This is not a valid email address.",
+		"recaptcha": "Your reCAPTCHA response was incorrect.",
+		"recaptcha_theme": "light",
+		"phone": "This is not a valid phone number.",
+		"digits": "This phone number is not 10 digits",
+		"hour": "This is not a valid hour.",
+		"date": "This date is not valid.",
+		"minute": "This is not a valid minute.",
+		"website": "This is not a valid URL. URL's must start with http(s):\/\/"
+	};
+</script>
+
+<!-- Load local lib and tests. -->
+<script src="../../js/form.js?v=4"></script>
+<script src="test-form-errors.js"></script>
+</body>
+</html>

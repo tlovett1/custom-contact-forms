@@ -18,9 +18,7 @@ module.exports = function ( grunt ) {
 			}
 		},
 		jshint: {
-			options: {
-				smarttabs: true
-			},
+			options: grunt.file.readJSON( '.jshintrc' ),
 			all: ['js/*', 'js/manager/*']
 		},
 		sass: {
@@ -46,6 +44,9 @@ module.exports = function ( grunt ) {
 				}]
 			}
 		},
+		qunit: {
+			all: [ 'tests/js/*.html' ]
+		},
 		watch: {
 			files: [
 				'js/*',
@@ -61,5 +62,7 @@ module.exports = function ( grunt ) {
 	grunt.loadNpmTasks( 'grunt-contrib-cssmin' );
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks( 'grunt-contrib-watch' );
+	grunt.loadNpmTasks( 'grunt-contrib-qunit' );
 	grunt.registerTask( 'default', ['jshint', 'concat:dist', 'uglify:js', 'sass', 'cssmin:dist'] );
+	grunt.registerTask( 'test', [ 'qunit:all' ] );
 };

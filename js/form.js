@@ -267,10 +267,7 @@
 
 	wp.ccf.validators.radio = wp.ccf.validators.radio || choiceValidator;
 
-	/**
-	 * Register listeners on DOM
-	 */
-	$( document ).ready( function() {
+	wp.ccf.setupDOM = wp.ccf.setupDOM || function() {
 		var datepickers = document.querySelectorAll( '.ccf-datepicker' );
 
 		for ( var i = 0; i < datepickers.length; i++ ) {
@@ -320,7 +317,12 @@
 						}
 					});
 
+					var $form = $( this.querySelectorAll( '.ccf-form' )[0] );
+
 					if ( errors.length ) {
+						// Trigger errors, mostly for unit testing
+						$form.trigger( 'ccfFormError', errors );
+
 						var docViewTop = $( window ).scrollTop();
 						var docViewBottom = docViewTop + $( window ).height();
 
@@ -336,7 +338,8 @@
 							}, 500 );
 						}
 					} else {
-						var $form = $( this.querySelectorAll( '.ccf-form' )[0] );
+						// Notify form complete, mostly for unit testing
+						$form.trigger( 'ccfFormSuccess' );
 
 						form.className = form.className.replace( / loading/i, '' ) + ' loading';
 
@@ -374,5 +377,10 @@
 
 			});
 		}
-	});
+	};
+
+	/**
+	 * Register listeners on DOM
+	 */
+	$( document ).ready( wp.ccf.setupDOM );
 })( jQuery, ccfSettings );
