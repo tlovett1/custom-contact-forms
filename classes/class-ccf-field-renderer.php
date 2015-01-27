@@ -411,10 +411,6 @@ class CCF_Field_Renderer {
 					$line_two_post_value = $_POST['ccf_field_' . $slug]['line_two'];
 				}
 
-				if ( ! empty( $_POST['ccf_field_' . $slug]['line_two'] ) ) {
-					$line_two_post_value = $_POST['ccf_field_' . $slug]['line_two'];
-				}
-
 				if ( ! empty( $_POST['ccf_field_' . $slug]['city'] ) ) {
 					$city_post_value = $_POST['ccf_field_' . $slug]['city'];
 				}
