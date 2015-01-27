@@ -1,10 +1,13 @@
 {
   "name": "custom-contact-forms",
   "dependencies": {
-    "moment": "~2.9.0",
-	"jquery": "~2.1.1",
-	"underscore": "~1.6.0",
-	"jquery-migrate": "~1.2.1",
-	"qunit": "~1.17.1"
+    "moment": "~2.9.0"
+  },
+  "devDependencies": {
+    "jquery": "~2.1.1",
+    "underscore": "~1.6.0",
+    "jquery-migrate": "~1.2.1",
+    "qunit": "~1.17.1",
+	"moment": "~2.9.0"
   }
 }
