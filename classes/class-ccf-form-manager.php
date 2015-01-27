@@ -190,16 +190,8 @@ class CCF_Form_Manager {
 
 				<p class="email-notification-from-field">
 					<label for="ccf_form_email_notification_from_field"><?php esc_html_e( 'Pull "From" Email Dynamically from Field:', 'custom-contact-forms' ); ?></label>
-					<# if ( emailFields.length < 1 ) { #>
-						<strong><?php esc_html_e( 'There are no email fields in your form.', 'custom-contact-forms' ); ?></strong>
-						<input type="hidden" name="email_notification_from_field" value="" class="form-email-notification-from-field">
-					<# } else { #>
-						<select name="email_notification_from_field" class="form-email-notification-from-field" id="ccf_form_email_notification_from_field">
-							<# _.each( emailFields, function( field ) { #>
-								<option <# if ( field.get( 'slug' ) === form.emailNotificationFromField ) { #>selected<# }#>>{{ field.get( 'slug' ) }}</option>
-							<# }); #>
-						</select>
-					<# } #>
+					<select name="email_notification_from_field" class="form-email-notification-from-field" id="ccf_form_email_notification_from_field">
+					</select>
 				</p>
 			</div>
 		</script>
@@ -1327,6 +1319,7 @@ class CCF_Form_Manager {
 				'postsPerPage' => (int) get_option( 'posts_per_page' ),
 				'structureFieldLabels' => $structure_field_labels,
 				'specialFieldLabels' => $special_field_labels,
+				'noEmailFields' => esc_html__( 'You have no email fields', 'custom-contact-forms' ),
 				'invalidDate' => esc_html__( 'Invalid date', 'custom-contact-forms' ),
 				'allLabels' => array_merge( $field_labels, $structure_field_labels, $special_field_labels ),
 				'thickboxTitle' => esc_html__( 'Form Submission', 'custom-contact-forms' ),
