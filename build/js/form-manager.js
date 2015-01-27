@@ -552,7 +552,8 @@
 		{
 			defaults: function() {
 				var defaults = {
-					type: 'website'
+					type: 'website',
+					placeholder: 'http://'
 				};
 
 				return _.defaults( defaults, this.constructor.__super__.defaults() );
