@@ -378,7 +378,6 @@
 			var $form = $('.ccf-form' );
 
 			$form.on( 'ccfFormError', function() {
-				console.log( arguments );
 				equal( arguments.length, 2, 'Form submitted with one error field' );
 
 				var errors = arguments[1].errors;
