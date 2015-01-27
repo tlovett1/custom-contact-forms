@@ -26,8 +26,18 @@
 				done();
 			});
 
+			var server = sinon.fakeServer.create();
+			server.respondWith(
+				'POST',
+				'http://example.com/wp-admin/admin-ajax.php',
+				[ 200, { 'Content-Type': 'application/json' }, JSON.stringify( { woot: true } ) ]
+			);
+
 			// Submit form
 			form.querySelectorAll( '.ccf-submit-button' )[0].click();
+
+			server.respond();
+			server.restore();
 		});
 	});
 
@@ -46,8 +56,18 @@
 				done();
 			});
 
+			var server = sinon.fakeServer.create();
+			server.respondWith(
+				'POST',
+				'http://example.com/wp-admin/admin-ajax.php',
+				[ 200, { 'Content-Type': 'application/json' }, JSON.stringify( { woot: true } ) ]
+			);
+
 			// Submit form
 			$form.submit();
+
+			server.respond();
+			server.restore();
 		});
 	});
 
@@ -70,8 +90,18 @@
 				done();
 			});
 
+			var server = sinon.fakeServer.create();
+			server.respondWith(
+				'POST',
+				'http://example.com/wp-admin/admin-ajax.php',
+				[ 200, { 'Content-Type': 'application/json' }, JSON.stringify( { woot: true } ) ]
+			);
+
 			// Submit form
 			$form.submit();
+
+			server.respond();
+			server.restore();
 		});
 	});
 
@@ -93,8 +123,18 @@
 				done();
 			});
 
+			var server = sinon.fakeServer.create();
+			server.respondWith(
+				'POST',
+				'http://example.com/wp-admin/admin-ajax.php',
+				[ 200, { 'Content-Type': 'application/json' }, JSON.stringify( { woot: true } ) ]
+			);
+
 			// Submit form
 			$form.submit();
+
+			server.respond();
+			server.restore();
 		});
 	});
 
@@ -118,8 +158,18 @@
 				done();
 			});
 
+			var server = sinon.fakeServer.create();
+			server.respondWith(
+				'POST',
+				'http://example.com/wp-admin/admin-ajax.php',
+				[ 200, { 'Content-Type': 'application/json' }, JSON.stringify( { woot: true } ) ]
+			);
+
 			// Submit form
 			$form.submit();
+
+			server.respond();
+			server.restore();
 		});
 	});
 
@@ -141,8 +191,18 @@
 				done();
 			});
 
+			var server = sinon.fakeServer.create();
+			server.respondWith(
+				'POST',
+				'http://example.com/wp-admin/admin-ajax.php',
+				[ 200, { 'Content-Type': 'application/json' }, JSON.stringify( { woot: true } ) ]
+			);
+
 			// Submit form
 			$form.submit();
+
+			server.respond();
+			server.restore();
 		});
 	});
 
@@ -167,8 +227,18 @@
 				done();
 			});
 
+			var server = sinon.fakeServer.create();
+			server.respondWith(
+				'POST',
+				'http://example.com/wp-admin/admin-ajax.php',
+				[ 200, { 'Content-Type': 'application/json' }, JSON.stringify( { woot: true } ) ]
+			);
+
 			// Submit form
 			$form.submit();
+
+			server.respond();
+			server.restore();
 		});
 	});
 
@@ -196,8 +266,18 @@
 				done();
 			});
 
+			var server = sinon.fakeServer.create();
+			server.respondWith(
+				'POST',
+				'http://example.com/wp-admin/admin-ajax.php',
+				[ 200, { 'Content-Type': 'application/json' }, JSON.stringify( { woot: true } ) ]
+			);
+
 			// Submit form
 			$form.submit();
+
+			server.respond();
+			server.restore();
 		});
 	});
 
@@ -226,8 +306,18 @@
 				done();
 			});
 
+			var server = sinon.fakeServer.create();
+			server.respondWith(
+				'POST',
+				'http://example.com/wp-admin/admin-ajax.php',
+				[ 200, { 'Content-Type': 'application/json' }, JSON.stringify( { woot: true } ) ]
+			);
+
 			// Submit form
 			$form.submit();
+
+			server.respond();
+			server.restore();
 		});
 	});
 
@@ -270,8 +360,18 @@
 				done();
 			});
 
+			var server = sinon.fakeServer.create();
+			server.respondWith(
+				'POST',
+				'http://example.com/wp-admin/admin-ajax.php',
+				[ 200, { 'Content-Type': 'application/json' }, JSON.stringify( { woot: true } ) ]
+			);
+
 			// Submit form
 			$form.submit();
+
+			server.respond();
+			server.restore();
 		});
 	});
 
@@ -302,8 +402,18 @@
 				done();
 			});
 
+			var server = sinon.fakeServer.create();
+			server.respondWith(
+				'POST',
+				'http://example.com/wp-admin/admin-ajax.php',
+				[ 200, { 'Content-Type': 'application/json' }, JSON.stringify( { woot: true } ) ]
+			);
+
 			// Submit form
 			$form.submit();
+
+			server.respond();
+			server.restore();
 		});
 	});
 
@@ -336,8 +446,18 @@
 				done();
 			});
 
+			var server = sinon.fakeServer.create();
+			server.respondWith(
+				'POST',
+				'http://example.com/wp-admin/admin-ajax.php',
+				[ 200, { 'Content-Type': 'application/json' }, JSON.stringify( { woot: true } ) ]
+			);
+
 			// Submit form
 			$form.submit();
+
+			server.respond();
+			server.restore();
 		});
 	});
 
@@ -362,8 +482,18 @@
 				done();
 			});
 
+			var server = sinon.fakeServer.create();
+			server.respondWith(
+				'POST',
+				'http://example.com/wp-admin/admin-ajax.php',
+				[ 200, { 'Content-Type': 'application/json' }, JSON.stringify( { woot: true } ) ]
+			);
+
 			// Submit form
 			$form.submit();
+
+			server.respond();
+			server.restore();
 		});
 	});
 
@@ -387,8 +517,18 @@
 				done();
 			});
 
+			var server = sinon.fakeServer.create();
+			server.respondWith(
+				'POST',
+				'http://example.com/wp-admin/admin-ajax.php',
+				[ 200, { 'Content-Type': 'application/json' }, JSON.stringify( { woot: true } ) ]
+			);
+
 			// Submit form
 			$form.submit();
+
+			server.respond();
+			server.restore();
 		});
 	});
 
@@ -424,8 +564,18 @@
 				done();
 			});
 
+			var server = sinon.fakeServer.create();
+			server.respondWith(
+				'POST',
+				'http://example.com/wp-admin/admin-ajax.php',
+				[ 200, { 'Content-Type': 'application/json' }, JSON.stringify( { woot: true } ) ]
+			);
+
 			// Submit form
 			$form.submit();
+
+			server.respond();
+			server.restore();
 		});
 	});
 
