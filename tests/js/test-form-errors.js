@@ -201,4 +201,64 @@
 		});
 	});
 
+	QUnit.test( 'Test simple successful US address field', function( assert ) {
+		var done = assert.async();
+
+		expect( 1 );
+
+		$( qunit ).load( 'forms/simple-us-address-1.html', function() {
+			wp.ccf.setupDOM();
+
+			var $form = $('.ccf-form' );
+
+			var $requiredFields = $form.find( '.field-required .field-input');
+			$requiredFields.each( function() {
+				// make sure we skip state field
+				if ( 'text' === $( this ).attr( 'type' ) ) {
+					$( this).val( 'Test' );
+				}
+			});
+
+			$form.on( 'ccfFormSuccess', function() {
+				ok( true, 'Form submitted without errors' );
+				done();
+			});
+
+			// Submit form
+			$form.submit();
+		});
+	});
+
+	QUnit.test( 'Test simple unsuccessful incomplete US address field', function( assert ) {
+		var done = assert.async();
+
+		expect( 2 );
+
+		$( qunit ).load( 'forms/simple-us-address-1.html', function() {
+			wp.ccf.setupDOM();
+
+			var $form = $('.ccf-form' );
+
+			$form.on( 'ccfFormError', function() {
+				equal( arguments.length, 2, 'Form submitted with one error' );
+
+				var errors = arguments[1].errors;
+
+				var requiredErrorsFound = 0;
+
+				for ( var errorKey in errors ) {
+					if ( errors[errorKey].required ) {
+						requiredErrorsFound++;
+					}
+				}
+
+				equal( requiredErrorsFound, 3, 'Form has three address required errors' );
+				done();
+			});
+
+			// Submit form
+			$form.submit();
+		});
+	});
+
 })( jQuery );
