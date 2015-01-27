@@ -229,6 +229,50 @@
 		});
 	});
 
+	QUnit.test( 'Test simple unsuccessful half-complete US address field', function( assert ) {
+		var done = assert.async();
+
+		expect( 2 );
+
+		$( qunit ).load( 'forms/simple-us-address-1.html', function() {
+			wp.ccf.setupDOM();
+
+			var $form = $('.ccf-form' );
+
+			var $requiredFields = $form.find( '.field-input'),
+				i = 0;
+			$requiredFields.each( function() {
+				if ( i > 1 ) {
+					return false;
+				}
+
+				$( this).val( 'Test' );
+
+				i++;
+			});
+
+			$form.on( 'ccfFormError', function() {
+				equal( arguments.length, 2, 'Form submitted with one error field' );
+
+				var errors = arguments[1].errors;
+
+				var requiredErrorsFound = 0;
+
+				for ( var errorKey in errors ) {
+					if ( errors[errorKey].required ) {
+						requiredErrorsFound++;
+					}
+				}
+
+				equal( requiredErrorsFound, 2, 'Form has two address required errors' );
+				done();
+			});
+
+			// Submit form
+			$form.submit();
+		});
+	});
+
 	QUnit.test( 'Test simple unsuccessful incomplete US address field', function( assert ) {
 		var done = assert.async();
 
@@ -240,7 +284,7 @@
 			var $form = $('.ccf-form' );
 
 			$form.on( 'ccfFormError', function() {
-				equal( arguments.length, 2, 'Form submitted with one error' );
+				equal( arguments.length, 2, 'Form submitted with one error field' );
 
 				var errors = arguments[1].errors;
 
