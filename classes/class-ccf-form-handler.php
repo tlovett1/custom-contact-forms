@@ -229,10 +229,6 @@ class CCF_Form_Handler {
 			$errors['street_required'] = esc_html__( 'This field is required.', 'custom-contact-forms' );
 		}
 
-		if ( $required && empty( $value['line_two'] ) ) {
-			$errors['line_two_required'] = esc_html__( 'This field is required.', 'custom-contact-forms' );
-		}
-
 		if ( $required && empty( $value['city'] ) ) {
 			$errors['city_required'] = esc_html__( 'This field is required.', 'custom-contact-forms' );
 		}
