@@ -11,7 +11,6 @@ if [ "$input_variable" == "y" ]; then
     rm bin/install-wp-tests.sh > /dev/null 2>&1
 
     rm -rf bower_components > /dev/null 2>&1
-    rm -rf js > /dev/null 2>&1
     rm -rf node_modules > /dev/null 2>&1
     rm -rf scss > /dev/null 2>&1
     rm -rf tests > /dev/null 2>&1
