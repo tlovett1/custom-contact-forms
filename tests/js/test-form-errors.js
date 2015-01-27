@@ -429,4 +429,20 @@
 		});
 	});
 
+	// Todo: Test website
+
+	// Todo: Test email
+
+	// Todo: Test dropdown
+
+	// Todo: Test radio
+
+	// Todo: Test date
+
+	// Todo: Test hidden
+
+	// Todo: Test reCAPTCHA
+
+	// Todo: Test paragraph text
+
 })( jQuery );
