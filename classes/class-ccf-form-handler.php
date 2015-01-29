@@ -720,6 +720,7 @@ class CCF_Form_Handler {
 	 *
 	 * @param int $field_id
 	 * @param string $value
+	 * @since 6.0
 	 * @return array
 	 */
 	public function process_field( $field_id, $value ) {
@@ -731,7 +732,8 @@ class CCF_Form_Handler {
 		$type = get_post_meta( $field_id, 'ccf_field_type', true );
 		$required = get_post_meta( $field_id, 'ccf_field_required', true );
 
-		$validator = apply_filters( 'ccf_field_validator', $this->field_callbacks[$type]['validator'], $value, $field_id, $type );
+		$callback = ( ! empty( $this->field_callbacks[$type]['validator'] ) ) ? $this->field_callbacks[$type]['validator'] : null;
+		$validator = apply_filters( 'ccf_field_validator', $callback, $value, $field_id, $type );
 
 		$is_valid = true;
 		if ( ! empty( $validator ) ) {
