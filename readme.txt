@@ -39,6 +39,7 @@ For questions, feature requests, and support concerning the Custom Contact Forms
 * Re-add PHP function to server form via PHP
 * Don't escape form title since it is already escaped
 * Fix notice sent because of missing hidden field validator
+* Remove overflow: auto from fields. Instead use clearing div
 
 = 6.3.3 =
 * Fix address bug where line two was required
