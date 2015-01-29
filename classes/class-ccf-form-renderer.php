@@ -132,7 +132,7 @@ class CCF_Form_Renderer {
 
 					<?php $title = get_the_title( $form_id ); if ( ! empty( $title ) && apply_filters( 'ccf_show_form_title', true, $form_id ) ) : ?>
 						<div class="form-title">
-							<?php echo esc_html( $title ); ?>
+							<?php echo $title; ?>
 						</div>
 					<?php endif; ?>
 
