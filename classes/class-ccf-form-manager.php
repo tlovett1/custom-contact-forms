@@ -726,6 +726,8 @@ class CCF_Form_Manager {
 						<label><?php esc_html_e( 'Manage field choices:', 'custom-contact-forms' ); ?></label>
 						<div class="repeatable-choices">
 						</div>
+
+						<p><?php esc_html_e( "Note: If an option does not have a \"value\", it will not be considered a valid selection if the field is required. The \"value\" is what's read, stored, and displayed in the submission.", 'custom-contact-forms' ); ?></p>
 					</div>
 				</div>
 			</div>
@@ -763,6 +765,8 @@ class CCF_Form_Manager {
 						<label><?php esc_html_e( 'Manage field choices:', 'custom-contact-forms' ); ?></label>
 						<div class="repeatable-choices">
 						</div>
+
+						<p><?php esc_html_e( "Note: If an option does not have a \"value\", it will not be considered a valid selection if the field is required. The \"value\" is what's read, stored, and displayed in the submission.", 'custom-contact-forms' ); ?></p>
 					</div>
 				</div>
 			</div>
@@ -800,6 +804,8 @@ class CCF_Form_Manager {
 						<label><?php esc_html_e( 'Manage field choices:', 'custom-contact-forms' ); ?></label>
 						<div class="repeatable-choices">
 						</div>
+
+						<p><?php esc_html_e( "Note: If an option does not have a \"value\", it will not be considered a valid selection if the field is required. The \"value\" is what's read, stored, and displayed in the submission.", 'custom-contact-forms' ); ?></p>
 					</div>
 				</div>
 			</div>
