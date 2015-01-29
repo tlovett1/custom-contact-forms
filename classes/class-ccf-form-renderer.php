@@ -22,17 +22,13 @@ class CCF_Form_Renderer {
 	/**
 	 * Enqueue scripts for form
 	 *
-	 * @todo only enqueue when a form is present
 	 * @since 6.0
 	 */
 	public function action_wp_enqueue_scripts() {
-		if ( is_single() ) {
-			global $post;
-
-			if ( ! preg_match( '#\[ccf_form id="[0-9]+"\]#i', $post->post_content ) ) {
-				return;
-			}
-		}
+		/**
+		 * Todo: We need away to enqueue all this stuff conditionally. The best idea I
+		 * have is creating a settings page to enter URL's where forms will be added.
+		 */
 
 		if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
 			$css_form_path = '/build/css/form.css';
@@ -192,4 +188,26 @@ class CCF_Form_Renderer {
 
 		return $instance;
 	}
+}
+
+/**
+ * Output a custom contact form.
+ *
+ * @param $form_id
+ * @since 6.3.4
+ * @return string
+ */
+function ccf_output_form( $form_id ) {
+	echo CCF_Form_Renderer::factory()->get_rendered_form( $form_id );
+}
+
+/**
+ * Output a custom contact form. This is function is here for backwards compat.
+ *
+ * @param $form_id
+ * @since 1.0?
+ * @return string
+ */
+function serveCustomContactForm( $form_id ) {
+	ccf_output_form( $form_id );
 }
