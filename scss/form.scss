@@ -1,6 +1,10 @@
 .ccf-form-wrapper {
 	margin: 20px 0;
 
+	.ccf-clear {
+		clear: both;
+	}
+
 	.form-title {
 		font-size: 150%;
 		padding: 20px 0;
@@ -28,7 +32,6 @@
 	.field {
 		margin-bottom: 24px;
 		clear: both;
-		overflow: auto;
 
 		&[data-field-type="recaptcha"],&[data-field-type="dropdown"], &[data-field-type="radio"], &[data-field-type="checkboxes"], &[data-field-type="date"] {
 			.error {
