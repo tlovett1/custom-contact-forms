@@ -668,7 +668,7 @@ class CCF_Form_Handler {
 
 					$message .= ob_get_clean();
 
-					$headers = array( 'MIME-Version: 1.0', 'Content-type: text/html; charset=iso-8859-1' );
+					$headers = array( 'MIME-Version: 1.0', 'Content-type: text/html; charset=utf-8' );
 
 					$email_notification_from_type = get_post_meta( $form_id, 'ccf_form_email_notification_from_type', true );
 
