@@ -190,16 +190,8 @@ class CCF_Form_Manager {
 
 				<p class="email-notification-from-field">
 					<label for="ccf_form_email_notification_from_field"><?php esc_html_e( 'Pull "From" Email Dynamically from Field:', 'custom-contact-forms' ); ?></label>
-					<# if ( emailFields.length < 1 ) { #>
-						<strong><?php esc_html_e( 'There are no email fields in your form.', 'custom-contact-forms' ); ?></strong>
-						<input type="hidden" name="email_notification_from_field" value="" class="form-email-notification-from-field">
-					<# } else { #>
-						<select name="email_notification_from_field" class="form-email-notification-from-field" id="ccf_form_email_notification_from_field">
-							<# _.each( emailFields, function( field ) { #>
-								<option <# if ( field.get( 'slug' ) === form.emailNotificationFromField ) { #>selected<# }#>>{{ field.get( 'slug' ) }}</option>
-							<# }); #>
-						</select>
-					<# } #>
+					<select name="email_notification_from_field" class="form-email-notification-from-field" id="ccf_form_email_notification_from_field">
+					</select>
 				</p>
 			</div>
 		</script>
@@ -781,6 +773,8 @@ class CCF_Form_Manager {
 						<label><?php esc_html_e( 'Manage field choices:', 'custom-contact-forms' ); ?></label>
 						<div class="repeatable-choices">
 						</div>
+
+						<p><?php esc_html_e( "Note: If an option does not have a \"value\", it will not be considered a valid selection if the field is required. The \"value\" is what's read, stored, and displayed in the submission.", 'custom-contact-forms' ); ?></p>
 					</div>
 				</div>
 			</div>
@@ -818,6 +812,8 @@ class CCF_Form_Manager {
 						<label><?php esc_html_e( 'Manage field choices:', 'custom-contact-forms' ); ?></label>
 						<div class="repeatable-choices">
 						</div>
+
+						<p><?php esc_html_e( "Note: If an option does not have a \"value\", it will not be considered a valid selection if the field is required. The \"value\" is what's read, stored, and displayed in the submission.", 'custom-contact-forms' ); ?></p>
 					</div>
 				</div>
 			</div>
@@ -855,6 +851,8 @@ class CCF_Form_Manager {
 						<label><?php esc_html_e( 'Manage field choices:', 'custom-contact-forms' ); ?></label>
 						<div class="repeatable-choices">
 						</div>
+
+						<p><?php esc_html_e( "Note: If an option does not have a \"value\", it will not be considered a valid selection if the field is required. The \"value\" is what's read, stored, and displayed in the submission.", 'custom-contact-forms' ); ?></p>
 					</div>
 				</div>
 			</div>
@@ -1196,27 +1194,37 @@ class CCF_Form_Manager {
 						<# if ( submission.data[column] ) { #>
 							<# if ( submission.data[column] instanceof Object ) { var output = '', i = 0; #>
 								<# if ( utils.isFieldDate( submission.data[column] ) ) { #>
-									{{ utils.getPrettyFieldDate( submission.data[column] ) }}
+									{{ utils.wordChop( utils.getPrettyFieldDate( submission.data[column] ), 30 ) }}
 								<# } else if ( utils.isFieldName( submission.data[column] ) ) { #>
-									{{ utils.getPrettyFieldName( submission.data[column] ) }}
+									{{ utils.wordChop( utils.getPrettyFieldName( submission.data[column] ), 30 ) }}
 								<# } else if ( utils.isFieldAddress( submission.data[column] ) ) { #>
 									{{ utils.wordChop( utils.getPrettyFieldAddress( submission.data[column] ), 30 ) }}
+								<# } else if ( utils.isFieldEmailConfirm( submission.data[column] ) ) { #>
+									{{ utils.wordChop( utils.getPrettyFieldEmailConfirm( submission.data[column] ), 30 ) }}
 								<# } else { #>
 									<# for ( var key in submission.data[column] ) { if ( submission.data[column].hasOwnProperty( key ) ) {
-										if ( i > 0 ) {
-											output += ', ';
-										}
-										output += submission.data[column][key];
+										if ( submission.data[column][key] !== '' ) {
+											if ( i > 0 ) {
+												output += ', ';
+											}
+											output += submission.data[column][key];
 
-										i++;
+											i++;
+										}
 									} } #>
-									{{ utils.wordChop( output, 30 ) }}
+
+									<# if ( output ) { #>
+										{{ utils.wordChop( output, 30 ) }}
+									<# } else { #>
+										<span>-</span>
+									<# } #>
+
 								<# } #>
 							<# } else { #>
-								{{ utils.wordChop( submission.data[column] ) }}
+								{{ utils.wordChop( submission.data[column], 30 ) }}
 							<# } #>
 						<# } else { #>
-							<span><?php esc_html_e( '-', 'custom-contact-forms' ); ?></span>
+							<span>-</span>
 						<# } #>
 					</td>
 				<# } #>
@@ -1233,17 +1241,32 @@ class CCF_Form_Manager {
 							</div>
 							<div class="field-content">
 								<# if ( submission.data[column] ) { #>
-									<# if ( submission.data[column] instanceof Object ) { #>
+									<# if ( submission.data[column] instanceof Object ) { var output = '', i = 0; #>
 										<# if ( utils.isFieldDate( submission.data[column] ) ) { #>
 											{{ utils.getPrettyFieldDate( submission.data[column] ) }}
 										<# } else if ( utils.isFieldName( submission.data[column] ) ) { #>
 											{{ utils.getPrettyFieldName( submission.data[column] ) }}
 										<# } else if ( utils.isFieldAddress( submission.data[column] ) ) { #>
 											{{ utils.getPrettyFieldAddress( submission.data[column] ) }}
+										<# } else if ( utils.isFieldEmailConfirm( submission.data[column] ) ) { #>
+											{{ utils.getPrettyFieldEmailConfirm( submission.data[column] ) }}
 										<# } else { #>
-											<# for ( var key in submission.data[column] ) { if ( submission.data[column].hasOwnProperty( key ) ) { #>
-												<# if ( isNaN( key ) ) { #><strong>{{ key }}:</strong> <# } #>{{ submission.data[column][key] }}<br>
-											<# } } #>
+											<# for ( var key in submission.data[column] ) { if ( submission.data[column].hasOwnProperty( key ) ) {
+												if ( submission.data[column][key] !== '' ) {
+													if ( i > 0 ) {
+														output += ', ';
+													}
+													output += submission.data[column][key];
+
+													i++;
+												}
+											} } #>
+
+											<# if ( output ) { #>
+												{{ output }}
+											<# } else { #>
+												-
+											<# } #>
 										<# } #>
 									<# } else { #>
 										{{ submission.data[column] }}
@@ -1351,6 +1374,7 @@ class CCF_Form_Manager {
 				'structureFieldLabels' => $structure_field_labels,
 				'specialFieldLabels' => $special_field_labels,
 				'maxFileSize' => wp_max_upload_size(),
+				'noEmailFields' => esc_html__( 'You have no email fields', 'custom-contact-forms' ),
 				'invalidDate' => esc_html__( 'Invalid date', 'custom-contact-forms' ),
 				'allLabels' => array_merge( $field_labels, $structure_field_labels, $special_field_labels ),
 				'thickboxTitle' => esc_html__( 'Form Submission', 'custom-contact-forms' ),

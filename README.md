@@ -35,6 +35,14 @@ Select or create a new form and click `Insert into post`:
 
 ![Insert a form into a post](https://tlovett1.files.wordpress.com/2015/01/insert-form.png)
 
+You can also add a form to your theme or plugin using PHP:
+
+```php
+if ( function_exists( 'ccf_output_form' ) ) {
+    ccf_output_form( FORM_ID );
+}
+```
+
 ### Form Settings
 
 Each form has a number of settings that you should understand.

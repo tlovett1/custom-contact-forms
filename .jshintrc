@@ -1,0 +1,10 @@
+{
+	"smarttabs": true,
+	"globals": {
+		"_": false,
+		"Backbone": false,
+		"jQuery": false,
+		"wp": false,
+		"ccfSettings": false
+	}
+}

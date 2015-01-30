@@ -74,12 +74,32 @@
 		return false;
 	};
 
+	wp.ccf.utils.isFieldEmailConfirm = function( value ) {
+		if ( typeof value.email !== 'undefined' || typeof value.confirm !== 'undefined' ) {
+			return true;
+		}
+
+		return false;
+	};
+
 	wp.ccf.utils.isFieldAddress = function( value ) {
 		if ( typeof value.street !== 'undefined' && typeof value.city !== 'undefined' && typeof value.zipcode !== 'undefined' && typeof value.line_two !== 'undefined' ) {
 			return true;
 		}
 
 		return false;
+	};
+
+	wp.ccf.utils.getPrettyFieldEmailConfirm = function( value ) {
+		if ( value.email ) {
+			return value.email;
+		}
+
+		if ( value.confirm ) {
+			return value.confirm;
+		}
+
+		return '-';
 	};
 
 	wp.ccf.utils.getPrettyFieldDate = function( value ) {

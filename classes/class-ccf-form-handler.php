@@ -229,10 +229,6 @@ class CCF_Form_Handler {
 			$errors['street_required'] = esc_html__( 'This field is required.', 'custom-contact-forms' );
 		}
 
-		if ( $required && empty( $value['line_two'] ) ) {
-			$errors['line_two_required'] = esc_html__( 'This field is required.', 'custom-contact-forms' );
-		}
-
 		if ( $required && empty( $value['city'] ) ) {
 			$errors['city_required'] = esc_html__( 'This field is required.', 'custom-contact-forms' );
 		}
@@ -634,7 +630,7 @@ class CCF_Form_Handler {
 
 										<?php $i = 0; foreach ( $field as $value ) : ?>
 											<?php if ( ! empty( $value ) ) : ?>
-												<?php if ( $i !== 0 ) : ?>, <br><?php endif; ?>
+												<?php if ( $i !== 0 ) : ?><br><?php endif; ?>
 												<?php echo esc_html( stripslashes( $value ) ); ?>
 												<?php $i++; ?>
 											<?php endif; ?>
@@ -672,7 +668,7 @@ class CCF_Form_Handler {
 
 					$message .= ob_get_clean();
 
-					$headers = array( 'MIME-Version: 1.0', 'Content-type: text/html; charset=iso-8859-1' );
+					$headers = array( 'MIME-Version: 1.0', 'Content-type: text/html; charset=utf-8' );
 
 					$email_notification_from_type = get_post_meta( $form_id, 'ccf_form_email_notification_from_type', true );
 
@@ -724,6 +720,7 @@ class CCF_Form_Handler {
 	 *
 	 * @param int $field_id
 	 * @param string $value
+	 * @since 6.0
 	 * @return array
 	 */
 	public function process_field( $field_id, $value ) {
@@ -735,7 +732,8 @@ class CCF_Form_Handler {
 		$type = get_post_meta( $field_id, 'ccf_field_type', true );
 		$required = get_post_meta( $field_id, 'ccf_field_required', true );
 
-		$validator = apply_filters( 'ccf_field_validator', $this->field_callbacks[$type]['validator'], $value, $field_id, $type );
+		$callback = ( ! empty( $this->field_callbacks[$type]['validator'] ) ) ? $this->field_callbacks[$type]['validator'] : null;
+		$validator = apply_filters( 'ccf_field_validator', $callback, $value, $field_id, $type );
 
 		$is_valid = true;
 		if ( ! empty( $validator ) ) {

@@ -398,7 +398,6 @@ class CCFTestFieldErrors extends CCFTestBase {
 		CCF_Form_Handler::factory()->submit_listen();
 
 		$this->assertTrue( ! empty( CCF_Form_Handler::factory()->errors_by_form[$form_response->data['ID']][$slug . '1']['street_required'] ) );
-		$this->assertTrue( ! empty( CCF_Form_Handler::factory()->errors_by_form[$form_response->data['ID']][$slug . '1']['line_two_required'] ) );
 		$this->assertTrue( ! empty( CCF_Form_Handler::factory()->errors_by_form[$form_response->data['ID']][$slug . '1']['city_required'] ) );
 		$this->assertTrue( ! empty( CCF_Form_Handler::factory()->errors_by_form[$form_response->data['ID']][$slug . '1']['zipcode_required'] ) );
 		$this->assertTrue( ! empty( CCF_Form_Handler::factory()->errors_by_form[$form_response->data['ID']][$slug . '1']['state_required'] ) );
@@ -406,7 +405,6 @@ class CCFTestFieldErrors extends CCFTestBase {
 		CCF_Form_Handler::factory()->errors_by_form = array();
 
 		$_POST['ccf_field_' . $slug . '1']['street'] = 'test';
-		$_POST['ccf_field_' . $slug . '1']['line_two'] = 'test';
 		$_POST['ccf_field_' . $slug . '1']['state'] = 'test';
 		$_POST['ccf_field_' . $slug . '1']['city'] = 'test';
 		$_POST['ccf_field_' . $slug . '1']['zipcode'] = 'test';
@@ -433,7 +431,6 @@ class CCFTestFieldErrors extends CCFTestBase {
 		CCF_Form_Handler::factory()->submit_listen();
 
 		$this->assertTrue( ! empty( CCF_Form_Handler::factory()->errors_by_form[$form_response->data['ID']][$slug . '1']['street_required'] ) );
-		$this->assertTrue( ! empty( CCF_Form_Handler::factory()->errors_by_form[$form_response->data['ID']][$slug . '1']['line_two_required'] ) );
 		$this->assertTrue( ! empty( CCF_Form_Handler::factory()->errors_by_form[$form_response->data['ID']][$slug . '1']['city_required'] ) );
 		$this->assertTrue( ! empty( CCF_Form_Handler::factory()->errors_by_form[$form_response->data['ID']][$slug . '1']['zipcode_required'] ) );
 		$this->assertTrue( ! empty( CCF_Form_Handler::factory()->errors_by_form[$form_response->data['ID']][$slug . '1']['state_required'] ) );

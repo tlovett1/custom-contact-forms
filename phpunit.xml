@@ -1,5 +1,5 @@
 <phpunit
-        bootstrap="tests/bootstrap.php"
+        bootstrap="tests/php/bootstrap.php"
         backupGlobals="false"
         colors="true"
         convertErrorsToExceptions="true"

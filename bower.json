@@ -1,25 +1,15 @@
 {
   "name": "custom-contact-forms",
-  "homepage": "https://github.com/tlovett1/custom-contact-forms",
-  "authors": [
-    "Taylor Lovett <tlovett88@gmail.com>"
-  ],
-  "description": "Build beautiful custom forms the WordPress way.",
-  "main": "custom-contact-forms.php",
-  "keywords": [
-    "forms",
-    "wordpress",
-    "contact"
-  ],
-  "license": "MIT",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
   "dependencies": {
     "moment": "~2.9.0"
+  },
+  "devDependencies": {
+    "jquery": "~2.1.1",
+    "underscore": "~1.6.0",
+    "jquery-migrate": "~1.2.1",
+    "qunit": "~1.17.1",
+	"moment": "~2.9.0",
+	"sinon-1.9.1": "http://sinonjs.org/releases/sinon-1.9.1.js",
+	"sinon-qunit-1.0.0": "http://sinonjs.org/releases/sinon-qunit-1.0.0.js"
   }
 }

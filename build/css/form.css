@@ -1,5 +1,7 @@
 .ccf-form-wrapper {
   margin: 20px 0; }
+  .ccf-form-wrapper .ccf-clear {
+    clear: both; }
   .ccf-form-wrapper .form-title {
     font-size: 150%;
     padding: 20px 0; }
@@ -18,8 +20,7 @@
     margin: 0 0 0 6px; }
   .ccf-form-wrapper .field {
     margin-bottom: 24px;
-    clear: both;
-    overflow: auto; }
+    clear: both; }
     .ccf-form-wrapper .field[data-field-type="recaptcha"] .error, .ccf-form-wrapper .field[data-field-type="dropdown"] .error, .ccf-form-wrapper .field[data-field-type="radio"] .error, .ccf-form-wrapper .field[data-field-type="checkboxes"] .error, .ccf-form-wrapper .field[data-field-type="date"] .error {
       float: none; }
     .ccf-form-wrapper .field .error {

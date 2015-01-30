@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: contact form, web form, custom contact form, custom forms, captcha form, contact fields, form mailers, forms
 Requires at least: 3.9
 Tested up to: 4.1
-Stable tag: 6.3.2
+Stable tag: 6.3.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -34,6 +34,24 @@ Please refer to [Github](http://github.com/tlovett1/custom-contact-forms) for de
 For questions, feature requests, and support concerning the Custom Contact Forms plugin, please refer to [Github](http://github.com/tlovett1/custom-contact-forms).
 
 == Changelog ==
+
+= 6.3.5 =
+* Encode notification emails in UTF-8
+
+= 6.3.4 =
+* Re-add PHP function to server form via PHP
+* Don't escape form title since it is already escaped
+* Fix notice sent because of missing hidden field validator
+* Remove overflow: auto from fields. Instead use clearing div
+
+= 6.3.3 =
+* Fix address bug where line two was required
+* Add starting QUnit tests
+* Fix performance bug where duplicate event listeners were being created in the form notifications panel
+* Fix required field bug with checkbox fields
+* Restructure unit test folder
+* Add .jshintrc
+* Clean up bower.json and composer.json
 
 = 6.3.2 =
 * Change underscores style templating to account for when ASP tags are turned on.

@@ -411,10 +411,6 @@ class CCF_Field_Renderer {
 					$line_two_post_value = $_POST['ccf_field_' . $slug]['line_two'];
 				}
 
-				if ( ! empty( $_POST['ccf_field_' . $slug]['line_two'] ) ) {
-					$line_two_post_value = $_POST['ccf_field_' . $slug]['line_two'];
-				}
-
 				if ( ! empty( $_POST['ccf_field_' . $slug]['city'] ) ) {
 					$city_post_value = $_POST['ccf_field_' . $slug]['city'];
 				}
@@ -449,12 +445,8 @@ class CCF_Field_Renderer {
 				<label for="ccf_field_<?php echo esc_attr( $slug ); ?>-street" class="sub-label">Street Address</label>
 			</div>
 			<div class="full">
-				<input value="<?php if ( ! empty( $line_two_post_value ) ) echo esc_attr( $line_two_post_value ); ?>" class="<?php if ( ! empty( $errors['line_two_required'] ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> id="ccf_field_<?php echo esc_attr( $slug ); ?>-line_two" type="text" name="ccf_field_<?php echo esc_attr( $slug ); ?>[line_two]">
-				<?php if ( ! empty( $errors['line_two_required'] ) ) : ?>
-					<div class="error"><?php echo esc_html( $errors['line_two_required'] ); ?></div>
-				<?php endif; ?>
+				<input value="<?php if ( ! empty( $line_two_post_value ) ) echo esc_attr( $line_two_post_value ); ?>" class=" field-input" id="ccf_field_<?php echo esc_attr( $slug ); ?>-line_two" type="text" name="ccf_field_<?php echo esc_attr( $slug ); ?>[line_two]">
 				<label for="ccf_field_<?php echo esc_attr( $slug ); ?>-line_two" class="sub-label">Address Line 2</label>
-
 			</div>
 			<div class="left">
 				<input value="<?php if ( ! empty( $city_post_value ) ) echo esc_attr( $city_post_value ); ?>" class="<?php if ( ! empty( $errors['city_required'] ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> type="text" name="ccf_field_<?php echo esc_attr( $slug ); ?>[city]" id="ccf_field_<?php echo esc_attr( $slug ); ?>-city">
@@ -689,6 +681,7 @@ class CCF_Field_Renderer {
 				<?php if ( ! empty( $errors['email'] ) ) : ?>
 					<div class="error"><?php echo esc_html( $errors['email'] ); ?></div>
 				<?php endif; ?>
+				<div class="ccf-clear"></div>
 			<?php } ?>
 		</div>
 
@@ -748,6 +741,7 @@ class CCF_Field_Renderer {
 				<?php endif; ?>
 				<label for="ccf_field_<?php echo esc_attr( $slug ); ?>-last" class="sub-label">Last</label>
 			</div>
+			<div class="ccf-clear"></div>
 		</div>
 
 		<?php
@@ -821,6 +815,7 @@ class CCF_Field_Renderer {
 						<option <?php if ( ! empty( $am_pm_post_value ) ) { selected( 'pm', $am_pm_post_value ); } ?> value="pm"><?php esc_html_e( 'PM', 'custom-contact-forms' ); ?></option>
 					</select>
 				</div>
+				<div class="ccf-clear"></div>
 			<?php } else { ?>
 				<div class="left">
 					<input value="<?php if ( ! empty( $date_post_value ) ) { echo esc_attr( $date_post_value ); } ?>" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> name="ccf_field_<?php echo esc_attr( $slug ); ?>[date]" class="<?php if ( ! empty( $errors['date_required'] ) ) : ?>field-error-input<?php endif; ?> ccf-datepicker field-input" id="ccf_field_<?php echo esc_attr( $slug ); ?>-date" type="text">
@@ -842,6 +837,7 @@ class CCF_Field_Renderer {
 						</select>
 					</div>
 				</div>
+				<div class="ccf-clear"></div>
 			<?php } ?>
 			<?php if ( ! empty( $errors ) ) : foreach ( $errors as $error ) : ?>
 				<div class="error"><?php echo esc_html( $error ); ?></div>
