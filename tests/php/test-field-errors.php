@@ -29,6 +29,73 @@ class CCFTestFieldErrors extends CCFTestBase {
 	}
 
 	/**
+	 * Test file field errors basic
+	 *
+	 * @since 6.4
+	 */
+	public function testFile() {
+		$slug = 'file';
+		$form_response = $this->_createForm( array( array( 'slug' => $slug, 'type' => 'file', 'required' => true ) ) );
+
+		$_POST['form_id'] = $form_response->data['ID'];
+		$_POST['ccf_form'] = true;
+		$_POST['form_nonce'] = wp_create_nonce( 'ccf_form' );
+
+		CCF_Form_Handler::factory()->submit_listen();
+
+		$this->assertTrue( ! empty( CCF_Form_Handler::factory()->errors_by_form[$form_response->data['ID']][$slug . '1']['required'] ) );
+
+		CCF_Form_Handler::factory()->errors_by_form = array();
+
+		$_FILES['ccf_field_' . $slug . '1'] = array(
+			'size' => 1000,
+			'name' => 'test.jpg',
+			'error' => 0,
+		);
+
+		CCF_Form_Handler::factory()->submit_listen();
+
+		$this->assertTrue( empty( CCF_Form_Handler::factory()->errors_by_form[$form_response->data['ID']][$slug . '1'] ) );
+	}
+
+	/**
+	 * Test file field errors advanced
+	 *
+	 * @since 6.4
+	 */
+	public function testFileAdvanced() {
+		$slug = 'file';
+		$form_response = $this->_createForm( array( array( 'slug' => $slug, 'type' => 'file', 'required' => true, 'fileExtensions' => 'jpg, ', 'maxFileSize' => 1, ) ) );
+
+		$_POST['form_id'] = $form_response->data['ID'];
+		$_POST['ccf_form'] = true;
+		$_POST['form_nonce'] = wp_create_nonce( 'ccf_form' );
+
+		$_FILES['ccf_field_' . $slug . '1'] = array(
+			'size' => 10000000,
+			'name' => 'test.png',
+			'error' => 0,
+		);
+
+		CCF_Form_Handler::factory()->submit_listen();
+
+		$this->assertTrue( ! empty( CCF_Form_Handler::factory()->errors_by_form[$form_response->data['ID']][$slug . '1']['file_size'] ) );
+		$this->assertTrue( ! empty( CCF_Form_Handler::factory()->errors_by_form[$form_response->data['ID']][$slug . '1']['file_extension'] ) );
+
+		CCF_Form_Handler::factory()->errors_by_form = array();
+
+		$_FILES['ccf_field_' . $slug . '1'] = array(
+			'size' => 10000000,
+			'name' => 'test.png',
+			'error' => 5,
+		);
+
+		CCF_Form_Handler::factory()->submit_listen();
+
+		$this->assertTrue( ! empty( CCF_Form_Handler::factory()->errors_by_form[$form_response->data['ID']][$slug . '1']['file_upload'] ) );
+	}
+
+	/**
 	 * Test that empty recaptcha field produces an error
 	 *
 	 * @since 6.2

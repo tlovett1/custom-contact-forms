@@ -269,8 +269,7 @@
 				var defaults = {
 					type: 'file',
 					fileExtensions: '',
-					maxFileSize: ccfSettings.maxFileSize,
-					multiFileUpload: false
+					maxFileSize: ccfSettings.maxFileSize
 				};
 
 				return _.defaults( defaults, this.constructor.__super__.defaults() );

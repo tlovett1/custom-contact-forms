@@ -182,6 +182,8 @@
 				this.model.set( 'label', this.el.querySelectorAll( '.field-label' )[0].value );
 				this.model.set( 'className', this.el.querySelectorAll( '.field-class-name' )[0].value );
 				this.model.set( 'required', ( this.el.querySelectorAll( '.field-required' )[0].value == 1 ) ? true : false  );
+				this.model.set( 'fileExtensions', this.el.querySelectorAll( '.field-file-extensions' )[0].value );
+				this.model.set( 'maxFileSize', this.el.querySelectorAll( '.field-max-file-size' )[0].value );
 
 				return this;
 			}
@@ -1472,6 +1474,7 @@
 						wordChop: wp.ccf.utils.wordChop,
 						isFieldDate: wp.ccf.utils.isFieldDate,
 						isFieldName: wp.ccf.utils.isFieldName,
+						isFieldFile: wp.ccf.utils.isFieldFile,
 						isFieldAddress: wp.ccf.utils.isFieldAddress,
 						isFieldEmailConfirm: wp.ccf.utils.isFieldEmailConfirm,
 						getPrettyFieldDate: wp.ccf.utils.getPrettyFieldDate,

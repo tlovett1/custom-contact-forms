@@ -260,6 +260,10 @@
     .ccf-main-modal .ccf-form-pane label {
       display: block;
       margin-bottom: 8px; }
+    .ccf-main-modal .ccf-form-pane .explain {
+      margin-top: 5px;
+      font-style: italic;
+      display: block; }
     .ccf-main-modal .ccf-form-pane .left-sidebar {
       box-sizing: border-box;
       background-color: #f3f3f3;
@@ -279,10 +283,6 @@
         padding: 5px; }
         .ccf-main-modal .ccf-form-pane .left-sidebar .fields .field .right, .ccf-main-modal .ccf-form-pane .left-sidebar .fields .field .preview, .ccf-main-modal .ccf-form-pane .left-sidebar .structure-fields .field .right, .ccf-main-modal .ccf-form-pane .left-sidebar .structure-fields .field .preview, .ccf-main-modal .ccf-form-pane .left-sidebar .special-fields .field .right, .ccf-main-modal .ccf-form-pane .left-sidebar .special-fields .field .preview {
           display: none; }
-      .ccf-main-modal .ccf-form-pane .left-sidebar .explain {
-        margin-top: 5px;
-        font-style: italic;
-        display: block; }
     .ccf-main-modal .ccf-form-pane .form-content {
       box-sizing: border-box;
       position: absolute;

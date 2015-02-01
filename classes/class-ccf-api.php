@@ -98,6 +98,14 @@ class CCF_API extends WP_JSON_Posts {
 				'sanitize' => 'wp_kses_post',
 				'escape' => 'wp_kses_post',
 			),
+			'maxFileSize' => array(
+				'sanitize' => 'intval',
+				'escape' => 'intval',
+			),
+			'fileExtensions' => array(
+				'sanitize' => 'sanitize_text_field',
+				'escape' => 'esc_html',
+			),
 		) );
 
 		$this->choice_attribute_keys = apply_filters( 'ccf_choice_attributes', array(

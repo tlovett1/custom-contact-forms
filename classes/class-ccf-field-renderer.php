@@ -56,6 +56,56 @@ class CCF_Field_Renderer {
 	}
 
 	/**
+	 * Get file field HTML, including any errors from the last form submission. if there is an
+	 * error the field will remember it's last submitted value.
+	 *
+	 * @param int $field_id
+	 * @param int $form_id
+	 * @since 6.4
+	 * @return string
+	 */
+	public function file( $field_id, $form_id ) {
+		$slug = get_post_meta( $field_id, 'ccf_field_slug', true );
+		$label = get_post_meta( $field_id, 'ccf_field_label', true );
+		$value = get_post_meta( $field_id, 'ccf_field_value', true );
+		$placeholder = get_post_meta( $field_id, 'ccf_field_placeholder', true );
+		$required = get_post_meta( $field_id, 'ccf_field_required', true );
+		$class_name = get_post_meta( $field_id, 'ccf_field_className', true );
+
+		$errors = CCF_Form_Handler::factory()->get_errors( $form_id, $slug );
+		$all_errors = CCF_Form_Handler::factory()->get_errors( $form_id );
+
+		if ( ! empty( $all_errors ) ) {
+			if ( apply_filters( 'ccf_show_last_field_value', true, $field_id ) ) {
+				if ( ! empty( $_POST['ccf_field_' . $slug] ) ) {
+					$post_value = $_POST['ccf_field_' . $slug];
+				}
+			}
+		}
+
+		ob_start();
+		?>
+
+		<div data-field-type="file" class="<?php if ( ! empty( $errors ) ) : ?>field-error<?php endif; ?> field <?php echo esc_attr( $slug ); ?> file field-<?php echo (int) $field_id; ?> <?php echo esc_attr( $class_name ); ?> <?php if ( ! empty( $required ) ) : ?>field-required<?php endif; ?>">
+			<label for="ccf_field_<?php echo esc_attr( $slug ); ?>">
+				<?php if ( ! empty( $required ) ) : ?><span class="required">*</span><?php endif; ?>
+				<?php echo esc_html( $label ); ?>
+			</label>
+			
+			<input class="<?php if ( ! empty( $errors ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> type="file" name="ccf_field_<?php echo esc_attr( $slug ); ?>" id="ccf_field_<?php echo esc_attr( $slug ); ?>" placeholder="<?php echo esc_attr( $placeholder ); ?>" value="<?php if ( ! empty( $post_value ) ) { echo esc_attr( $post_value ); } else { echo esc_attr( $value ); } ?>">
+
+			<?php if ( ! empty( $errors ) ) : ?>
+				<?php foreach ( $errors as $error ) : ?>
+					<div class="error"><?php echo esc_html( $error ); ?></div>
+				<?php endforeach; ?>
+			<?php endif; ?>
+		</div>
+
+		<?php
+		return ob_get_clean();
+	}
+
+	/**
 	 * Get reCAPTCHA field HTML, including any errors from the last form submission.
 	 *
 	 * @param int $field_id
@@ -961,6 +1011,9 @@ class CCF_Field_Renderer {
 				break;
 			case 'date':
 				$field_html = $this->date( $field_id, $form_id );
+				break;
+			case 'file':
+				$field_html = $this->file( $field_id, $form_id );
 				break;
 			case 'address':
 				$field_html = $this->address( $field_id, $form_id );

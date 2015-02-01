@@ -48,6 +48,11 @@ class CCF_Form_Manager {
 	 * @since 6.0
 	 */
 	public function print_templates() {
+		$max_upload_size = wp_max_upload_size();
+		if ( ! $max_upload_size ) {
+			$max_upload_size = 0;
+		}
+
 		?>
 
 		<script type="text/html" id="ccf-main-modal-template">
@@ -307,15 +312,9 @@ class CCF_Form_Manager {
 						<input id="ccf-field-file-extensions" class="field-file-extensions" type="text" value="{{ field.fileExtensions }}">
 					</div>
 					<div>
-						<label for="ccf-field-multi-file-upload"><?php esc_html_e( 'Enable Multi-File Upload', 'custom-contact-forms' ); ?></label>
-						<select id="ccf-field-required" class="field-required">
-							<option value="1"><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
-							<option value="0" <# if ( ! field.required ) { #>selected="selected"<# } #>><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
-						</select>
-					</div>
-					<div>
-						<label for="ccf-field-max-file-size"><?php esc_html_e( 'Max File Size:', 'custom-contact-forms' ); ?></label>
+						<label for="ccf-field-max-file-size"><?php esc_html_e( 'Max File Size (in MB):', 'custom-contact-forms' ); ?></label>
 						<input id="ccf-field-max-file-size" class="field-max-file-size" type="text" value="{{ field.maxFileSize }}">
+						<span class="explain"><?php printf( esc_html__( 'Maximum allowed by server is %d MB', 'custom-contact-forms' ), (double) size_format( $max_upload_size ) ); ?></span>
 					</div>
 					<div>
 						<label for="ccf-field-required"><?php esc_html_e( 'Required:', 'custom-contact-forms' ); ?></label>
@@ -878,6 +877,11 @@ class CCF_Form_Manager {
 			<input disabled type="text" placeholder="{{ field.placeholder }}" value="{{ field.value }}">
 		</script>
 
+		<script type="text/html" id="ccf-file-preview-template">
+			<label>{{ field.label }} <# if ( field.required ) { #><span>*</span><# } #></label>
+			<input disabled type="file" placeholder="{{ field.placeholder }}" value="{{ field.value }}">
+		</script>
+
 		<script type="text/html" id="ccf-recaptcha-preview-template">
 			<label>{{ field.label }} <# if ( field.required ) { #><span>*</span><# } #></label>
 			<img class="recaptcha-preview-img" src="<?php echo plugins_url( 'img/recaptcha.png', dirname( __FILE__ )); ?>">
@@ -1201,6 +1205,8 @@ class CCF_Form_Manager {
 									{{ utils.wordChop( utils.getPrettyFieldAddress( submission.data[column] ), 30 ) }}
 								<# } else if ( utils.isFieldEmailConfirm( submission.data[column] ) ) { #>
 									{{ utils.wordChop( utils.getPrettyFieldEmailConfirm( submission.data[column] ), 30 ) }}
+								<# } else if ( utils.isFieldFile( submission.data[column] ) ) { #>
+									<a href="{{ submission.data[column].url }}">{{ submission.data[column].file_name }}</a>
 								<# } else { #>
 									<# for ( var key in submission.data[column] ) { if ( submission.data[column].hasOwnProperty( key ) ) {
 										if ( submission.data[column][key] !== '' ) {
@@ -1250,6 +1256,8 @@ class CCF_Form_Manager {
 											{{ utils.getPrettyFieldAddress( submission.data[column] ) }}
 										<# } else if ( utils.isFieldEmailConfirm( submission.data[column] ) ) { #>
 											{{ utils.getPrettyFieldEmailConfirm( submission.data[column] ) }}
+										<# } else if ( utils.isFieldFile( submission.data[column] ) ) { #>
+											<a href="{{ submission.data[column].url }}">{{ submission.data[column].name }}</a>
 										<# } else { #>
 											<# for ( var key in submission.data[column] ) { if ( submission.data[column].hasOwnProperty( key ) ) {
 												if ( submission.data[column][key] !== '' ) {
@@ -1373,7 +1381,7 @@ class CCF_Form_Manager {
 				'postsPerPage' => (int) get_option( 'posts_per_page' ),
 				'structureFieldLabels' => $structure_field_labels,
 				'specialFieldLabels' => $special_field_labels,
-				'maxFileSize' => wp_max_upload_size(),
+				'maxFileSize' => floor( wp_max_upload_size() / 1000 / 1000 ),
 				'noEmailFields' => esc_html__( 'You have no email fields', 'custom-contact-forms' ),
 				'invalidDate' => esc_html__( 'Invalid date', 'custom-contact-forms' ),
 				'allLabels' => array_merge( $field_labels, $structure_field_labels, $special_field_labels ),

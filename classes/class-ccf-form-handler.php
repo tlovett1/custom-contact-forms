@@ -59,6 +59,10 @@ class CCF_Form_Handler {
 				'sanitizer' => 'sanitize_text_field',
 				'validator' => array( $this, 'is_address' ),
 			),
+			'file' => array(
+				'sanitizer' => array( $this, 'handle_file' ),
+				'validator' => array( $this, 'is_file' ),
+			),
 			'date' => array(
 				'sanitizer' => 'sanitize_text_field',
 				'validator' => array( $this, 'is_date' ),
@@ -76,6 +80,73 @@ class CCF_Form_Handler {
 				'validator' => array( $this, 'not_empty_choiceable' ),
 			),
 		) );
+	}
+
+	public function handle_file( $value, $field_id ) {
+
+		$slug = get_post_meta( $field_id, 'ccf_field_slug', true );
+
+		$form_id = media_handle_upload( 'ccf_field_' . $slug, 0 );
+
+		if ( is_wp_error( $form_id ) ) {
+			return 0;
+		}
+
+		$url = wp_get_attachment_url( $form_id );
+
+		return array(
+			'id' => $form_id,
+			'url' => $url,
+			'file_name' => basename( $url ),
+		);
+	}
+
+	public function is_file( $value, $field_id, $required ) {
+		$slug = get_post_meta( $field_id, 'ccf_field_slug', true );
+		$errors = array();
+
+		if ( $required && empty( $_FILES['ccf_field_' . $slug] ) ) {
+			return array( 'required' => esc_html__( 'This field is required.', 'custom-contact-forms' ) );
+		}
+
+		if ( ! empty( $_FILES['ccf_field_' . $slug]['error'] ) || empty( $_FILES['ccf_field_' . $slug]['size'] ) ) {
+			return array( 'file_upload' => esc_html__( 'An upload error occurred.', 'custom-contact-forms' ) );
+		}
+
+		$extension = pathinfo( $_FILES['ccf_field_' . $slug]['name'], PATHINFO_EXTENSION );
+
+		$valid_extensions = get_post_meta( $field_id, 'ccf_field_fileExtensions', true );
+
+		if ( ! empty( $valid_extensions ) ) {
+			$valid_extensions = str_replace( ';', ',', $valid_extensions );
+			$valid_extensions = explode( ',', $valid_extensions );
+
+			foreach ( $valid_extensions as $key => $ext ) {
+				$ext = trim( $ext );
+
+				if ( empty( $ext ) ) {
+					unset( $valid_extensions[$key] );
+				} else {
+					$valid_extensions[$key] = $ext;
+				}
+			}
+
+			if ( ! empty( $valid_extensions ) && ! in_array( $extension, $valid_extensions ) ) {
+				$errors['file_extension'] = esc_html__( 'File contains an invalid extension.', 'custom-contact-forms' );
+			}
+		}
+
+		$max_file_size = get_post_meta( $field_id, 'ccf_field_maxFileSize', true );
+
+		if ( ! empty( $max_file_size ) && $_FILES['ccf_field_' . $slug]['size'] > $max_file_size ) {
+			$errors['file_size'] = sprintf( esc_html__( 'This file is too big (%d MB max)', 'custom-contact-forms' ), (int) $max_file_size );
+		}
+
+		if ( ! empty( $errors ) ) {
+			return $errors;
+		}
+
+		return true;
 	}
 
 	/**
