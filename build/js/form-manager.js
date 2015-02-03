@@ -2608,13 +2608,17 @@
 		createManager: function() {
 			var SELF = this;
 
+			var managerButton = document.querySelectorAll( '.ccf-open-form-manager')[0];
+
+			if ( ! managerButton ) {
+				return false;
+			}
+
 			_.extend( this.dispatcher, Backbone.Events );
 
 			new wp.ccf.router();
 
 			var single = false;
-
-			var managerButton = document.querySelectorAll( '.ccf-open-form-manager')[0];
 
 			if ( ccfSettings.single ) {
 				single = true;
