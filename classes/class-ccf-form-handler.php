@@ -59,6 +59,10 @@ class CCF_Form_Handler {
 				'sanitizer' => 'sanitize_text_field',
 				'validator' => array( $this, 'is_address' ),
 			),
+			'file' => array(
+				'sanitizer' => array( $this, 'handle_file' ),
+				'validator' => array( $this, 'is_file' ),
+			),
 			'date' => array(
 				'sanitizer' => 'sanitize_text_field',
 				'validator' => array( $this, 'is_date' ),
@@ -76,6 +80,96 @@ class CCF_Form_Handler {
 				'validator' => array( $this, 'not_empty_choiceable' ),
 			),
 		) );
+	}
+
+	/**
+	 * Upload file and return relevant attachment info
+	 *
+	 * @param string $value
+	 * @param int $field_id
+	 * @since 6.4
+	 * @return array|int
+	 */
+	public function handle_file( $value, $field_id ) {
+
+		$slug = get_post_meta( $field_id, 'ccf_field_slug', true );
+
+		$file_id = media_handle_upload( 'ccf_field_' . $slug, 0 );
+
+		if ( is_wp_error( $file_id ) ) {
+			return 0;
+		}
+
+		$url = wp_get_attachment_url( $file_id );
+
+		return array(
+			'id' => $file_id,
+			'url' => $url,
+			'file_name' => basename( $url ),
+		);
+	}
+
+	/**
+	 * Validate a file upload.
+	 *
+	 * @param $value
+	 * @param $field_id
+	 * @param $required
+	 * @since 6.4
+	 * @return array|bool
+	 */
+	public function is_file( $value, $field_id, $required ) {
+		$slug = get_post_meta( $field_id, 'ccf_field_slug', true );
+		$errors = array();
+
+		if ( $required ) {
+			if ( empty( $_FILES['ccf_field_' . $slug] ) || 4 === $_FILES['ccf_field_' . $slug]['error'] ) {
+				return array( 'required' => esc_html__( 'This field is required.', 'custom-contact-forms' ) );
+			}
+		} else {
+			if ( ! empty( $_FILES['ccf_field_' . $slug] ) && 4 === $_FILES['ccf_field_' . $slug]['error'] ) {
+				return true;
+			}
+		}
+
+		$max_file_size = get_post_meta( $field_id, 'ccf_field_maxFileSize', true );
+
+		if ( ! empty( $max_file_size ) && $_FILES['ccf_field_' . $slug]['size'] > ( $max_file_size * 1000 * 1000 ) || 1 === $_FILES['ccf_field_' . $slug]['error'] ) {
+			$errors['file_size'] = sprintf( esc_html__( 'This file is too big (%d MB max)', 'custom-contact-forms' ), (int) $max_file_size );
+		}
+
+		if ( ! empty( $_FILES['ccf_field_' . $slug]['error'] ) || empty( $_FILES['ccf_field_' . $slug]['size'] ) ) {
+			return array( 'file_upload' => esc_html__( 'An upload error occurred.', 'custom-contact-forms' ) );
+		}
+
+		$extension = strtolower( pathinfo( $_FILES['ccf_field_' . $slug]['name'], PATHINFO_EXTENSION ) );
+
+		$valid_extensions = get_post_meta( $field_id, 'ccf_field_fileExtensions', true );
+
+		if ( ! empty( $valid_extensions ) ) {
+			$valid_extensions = strtolower( str_replace( ';', ',', $valid_extensions ) );
+			$valid_extensions = explode( ',', $valid_extensions );
+
+			foreach ( $valid_extensions as $key => $ext ) {
+				$ext = trim( $ext );
+
+				if ( empty( $ext ) ) {
+					unset( $valid_extensions[$key] );
+				} else {
+					$valid_extensions[$key] = $ext;
+				}
+			}
+
+			if ( ! empty( $valid_extensions ) && ! in_array( $extension, $valid_extensions ) ) {
+				$errors['file_extension'] = esc_html__( 'File contains an invalid extension.', 'custom-contact-forms' );
+			}
+		}
+
+		if ( ! empty( $errors ) ) {
+			return $errors;
+		}
+
+		return true;
 	}
 
 	/**
@@ -467,23 +561,14 @@ class CCF_Form_Handler {
 			return;
 		}
 
-		$submission = $this->process_submission();
+		$submission_response = $this->process_submission();
 
 		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-			$response = false;
-
-			if ( is_array( $submission ) ) {
-				$response = $submission;
-				$response['success'] = true;
-			}
-
-			wp_send_json( $response );
+			wp_send_json( $submission_response );
 		} else {
-			if ( is_array( $submission ) ) {
-				if ( ! empty( $submission['completion_redirect_url'] ) ) {
-					wp_redirect( esc_url_raw( $submission['completion_redirect_url'] ) );
-					exit;
-				}
+			if ( ! empty( $submission_response['completion_redirect_url'] ) ) {
+				wp_redirect( esc_url_raw( $submission_response['completion_redirect_url'] ) );
+				exit;
 			}
 		}
 	}
@@ -491,16 +576,16 @@ class CCF_Form_Handler {
 	/**
 	 * Process a form submission
 	 *
-	 * @return array|bool
+	 * @return array
 	 */
 	function process_submission() {
 		if ( ! empty( $_POST['my_information'] ) ) {
 			// Honeypot
-			return false;
+			return array( 'error' => 'honeypot', 'success' => false, );
 		}
 
 		if ( empty( $_POST['form_nonce'] ) || ! wp_verify_nonce( $_POST['form_nonce'], 'ccf_form' ) ) {
-			return false;
+			return array( 'error' => 'nonce', 'success' => false, );
 		}
 
 		$form_id = (int) $_POST['form_id'];
@@ -508,7 +593,7 @@ class CCF_Form_Handler {
 		$form = get_post( $form_id );
 
 		if ( empty( $form ) ) {
-			return false;
+			return array( 'error' => 'missing_form', 'success' => false, );
 		}
 
 		$fields = get_post_meta( $form->ID, 'ccf_attached_fields', true );
@@ -520,6 +605,7 @@ class CCF_Form_Handler {
 
 		$skip_fields = apply_filters( 'ccf_skip_fields', array( 'html', 'section-header' ), $form->ID );
 		$save_skip_fields = apply_filters( 'ccf_save_skip_fields', array( 'recaptcha' ), $form->ID );
+		$file_ids = array();
 
 		foreach ( $fields as $field_id ) {
 			$field_id = (int) $field_id;
@@ -550,13 +636,17 @@ class CCF_Form_Handler {
 			} else {
 				if ( ! in_array( $type, $save_skip_fields ) ) {
 					$submission[$slug] = $validation['sanitized_value'];
+
+					if ( 'file' === $type ) {
+						$file_ids[] = $submission[$slug]['id'];
+					}
 				}
 			}
 		}
 
 		if ( ! empty( $errors ) ) {
 			$this->errors_by_form[$form_id] = $errors;
-			return false;
+			return array( 'error' => 'invalid_fields', 'field_errors' => $errors, 'success' => false, );
 		} else {
 			$submission_id = wp_insert_post( array(
 				'post_status' => 'publish',
@@ -567,11 +657,19 @@ class CCF_Form_Handler {
 
 			if ( ! is_wp_error( $submission_id ) ) {
 				update_post_meta( $submission_id, 'ccf_submission_data', $submission );
+
+				foreach ( $file_ids as $file_id ) {
+					wp_update_post( array(
+						'ID' => $file_id,
+						'post_parent' => $submission_id,
+					) );
+				}
 			} else {
-				return false;
+				return array( 'error' => 'could_not_create_submission', 'success' => false, );
 			}
 
 			$output = array(
+				'success' => true,
 				'action_type' => get_post_meta( $form_id, 'ccf_form_completion_action_type', true ),
 			);
 

@@ -90,6 +90,14 @@
 		return false;
 	};
 
+	wp.ccf.utils.isFieldFile = function( value ) {
+		if ( typeof value.id !== 'undefined' && typeof value.url !== 'undefined' && typeof value.file_name !== 'undefined' ) {
+			return true;
+		}
+
+		return false;
+	};
+
 	wp.ccf.utils.getPrettyFieldEmailConfirm = function( value ) {
 		if ( value.email ) {
 			return value.email;
@@ -504,6 +512,20 @@
 			defaults: function() {
 				var defaults = {
 					type: 'single-line-text'
+				};
+
+				return _.defaults( defaults, this.constructor.__super__.defaults() );
+			}
+		}
+	);
+
+	wp.ccf.models.Fields.file = wp.ccf.models.Fields.file || wp.ccf.models.StandardField.extend(
+		{
+			defaults: function() {
+				var defaults = {
+					type: 'file',
+					fileExtensions: '',
+					maxFileSize: ccfSettings.maxFileSize
 				};
 
 				return _.defaults( defaults, this.constructor.__super__.defaults() );
@@ -995,6 +1017,28 @@
 				this.model.set( 'placeholder', this.el.querySelectorAll( '.field-placeholder' )[0].value );
 				this.model.set( 'className', this.el.querySelectorAll( '.field-class-name' )[0].value );
 				this.model.set( 'required', ( this.el.querySelectorAll( '.field-required' )[0].value == 1 ) ? true : false  );
+
+				return this;
+			}
+		}
+	);
+
+	wp.ccf.views.Fields.file = wp.ccf.views.Fields.file || wp.ccf.views.FieldBase.extend(
+		{
+			template: wp.ccf.utils.template( 'ccf-file-template' ),
+
+			initialize: function() {
+
+			},
+
+			saveField: function() {
+
+				this.model.set( 'slug', this.el.querySelectorAll( '.field-slug' )[0].value );
+				this.model.set( 'label', this.el.querySelectorAll( '.field-label' )[0].value );
+				this.model.set( 'className', this.el.querySelectorAll( '.field-class-name' )[0].value );
+				this.model.set( 'required', ( this.el.querySelectorAll( '.field-required' )[0].value == 1 ) ? true : false  );
+				this.model.set( 'fileExtensions', this.el.querySelectorAll( '.field-file-extensions' )[0].value );
+				this.model.set( 'maxFileSize', this.el.querySelectorAll( '.field-max-file-size' )[0].value );
 
 				return this;
 			}
@@ -2285,6 +2329,7 @@
 						wordChop: wp.ccf.utils.wordChop,
 						isFieldDate: wp.ccf.utils.isFieldDate,
 						isFieldName: wp.ccf.utils.isFieldName,
+						isFieldFile: wp.ccf.utils.isFieldFile,
 						isFieldAddress: wp.ccf.utils.isFieldAddress,
 						isFieldEmailConfirm: wp.ccf.utils.isFieldEmailConfirm,
 						getPrettyFieldDate: wp.ccf.utils.getPrettyFieldDate,

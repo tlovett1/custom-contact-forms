@@ -386,6 +386,12 @@
 			margin-bottom: 8px;
 		}
 
+		.explain {
+			margin-top: 5px;
+			font-style: italic;
+			display: block;
+		}
+
 		.left-sidebar {
 			box-sizing: border-box;
 			background-color: #f3f3f3;
@@ -410,12 +416,6 @@
 				.field .right, .field .preview {
 					display: none;
 				}
-			}
-
-			.explain {
-				margin-top: 5px;
-				font-style: italic;
-				display: block;
 			}
 		}
 

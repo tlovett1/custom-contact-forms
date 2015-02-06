@@ -90,6 +90,14 @@
 		return false;
 	};
 
+	wp.ccf.utils.isFieldFile = function( value ) {
+		if ( typeof value.id !== 'undefined' && typeof value.url !== 'undefined' && typeof value.file_name !== 'undefined' ) {
+			return true;
+		}
+
+		return false;
+	};
+
 	wp.ccf.utils.getPrettyFieldEmailConfirm = function( value ) {
 		if ( value.email ) {
 			return value.email;
