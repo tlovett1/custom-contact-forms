@@ -33,6 +33,21 @@
 		}
 	}
 
+	.error {
+		color: #ff0000;
+		float: right;
+		font-size: 85%;
+		margin-top: 3px;
+
+		&.match-error, &.email-error, &.unknown-error {
+			float: none;
+		}
+
+		&.right-error {
+			float: right;
+		}
+	}
+
 	.field {
 		margin-bottom: 24px;
 		clear: both;
@@ -40,21 +55,6 @@
 		&[data-field-type="recaptcha"],&[data-field-type="file"],&[data-field-type="dropdown"], &[data-field-type="radio"], &[data-field-type="checkboxes"], &[data-field-type="date"] {
 			.error {
 				float: none;
-			}
-		}
-
-		.error {
-			color: #ff0000;
-			float: right;
-			font-size: 85%;
-			margin-top: 3px;
-
-			&.match-error, &.email-error {
-				float: none;
-			}
-
-			&.right-error {
-				float: right;
 			}
 		}
 

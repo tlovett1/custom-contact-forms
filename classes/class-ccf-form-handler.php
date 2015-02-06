@@ -474,7 +474,7 @@ class CCF_Form_Handler {
 				$errors['hour_required'] = esc_html__( 'Hour is required.', 'custom-contact-forms' );
 			} else {
 				if ( ! empty( $value['hour'] ) && ! preg_match( '#^([0-9]|/)+$#', $value['hour'] ) ) {
-					$errors['date'] = esc_html__( 'This is not a valid hour.', 'custom-contact-forms' );
+					$errors['hour'] = esc_html__( 'This is not a valid hour.', 'custom-contact-forms' );
 				}
 			}
 
@@ -482,7 +482,7 @@ class CCF_Form_Handler {
 				$errors['minutes_required'] = esc_html__( 'Minute is required.', 'custom-contact-forms' );
 			} else {
 				if ( ! empty( $value['minute'] ) && ! preg_match( '#^[0-9]+$#', $value['minute'] ) ) {
-					$errors['hour'] = esc_html__( 'This is not a valid minute.', 'custom-contact-forms' );
+					$errors['minute'] = esc_html__( 'This is not a valid minute.', 'custom-contact-forms' );
 				}
 			}
 

@@ -26,18 +26,8 @@
 				done();
 			});
 
-			var server = sinon.fakeServer.create();
-			server.respondWith(
-				'POST',
-				'http://example.com/wp-admin/admin-ajax.php',
-				[ 200, { 'Content-Type': 'application/json' }, JSON.stringify( { woot: true } ) ]
-			);
-
 			// Submit form
 			form.querySelectorAll( '.ccf-submit-button' )[0].click();
-
-			server.respond();
-			server.restore();
 		});
 	});
 
@@ -56,18 +46,8 @@
 				done();
 			});
 
-			var server = sinon.fakeServer.create();
-			server.respondWith(
-				'POST',
-				'http://example.com/wp-admin/admin-ajax.php',
-				[ 200, { 'Content-Type': 'application/json' }, JSON.stringify( { woot: true } ) ]
-			);
-
 			// Submit form
-			$form.submit();
-
-			server.respond();
-			server.restore();
+			$form.find( '.ccf-submit-button').click();
 		});
 	});
 
@@ -90,18 +70,8 @@
 				done();
 			});
 
-			var server = sinon.fakeServer.create();
-			server.respondWith(
-				'POST',
-				'http://example.com/wp-admin/admin-ajax.php',
-				[ 200, { 'Content-Type': 'application/json' }, JSON.stringify( { woot: true } ) ]
-			);
-
 			// Submit form
-			$form.submit();
-
-			server.respond();
-			server.restore();
+			$form.find( '.ccf-submit-button' ).click();
 		});
 	});
 
@@ -123,18 +93,8 @@
 				done();
 			});
 
-			var server = sinon.fakeServer.create();
-			server.respondWith(
-				'POST',
-				'http://example.com/wp-admin/admin-ajax.php',
-				[ 200, { 'Content-Type': 'application/json' }, JSON.stringify( { woot: true } ) ]
-			);
-
 			// Submit form
-			$form.submit();
-
-			server.respond();
-			server.restore();
+			$form.find( '.ccf-submit-button' ).click();
 		});
 	});
 
@@ -158,18 +118,8 @@
 				done();
 			});
 
-			var server = sinon.fakeServer.create();
-			server.respondWith(
-				'POST',
-				'http://example.com/wp-admin/admin-ajax.php',
-				[ 200, { 'Content-Type': 'application/json' }, JSON.stringify( { woot: true } ) ]
-			);
-
 			// Submit form
-			$form.submit();
-
-			server.respond();
-			server.restore();
+			$form.find( '.ccf-submit-button' ).click();
 		});
 	});
 
@@ -191,18 +141,8 @@
 				done();
 			});
 
-			var server = sinon.fakeServer.create();
-			server.respondWith(
-				'POST',
-				'http://example.com/wp-admin/admin-ajax.php',
-				[ 200, { 'Content-Type': 'application/json' }, JSON.stringify( { woot: true } ) ]
-			);
-
 			// Submit form
-			$form.submit();
-
-			server.respond();
-			server.restore();
+			$form.find( '.ccf-submit-button' ).click();
 		});
 	});
 
@@ -227,18 +167,8 @@
 				done();
 			});
 
-			var server = sinon.fakeServer.create();
-			server.respondWith(
-				'POST',
-				'http://example.com/wp-admin/admin-ajax.php',
-				[ 200, { 'Content-Type': 'application/json' }, JSON.stringify( { woot: true } ) ]
-			);
-
 			// Submit form
-			$form.submit();
-
-			server.respond();
-			server.restore();
+			$form.find( '.ccf-submit-button' ).click();
 		});
 	});
 
@@ -266,18 +196,8 @@
 				done();
 			});
 
-			var server = sinon.fakeServer.create();
-			server.respondWith(
-				'POST',
-				'http://example.com/wp-admin/admin-ajax.php',
-				[ 200, { 'Content-Type': 'application/json' }, JSON.stringify( { woot: true } ) ]
-			);
-
 			// Submit form
-			$form.submit();
-
-			server.respond();
-			server.restore();
+			$form.find( '.ccf-submit-button' ).click();
 		});
 	});
 
@@ -306,18 +226,8 @@
 				done();
 			});
 
-			var server = sinon.fakeServer.create();
-			server.respondWith(
-				'POST',
-				'http://example.com/wp-admin/admin-ajax.php',
-				[ 200, { 'Content-Type': 'application/json' }, JSON.stringify( { woot: true } ) ]
-			);
-
 			// Submit form
-			$form.submit();
-
-			server.respond();
-			server.restore();
+			$form.find( '.ccf-submit-button' ).click();
 		});
 	});
 
@@ -360,18 +270,8 @@
 				done();
 			});
 
-			var server = sinon.fakeServer.create();
-			server.respondWith(
-				'POST',
-				'http://example.com/wp-admin/admin-ajax.php',
-				[ 200, { 'Content-Type': 'application/json' }, JSON.stringify( { woot: true } ) ]
-			);
-
 			// Submit form
-			$form.submit();
-
-			server.respond();
-			server.restore();
+			$form.find( '.ccf-submit-button' ).click();
 		});
 	});
 
@@ -402,18 +302,8 @@
 				done();
 			});
 
-			var server = sinon.fakeServer.create();
-			server.respondWith(
-				'POST',
-				'http://example.com/wp-admin/admin-ajax.php',
-				[ 200, { 'Content-Type': 'application/json' }, JSON.stringify( { woot: true } ) ]
-			);
-
 			// Submit form
-			$form.submit();
-
-			server.respond();
-			server.restore();
+			$form.find( '.ccf-submit-button' ).click();
 		});
 	});
 
@@ -446,18 +336,8 @@
 				done();
 			});
 
-			var server = sinon.fakeServer.create();
-			server.respondWith(
-				'POST',
-				'http://example.com/wp-admin/admin-ajax.php',
-				[ 200, { 'Content-Type': 'application/json' }, JSON.stringify( { woot: true } ) ]
-			);
-
 			// Submit form
-			$form.submit();
-
-			server.respond();
-			server.restore();
+			$form.find( '.ccf-submit-button' ).click();
 		});
 	});
 
@@ -482,18 +362,8 @@
 				done();
 			});
 
-			var server = sinon.fakeServer.create();
-			server.respondWith(
-				'POST',
-				'http://example.com/wp-admin/admin-ajax.php',
-				[ 200, { 'Content-Type': 'application/json' }, JSON.stringify( { woot: true } ) ]
-			);
-
 			// Submit form
-			$form.submit();
-
-			server.respond();
-			server.restore();
+			$form.find( '.ccf-submit-button' ).click();
 		});
 	});
 
@@ -517,18 +387,8 @@
 				done();
 			});
 
-			var server = sinon.fakeServer.create();
-			server.respondWith(
-				'POST',
-				'http://example.com/wp-admin/admin-ajax.php',
-				[ 200, { 'Content-Type': 'application/json' }, JSON.stringify( { woot: true } ) ]
-			);
-
 			// Submit form
-			$form.submit();
-
-			server.respond();
-			server.restore();
+			$form.find( '.ccf-submit-button' ).click();
 		});
 	});
 
@@ -564,22 +424,10 @@
 				done();
 			});
 
-			var server = sinon.fakeServer.create();
-			server.respondWith(
-				'POST',
-				'http://example.com/wp-admin/admin-ajax.php',
-				[ 200, { 'Content-Type': 'application/json' }, JSON.stringify( { woot: true } ) ]
-			);
-
 			// Submit form
-			$form.submit();
-
-			server.respond();
-			server.restore();
+			$form.find( '.ccf-submit-button' ).click();
 		});
 	});
-
-	// Todo: Test website
 
 	// Todo: Test email
 
@@ -594,5 +442,85 @@
 	// Todo: Test reCAPTCHA
 
 	// Todo: Test paragraph text
+
+	// Todo: Test file
+
+	QUnit.test( 'Test simple successful website field', function( assert ) {
+		var done = assert.async();
+
+		expect( 1 );
+
+		$( qunit ).load( 'forms/simple-website-1.html', function() {
+			wp.ccf.setupDOM();
+
+			var $form = $('.ccf-form' );
+
+			$form.find( '.field-required .field-input')
+				.val( 'http://google.com' );
+
+			$form.on( 'ccfFormSuccess', function() {
+				ok( true, 'Form submitted without errors' );
+				done();
+			});
+
+			// Submit form
+			$form.find( '.ccf-submit-button' ).click();
+		});
+	});
+
+	QUnit.test( 'Test simple unsuccessful missing website field', function( assert ) {
+		var done = assert.async();
+
+		expect( 2 );
+
+		$( qunit ).load( 'forms/simple-website-1.html', function() {
+			wp.ccf.setupDOM();
+
+			var $form = $('.ccf-form' );
+
+			$form.on( 'ccfFormError', function() {
+				equal( 2, arguments.length, 'Form has one error' );
+
+				var errors = arguments[1].errors;
+				var keys = _.keys( errors );
+
+				// Required error
+				equal( _.keys( errors[keys[0]] )[0], 'required', 'Form has required error' );
+				done();
+			});
+
+			// Submit form
+			$form.find( '.ccf-submit-button' ).click();
+		});
+	});
+
+	QUnit.test( 'Test simple unsuccessful badly formatted website field', function( assert ) {
+		var done = assert.async();
+
+		expect( 2 );
+
+		$( qunit ).load( 'forms/simple-website-1.html', function() {
+			wp.ccf.setupDOM();
+
+			var $form = $('.ccf-form' );
+
+			$form.find( '.field-required .field-input')
+				.val( 'something' );
+
+			$form.on( 'ccfFormError', function() {
+				equal( 2, arguments.length, 'Form has one error' );
+
+				var errors = arguments[1].errors;
+				var keys = _.keys( errors );
+
+				// Phone error
+				equal( _.keys( errors[keys[0]] )[0], 'website', 'Form has badly formatted website error' );
+				done();
+			});
+
+			// Submit form
+			$form.find( '.ccf-submit-button' ).click();
+		});
+	});
 
 })( jQuery );

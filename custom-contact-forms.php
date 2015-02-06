@@ -24,6 +24,7 @@ require_once( dirname( __FILE__ ) . '/classes/class-ccf-field-renderer.php' );
 require_once( dirname( __FILE__ ) . '/classes/class-ccf-form-renderer.php' );
 require_once( dirname( __FILE__ ) . '/classes/class-ccf-form-handler.php' );
 require_once( dirname( __FILE__ ) . '/classes/class-ccf-upgrader.php' );
+require_once( dirname( __FILE__ ) . '/classes/class-ccf-widget.php' );
 
 CCF_Custom_Contact_Forms::factory();
 CCF_Constants::factory();
@@ -36,6 +37,16 @@ CCF_Form_Renderer::factory();
 CCF_Field_Renderer::factory();
 CCF_Form_Handler::factory();
 CCF_Upgrader::factory();
+
+/**
+ * Setup the widget
+ *
+ * @since 6.4
+ */
+function ccf_register_widget() {
+	register_widget( 'CCF_Widget' );
+}
+add_action( 'widgets_init', 'ccf_register_widget' );
 
 /**
  * Flush the rewrites at the end of init after the plugin is been activated.

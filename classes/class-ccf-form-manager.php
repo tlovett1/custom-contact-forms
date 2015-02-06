@@ -1257,7 +1257,7 @@ class CCF_Form_Manager {
 										<# } else if ( utils.isFieldEmailConfirm( submission.data[column] ) ) { #>
 											{{ utils.getPrettyFieldEmailConfirm( submission.data[column] ) }}
 										<# } else if ( utils.isFieldFile( submission.data[column] ) ) { #>
-											<a href="{{ submission.data[column].url }}">{{ submission.data[column].name }}</a>
+											<a href="{{ submission.data[column].url }}">{{ submission.data[column].file_name }}</a>
 										<# } else { #>
 											<# for ( var key in submission.data[column] ) { if ( submission.data[column].hasOwnProperty( key ) ) {
 												if ( submission.data[column][key] !== '' ) {

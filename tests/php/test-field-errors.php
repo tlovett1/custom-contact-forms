@@ -517,7 +517,120 @@ class CCFTestFieldErrors extends CCFTestBase {
 		$this->assertTrue( empty( CCF_Form_Handler::factory()->errors_by_form[$form_response->data['ID']][$slug . '1'] ) );
 	}
 
-	// Todo: testDate
+	/**
+	 * Test date only field errors
+	 *
+	 * @since 6.4
+	 */
+	public function testDateOnly() {
+		$slug = 'date';
 
-	// Todo: testAddress
+		$form_response = $this->_createForm( array( array( 'slug' => $slug, 'type' => 'date', 'showDate' => true, 'showTime' => false, 'required' => true ) ) );
+
+		$_POST['form_id'] = $form_response->data['ID'];
+		$_POST['ccf_form'] = true;
+		$_POST['form_nonce'] = wp_create_nonce( 'ccf_form' );
+
+		CCF_Form_Handler::factory()->submit_listen();
+
+		$this->assertTrue( ! empty( CCF_Form_Handler::factory()->errors_by_form[$form_response->data['ID']][$slug . '1']['date_required'] ) );
+
+		CCF_Form_Handler::factory()->errors_by_form = array();
+
+		$_POST['ccf_field_' . $slug . '1']['date'] = 'test';
+		CCF_Form_Handler::factory()->submit_listen();
+
+		$this->assertTrue( ! empty( CCF_Form_Handler::factory()->errors_by_form[$form_response->data['ID']][$slug . '1']['date'] ) );
+
+		CCF_Form_Handler::factory()->errors_by_form = array();
+
+		$_POST['ccf_field_' . $slug . '1']['date'] = '5/12/2015';
+		CCF_Form_Handler::factory()->submit_listen();
+
+		$this->assertTrue( empty( CCF_Form_Handler::factory()->errors_by_form[$form_response->data['ID']][$slug . '1'] ) );
+	}
+
+	/**
+	 * Test time only field errors
+	 *
+	 * @since 6.4
+	 */
+	public function testTimeOnly() {
+		$slug = 'date';
+
+		$form_response = $this->_createForm( array( array( 'slug' => $slug, 'type' => 'date', 'showDate' => false, 'showTime' => true, 'required' => true ) ) );
+
+		$_POST['form_id'] = $form_response->data['ID'];
+		$_POST['ccf_form'] = true;
+		$_POST['form_nonce'] = wp_create_nonce( 'ccf_form' );
+
+		CCF_Form_Handler::factory()->submit_listen();
+
+		$this->assertTrue( ! empty( CCF_Form_Handler::factory()->errors_by_form[$form_response->data['ID']][$slug . '1']['hour_required'] ) );
+		$this->assertTrue( ! empty( CCF_Form_Handler::factory()->errors_by_form[$form_response->data['ID']][$slug . '1']['minutes_required'] ) );
+		$this->assertTrue( ! empty( CCF_Form_Handler::factory()->errors_by_form[$form_response->data['ID']][$slug . '1']['am-pm_required'] ) );
+
+		CCF_Form_Handler::factory()->errors_by_form = array();
+
+		$_POST['ccf_field_' . $slug . '1']['hour'] = 'a';
+		$_POST['ccf_field_' . $slug . '1']['minute'] = 'b';
+		$_POST['ccf_field_' . $slug . '1']['am-pm'] = 'am';
+		CCF_Form_Handler::factory()->submit_listen();
+
+		$this->assertTrue( ! empty( CCF_Form_Handler::factory()->errors_by_form[$form_response->data['ID']][$slug . '1']['minute'] ) );
+		$this->assertTrue( ! empty( CCF_Form_Handler::factory()->errors_by_form[$form_response->data['ID']][$slug . '1']['hour'] ) );
+
+		CCF_Form_Handler::factory()->errors_by_form = array();
+
+		$_POST['ccf_field_' . $slug . '1']['hour'] = '10';
+		$_POST['ccf_field_' . $slug . '1']['minute'] = '12';
+		$_POST['ccf_field_' . $slug . '1']['am-pm'] = 'am';
+		CCF_Form_Handler::factory()->submit_listen();
+
+		$this->assertTrue( empty( CCF_Form_Handler::factory()->errors_by_form[$form_response->data['ID']][$slug . '1'] ) );
+	}
+
+	/**
+	 * Test date/time field errors
+	 *
+	 * @since 6.4
+	 */
+	public function testDateTime() {
+		$slug = 'date';
+
+		$form_response = $this->_createForm( array( array( 'slug' => $slug, 'type' => 'date', 'showDate' => true, 'showTime' => true, 'required' => true ) ) );
+
+		$_POST['form_id'] = $form_response->data['ID'];
+		$_POST['ccf_form'] = true;
+		$_POST['form_nonce'] = wp_create_nonce( 'ccf_form' );
+
+		CCF_Form_Handler::factory()->submit_listen();
+
+		$this->assertTrue( ! empty( CCF_Form_Handler::factory()->errors_by_form[$form_response->data['ID']][$slug . '1']['date_required'] ) );
+		$this->assertTrue( ! empty( CCF_Form_Handler::factory()->errors_by_form[$form_response->data['ID']][$slug . '1']['hour_required'] ) );
+		$this->assertTrue( ! empty( CCF_Form_Handler::factory()->errors_by_form[$form_response->data['ID']][$slug . '1']['minutes_required'] ) );
+		$this->assertTrue( ! empty( CCF_Form_Handler::factory()->errors_by_form[$form_response->data['ID']][$slug . '1']['am-pm_required'] ) );
+
+		CCF_Form_Handler::factory()->errors_by_form = array();
+
+		$_POST['ccf_field_' . $slug . '1']['date'] = 'a';
+		$_POST['ccf_field_' . $slug . '1']['hour'] = 'a';
+		$_POST['ccf_field_' . $slug . '1']['minute'] = 'b';
+		$_POST['ccf_field_' . $slug . '1']['am-pm'] = 'am';
+		CCF_Form_Handler::factory()->submit_listen();
+
+		$this->assertTrue( ! empty( CCF_Form_Handler::factory()->errors_by_form[$form_response->data['ID']][$slug . '1']['minute'] ) );
+		$this->assertTrue( ! empty( CCF_Form_Handler::factory()->errors_by_form[$form_response->data['ID']][$slug . '1']['hour'] ) );
+		$this->assertTrue( ! empty( CCF_Form_Handler::factory()->errors_by_form[$form_response->data['ID']][$slug . '1']['date'] ) );
+
+		CCF_Form_Handler::factory()->errors_by_form = array();
+
+		$_POST['ccf_field_' . $slug . '1']['date'] = '10/1/1900';
+		$_POST['ccf_field_' . $slug . '1']['hour'] = '10';
+		$_POST['ccf_field_' . $slug . '1']['minute'] = '12';
+		$_POST['ccf_field_' . $slug . '1']['am-pm'] = 'am';
+		CCF_Form_Handler::factory()->submit_listen();
+
+		$this->assertTrue( empty( CCF_Form_Handler::factory()->errors_by_form[$form_response->data['ID']][$slug . '1'] ) );
+	}
 }

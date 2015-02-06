@@ -10,6 +10,25 @@ class CCF_Submission_CPT {
 	 */
 	public function setup() {
 		add_action( 'init', array( $this, 'setup_cpt' ) );
+		add_action( 'before_delete_post', array( $this, 'action_before_delete_post' ) );
+	}
+
+	/**
+	 * Clean up attachments when we delete a submission
+	 *
+	 * @param int $post_id
+	 * @since 6.4
+	 */
+	public function action_before_delete_post( $post_id ) {
+		if ( 'ccf_submission' === get_post_type( $post_id ) ) {
+			$attachments = get_children( array( 'post_parent' => $post_id, 'numberposts' => apply_filters( 'ccf_max_submission_attachments', 5000, get_post( $post_id ) ) ) );
+
+			if ( ! empty( $attachments ) ) {
+				foreach ( $attachments as $attachment ) {
+					wp_delete_attachment( $attachment->ID, true );
+				}
+			}
+		}
 	}
 
 	/**

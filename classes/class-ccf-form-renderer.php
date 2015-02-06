@@ -92,6 +92,7 @@ class CCF_Form_Renderer {
 			'minute' => esc_html__( 'This is not a valid minute.', 'custom-contact-forms' ),
 			'fileExtension' => esc_html__( 'This is not an allowed file extension', 'custom-contact-forms' ),
 			'fileSize' => esc_html__( 'This file is bigger than', 'custom-contact-forms' ),
+			'unknown' => esc_html__( 'An unknown error occured.', 'custom-contact-forms' ),
 			'website' => esc_html__( "This is not a valid URL. URL's must start with http(s)://", 'custom-contact-forms' ),
 		);
 		wp_localize_script( 'ccf-form', 'ccfSettings', apply_filters( 'ccf_localized_form_messages', $localized ) );
