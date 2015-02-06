@@ -1,6 +1,10 @@
 .ccf-form-wrapper {
 	margin: 20px 0;
 
+	.ccf-form-frame {
+		display: none;
+	}
+
 	.ccf-clear {
 		clear: both;
 	}
@@ -33,7 +37,7 @@
 		margin-bottom: 24px;
 		clear: both;
 
-		&[data-field-type="recaptcha"],&[data-field-type="dropdown"], &[data-field-type="radio"], &[data-field-type="checkboxes"], &[data-field-type="date"] {
+		&[data-field-type="recaptcha"],&[data-field-type="file"],&[data-field-type="dropdown"], &[data-field-type="radio"], &[data-field-type="checkboxes"], &[data-field-type="date"] {
 			.error {
 				float: none;
 			}

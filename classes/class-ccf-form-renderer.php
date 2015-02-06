@@ -90,6 +90,8 @@ class CCF_Form_Renderer {
 			'hour' => esc_html__( 'This is not a valid hour.', 'custom-contact-forms' ),
 			'date' => esc_html__( 'This date is not valid.', 'custom-contact-forms' ),
 			'minute' => esc_html__( 'This is not a valid minute.', 'custom-contact-forms' ),
+			'fileExtension' => esc_html__( 'This is not an allowed file extension', 'custom-contact-forms' ),
+			'fileSize' => esc_html__( 'This file is bigger than', 'custom-contact-forms' ),
 			'website' => esc_html__( "This is not a valid URL. URL's must start with http(s)://", 'custom-contact-forms' ),
 		);
 		wp_localize_script( 'ccf-form', 'ccfSettings', apply_filters( 'ccf_localized_form_messages', $localized ) );
@@ -196,6 +198,8 @@ class CCF_Form_Renderer {
 					<input type="hidden"  name="ccf_form" value="1">
 					<input type="hidden" name="form_nonce" value="<?php echo wp_create_nonce( 'ccf_form' ); ?>">
 				</form>
+
+				<iframe class="ccf-form-frame" id="ccf_form_frame_<?php echo (int) $form_id; ?>" name="ccf_form_frame_<?php echo (int) $form_id; ?>"></iframe>
 			</div>
 
 			<?php

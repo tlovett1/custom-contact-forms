@@ -1,5 +1,7 @@
 .ccf-form-wrapper {
   margin: 20px 0; }
+  .ccf-form-wrapper .ccf-form-frame {
+    display: none; }
   .ccf-form-wrapper .ccf-clear {
     clear: both; }
   .ccf-form-wrapper .form-title {
@@ -21,7 +23,7 @@
   .ccf-form-wrapper .field {
     margin-bottom: 24px;
     clear: both; }
-    .ccf-form-wrapper .field[data-field-type="recaptcha"] .error, .ccf-form-wrapper .field[data-field-type="dropdown"] .error, .ccf-form-wrapper .field[data-field-type="radio"] .error, .ccf-form-wrapper .field[data-field-type="checkboxes"] .error, .ccf-form-wrapper .field[data-field-type="date"] .error {
+    .ccf-form-wrapper .field[data-field-type="recaptcha"] .error, .ccf-form-wrapper .field[data-field-type="file"] .error, .ccf-form-wrapper .field[data-field-type="dropdown"] .error, .ccf-form-wrapper .field[data-field-type="radio"] .error, .ccf-form-wrapper .field[data-field-type="checkboxes"] .error, .ccf-form-wrapper .field[data-field-type="date"] .error {
       float: none; }
     .ccf-form-wrapper .field .error {
       color: #ff0000;

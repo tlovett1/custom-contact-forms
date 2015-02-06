@@ -6,6 +6,15 @@
 	wp.ccf = wp.ccf || {};
 	wp.ccf.validators = wp.ccf.validators || {};
 
+	function isIE() {
+		var userAgent = navigator.userAgent.toLowerCase();
+		if ( userAgent.indexOf( 'msie' ) != -1 ) {
+			return parseInt( userAgent.split( 'msie' )[1] );
+		} else {
+			return false;
+		}
+	}
+
 
 	var _verifiedRecaptcha = {};
 
@@ -251,6 +260,90 @@
 
 	wp.ccf.validators.address = wp.ccf.validators.address || validator();
 
+	wp.ccf.validators.file = wp.ccf.validators.file || function( fieldWrapperElement ) {
+		this.wrapper = fieldWrapperElement;
+		this.inputs = this.wrapper.querySelectorAll( '.field-input' );
+		this.errors = {};
+
+		var oldErrorNodes = this.wrapper.querySelectorAll( '.error' );
+		for ( var i = oldErrorNodes.length - 1; i >= 0; i-- ) {
+			oldErrorNodes[i].parentNode.removeChild( oldErrorNodes[i] );
+		}
+
+		_.each( this.inputs, function( input ) {
+			var name = input.getAttribute( 'name' );
+			this.errors[name] = {};
+
+			if ( input.getAttribute( 'aria-required' ) ) {
+				if ( input.value === '' ) {
+					this.errors[name].required = input;
+				}
+			}
+		}, this );
+
+		var file = this.inputs[0];
+		var maxFileSize = this.wrapper.getAttribute( 'data-max-file-size' );
+		var fileExtensions = this.wrapper.getAttribute( 'data-file-extensions' );
+
+		if ( file.value ) {
+
+			if ( maxFileSize ) {
+				var maxFileSizeBytes = parseInt( maxFileSize ) * 1000 * 1000;
+
+				if ( file.files ) {
+					if ( maxFileSizeBytes < file.files[0].size ) {
+						this.errors[this.inputs[0].getAttribute( 'name' )].fileSize = this.wrapper.lastChild;
+					}
+				} else if ( typeof ActiveXObject !== 'undefined' ) {
+					var fso = new ActiveXObject("Scripting.FileSystemObject");
+					var filePath = document.upload.file.value;
+					var file = fso.getFile( filePath );
+					var size = file.size;
+
+					debugger;
+				}
+			}
+
+			if ( fileExtensions ) {
+				var fileExtensionsArray = fileExtensions.replace( ';', ',' );
+				fileExtensionsArray = fileExtensionsArray.replace( ' ', '' );
+				fileExtensionsArray = fileExtensionsArray.split( ',' );
+
+				if ( fileExtensionsArray.length ) {
+					if ( file.files ) {
+						var extension = file.files[0].name.replace( /^.*\.(.+)$/g, '$1' );
+
+						if ( _.indexOf( fileExtensionsArray, extension ) === -1 ) {
+							this.errors[this.inputs[0].getAttribute( 'name' )].fileExtension = this.wrapper.lastChild;
+						}
+					}
+				}
+			}
+		}
+
+		var newErrorNode;
+
+		for ( var field in this.errors ) {
+			if ( this.errors.hasOwnProperty( field ) ) {
+
+				for ( var errorKey in this.errors[field] ) {
+					newErrorNode = document.createElement( 'div' );
+					newErrorNode.className = 'error ' + errorKey + '-error';
+					newErrorNode.setAttribute( 'data-field-name', field );
+					newErrorNode.innerText = ccfSettings[errorKey];
+
+					if ( 'fileExtension' === errorKey && fileExtensions ) {
+						newErrorNode.innerText += ' (' + fileExtensions + ')';
+					} else if ( 'fileSize' === errorKey && maxFileSize ) {
+						newErrorNode.innerText += ' (' + maxFileSize + ' MB)';
+					}
+
+					this.errors[field][errorKey].parentNode.insertBefore( newErrorNode, this.errors[field][errorKey].nextSibling );
+				}
+			}
+		}
+	};
+
 	wp.ccf.validators.website = wp.ccf.validators.website || validator( function( input ) {
 		if ( input.value ) {
 			var re = /^http(s?)\:\/\/(([a-zA-Z0-9\-\._]+(\.[a-zA-Z0-9\-\._]+)+)|localhost)(\/?)([a-zA-Z0-9\-\.\?\,\'\/\\\+&amp;%\$#_]*)?([\d\w\.\/\%\+\-\=\&amp;\?\:\\\&quot;\'\,\|\~\;]*)$/;
@@ -277,18 +370,74 @@
 		var forms = document.querySelectorAll( '.ccf-form-wrapper' );
 
 		if ( forms.length >= 1 ) {
-			_.each( forms, function( form ) {
+			_.each( forms, function( formWrapper ) {
 
-				var formId = parseInt( form.getAttribute( 'data-form-id' ) );
+				var form = formWrapper.querySelectorAll( '.ccf-form' )[0];
+				var $form = $( form );
+				var formId = parseInt( formWrapper.getAttribute( 'data-form-id' ) );
+				var button = form.querySelectorAll( '.ccf-submit-button' )[0];
+				var frame = document.getElementById( 'ccf_form_frame_' + formId );
+				var $loading = $( form.querySelectorAll( '.loading-img' )[0] );
+				var $frame = $( frame );
 
-				var formSubmit = function( event ) {
-					event.returnFalse = false;
+				button.setAttribute( 'type', 'button' );
 
-					if ( event.preventDefault ) {
-						event.preventDefault();
+				var fieldsBySlug = {};
+
+				$frame.on( 'load', function() {
+					var data;
+					try {
+						data = $.parseJSON( frame.contentWindow.document.body.innerText );
+					} catch ( error ) {
+
 					}
 
-					var fields = form.querySelectorAll( '.field' );
+					form.className = form.className.replace( / loading/i, '' );
+					$loading.animate( { opacity: 0 } );
+					_verifiedRecaptcha[formId] = false;
+
+					if ( data.success ) {
+						if ( 'text' === data.action_type && data.completion_message ) {
+							form.innerHTML = data.completion_message;
+
+							$( 'html, body' ).animate( {
+								scrollTop: $( form ).offset().top
+							}, 500 );
+						} else if ( 'redirect' === data.action_type && data.completion_redirect_url ) {
+							document.location = data.completion_redirect_url;
+						}
+					} else {
+						if ( data.field_errors ) {
+							_.each( data.field_errors, function( errors, slug ) {
+								var inputs = fieldsBySlug[slug].querySelectorAll( '.field-input' );
+
+								for ( var error in errors ) {
+									if ( errors.hasOwnProperty( error ) ) {
+										var newErrorNode = document.createElement( 'div' );
+										newErrorNode.className = 'error ' + error + '-error';
+										newErrorNode.innerHTML = errors[error];
+
+										if ( inputs.length === 1 ) {
+											inputs[inputs.length - 1].parentNode.insertBefore( newErrorNode, inputs[inputs.length - 1].nextSibling );
+										} else {
+											fieldsBySlug[slug].appendChild( newErrorNode );
+										}
+									}
+								}
+							});
+						}
+					}
+
+				});
+
+				button.onclick = function() {
+					form.target = 'ccf_form_frame_' + formId;
+					form.action = ccfSettings.ajaxurl;
+					$form.submit();
+				};
+
+				function formSubmit( event ) {
+					var fields = formWrapper.querySelectorAll( '.field' );
 
 					var errors = [];
 
@@ -298,6 +447,9 @@
 						}
 
 						var type = field.getAttribute( 'data-field-type' );
+						var slug = field.getAttribute( 'data-field-slug' );
+
+						fieldsBySlug[slug] = field;
 
 						var validation = new ( wp.ccf.validators[type] )( field, formId );
 
@@ -317,9 +469,13 @@
 						}
 					});
 
-					var $form = $( this.querySelectorAll( '.ccf-form' )[0] );
-
 					if ( errors.length ) {
+						event.returnFalse = false;
+
+						if ( event.preventDefault ) {
+							event.preventDefault();
+						}
+
 						// Trigger errors, mostly for unit testing
 						$form.trigger( 'ccfFormError', errors );
 
@@ -337,43 +493,21 @@
 								scrollTop: $firstError.offset().top
 							}, 500 );
 						}
+
+						return false;
 					} else {
 						// Notify form complete, mostly for unit testing
 						$form.trigger( 'ccfFormSuccess' );
 
-						form.className = form.className.replace( / loading/i, '' ) + ' loading';
+						formWrapper.className = formWrapper.className.replace( / loading/i, '' ) + ' loading';
 
-						var $loading = $( form.querySelectorAll( '.loading-img' )[0] );
 						$loading.animate( { opacity: 100 } );
-
-						$.ajax( {
-							url: ccfSettings.ajaxurl,
-							type: 'post',
-							data: $form.serialize()
-						}).done( function( data ) {
-							if ( data.success ) {
-								if ( 'text' === data.action_type && data.completion_message ) {
-									form.innerHTML = data.completion_message;
-
-									$( 'html, body' ).animate( {
-										scrollTop: $( form ).offset().top
-									}, 500 );
-								} else if ( 'redirect' === data.action_type && data.completion_redirect_url ) {
-									document.location = data.completion_redirect_url;
-								}
-
-							}
-						}).complete( function() {
-							form.className = form.className.replace( / loading/i, '' );
-							$loading.animate( { opacity: 0 } );
-							_verifiedRecaptcha[formId] = false;
-						});
 					}
 
-					return false;
-				};
+					return true;
+				}
 
-				$( form ).on( 'submit', formSubmit );
+				$form.on( 'submit', formSubmit );
 
 			});
 		}

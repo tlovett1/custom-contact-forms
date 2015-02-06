@@ -40,7 +40,7 @@ class CCF_Field_Renderer {
 		ob_start();
 		?>
 
-		<div data-field-type="single-line-text" class="<?php if ( ! empty( $errors ) ) : ?>field-error<?php endif; ?> field <?php echo esc_attr( $slug ); ?> single-line-text field-<?php echo (int) $field_id; ?> <?php echo esc_attr( $class_name ); ?> <?php if ( ! empty( $required ) ) : ?>field-required<?php endif; ?>">
+		<div data-field-type="single-line-text" data-field-slug="<?php echo esc_attr( $slug ); ?>" class="<?php if ( ! empty( $errors ) ) : ?>field-error<?php endif; ?> field <?php echo esc_attr( $slug ); ?> single-line-text field-<?php echo (int) $field_id; ?> <?php echo esc_attr( $class_name ); ?> <?php if ( ! empty( $required ) ) : ?>field-required<?php endif; ?>">
 			<label for="ccf_field_<?php echo esc_attr( $slug ); ?>">
 				<?php if ( ! empty( $required ) ) : ?><span class="required">*</span><?php endif; ?>
 				<?php echo esc_html( $label ); ?>
@@ -71,6 +71,8 @@ class CCF_Field_Renderer {
 		$placeholder = get_post_meta( $field_id, 'ccf_field_placeholder', true );
 		$required = get_post_meta( $field_id, 'ccf_field_required', true );
 		$class_name = get_post_meta( $field_id, 'ccf_field_className', true );
+		$max_file_size = get_post_meta( $field_id, 'ccf_field_maxFileSize', true );
+		$file_extensions = get_post_meta( $field_id, 'ccf_field_fileExtensions', true );
 
 		$errors = CCF_Form_Handler::factory()->get_errors( $form_id, $slug );
 		$all_errors = CCF_Form_Handler::factory()->get_errors( $form_id );
@@ -86,7 +88,7 @@ class CCF_Field_Renderer {
 		ob_start();
 		?>
 
-		<div data-field-type="file" class="<?php if ( ! empty( $errors ) ) : ?>field-error<?php endif; ?> field <?php echo esc_attr( $slug ); ?> file field-<?php echo (int) $field_id; ?> <?php echo esc_attr( $class_name ); ?> <?php if ( ! empty( $required ) ) : ?>field-required<?php endif; ?>">
+		<div data-max-file-size="<?php echo esc_attr( $max_file_size ); ?>" data-file-extensions="<?php echo esc_attr( $file_extensions ); ?>" data-field-type="file" data-field-slug="<?php echo esc_attr( $slug ); ?>" class="<?php if ( ! empty( $errors ) ) : ?>field-error<?php endif; ?> field <?php echo esc_attr( $slug ); ?> file field-<?php echo (int) $field_id; ?> <?php echo esc_attr( $class_name ); ?> <?php if ( ! empty( $required ) ) : ?>field-required<?php endif; ?>">
 			<label for="ccf_field_<?php echo esc_attr( $slug ); ?>">
 				<?php if ( ! empty( $required ) ) : ?><span class="required">*</span><?php endif; ?>
 				<?php echo esc_html( $label ); ?>
@@ -124,7 +126,7 @@ class CCF_Field_Renderer {
 		ob_start();
 		?>
 
-		<div data-field-type="recaptcha" class="<?php if ( ! empty( $errors ) ) : ?>field-error<?php endif; ?> field <?php echo esc_attr( $slug ); ?> single-line-text field-<?php echo (int) $field_id; ?> <?php echo esc_attr( $class_name ); ?> <?php if ( ! empty( $required ) ) : ?>field-required<?php endif; ?>">
+		<div data-field-type="recaptcha" data-field-slug="<?php echo esc_attr( $slug ); ?>" class="<?php if ( ! empty( $errors ) ) : ?>field-error<?php endif; ?> field <?php echo esc_attr( $slug ); ?> single-line-text field-<?php echo (int) $field_id; ?> <?php echo esc_attr( $class_name ); ?> <?php if ( ! empty( $required ) ) : ?>field-required<?php endif; ?>">
 			<label for="ccf_field_<?php echo esc_attr( $slug ); ?>">
 				<span class="required">*</span>
 				<?php echo esc_html( $label ); ?>
@@ -253,7 +255,7 @@ class CCF_Field_Renderer {
 		ob_start();
 		?>
 
-		<div data-field-type="dropdown" class="<?php if ( ! empty( $errors ) ) : ?>field-error<?php endif; ?> field <?php echo esc_attr( $slug ); ?> dropdown field-<?php echo (int) $field_id; ?> <?php echo esc_attr( $class_name ); ?> <?php if ( ! empty( $required ) ) : ?>field-required<?php endif; ?>">
+		<div data-field-type="dropdown" data-field-slug="<?php echo esc_attr( $slug ); ?>" class="<?php if ( ! empty( $errors ) ) : ?>field-error<?php endif; ?> field <?php echo esc_attr( $slug ); ?> dropdown field-<?php echo (int) $field_id; ?> <?php echo esc_attr( $class_name ); ?> <?php if ( ! empty( $required ) ) : ?>field-required<?php endif; ?>">
 			<label for="ccf_field_<?php echo esc_attr( $slug ); ?>">
 				<?php if ( ! empty( $required ) ) : ?><span class="required">*</span><?php endif; ?>
 				<?php echo esc_html( $label ); ?>
@@ -327,7 +329,7 @@ class CCF_Field_Renderer {
 		ob_start();
 		?>
 
-		<div data-field-type="checkboxes" class="<?php if ( ! empty( $errors ) ) : ?>field-error<?php endif; ?> field <?php echo esc_attr( $slug ); ?> checkboxes field-<?php echo (int) $field_id; ?> <?php echo esc_attr( $class_name ); ?> <?php if ( ! empty( $required ) ) : ?>field-required<?php endif; ?>">
+		<div data-field-type="checkboxes" data-field-slug="<?php echo esc_attr( $slug ); ?>" class="<?php if ( ! empty( $errors ) ) : ?>field-error<?php endif; ?> field <?php echo esc_attr( $slug ); ?> checkboxes field-<?php echo (int) $field_id; ?> <?php echo esc_attr( $class_name ); ?> <?php if ( ! empty( $required ) ) : ?>field-required<?php endif; ?>">
 			<label for="ccf_field_<?php echo esc_attr( $slug ); ?>">
 				<?php if ( ! empty( $required ) ) : ?><span class="required">*</span><?php endif; ?>
 				<?php echo esc_html( $label ); ?>
@@ -401,7 +403,7 @@ class CCF_Field_Renderer {
 		ob_start();
 		?>
 
-		<div data-field-type="radio" class="<?php if ( ! empty( $errors ) ) : ?>field-error<?php endif; ?> field <?php echo esc_attr( $slug ); ?> radio field-<?php echo (int) $field_id; ?> <?php echo esc_attr( $class_name ); ?> <?php if ( ! empty( $required ) ) : ?>field-required<?php endif; ?>">
+		<div data-field-type="radio" data-field-slug="<?php echo esc_attr( $slug ); ?>" class="<?php if ( ! empty( $errors ) ) : ?>field-error<?php endif; ?> field <?php echo esc_attr( $slug ); ?> radio field-<?php echo (int) $field_id; ?> <?php echo esc_attr( $class_name ); ?> <?php if ( ! empty( $required ) ) : ?>field-required<?php endif; ?>">
 			<label for="ccf_field_<?php echo esc_attr( $slug ); ?>">
 				<?php if ( ! empty( $required ) ) : ?><span class="required">*</span><?php endif; ?>
 				<?php echo esc_html( $label ); ?>
@@ -482,7 +484,7 @@ class CCF_Field_Renderer {
 		ob_start();
 		?>
 
-		<div data-field-type="address" class="<?php if ( ! empty( $errors ) ) : ?>field-error<?php endif; ?> field <?php echo esc_attr( $slug ); ?> address field-<?php echo (int) $field_id; ?> <?php echo esc_attr( $class_name ); ?> <?php if ( ! empty( $required ) ) : ?>field-required<?php endif; ?>">
+		<div data-field-type="address" data-field-slug="<?php echo esc_attr( $slug ); ?>" class="<?php if ( ! empty( $errors ) ) : ?>field-error<?php endif; ?> field <?php echo esc_attr( $slug ); ?> address field-<?php echo (int) $field_id; ?> <?php echo esc_attr( $class_name ); ?> <?php if ( ! empty( $required ) ) : ?>field-required<?php endif; ?>">
 			<label for="ccf_field_<?php echo esc_attr( $slug ); ?>">
 				<?php if ( ! empty( $required ) ) : ?><span class="required">*</span><?php endif; ?>
 				<?php echo esc_html( $label ); ?>
@@ -595,7 +597,7 @@ class CCF_Field_Renderer {
 		ob_start();
 		?>
 
-		<div data-phone-format="<?php echo esc_attr( $phone_format ); ?>" data-field-type="phone" class="<?php if ( ! empty( $errors ) ) : ?>field-error<?php endif; ?> field <?php echo esc_attr( $slug ); ?> phone field-<?php echo (int) $field_id; ?> <?php echo esc_attr( $class_name ); ?> <?php if ( ! empty( $required ) ) : ?>field-required<?php endif; ?>">
+		<div data-phone-format="<?php echo esc_attr( $phone_format ); ?>" data-field-slug="<?php echo esc_attr( $slug ); ?>" data-field-type="phone" class="<?php if ( ! empty( $errors ) ) : ?>field-error<?php endif; ?> field <?php echo esc_attr( $slug ); ?> phone field-<?php echo (int) $field_id; ?> <?php echo esc_attr( $class_name ); ?> <?php if ( ! empty( $required ) ) : ?>field-required<?php endif; ?>">
 			<label for="ccf_field_<?php echo esc_attr( $slug ); ?>">
 				<?php if ( ! empty( $required ) ) : ?><span class="required">*</span><?php endif; ?>
 				<?php echo esc_html( $label ); ?>
@@ -644,7 +646,7 @@ class CCF_Field_Renderer {
 		ob_start();
 		?>
 
-		<div data-field-type="website" class="<?php if ( ! empty( $errors ) ) : ?>field-error<?php endif; ?> field <?php echo esc_attr( $slug ); ?> website field-<?php echo (int) $field_id; ?> <?php echo esc_attr( $class_name ); ?> <?php if ( ! empty( $required ) ) : ?>field-required<?php endif; ?>">
+		<div data-field-type="website" data-field-slug="<?php echo esc_attr( $slug ); ?>" class="<?php if ( ! empty( $errors ) ) : ?>field-error<?php endif; ?> field <?php echo esc_attr( $slug ); ?> website field-<?php echo (int) $field_id; ?> <?php echo esc_attr( $class_name ); ?> <?php if ( ! empty( $required ) ) : ?>field-required<?php endif; ?>">
 			<label for="ccf_field_<?php echo esc_attr( $slug ); ?>">
 				<?php if ( ! empty( $required ) ) : ?><span class="required">*</span><?php endif; ?>
 				<?php echo esc_html( $label ); ?>
@@ -700,7 +702,7 @@ class CCF_Field_Renderer {
 		ob_start();
 		?>
 
-		<div data-field-type="email" class="<?php if ( ! empty( $errors ) ) : ?>field-error<?php endif; ?> field <?php echo esc_attr( $slug ); ?> email field-<?php echo (int) $field_id; ?> <?php echo esc_attr( $class_name ); ?> <?php if ( ! empty( $required ) ) : ?>field-required<?php endif; ?>">
+		<div data-field-type="email" data-field-slug="<?php echo esc_attr( $slug ); ?>" class="<?php if ( ! empty( $errors ) ) : ?>field-error<?php endif; ?> field <?php echo esc_attr( $slug ); ?> email field-<?php echo (int) $field_id; ?> <?php echo esc_attr( $class_name ); ?> <?php if ( ! empty( $required ) ) : ?>field-required<?php endif; ?>">
 			<label for="ccf_field_<?php echo esc_attr( $slug ); ?>">
 				<?php if ( ! empty( $required ) ) : ?><span class="required">*</span><?php endif; ?>
 				<?php echo esc_html( $label ); ?>
@@ -772,7 +774,7 @@ class CCF_Field_Renderer {
 		ob_start();
 		?>
 
-		<div data-field-type="name" class="<?php if ( ! empty( $errors ) ) : ?>field-error<?php endif; ?> field <?php echo esc_attr( $slug ); ?> name field-<?php echo (int) $field_id; ?> <?php echo esc_attr( $class_name ); ?> <?php if ( ! empty( $required ) ) : ?>field-required<?php endif; ?>">
+		<div data-field-type="name" data-field-slug="<?php echo esc_attr( $slug ); ?>" class="<?php if ( ! empty( $errors ) ) : ?>field-error<?php endif; ?> field <?php echo esc_attr( $slug ); ?> name field-<?php echo (int) $field_id; ?> <?php echo esc_attr( $class_name ); ?> <?php if ( ! empty( $required ) ) : ?>field-required<?php endif; ?>">
 			<label>
 				<?php if ( ! empty( $required ) ) : ?><span class="required">*</span><?php endif; ?>
 				<?php echo esc_html( $label ); ?>
@@ -843,7 +845,7 @@ class CCF_Field_Renderer {
 		ob_start();
 		?>
 
-		<div data-field-type="date" class="<?php if ( ! empty( $errors ) ) : ?>field-error<?php endif; ?> field <?php echo esc_attr( $slug ); ?> date field-<?php echo (int) $field_id; ?> <?php echo esc_attr( $class_name ); ?> <?php if ( ! empty( $required ) ) : ?>field-required<?php endif; ?>">
+		<div data-field-type="date" data-field-slug="<?php echo esc_attr( $slug ); ?>" class="<?php if ( ! empty( $errors ) ) : ?>field-error<?php endif; ?> field <?php echo esc_attr( $slug ); ?> date field-<?php echo (int) $field_id; ?> <?php echo esc_attr( $class_name ); ?> <?php if ( ! empty( $required ) ) : ?>field-required<?php endif; ?>">
 			<label for="ccf_field_<?php echo esc_attr( $slug ); ?>">
 				<?php if ( ! empty( $required ) ) : ?><span class="required">*</span><?php endif; ?>
 				<?php echo esc_html( $label ); ?>
@@ -929,7 +931,7 @@ class CCF_Field_Renderer {
 		ob_start();
 		?>
 
-		<div data-field-type="paragraph-text" class="<?php if ( ! empty( $errors ) ) : ?>field-error<?php endif; ?> field <?php echo esc_attr( $slug ); ?> paragraph-text field-<?php echo (int) $field_id; ?> <?php echo esc_attr( $class_name ); ?> <?php if ( ! empty( $required ) ) : ?>field-required<?php endif; ?>">
+		<div data-field-type="paragraph-text" data-field-slug="<?php echo esc_attr( $slug ); ?>" class="<?php if ( ! empty( $errors ) ) : ?>field-error<?php endif; ?> field <?php echo esc_attr( $slug ); ?> paragraph-text field-<?php echo (int) $field_id; ?> <?php echo esc_attr( $class_name ); ?> <?php if ( ! empty( $required ) ) : ?>field-required<?php endif; ?>">
 			<label for="ccf_field_<?php echo esc_attr( $slug ); ?>">
 				<?php if ( ! empty( $required ) ) : ?><span class="required">*</span><?php endif; ?>
 				<?php echo esc_html( $label ); ?>
