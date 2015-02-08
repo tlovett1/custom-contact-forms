@@ -80,6 +80,7 @@ per-field basis.
 * `Internal Slug` - Every field in a form must have a unique slug. Slugs are auto-generated to make your life
 easier. This makes it easier to develop with CCF.
 * `Label` - A label shows up above a field and is visible to the form user.
+* `Description` - A description shows up below a field and is visible to the form user.
 * `Initial Value` - A fields value upon loading the form.
 * `Required` - Required fields must be filled out for a form to be submitted.
 * `Class Name` - You can manually add classes to a fields wrapper element.
@@ -98,6 +99,10 @@ described below:
 * `Checkboxes` - A list of checkable choices.
 * `Radio Buttons` - A list of choices where only one can be chosen.
 * `Hidden` - A hidden field.
+* `File Upload` - Allow users to upload a file.
+
+  * __Allowed Files Types__ - Restrict the file extensions that can be uploaded. If left blank, this will default to whatever is allowed by WordPress.
+  * __Max File Size__ - Restrict the max file size allowed to be uploaded. If left blank, will default to whatever is allowed by WordPress and your server.
 
 __Note__: Choiceable fields all handle choices the same way. Choices can be set with a `value` and a `label`. Values
 are internal, and labels are visible to the end form user. If a choice does not have a `value`, the choice will not
