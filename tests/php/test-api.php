@@ -132,6 +132,9 @@ class CCFTestAPI extends CCFTestBase {
 			$label = get_post_meta( $field_id, 'ccf_field_label', true );
 			$this->assertTrue( ! empty( $label ) );
 
+			$description = get_post_meta( $field_id, 'ccf_field_description', true );
+			$this->assertTrue( ! empty( $description ) );
+
 			$class_name = get_post_meta( $field_id, 'ccf_field_className', true );
 			$this->assertTrue( ! empty( $class_name ) );
 

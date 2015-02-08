@@ -243,7 +243,8 @@
 					slug: '',
 					type: '',
 					required: false,
-					className: ''
+					className: '',
+					description: ''
 				};
 
 				return _.defaults( defaults, this.constructor.__super__.defaults );

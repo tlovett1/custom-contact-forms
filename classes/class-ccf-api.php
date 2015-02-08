@@ -50,6 +50,10 @@ class CCF_API extends WP_JSON_Posts {
 				'sanitize' => 'sanitize_text_field',
 				'escape' => 'esc_html',
 			),
+			'description' => array(
+				'sanitize' => 'sanitize_text_field',
+				'escape' => 'esc_html',
+			),
 			'value' => array(
 				'sanitize' => 'sanitize_text_field',
 				'escape' => 'esc_html',

@@ -268,6 +268,10 @@ class CCF_Form_Manager {
 						<input id="ccf-field-label" class="field-label" type="text" value="{{ field.label }}">
 					</div>
 					<div>
+						<label for="ccf-field-description"><?php esc_html_e( 'Description:', 'custom-contact-forms' ); ?></label>
+						<textarea id="ccf-field-description" class="field-description">{{ field.description }}</textarea>
+					</div>
+					<div>
 						<label for="ccf-field-value"><?php esc_html_e( 'Initial Value:', 'custom-contact-forms' ); ?></label>
 						<input id="ccf-field-value" class="field-value" type="text" value="{{ field.value }}">
 					</div>
@@ -308,6 +312,10 @@ class CCF_Form_Manager {
 						<input id="ccf-field-label" class="field-label" type="text" value="{{ field.label }}">
 					</div>
 					<div>
+						<label for="ccf-field-description"><?php esc_html_e( 'Description:', 'custom-contact-forms' ); ?></label>
+						<textarea id="ccf-field-description" class="field-description">{{ field.description }}</textarea>
+					</div>
+					<div>
 						<label for="ccf-field-file-extensions"><?php esc_html_e( 'Allowed File Extensions (comma separate):', 'custom-contact-forms' ); ?></label>
 						<input id="ccf-field-file-extensions" class="field-file-extensions" type="text" value="{{ field.fileExtensions }}">
 					</div>
@@ -346,6 +354,10 @@ class CCF_Form_Manager {
 						<input id="ccf-field-label" class="field-label" type="text" value="{{ field.label }}">
 					</div>
 					<div>
+						<label for="ccf-field-description"><?php esc_html_e( 'Description:', 'custom-contact-forms' ); ?></label>
+						<textarea id="ccf-field-description" class="field-description">{{ field.description }}</textarea>
+					</div>
+					<div>
 						<label for="ccf-field-site-key"><span class="required">*</span> <?php esc_html_e( 'Site Key:', 'custom-contact-forms' ); ?></label>
 						<input id="ccf-field-site-key" class="field-site-key" type="text" value="{{ field.siteKey }}">
 						<a href="http://google.com/recaptcha/" target="_blank"><?php _e( "Don't have one?", 'custom-contact-forms' ); ?></a>
@@ -379,6 +391,10 @@ class CCF_Form_Manager {
 					<div>
 						<label for="ccf-field-label"><?php esc_html_e( 'Label:', 'custom-contact-forms' ); ?></label>
 						<input id="ccf-field-label" class="field-label" type="text" value="{{ field.label }}">
+					</div>
+					<div>
+						<label for="ccf-field-description"><?php esc_html_e( 'Description:', 'custom-contact-forms' ); ?></label>
+						<textarea id="ccf-field-description" class="field-description">{{ field.description }}</textarea>
 					</div>
 					<div>
 						<label for="ccf-field-value"><?php esc_html_e( 'Initial Value:', 'custom-contact-forms' ); ?></label>
@@ -467,6 +483,10 @@ class CCF_Form_Manager {
 						<input id="ccf-field-label" class="field-label" type="text" value="{{ field.label }}">
 					</div>
 					<div>
+						<label for="ccf-field-description"><?php esc_html_e( 'Description:', 'custom-contact-forms' ); ?></label>
+						<textarea id="ccf-field-description" class="field-description">{{ field.description }}</textarea>
+					</div>
+					<div>
 						<label for="ccf-field-value"><?php esc_html_e( 'Initial Value:', 'custom-contact-forms' ); ?></label>
 						<input id="ccf-field-value" class="field-value" type="text" value="{{ field.value }}">
 					</div>
@@ -532,6 +552,10 @@ class CCF_Form_Manager {
 						<input id="ccf-field-label" class="field-label" type="text" value="{{ field.label }}">
 					</div>
 					<div>
+						<label for="ccf-field-description"><?php esc_html_e( 'Description:', 'custom-contact-forms' ); ?></label>
+						<textarea id="ccf-field-description" class="field-description">{{ field.description }}</textarea>
+					</div>
+					<div>
 						<label for="ccf-field-required"><?php esc_html_e( 'Required:', 'custom-contact-forms' ); ?></label>
 						<select id="ccf-field-required" class="field-required">
 							<option value="1"><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
@@ -562,6 +586,10 @@ class CCF_Form_Manager {
 					<div>
 						<label for="ccf-field-label"><?php esc_html_e( 'Label:', 'custom-contact-forms' ); ?></label>
 						<input id="ccf-field-label" class="field-label" type="text" value="{{ field.label }}">
+					</div>
+					<div>
+						<label for="ccf-field-description"><?php esc_html_e( 'Description:', 'custom-contact-forms' ); ?></label>
+						<textarea id="ccf-field-description" class="field-description">{{ field.description }}</textarea>
 					</div>
 					<# if ( ! field.showTime ) { #>
 						<div>
@@ -616,6 +644,10 @@ class CCF_Form_Manager {
 						<input id="ccf-field-label" class="field-label" type="text" value="{{ field.label }}">
 					</div>
 					<div>
+						<label for="ccf-field-description"><?php esc_html_e( 'Description:', 'custom-contact-forms' ); ?></label>
+						<textarea id="ccf-field-description" class="field-description">{{ field.description }}</textarea>
+					</div>
+					<div>
 						<label for="ccf-field-value"><?php esc_html_e( 'Initial Value:', 'custom-contact-forms' ); ?></label>
 						<input id="ccf-field-value" class="field-value" type="text" value="{{ field.value }}">
 					</div>
@@ -663,6 +695,10 @@ class CCF_Form_Manager {
 						<input id="ccf-field-label" class="field-label" type="text" value="{{ field.label }}">
 					</div>
 					<div>
+						<label for="ccf-field-description"><?php esc_html_e( 'Description:', 'custom-contact-forms' ); ?></label>
+						<textarea id="ccf-field-description" class="field-description">{{ field.description }}</textarea>
+					</div>
+					<div>
 						<label for="ccf-field-address-type"><?php esc_html_e( 'Type:', 'custom-contact-forms' ); ?></label>
 						<select id="ccf-field-address-type" class="field-address-type">
 							<option value="us"><?php esc_html_e( 'United States', 'custom-contact-forms' ); ?></option>
@@ -700,6 +736,10 @@ class CCF_Form_Manager {
 					<div>
 						<label for="ccf-field-label"><?php esc_html_e( 'Label:', 'custom-contact-forms' ); ?></label>
 						<input id="ccf-field-label" class="field-label" type="text" value="{{ field.label }}">
+					</div>
+					<div>
+						<label for="ccf-field-description"><?php esc_html_e( 'Description:', 'custom-contact-forms' ); ?></label>
+						<textarea id="ccf-field-description" class="field-description">{{ field.description }}</textarea>
 					</div>
 					<# if ( ! field.emailConfirmation ) { #>
 						<div>
@@ -762,6 +802,10 @@ class CCF_Form_Manager {
 						<input id="ccf-field-label" class="field-label" type="text" value="{{ field.label }}">
 					</div>
 					<div>
+						<label for="ccf-field-description"><?php esc_html_e( 'Description:', 'custom-contact-forms' ); ?></label>
+						<textarea id="ccf-field-description" class="field-description">{{ field.description }}</textarea>
+					</div>
+					<div>
 						<label for="ccf-field-required"><?php esc_html_e( 'Required:', 'custom-contact-forms' ); ?></label>
 						<select id="ccf-field-required" class="field-required">
 							<option value="1"><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
@@ -799,6 +843,10 @@ class CCF_Form_Manager {
 					<div>
 						<label for="ccf-field-label"><?php esc_html_e( 'Label:', 'custom-contact-forms' ); ?></label>
 						<input id="ccf-field-label" class="field-label" type="text" value="{{ field.label }}">
+					</div>
+					<div>
+						<label for="ccf-field-description"><?php esc_html_e( 'Description:', 'custom-contact-forms' ); ?></label>
+						<textarea id="ccf-field-description" class="field-description">{{ field.description }}</textarea>
 					</div>
 					<div>
 						<label for="ccf-field-required"><?php esc_html_e( 'Required:', 'custom-contact-forms' ); ?></label>
@@ -840,6 +888,10 @@ class CCF_Form_Manager {
 						<input id="ccf-field-label" class="field-label" type="text" value="{{ field.label }}">
 					</div>
 					<div>
+						<label for="ccf-field-description"><?php esc_html_e( 'Description:', 'custom-contact-forms' ); ?></label>
+						<textarea id="ccf-field-description" class="field-description">{{ field.description }}</textarea>
+					</div>
+					<div>
 						<label for="ccf-field-required"><?php esc_html_e( 'Required:', 'custom-contact-forms' ); ?></label>
 						<select id="ccf-field-required" class="field-required">
 							<option value="1"><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
@@ -868,28 +920,40 @@ class CCF_Form_Manager {
 
 		<script type="text/html" id="ccf-empty-form-table-row-template">
 			<td class="empty-form-table" colspan="6">
-				You currently have no forms. Add some!
+				<?php esc_html_e( 'You currently have no forms. Add some!', 'custom-contact-forms' ); ?>
 			</td>
 		</script>
 
 		<script type="text/html" id="ccf-single-line-text-preview-template">
 			<label>{{ field.label }} <# if ( field.required ) { #><span>*</span><# } #></label>
 			<input disabled type="text" placeholder="{{ field.placeholder }}" value="{{ field.value }}">
+			<# if ( field.description ) { #>
+				<div class="field-description">{{ field.description }}</div>
+			<# } #>
 		</script>
 
 		<script type="text/html" id="ccf-file-preview-template">
 			<label>{{ field.label }} <# if ( field.required ) { #><span>*</span><# } #></label>
 			<input disabled type="file" placeholder="{{ field.placeholder }}" value="{{ field.value }}">
+			<# if ( field.description ) { #>
+				<div class="field-description">{{ field.description }}</div>
+			<# } #>
 		</script>
 
 		<script type="text/html" id="ccf-recaptcha-preview-template">
 			<label>{{ field.label }} <# if ( field.required ) { #><span>*</span><# } #></label>
 			<img class="recaptcha-preview-img" src="<?php echo plugins_url( 'img/recaptcha.png', dirname( __FILE__ )); ?>">
+			<# if ( field.description ) { #>
+				<div class="field-description">{{ field.description }}</div>
+			<# } #>
 		</script>
 
 		<script type="text/html" id="ccf-paragraph-text-preview-template">
 			<label>{{ field.label }} <# if ( field.required ) { #><span>*</span><# } #></label>
 			<textarea placeholder="{{ field.placeholder }}" disabled>{{ field.value }}</textarea>
+			<# if ( field.description ) { #>
+				<div class="field-description">{{ field.description }}</div>
+			<# } #>
 		</script>
 
 		<script type="text/html" id="ccf-dropdown-preview-template">
@@ -903,6 +967,9 @@ class CCF_Form_Manager {
 					<# }); #>
 				<# } #>
 			</select>
+			<# if ( field.description ) { #>
+				<div class="field-description">{{ field.description }}</div>
+			<# } #>
 		</script>
 
 		<script type="text/html" id="ccf-radio-preview-template">
@@ -918,6 +985,9 @@ class CCF_Form_Manager {
 					</div>
 				<# }); #>
 			<# } #>
+			<# if ( field.description ) { #>
+				<div class="field-description">{{ field.description }}</div>
+			<# } #>
 		</script>
 
 		<script type="text/html" id="ccf-checkboxes-preview-template">
@@ -932,6 +1002,9 @@ class CCF_Form_Manager {
 						<input type="checkbox" value="{{ choice.get( 'value' ) }}" <# if ( choice.get( 'selected' ) ) { #>checked="checked"<# } #>> <label>{{ choice.get( 'label' ) }}</label>
 					</div>
 				<# }); #>
+			<# } #>
+			<# if ( field.description ) { #>
+				<div class="field-description">{{ field.description }}</div>
 			<# } #>
 		</script>
 
@@ -960,6 +1033,9 @@ class CCF_Form_Manager {
 				<input type="text">
 				<label class="sub-label"><?php esc_html_e( 'Last', 'custom-contact-forms' ); ?></label>
 			</div>
+			<# if ( field.description ) { #>
+				<div class="field-description">{{ field.description }}</div>
+			<# } #>
 		</script>
 
 		<script type="text/html" id="ccf-date-preview-template">
@@ -1004,6 +1080,9 @@ class CCF_Form_Manager {
 						</select>
 					</div>
 				</div>
+			<# } #>
+			<# if ( field.description ) { #>
+				<div class="field-description">{{ field.description }}</div>
 			<# } #>
 		</script>
 
@@ -1064,6 +1143,9 @@ class CCF_Form_Manager {
 					<label class="sub-label"><?php esc_html_e( 'Country', 'custom-contact-forms' ); ?></label>
 				</div>
 			<# } #>
+			<# if ( field.description ) { #>
+				<div class="field-description">{{ field.description }}</div>
+			<# } #>
 		</script>
 
 		<script type="text/html" id="ccf-email-preview-template">
@@ -1080,16 +1162,25 @@ class CCF_Form_Manager {
 					<div class="sub-label"><?php esc_html_e( 'Confirm Email', 'custom-contact-forms' ); ?></div>
 				</div>
 			<# } #>
+			<# if ( field.description ) { #>
+				<div class="field-description">{{ field.description }}</div>
+			<# } #>
 		</script>
 
 		<script type="text/html" id="ccf-website-preview-template">
 			<label>{{ field.label }} <# if ( field.required ) { #><span>*</span><# } #></label>
 			<input placeholder="<# if ( field.placeholder ) { #>{{ field.placeholder }}<# } else { #>http://<# } #>" disabled type="text" value="{{ field.value }}">
+			<# if ( field.description ) { #>
+				<div class="field-description">{{ field.description }}</div>
+			<# } #>
 		</script>
 
 		<script type="text/html" id="ccf-phone-preview-template">
 			<label>{{ field.label }} <# if ( field.required ) { #><span>*</span><# } #></label>
 			<input placeholder="<# if ( field.placeholder ) { #>{{ field.placeholder }}<# } else { #>(301) 101-8976<# } #>" disabled type="text" value="{{ field.value }}">
+			<# if ( field.description ) { #>
+				<div class="field-description">{{ field.description }}</div>
+			<# } #>
 		</script>
 
 		<script type="text/html" id="ccf-existing-form-table-row-template">

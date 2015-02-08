@@ -25,6 +25,7 @@ class CCF_Field_Renderer {
 		$placeholder = get_post_meta( $field_id, 'ccf_field_placeholder', true );
 		$required = get_post_meta( $field_id, 'ccf_field_required', true );
 		$class_name = get_post_meta( $field_id, 'ccf_field_className', true );
+		$description = get_post_meta( $field_id, 'ccf_field_description', true );
 
 		$errors = CCF_Form_Handler::factory()->get_errors( $form_id, $slug );
 		$all_errors = CCF_Form_Handler::factory()->get_errors( $form_id );
@@ -46,6 +47,13 @@ class CCF_Field_Renderer {
 				<?php echo esc_html( $label ); ?>
 			</label>
 			<input class="<?php if ( ! empty( $errors ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> type="text" name="ccf_field_<?php echo esc_attr( $slug ); ?>" id="ccf_field_<?php echo esc_attr( $slug ); ?>" placeholder="<?php echo esc_attr( $placeholder ); ?>" value="<?php if ( ! empty( $post_value ) ) { echo esc_attr( $post_value ); } else { echo esc_attr( $value ); } ?>">
+
+			<?php if ( ! empty( $description ) ) : ?>
+				<div class="field-description">
+					<?php echo esc_html( $description ); ?>
+				</div>
+			<?php endif; ?>
+
 			<?php if ( ! empty( $errors ) ) : ?>
 				<div class="error"><?php echo esc_html( $errors['required'] ); ?></div>
 			<?php endif; ?>
@@ -73,6 +81,7 @@ class CCF_Field_Renderer {
 		$class_name = get_post_meta( $field_id, 'ccf_field_className', true );
 		$max_file_size = get_post_meta( $field_id, 'ccf_field_maxFileSize', true );
 		$file_extensions = get_post_meta( $field_id, 'ccf_field_fileExtensions', true );
+		$description = get_post_meta( $field_id, 'ccf_field_description', true );
 
 		$errors = CCF_Form_Handler::factory()->get_errors( $form_id, $slug );
 		$all_errors = CCF_Form_Handler::factory()->get_errors( $form_id );
@@ -95,6 +104,12 @@ class CCF_Field_Renderer {
 			</label>
 			
 			<input class="<?php if ( ! empty( $errors ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> type="file" name="ccf_field_<?php echo esc_attr( $slug ); ?>" id="ccf_field_<?php echo esc_attr( $slug ); ?>" placeholder="<?php echo esc_attr( $placeholder ); ?>" value="<?php if ( ! empty( $post_value ) ) { echo esc_attr( $post_value ); } else { echo esc_attr( $value ); } ?>">
+
+			<?php if ( ! empty( $description ) ) : ?>
+				<div class="field-description">
+					<?php echo esc_html( $description ); ?>
+				</div>
+			<?php endif; ?>
 
 			<?php if ( ! empty( $errors ) ) : ?>
 				<?php foreach ( $errors as $error ) : ?>
@@ -120,6 +135,7 @@ class CCF_Field_Renderer {
 		$label = get_post_meta( $field_id, 'ccf_field_label', true );
 		$class_name = get_post_meta( $field_id, 'ccf_field_className', true );
 		$site_key = get_post_meta( $field_id, 'ccf_field_siteKey', true );
+		$description = get_post_meta( $field_id, 'ccf_field_description', true );
 
 		$errors = CCF_Form_Handler::factory()->get_errors( $form_id, $slug );
 
@@ -132,6 +148,13 @@ class CCF_Field_Renderer {
 				<?php echo esc_html( $label ); ?>
 			</label>
 			<div class="ccf-recaptcha-wrapper" data-form-id="<?php echo (int) $form_id; ?>" data-sitekey="<?php echo esc_attr( $site_key ); ?>"></div>
+
+			<?php if ( ! empty( $description ) ) : ?>
+				<div class="field-description">
+					<?php echo esc_html( $description ); ?>
+				</div>
+			<?php endif; ?>
+
 			<?php if ( ! empty( $errors ) ) : ?>
 				<div class="error"><?php echo esc_html( $errors['recaptcha'] ); ?></div>
 			<?php endif; ?>
@@ -240,6 +263,7 @@ class CCF_Field_Renderer {
 		$label = get_post_meta( $field_id, 'ccf_field_label', true );
 		$class_name = get_post_meta( $field_id, 'ccf_field_className', true );
 		$required = get_post_meta( $field_id, 'ccf_field_required', true );
+		$description = get_post_meta( $field_id, 'ccf_field_description', true );
 
 		$errors = CCF_Form_Handler::factory()->get_errors( $form_id, $slug );
 		$all_errors = CCF_Form_Handler::factory()->get_errors( $form_id );
@@ -276,6 +300,12 @@ class CCF_Field_Renderer {
 					<option <?php echo $selected; ?> value="<?php echo esc_attr( $choice['value'] ); ?>"><?php echo esc_html( $choice['label'] ); ?></option>
 				<?php endforeach; ?>
 			</select>
+
+			<?php if ( ! empty( $description ) ) : ?>
+				<div class="field-description">
+					<?php echo esc_html( $description ); ?>
+				</div>
+			<?php endif; ?>
 
 			<?php if ( ! empty( $errors['required'] ) ) : ?>
 				<div class="error"><?php echo esc_html( $errors['required'] ); ?></div>
@@ -314,6 +344,7 @@ class CCF_Field_Renderer {
 		$label = get_post_meta( $field_id, 'ccf_field_label', true );;
 		$required = get_post_meta( $field_id, 'ccf_field_required', true );
 		$class_name = get_post_meta( $field_id, 'ccf_field_className', true );
+		$description = get_post_meta( $field_id, 'ccf_field_description', true );
 
 		$errors = CCF_Form_Handler::factory()->get_errors( $form_id, $slug );
 		$all_errors = CCF_Form_Handler::factory()->get_errors( $form_id );
@@ -350,6 +381,12 @@ class CCF_Field_Renderer {
 					<input class="field-input" name="ccf_field_<?php echo esc_attr( $slug ); ?>[]" type="checkbox" <?php echo $checked; ?> value="<?php echo esc_attr( $choice['value'] ); ?>"> <span><?php echo esc_html( $choice['label'] ); ?></span>
 				</div>
 			<?php endforeach; ?>
+
+			<?php if ( ! empty( $description ) ) : ?>
+				<div class="field-description">
+					<?php echo esc_html( $description ); ?>
+				</div>
+			<?php endif; ?>
 
 			<?php if ( ! empty( $errors ) ) : ?>
 				<div class="error"><?php echo esc_html( $errors['required'] ); ?></div>
@@ -388,6 +425,7 @@ class CCF_Field_Renderer {
 		$label = get_post_meta( $field_id, 'ccf_field_label', true );;
 		$required = get_post_meta( $field_id, 'ccf_field_required', true );
 		$class_name = get_post_meta( $field_id, 'ccf_field_className', true );
+		$description = get_post_meta( $field_id, 'ccf_field_description', true );
 
 		$errors = CCF_Form_Handler::factory()->get_errors( $form_id, $slug );
 		$all_errors = CCF_Form_Handler::factory()->get_errors( $form_id );
@@ -425,6 +463,12 @@ class CCF_Field_Renderer {
 				</div>
 			<?php endforeach; ?>
 
+			<?php if ( ! empty( $description ) ) : ?>
+				<div class="field-description">
+					<?php echo esc_html( $description ); ?>
+				</div>
+			<?php endif; ?>
+
 			<?php if ( ! empty( $errors ) ) : ?>
 				<div class="error"><?php echo esc_html( $errors['required'] ); ?></div>
 			<?php endif; ?>
@@ -449,6 +493,7 @@ class CCF_Field_Renderer {
 		$address_type = get_post_meta( $field_id, 'ccf_field_addressType', true );
 		$required = get_post_meta( $field_id, 'ccf_field_required', true );
 		$class_name = get_post_meta( $field_id, 'ccf_field_className', true );
+		$description = get_post_meta( $field_id, 'ccf_field_description', true );
 
 		$errors = CCF_Form_Handler::factory()->get_errors( $form_id, $slug );
 		$all_errors = CCF_Form_Handler::factory()->get_errors( $form_id );
@@ -529,6 +574,7 @@ class CCF_Field_Renderer {
 					<label for="ccf_field_<?php echo esc_attr( $slug ); ?>-zipcode" class="sub-label">ZIP Code</label>
 
 				</div>
+				<div class="ccf-clear"></div>
 			<?php } else if ( $address_type === 'international' ) { ?>
 				<div class="right">
 					<input value="<?php if ( ! empty( $state_post_value ) ) echo esc_attr( $state_post_value ); ?>" class="<?php if ( ! empty( $errors['state_required'] ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> type="text" name="ccf_field_<?php echo esc_attr( $slug ); ?>[state]" id="ccf_field_<?php echo esc_attr( $slug ); ?>-state">
@@ -558,7 +604,14 @@ class CCF_Field_Renderer {
 					<label for="ccf_field_<?php echo esc_attr( $slug ); ?>-country" class="sub-label">Country</label>
 
 				</div>
+				<div class="ccf-clear"></div>
 			<?php } ?>
+
+			<?php if ( ! empty( $description ) ) : ?>
+				<div class="field-description">
+					<?php echo esc_html( $description ); ?>
+				</div>
+			<?php endif; ?>
 		</div>
 
 		<?php
@@ -582,6 +635,7 @@ class CCF_Field_Renderer {
 		$required = get_post_meta( $field_id, 'ccf_field_required', true );
 		$class_name = get_post_meta( $field_id, 'ccf_field_className', true );
 		$phone_format = get_post_meta( $field_id, 'ccf_field_phoneFormat', true );
+		$description = get_post_meta( $field_id, 'ccf_field_description', true );
 
 		$errors = CCF_Form_Handler::factory()->get_errors( $form_id, $slug );
 		$all_errors = CCF_Form_Handler::factory()->get_errors( $form_id );
@@ -603,6 +657,12 @@ class CCF_Field_Renderer {
 				<?php echo esc_html( $label ); ?>
 			</label>
 			<input class="<?php if ( ! empty( $errors ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> type="text" name="ccf_field_<?php echo esc_attr( $slug ); ?>" id="ccf_field_<?php echo esc_attr( $slug ); ?>" placeholder="<?php echo esc_attr( $placeholder ); ?>" value="<?php if ( ! empty( $post_value ) ) { echo esc_attr( $post_value ); } else { echo esc_attr( $value ); } ?>">
+
+			<?php if ( ! empty( $description ) ) : ?>
+				<div class="field-description">
+					<?php echo esc_html( $description ); ?>
+				</div>
+			<?php endif; ?>
 
 			<?php if ( ! empty( $errors ) ) : ?>
 				<?php foreach ( $errors as $error ) : ?>
@@ -631,6 +691,7 @@ class CCF_Field_Renderer {
 		$placeholder = get_post_meta( $field_id, 'ccf_field_placeholder', true );
 		$required = get_post_meta( $field_id, 'ccf_field_required', true );
 		$class_name = get_post_meta( $field_id, 'ccf_field_className', true );
+		$description = get_post_meta( $field_id, 'ccf_field_description', true );
 
 		$errors = CCF_Form_Handler::factory()->get_errors( $form_id, $slug );
 		$all_errors = CCF_Form_Handler::factory()->get_errors( $form_id );
@@ -652,6 +713,12 @@ class CCF_Field_Renderer {
 				<?php echo esc_html( $label ); ?>
 			</label>
 			<input class="<?php if ( ! empty( $errors ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> type="text" name="ccf_field_<?php echo esc_attr( $slug ); ?>" id="ccf_field_<?php echo esc_attr( $slug ); ?>" placeholder="<?php echo esc_attr( $placeholder ); ?>" value="<?php if ( ! empty( $post_value ) ) { echo esc_attr( $post_value ); } else { echo esc_attr( $value ); } ?>">
+
+			<?php if ( ! empty( $description ) ) : ?>
+				<div class="field-description">
+					<?php echo esc_html( $description ); ?>
+				</div>
+			<?php endif; ?>
 
 			<?php if ( ! empty( $errors ) ) : foreach ( $errors as $error ) : ?>
 				<div class="error"><?php echo esc_html( $error ); ?></div>
@@ -679,6 +746,7 @@ class CCF_Field_Renderer {
 		$email_confirmation = get_post_meta( $field_id, 'ccf_field_emailConfirmation', true );
 		$required = get_post_meta( $field_id, 'ccf_field_required', true );
 		$class_name = get_post_meta( $field_id, 'ccf_field_className', true );
+		$description = get_post_meta( $field_id, 'ccf_field_description', true );
 
 		$errors = CCF_Form_Handler::factory()->get_errors( $form_id, $slug );
 		$all_errors = CCF_Form_Handler::factory()->get_errors( $form_id );
@@ -735,6 +803,12 @@ class CCF_Field_Renderer {
 				<?php endif; ?>
 				<div class="ccf-clear"></div>
 			<?php } ?>
+
+			<?php if ( ! empty( $description ) ) : ?>
+				<div class="field-description">
+					<?php echo esc_html( $description ); ?>
+				</div>
+			<?php endif; ?>
 		</div>
 
 		<?php
@@ -755,6 +829,7 @@ class CCF_Field_Renderer {
 		$label = get_post_meta( $field_id, 'ccf_field_label', true );
 		$required = get_post_meta( $field_id, 'ccf_field_required', true );
 		$class_name = get_post_meta( $field_id, 'ccf_field_className', true );
+		$description = get_post_meta( $field_id, 'ccf_field_description', true );
 
 		$errors = CCF_Form_Handler::factory()->get_errors( $form_id, $slug );
 		$all_errors = CCF_Form_Handler::factory()->get_errors( $form_id );
@@ -793,7 +868,14 @@ class CCF_Field_Renderer {
 				<?php endif; ?>
 				<label for="ccf_field_<?php echo esc_attr( $slug ); ?>-last" class="sub-label">Last</label>
 			</div>
+
 			<div class="ccf-clear"></div>
+
+			<?php if ( ! empty( $description ) ) : ?>
+				<div class="field-description">
+					<?php echo esc_html( $description ); ?>
+				</div>
+			<?php endif; ?>
 		</div>
 
 		<?php
@@ -816,6 +898,7 @@ class CCF_Field_Renderer {
 		$class_name = get_post_meta( $field_id, 'ccf_field_className', true );
 		$show_date = get_post_meta( $field_id, 'ccf_field_showDate', true );
 		$show_time = get_post_meta( $field_id, 'ccf_field_showTime', true );
+		$description = get_post_meta( $field_id, 'ccf_field_description', true );
 
 		$errors = CCF_Form_Handler::factory()->get_errors( $form_id, $slug );
 		$all_errors = CCF_Form_Handler::factory()->get_errors( $form_id );
@@ -891,6 +974,13 @@ class CCF_Field_Renderer {
 				</div>
 				<div class="ccf-clear"></div>
 			<?php } ?>
+
+			<?php if ( ! empty( $description ) ) : ?>
+				<div class="field-description">
+					<?php echo esc_html( $description ); ?>
+				</div>
+			<?php endif; ?>
+
 			<?php if ( ! empty( $errors ) ) : foreach ( $errors as $error ) : ?>
 				<div class="error"><?php echo esc_html( $error ); ?></div>
 			<?php endforeach; endif; ?>
@@ -916,6 +1006,7 @@ class CCF_Field_Renderer {
 		$placeholder = get_post_meta( $field_id, 'ccf_field_placeholder', true );
 		$required = get_post_meta( $field_id, 'ccf_field_required', true );
 		$class_name = get_post_meta( $field_id, 'ccf_field_className', true );
+		$description = get_post_meta( $field_id, 'ccf_field_description', true );
 
 		$errors = CCF_Form_Handler::factory()->get_errors( $form_id, $slug );
 		$all_errors = CCF_Form_Handler::factory()->get_errors( $form_id );
@@ -937,6 +1028,12 @@ class CCF_Field_Renderer {
 				<?php echo esc_html( $label ); ?>
 			</label>
 			<textarea class="<?php if ( ! empty( $errors ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> name="ccf_field_<?php echo esc_attr( $slug ); ?>" id="ccf_field_<?php echo esc_attr( $slug ); ?>" placeholder="<?php echo esc_attr( $placeholder ); ?>"><?php if ( ! empty( $post_value ) ) { echo esc_attr( $post_value ); } else { echo esc_attr( $value ); } ?></textarea>
+
+			<?php if ( ! empty( $description ) ) : ?>
+				<div class="field-description">
+					<?php echo esc_html( $description ); ?>
+				</div>
+			<?php endif; ?>
 
 			<?php if ( ! empty( $errors ) ) : ?>
 				<div class="error"><?php echo esc_html( $errors['required'] ); ?></div>

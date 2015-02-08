@@ -14,6 +14,7 @@ class CCFTestBase extends WP_UnitTestCase {
 		'label' => 'Field Label',
 		'value' => 'value',
 		'placeholder' => 'placeholder',
+		'description' => 'test description',
 		'slug' => 'slug',
 		'required' => false,
 		'className' => 'class-name',

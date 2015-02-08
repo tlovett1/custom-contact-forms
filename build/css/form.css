@@ -20,6 +20,10 @@
     opacity: 0;
     float: none;
     margin: 0 0 0 6px; }
+  .ccf-form-wrapper .field-description {
+    font-size: 85%;
+    clear: left;
+    margin-top: 6px; }
   .ccf-form-wrapper .error {
     color: #ff0000;
     float: right;
