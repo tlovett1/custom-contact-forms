@@ -342,7 +342,8 @@
         display: inline-block; }
       .ccf-main-modal .ccf-form-pane .right-sidebar textarea {
         width: 100%;
-        height: 80px; }
+        height: 80px;
+        margin-top: 5px; }
       .ccf-main-modal .ccf-form-pane .right-sidebar .field-html {
         height: 150px;
         width: 100%; }

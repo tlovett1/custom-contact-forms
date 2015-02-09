@@ -318,11 +318,12 @@ class CCF_Form_Manager {
 					<div>
 						<label for="ccf-field-file-extensions"><?php esc_html_e( 'Allowed File Extensions (comma separate):', 'custom-contact-forms' ); ?></label>
 						<input id="ccf-field-file-extensions" class="field-file-extensions" type="text" value="{{ field.fileExtensions }}">
+						<span class="explain"><?php _e( 'If left blank, will default to all extensions registered by WordPress. If you use a file extension or mime type not <a href="http://codex.wordpress.org/Function_Reference/get_allowed_mime_types">whitelisted by WordPress</a>, you will need to filter and manually whitelist the new extension.', 'custom-contact-forms' ); ?></span>
 					</div>
 					<div>
 						<label for="ccf-field-max-file-size"><?php esc_html_e( 'Max File Size (in MB):', 'custom-contact-forms' ); ?></label>
 						<input id="ccf-field-max-file-size" class="field-max-file-size" type="text" value="{{ field.maxFileSize }}">
-						<span class="explain"><?php printf( esc_html__( 'Maximum allowed by server is %d MB', 'custom-contact-forms' ), (double) size_format( $max_upload_size ) ); ?></span>
+						<span class="explain"><?php printf( esc_html__( 'If left blank, will default to %d MB. Maximum allowed by server is %d MB.', 'custom-contact-forms' ), (double) size_format( $max_upload_size ), (double) size_format( $max_upload_size ) ); ?></span>
 					</div>
 					<div>
 						<label for="ccf-field-required"><?php esc_html_e( 'Required:', 'custom-contact-forms' ); ?></label>
