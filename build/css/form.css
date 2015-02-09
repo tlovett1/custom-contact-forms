@@ -46,6 +46,7 @@
       margin-bottom: 6px;
       font-weight: bold; }
       .ccf-form-wrapper .field label .required {
+        padding-right: .3em;
         color: #ff0000; }
     .ccf-form-wrapper .field input[type="text"], .ccf-form-wrapper .field textarea {
       width: 100%;
