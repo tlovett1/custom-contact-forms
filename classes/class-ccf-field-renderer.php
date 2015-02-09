@@ -94,6 +94,17 @@ class CCF_Field_Renderer {
 			}
 		}
 
+		$max_upload_size = wp_max_upload_size();
+		if ( ! $max_upload_size ) {
+			$max_upload_size = 0;
+		}
+
+		$formatted_file_size = size_format( $max_upload_size );
+
+		if ( $max_file_size ) {
+			$formatted_file_size = $max_file_size;
+		}
+
 		ob_start();
 		?>
 
@@ -105,11 +116,14 @@ class CCF_Field_Renderer {
 			
 			<input class="<?php if ( ! empty( $errors ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> type="file" name="ccf_field_<?php echo esc_attr( $slug ); ?>" id="ccf_field_<?php echo esc_attr( $slug ); ?>" placeholder="<?php echo esc_attr( $placeholder ); ?>" value="<?php if ( ! empty( $post_value ) ) { echo esc_attr( $post_value ); } else { echo esc_attr( $value ); } ?>">
 
-			<?php if ( ! empty( $description ) ) : ?>
-				<div class="field-description">
-					<?php echo esc_html( $description ); ?>
-				</div>
-			<?php endif; ?>
+
+			<div class="field-description">
+				<?php if ( ! empty( $file_extensions ) ) : ?>
+					<?php echo sprintf( esc_html__( 'Allowed file extensions are %s. ', 'custom-contact-forms' ), implode( ', ', explode( ',', str_replace( ' ', '', $file_extensions ) ) ) ); ?>
+				<?php endif; ?>
+				<?php echo sprintf( esc_html__( 'Max file size is %d MB. ', 'custom-contact-forms' ), (int) $formatted_file_size ); ?>
+				<?php echo esc_html( $description ); ?>
+			</div>
 
 			<?php if ( ! empty( $errors ) ) : ?>
 				<?php foreach ( $errors as $error ) : ?>

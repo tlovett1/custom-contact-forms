@@ -936,9 +936,19 @@ class CCF_Form_Manager {
 		<script type="text/html" id="ccf-file-preview-template">
 			<label>{{ field.label }} <# if ( field.required ) { #><span>*</span><# } #></label>
 			<input disabled type="file" placeholder="{{ field.placeholder }}" value="{{ field.value }}">
-			<# if ( field.description ) { #>
-				<div class="field-description">{{ field.description }}</div>
-			<# } #>
+			<div class="field-description">
+				<# if ( field.fileExtensions ) {
+					var extensions = field.fileExtensions.toLowerCase().replace( /\s/g, '' ).split( ',' ).join( ', ' );
+					var file_size = <?php echo floor( $max_upload_size / 1000 / 1000 ); ?>;
+					if ( field.maxFileSize ) {
+						file_size = field.maxFileSize;
+					}
+					#>
+					<?php esc_html_e( 'Allowed file extensions are {{ extensions }}. ', 'custom-contact-forms' ); ?>
+				<# } #>
+				<?php esc_html_e( 'Max file size is {{ file_size }} MB. ', 'custom-contact-forms' ); ?>
+				{{ field.description }}
+			</div>
 		</script>
 
 		<script type="text/html" id="ccf-recaptcha-preview-template">
