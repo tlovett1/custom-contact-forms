@@ -367,6 +367,7 @@
 				var frame = document.getElementById( 'ccf_form_frame_' + formId );
 				var $loading = $( form.querySelectorAll( '.loading-img' )[0] );
 				var $frame = $( frame );
+				var $button = $( button );
 
 				var fieldsBySlug = {};
 
@@ -431,19 +432,15 @@
 
 				});
 
-				button.onclick = function( event ) {
-					event.returnFalse = false;
-
-					if ( event.preventDefault ) {
-						event.preventDefault();
-					}
+				$button.on( 'click', function( event ) {
+					event.preventDefault();
 
 					form.target = 'ccf_form_frame_' + formId;
 					form.action = ccfSettings.ajaxurl;
 					$form.submit();
 
 					return false;
-				};
+				});
 
 				function formSubmit( event ) {
 					var fields = formWrapper.querySelectorAll( '.field' );
