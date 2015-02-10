@@ -502,8 +502,6 @@
 								scrollTop: $firstError.offset().top
 							}, 500 );
 						}
-
-						return false;
 					} else {
 						// Notify form complete, mostly for unit testing
 						$form.trigger( 'ccfFormSuccess' );
@@ -513,7 +511,7 @@
 						$loading.animate( { opacity: 100 } );
 					}
 
-					return true;
+					return false;
 				}
 
 				$form.on( 'submit', formSubmit );
