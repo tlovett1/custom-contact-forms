@@ -371,14 +371,19 @@
 				var fieldsBySlug = {};
 
 				$frame.on( 'load', function() {
-					var data;
+					var data,
+						content = $frame.contents().find( 'body' ).text();
+
+					if ( ! content ) {
+						return false;
+					}
 
 					form.className = form.className.replace( / loading/i, '' );
 					$loading.animate( { opacity: 0 } );
 					_verifiedRecaptcha[formId] = false;
 
 					try {
-						data = $.parseJSON( frame.contentWindow.document.body.innerText );
+						data = $.parseJSON( content );
 					} catch ( error ) {
 						var errorNode = document.createElement( 'div' );
 						errorNode.className = 'error unknown-error';
