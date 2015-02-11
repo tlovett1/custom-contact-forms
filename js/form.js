@@ -287,11 +287,15 @@
 						this.errors[this.inputs[0].getAttribute( 'name' )].fileSize = this.wrapper.lastChild;
 					}
 				} else if ( typeof ActiveXObject !== 'undefined' ) {
-					var fso = new ActiveXObject( 'Scripting.FileSystemObject' );
-					var ieFile = fso.getFile( file.value );
+					try {
+						var fso = new ActiveXObject( 'Scripting.FileSystemObject' );
+						var ieFile = fso.getFile( file.value );
 
-					if ( maxFileSizeBytes < ieFile.size ) {
-						this.errors[this.inputs[0].getAttribute( 'name' )].fileSize = this.wrapper.lastChild;
+						if ( maxFileSizeBytes < ieFile.size ) {
+							this.errors[this.inputs[0].getAttribute( 'name' )].fileSize = this.wrapper.lastChild;
+						}
+					} catch ( error ) {
+						// Just move on
 					}
 				}
 			}
