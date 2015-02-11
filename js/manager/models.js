@@ -23,7 +23,7 @@
 	 */
 	var _modelDecode = function( excludeKeys ) {
 		for ( var key in this.attributes ) {
-			if ( excludeKeys.indexOf( key ) === -1 ) {
+			if ( _.indexOf( excludeKeys, key ) === -1 ) {
 				var value = this.get( key );
 
 				if ( typeof value === 'string' && value !== '' ) {
