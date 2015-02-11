@@ -320,12 +320,12 @@
 					newErrorNode = document.createElement( 'div' );
 					newErrorNode.className = 'error ' + errorKey + '-error';
 					newErrorNode.setAttribute( 'data-field-name', field );
-					newErrorNode.innerText = ccfSettings[errorKey];
+					newErrorNode.innerHTML = ccfSettings[errorKey];
 
 					if ( 'fileExtension' === errorKey && fileExtensions ) {
-						newErrorNode.innerText += ' (' + fileExtensions + ')';
+						newErrorNode.innerHTML += ' (' + fileExtensions + ')';
 					} else if ( 'fileSize' === errorKey && maxFileSize ) {
-						newErrorNode.innerText += ' ' + maxFileSize + ' MB';
+						newErrorNode.innerHTML += ' ' + maxFileSize + ' MB';
 					}
 
 					this.errors[field][errorKey].parentNode.insertBefore( newErrorNode, this.errors[field][errorKey].nextSibling );
