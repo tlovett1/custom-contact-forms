@@ -35,6 +35,12 @@ For questions, feature requests, and support concerning the Custom Contact Forms
 
 == Changelog ==
 
+= 6.4 =
+* File upload field
+* Description field added to each field type
+* Improved unit testing
+* CCF widget
+
 = 6.3.5 =
 * Encode notification emails in UTF-8
 
@@ -52,10 +58,6 @@ For questions, feature requests, and support concerning the Custom Contact Forms
 * Restructure unit test folder
 * Add .jshintrc
 * Clean up bower.json and composer.json
-
-= 6.4 =
-* File upload field
-* Description field added to each field type
 
 = 6.3.2 =
 * Change underscores style templating to account for when ASP tags are turned on.
