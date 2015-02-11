@@ -8,6 +8,8 @@
 
 	var _verifiedRecaptcha = {};
 
+	var _formFrameOnload = {};
+
 	window.ccfRecaptchaOnload = function() {
 		var recaptchas = document.querySelectorAll( '.ccf-recaptcha-wrapper' );
 
@@ -348,6 +350,12 @@
 
 	wp.ccf.validators.radio = wp.ccf.validators.radio || choiceValidator;
 
+	wp.ccf.iframeOnload = function( formId ) {
+		if ( _formFrameOnload[formId] ) {
+			_formFrameOnload[formId]();
+		}
+	};
+
 	wp.ccf.setupDOM = wp.ccf.setupDOM || function() {
 		var datepickers = document.querySelectorAll( '.ccf-datepicker' );
 
@@ -371,7 +379,7 @@
 
 				var fieldsBySlug = {};
 
-				$frame.on( 'load', function() {
+				_formFrameOnload[formId] = function() {
 					var data,
 						content = $frame.contents().find( 'body' ).text();
 
@@ -430,7 +438,7 @@
 						});
 					}
 
-				});
+				};
 
 				$button.on( 'click', function( event ) {
 					event.preventDefault();
@@ -506,6 +514,8 @@
 						formWrapper.className = formWrapper.className.replace( / loading/i, '' ) + ' loading';
 
 						$loading.animate( { opacity: 100 } );
+
+						return true;
 					}
 
 					return false;

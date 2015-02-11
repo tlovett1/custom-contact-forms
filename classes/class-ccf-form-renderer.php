@@ -170,7 +170,7 @@ class CCF_Form_Renderer {
 					<input type="hidden" name="form_nonce" value="<?php echo wp_create_nonce( 'ccf_form' ); ?>">
 				</form>
 
-				<iframe class="ccf-form-frame" id="ccf_form_frame_<?php echo (int) $form_id; ?>" name="ccf_form_frame_<?php echo (int) $form_id; ?>"></iframe>
+				<iframe onload="wp.ccf.iframeOnload( <?php echo (int) $form_id; ?> );" class="ccf-form-frame" id="ccf_form_frame_<?php echo (int) $form_id; ?>" name="ccf_form_frame_<?php echo (int) $form_id; ?>"></iframe>
 			</div>
 
 			<?php
