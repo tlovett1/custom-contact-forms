@@ -690,6 +690,10 @@ class CCF_Form_Handler {
 						$field_id = $field_slug_to_id[$slug];
 						$label = get_post_meta( $field_id, 'ccf_field_label', true );
 						$type = get_post_meta( $field_id, 'ccf_field_type', true );
+
+						if ( 'hidden' === $type ) {
+							$label = esc_html__( '*Hidden Field*', 'custom-contact-forms' );
+						}
 						?>
 
 						<div>
