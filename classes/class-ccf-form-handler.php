@@ -564,7 +564,9 @@ class CCF_Form_Handler {
 		$submission_response = $this->process_submission();
 
 		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-			wp_send_json( $submission_response );
+			// Hack to fix IE prompting for download
+			echo wp_json_encode( $submission_response );
+			wp_die();
 		} else {
 			if ( ! empty( $submission_response['completion_redirect_url'] ) ) {
 				wp_redirect( esc_url_raw( $submission_response['completion_redirect_url'] ) );
