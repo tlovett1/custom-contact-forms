@@ -19,6 +19,7 @@ if [ "$input_variable" == "y" ]; then
 
     rm .travis.yml > /dev/null 2>&1
     rm Gruntfile.js > /dev/null 2>&1
+    rm Dockunit.json > /dev/null 2>&1
     rm phpunit.xml > /dev/null 2>&1
     rm .jshintrc > /dev/null 2>&1
 
