@@ -35,6 +35,9 @@ For questions, feature requests, and support concerning the Custom Contact Forms
 
 == Changelog ==
 
+= 6.4.2 =
+* Fix IE bug where browser was prompting for download
+
 = 6.4.1 =
 * Fix ie8 bug where dragging a selected field broke the manager.
 * Don't email field label for hidden fields
