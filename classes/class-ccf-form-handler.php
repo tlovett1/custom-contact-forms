@@ -716,6 +716,10 @@ class CCF_Form_Handler {
 
 									<?php echo esc_html( stripslashes( CCF_Submission_CPT::factory()->get_pretty_field_name( $field ) ) ); ?>
 
+								<?php elseif ( 'file' === $type ) : ?>
+
+									<a href="<?php echo esc_url( $field['url'] ); ?>"><?php echo esc_html( stripslashes( $field['file_name'] ) ); ?></a>
+
 								<?php elseif ( 'address' === $type ) : ?>
 
 									<?php echo esc_html( stripslashes( CCF_Submission_CPT::factory()->get_pretty_field_address( $field ) ) ); ?>
