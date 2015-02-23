@@ -39,10 +39,10 @@ class CCF_Form_Renderer {
 		}
 
 		wp_enqueue_style('ccf-jquery-ui', '//ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/jquery-ui.css');
-		wp_enqueue_script( 'ccf-google-recaptcha', '//www.google.com/recaptcha/api.js?ver=2&onload=ccfRecaptchaOnload&render=explicit' );
+		wp_enqueue_script( 'ccf-google-recaptcha', '//www.google.com/recaptcha/api.js?ver=2&onload=ccfRecaptchaOnload&render=explicit', array(), '1.0', true );
 		wp_enqueue_style( 'ccf-form', plugins_url( $css_form_path, dirname( __FILE__ ) ) );
 
-		wp_enqueue_script( 'ccf-form', plugins_url( $js_path, dirname( __FILE__ ) ), array( 'jquery-ui-datepicker', 'underscore', 'ccf-google-recaptcha' ), '1.1', false );
+		wp_enqueue_script( 'ccf-form', plugins_url( $js_path, dirname( __FILE__ ) ), array( 'jquery-ui-datepicker', 'underscore' ), '1.1', false );
 
 		$localized = array(
 			'ajaxurl' => esc_url_raw( admin_url( 'admin-ajax.php' ) ),
