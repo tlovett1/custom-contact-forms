@@ -11,7 +11,6 @@
 	var _formFrameOnload = {};
 
 	window.ccfRecaptchaOnload = function() {
-		console.log('recaptcha onload');
 		var recaptchas = document.querySelectorAll( '.ccf-recaptcha-wrapper' );
 
 		var setupCaptcha = function( formId ) {

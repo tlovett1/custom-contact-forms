@@ -55,7 +55,7 @@
       float: right;
       width: 47%; }
     .ccf-form-preview .field .field-description {
-      margin-top: 3px;
+      margin-top: 7px;
       clear: left; }
     .ccf-form-preview .field .left input[type="text"], .ccf-form-preview .field .left select, .ccf-form-preview .field .right input[type="text"], .ccf-form-preview .field .right select, .ccf-form-preview .field .full input[type="text"], .ccf-form-preview .field .full select {
       width: 100%;

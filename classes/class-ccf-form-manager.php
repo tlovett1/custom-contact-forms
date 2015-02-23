@@ -656,7 +656,7 @@ class CCF_Form_Manager {
 						<label for="ccf-field-phone-format"><?php esc_html_e( 'Format:', 'custom-contact-forms' ); ?></label>
 						<select id="ccf-field-phone-format" class="field-phone-format">
 							<option value="us">(xxx) xxx-xxxx</option>
-							<option value="international" <# if ( 'international' === field.format ) { #>selected="selected"<# } #>><?php esc_html_e( 'International', 'custom-contact-forms' ); ?></option>
+							<option value="international" <# if ( 'international' === field.phoneFormat ) { #>selected="selected"<# } #>><?php esc_html_e( 'International', 'custom-contact-forms' ); ?></option>
 						</select>
 					</div>
 					<div>
@@ -1188,7 +1188,7 @@ class CCF_Form_Manager {
 
 		<script type="text/html" id="ccf-phone-preview-template">
 			<label>{{ field.label }} <# if ( field.required ) { #><span>*</span><# } #></label>
-			<input placeholder="<# if ( field.placeholder ) { #>{{ field.placeholder }}<# } else { #>(301) 101-8976<# } #>" disabled type="text" value="{{ field.value }}">
+			<input placeholder="<# if ( field.placeholder ) { #>{{ field.placeholder }}<# } else if ( 'us' === field.phoneFormat ) { #>(301) 101-8976<# } #>" disabled type="text" value="{{ field.value }}">
 			<# if ( field.description ) { #>
 				<div class="field-description">{{ field.description }}</div>
 			<# } #>
