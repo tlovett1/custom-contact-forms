@@ -55,6 +55,20 @@ class CCF_Form_Manager {
 
 		?>
 
+		<script type="text/html" id="ccf-error-modal-template">
+			<div class="notification-dialog-background"></div>
+			<div class="notification-dialog">
+				<div class="close">&times;</div>
+				<div class="message">
+					<div class="title"><?php esc_html_e( 'Custom Contact Forms is experiencing issues.', 'custom-contact-forms' ); ?></div>
+
+					<p>
+						<?php printf( __( 'There is an issue with synchronizing data. Please try deactivating all other plugins and activating the TwentyFifteen theme. If this fixes the problem, you have a plugin or theme conflict. If it does not, please post in the <a href="%s">support forums</a> or <a href="%s">Github</a>.', 'custom-contact-forms' ), 'https://wordpress.org/support/plugin/custom-contact-forms', 'http://github.com/tlovett1/custom-contact-forms' ); ?>
+					</p>
+				</div>
+			</div>
+		</script>
+
 		<script type="text/html" id="ccf-main-modal-template">
 			<div class="wrap">
 				<a class="close-icon">&times;</a>

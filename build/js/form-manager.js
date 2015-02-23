@@ -1957,7 +1957,9 @@
 
 					if ( allReqsMet ) {
 
-						SELF.model.save( {}, { context: 'edit' } ).done( function( response ) {
+						SELF.model.save( {}, { context: 'edit' }).error( function( jqXHR, textStatus, errorThrown ) {
+							wp.ccf.errorModal.show();
+						}).done( function( response ) {
 							if (ccfSettings.single && ! ccfSettings.postId ) {
 								window.location = ccfSettings.adminUrl + 'post.php?post=' + SELF.model.get( 'ID' ) + '&action=edit#ccf-form/' + SELF.model.get( 'ID' );
 							}
@@ -2184,7 +2186,11 @@
 			showPage: function( page ) {
 				var SELF = this;
 
-				var fetch = this.collection.fetch( { data: { page: ( page ) } } );
+				var fetch = this.collection.fetch( { data: { page: ( page ) } });
+
+				fetch.error( function() {
+					wp.ccf.errorModal.show();
+				});
 
 				fetch.done( function() {
 					var rowContainer = SELF.el.querySelectorAll( '.rows' )[0];
@@ -2436,6 +2442,10 @@
 
 				var fetch = this.collection.fetch( { data: { page: ( page ) } } );
 
+				fetch.error( function() {
+					wp.ccf.errorModal.show();
+				});
+
 				fetch.done( function() {
 					var rowContainer = SELF.el.querySelectorAll( '.submission-rows' )[0];
 					var newRowContainer = document.createElement( 'tbody');
@@ -2488,6 +2498,40 @@
 				}
 
 				return SELF;
+			}
+		}
+	);
+
+	wp.ccf.views.ErrorModal = wp.ccf.views.ErrorModal || Backbone.View.extend(
+		{
+			template: wp.ccf.utils.template( 'ccf-error-modal-template'),
+			tagName: 'div',
+			className: 'ccf-error-modal',
+
+			events: {
+				'click .close': 'hide'
+			},
+
+			hide: function() {
+				this.el.className = this.el.className.replace( ' show', '' );
+			},
+
+			show: function() {
+				this.el.className = this.el.className.replace( ' show', '' ) + ' show';
+			},
+
+			toggle: function() {
+				if ( this.el.className.match( ' show') ) {
+					this.hide();
+				} else {
+					this.show();
+				}
+			},
+
+			render: function() {
+				this.el.innerHTML = this.template();
+
+				return this;
 			}
 		}
 	);
@@ -2620,6 +2664,8 @@
 
 		currentForm: null,
 
+		errorModal: null,
+
 		// Used for single form pages
 		_currentFormDeferred: null,
 
@@ -2630,6 +2676,12 @@
 
 			this.instance.show();
 			return this.instance;
+		},
+
+		initErrorModal: function() {
+			this.errorModal = new wp.ccf.views.ErrorModal().render();
+			var body = document.getElementsByTagName( 'body' )[0];
+			body.appendChild( this.errorModal.el );
 		},
 
 		switchToForm: function( form ) {
@@ -2733,6 +2785,8 @@
 			_.extend( this.dispatcher, Backbone.Events );
 
 			new wp.ccf.router();
+
+			SELF.initErrorModal();
 
 			var single = false;
 

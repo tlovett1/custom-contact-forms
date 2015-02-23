@@ -1101,7 +1101,9 @@
 
 					if ( allReqsMet ) {
 
-						SELF.model.save( {}, { context: 'edit' } ).done( function( response ) {
+						SELF.model.save( {}, { context: 'edit' }).error( function( jqXHR, textStatus, errorThrown ) {
+							wp.ccf.errorModal.show();
+						}).done( function( response ) {
 							if (ccfSettings.single && ! ccfSettings.postId ) {
 								window.location = ccfSettings.adminUrl + 'post.php?post=' + SELF.model.get( 'ID' ) + '&action=edit#ccf-form/' + SELF.model.get( 'ID' );
 							}
@@ -1328,7 +1330,11 @@
 			showPage: function( page ) {
 				var SELF = this;
 
-				var fetch = this.collection.fetch( { data: { page: ( page ) } } );
+				var fetch = this.collection.fetch( { data: { page: ( page ) } });
+
+				fetch.error( function() {
+					wp.ccf.errorModal.show();
+				});
 
 				fetch.done( function() {
 					var rowContainer = SELF.el.querySelectorAll( '.rows' )[0];
@@ -1580,6 +1586,10 @@
 
 				var fetch = this.collection.fetch( { data: { page: ( page ) } } );
 
+				fetch.error( function() {
+					wp.ccf.errorModal.show();
+				});
+
 				fetch.done( function() {
 					var rowContainer = SELF.el.querySelectorAll( '.submission-rows' )[0];
 					var newRowContainer = document.createElement( 'tbody');
@@ -1632,6 +1642,40 @@
 				}
 
 				return SELF;
+			}
+		}
+	);
+
+	wp.ccf.views.ErrorModal = wp.ccf.views.ErrorModal || Backbone.View.extend(
+		{
+			template: wp.ccf.utils.template( 'ccf-error-modal-template'),
+			tagName: 'div',
+			className: 'ccf-error-modal',
+
+			events: {
+				'click .close': 'hide'
+			},
+
+			hide: function() {
+				this.el.className = this.el.className.replace( ' show', '' );
+			},
+
+			show: function() {
+				this.el.className = this.el.className.replace( ' show', '' ) + ' show';
+			},
+
+			toggle: function() {
+				if ( this.el.className.match( ' show') ) {
+					this.hide();
+				} else {
+					this.show();
+				}
+			},
+
+			render: function() {
+				this.el.innerHTML = this.template();
+
+				return this;
 			}
 		}
 	);

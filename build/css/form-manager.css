@@ -466,4 +466,42 @@
         color: #aaa;
         background: #f0f0f0; }
 
+.ccf-error-modal {
+  display: none; }
+  .ccf-error-modal.show {
+    display: block; }
+  .ccf-error-modal .ccf-notification-dialog-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #000;
+    opacity: 0.7;
+    filter: alpha(opacity=70);
+    z-index: 1000000; }
+  .ccf-error-modal .notification-dialog {
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    width: 450px;
+    margin-left: -225px;
+    background: #fff;
+    -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+    line-height: 1.5;
+    z-index: 1000005; }
+    .ccf-error-modal .notification-dialog .close {
+      font-size: 25px;
+      position: absolute;
+      right: 10px;
+      cursor: pointer; }
+    .ccf-error-modal .notification-dialog .message {
+      margin: 25px;
+      text-align: center; }
+      .ccf-error-modal .notification-dialog .message .title {
+        color: #23282d;
+        font-size: 1.3em;
+        margin: 0 0 1em 0; }
+
 /*# sourceMappingURL=form-manager.css.map */

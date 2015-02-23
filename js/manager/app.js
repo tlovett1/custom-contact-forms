@@ -11,6 +11,8 @@
 
 		currentForm: null,
 
+		errorModal: null,
+
 		// Used for single form pages
 		_currentFormDeferred: null,
 
@@ -21,6 +23,12 @@
 
 			this.instance.show();
 			return this.instance;
+		},
+
+		initErrorModal: function() {
+			this.errorModal = new wp.ccf.views.ErrorModal().render();
+			var body = document.getElementsByTagName( 'body' )[0];
+			body.appendChild( this.errorModal.el );
 		},
 
 		switchToForm: function( form ) {
@@ -124,6 +132,8 @@
 			_.extend( this.dispatcher, Backbone.Events );
 
 			new wp.ccf.router();
+
+			SELF.initErrorModal();
 
 			var single = false;
 
