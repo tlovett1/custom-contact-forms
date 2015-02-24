@@ -4,7 +4,7 @@
  * Plugin URI: http://www.taylorlovett.com
  * Description: Build beautiful custom forms the WordPress way. View live previews of your forms while you build them.
  * Author: Taylor Lovett
- * Version: 6.4.5
+ * Version: 6.4.6
  * Author URI: http://www.taylorlovett.com
  */
 

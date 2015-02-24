@@ -1102,7 +1102,13 @@
 					if ( allReqsMet ) {
 
 						SELF.model.save( {}, { context: 'edit' }).error( function( jqXHR, textStatus, errorThrown ) {
-							wp.ccf.errorModal.show();
+							var messageType = 'sync';
+
+							if ( parseInt( errorThrown.status ) === 501 || parseInt( errorThrown.status ) === 505 ) {
+								messageType = 'method';
+							}
+
+							wp.ccf.errorModal.render( messageType ).show();
 						}).done( function( response ) {
 							if (ccfSettings.single && ! ccfSettings.postId ) {
 								window.location = ccfSettings.adminUrl + 'post.php?post=' + SELF.model.get( 'ID' ) + '&action=edit#ccf-form/' + SELF.model.get( 'ID' );
@@ -1332,8 +1338,14 @@
 
 				var fetch = this.collection.fetch( { data: { page: ( page ) } });
 
-				fetch.error( function() {
-					wp.ccf.errorModal.show();
+				fetch.error( function( jqXHR, textStatus, errorThrown ) {
+					var messageType = 'sync';
+
+					if ( parseInt( errorThrown.status ) === 501 || parseInt( errorThrown.status ) === 505 ) {
+						messageType = 'method';
+					}
+
+					wp.ccf.errorModal.render( messageType ).show();
 				});
 
 				fetch.done( function() {
@@ -1586,8 +1598,14 @@
 
 				var fetch = this.collection.fetch( { data: { page: ( page ) } } );
 
-				fetch.error( function() {
-					wp.ccf.errorModal.show();
+				fetch.error( function( jqXHR, textStatus, errorThrown ) {
+					var messageType = 'sync';
+
+					if ( parseInt( errorThrown.status ) === 501 || parseInt( errorThrown.status ) === 505 ) {
+						messageType = 'method';
+					}
+
+					wp.ccf.errorModal.render( messageType ).show();
 				});
 
 				fetch.done( function() {
@@ -1672,8 +1690,16 @@
 				}
 			},
 
-			render: function() {
-				this.el.innerHTML = this.template();
+			render: function( messageType ) {
+				var context = {
+					messageType: ''
+				};
+
+				if ( messageType ) {
+					context.messageType = messageType;
+				}
+
+				this.el.innerHTML = this.template( context );
 
 				return this;
 			}
