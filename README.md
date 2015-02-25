@@ -223,6 +223,14 @@ Run the plugin tests:
 phpunit
 ```
 
+##### Dockunit
+
+This plugin contains a valid [Dockunit](https://www.npmjs.com/package/dockunit) file for running unit tests across a variety of environments locally (PHP 5.2 and 5.5). You can use Dockunit (after installing it via npm) by running:
+
+```bash
+dockunit
+```
+
 #### Extending the Plugin
 
 Coming soon.
