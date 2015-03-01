@@ -1495,6 +1495,7 @@ class CCF_Form_Manager {
 				'nonce' => wp_create_nonce( 'ccf_nonce' ),
 				'adminUrl' => esc_url_raw( admin_url() ),
 				'fieldLabels' => $field_labels,
+				'gmtOffset' => get_option( 'gmt_offset' ),
 				'adminEmail' => sanitize_email( get_option( 'admin_email' ) ),
 				'single' => ( 'ccf_form' === get_post_type() ) ? true : false,
 				'postId' => ( ! empty( $_GET['post'] ) ) ? (int) $_GET['post'] : null,

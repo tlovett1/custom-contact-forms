@@ -42,7 +42,11 @@
 	};
 
 	wp.ccf.utils.getPrettyPostDate = function( date ) {
-		date = moment( date );
+		date = moment.utc( date );
+
+		if ( ccfSettings.gmtOffset ) {
+			date = date.utcOffset( parseInt( ccfSettings.gmtOffset ) * 60 );
+		}
 
 		return date.format( 'h:mm a M/D/YYYY' );
 	};
@@ -126,7 +130,7 @@
 			return '-';
 		}
 
-		var date = moment( dateString );
+		var date = moment.utc( dateString );
 
 		if ( ! date.isValid() ) {
 			return ccfSettings.invalidDate;
