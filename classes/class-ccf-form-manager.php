@@ -1356,7 +1356,7 @@ class CCF_Form_Manager {
 				<# } #>
 			<# } ); #>
 			<td class="actions">
-				<a href="#TB_inline?height=300&amp;width=400&amp;inlineId=submission-content" data-submission-date="{{ submission.date }}" data-submission-id="{{ submission.ID }}" class="view"  data-icon="&#xe601;"></a>
+				<a href="#TB_inline?height=300&amp;width=400&amp;inlineId=submission-content" data-submission-date="{{ submission.date_gmt }}" data-submission-id="{{ submission.ID }}" class="view"  data-icon="&#xe601;"></a>
 				<a class="delete" data-icon="&#xe602;"></a>
 
 				<div class="submission-wrapper" id="ccf-submission-content-{{ submission.ID }}">
