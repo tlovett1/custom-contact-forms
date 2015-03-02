@@ -39,9 +39,12 @@ class CCF_Submission_CPT {
 	public function setup_cpt() {
 		$args = array(
 			'labels' => false,
-			'public' => false,
-			'query_var' => false,
+			'public' => true,
+			'exclude_from_search' => true,
+			'show_in_nav_menus' => false,
+			'show_ui' => false,
 			'publicly_queryable' => true,
+			'query_var' => false,
 			'rewrite' => false,
 			'capability_type' => 'post',
 			'hierarchical' => false,
