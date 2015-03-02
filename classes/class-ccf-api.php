@@ -129,6 +129,53 @@ class CCF_API extends WP_JSON_Posts {
 	}
 
 	/**
+	 * Retrieve a post.
+	 *
+	 * @uses get_post()
+	 * @since 6.4.9
+	 * @param int $id Post ID
+	 * @param string $context The context; 'view' (default) or 'edit'.
+	 * @return array Post entity
+	 */
+	public function get_post( $id, $context = 'view' ) {
+		$id = (int) $id;
+
+		$post = get_post( $id, ARRAY_A );
+
+		if ( empty( $id ) || empty( $post['ID'] ) ) {
+			return new WP_Error( 'json_post_invalid_id', __( 'Invalid post ID.' ), array( 'status' => 404 ) );
+		}
+
+		if ( ! json_check_post_permission( $post, 'read' ) ) {
+			return new WP_Error( 'json_user_cannot_read', __( 'Sorry, you cannot read this post.' ), array( 'status' => 401 ) );
+		}
+
+		// Link headers (see RFC 5988)
+
+		$response = new WP_JSON_Response();
+		// Modified now, no cache
+		$response->header( 'Cache-Control', 'no-cache, no-store, must-revalidate' );
+		$response->header( 'Expires', 'Wed, 11 Jan 1984 05:00:00 GMT' );
+		$response->header( 'Pragma', 'no-cache' );
+		$response->header( 'Last-Modified', gmdate( 'D, d M Y H:i:s' ) . ' GMT'  );
+
+		$post = $this->prepare_post( $post, $context );
+
+		if ( is_wp_error( $post ) ) {
+			return $post;
+		}
+
+		foreach ( $post['meta']['links'] as $rel => $url ) {
+			$response->link_header( $rel, $url );
+		}
+
+		$response->link_header( 'alternate',  get_permalink( $id ), array( 'type' => 'text/html' ) );
+		$response->set_data( $post );
+
+		return $response;
+	}
+
+	/**
 	 * Retrieve posts. We need to override last modified date
 	 *
 	 * @since 6.4.9
@@ -709,7 +756,7 @@ class CCF_API extends WP_JSON_Posts {
 			return new WP_Error( 'json_cannot_view_ccf_form', esc_html__( 'Sorry, you cannot view this form.', 'custom-contact-forms' ), array( 'status' => 403 ) );
 		}
 
-		return parent::get_post( $id, $context );
+		return $this->get_post( $id, $context );
 	}
 
 	/**
