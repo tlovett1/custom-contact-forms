@@ -213,7 +213,9 @@ class CCF_API extends WP_JSON_Posts {
 
 		// Modified now, no cache
 		$response->header( 'Cache-Control', 'no-cache, no-store, must-revalidate' );
-		$response->header( 'Last-Modified', date( 'D, d M Y H:i:s', current_time( 'timestamp', 1 ) ).' GMT' );
+		$response->header( 'Expires', 'Wed, 11 Jan 1984 05:00:00 GMT' );
+		$response->header( 'Pragma', 'no-cache' );
+		$response->header( 'Last-Modified', gmdate( 'D, d M Y H:i:s' ) . ' GMT'  );
 
 		foreach ( $posts_list as $post ) {
 			$post = get_object_vars( $post );
