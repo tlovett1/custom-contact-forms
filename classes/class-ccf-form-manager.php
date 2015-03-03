@@ -65,8 +65,6 @@ class CCF_Form_Manager {
 					<p>
 						<# if ( 'sync' === messageType ) { #>
 							<?php printf( __( 'There is an issue with synchronizing data. Please try deactivating all other plugins and activating the TwentyFifteen theme. If this fixes the problem, you have a plugin or theme conflict. If it does not, please post in the <a href="%s">support forums</a> or <a href="%s">Github</a>.', 'custom-contact-forms' ), 'https://wordpress.org/support/plugin/custom-contact-forms', 'http://github.com/tlovett1/custom-contact-forms' ); ?>
-						<# } else if ( 'method' === messageType ) { #>
-							<?php printf( __( 'Your web server does not support either PUT, PATCH, or DELETE HTTP methods. Please contact your host to resolve the issue.', 'custom-contact-forms' ), 'https://wordpress.org/support/plugin/custom-contact-forms', 'http://github.com/tlovett1/custom-contact-forms' ); ?>
 						<# } #>
 					</p>
 				</div>

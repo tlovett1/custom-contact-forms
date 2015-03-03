@@ -1104,10 +1104,6 @@
 						SELF.model.save( {}, { context: 'edit' }).error( function( jqXHR, textStatus, errorThrown ) {
 							var messageType = 'sync';
 
-							if ( parseInt( errorThrown.status ) === 501 || parseInt( errorThrown.status ) === 505 ) {
-								messageType = 'method';
-							}
-
 							wp.ccf.errorModal.render( messageType ).show();
 						}).done( function( response ) {
 							if (ccfSettings.single && ! ccfSettings.postId ) {
@@ -1340,10 +1336,6 @@
 
 				fetch.error( function( jqXHR, textStatus, errorThrown ) {
 					var messageType = 'sync';
-
-					if ( parseInt( errorThrown.status ) === 501 || parseInt( errorThrown.status ) === 505 ) {
-						messageType = 'method';
-					}
 
 					wp.ccf.errorModal.render( messageType ).show();
 				});
@@ -1600,10 +1592,6 @@
 
 				fetch.error( function( jqXHR, textStatus, errorThrown ) {
 					var messageType = 'sync';
-
-					if ( parseInt( errorThrown.status ) === 501 || parseInt( errorThrown.status ) === 505 ) {
-						messageType = 'method';
-					}
 
 					wp.ccf.errorModal.render( messageType ).show();
 				});
