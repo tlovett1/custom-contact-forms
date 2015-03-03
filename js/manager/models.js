@@ -18,6 +18,17 @@
 	};
 
 	/**
+	 * Many web servers don't support PUT
+	 */
+	var _sync = function( method, model, options ) {
+		options = options || {};
+
+		options.emulateHTTP = true;
+
+		return this.constructor.__super__.sync.call( this, method, model, options );
+	};
+
+	/**
 	 * We decode HTML entities after syncing then escape on output. The
 	 * point of this is to prevent double escaping.
 	 */
@@ -67,6 +78,8 @@
 			urlRoot: WP_API_Settings.root + '/ccf/forms',
 
 			set: _modelSet,
+
+			sync: _sync,
 
 			initialize: function() {
 				this.on( 'sync', this.decode, this );
@@ -194,7 +207,9 @@
 			defaults: {
 				ID: null,
 				data: {}
-			}
+			},
+
+			sync: _sync
 		}
 	);
 
@@ -227,7 +242,9 @@
 				});
 
 				return reqsMet;
-			}
+			},
+
+			sync: _sync
 		}
 	);
 

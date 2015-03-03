@@ -278,6 +278,17 @@
 	};
 
 	/**
+	 * Many web servers don't support PUT
+	 */
+	var _sync = function( method, model, options ) {
+		options = options || {};
+
+		options.emulateHTTP = true;
+
+		return this.constructor.__super__.sync.call( this, method, model, options );
+	};
+
+	/**
 	 * We decode HTML entities after syncing then escape on output. The
 	 * point of this is to prevent double escaping.
 	 */
@@ -327,6 +338,8 @@
 			urlRoot: WP_API_Settings.root + '/ccf/forms',
 
 			set: _modelSet,
+
+			sync: _sync,
 
 			initialize: function() {
 				this.on( 'sync', this.decode, this );
@@ -454,7 +467,9 @@
 			defaults: {
 				ID: null,
 				data: {}
-			}
+			},
+
+			sync: _sync
 		}
 	);
 
@@ -487,7 +502,9 @@
 				});
 
 				return reqsMet;
-			}
+			},
+
+			sync: _sync
 		}
 	);
 
@@ -781,6 +798,17 @@
 ( function( $, Backbone, _, ccfSettings ) {
 	'use strict';
 
+	/**
+	 * Many web servers don't support PUT
+	 */
+	var _sync = function( method, model, options ) {
+		options = options || {};
+
+		options.emulateHTTP = true;
+
+		return this.constructor.__super__.sync.call( this, method, model, options );
+	};
+
 	wp.ccf.collections = wp.ccf.collections || {};
 
 	wp.ccf.collections.Forms = wp.ccf.collections.Forms || wp.api.collections.Posts.extend(
@@ -795,6 +823,8 @@
 				this.constructor.__super__.initialize();
 				this.formsFetching = {};
 			},
+
+			sync: _sync,
 
 			remove: function( model, options ) {
 				options = options || {};
@@ -829,7 +859,9 @@
 				if ( options && options.formId ) {
 					this.formId = options.formId;
 				}
-			}
+			},
+
+			sync: _sync
 		}
 	);
 
@@ -847,7 +879,9 @@
 				if ( options && options.formId ) {
 					this.formId = options.formId;
 				}
-			}
+			},
+
+			sync: _sync
 		}
 	);
 

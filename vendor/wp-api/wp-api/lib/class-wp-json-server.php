@@ -218,7 +218,12 @@ class WP_JSON_Server implements WP_JSON_ResponseHandler {
 		}
 
 		$this->path           = $path;
-		$this->method         = $_SERVER['REQUEST_METHOD'];
+
+		$this->method = $_SERVER['REQUEST_METHOD'];
+		if ( ! empty( $_SERVER['HTTP_X_HTTP_METHOD_OVERRIDE'] ) ) {
+			$this->method = $_SERVER['HTTP_X_HTTP_METHOD_OVERRIDE'];
+		}
+
 		$this->params['GET']  = $_GET;
 		$this->params['POST'] = $_POST;
 		$this->headers        = $this->get_headers( $_SERVER );

@@ -1,6 +1,17 @@
 ( function( $, Backbone, _, ccfSettings ) {
 	'use strict';
 
+	/**
+	 * Many web servers don't support PUT
+	 */
+	var _sync = function( method, model, options ) {
+		options = options || {};
+
+		options.emulateHTTP = true;
+
+		return this.constructor.__super__.sync.call( this, method, model, options );
+	};
+
 	wp.ccf.collections = wp.ccf.collections || {};
 
 	wp.ccf.collections.Forms = wp.ccf.collections.Forms || wp.api.collections.Posts.extend(
@@ -15,6 +26,8 @@
 				this.constructor.__super__.initialize();
 				this.formsFetching = {};
 			},
+
+			sync: _sync,
 
 			remove: function( model, options ) {
 				options = options || {};
@@ -49,7 +62,9 @@
 				if ( options && options.formId ) {
 					this.formId = options.formId;
 				}
-			}
+			},
+
+			sync: _sync
 		}
 	);
 
@@ -67,7 +82,9 @@
 				if ( options && options.formId ) {
 					this.formId = options.formId;
 				}
-			}
+			},
+
+			sync: _sync
 		}
 	);
 
