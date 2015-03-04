@@ -810,7 +810,7 @@ class CCF_Form_Handler {
 					}
 
 					foreach ( $email_addresses as $email ) {
-						$subject = sprintf( __( '%s: Form Submission to "%s"', 'custom-contact-forms' ), esc_html( get_bloginfo( 'name' ) ), esc_html( get_the_title( $form_id ) ) );
+						$subject = sprintf( __( '%s: Form Submission to "%s"', 'custom-contact-forms' ), wp_strip_all_tags( get_bloginfo( 'name' ) ), wp_strip_all_tags( get_the_title( $form_id ) ) );
 						$subject = apply_filters( 'ccf_email_subject', $subject, $form_id, $email, $form_page );
 						wp_mail( $email, $subject, apply_filters( 'ccf_email_content', $message, $form_id, $email, $form_page ), apply_filters( 'ccf_email_headers', $headers, $form_id, $email, $form_page ) );
 					}
