@@ -659,6 +659,7 @@ class CCF_Form_Handler {
 
 			if ( ! is_wp_error( $submission_id ) ) {
 				update_post_meta( $submission_id, 'ccf_submission_data', $submission );
+				update_post_meta( $submission_id, 'ccf_submission_ip', sanitize_text_field( $_SERVER['REMOTE_ADDR'] ) );
 
 				foreach ( $file_ids as $file_id ) {
 					wp_update_post( array(
@@ -760,7 +761,7 @@ class CCF_Form_Handler {
 							<?php endif; ?>
 						</div>
 
-						<?php
+					<?php
 					}
 
 					$form_page = null;
@@ -771,8 +772,15 @@ class CCF_Form_Handler {
 							<?php esc_html_e( 'Form submitted from', 'custom-contact-forms' ); ?>:
 							<?php echo esc_url( $_POST['form_page'] ); ?>
 						</div>
-						<?php
+					<?php
 					}
+
+					?>
+					<div>
+						<?php esc_html_e( 'Form Submitter IP:', 'custom-contact-forms' ); ?>:
+						<?php echo esc_html( $_SERVER['REMOTE_ADDR'] ); ?>
+					</div>
+					<?php
 
 					$message .= ob_get_clean();
 
