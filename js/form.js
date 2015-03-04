@@ -177,7 +177,7 @@
 				this.errors[this.inputs[0].getAttribute( 'name' )].phone = this.wrapper.lastChild;
 			} else {
 				if ( 'us' === this.wrapper.getAttribute( 'data-phone-format' ) ) {
-					var strippedPhone = phone.replace( /[^0-9]/, '' );
+					var strippedPhone = phone.replace( /[^0-9]/ig, '' );
 
 					if ( strippedPhone.length !== 10 ) {
 						this.errors[this.inputs[0].getAttribute( 'name' )].digits = this.wrapper.lastChild;
