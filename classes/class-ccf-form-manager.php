@@ -1402,6 +1402,12 @@ class CCF_Form_Manager {
 								<# } #>
 							</div>
 						<# } #>
+						<div class="field-slug">
+							<?php esc_html_e( 'IP Address', 'custom-contact-forms' ); ?>
+						</div>
+						<div class="field-content">
+							{{ submission.ip_address }}
+						</div>
 					</div>
 				</div>
 			</td>

@@ -407,6 +407,7 @@ class CCF_API extends WP_JSON_Posts {
 			$_post['submissions'] = esc_html( count( $submissions ) );
 		} elseif ( 'ccf_submission' === $_post['type'] ) {
 			$_post['data'] = get_post_meta( $_post['ID'], 'ccf_submission_data', true );
+			$_post['ip_address'] = esc_html( get_post_meta( $_post['ID'], 'ccf_submission_ip', true ) );
 		}
 
 		return $_post;
