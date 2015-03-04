@@ -777,7 +777,7 @@ class CCF_Form_Handler {
 
 					?>
 					<div>
-						<?php esc_html_e( 'Form Submitter IP:', 'custom-contact-forms' ); ?>:
+						<?php esc_html_e( 'Form submitter IP', 'custom-contact-forms' ); ?>:
 						<?php echo esc_html( $_SERVER['REMOTE_ADDR'] ); ?>
 					</div>
 					<?php
