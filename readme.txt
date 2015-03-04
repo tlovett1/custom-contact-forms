@@ -37,6 +37,7 @@ For questions, feature requests, and support concerning the Custom Contact Forms
 
 = 6.4.10 =
 * Only use GET and POST HTTP methods. Remove 505 error message modal text.
+* Add IP address to submission
 
 = 6.4.9 =
 * Don't cache backend endpoints. A useful fix for W3 Total Cache users.
