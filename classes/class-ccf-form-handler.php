@@ -287,7 +287,7 @@ class CCF_Form_Handler {
 
 		$format = get_post_meta( $field_id, esc_html__( 'ccf_field_phoneFormat', 'custom-contact-forms' ), true );
 
-		if ( ! empty( $value ) && preg_match( '#[^0-9+.)(\-]#', $value ) ) {
+		if ( ! empty( $value ) && preg_match( '#[^0-9+.)(\- ]#', $value ) ) {
 			$errors['chars'] = esc_html__( 'This phone number contains invalid characters.', 'custom-contact-forms' );
 		}
 
