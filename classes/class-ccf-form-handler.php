@@ -701,7 +701,7 @@ class CCF_Form_Handler {
 
 						<div>
 							<?php if ( ! empty( $label ) ) : ?>
-								<b><?php echo esc_html( $label ); ?> (<?php echo esc_html( $slug ); ?>):</b>
+								<b><?php echo esc_html( $label ); ?> <?php if ( apply_filters( 'ccf_show_field_slug_in_submission', false, $submission_id, $form_id ) ) : ?>(<?php echo esc_html( $slug ); ?>)<?php endif; ?>:</b>
 							<?php else : ?>
 								<b><?php echo esc_html( $slug ); ?>:</b>
 							<?php endif; ?>
