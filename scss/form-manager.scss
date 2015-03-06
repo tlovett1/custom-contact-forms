@@ -430,7 +430,6 @@
 			width: 40%;
 			bottom: 50px;
 			left: 25%;
-			overflow: scroll;
 			right: 35%;
 			top: 0;
 			overflow: auto;
@@ -441,6 +440,21 @@
 				font-size: 22px;
 				padding: 16px;
 				font-style: italic;
+			}
+
+			&:after {
+				width: 100%;
+				display: block;
+				margin-top: 5px;
+				box-sizing:border-box;
+				-moz-box-sizing:border-box;
+				-webkit-box-sizing:border-box;
+				font-style: italic;
+				font-size: 22px;
+				text-align: center;
+				padding: 1em .5em;
+				border: 4px dashed #e5e5e5;
+				content: attr(data-drag-message);
 			}
 		}
 

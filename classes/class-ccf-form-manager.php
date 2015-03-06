@@ -124,10 +124,7 @@ class CCF_Form_Manager {
 				<div class="accordion-section ccf-form-notifications"></div>
 			</div>
 
-			<div class="form-content">
-				<!--<div class="no-fields">
-					<?php esc_html_e( '&rarr; Drag fields here to add them', 'custom-contact-forms' ); ?>
-				</div>-->
+			<div class="form-content" data-drag-message="<?php esc_html_e( '&larr; Drag fields from the left here.', 'custom-contact-forms' ); ?>">
 			</div>
 
 			<div class="right-sidebar ccf-field-sidebar accordion-container"></div>
