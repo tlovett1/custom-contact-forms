@@ -90,9 +90,9 @@ class CCF_Form_Manager {
 
 		<script type="text/html" id="ccf-field-row-template">
 			<h4>
-				<div class="right">
+				<span class="right">
 					<a aria-hidden="true" data-icon="&#xe602;" class="delete"></a>
-				</div>
+				</span>
 				<span class="label">{{ label }}</span>
 			</h4>
 

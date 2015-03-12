@@ -72,7 +72,8 @@
       .ccf-main-modal .field h4:hover {
         border: #999 1px solid; }
     .ccf-main-modal .field .right {
-      float: right; }
+      float: right;
+      display: block; }
       .ccf-main-modal .field .right a {
         color: inherit;
         margin-left: 3px; }
