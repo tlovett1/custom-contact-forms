@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: contact form, web form, custom contact form, custom forms, captcha form, contact fields, form mailers, forms
 Requires at least: 3.9
 Tested up to: 4.2
-Stable tag: 6.4.11
+Stable tag: 6.4.12
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -34,6 +34,9 @@ Please refer to [Github](http://github.com/tlovett1/custom-contact-forms) for de
 For questions, feature requests, and support concerning the Custom Contact Forms plugin, please refer to [Github](http://github.com/tlovett1/custom-contact-forms).
 
 == Changelog ==
+
+= 6.4.12 =
+* Improved draggable interactions
 
 = 6.4.11 =
 * Fix title special character formatting
