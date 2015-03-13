@@ -108,7 +108,7 @@
 		.right {
 			float: right;
 			display: block;
-			
+
 			a {
 				color: inherit;
 				margin-left: 3px;
@@ -437,6 +437,13 @@
 			overflow: auto;
 			border-top: 1px solid #ddd;
 			padding: 21px;
+
+			.field-placeholder {
+				border: 1px dashed #e5e5e5;
+				height: 46px;
+				margin-bottom: 5px;
+
+			}
 
 			.no-fields {
 				font-size: 22px;

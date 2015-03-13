@@ -298,6 +298,10 @@
       overflow: auto;
       border-top: 1px solid #ddd;
       padding: 21px; }
+      .ccf-main-modal .ccf-form-pane .form-content .field-placeholder {
+        border: 1px dashed #e5e5e5;
+        height: 46px;
+        margin-bottom: 5px; }
       .ccf-main-modal .ccf-form-pane .form-content .no-fields {
         font-size: 22px;
         padding: 16px;

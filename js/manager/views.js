@@ -1198,17 +1198,15 @@
 					cursor: 'move',
 					distance: 2,
 					zIndex: 160001,
-					//opacity: 0.75,
 					scroll: false,
-					containment: '.ccf-form-pane',
+					containment: 'document',
 					appendTo: '.ccf-main-modal',
-					snap: true,
-					snapTolerance: 8,
+					snap: false,
 					connectToSortable: '.form-content',
 					helper: function( event ) {
 						var $field = $( event.currentTarget );
 						var $helper = $( '<div class="field" data-field-type="' + $field.attr( 'data-field-type' ) + '"><h4>' + $field.find( '.label' ).html() + '</h4></div>' );
-						return $helper.css( { 'width': $formContent.width(), 'height': $field.height() } );
+						return $helper.css( { 'width': $formContent.width(), opacity: '.75', 'height': $field.height() } );
 					}
 
 				});
@@ -1226,6 +1224,7 @@
 					axis: 'y',
 					distance: 2,
 					handle: 'h4',
+					placeholder: 'field-placeholder',
 					stop: function( event, $ui ) {
 						if ( ! $ui.item.hasClass( 'instantiated' ) ) {
 							var type = $ui.item.attr( 'data-field-type' );
