@@ -27,7 +27,7 @@ class CCF_Field_CPT {
 	public function setup_cpt() {
 
 		$args = array(
-			'labels' => false,
+			'label' => esc_html__( 'Form Fields', 'custom-contact-forms' ),
 			'public' => false,
 			'query_var' => false,
 			'rewrite' => false,

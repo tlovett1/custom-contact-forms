@@ -26,7 +26,7 @@ class CCF_Choice_CPT {
 	 */
 	public function setup_cpt() {
 		$args = array(
-			'labels' => false,
+			'label' => esc_html__( 'Field Choices', 'custom-contact-forms' ),
 			'public' => false,
 			'query_var' => false,
 			'rewrite' => false,
