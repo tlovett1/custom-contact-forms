@@ -340,7 +340,7 @@ class CCF_Form_CPT {
 
 		global $pagenow;
 
-		if ( ( 'post.php' === $pagenow && 'ccf_form' === get_post_type() ) || ( 'post-new.php' === $pagenow && 'ccf_form' === $_GET['post_type'] ) ) {
+		if ( ( 'post.php' === $pagenow && 'ccf_form' === get_post_type() ) || ( 'post-new.php' === $pagenow && isset( $_GET['post_type'] ) && 'ccf_form' === $_GET['post_type'] ) ) {
 			wp_dequeue_script( 'autosave' );
 
 			add_thickbox();
