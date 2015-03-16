@@ -228,18 +228,12 @@ class CCF_Form_CPT {
 	}
 
 	/**
-	 * Output submissions meta box
+	 * Output submissions meta box. This is a placeholder method since JS will do the work.
 	 *
 	 * @param object $post
 	 * @since 6.0
 	 */
-	public function meta_box_submissions( $post ) {
-
-		$page = ( empty( $_GET['submission_page'] ) || 1 == $_GET['submission_page'] ) ? 1 : (int) $_GET['submission_page'];
-
-
-		wp_reset_postdata();
-	}
+	public function meta_box_submissions( $post ) { }
 
 	/**
 	 * Output at a glance meta box. This contains stats about the form.
