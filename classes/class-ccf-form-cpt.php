@@ -10,6 +10,14 @@ class CCF_Form_CPT {
 	public function __construct() {}
 
 	/**
+	 * Keep track of post types when we change them
+	 *
+	 * @var $old_post_types
+	 * @since 6.5
+	 */
+	public $old_post_types = false;
+
+	/**
 	 * Setup form screen with actions and filters
 	 *
 	 * @since 6.0
@@ -25,6 +33,51 @@ class CCF_Form_CPT {
 		add_filter( 'get_the_excerpt', array( $this, 'filter_get_the_excerpt' ) );
 		add_filter( 'screen_settings', array( $this, 'filter_screen_options' ), 10, 2 );
 		add_action( 'before_delete_post', array( $this, 'action_before_delete_post' ) );
+		add_filter( 'export_args', array( $this, 'filter_export_args' ) );
+		add_action( 'rss2_head', array( $this, 'action_rss2_head' ) );
+	}
+
+	/**
+	 * Restore global post types variable if necessary
+	 *
+	 * @since 6.5
+	 */
+	public function action_rss2_head() {
+		if ( isset( $_GET['content'] ) && 'ccf_form' === $_GET['content'] && defined( 'WXR_VERSION' ) && WXR_VERSION ) {
+			global $wp_post_types;
+
+			if ( false !== $this->old_post_types ) {
+				$wp_post_types = $this->old_post_types;
+			}
+		}
+	}
+
+	/**
+	 * Hack all non-ccf post types to be not exportable if someone tries to export the ccf_form
+	 * post type
+	 *
+	 * @param array $args
+	 * @since 6.5
+	 * @return array
+	 */
+	public function filter_export_args( $args ) {
+		if ( isset( $_GET['content'] ) && 'ccf_form' === $_GET['content'] && defined( 'WXR_VERSION' ) && WXR_VERSION ) {
+			$args['content'] = 'all';
+
+			global $wp_post_types;
+			$this->old_post_types = $wp_post_types;
+
+			$ccf_post_types = array( 'ccf_form', 'ccf_field', 'ccf_choice', 'ccf_submission' );
+
+			foreach ( $wp_post_types as $slug => $post_type ) {
+				if ( ! in_array( $slug, $ccf_post_types ) ) {
+					$this->old_post_types[$slug] = clone $post_type;
+					$post_type->can_export = false;
+				}
+			}
+		}
+
+		return $args;
 	}
 
 	/**
@@ -63,6 +116,14 @@ class CCF_Form_CPT {
 
 	}
 
+	/**
+	 * Add extra html to screen options for submission columns
+	 *
+	 * @param array $options
+	 * @param array $screen
+	 * @since 6.0
+	 * @return string
+	 */
 	public function filter_screen_options( $options, $screen ) {
 		global $pagenow;
 		if ( 'post.php' !== $pagenow || empty( $_GET['post'] ) || 'ccf_form' !== get_post_type( $_GET['post'] ) ) {
@@ -256,6 +317,11 @@ class CCF_Form_CPT {
 		<?php
 	}
 
+	/**
+	 * Setup JS and CSS
+	 *
+	 * @since 6.0
+	 */
 	public function action_admin_enqueue_scripts() {
 		if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
 			$admin_css_path = '/build/css/admin.css';
