@@ -91,7 +91,7 @@ class CCF_Form_CPT {
 			return;
 		}
 
-		$submissions = get_children( array( 'post_parent' => $form_id, 'numberposts' => apply_filters( 'ccf_max_submissions', 5000, get_post( $form_id ) ) ) );
+		$submissions = get_children( array( 'post_parent' => $form_id, 'post_type' => 'ccf_submission', 'numberposts' => apply_filters( 'ccf_max_submissions', 5000, get_post( $form_id ) ) ) );
 		if ( ! empty( $submissions ) ) {
 			foreach ( $submissions as $submission ) {
 				wp_delete_post( $submission->ID, true );
