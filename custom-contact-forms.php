@@ -25,6 +25,7 @@ require_once( dirname( __FILE__ ) . '/classes/class-ccf-form-renderer.php' );
 require_once( dirname( __FILE__ ) . '/classes/class-ccf-form-handler.php' );
 require_once( dirname( __FILE__ ) . '/classes/class-ccf-upgrader.php' );
 require_once( dirname( __FILE__ ) . '/classes/class-ccf-widget.php' );
+require_once( dirname( __FILE__ ) . '/classes/class-ccf-export.php' );
 
 CCF_Custom_Contact_Forms::factory();
 CCF_Constants::factory();

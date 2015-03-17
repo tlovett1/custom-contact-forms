@@ -25,6 +25,7 @@ class CCF_Export {
 	public function setup() {
 		add_action( 'init', array( $this, 'setup_cpt' ) );
 		add_action( 'admin_init', array( $this, 'action_handle_export' ) );
+		add_filter( 'export_args', array( $this, 'filter_export_args' ) );
 		add_action( 'rss2_head', array( $this, 'action_rss2_head' ) );
 	}
 

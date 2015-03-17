@@ -24,7 +24,6 @@ class CCF_Form_CPT {
 	 */
 	public function setup() {
 		add_action( 'init', array( $this, 'setup_cpt' ) );
-		add_action( 'admin_init', array( $this, 'action_handle_export' ) );
 		add_filter( 'manage_edit-ccf_form_columns', array( $this, 'filter_columns' ) ) ;
 		add_action( 'manage_ccf_form_posts_custom_column', array( $this, 'action_columns' ), 10, 2 );
 		add_action( 'admin_enqueue_scripts', array( $this, 'action_admin_enqueue_scripts' ), 9 );
@@ -34,8 +33,6 @@ class CCF_Form_CPT {
 		add_filter( 'get_the_excerpt', array( $this, 'filter_get_the_excerpt' ) );
 		add_filter( 'screen_settings', array( $this, 'filter_screen_options' ), 10, 2 );
 		add_action( 'before_delete_post', array( $this, 'action_before_delete_post' ) );
-		add_filter( 'export_args', array( $this, 'filter_export_args' ) );
-		add_action( 'rss2_head', array( $this, 'action_rss2_head' ) );
 	}
 
 	/**
