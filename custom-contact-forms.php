@@ -38,6 +38,7 @@ CCF_Form_Renderer::factory();
 CCF_Field_Renderer::factory();
 CCF_Form_Handler::factory();
 CCF_Upgrader::factory();
+CCF_Export::factory();
 
 /**
  * Setup the widget

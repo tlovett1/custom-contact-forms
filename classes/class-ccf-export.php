@@ -5,7 +5,7 @@ class CCF_Export {
 	/**
 	 * Placeholder method
 	 *
-	 * @since 6.0
+	 * @since 6.5
 	 */
 	public function __construct() {}
 
@@ -20,10 +20,9 @@ class CCF_Export {
 	/**
 	 * Setup form screen with actions and filters
 	 *
-	 * @since 6.0
+	 * @since 6.5
 	 */
 	public function setup() {
-		add_action( 'init', array( $this, 'setup_cpt' ) );
 		add_action( 'admin_init', array( $this, 'action_handle_export' ) );
 		add_filter( 'export_args', array( $this, 'filter_export_args' ) );
 		add_action( 'rss2_head', array( $this, 'action_rss2_head' ) );
@@ -39,11 +38,16 @@ class CCF_Export {
 	public function filter_query( $query ) {
 		global $wpdb;
 
-		if ( isset( $_GET['post'] ) && stripos( $query, 'ccf-cool-filler-45633451' ) ) {
+		if ( isset( $_GET['post'] ) && stripos( $query, 'ccf_form' ) ) {
+			remove_filter( 'query', array( $this, 'filter_query' ) );
+
 			$form_id = (int) $_GET['post'];
 
+			$post_ids = array( $form_id );
+
 			// First get submissions
-			$post_ids = wp_list_pluck( get_children( array( 'post_parent' => $_GET['post'], 'post_type' => 'ccf_field' ) ), 'ID' );
+			$submissions = wp_list_pluck( get_children( array( 'post_parent' => $_GET['post'], 'post_type' => 'ccf_submission' ) ), 'ID' );
+			$post_ids = array_merge( $post_ids, $submissions );
 
 			// Now get fields
 			$fields = get_post_meta( $form_id, 'ccf_attached_fields', true );
@@ -67,7 +71,7 @@ class CCF_Export {
 			if ( ! empty( $post_ids ) ) {
 				$post_ids = implode( ',', array_map( 'intval', $post_ids ) );
 
-				$query = str_replace( 'WHERE ', "WHERE {$wpdb->posts}.ID in ({$post_ids}) AND ", $query );
+				$query = preg_replace( "#post_type.*=.*('|\").*?('|\")#i", "ID in ({$post_ids}) ", $query );
 			}
 		}
 
@@ -84,11 +88,11 @@ class CCF_Export {
 			require_once( ABSPATH . 'wp-admin/includes/export.php' );
 
 			/**
-			 * We use ccf-cool-filler-45633451 so we can be sure we are referring to the
+			 * We use ccf_form so we can be sure we are referring to the
 			 * right query later.
 			 */
 			add_filter( 'query', array( $this, 'filter_query' ) );
-			export_wp( array( 'content' => 'ccf-cool-filler-45633451' ) );
+			export_wp( array( 'content' => 'ccf_form' ) );
 
 			exit;
 		}
@@ -140,7 +144,7 @@ class CCF_Export {
 	/**
 	 * Return singleton instance of class
 	 *
-	 * @since 6.0
+	 * @since 6.5
 	 * @return object
 	 */
 	public static function factory() {
