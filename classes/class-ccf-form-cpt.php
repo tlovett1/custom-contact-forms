@@ -24,6 +24,7 @@ class CCF_Form_CPT {
 	 */
 	public function setup() {
 		add_action( 'init', array( $this, 'setup_cpt' ) );
+		add_action( 'admin_init', array( $this, 'action_handle_export' ) );
 		add_filter( 'manage_edit-ccf_form_columns', array( $this, 'filter_columns' ) ) ;
 		add_action( 'manage_ccf_form_posts_custom_column', array( $this, 'action_columns' ), 10, 2 );
 		add_action( 'admin_enqueue_scripts', array( $this, 'action_admin_enqueue_scripts' ), 9 );
@@ -35,49 +36,6 @@ class CCF_Form_CPT {
 		add_action( 'before_delete_post', array( $this, 'action_before_delete_post' ) );
 		add_filter( 'export_args', array( $this, 'filter_export_args' ) );
 		add_action( 'rss2_head', array( $this, 'action_rss2_head' ) );
-	}
-
-	/**
-	 * Restore global post types variable if necessary
-	 *
-	 * @since 6.5
-	 */
-	public function action_rss2_head() {
-		if ( isset( $_GET['content'] ) && 'ccf_form' === $_GET['content'] && defined( 'WXR_VERSION' ) && WXR_VERSION ) {
-			global $wp_post_types;
-
-			if ( false !== $this->old_post_types ) {
-				$wp_post_types = $this->old_post_types;
-			}
-		}
-	}
-
-	/**
-	 * Hack all non-ccf post types to be not exportable if someone tries to export the ccf_form
-	 * post type
-	 *
-	 * @param array $args
-	 * @since 6.5
-	 * @return array
-	 */
-	public function filter_export_args( $args ) {
-		if ( isset( $_GET['content'] ) && 'ccf_form' === $_GET['content'] && defined( 'WXR_VERSION' ) && WXR_VERSION ) {
-			$args['content'] = 'all';
-
-			global $wp_post_types;
-			$this->old_post_types = $wp_post_types;
-
-			$ccf_post_types = array( 'ccf_form', 'ccf_field', 'ccf_choice', 'ccf_submission' );
-
-			foreach ( $wp_post_types as $slug => $post_type ) {
-				if ( ! in_array( $slug, $ccf_post_types ) ) {
-					$this->old_post_types[$slug] = clone $post_type;
-					$post_type->can_export = false;
-				}
-			}
-		}
-
-		return $args;
 	}
 
 	/**
@@ -271,6 +229,8 @@ class CCF_Form_CPT {
 				<a class="submitdelete deletion" href="<?php echo get_delete_post_link($post->ID); ?>"><?php esc_html_e( 'Move to Trash', 'custom-contact-forms' ); ?></a>
 				<div class="clear"></div>
 			</div>
+
+			<a class="button export-button" href="<?php echo esc_url( admin_url( 'post.php?action=edit&post=' . (int) $post->ID . '&nonce=' . wp_create_nonce( 'ccf_form_export' ) ) . '&export=1' ); ?>"><?php esc_html_e( 'Export', 'custom-contact-forms' ); ?></a>
 		</div>
 		<?php
 	}
