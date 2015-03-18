@@ -35,6 +35,9 @@ For questions, feature requests, and support concerning the Custom Contact Forms
 
 == Changelog ==
 
+= 6.5 =
+* Add import/export functionality
+
 = 6.4.12 =
 * Improved draggable interactions
 
