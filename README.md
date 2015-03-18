@@ -160,6 +160,22 @@ Scroll to the `Submissions` meta box. Click one the eye icon to view more inform
 In the `Submissions` meta box, you can add and remove columns. Click the cog icon at the top of the meta box to open
 the screen options panel. In this panel you can check which columns you would like to see in the table.
 
+### Import/Export
+
+Custom Contact Forms allows you to import and export forms and form submissions using the default WordPress
+importer/exporter functionality. You can export all your forms (with submissions) within the standard WordPress export view:
+
+!(https://tlovett1.files.wordpress.com/2015/03/export-all.png)
+
+You can also export a single form (with submissions) within the `Edit Form` screen:
+
+!(https://tlovett1.files.wordpress.com/2015/03/export-single.png)
+
+Both export methods will produce a standard WordPress WXR file. You can import your WXR files using the standard
+WordPress importer:
+
+!(https://tlovett1.files.wordpress.com/2015/03/import.png)
+
 ## Frequently Asked Questions
 
 * __My form(s) will not save. What's wrong?__
