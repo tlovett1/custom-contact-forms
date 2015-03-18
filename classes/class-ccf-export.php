@@ -27,12 +27,12 @@ class CCF_Export {
 		add_filter( 'export_args', array( $this, 'filter_export_args' ) );
 		add_action( 'rss2_head', array( $this, 'action_rss2_head' ) );
 		add_action( 'import_end', array( $this, 'action_import_end' ) );
-		add_action( 'wp_import_insert_post', array( $this, 'action_wp_import_insert_post' ) );
+		add_action( 'wp_import_insert_post', array( $this, 'action_wp_import_insert_post' ), 10, 1 );
 		add_action( 'admin_menu', array( $this, 'action_admin_menu' ) );
 	}
 
 	/**
-	 * Hackishing add import link to forms menu
+	 * Hackishly add import link to forms menu
 	 *
 	 * @since 6.5
 	 */
@@ -41,7 +41,13 @@ class CCF_Export {
 		$submenu['edit.php?post_type=ccf_form'][] = array( esc_html__( 'Import', 'custom-contact-forms' ), 'manage_options', esc_url( admin_url( 'import.php' ) ) );
 	}
 
-	public function action_wp_import_insert_post( $post_id, $original_post_ID, $postdata, $post ) {
+	/**
+	 * Add import cleanup meta value
+	 *
+	 * @param int $post_id
+	 * @since 6.5
+	 */
+	public function action_wp_import_insert_post( $post_id ) {
 		$types = array( 'ccf_form', 'ccf_field' );
 
 		if ( in_array( get_post_type( $post_id ), $types ) ) {
@@ -52,12 +58,15 @@ class CCF_Export {
 	}
 
 	/**
-	 * We need to clean
+	 * We need to reattach form fields and field choices
+	 *
+	 * @since 6.5
 	 */
 	public function action_import_end() {
 		$forms = new WP_Query( array(
 			'post_type' => 'ccf_form',
 			'posts_per_page' => 1000,
+			'no_found_rows' => true,
 		));
 
 		if ( $forms->have_posts() ) {
@@ -66,8 +75,13 @@ class CCF_Export {
 
 				if ( ! empty( $cleanup ) ) {
 					$fields = wp_list_pluck( get_children( array( 'post_type' => 'ccf_field', 'post_parent' => $form->ID, 'numberposts' => 500 ) ), 'ID' );
+					if ( ! empty( $fields ) ) {
+						$fields = array_values( $fields );
+					}
 
 					update_post_meta( $form->ID, 'ccf_attached_fields', $fields );
+
+					delete_post_meta( $form->ID, 'ccf_import_cleanup' );
 				}
 			}
 		}
@@ -75,6 +89,7 @@ class CCF_Export {
 		$fields = new WP_Query( array(
 			'post_type' => 'ccf_field',
 			'posts_per_page' => 2000,
+			'no_found_rows' => true,
 		));
 
 		if ( $fields->have_posts() ) {
@@ -82,9 +97,14 @@ class CCF_Export {
 				$cleanup = get_post_meta( $field->ID, 'ccf_import_cleanup', true );
 
 				if ( ! empty( $cleanup ) ) {
-					$fields = wp_list_pluck( get_children( array( 'post_type' => 'ccf_choice', 'post_parent' => $field->ID, 'numberposts' => 500 ) ), 'ID' );
+					$choices = wp_list_pluck( get_children( array( 'post_type' => 'ccf_choice', 'post_parent' => $field->ID, 'numberposts' => 500 ) ), 'ID' );
+					if ( ! empty( $choices ) ) {
+						$choices = array_values( $choices );
+					}
 
-					update_post_meta( $form->ID, 'ccf_attached_fields', $fields );
+					update_post_meta( $field->ID, 'ccf_attached_fields', $choices );
+
+					delete_post_meta( $field->ID, 'ccf_import_cleanup' );
 				}
 			}
 		}
