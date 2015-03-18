@@ -26,6 +26,68 @@ class CCF_Export {
 		add_action( 'admin_init', array( $this, 'action_handle_export' ) );
 		add_filter( 'export_args', array( $this, 'filter_export_args' ) );
 		add_action( 'rss2_head', array( $this, 'action_rss2_head' ) );
+		add_action( 'import_end', array( $this, 'action_import_end' ) );
+		add_action( 'wp_import_insert_post', array( $this, 'action_wp_import_insert_post' ) );
+		add_action( 'admin_menu', array( $this, 'action_admin_menu' ) );
+	}
+
+	/**
+	 * Hackishing add import link to forms menu
+	 *
+	 * @since 6.5
+	 */
+	public function action_admin_menu() {
+		global $submenu;
+		$submenu['edit.php?post_type=ccf_form'][] = array( esc_html__( 'Import', 'custom-contact-forms' ), 'manage_options', esc_url( admin_url( 'import.php' ) ) );
+	}
+
+	public function action_wp_import_insert_post( $post_id, $original_post_ID, $postdata, $post ) {
+		$types = array( 'ccf_form', 'ccf_field' );
+
+		if ( in_array( get_post_type( $post_id ), $types ) ) {
+			// Mark post for cleanup later
+
+			update_post_meta( $post_id, 'ccf_import_cleanup', true );
+		}
+	}
+
+	/**
+	 * We need to clean
+	 */
+	public function action_import_end() {
+		$forms = new WP_Query( array(
+			'post_type' => 'ccf_form',
+			'posts_per_page' => 1000,
+		));
+
+		if ( $forms->have_posts() ) {
+			foreach ( $forms->posts as $form ) {
+				$cleanup = get_post_meta( $form->ID, 'ccf_import_cleanup', true );
+
+				if ( ! empty( $cleanup ) ) {
+					$fields = wp_list_pluck( get_children( array( 'post_type' => 'ccf_field', 'post_parent' => $form->ID, 'numberposts' => 500 ) ), 'ID' );
+
+					update_post_meta( $form->ID, 'ccf_attached_fields', $fields );
+				}
+			}
+		}
+
+		$fields = new WP_Query( array(
+			'post_type' => 'ccf_field',
+			'posts_per_page' => 2000,
+		));
+
+		if ( $fields->have_posts() ) {
+			foreach ( $fields->posts as $field ) {
+				$cleanup = get_post_meta( $field->ID, 'ccf_import_cleanup', true );
+
+				if ( ! empty( $cleanup ) ) {
+					$fields = wp_list_pluck( get_children( array( 'post_type' => 'ccf_choice', 'post_parent' => $field->ID, 'numberposts' => 500 ) ), 'ID' );
+
+					update_post_meta( $form->ID, 'ccf_attached_fields', $fields );
+				}
+			}
+		}
 	}
 
 	/**
