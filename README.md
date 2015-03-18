@@ -165,7 +165,7 @@ the screen options panel. In this panel you can check which columns you would li
 Custom Contact Forms allows you to import and export forms and form submissions using the default WordPress
 importer/exporter functionality. You can export all your forms (with submissions) within the standard WordPress export view:
 
-![Export CCF Forms](https://tlovett1.files.wordpress.com/2015/03/export-all.png)
+![Export CCF Forms](https://tlovett1.files.wordpress.com/2015/03/export-all1.png)
 
 You can also export a single form (with submissions) within the `Edit Form` screen:
 

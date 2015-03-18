@@ -29,6 +29,53 @@ class CCF_Export {
 		add_action( 'import_end', array( $this, 'action_import_end' ) );
 		add_action( 'wp_import_insert_post', array( $this, 'action_wp_import_insert_post' ), 10, 1 );
 		add_action( 'admin_menu', array( $this, 'action_admin_menu' ) );
+		add_action( 'all_admin_notices', array( $this, 'action_all_admin_notices' ) );
+		add_action( 'export_filters', array( $this, 'action_export_filters' ) );
+	}
+
+	/**
+	 * Hackishly hide some CCF post types on the export screen
+	 *
+	 * @since 6.5
+	 */
+	public function action_all_admin_notices() {
+		global $pagenow;
+
+		if ( 'export.php' === $pagenow && empty( $_GET['download'] ) ) {
+			global $wp_post_types;
+			$this->old_post_types = $wp_post_types;
+
+			$ccf_post_types = array( 'ccf_field', 'ccf_choice', 'ccf_submission' );
+
+			foreach ( $wp_post_types as $slug => $post_type ) {
+				if ( in_array( $slug, $ccf_post_types ) ) {
+					$this->old_post_types[$slug] = clone $post_type;
+					$post_type->can_export = false;
+				}
+
+				if ( 'ccf_form' === $slug ) {
+					$this->old_post_types[$slug] = clone $post_type;
+					$post_type->label = esc_html__( 'Forms and Submissions', 'cutom-contact-forms' );
+				}
+			}
+		}
+	}
+
+	/**
+	 * Restore global post types on export page
+	 *
+	 * @since 6.5
+	 */
+	public function action_export_filters() {
+		global $pagenow;
+
+		if ( 'export.php' === $pagenow && empty( $_GET['download'] ) ) {
+			global $wp_post_types;
+
+			if ( false !== $this->old_post_types ) {
+				$wp_post_types = $this->old_post_types;
+			}
+		}
 	}
 
 	/**
