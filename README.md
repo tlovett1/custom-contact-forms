@@ -183,11 +183,6 @@ WordPress importer:
   You most likely have a theme or plugin conflict. Try deactivating other plugins and activating a default theme. If
   forms still won't save, please create an issue.
 
-* __When I save, delete, or edit a form, I get a HTTP 501 error. What should I do?__
-
-  CCF uses RESTful HTTP verbs such as PUT and DELETE. If your web server does not support those HTTP requests, the
-  plugin will not work. You will need to contact your host to resolve this.
-
 * __Form mail is not getting emailed to me. What's wrong?__
 
   CCF relies on default WordPress email functionality. If CCF email is not sending, most likely no WordPress email is
