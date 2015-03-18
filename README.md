@@ -194,6 +194,12 @@ WordPress importer:
   sending. You can test this by trying to send yourself a lost password email. If you don't receive the lost password
   email, then there is an issue with your host or a plugin/theme conflict.
 
+* __My form won't submit on the front end of my website. What's wrong?__
+
+  Most likely there is a JavaScript error on your page that is conflicting with the form. This is the result of a theme
+  or plugin conflict. Try deactivating other plugins and activating a default theme. Another possibility is that your
+  theme does not call `wp_head()` or `wp_footer()`.
+
 ## Development
 
 #### Setup
