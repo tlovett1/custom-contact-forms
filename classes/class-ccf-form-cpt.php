@@ -33,6 +33,34 @@ class CCF_Form_CPT {
 		add_filter( 'get_the_excerpt', array( $this, 'filter_get_the_excerpt' ) );
 		add_filter( 'screen_settings', array( $this, 'filter_screen_options' ), 10, 2 );
 		add_action( 'before_delete_post', array( $this, 'action_before_delete_post' ) );
+		add_filter( 'wp_link_query_args', array( $this, 'filter_wp_link_query_args' ) );
+	}
+
+	/**
+	 * Remove CCF post types from links query
+	 *
+	 * @param array $query
+	 * @since 6.5.1
+	 * @return array
+	 */
+	public function filter_wp_link_query_args( $query ) {
+		if ( is_array( $query ) && ! empty( $query['post_type'] ) ) {
+
+			$post_types = array();
+			$ccf_post_types = array( 'ccf_submission', 'ccf_form', 'ccf_field', 'ccf_choice' );
+
+			foreach ( $query['post_type'] as $post_type ) {
+				if ( ! in_array( $post_type, $ccf_post_types ) ) {
+					$post_types[] = $post_type;
+				}
+			}
+
+			$query['post_type'] = $post_types;
+
+			var_dump( $query );
+		}
+
+		return $query;
 	}
 
 	/**
