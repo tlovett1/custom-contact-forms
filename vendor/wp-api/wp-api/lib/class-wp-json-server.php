@@ -218,20 +218,21 @@ class WP_JSON_Server implements WP_JSON_ResponseHandler {
 		}
 
 		$this->path           = $path;
-
-		$this->method = $_SERVER['REQUEST_METHOD'];
-		if ( ! empty( $_SERVER['HTTP_X_HTTP_METHOD_OVERRIDE'] ) ) {
-			$this->method = $_SERVER['HTTP_X_HTTP_METHOD_OVERRIDE'];
-		}
-
+		$this->method         = $_SERVER['REQUEST_METHOD'];
 		$this->params['GET']  = $_GET;
 		$this->params['POST'] = $_POST;
 		$this->headers        = $this->get_headers( $_SERVER );
 		$this->files          = $_FILES;
 
-		// Compatibility for clients that can't use PUT/PATCH/DELETE
+		/**
+		 * HTTP method override for clients that can't use PUT/PATCH/DELETE. First, we check
+		 * $_GET['_method']. If that is not set, we check for the HTTP_X_HTTP_METHOD_OVERRIDE
+		 * header.
+		 */
 		if ( isset( $_GET['_method'] ) ) {
 			$this->method = strtoupper( $_GET['_method'] );
+		} elseif ( isset( $_SERVER['HTTP_X_HTTP_METHOD_OVERRIDE'] ) ) {
+			$this->method = strtoupper( $_SERVER['HTTP_X_HTTP_METHOD_OVERRIDE'] );
 		}
 
 		$result = $this->check_authentication();
@@ -699,7 +700,7 @@ class WP_JSON_Server implements WP_JSON_ResponseHandler {
 	 * @deprecated
 	 * @param string $email Email address
 	 * @return string url for the user's avatar
-	*/
+	 */
 	public function get_avatar_url( $email ) {
 		_deprecated_function( __CLASS__ . '::' . __METHOD__, 'WPAPI-1.1', 'json_get_avatar_url' );
 

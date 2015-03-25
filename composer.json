@@ -1,7 +1,7 @@
 {
     "name": "tlovett1/custom-contact-forms",
 	"require": {
-		"wp-api/wp-api": "dev-master#ad9688f450a813fd23d5c008d7d7c9fb58e76b2b"
+		"wp-api/wp-api": "dev-master#4e2d780432d934a912721748bcc70d89025c625c"
 	},
 	"repositories": [
 		{

@@ -6,7 +6,7 @@
         "source": {
             "type": "git",
             "url": "https://github.com/wp-api/wp-api",
-            "reference": "ad9688f450a813fd23d5c008d7d7c9fb58e76b2b"
+            "reference": "4e2d780432d934a912721748bcc70d89025c625c"
         },
         "type": "library",
         "installation-source": "source"

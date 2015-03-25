@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1d93aaeab916629d2e1b6fd76199eb35",
+    "hash": "976360f57efd5dd53b0f99e3cd2fca0d",
     "packages": [
         {
             "name": "wp-api/wp-api",
@@ -12,10 +12,10 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-api/wp-api",
-                "reference": "ad9688f450a813fd23d5c008d7d7c9fb58e76b2b"
+                "reference": "4e2d780432d934a912721748bcc70d89025c625c"
             },
             "type": "library",
-            "time": "2014-12-19 22:28:49"
+            "time": "2015-03-21 17:03:04"
         }
     ],
     "packages-dev": [],
