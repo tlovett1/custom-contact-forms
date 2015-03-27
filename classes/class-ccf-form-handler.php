@@ -620,8 +620,8 @@ class CCF_Form_Handler {
 
 			$slug = get_post_meta( $field_id, 'ccf_field_slug', true );
 
-			// We will use this later when emailing a submission
-			$field_slug_to_id[$slug] = $field_id;
+			// We save this to reference later
+			$field_slug_to_id[$slug] = array( 'id' => $field_id, 'type' => sanitize_text_field( $type ) );
 
 			$custom_value_mapping = array( 'recaptcha' => 'g-recaptcha-response' );
 
@@ -659,6 +659,12 @@ class CCF_Form_Handler {
 
 			if ( ! is_wp_error( $submission_id ) ) {
 				update_post_meta( $submission_id, 'ccf_submission_data', $submission );
+
+				/**
+				 * @since 6.6
+				 */
+				update_post_meta( $submission_id, 'ccf_submission_data_map', $field_slug_to_id );
+
 				update_post_meta( $submission_id, 'ccf_submission_ip', sanitize_text_field( $_SERVER['REMOTE_ADDR'] ) );
 
 				foreach ( $file_ids as $file_id ) {
@@ -690,7 +696,7 @@ class CCF_Form_Handler {
 					ob_start();
 
 					foreach ( $submission as $slug => $field ) {
-						$field_id = $field_slug_to_id[$slug];
+						$field_id = $field_slug_to_id[$slug]['id'];
 						$label = get_post_meta( $field_id, 'ccf_field_label', true );
 						$type = get_post_meta( $field_id, 'ccf_field_type', true );
 
