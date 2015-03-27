@@ -553,18 +553,18 @@ class CCF_Field_Renderer {
 				<?php if ( ! empty( $errors['street_required'] ) ) : ?>
 					<div class="error"><?php echo esc_html( $errors['street_required'] ); ?></div>
 				<?php endif; ?>
-				<label for="ccf_field_<?php echo esc_attr( $slug ); ?>-street" class="sub-label">Street Address</label>
+				<label for="ccf_field_<?php echo esc_attr( $slug ); ?>-street" class="sub-label"><?php esc_html_e( 'Street Address', 'custom-contact-forms' ); ?></label>
 			</div>
 			<div class="full">
 				<input value="<?php if ( ! empty( $line_two_post_value ) ) echo esc_attr( $line_two_post_value ); ?>" class=" field-input" id="ccf_field_<?php echo esc_attr( $slug ); ?>-line_two" type="text" name="ccf_field_<?php echo esc_attr( $slug ); ?>[line_two]">
-				<label for="ccf_field_<?php echo esc_attr( $slug ); ?>-line_two" class="sub-label">Address Line 2</label>
+				<label for="ccf_field_<?php echo esc_attr( $slug ); ?>-line_two" class="sub-label"><?php esc_html_e( 'Address Line 2', 'custom-contact-forms' ); ?></label>
 			</div>
 			<div class="left">
 				<input value="<?php if ( ! empty( $city_post_value ) ) echo esc_attr( $city_post_value ); ?>" class="<?php if ( ! empty( $errors['city_required'] ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> type="text" name="ccf_field_<?php echo esc_attr( $slug ); ?>[city]" id="ccf_field_<?php echo esc_attr( $slug ); ?>-city">
 				<?php if ( ! empty( $errors['city_required'] ) ) : ?>
 					<div class="error"><?php echo esc_html( $errors['city_required'] ); ?></div>
 				<?php endif; ?>
-				<label for="ccf_field_<?php echo esc_attr( $slug ); ?>-city" class="sub-label">City</label>
+				<label for="ccf_field_<?php echo esc_attr( $slug ); ?>-city" class="sub-label"><?php esc_html_e( 'City', 'custom-contact-forms' ); ?></label>
 
 			</div>
 			<?php if ( $address_type === 'us' ) { ?>
@@ -577,7 +577,7 @@ class CCF_Field_Renderer {
 					<?php if ( ! empty( $errors['state_required'] ) ) : ?>
 						<div class="error"><?php echo esc_html( $errors['state_required'] ); ?></div>
 					<?php endif; ?>
-					<label for="ccf_field_<?php echo esc_attr( $slug ); ?>-state" class="sub-label">State</label>
+					<label for="ccf_field_<?php echo esc_attr( $slug ); ?>-state" class="sub-label"><?php esc_html_e( 'State', 'custom-contact-forms' ); ?></label>
 
 				</div>
 				<div class="left">
@@ -585,7 +585,7 @@ class CCF_Field_Renderer {
 					<?php if ( ! empty( $errors['zipcode_required'] ) ) : ?>
 						<div class="error"><?php echo esc_html( $errors['zipcode_required'] ); ?></div>
 					<?php endif; ?>
-					<label for="ccf_field_<?php echo esc_attr( $slug ); ?>-zipcode" class="sub-label">ZIP Code</label>
+					<label for="ccf_field_<?php echo esc_attr( $slug ); ?>-zipcode" class="sub-label"><?php esc_html_e( 'ZIP Code', 'custom-contact-forms' ); ?></label>
 
 				</div>
 				<div class="ccf-clear"></div>
@@ -595,7 +595,7 @@ class CCF_Field_Renderer {
 					<?php if ( ! empty( $errors['state_required'] ) ) : ?>
 						<div class="error"><?php echo esc_html( $errors['state_required'] ); ?></div>
 					<?php endif; ?>
-					<label for="ccf_field_<?php echo esc_attr( $slug ); ?>-state" class="sub-label">State / Region / Province</label>
+					<label for="ccf_field_<?php echo esc_attr( $slug ); ?>-state" class="sub-label"><?php esc_html_e( 'State / Region / Province', 'custom-contact-forms' ); ?></label>
 
 				</div>
 				<div class="left">
@@ -603,7 +603,7 @@ class CCF_Field_Renderer {
 					<?php if ( ! empty( $errors['zipcode_required'] ) ) : ?>
 						<div class="error"><?php echo esc_html( $errors['zipcode_required'] ); ?></div>
 					<?php endif; ?>
-					<label for="ccf_field_<?php echo esc_attr( $slug ); ?>-zipcode" class="sub-label">ZIP / Postal Code</label>
+					<label for="ccf_field_<?php echo esc_attr( $slug ); ?>-zipcode" class="sub-label"><?php esc_html_e( 'ZIP / Postal Code', 'custom-contact-forms' ); ?></label>
 
 				</div>
 				<div class="right">
@@ -615,7 +615,7 @@ class CCF_Field_Renderer {
 					<?php if ( ! empty( $errors['country_required'] ) ) : ?>
 						<div class="error"><?php echo esc_html( $errors['country_required'] ); ?></div>
 					<?php endif; ?>
-					<label for="ccf_field_<?php echo esc_attr( $slug ); ?>-country" class="sub-label">Country</label>
+					<label for="ccf_field_<?php echo esc_attr( $slug ); ?>-country" class="sub-label"><?php esc_html_e( 'Country', 'custom-contact-forms' ); ?></label>
 
 				</div>
 				<div class="ccf-clear"></div>
@@ -800,14 +800,14 @@ class CCF_Field_Renderer {
 					<?php if ( ! empty( $errors['email_required'] ) ) : ?>
 						<div class="error"><?php echo esc_html( $errors['email_required'] ); ?></div>
 					<?php endif; ?>
-					<label for="ccf_field_<?php echo esc_attr( $slug ); ?>" class="sub-label">Email</label>
+					<label for="ccf_field_<?php echo esc_attr( $slug ); ?>" class="sub-label"><?php esc_html_e( 'Email', 'custom-contact-forms' ); ?></label>
 				</div>
 				<div class="right">
 					<input class="field-input <?php if ( ! empty( $errors['confirm_required'] ) || ! empty( $errors['match'] ) || ! empty( $errors['email'] ) ) : ?>field-error-input<?php endif; ?>" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> name="ccf_field_<?php echo esc_attr( $slug ); ?>[confirm]" id="ccf_field_<?php echo esc_attr( $slug ); ?>-confirm" value="<?php if ( ! empty( $confirm_post_value ) ) { echo esc_attr( $confirm_post_value ); } ?>" type="text">
 					<?php if ( ! empty( $errors['confirm_required'] ) ) : ?>
 						<div class="error"><?php echo esc_html( $errors['confirm_required'] ); ?></div>
 					<?php endif; ?>
-					<label for="ccf_field_<?php echo esc_attr( $slug ); ?>-confirm" class="sub-label">Confirm Email</label>
+					<label for="ccf_field_<?php echo esc_attr( $slug ); ?>-confirm" class="sub-label"><?php esc_html_e( 'Confirm Email', 'custom-contact-forms' ); ?></label>
 				</div>
 				<?php if ( ! empty( $errors['match'] ) ) : ?>
 					<div class="error"><?php echo esc_html( $errors['match'] ); ?></div>
@@ -873,14 +873,14 @@ class CCF_Field_Renderer {
 				<?php if ( ! empty( $errors['first_required'] ) ) : ?>
 					<div class="error"><?php echo esc_html( $errors['first_required'] ); ?></div>
 				<?php endif; ?>
-				<label for="ccf_field_<?php echo esc_attr( $slug ); ?>-first" class="sub-label">First</label>
+				<label for="ccf_field_<?php echo esc_attr( $slug ); ?>-first" class="sub-label"><?php esc_html_e( 'First', 'custom-contact-forms' ); ?></label>
 			</div>
 			<div class="right">
 				<input value="<?php if ( ! empty( $last_post_value ) ) echo esc_attr( $last_post_value ); ?>" class="<?php if ( ! empty( $errors['last_required'] ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> type="text" name="ccf_field_<?php echo esc_attr( $slug ); ?>[last]" id="ccf_field_<?php echo esc_attr( $slug ); ?>-last">
 				<?php if ( ! empty( $errors['last_required'] ) ) : ?>
 					<div class="error"><?php echo esc_html( $errors['last_required'] ); ?></div>
 				<?php endif; ?>
-				<label for="ccf_field_<?php echo esc_attr( $slug ); ?>-last" class="sub-label">Last</label>
+				<label for="ccf_field_<?php echo esc_attr( $slug ); ?>-last" class="sub-label"><?php esc_html_e( 'Last', 'custom-contact-forms' ); ?></label>
 			</div>
 
 			<div class="ccf-clear"></div>
