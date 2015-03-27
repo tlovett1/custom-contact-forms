@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: contact form, web form, custom contact form, custom forms, captcha form, contact fields, form mailers, forms
 Requires at least: 3.9
 Tested up to: 4.2
-Stable tag: 6.5.2
+Stable tag: 6.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -35,11 +35,8 @@ For questions, feature requests, and support concerning the Custom Contact Forms
 
 == Changelog ==
 
-= 6.5.2 =
-* Fix translatable field strings.
-
 = 6.5.1 =
-* Don't show CCF post types in link dropdown
+* Fix translatable field strings.
 
 = 6.5 =
 * Add import/export functionality
