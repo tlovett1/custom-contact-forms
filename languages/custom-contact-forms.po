@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: Custom Contact Forms\n"
 "Report-Msgid-Bugs-To: https://github.com/tlovett1/editorial-access-manager/"
 "issues\n"
-"POT-Creation-Date: 2015-03-17 23:05-0500\n"
-"PO-Revision-Date: 2015-03-17 23:05-0500\n"
+"POT-Creation-Date: 2015-03-27 10:30-0500\n"
+"PO-Revision-Date: 2015-03-27 10:30-0500\n"
 "Last-Translator: Taylor Lovett <tlovett88@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: en\n"
@@ -128,6 +128,70 @@ msgstr ""
 #: ../classes/class-ccf-field-renderer.php:124
 #, php-format
 msgid "Max file size is %d MB. "
+msgstr ""
+
+#: ../classes/class-ccf-field-renderer.php:556
+#: ../classes/class-ccf-form-manager.php:1118
+#: ../classes/class-ccf-form-manager.php:1143
+msgid "Street Address"
+msgstr ""
+
+#: ../classes/class-ccf-field-renderer.php:560
+#: ../classes/class-ccf-form-manager.php:1122
+#: ../classes/class-ccf-form-manager.php:1147
+msgid "Address Line 2"
+msgstr ""
+
+#: ../classes/class-ccf-field-renderer.php:567
+#: ../classes/class-ccf-form-manager.php:1126
+#: ../classes/class-ccf-form-manager.php:1151
+msgid "City"
+msgstr ""
+
+#: ../classes/class-ccf-field-renderer.php:580
+#: ../classes/class-ccf-form-manager.php:1134
+msgid "State"
+msgstr ""
+
+#: ../classes/class-ccf-field-renderer.php:588
+#: ../classes/class-ccf-form-manager.php:1138
+msgid "ZIP Code"
+msgstr ""
+
+#: ../classes/class-ccf-field-renderer.php:598
+#: ../classes/class-ccf-form-manager.php:1155
+msgid "State / Region / Province"
+msgstr ""
+
+#: ../classes/class-ccf-field-renderer.php:606
+#: ../classes/class-ccf-form-manager.php:1159
+msgid "ZIP / Postal Code"
+msgstr ""
+
+#: ../classes/class-ccf-field-renderer.php:618
+#: ../classes/class-ccf-form-manager.php:1167
+msgid "Country"
+msgstr ""
+
+#: ../classes/class-ccf-field-renderer.php:803
+#: ../classes/class-ccf-form-manager.php:1182
+#: ../classes/class-ccf-form-manager.php:1483
+msgid "Email"
+msgstr ""
+
+#: ../classes/class-ccf-field-renderer.php:810
+#: ../classes/class-ccf-form-manager.php:1186
+msgid "Confirm Email"
+msgstr ""
+
+#: ../classes/class-ccf-field-renderer.php:876
+#: ../classes/class-ccf-form-manager.php:1054
+msgid "First"
+msgstr ""
+
+#: ../classes/class-ccf-field-renderer.php:883
+#: ../classes/class-ccf-form-manager.php:1058
+msgid "Last"
 msgstr ""
 
 #: ../classes/class-ccf-field-renderer.php:955
@@ -428,10 +492,15 @@ msgstr ""
 
 #: ../classes/class-ccf-form-handler.php:815
 #, php-format
-msgid "%s: Form Submission to \"%s\""
+msgid "%s: Form Submission"
 msgstr ""
 
-#: ../classes/class-ccf-form-handler.php:828
+#: ../classes/class-ccf-form-handler.php:817
+#, php-format
+msgid " to \"%s\""
+msgstr ""
+
+#: ../classes/class-ccf-form-handler.php:832
 #: ../classes/class-ccf-form-renderer.php:119
 msgid "Thank you for your submission."
 msgstr ""
@@ -885,60 +954,8 @@ msgstr ""
 msgid "This is the sub-heading text."
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1054
-msgid "First"
-msgstr ""
-
-#: ../classes/class-ccf-form-manager.php:1058
-msgid "Last"
-msgstr ""
-
-#: ../classes/class-ccf-form-manager.php:1118
-#: ../classes/class-ccf-form-manager.php:1143
-msgid "Street Address"
-msgstr ""
-
-#: ../classes/class-ccf-form-manager.php:1122
-#: ../classes/class-ccf-form-manager.php:1147
-msgid "Address Line 2"
-msgstr ""
-
-#: ../classes/class-ccf-form-manager.php:1126
-#: ../classes/class-ccf-form-manager.php:1151
-msgid "City"
-msgstr ""
-
-#: ../classes/class-ccf-form-manager.php:1134
-msgid "State"
-msgstr ""
-
-#: ../classes/class-ccf-form-manager.php:1138
-msgid "ZIP Code"
-msgstr ""
-
-#: ../classes/class-ccf-form-manager.php:1155
-msgid "State / Region / Province"
-msgstr ""
-
-#: ../classes/class-ccf-form-manager.php:1159
-msgid "ZIP / Postal Code"
-msgstr ""
-
-#: ../classes/class-ccf-form-manager.php:1167
-msgid "Country"
-msgstr ""
-
 #: ../classes/class-ccf-form-manager.php:1178
 msgid "email@example.com"
-msgstr ""
-
-#: ../classes/class-ccf-form-manager.php:1182
-#: ../classes/class-ccf-form-manager.php:1483
-msgid "Email"
-msgstr ""
-
-#: ../classes/class-ccf-form-manager.php:1186
-msgid "Confirm Email"
 msgstr ""
 
 #: ../classes/class-ccf-form-manager.php:1216
