@@ -160,6 +160,13 @@ Scroll to the `Submissions` meta box. Click one the eye icon to view more inform
 In the `Submissions` meta box, you can add and remove columns. Click the cog icon at the top of the meta box to open
 the screen options panel. In this panel you can check which columns you would like to see in the table.
 
+#### Download Form Submissions as CSV
+
+In addition to being able to import/export forms with all fields and submissions, you can export submissions for
+individual forms as .CSV files. Click the icon within the form edit view like so:
+
+![Export Submissions as .CSV Files](https://tlovett1.files.wordpress.com/2015/03/submissions-csv.png)
+
 ### Import/Export
 
 Custom Contact Forms allows you to import and export forms and form submissions using the default WordPress
