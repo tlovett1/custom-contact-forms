@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: Custom Contact Forms\n"
 "Report-Msgid-Bugs-To: https://github.com/tlovett1/custom-contact-forms/"
 "issues\n"
-"POT-Creation-Date: 2015-03-27 10:30-0500\n"
-"PO-Revision-Date: 2015-03-27 10:30-0500\n"
+"POT-Creation-Date: 2015-03-29 23:51-0500\n"
+"PO-Revision-Date: 2015-03-29 23:51-0500\n"
 "Last-Translator: Taylor Lovett <tlovett88@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: en\n"
@@ -41,8 +41,8 @@ msgstr ""
 #: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:271
 #: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:319
 #: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:364
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:730
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:758
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:739
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:767
 msgid "Invalid post ID."
 msgstr ""
 
@@ -108,7 +108,7 @@ msgstr ""
 msgid "<a href=\"%s\">Forms and Submissions</a>"
 msgstr ""
 
-#: ../classes/class-ccf-export.php:58 ../classes/class-ccf-form-cpt.php:389
+#: ../classes/class-ccf-export.php:58 ../classes/class-ccf-form-cpt.php:576
 msgid "Forms and Submissions"
 msgstr ""
 
@@ -223,7 +223,7 @@ msgid "PM"
 msgstr ""
 
 #: ../classes/class-ccf-field-renderer.php:971
-#: ../classes/class-ccf-form-cpt.php:323
+#: ../classes/class-ccf-form-cpt.php:510
 #: ../classes/class-ccf-form-manager.php:241
 #: ../classes/class-ccf-form-manager.php:254
 #: ../classes/class-ccf-form-manager.php:1089
@@ -233,129 +233,129 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-#: ../classes/class-ccf-form-cpt.php:90
+#: ../classes/class-ccf-form-cpt.php:277
 msgid "Form Submission Columns"
 msgstr ""
 
-#: ../classes/class-ccf-form-cpt.php:139 ../classes/class-ccf-form-cpt.php:157
-#: ../classes/class-ccf-form-cpt.php:321
+#: ../classes/class-ccf-form-cpt.php:326 ../classes/class-ccf-form-cpt.php:344
+#: ../classes/class-ccf-form-cpt.php:508
 #: ../classes/class-ccf-form-manager.php:244
 #: ../classes/class-ccf-form-manager.php:257
 msgid "Submissions"
 msgstr ""
 
-#: ../classes/class-ccf-form-cpt.php:153
+#: ../classes/class-ccf-form-cpt.php:340
 msgid "At a Glance"
 msgstr ""
 
-#: ../classes/class-ccf-form-cpt.php:154
+#: ../classes/class-ccf-form-cpt.php:341
 msgid "Preview"
 msgstr ""
 
-#: ../classes/class-ccf-form-cpt.php:174
+#: ../classes/class-ccf-form-cpt.php:361
 msgid "Save your new form to see a preview."
 msgstr ""
 
-#: ../classes/class-ccf-form-cpt.php:211
+#: ../classes/class-ccf-form-cpt.php:398
 msgid "Created on:"
 msgstr ""
 
-#: ../classes/class-ccf-form-cpt.php:214
+#: ../classes/class-ccf-form-cpt.php:401
 msgid "Author:"
 msgstr ""
 
-#: ../classes/class-ccf-form-cpt.php:217
+#: ../classes/class-ccf-form-cpt.php:404
 msgid "Number of fields:"
 msgstr ""
 
-#: ../classes/class-ccf-form-cpt.php:220
+#: ../classes/class-ccf-form-cpt.php:407
 msgid "Number of submissions:"
 msgstr ""
 
-#: ../classes/class-ccf-form-cpt.php:226
+#: ../classes/class-ccf-form-cpt.php:413
 msgid "Move to Trash"
 msgstr ""
 
-#: ../classes/class-ccf-form-cpt.php:230
+#: ../classes/class-ccf-form-cpt.php:417
 msgid "Export"
 msgstr ""
 
-#: ../classes/class-ccf-form-cpt.php:259
+#: ../classes/class-ccf-form-cpt.php:446
 #: ../classes/class-ccf-form-manager.php:1214
 msgid "(No title)"
 msgstr ""
 
-#: ../classes/class-ccf-form-cpt.php:264
+#: ../classes/class-ccf-form-cpt.php:451
 msgid "Manage Form"
 msgstr ""
 
-#: ../classes/class-ccf-form-cpt.php:319
+#: ../classes/class-ccf-form-cpt.php:506
 msgid "Form Title"
 msgstr ""
 
-#: ../classes/class-ccf-form-cpt.php:320
+#: ../classes/class-ccf-form-cpt.php:507
 #: ../classes/class-ccf-form-manager.php:242
 #: ../classes/class-ccf-form-manager.php:255
 msgid "Author"
 msgstr ""
 
-#: ../classes/class-ccf-form-cpt.php:322
+#: ../classes/class-ccf-form-cpt.php:509
 #: ../classes/class-ccf-form-manager.php:243
 #: ../classes/class-ccf-form-manager.php:256
 msgid "Number of Fields"
 msgstr ""
 
-#: ../classes/class-ccf-form-cpt.php:356
+#: ../classes/class-ccf-form-cpt.php:543
 msgid "Unpublished"
 msgstr ""
 
-#: ../classes/class-ccf-form-cpt.php:358
+#: ../classes/class-ccf-form-cpt.php:545
 msgid "Y/m/d g:i:s A"
 msgstr ""
 
-#: ../classes/class-ccf-form-cpt.php:365
+#: ../classes/class-ccf-form-cpt.php:552
 #, php-format
 msgid "%s ago"
 msgstr ""
 
-#: ../classes/class-ccf-form-cpt.php:367
+#: ../classes/class-ccf-form-cpt.php:554
 msgid "Y/m/d"
 msgstr ""
 
-#: ../classes/class-ccf-form-cpt.php:383 ../classes/class-ccf-form-cpt.php:395
+#: ../classes/class-ccf-form-cpt.php:570 ../classes/class-ccf-form-cpt.php:582
 msgid "Forms"
 msgstr ""
 
-#: ../classes/class-ccf-form-cpt.php:384
+#: ../classes/class-ccf-form-cpt.php:571
 msgid "Form"
 msgstr ""
 
-#: ../classes/class-ccf-form-cpt.php:385 ../classes/class-ccf-form-cpt.php:388
+#: ../classes/class-ccf-form-cpt.php:572 ../classes/class-ccf-form-cpt.php:575
 #: ../classes/class-ccf-form-manager.php:81
 msgid "New Form"
 msgstr ""
 
-#: ../classes/class-ccf-form-cpt.php:386
+#: ../classes/class-ccf-form-cpt.php:573
 msgid "Add New Form"
 msgstr ""
 
-#: ../classes/class-ccf-form-cpt.php:387
+#: ../classes/class-ccf-form-cpt.php:574
 msgid "Edit Form"
 msgstr ""
 
-#: ../classes/class-ccf-form-cpt.php:390
+#: ../classes/class-ccf-form-cpt.php:577
 msgid "View Form"
 msgstr ""
 
-#: ../classes/class-ccf-form-cpt.php:391
+#: ../classes/class-ccf-form-cpt.php:578
 msgid "Search Forms"
 msgstr ""
 
-#: ../classes/class-ccf-form-cpt.php:392
+#: ../classes/class-ccf-form-cpt.php:579
 msgid "No forms found."
 msgstr ""
 
-#: ../classes/class-ccf-form-cpt.php:393
+#: ../classes/class-ccf-form-cpt.php:580
 msgid "No forms found in trash."
 msgstr ""
 
@@ -478,29 +478,29 @@ msgstr ""
 msgid "AM/PM is required."
 msgstr ""
 
-#: ../classes/class-ccf-form-handler.php:698
+#: ../classes/class-ccf-form-handler.php:704
 msgid "*Hidden Field*"
 msgstr ""
 
-#: ../classes/class-ccf-form-handler.php:772
+#: ../classes/class-ccf-form-handler.php:778
 msgid "Form submitted from"
 msgstr ""
 
-#: ../classes/class-ccf-form-handler.php:781
+#: ../classes/class-ccf-form-handler.php:787
 msgid "Form submitter IP"
 msgstr ""
 
-#: ../classes/class-ccf-form-handler.php:815
+#: ../classes/class-ccf-form-handler.php:821
 #, php-format
 msgid "%s: Form Submission"
 msgstr ""
 
-#: ../classes/class-ccf-form-handler.php:817
+#: ../classes/class-ccf-form-handler.php:823
 #, php-format
 msgid " to \"%s\""
 msgstr ""
 
-#: ../classes/class-ccf-form-handler.php:832
+#: ../classes/class-ccf-form-handler.php:838
 #: ../classes/class-ccf-form-renderer.php:119
 msgid "Thank you for your submission."
 msgstr ""
@@ -1042,15 +1042,15 @@ msgstr ""
 msgid "reCAPTCHA"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1507
+#: ../classes/class-ccf-form-manager.php:1508
 msgid "You have no email fields"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1508
+#: ../classes/class-ccf-form-manager.php:1509
 msgid "Invalid date"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1510
+#: ../classes/class-ccf-form-manager.php:1511
 msgid "Form Submission"
 msgstr ""
 
@@ -1161,18 +1161,18 @@ msgstr ""
 #: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:153
 #: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:174
 #: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:205
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:749
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:769
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:758
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:778
 msgid "Invalid post type"
 msgstr ""
 
 #: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:210
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:784
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:793
 msgid "Sorry, you are not allowed to post on this site."
 msgstr ""
 
 #: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:215
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:776
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:785
 msgid "Sorry, you are not allowed to edit this post."
 msgstr ""
 
@@ -1207,7 +1207,7 @@ msgid "Invalid featured image."
 msgstr ""
 
 #: ../vendor/wp-api/wp-api/lib/class-wp-json-meta-posts.php:34
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:636
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:645
 msgid "Sorry, you cannot edit this post"
 msgstr ""
 
@@ -1304,49 +1304,49 @@ msgstr ""
 msgid "Cannot view post type"
 msgstr ""
 
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:646
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:655
 msgid "Sorry, you cannot view this revision"
 msgstr ""
 
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:682
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:691
 msgid "There is no excerpt because this is a protected post."
 msgstr ""
 
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:780
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:789
 msgid "The post type may not be changed."
 msgstr ""
 
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:798
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:807
 msgid "Sorry, you are not allowed to create private posts in this post type"
 msgstr ""
 
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:804
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:813
 msgid "Sorry, you are not allowed to publish posts in this post type"
 msgstr ""
 
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:845
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:854
 msgid "Invalid author object."
 msgstr ""
 
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:855
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:864
 msgid "You are not allowed to edit posts as this user."
 msgstr ""
 
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:861
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:870
 msgid "Invalid author ID."
 msgstr ""
 
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:873
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:882
 msgid ""
 "Sorry, you are not allowed to create password protected posts in this post "
 "type"
 msgstr ""
 
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:890
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:899
 msgid "Invalid post parent ID."
 msgstr ""
 
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:916
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:925
 msgid "Invalid post format."
 msgstr ""
 
@@ -1362,19 +1362,19 @@ msgstr ""
 msgid "The JSONP callback function is invalid."
 msgstr ""
 
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-server.php:374
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-server.php:375
 msgid "Unsupported request method"
 msgstr ""
 
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-server.php:393
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-server.php:394
 msgid "The handler for the route is invalid"
 msgstr ""
 
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-server.php:453
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-server.php:454
 msgid "No route was found matching the URL and request method"
 msgstr ""
 
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-server.php:505
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-server.php:506
 #: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:252
 #, php-format
 msgid "Missing parameter %s"
