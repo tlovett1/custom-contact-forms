@@ -1494,6 +1494,7 @@ class CCF_Form_Manager {
 			wp_enqueue_script( 'ccf-form-manager', plugins_url( $js_manager_path, dirname( __FILE__ ) ), array( 'json2', 'jquery', 'jquery-ui-core', 'jquery-ui-datepicker', 'underscore', 'backbone', 'jquery-ui-core', 'jquery-ui-draggable', 'jquery-ui-sortable', 'jquery-ui-droppable', 'wp-api', 'moment' ), '1.0', true );
 			wp_localize_script( 'ccf-form-manager', 'ccfSettings', array(
 				'nonce' => wp_create_nonce( 'ccf_nonce' ),
+				'downloadSubmissionsNonce' => wp_create_nonce( 'ccf_download_submissions_nonce' ),
 				'adminUrl' => esc_url_raw( admin_url() ),
 				'fieldLabels' => $field_labels,
 				'gmtOffset' => get_option( 'gmt_offset' ),

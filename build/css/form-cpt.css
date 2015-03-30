@@ -88,7 +88,8 @@
   float: right;
   width: 23px;
   height: 30px;
-  cursor: pointer; }
+  cursor: pointer;
+  color: inherit; }
 #ccf-submissions .inside {
   padding: 0;
   margin: 0; }

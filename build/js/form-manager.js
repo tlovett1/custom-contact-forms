@@ -2884,7 +2884,8 @@
 							settings.className = 'ccf-submission-icon';
 							settings.setAttribute( 'data-icon', '' );
 
-							var download = document.createElement( 'div' );
+							var download = document.createElement( 'a' );
+							download.href = '?action=edit&post=' + parseInt( ccfSettings.postId ) + '&download_submissions=1&download_submissions_nonce=' + ccfSettings.downloadSubmissionsNonce;
 							download.className = 'ccf-submission-icon';
 							download.setAttribute( 'data-icon', '' );
 
