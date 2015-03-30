@@ -429,7 +429,83 @@
 		});
 	});
 
-	// Todo: Test email
+	// @Todo: Test confirm email field
+
+	QUnit.test( 'Test simple successful email field', function( assert ) {
+		var done = assert.async();
+
+		expect( 1 );
+
+		$( qunit ).load( 'forms/simple-email-1.html', function() {
+			wp.ccf.setupDOM();
+
+			var $form = $('.ccf-form' );
+
+			$form.find( '.field-required .field-input')
+				.val( 'test@test.com' );
+
+			$form.on( 'ccfFormSuccess', function() {
+				ok( true, 'Form submitted without errors' );
+				done();
+			});
+
+			// Submit form
+			$form.find( '.ccf-submit-button' ).click();
+		});
+	});
+
+	QUnit.test( 'Test simple unsuccessful required email field', function( assert ) {
+		var done = assert.async();
+
+		expect( 2 );
+
+		$( qunit ).load( 'forms/simple-email-1.html', function() {
+			wp.ccf.setupDOM();
+
+			var $form = $('.ccf-form' );
+
+			$form.on( 'ccfFormError', function() {
+				equal( arguments.length, 2, 'Form submitted with one error field' );
+
+				var errors = arguments[1].errors;
+				var keys = _.keys( errors );
+
+				equal( _.keys( errors[keys[0]] )[0], 'required', 'Form has required error' );
+				done();
+			});
+
+			// Submit form
+			$form.find( '.ccf-submit-button' ).click();
+		});
+	});
+
+	QUnit.test( 'Test simple unsuccessful bad email field', function( assert ) {
+		var done = assert.async();
+
+		expect( 2 );
+
+		$( qunit ).load( 'forms/simple-email-1.html', function() {
+			wp.ccf.setupDOM();
+
+			var $form = $('.ccf-form' );
+
+			$form.find( '.field-required .field-input')
+				.val( 'testsd' );
+
+			$form.on( 'ccfFormError', function() {
+				equal( arguments.length, 2, 'Form submitted with one error field' );
+
+				var errors = arguments[1].errors;
+				var keys = _.keys( errors );
+
+				equal( _.keys( errors[keys[0]] )[0], 'email', 'Email is not valid' );
+				done();
+			});
+
+			// Submit form
+			$form.find( '.ccf-submit-button' ).click();
+		});
+	});
 
 	// Todo: Test dropdown
 
