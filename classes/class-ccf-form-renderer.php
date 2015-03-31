@@ -103,13 +103,28 @@ class CCF_Form_Renderer {
 
 		$fields = get_post_meta( $form_id, 'ccf_attached_fields', true );
 
+		$pause = get_post_meta( $form_id, 'ccf_form_pause', true );
+
 		if ( empty( $fields ) ) {
 			return '';
 		}
 
 		ob_start();
 
-		if ( ! empty( $_POST['ccf_form'] ) && ! empty( $_POST['form_id'] ) && $_POST['form_id'] == $form_id && empty( CCF_Form_Handler::factory()->errors_by_form[$form_id] ) ) {
+		if ( ! empty( $pause ) ) {
+			$pause_message = get_post_meta( $form_id, 'ccf_form_pause_message', true );
+			?>
+
+			<div class="ccf-form-pause form-id-<?php echo (int) $form_id; ?>">
+				<?php if ( empty( $pause_message ) ) : ?>
+					<?php esc_html_e( 'This form is paused right now. Check back later!', 'custom-contact-forms' ); ?>
+				<?php else : ?>
+					<?php echo esc_html( $pause_message ); ?>
+				<?php endif; ?>
+			</div>
+
+			<?php
+		} elseif ( ! empty( $_POST['ccf_form'] ) && ! empty( $_POST['form_id'] ) && $_POST['form_id'] == $form_id && empty( CCF_Form_Handler::factory()->errors_by_form[$form_id] ) ) {
 
 			$completion_message = get_post_meta( $form_id, 'ccf_form_completion_message', true );
 			?>

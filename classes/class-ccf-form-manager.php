@@ -170,6 +170,18 @@ class CCF_Form_Manager {
 					<label for="ccf_form_completion_message"><?php esc_html_e( 'Completion Message:', 'custom-contact-forms' ); ?></label>
 					<textarea class="widefat form-completion-message" id="ccf_form_completion_message" name="completion-message">{{ form.completionMessage }}</textarea>
 				</p>
+				<p>
+					<label for="ccf_form_pause"><?php esc_html_e( 'Pause form:', 'custom-contact-forms' ); ?></label>
+
+					<select name="form_pause" class="form-pause" id="ccf_form_pause">
+						<option value="0"><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
+						<option value="1" <# if ( form.pause ) { #>selected<# } #>><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
+					</select>
+				</p>
+				<p class="pause-message">
+					<label for="ccf_form_pause_message"><?php esc_html_e( 'Pause Message:', 'custom-contact-forms' ); ?></label>
+					<textarea class="widefat form-pause-message" id="ccf_form_pause_message" name="pause-message">{{ form.pauseMessage }}</textarea>
+				</p>
 			</div>
 		</script>
 
@@ -1509,6 +1521,7 @@ class CCF_Form_Manager {
 				'invalidDate' => esc_html__( 'Invalid date', 'custom-contact-forms' ),
 				'allLabels' => array_merge( $field_labels, $structure_field_labels, $special_field_labels ),
 				'thickboxTitle' => esc_html__( 'Form Submission', 'custom-contact-forms' ),
+				'pauseMessage' => esc_html__( 'This form is paused right now. Check back later!', 'custom-contact-forms' ),
 				'skipFields' => apply_filters( 'ccf_no_submission_display_fields', array( 'html', 'section-header', 'recaptcha' ) ),
 			) );
 

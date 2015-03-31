@@ -100,7 +100,9 @@
 					emailNotificationAddresses: ccfSettings.adminEmail,
 					emailNotificationFromType: 'default',
 					emailNotificationFromAddress: '',
-					emailNotificationFromField: ''
+					emailNotificationFromField: '',
+					pause: false,
+					pauseMessage: ccfSettings.pauseMessage
 				};
 
 				defaults = _.defaults( defaults, this.constructor.__super__.defaults );

@@ -778,6 +778,7 @@
 				'blur input': 'save',
 				'change select': 'save',
 				'change select.form-completion-action-type': 'toggleCompletionFields',
+				'change select.form-pause': 'togglePauseFields',
 				'change select.form-send-email-notifications': 'toggleNotificationFields'
 			},
 
@@ -805,6 +806,18 @@
 				}
 			},
 
+			togglePauseFields: function() {
+
+				var pause = this.el.querySelectorAll( '.form-pause' )[0].value;
+				var pauseMessage = this.el.querySelectorAll( '.pause-message' )[0];
+
+				if ( parseInt( pause ) ) {
+					pauseMessage.style.display = 'block';
+				} else {
+					pauseMessage.style.display = 'none';
+				}
+			},
+
 			save: function( $promise ) {
 				var SELF = this;
 
@@ -821,6 +834,12 @@
 
 				var buttonText = this.el.querySelectorAll( '.form-button-text' )[0].value;
 				this.model.set( 'buttonText', buttonText );
+
+				var pause = this.el.querySelectorAll( '.form-pause' )[0].value;
+				this.model.set( 'pause', ( parseInt( pause ) ) ? true : false );
+
+				var pauseMessage = this.el.querySelectorAll( '.form-pause-message' )[0].value;
+				this.model.set( 'pauseMessage', pauseMessage );
 
 				var completionMessage = this.el.querySelectorAll( '.form-completion-message' )[0].value;
 				this.model.set( 'completionMessage', completionMessage );
@@ -844,6 +863,8 @@
 				this.el.innerHTML = this.template( context );
 
 				this.toggleCompletionFields();
+
+				this.togglePauseFields();
 
 				wp.ccf.dispatcher.on( 'saveFormSettings', this.save, this );
 				wp.ccf.dispatcher.on( 'mainViewChange', this.save, this );

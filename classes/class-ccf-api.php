@@ -398,6 +398,8 @@ class CCF_API extends WP_JSON_Posts {
 			$_post['completionRedirectUrl'] = esc_url_raw( get_post_meta( $post['ID'], 'ccf_form_completion_redirect_url', true ) );
 			$_post['completionMessage'] = esc_html( get_post_meta( $post['ID'], 'ccf_form_completion_message', true ) );
 			$_post['sendEmailNotifications'] = (bool) get_post_meta( $post['ID'], 'ccf_form_send_email_notifications', true );
+			$_post['pause'] = (bool) get_post_meta( $post['ID'], 'ccf_form_pause', true );
+			$_post['pauseMessage'] = esc_html( get_post_meta( $post['ID'], 'ccf_form_pause_message', true ) );
 			$_post['emailNotificationAddresses'] = esc_html( get_post_meta( $post['ID'], 'ccf_form_email_notification_addresses', true ) );
 			$_post['emailNotificationFromType'] = esc_html( get_post_meta( $post['ID'], 'ccf_form_email_notification_from_type', true ) );
 			$_post['emailNotificationFromAddress'] = esc_html( get_post_meta( $post['ID'], 'ccf_form_email_notification_from_address', true ) );
@@ -550,6 +552,14 @@ class CCF_API extends WP_JSON_Posts {
 
 		if ( isset( $data['sendEmailNotifications'] ) ) {
 			update_post_meta( $result, 'ccf_form_send_email_notifications', (bool) $data['sendEmailNotifications'] );
+		}
+
+		if ( isset( $data['pause'] ) ) {
+			update_post_meta( $result, 'ccf_form_pause', (bool) $data['pause'] );
+		}
+
+		if ( isset( $data['pauseMessage'] ) ) {
+			update_post_meta( $result, 'ccf_form_pause_message', sanitize_text_field( $data['pauseMessage'] ) );
 		}
 
 		if ( isset( $data['emailNotificationAddresses'] ) ) {
@@ -820,6 +830,14 @@ class CCF_API extends WP_JSON_Posts {
 
 		if ( isset( $data['completionMessage'] ) ) {
 			update_post_meta( $result, 'ccf_form_completion_message', sanitize_text_field( $data['completionMessage'] ) );
+		}
+
+		if ( isset( $data['pause'] ) ) {
+			update_post_meta( $result, 'ccf_form_pause', (bool) $data['pause'] );
+		}
+
+		if ( isset( $data['pauseMessage'] ) ) {
+			update_post_meta( $result, 'ccf_form_pause_message', sanitize_text_field( $data['pauseMessage'] ) );
 		}
 
 		if ( isset( $data['completionRedirectUrl'] ) ) {
