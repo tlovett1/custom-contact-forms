@@ -55,6 +55,10 @@ Each form has a number of settings that you should understand.
   * `Completion Message` - If you choose to show a message, you can customize the message to be shown.
   * `Redirect URL` - If you choose to perform a redirect, you can customize the redirect URL.
 
+* `Pause` - Pausing a form will temporarily disable new form submissions on the front end.
+
+  * `Pause Message` - This message will be shown if the form is paused.
+
 ### Form Notifications
 
 * `Send email notifications` - When a form is completed, you can have an email sent with submission information.
