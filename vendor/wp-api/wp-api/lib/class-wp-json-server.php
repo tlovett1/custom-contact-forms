@@ -700,7 +700,7 @@ class WP_JSON_Server implements WP_JSON_ResponseHandler {
 	 * @deprecated
 	 * @param string $email Email address
 	 * @return string url for the user's avatar
-	 */
+	*/
 	public function get_avatar_url( $email ) {
 		_deprecated_function( __CLASS__ . '::' . __METHOD__, 'WPAPI-1.1', 'json_get_avatar_url' );
 
