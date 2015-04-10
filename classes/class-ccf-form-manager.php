@@ -728,7 +728,7 @@ class CCF_Form_Manager {
 						<label for="ccf-field-address-type"><?php esc_html_e( 'Type:', 'custom-contact-forms' ); ?></label>
 						<select id="ccf-field-address-type" class="field-address-type">
 							<option value="us"><?php esc_html_e( 'United States', 'custom-contact-forms' ); ?></option>
-							<option value="international" <# if ( 'international' === field.format ) { #>selected="selected"<# } #>><?php esc_html_e( 'International', 'custom-contact-forms' ); ?></option>
+							<option value="international" <# if ( 'international' === field.addressType ) { #>selected="selected"<# } #>><?php esc_html_e( 'International', 'custom-contact-forms' ); ?></option>
 						</select>
 					</div>
 					<div>
