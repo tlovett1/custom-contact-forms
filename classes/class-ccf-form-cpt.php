@@ -47,7 +47,7 @@ class CCF_Form_CPT {
 			return;
 		}
 
-		if ( ! current_user_can( 'manage_options ') ) {
+		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
 
