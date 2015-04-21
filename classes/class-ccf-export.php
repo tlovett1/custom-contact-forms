@@ -84,8 +84,11 @@ class CCF_Export {
 	 * @since 6.5
 	 */
 	public function action_admin_menu() {
-		global $submenu;
-		$submenu['edit.php?post_type=ccf_form'][] = array( esc_html__( 'Import', 'custom-contact-forms' ), 'manage_options', esc_url( admin_url( 'import.php' ) ) );
+		if ( current_user_can( 'edit_posts' ) ) {
+			global $submenu;
+
+			$submenu['edit.php?post_type=ccf_form'][] = array( esc_html__( 'Import', 'custom-contact-forms' ), 'manage_options', esc_url( admin_url( 'import.php' ) ) );
+		}
 	}
 
 	/**

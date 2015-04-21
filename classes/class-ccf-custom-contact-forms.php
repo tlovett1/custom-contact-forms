@@ -15,7 +15,7 @@ class CCF_Custom_Contact_Forms {
 	 * @since 6.0
 	 */
 	public function setup() {
-		add_action( 'plugins_loaded', array( $this, 'manually_load_api' ), 100 );
+		add_action( 'plugins_loaded', array( $this, 'manually_load_api' ), 1000 );
 		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 		add_filter( 'plugin_action_links', array( $this, 'filter_plugin_action_links' ), 10, 2 );
 		add_action( 'admin_notices', array( $this, 'permalink_warning' ) );
@@ -85,13 +85,22 @@ class CCF_Custom_Contact_Forms {
 	 * @since 6.0
 	 */
 	public function manually_load_api() {
-		if ( ! class_exists( 'WP_JSON_Server' ) ) {
-			add_filter( 'json_url', 'set_url_scheme' );
+		global $pagenow;
 
-			require( dirname( __FILE__ ) . '/../vendor/wp-api/wp-api/plugin.php' );
+		add_action( 'wp_json_server_before_serve', array( $this, 'api_init' ) );
+		add_filter( 'json_url', 'set_url_scheme' );
 
-			add_action( 'wp_json_server_before_serve', array( $this, 'api_init' ) );
+		if ( ! empty( $pagenow ) ) {
+			if ( 'plugins.php' === $pagenow && ( ! empty( $_GET['action'] ) && 'activate' === $_GET['action'] || ! empty( $_POST['checked'] ) ) ) {
+				return;
+			}
 		}
+
+		if ( function_exists( 'json_api_init' ) ) {
+			return;
+		}
+
+		require( dirname( __FILE__ ) . '/../vendor/wp-api/wp-api/plugin.php' );
 	}
 
 	/**
