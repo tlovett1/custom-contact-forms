@@ -28,6 +28,7 @@ class CCF_API extends WP_JSON_Posts {
 		parent::__construct( $server );
 
 		add_filter( 'json_prepare_post', array( $this, 'filter_prepare_post' ), 10, 3 );
+		add_filter( 'json_pre_dispatch', array( $this, 'filter_json_pre_dispatch' ), 10, 2 );
 
 		$this->field_attribute_keys = apply_filters( 'ccf_field_attributes', array(
 			'type' => array(
@@ -126,6 +127,19 @@ class CCF_API extends WP_JSON_Posts {
 				'escape' => array( $this, 'boolval' ),
 			),
 		) );
+	}
+
+	/**
+	 * Allow Backbone to emulate HTTP
+	 *
+	 * @param $result
+	 * @param object $server
+	 * @since 6.6.5
+	 */
+	function filter_json_pre_dispatch( $result, $server ) {
+		if ( isset( $_SERVER['HTTP_X_HTTP_METHOD_OVERRIDE'] ) ) {
+			$server->method = $_SERVER['HTTP_X_HTTP_METHOD_OVERRIDE'];
+		}
 	}
 
 	/**

@@ -225,14 +225,10 @@ class WP_JSON_Server implements WP_JSON_ResponseHandler {
 		$this->files          = $_FILES;
 
 		/**
-		 * HTTP method override for clients that can't use PUT/PATCH/DELETE. First, we check
-		 * $_GET['_method']. If that is not set, we check for the HTTP_X_HTTP_METHOD_OVERRIDE
-		 * header.
+		 * HTTP method override for clients that can't use PUT/PATCH/DELETE.
 		 */
 		if ( isset( $_GET['_method'] ) ) {
 			$this->method = strtoupper( $_GET['_method'] );
-		} elseif ( isset( $_SERVER['HTTP_X_HTTP_METHOD_OVERRIDE'] ) ) {
-			$this->method = strtoupper( $_SERVER['HTTP_X_HTTP_METHOD_OVERRIDE'] );
 		}
 
 		$result = $this->check_authentication();
