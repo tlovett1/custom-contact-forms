@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: contact form, web form, custom contact form, custom forms, captcha form, contact fields, form mailers, forms
 Requires at least: 3.9
 Tested up to: 4.2
-Stable tag: 6.6.4
+Stable tag: 6.7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -35,9 +35,13 @@ For questions, feature requests, and support concerning the Custom Contact Forms
 
 == Changelog ==
 
+= 6.7.0 =
+* Ability to pause forms
+* Emulate Backbone HTTP via filter instead of API hack
+
 = 6.6.4 =
 * Fix API setup so it doesn't conflict with WP API plugin
-# Fix bug where export menu item was shown to non authorized users
+* Fix bug where export menu item was shown to non authorized users
 
 = 6.6.3 =
 * Fix form submission download bug

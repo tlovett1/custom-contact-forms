@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: Custom Contact Forms\n"
 "Report-Msgid-Bugs-To: https://github.com/tlovett1/custom-contact-forms/"
 "issues\n"
-"POT-Creation-Date: 2015-03-30 23:27-0500\n"
-"PO-Revision-Date: 2015-03-30 23:27-0500\n"
+"POT-Creation-Date: 2015-04-25 00:38-0500\n"
+"PO-Revision-Date: 2015-04-25 00:39-0500\n"
 "Last-Translator: Taylor Lovett <tlovett88@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: en\n"
@@ -23,7 +23,7 @@ msgstr ""
 "X-Textdomain-Support: yes\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../classes/class-ccf-api.php:146
+#: ../classes/class-ccf-api.php:160
 #: ../vendor/wp-api/wp-api/lib/class-wp-json-comments.php:82
 #: ../vendor/wp-api/wp-api/lib/class-wp-json-customposttype.php:130
 #: ../vendor/wp-api/wp-api/lib/class-wp-json-customposttype.php:151
@@ -39,56 +39,56 @@ msgstr ""
 #: ../vendor/wp-api/wp-api/lib/class-wp-json-pages.php:106
 #: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:74
 #: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:271
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:319
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:364
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:739
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:767
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:329
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:374
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:749
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:777
 msgid "Invalid post ID."
 msgstr ""
 
-#: ../classes/class-ccf-api.php:150
+#: ../classes/class-ccf-api.php:164
 #: ../vendor/wp-api/wp-api/lib/class-wp-json-comments.php:86
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:275
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:517
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:529
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:285
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:527
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:539
 msgid "Sorry, you cannot read this post."
 msgstr ""
 
-#: ../classes/class-ccf-api.php:206
+#: ../classes/class-ccf-api.php:220
 #: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:122
 #, php-format
 msgid "The post type \"%s\" is not valid"
 msgstr ""
 
-#: ../classes/class-ccf-api.php:429 ../classes/class-ccf-api.php:732
-#: ../classes/class-ccf-api.php:757 ../classes/class-ccf-api.php:786
-#: ../classes/class-ccf-api.php:887
+#: ../classes/class-ccf-api.php:443 ../classes/class-ccf-api.php:746
+#: ../classes/class-ccf-api.php:771 ../classes/class-ccf-api.php:800
+#: ../classes/class-ccf-api.php:901
 msgid "Invalid form ID."
 msgstr ""
 
-#: ../classes/class-ccf-api.php:434 ../classes/class-ccf-api.php:717
-#: ../classes/class-ccf-api.php:737
+#: ../classes/class-ccf-api.php:448 ../classes/class-ccf-api.php:731
+#: ../classes/class-ccf-api.php:751
 msgid "Sorry, you cannot view forms."
 msgstr ""
 
-#: ../classes/class-ccf-api.php:763 ../classes/class-ccf-api.php:792
+#: ../classes/class-ccf-api.php:777 ../classes/class-ccf-api.php:806
 msgid "Invalid form."
 msgstr ""
 
-#: ../classes/class-ccf-api.php:767
+#: ../classes/class-ccf-api.php:781
 msgid "Sorry, you cannot view this form."
 msgstr ""
 
-#: ../classes/class-ccf-api.php:898
+#: ../classes/class-ccf-api.php:912
 msgid "The form cannot be deleted."
 msgstr ""
 
-#: ../classes/class-ccf-api.php:902
+#: ../classes/class-ccf-api.php:916
 msgid "Permanently deleted form"
 msgstr ""
 
-#: ../classes/class-ccf-api.php:905
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:381
+#: ../classes/class-ccf-api.php:919
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:391
 msgid "Deleted post"
 msgstr ""
 
@@ -112,7 +112,7 @@ msgstr ""
 msgid "Forms and Submissions"
 msgstr ""
 
-#: ../classes/class-ccf-export.php:88
+#: ../classes/class-ccf-export.php:90
 msgid "Import"
 msgstr ""
 
@@ -1176,18 +1176,18 @@ msgstr ""
 #: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:153
 #: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:174
 #: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:205
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:758
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:778
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:768
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:788
 msgid "Invalid post type"
 msgstr ""
 
 #: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:210
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:793
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:803
 msgid "Sorry, you are not allowed to post on this site."
 msgstr ""
 
 #: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:215
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:785
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:795
 msgid "Sorry, you are not allowed to edit this post."
 msgstr ""
 
@@ -1222,7 +1222,7 @@ msgid "Invalid featured image."
 msgstr ""
 
 #: ../vendor/wp-api/wp-api/lib/class-wp-json-meta-posts.php:34
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:645
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:655
 msgid "Sorry, you cannot edit this post"
 msgstr ""
 
@@ -1299,69 +1299,69 @@ msgstr ""
 msgid "Sorry, you cannot view the revisions for this post."
 msgstr ""
 
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:337
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:347
 msgid "There is a revision of this post that is more recent."
 msgstr ""
 
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:368
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:378
 msgid "Sorry, you are not allowed to delete this post."
 msgstr ""
 
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:374
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:384
 msgid "The post cannot be deleted."
 msgstr ""
 
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:378
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:388
 msgid "Permanently deleted post"
 msgstr ""
 
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:421
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:431
 msgid "Cannot view post type"
 msgstr ""
 
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:655
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:665
 msgid "Sorry, you cannot view this revision"
 msgstr ""
 
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:691
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:701
 msgid "There is no excerpt because this is a protected post."
 msgstr ""
 
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:789
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:799
 msgid "The post type may not be changed."
 msgstr ""
 
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:807
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:817
 msgid "Sorry, you are not allowed to create private posts in this post type"
 msgstr ""
 
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:813
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:823
 msgid "Sorry, you are not allowed to publish posts in this post type"
 msgstr ""
 
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:854
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:864
 msgid "Invalid author object."
 msgstr ""
 
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:864
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:874
 msgid "You are not allowed to edit posts as this user."
 msgstr ""
 
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:870
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:880
 msgid "Invalid author ID."
 msgstr ""
 
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:882
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:892
 msgid ""
 "Sorry, you are not allowed to create password protected posts in this post "
 "type"
 msgstr ""
 
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:899
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:909
 msgid "Invalid post parent ID."
 msgstr ""
 
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:925
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:935
 msgid "Invalid post format."
 msgstr ""
 
@@ -1377,19 +1377,19 @@ msgstr ""
 msgid "The JSONP callback function is invalid."
 msgstr ""
 
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-server.php:375
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-server.php:371
 msgid "Unsupported request method"
 msgstr ""
 
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-server.php:394
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-server.php:390
 msgid "The handler for the route is invalid"
 msgstr ""
 
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-server.php:454
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-server.php:450
 msgid "No route was found matching the URL and request method"
 msgstr ""
 
-#: ../vendor/wp-api/wp-api/lib/class-wp-json-server.php:506
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-server.php:502
 #: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:252
 #, php-format
 msgid "Missing parameter %s"
