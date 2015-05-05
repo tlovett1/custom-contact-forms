@@ -673,7 +673,11 @@ class CCF_Form_Handler {
 						'post_parent' => $submission_id,
 					) );
 				}
+
+				do_action( 'ccf_successful_submission', $submission_id, $form_id );
 			} else {
+				do_action( 'ccf_unsuccessful_submission', $form_id );
+
 				return array( 'error' => 'could_not_create_submission', 'success' => false, );
 			}
 
