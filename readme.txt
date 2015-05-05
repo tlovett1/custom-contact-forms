@@ -35,6 +35,9 @@ For questions, feature requests, and support concerning the Custom Contact Forms
 
 == Changelog ==
 
+= xxxxx =
+* Add successful/unsuccessful submission hooks
+
 = 6.7.2 =
 * Allow forms to be emptied
 * Allow MCE previews to be re-rendered
