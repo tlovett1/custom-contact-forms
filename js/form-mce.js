@@ -12,7 +12,7 @@
 		triggerRefresh: function( form ) {
 			if ( form === wp.ccf.forms.findWhere( { ID: parseInt( this.shortcode.attrs.named.id ) } ) ) {
 				this.renderPreviews();
-				this.render( this.getHtml() );
+				this.render( this.getHtml(), true );
 			}
 		},
 
@@ -41,12 +41,12 @@
 
 					SELF.renderPreviews();
 
-					SELF.render( SELF.getHtml() );
+					SELF.render( SELF.getHtml(), true );
 				});
 			} else {
 				SELF.renderPreviews();
 
-				SELF.render( SELF.getHtml() );
+				SELF.render( SELF.getHtml(), true );
 			}
 		},
 
