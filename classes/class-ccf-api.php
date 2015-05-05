@@ -826,7 +826,11 @@ class CCF_API extends WP_JSON_Posts {
 			return $result;
 		}
 
-		if ( ! empty( $data['fields'] ) ) {
+		if ( isset( $data['fields'] ) ) {
+			if ( empty( $data['fields'] ) ) {
+				$data['fields'] = array();
+			}
+
 			$this->create_and_map_fields( $data['fields'], $result );
 		}
 

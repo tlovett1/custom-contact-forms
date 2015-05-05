@@ -222,6 +222,7 @@
       border-top: 1px solid #e5e5e5; }
       .ccf-main-modal .ccf-form-pane .bottom .spinner {
         display: none;
+        visibility: visible;
         float: right;
         width: 16px;
         height: 16px;
