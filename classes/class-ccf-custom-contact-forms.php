@@ -31,12 +31,15 @@ class CCF_Custom_Contact_Forms {
 		$flush_rewrites = get_option( 'ccf_flush_rewrites' );
 
 		if ( ! empty( $flush_rewrites ) ) {
-			flush_rewrite_rules();
+			add_action( 'shutdown', 'flush_rewrite_rules' );
 
 			delete_option( 'ccf_flush_rewrites' );
 		}
 	}
 
+	/**
+	 * Output permalink warning
+	 */
 	public function permalink_warning() {
 		$permalink_structure = get_option( 'permalink_structure' );
 
@@ -45,7 +48,7 @@ class CCF_Custom_Contact_Forms {
 			<div class="update-nag">
 				<?php printf( __( 'Custom Contact Forms will not work unless pretty permalinks (not default) are enabled. Please update your <a href="%s">permalinks settings</a>.', 'custom-contact-forms' ), esc_url( admin_url( 'options-permalink.php' ) ) ); ?>
 			</div>
-			<?php
+		<?php
 		}
 	}
 
@@ -92,7 +95,18 @@ class CCF_Custom_Contact_Forms {
 
 		if ( ! empty( $pagenow ) ) {
 			if ( 'plugins.php' === $pagenow && ( ! empty( $_GET['action'] ) && 'activate' === $_GET['action'] || ! empty( $_POST['checked'] ) ) ) {
-				return;
+
+				if ( ! empty( $_POST['checked'] ) ) {
+					foreach ( $_POST['checked'] as $plugin ) {
+						if ( preg_match( '#json-rest-api#i', $plugin ) ) {
+							return;
+						}
+					}
+				} elseif ( ! empty( $_GET['plugin'] ) ) {
+					if ( preg_match( '#json-rest-api#i', $_GET['plugin'] ) ) {
+						return;
+					}
+				}
 			}
 		}
 
@@ -100,7 +114,7 @@ class CCF_Custom_Contact_Forms {
 			return;
 		}
 
-		require( dirname( __FILE__ ) . '/../vendor/wp-api/wp-api/plugin.php' );
+		require_once( dirname( __FILE__ ) . '/../vendor/wp-api/wp-api/plugin.php' );
 	}
 
 	/**
