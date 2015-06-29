@@ -101,6 +101,9 @@
 					emailNotificationFromType: 'default',
 					emailNotificationFromAddress: '',
 					emailNotificationFromField: '',
+					emailNotificationFromNameType: 'custom',
+					emailNotificationFromName: 'WordPress',
+					emailNotificationFromNameField: '',
 					pause: false,
 					pauseMessage: ccfSettings.pauseMessage
 				};
