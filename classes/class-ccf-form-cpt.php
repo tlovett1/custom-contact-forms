@@ -156,15 +156,15 @@ class CCF_Form_CPT {
 						} elseif ( 'dropdown' === $type || 'radio' === $type || 'checkboxes' === $type ) {
 							if ( is_array( $field ) ) {
 								$i = 0;
-								$output = '';
+								$outputval = '';
 
 								foreach ( $field as $value ) {
 									if ( ! empty( $value ) ) {
 										if ( $i !== 0 ) {
-											$output .= ', ';
+											$outputval .= ', ';
 										}
 
-										$output .= stripslashes( $value );
+										$outputval .= stripslashes( $value );
 
 										$i++;
 									}
@@ -173,7 +173,7 @@ class CCF_Form_CPT {
 								if ( 0 === $i ) {
 									$row[] = '';
 								} else {
-									$row[] = $output;
+									$row[] = $outputval;
 								}
 
 							} else {
