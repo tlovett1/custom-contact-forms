@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: Custom Contact Forms\n"
 "Report-Msgid-Bugs-To: https://github.com/tlovett1/custom-contact-forms/"
 "issues\n"
-"POT-Creation-Date: 2015-04-25 00:38-0500\n"
-"PO-Revision-Date: 2015-04-25 00:39-0500\n"
+"POT-Creation-Date: 2015-06-29 10:27-0500\n"
+"PO-Revision-Date: 2015-06-29 10:27-0500\n"
 "Last-Translator: Taylor Lovett <tlovett88@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: en\n"
@@ -60,34 +60,34 @@ msgstr ""
 msgid "The post type \"%s\" is not valid"
 msgstr ""
 
-#: ../classes/class-ccf-api.php:443 ../classes/class-ccf-api.php:746
-#: ../classes/class-ccf-api.php:771 ../classes/class-ccf-api.php:800
-#: ../classes/class-ccf-api.php:901
+#: ../classes/class-ccf-api.php:447 ../classes/class-ccf-api.php:762
+#: ../classes/class-ccf-api.php:787 ../classes/class-ccf-api.php:816
+#: ../classes/class-ccf-api.php:933
 msgid "Invalid form ID."
 msgstr ""
 
-#: ../classes/class-ccf-api.php:448 ../classes/class-ccf-api.php:731
-#: ../classes/class-ccf-api.php:751
+#: ../classes/class-ccf-api.php:452 ../classes/class-ccf-api.php:747
+#: ../classes/class-ccf-api.php:767
 msgid "Sorry, you cannot view forms."
 msgstr ""
 
-#: ../classes/class-ccf-api.php:777 ../classes/class-ccf-api.php:806
+#: ../classes/class-ccf-api.php:793 ../classes/class-ccf-api.php:822
 msgid "Invalid form."
 msgstr ""
 
-#: ../classes/class-ccf-api.php:781
+#: ../classes/class-ccf-api.php:797
 msgid "Sorry, you cannot view this form."
 msgstr ""
 
-#: ../classes/class-ccf-api.php:912
+#: ../classes/class-ccf-api.php:944
 msgid "The form cannot be deleted."
 msgstr ""
 
-#: ../classes/class-ccf-api.php:916
+#: ../classes/class-ccf-api.php:948
 msgid "Permanently deleted form"
 msgstr ""
 
-#: ../classes/class-ccf-api.php:919
+#: ../classes/class-ccf-api.php:951
 #: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:391
 msgid "Deleted post"
 msgstr ""
@@ -96,14 +96,14 @@ msgstr ""
 msgid "Form Field Choices"
 msgstr ""
 
-#: ../classes/class-ccf-custom-contact-forms.php:46
+#: ../classes/class-ccf-custom-contact-forms.php:49
 #, php-format
 msgid ""
 "Custom Contact Forms will not work unless pretty permalinks (not default) "
 "are enabled. Please update your <a href=\"%s\">permalinks settings</a>."
 msgstr ""
 
-#: ../classes/class-ccf-custom-contact-forms.php:64
+#: ../classes/class-ccf-custom-contact-forms.php:67
 #, php-format
 msgid "<a href=\"%s\">Forms and Submissions</a>"
 msgstr ""
@@ -131,105 +131,105 @@ msgid "Max file size is %d MB. "
 msgstr ""
 
 #: ../classes/class-ccf-field-renderer.php:556
-#: ../classes/class-ccf-form-manager.php:1130
-#: ../classes/class-ccf-form-manager.php:1155
+#: ../classes/class-ccf-form-manager.php:1151
+#: ../classes/class-ccf-form-manager.php:1176
 msgid "Street Address"
 msgstr ""
 
 #: ../classes/class-ccf-field-renderer.php:560
-#: ../classes/class-ccf-form-manager.php:1134
-#: ../classes/class-ccf-form-manager.php:1159
+#: ../classes/class-ccf-form-manager.php:1155
+#: ../classes/class-ccf-form-manager.php:1180
 msgid "Address Line 2"
 msgstr ""
 
 #: ../classes/class-ccf-field-renderer.php:567
-#: ../classes/class-ccf-form-manager.php:1138
-#: ../classes/class-ccf-form-manager.php:1163
+#: ../classes/class-ccf-form-manager.php:1159
+#: ../classes/class-ccf-form-manager.php:1184
 msgid "City"
 msgstr ""
 
 #: ../classes/class-ccf-field-renderer.php:580
-#: ../classes/class-ccf-form-manager.php:1146
+#: ../classes/class-ccf-form-manager.php:1167
 msgid "State"
 msgstr ""
 
 #: ../classes/class-ccf-field-renderer.php:588
-#: ../classes/class-ccf-form-manager.php:1150
+#: ../classes/class-ccf-form-manager.php:1171
 msgid "ZIP Code"
 msgstr ""
 
 #: ../classes/class-ccf-field-renderer.php:598
-#: ../classes/class-ccf-form-manager.php:1167
+#: ../classes/class-ccf-form-manager.php:1188
 msgid "State / Region / Province"
 msgstr ""
 
 #: ../classes/class-ccf-field-renderer.php:606
-#: ../classes/class-ccf-form-manager.php:1171
+#: ../classes/class-ccf-form-manager.php:1192
 msgid "ZIP / Postal Code"
 msgstr ""
 
 #: ../classes/class-ccf-field-renderer.php:618
-#: ../classes/class-ccf-form-manager.php:1179
+#: ../classes/class-ccf-form-manager.php:1200
 msgid "Country"
 msgstr ""
 
 #: ../classes/class-ccf-field-renderer.php:803
-#: ../classes/class-ccf-form-manager.php:1194
-#: ../classes/class-ccf-form-manager.php:1495
+#: ../classes/class-ccf-form-manager.php:1215
+#: ../classes/class-ccf-form-manager.php:1516
 msgid "Email"
 msgstr ""
 
 #: ../classes/class-ccf-field-renderer.php:810
-#: ../classes/class-ccf-form-manager.php:1198
+#: ../classes/class-ccf-form-manager.php:1219
 msgid "Confirm Email"
 msgstr ""
 
 #: ../classes/class-ccf-field-renderer.php:876
-#: ../classes/class-ccf-form-manager.php:1066
+#: ../classes/class-ccf-form-manager.php:1087
 msgid "First"
 msgstr ""
 
 #: ../classes/class-ccf-field-renderer.php:883
-#: ../classes/class-ccf-form-manager.php:1070
+#: ../classes/class-ccf-form-manager.php:1091
 msgid "Last"
 msgstr ""
 
 #: ../classes/class-ccf-field-renderer.php:955
 #: ../classes/class-ccf-field-renderer.php:976
-#: ../classes/class-ccf-form-manager.php:1085
 #: ../classes/class-ccf-form-manager.php:1106
+#: ../classes/class-ccf-form-manager.php:1127
 msgid "HH"
 msgstr ""
 
 #: ../classes/class-ccf-field-renderer.php:959
 #: ../classes/class-ccf-field-renderer.php:980
-#: ../classes/class-ccf-form-manager.php:1089
 #: ../classes/class-ccf-form-manager.php:1110
+#: ../classes/class-ccf-form-manager.php:1131
 msgid "MM"
 msgstr ""
 
 #: ../classes/class-ccf-field-renderer.php:963
 #: ../classes/class-ccf-field-renderer.php:984
-#: ../classes/class-ccf-form-manager.php:1093
 #: ../classes/class-ccf-form-manager.php:1114
+#: ../classes/class-ccf-form-manager.php:1135
 msgid "AM"
 msgstr ""
 
 #: ../classes/class-ccf-field-renderer.php:964
 #: ../classes/class-ccf-field-renderer.php:985
-#: ../classes/class-ccf-form-manager.php:1094
 #: ../classes/class-ccf-form-manager.php:1115
+#: ../classes/class-ccf-form-manager.php:1136
 msgid "PM"
 msgstr ""
 
 #: ../classes/class-ccf-field-renderer.php:971
 #: ../classes/class-ccf-form-cpt.php:510
-#: ../classes/class-ccf-form-manager.php:253
-#: ../classes/class-ccf-form-manager.php:266
-#: ../classes/class-ccf-form-manager.php:1101
-#: ../classes/class-ccf-form-manager.php:1284
-#: ../classes/class-ccf-form-manager.php:1298
-#: ../classes/class-ccf-form-manager.php:1436
+#: ../classes/class-ccf-form-manager.php:274
+#: ../classes/class-ccf-form-manager.php:287
+#: ../classes/class-ccf-form-manager.php:1122
+#: ../classes/class-ccf-form-manager.php:1305
+#: ../classes/class-ccf-form-manager.php:1319
+#: ../classes/class-ccf-form-manager.php:1457
 msgid "Date"
 msgstr ""
 
@@ -239,8 +239,8 @@ msgstr ""
 
 #: ../classes/class-ccf-form-cpt.php:326 ../classes/class-ccf-form-cpt.php:344
 #: ../classes/class-ccf-form-cpt.php:508
-#: ../classes/class-ccf-form-manager.php:256
-#: ../classes/class-ccf-form-manager.php:269
+#: ../classes/class-ccf-form-manager.php:277
+#: ../classes/class-ccf-form-manager.php:290
 msgid "Submissions"
 msgstr ""
 
@@ -281,7 +281,7 @@ msgid "Export"
 msgstr ""
 
 #: ../classes/class-ccf-form-cpt.php:446
-#: ../classes/class-ccf-form-manager.php:1226
+#: ../classes/class-ccf-form-manager.php:1247
 msgid "(No title)"
 msgstr ""
 
@@ -294,14 +294,14 @@ msgid "Form Title"
 msgstr ""
 
 #: ../classes/class-ccf-form-cpt.php:507
-#: ../classes/class-ccf-form-manager.php:254
-#: ../classes/class-ccf-form-manager.php:267
+#: ../classes/class-ccf-form-manager.php:275
+#: ../classes/class-ccf-form-manager.php:288
 msgid "Author"
 msgstr ""
 
 #: ../classes/class-ccf-form-cpt.php:509
-#: ../classes/class-ccf-form-manager.php:255
-#: ../classes/class-ccf-form-manager.php:268
+#: ../classes/class-ccf-form-manager.php:276
+#: ../classes/class-ccf-form-manager.php:289
 msgid "Number of Fields"
 msgstr ""
 
@@ -478,29 +478,29 @@ msgstr ""
 msgid "AM/PM is required."
 msgstr ""
 
-#: ../classes/class-ccf-form-handler.php:704
+#: ../classes/class-ccf-form-handler.php:708
 msgid "*Hidden Field*"
 msgstr ""
 
-#: ../classes/class-ccf-form-handler.php:778
+#: ../classes/class-ccf-form-handler.php:782
 msgid "Form submitted from"
 msgstr ""
 
-#: ../classes/class-ccf-form-handler.php:787
+#: ../classes/class-ccf-form-handler.php:791
 msgid "Form submitter IP"
 msgstr ""
 
-#: ../classes/class-ccf-form-handler.php:821
+#: ../classes/class-ccf-form-handler.php:846
 #, php-format
 msgid "%s: Form Submission"
 msgstr ""
 
-#: ../classes/class-ccf-form-handler.php:823
+#: ../classes/class-ccf-form-handler.php:848
 #, php-format
 msgid " to \"%s\""
 msgstr ""
 
-#: ../classes/class-ccf-form-handler.php:838
+#: ../classes/class-ccf-form-handler.php:863
 #: ../classes/class-ccf-form-renderer.php:134
 msgid "Thank you for your submission."
 msgstr ""
@@ -543,7 +543,7 @@ msgid "&larr; Drag fields from the left here."
 msgstr ""
 
 #: ../classes/class-ccf-form-manager.php:133
-#: ../classes/class-ccf-form-manager.php:1229
+#: ../classes/class-ccf-form-manager.php:1250
 msgid "Insert into post"
 msgstr ""
 
@@ -593,37 +593,37 @@ msgstr ""
 
 #: ../classes/class-ccf-form-manager.php:177
 #: ../classes/class-ccf-form-manager.php:196
-#: ../classes/class-ccf-form-manager.php:307
-#: ../classes/class-ccf-form-manager.php:357
-#: ../classes/class-ccf-form-manager.php:433
-#: ../classes/class-ccf-form-manager.php:523
-#: ../classes/class-ccf-form-manager.php:588
-#: ../classes/class-ccf-form-manager.php:630
-#: ../classes/class-ccf-form-manager.php:691
-#: ../classes/class-ccf-form-manager.php:738
-#: ../classes/class-ccf-form-manager.php:780
-#: ../classes/class-ccf-form-manager.php:787
-#: ../classes/class-ccf-form-manager.php:838
-#: ../classes/class-ccf-form-manager.php:881
-#: ../classes/class-ccf-form-manager.php:924
+#: ../classes/class-ccf-form-manager.php:328
+#: ../classes/class-ccf-form-manager.php:378
+#: ../classes/class-ccf-form-manager.php:454
+#: ../classes/class-ccf-form-manager.php:544
+#: ../classes/class-ccf-form-manager.php:609
+#: ../classes/class-ccf-form-manager.php:651
+#: ../classes/class-ccf-form-manager.php:712
+#: ../classes/class-ccf-form-manager.php:759
+#: ../classes/class-ccf-form-manager.php:801
+#: ../classes/class-ccf-form-manager.php:808
+#: ../classes/class-ccf-form-manager.php:859
+#: ../classes/class-ccf-form-manager.php:902
+#: ../classes/class-ccf-form-manager.php:945
 msgid "No"
 msgstr ""
 
 #: ../classes/class-ccf-form-manager.php:178
 #: ../classes/class-ccf-form-manager.php:195
-#: ../classes/class-ccf-form-manager.php:306
-#: ../classes/class-ccf-form-manager.php:356
-#: ../classes/class-ccf-form-manager.php:432
-#: ../classes/class-ccf-form-manager.php:522
-#: ../classes/class-ccf-form-manager.php:587
-#: ../classes/class-ccf-form-manager.php:629
-#: ../classes/class-ccf-form-manager.php:690
-#: ../classes/class-ccf-form-manager.php:737
-#: ../classes/class-ccf-form-manager.php:779
-#: ../classes/class-ccf-form-manager.php:786
-#: ../classes/class-ccf-form-manager.php:837
-#: ../classes/class-ccf-form-manager.php:880
-#: ../classes/class-ccf-form-manager.php:923
+#: ../classes/class-ccf-form-manager.php:327
+#: ../classes/class-ccf-form-manager.php:377
+#: ../classes/class-ccf-form-manager.php:453
+#: ../classes/class-ccf-form-manager.php:543
+#: ../classes/class-ccf-form-manager.php:608
+#: ../classes/class-ccf-form-manager.php:650
+#: ../classes/class-ccf-form-manager.php:711
+#: ../classes/class-ccf-form-manager.php:758
+#: ../classes/class-ccf-form-manager.php:800
+#: ../classes/class-ccf-form-manager.php:807
+#: ../classes/class-ccf-form-manager.php:858
+#: ../classes/class-ccf-form-manager.php:901
+#: ../classes/class-ccf-form-manager.php:944
 msgid "Yes"
 msgstr ""
 
@@ -656,6 +656,7 @@ msgid "Custom Email"
 msgstr ""
 
 #: ../classes/class-ccf-form-manager.php:210
+#: ../classes/class-ccf-form-manager.php:231
 msgid "Form Field"
 msgstr ""
 
@@ -673,140 +674,162 @@ msgstr ""
 msgid "Pull \"From\" Email Dynamically from Field:"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:236
+#: ../classes/class-ccf-form-manager.php:228
+msgid "\"From\" Name Type:"
+msgstr ""
+
+#: ../classes/class-ccf-form-manager.php:230
+msgid "Custom Name"
+msgstr ""
+
+#: ../classes/class-ccf-form-manager.php:234
+msgid ""
+"You can set the notification emails from name to be a custom name or pull "
+"the name from a field in the form."
+msgstr ""
+
+#: ../classes/class-ccf-form-manager.php:238
+msgid "Custom \"From\" Name:"
+msgstr ""
+
+#: ../classes/class-ccf-form-manager.php:243
+msgid "Pull \"From\" Name Dynamically from Field:"
+msgstr ""
+
+#: ../classes/class-ccf-form-manager.php:257
 msgid "items"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:251
-#: ../classes/class-ccf-form-manager.php:264
+#: ../classes/class-ccf-form-manager.php:272
+#: ../classes/class-ccf-form-manager.php:285
 msgid "ID"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:252
-#: ../classes/class-ccf-form-manager.php:265
+#: ../classes/class-ccf-form-manager.php:273
+#: ../classes/class-ccf-form-manager.php:286
 msgid "Title"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:279
+#: ../classes/class-ccf-form-manager.php:300
 msgid "<span>&larr;</span> Click on a field to edit it."
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:288
-#: ../classes/class-ccf-form-manager.php:332
-#: ../classes/class-ccf-form-manager.php:414
-#: ../classes/class-ccf-form-manager.php:504
+#: ../classes/class-ccf-form-manager.php:309
+#: ../classes/class-ccf-form-manager.php:353
+#: ../classes/class-ccf-form-manager.php:435
+#: ../classes/class-ccf-form-manager.php:525
 msgid "Internal Unique Slug"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:292
-#: ../classes/class-ccf-form-manager.php:336
-#: ../classes/class-ccf-form-manager.php:379
-#: ../classes/class-ccf-form-manager.php:418
-#: ../classes/class-ccf-form-manager.php:508
-#: ../classes/class-ccf-form-manager.php:577
-#: ../classes/class-ccf-form-manager.php:613
-#: ../classes/class-ccf-form-manager.php:669
-#: ../classes/class-ccf-form-manager.php:720
-#: ../classes/class-ccf-form-manager.php:763
-#: ../classes/class-ccf-form-manager.php:827
-#: ../classes/class-ccf-form-manager.php:870
-#: ../classes/class-ccf-form-manager.php:913
+#: ../classes/class-ccf-form-manager.php:313
+#: ../classes/class-ccf-form-manager.php:357
+#: ../classes/class-ccf-form-manager.php:400
+#: ../classes/class-ccf-form-manager.php:439
+#: ../classes/class-ccf-form-manager.php:529
+#: ../classes/class-ccf-form-manager.php:598
+#: ../classes/class-ccf-form-manager.php:634
+#: ../classes/class-ccf-form-manager.php:690
+#: ../classes/class-ccf-form-manager.php:741
+#: ../classes/class-ccf-form-manager.php:784
+#: ../classes/class-ccf-form-manager.php:848
+#: ../classes/class-ccf-form-manager.php:891
+#: ../classes/class-ccf-form-manager.php:934
 msgid "Label:"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:296
-#: ../classes/class-ccf-form-manager.php:340
-#: ../classes/class-ccf-form-manager.php:383
-#: ../classes/class-ccf-form-manager.php:422
-#: ../classes/class-ccf-form-manager.php:512
-#: ../classes/class-ccf-form-manager.php:581
-#: ../classes/class-ccf-form-manager.php:617
-#: ../classes/class-ccf-form-manager.php:673
-#: ../classes/class-ccf-form-manager.php:724
-#: ../classes/class-ccf-form-manager.php:767
-#: ../classes/class-ccf-form-manager.php:831
-#: ../classes/class-ccf-form-manager.php:874
-#: ../classes/class-ccf-form-manager.php:917
+#: ../classes/class-ccf-form-manager.php:317
+#: ../classes/class-ccf-form-manager.php:361
+#: ../classes/class-ccf-form-manager.php:404
+#: ../classes/class-ccf-form-manager.php:443
+#: ../classes/class-ccf-form-manager.php:533
+#: ../classes/class-ccf-form-manager.php:602
+#: ../classes/class-ccf-form-manager.php:638
+#: ../classes/class-ccf-form-manager.php:694
+#: ../classes/class-ccf-form-manager.php:745
+#: ../classes/class-ccf-form-manager.php:788
+#: ../classes/class-ccf-form-manager.php:852
+#: ../classes/class-ccf-form-manager.php:895
+#: ../classes/class-ccf-form-manager.php:938
 msgid "Description:"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:300
-#: ../classes/class-ccf-form-manager.php:426
-#: ../classes/class-ccf-form-manager.php:516
-#: ../classes/class-ccf-form-manager.php:552
-#: ../classes/class-ccf-form-manager.php:622
-#: ../classes/class-ccf-form-manager.php:677
-#: ../classes/class-ccf-form-manager.php:772
+#: ../classes/class-ccf-form-manager.php:321
+#: ../classes/class-ccf-form-manager.php:447
+#: ../classes/class-ccf-form-manager.php:537
+#: ../classes/class-ccf-form-manager.php:573
+#: ../classes/class-ccf-form-manager.php:643
+#: ../classes/class-ccf-form-manager.php:698
+#: ../classes/class-ccf-form-manager.php:793
 msgid "Initial Value:"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:304
-#: ../classes/class-ccf-form-manager.php:354
-#: ../classes/class-ccf-form-manager.php:430
-#: ../classes/class-ccf-form-manager.php:520
-#: ../classes/class-ccf-form-manager.php:585
-#: ../classes/class-ccf-form-manager.php:627
-#: ../classes/class-ccf-form-manager.php:688
-#: ../classes/class-ccf-form-manager.php:735
-#: ../classes/class-ccf-form-manager.php:777
-#: ../classes/class-ccf-form-manager.php:835
-#: ../classes/class-ccf-form-manager.php:878
-#: ../classes/class-ccf-form-manager.php:921
+#: ../classes/class-ccf-form-manager.php:325
+#: ../classes/class-ccf-form-manager.php:375
+#: ../classes/class-ccf-form-manager.php:451
+#: ../classes/class-ccf-form-manager.php:541
+#: ../classes/class-ccf-form-manager.php:606
+#: ../classes/class-ccf-form-manager.php:648
+#: ../classes/class-ccf-form-manager.php:709
+#: ../classes/class-ccf-form-manager.php:756
+#: ../classes/class-ccf-form-manager.php:798
+#: ../classes/class-ccf-form-manager.php:856
+#: ../classes/class-ccf-form-manager.php:899
+#: ../classes/class-ccf-form-manager.php:942
 msgid "Required:"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:313
-#: ../classes/class-ccf-form-manager.php:363
-#: ../classes/class-ccf-form-manager.php:399
-#: ../classes/class-ccf-form-manager.php:439
-#: ../classes/class-ccf-form-manager.php:464
-#: ../classes/class-ccf-form-manager.php:489
-#: ../classes/class-ccf-form-manager.php:529
-#: ../classes/class-ccf-form-manager.php:558
-#: ../classes/class-ccf-form-manager.php:594
-#: ../classes/class-ccf-form-manager.php:644
-#: ../classes/class-ccf-form-manager.php:697
-#: ../classes/class-ccf-form-manager.php:744
-#: ../classes/class-ccf-form-manager.php:793
-#: ../classes/class-ccf-form-manager.php:851
-#: ../classes/class-ccf-form-manager.php:894
-#: ../classes/class-ccf-form-manager.php:937
+#: ../classes/class-ccf-form-manager.php:334
+#: ../classes/class-ccf-form-manager.php:384
+#: ../classes/class-ccf-form-manager.php:420
+#: ../classes/class-ccf-form-manager.php:460
+#: ../classes/class-ccf-form-manager.php:485
+#: ../classes/class-ccf-form-manager.php:510
+#: ../classes/class-ccf-form-manager.php:550
+#: ../classes/class-ccf-form-manager.php:579
+#: ../classes/class-ccf-form-manager.php:615
+#: ../classes/class-ccf-form-manager.php:665
+#: ../classes/class-ccf-form-manager.php:718
+#: ../classes/class-ccf-form-manager.php:765
+#: ../classes/class-ccf-form-manager.php:814
+#: ../classes/class-ccf-form-manager.php:872
+#: ../classes/class-ccf-form-manager.php:915
+#: ../classes/class-ccf-form-manager.php:958
 msgid "Advanced"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:316
-#: ../classes/class-ccf-form-manager.php:366
-#: ../classes/class-ccf-form-manager.php:402
-#: ../classes/class-ccf-form-manager.php:442
-#: ../classes/class-ccf-form-manager.php:467
-#: ../classes/class-ccf-form-manager.php:492
-#: ../classes/class-ccf-form-manager.php:532
-#: ../classes/class-ccf-form-manager.php:561
-#: ../classes/class-ccf-form-manager.php:597
-#: ../classes/class-ccf-form-manager.php:647
-#: ../classes/class-ccf-form-manager.php:700
-#: ../classes/class-ccf-form-manager.php:747
-#: ../classes/class-ccf-form-manager.php:796
-#: ../classes/class-ccf-form-manager.php:854
-#: ../classes/class-ccf-form-manager.php:897
-#: ../classes/class-ccf-form-manager.php:940
+#: ../classes/class-ccf-form-manager.php:337
+#: ../classes/class-ccf-form-manager.php:387
+#: ../classes/class-ccf-form-manager.php:423
+#: ../classes/class-ccf-form-manager.php:463
+#: ../classes/class-ccf-form-manager.php:488
+#: ../classes/class-ccf-form-manager.php:513
+#: ../classes/class-ccf-form-manager.php:553
+#: ../classes/class-ccf-form-manager.php:582
+#: ../classes/class-ccf-form-manager.php:618
+#: ../classes/class-ccf-form-manager.php:668
+#: ../classes/class-ccf-form-manager.php:721
+#: ../classes/class-ccf-form-manager.php:768
+#: ../classes/class-ccf-form-manager.php:817
+#: ../classes/class-ccf-form-manager.php:875
+#: ../classes/class-ccf-form-manager.php:918
+#: ../classes/class-ccf-form-manager.php:961
 msgid "Class Name:"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:320
-#: ../classes/class-ccf-form-manager.php:446
-#: ../classes/class-ccf-form-manager.php:536
-#: ../classes/class-ccf-form-manager.php:652
-#: ../classes/class-ccf-form-manager.php:704
-#: ../classes/class-ccf-form-manager.php:801
+#: ../classes/class-ccf-form-manager.php:341
+#: ../classes/class-ccf-form-manager.php:467
+#: ../classes/class-ccf-form-manager.php:557
+#: ../classes/class-ccf-form-manager.php:673
+#: ../classes/class-ccf-form-manager.php:725
+#: ../classes/class-ccf-form-manager.php:822
 msgid "Placeholder Text:"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:344
+#: ../classes/class-ccf-form-manager.php:365
 msgid "Allowed File Extensions (comma separate):"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:346
+#: ../classes/class-ccf-form-manager.php:367
 msgid ""
 "If left blank, will default to all extensions registered by WordPress. If "
 "you use a file extension or mime type not <a href=\"http://codex.wordpress."
@@ -814,257 +837,261 @@ msgid ""
 "a>, you will need to filter and manually whitelist the new extension."
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:349
+#: ../classes/class-ccf-form-manager.php:370
 msgid "Max File Size (in MB):"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:351
+#: ../classes/class-ccf-form-manager.php:372
 #, php-format
 msgid ""
 "If left blank, will default to %d MB. Maximum allowed by server is %d MB."
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:377
+#: ../classes/class-ccf-form-manager.php:398
 msgid ""
 "reCAPTCHA is a simple captcha service provided by Google. <a target=\"_blank"
 "\" href=\"https://www.google.com/recaptcha/intro/index.html\">Learn more</a>"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:387
+#: ../classes/class-ccf-form-manager.php:408
 msgid "Site Key:"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:389
-#: ../classes/class-ccf-form-manager.php:394
+#: ../classes/class-ccf-form-manager.php:410
+#: ../classes/class-ccf-form-manager.php:415
 msgid "Don't have one?"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:392
+#: ../classes/class-ccf-form-manager.php:413
 msgid "Secret Key:"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:455
 #: ../classes/class-ccf-form-manager.php:476
-#: ../classes/class-ccf-form-manager.php:501
-#: ../classes/class-ccf-form-manager.php:545
-#: ../classes/class-ccf-form-manager.php:570
-#: ../classes/class-ccf-form-manager.php:606
-#: ../classes/class-ccf-form-manager.php:662
-#: ../classes/class-ccf-form-manager.php:713
-#: ../classes/class-ccf-form-manager.php:756
-#: ../classes/class-ccf-form-manager.php:820
-#: ../classes/class-ccf-form-manager.php:863
-#: ../classes/class-ccf-form-manager.php:906
+#: ../classes/class-ccf-form-manager.php:497
+#: ../classes/class-ccf-form-manager.php:522
+#: ../classes/class-ccf-form-manager.php:566
+#: ../classes/class-ccf-form-manager.php:591
+#: ../classes/class-ccf-form-manager.php:627
+#: ../classes/class-ccf-form-manager.php:683
+#: ../classes/class-ccf-form-manager.php:734
+#: ../classes/class-ccf-form-manager.php:777
+#: ../classes/class-ccf-form-manager.php:841
+#: ../classes/class-ccf-form-manager.php:884
+#: ../classes/class-ccf-form-manager.php:927
 msgid "Basic"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:458
+#: ../classes/class-ccf-form-manager.php:479
 msgid "HTML Content:"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:479
+#: ../classes/class-ccf-form-manager.php:500
 msgid "Heading:"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:483
+#: ../classes/class-ccf-form-manager.php:504
 msgid "Sub Heading:"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:548
-#: ../classes/class-ccf-form-manager.php:573
-#: ../classes/class-ccf-form-manager.php:609
-#: ../classes/class-ccf-form-manager.php:665
-#: ../classes/class-ccf-form-manager.php:716
-#: ../classes/class-ccf-form-manager.php:759
-#: ../classes/class-ccf-form-manager.php:823
-#: ../classes/class-ccf-form-manager.php:866
-#: ../classes/class-ccf-form-manager.php:909
+#: ../classes/class-ccf-form-manager.php:569
+#: ../classes/class-ccf-form-manager.php:594
+#: ../classes/class-ccf-form-manager.php:630
+#: ../classes/class-ccf-form-manager.php:686
+#: ../classes/class-ccf-form-manager.php:737
+#: ../classes/class-ccf-form-manager.php:780
+#: ../classes/class-ccf-form-manager.php:844
+#: ../classes/class-ccf-form-manager.php:887
+#: ../classes/class-ccf-form-manager.php:930
 msgid "Internal Unique Slug (a-z, 0-9, -, _):"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:635
+#: ../classes/class-ccf-form-manager.php:656
 msgid "Enable Date Select"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:639
+#: ../classes/class-ccf-form-manager.php:660
 msgid "Enable Time Select"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:681
+#: ../classes/class-ccf-form-manager.php:702
 msgid "Format:"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:684
-#: ../classes/class-ccf-form-manager.php:731
+#: ../classes/class-ccf-form-manager.php:705
+#: ../classes/class-ccf-form-manager.php:752
 msgid "International"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:728
+#: ../classes/class-ccf-form-manager.php:749
 msgid "Type:"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:730
+#: ../classes/class-ccf-form-manager.php:751
 msgid "United States"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:784
+#: ../classes/class-ccf-form-manager.php:805
 msgid "Require Confirmation:"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:812
+#: ../classes/class-ccf-form-manager.php:833
 msgid "Label"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:813
+#: ../classes/class-ccf-form-manager.php:834
 msgid "Value"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:842
-#: ../classes/class-ccf-form-manager.php:885
-#: ../classes/class-ccf-form-manager.php:928
+#: ../classes/class-ccf-form-manager.php:863
+#: ../classes/class-ccf-form-manager.php:906
+#: ../classes/class-ccf-form-manager.php:949
 msgid "Manage field choices:"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:846
-#: ../classes/class-ccf-form-manager.php:889
-#: ../classes/class-ccf-form-manager.php:932
+#: ../classes/class-ccf-form-manager.php:867
+#: ../classes/class-ccf-form-manager.php:910
+#: ../classes/class-ccf-form-manager.php:953
 msgid ""
 "Note: If an option does not have a \"value\", it will not be considered a "
 "valid selection if the field is required. The \"value\" is what's read, "
 "stored, and displayed in the submission."
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:949
+#: ../classes/class-ccf-form-manager.php:970
 msgid "You currently have no forms. Add some!"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:972
+#: ../classes/class-ccf-form-manager.php:993
 msgid "Allowed file extensions are {{ extensions }}. "
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:974
+#: ../classes/class-ccf-form-manager.php:995
 msgid "Max file size is {{ file_size }} MB. "
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:999
-#: ../classes/class-ccf-form-manager.php:1015
-#: ../classes/class-ccf-form-manager.php:1033
+#: ../classes/class-ccf-form-manager.php:1020
+#: ../classes/class-ccf-form-manager.php:1036
+#: ../classes/class-ccf-form-manager.php:1054
 msgid "An example choice"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1051
+#: ../classes/class-ccf-form-manager.php:1072
 msgid "Arbitrary block of HTML."
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1057
+#: ../classes/class-ccf-form-manager.php:1078
 msgid "Section Heading"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1059
+#: ../classes/class-ccf-form-manager.php:1080
 msgid "This is the sub-heading text."
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1190
+#: ../classes/class-ccf-form-manager.php:1211
 msgid "email@example.com"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1228
+#: ../classes/class-ccf-form-manager.php:1249
 msgid "Edit"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1230
+#: ../classes/class-ccf-form-manager.php:1251
 msgid "Trash"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1273
+#: ../classes/class-ccf-form-manager.php:1294
 msgid "There is a problem with this form. Is it trashed or deleted?"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1415
+#: ../classes/class-ccf-form-manager.php:1436
 msgid "IP Address"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1427
+#: ../classes/class-ccf-form-manager.php:1448
 msgid "There are no submissions."
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1456
+#: ../classes/class-ccf-form-manager.php:1477
 msgid "Add Form"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1480
+#: ../classes/class-ccf-form-manager.php:1501
 msgid "Single Line Text"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1481
+#: ../classes/class-ccf-form-manager.php:1502
 msgid "Dropdown"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1482
+#: ../classes/class-ccf-form-manager.php:1503
 msgid "Checkboxes"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1483
+#: ../classes/class-ccf-form-manager.php:1504
 msgid "Radio Buttons"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1484
+#: ../classes/class-ccf-form-manager.php:1505
 msgid "Paragraph Text"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1485
+#: ../classes/class-ccf-form-manager.php:1506
 msgid "Hidden"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1486
+#: ../classes/class-ccf-form-manager.php:1507
 msgid "File Upload"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1490
+#: ../classes/class-ccf-form-manager.php:1511
 msgid "HTML"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1491
+#: ../classes/class-ccf-form-manager.php:1512
 msgid "Section Header"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1496
+#: ../classes/class-ccf-form-manager.php:1517
 msgid "Name"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1497
+#: ../classes/class-ccf-form-manager.php:1518
 msgid "Date/Time"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1498
+#: ../classes/class-ccf-form-manager.php:1519
 msgid "Website"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1499
+#: ../classes/class-ccf-form-manager.php:1520
 msgid "Address"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1500
+#: ../classes/class-ccf-form-manager.php:1521
 msgid "Phone"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1501
+#: ../classes/class-ccf-form-manager.php:1522
 msgid "reCAPTCHA"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1520
+#: ../classes/class-ccf-form-manager.php:1541
 msgid "You have no email fields"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1521
+#: ../classes/class-ccf-form-manager.php:1542
+msgid "You have no name fields"
+msgstr ""
+
+#: ../classes/class-ccf-form-manager.php:1543
 msgid "Invalid date"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1523
+#: ../classes/class-ccf-form-manager.php:1545
 msgid "Form Submission"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1524
+#: ../classes/class-ccf-form-manager.php:1546
 #: ../classes/class-ccf-form-renderer.php:120
 msgid "This form is paused right now. Check back later!"
 msgstr ""
