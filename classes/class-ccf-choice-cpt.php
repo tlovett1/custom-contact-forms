@@ -28,6 +28,7 @@ class CCF_Choice_CPT {
 		$args = array(
 			'label' => esc_html__( 'Form Field Choices', 'custom-contact-forms' ),
 			'public' => false,
+			'has_archive' => false,
 			'query_var' => false,
 			'rewrite' => false,
 			'capability_type' => 'post',

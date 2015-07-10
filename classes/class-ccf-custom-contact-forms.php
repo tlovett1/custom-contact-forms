@@ -19,7 +19,29 @@ class CCF_Custom_Contact_Forms {
 		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 		add_filter( 'plugin_action_links', array( $this, 'filter_plugin_action_links' ), 10, 2 );
 		add_action( 'admin_notices', array( $this, 'permalink_warning' ) );
+		add_action( 'registered_post_type', array( $this, 'make_post_types_public' ), 11, 2 );
 		add_action( 'admin_init', array( $this, 'flush_rewrites' ), 10000 );
+
+	}
+
+
+	/**
+	 * Trick API into thinking non publically queryable post types are queryable
+	 *
+	 * @param string $post_type
+	 * @param array $args
+	 * @since 6.8.1
+	 */
+	public function make_post_types_public( $post_type, $args ) {
+		global $wp_post_types;
+
+		$type = &$wp_post_types[ $post_type ];
+
+		$json_post_types = array( 'ccf_form', 'ccf_submission' );
+
+		if ( in_array( $post_type, $json_post_types ) ) {
+			$type->show_in_json = true;
+		}
 	}
 
 	/**

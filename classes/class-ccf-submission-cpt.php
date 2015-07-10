@@ -43,12 +43,13 @@ class CCF_Submission_CPT {
 			'exclude_from_search' => true,
 			'show_in_nav_menus' => false,
 			'show_ui' => false,
-			'publicly_queryable' => true,
+			'publicly_queryable' => false,
 			'query_var' => false,
 			'rewrite' => false,
 			'capability_type' => 'post',
 			'hierarchical' => false,
 			'supports' => false,
+			'has_archive' => false,
 		);
 
 		register_post_type( 'ccf_submission', $args );
