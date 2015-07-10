@@ -585,7 +585,8 @@ class CCF_Form_CPT {
 		$args = array(
 			'labels' => $labels,
 			'public' => true,
-			'publicly_queryable' => true,
+			'publicly_queryable' => false,
+			'exclude_from_search' => true,
 			'show_ui' => true,
 			'show_in_menu' => true,
 			'query_var' => false,
@@ -593,6 +594,7 @@ class CCF_Form_CPT {
 			'capability_type' => 'post',
 			'hierarchical' => false,
 			'supports' => array( 'title' ),
+			'has_archive' => false,
 		);
 
 		register_post_type( 'ccf_form', $args );

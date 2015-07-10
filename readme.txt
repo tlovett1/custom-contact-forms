@@ -35,6 +35,9 @@ For questions, feature requests, and support concerning the Custom Contact Forms
 
 == Changelog ==
 
+= 6.8.1 =
+* Tighten post type permissions so submissions and forms don't have archives and single views.
+
 = 6.8 =
 * Configurable "from" name field
 * Minor variable stomping bug fix

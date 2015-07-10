@@ -34,6 +34,7 @@ class CCF_Field_CPT {
 			'capability_type' => 'post',
 			'hierarchical' => false,
 			'supports' => false,
+			'has_archive' => false,
 		);
 
 		register_post_type( 'ccf_field', $args );
