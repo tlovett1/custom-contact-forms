@@ -1,5 +1,5 @@
 Custom Contact Forms [![Build Status](https://travis-ci.org/tlovett1/custom-contact-forms.svg?branch=master)](https://travis-ci.org/tlovett1/custom-contact-forms)
-==============
+===============
 
 Build beautiful custom forms the WordPress way.
 
