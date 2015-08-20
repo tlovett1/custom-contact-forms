@@ -1,5 +1,5 @@
-Custom Contact Forms [![Build Status](https://travis-ci.org/tlovett1/custom-contact-forms.svg?branch=master)](https://travis-ci.org/tlovett1/custom-contact-forms) [![Dockunit Status](http://dockunit.io/svg/tlovett1/custom-contact-forms/)](http://dockunit.io/projects/tlovett1/custom-contact-forms/)
-==============
+Custom Contact Forms [![Build Status](https://travis-ci.org/tlovett1/custom-contact-forms.svg?branch=master)](https://travis-ci.org/tlovett1/custom-contact-forms) [![Dockunit Status](https://dockunit.io/svg/tlovett1/custom-contact-forms?master)](https://dockunit.io/projects/tlovett1/custom-contact-forms#master)
+===============
 
 Build beautiful custom forms the WordPress way.
 
@@ -259,7 +259,7 @@ phpunit
 
 ##### Dockunit
 
-This plugin contains a valid [Dockunit](https://www.npmjs.com/package/dockunit) file for running unit tests across a variety of environments locally (PHP 5.2 and 5.5). You can use Dockunit (after installing it via npm) by running:
+This plugin contains a valid [Dockunit](https://www.npmjs.com/package/dockunit) file for running unit tests across a variety of environments locally (PHP 5.2 and 5.6). You can use Dockunit (after installing it via npm) by running:
 
 ```bash
 dockunit
