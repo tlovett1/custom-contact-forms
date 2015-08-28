@@ -1,0 +1,1400 @@
+# Copyright (C) 2014 Taylor Lovett
+# This file is distributed under the same license as the Editorial Access Manager package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Custom Contact Forms\n"
+"Report-Msgid-Bugs-To: https://github.com/tlovett1/custom-contact-forms/issues\n"
+"POT-Creation-Date: 2015-06-29 10:27-0500\n"
+"PO-Revision-Date: 2015-08-27 18:12+0200\n"
+"Last-Translator: Pyrog <pyrog@laposte.net>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.4\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,"
+"_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;esc_html_e;esc_html__;esc_attr__;"
+"esc_attr_e\n"
+"X-Textdomain-Support: yes\n"
+"Language-Team: \n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../classes/class-ccf-api.php:160
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-comments.php:82
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-customposttype.php:130
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-customposttype.php:151
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-customposttype.php:157
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-customposttype.php:176
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:72
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:143
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:149
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:168
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta-posts.php:30
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-pages.php:69
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-pages.php:88
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-pages.php:106
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:74
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:271
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:329
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:374
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:749
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:777
+msgid "Invalid post ID."
+msgstr "Identifiant d'article invalide."
+
+#: ../classes/class-ccf-api.php:164
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-comments.php:86
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:285
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:527
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:539
+msgid "Sorry, you cannot read this post."
+msgstr "Désolé, vous ne pouvez-pas lire cet article."
+
+#: ../classes/class-ccf-api.php:220
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:122
+#, php-format
+msgid "The post type \"%s\" is not valid"
+msgstr "Le type d’article « %s » est invalide"
+
+#: ../classes/class-ccf-api.php:447 ../classes/class-ccf-api.php:762
+#: ../classes/class-ccf-api.php:787 ../classes/class-ccf-api.php:816
+#: ../classes/class-ccf-api.php:933
+msgid "Invalid form ID."
+msgstr "Identifiant de formulaire invalide."
+
+#: ../classes/class-ccf-api.php:452 ../classes/class-ccf-api.php:747
+#: ../classes/class-ccf-api.php:767
+msgid "Sorry, you cannot view forms."
+msgstr "Désolé, vous ne pouvez pas voir les formulaires."
+
+#: ../classes/class-ccf-api.php:793 ../classes/class-ccf-api.php:822
+msgid "Invalid form."
+msgstr "Formulaire invalide."
+
+#: ../classes/class-ccf-api.php:797
+msgid "Sorry, you cannot view this form."
+msgstr "Désolé, vous ne pouvez pas voir ce formulaire."
+
+#: ../classes/class-ccf-api.php:944
+msgid "The form cannot be deleted."
+msgstr "Ce formulaire ne peut-être effacé."
+
+#: ../classes/class-ccf-api.php:948
+msgid "Permanently deleted form"
+msgstr "Formulaire effacé définitivement"
+
+#: ../classes/class-ccf-api.php:951
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:391
+msgid "Deleted post"
+msgstr "Article effacé"
+
+#: ../classes/class-ccf-choice-cpt.php:29
+msgid "Form Field Choices"
+msgstr ""
+
+#: ../classes/class-ccf-custom-contact-forms.php:49
+#, php-format
+msgid ""
+"Custom Contact Forms will not work unless pretty permalinks (not default) are enabled. "
+"Please update your <a href=\"%s\">permalinks settings</a>."
+msgstr ""
+
+#: ../classes/class-ccf-custom-contact-forms.php:67
+#, php-format
+msgid "<a href=\"%s\">Forms and Submissions</a>"
+msgstr "<a href=\"%s\">Formulaires et soumissions</a>"
+
+#: ../classes/class-ccf-export.php:58 ../classes/class-ccf-form-cpt.php:576
+msgid "Forms and Submissions"
+msgstr "Formulaires et soumissions"
+
+#: ../classes/class-ccf-export.php:90
+msgid "Import"
+msgstr "Importer"
+
+#: ../classes/class-ccf-field-cpt.php:30
+msgid "Form Fields"
+msgstr "Champs de formulaire"
+
+#: ../classes/class-ccf-field-renderer.php:122
+#, php-format
+msgid "Allowed file extensions are %s. "
+msgstr ""
+
+#: ../classes/class-ccf-field-renderer.php:124
+#, php-format
+msgid "Max file size is %d MB. "
+msgstr ""
+
+#: ../classes/class-ccf-field-renderer.php:556 ../classes/class-ccf-form-manager.php:1151
+#: ../classes/class-ccf-form-manager.php:1176
+msgid "Street Address"
+msgstr "Adresse"
+
+#: ../classes/class-ccf-field-renderer.php:560 ../classes/class-ccf-form-manager.php:1155
+#: ../classes/class-ccf-form-manager.php:1180
+msgid "Address Line 2"
+msgstr "Complément"
+
+#: ../classes/class-ccf-field-renderer.php:567 ../classes/class-ccf-form-manager.php:1159
+#: ../classes/class-ccf-form-manager.php:1184
+msgid "City"
+msgstr "Ville"
+
+#: ../classes/class-ccf-field-renderer.php:580 ../classes/class-ccf-form-manager.php:1167
+msgid "State"
+msgstr "Etat"
+
+#: ../classes/class-ccf-field-renderer.php:588 ../classes/class-ccf-form-manager.php:1171
+msgid "ZIP Code"
+msgstr "Code postal"
+
+#: ../classes/class-ccf-field-renderer.php:598 ../classes/class-ccf-form-manager.php:1188
+msgid "State / Region / Province"
+msgstr "Etat / Région / Province"
+
+#: ../classes/class-ccf-field-renderer.php:606 ../classes/class-ccf-form-manager.php:1192
+msgid "ZIP / Postal Code"
+msgstr "Code postal"
+
+#: ../classes/class-ccf-field-renderer.php:618 ../classes/class-ccf-form-manager.php:1200
+msgid "Country"
+msgstr "Pays"
+
+#: ../classes/class-ccf-field-renderer.php:803 ../classes/class-ccf-form-manager.php:1215
+#: ../classes/class-ccf-form-manager.php:1516
+msgid "Email"
+msgstr "Mél"
+
+#: ../classes/class-ccf-field-renderer.php:810 ../classes/class-ccf-form-manager.php:1219
+msgid "Confirm Email"
+msgstr "Confirmez l’adresse mél"
+
+#: ../classes/class-ccf-field-renderer.php:876 ../classes/class-ccf-form-manager.php:1087
+msgid "First"
+msgstr "Prénom"
+
+#: ../classes/class-ccf-field-renderer.php:883 ../classes/class-ccf-form-manager.php:1091
+msgid "Last"
+msgstr "Nom"
+
+#: ../classes/class-ccf-field-renderer.php:955 ../classes/class-ccf-field-renderer.php:976
+#: ../classes/class-ccf-form-manager.php:1106 ../classes/class-ccf-form-manager.php:1127
+msgid "HH"
+msgstr ""
+
+#: ../classes/class-ccf-field-renderer.php:959 ../classes/class-ccf-field-renderer.php:980
+#: ../classes/class-ccf-form-manager.php:1110 ../classes/class-ccf-form-manager.php:1131
+msgid "MM"
+msgstr ""
+
+#: ../classes/class-ccf-field-renderer.php:963 ../classes/class-ccf-field-renderer.php:984
+#: ../classes/class-ccf-form-manager.php:1114 ../classes/class-ccf-form-manager.php:1135
+msgid "AM"
+msgstr ""
+
+#: ../classes/class-ccf-field-renderer.php:964 ../classes/class-ccf-field-renderer.php:985
+#: ../classes/class-ccf-form-manager.php:1115 ../classes/class-ccf-form-manager.php:1136
+msgid "PM"
+msgstr ""
+
+#: ../classes/class-ccf-field-renderer.php:971 ../classes/class-ccf-form-cpt.php:510
+#: ../classes/class-ccf-form-manager.php:274 ../classes/class-ccf-form-manager.php:287
+#: ../classes/class-ccf-form-manager.php:1122 ../classes/class-ccf-form-manager.php:1305
+#: ../classes/class-ccf-form-manager.php:1319 ../classes/class-ccf-form-manager.php:1457
+msgid "Date"
+msgstr ""
+
+#: ../classes/class-ccf-form-cpt.php:277
+msgid "Form Submission Columns"
+msgstr "Colonnes de soumissions de formulaire"
+
+#: ../classes/class-ccf-form-cpt.php:326 ../classes/class-ccf-form-cpt.php:344
+#: ../classes/class-ccf-form-cpt.php:508 ../classes/class-ccf-form-manager.php:277
+#: ../classes/class-ccf-form-manager.php:290
+msgid "Submissions"
+msgstr "Soumissions"
+
+#: ../classes/class-ccf-form-cpt.php:340
+msgid "At a Glance"
+msgstr "En bref"
+
+#: ../classes/class-ccf-form-cpt.php:341
+msgid "Preview"
+msgstr "Aperçu"
+
+#: ../classes/class-ccf-form-cpt.php:361
+msgid "Save your new form to see a preview."
+msgstr "Enregistrer votre nouveau formulaire pour voir l’aperçu."
+
+#: ../classes/class-ccf-form-cpt.php:398
+msgid "Created on:"
+msgstr "Créé le :"
+
+#: ../classes/class-ccf-form-cpt.php:401
+msgid "Author:"
+msgstr "Auteur :"
+
+#: ../classes/class-ccf-form-cpt.php:404
+msgid "Number of fields:"
+msgstr "Nombre de champs :"
+
+#: ../classes/class-ccf-form-cpt.php:407
+msgid "Number of submissions:"
+msgstr "Nombre de soumissions :"
+
+#: ../classes/class-ccf-form-cpt.php:413
+msgid "Move to Trash"
+msgstr "Déplacer dans la corbeille"
+
+#: ../classes/class-ccf-form-cpt.php:417
+msgid "Export"
+msgstr "Exporter"
+
+#: ../classes/class-ccf-form-cpt.php:446 ../classes/class-ccf-form-manager.php:1247
+msgid "(No title)"
+msgstr "(Sans titre)"
+
+#: ../classes/class-ccf-form-cpt.php:451
+msgid "Manage Form"
+msgstr "Gérer les formulaires"
+
+#: ../classes/class-ccf-form-cpt.php:506
+msgid "Form Title"
+msgstr "Titre du formulaire"
+
+#: ../classes/class-ccf-form-cpt.php:507 ../classes/class-ccf-form-manager.php:275
+#: ../classes/class-ccf-form-manager.php:288
+msgid "Author"
+msgstr "Auteur"
+
+#: ../classes/class-ccf-form-cpt.php:509 ../classes/class-ccf-form-manager.php:276
+#: ../classes/class-ccf-form-manager.php:289
+msgid "Number of Fields"
+msgstr "Nombre de champs"
+
+#: ../classes/class-ccf-form-cpt.php:543
+msgid "Unpublished"
+msgstr "Brouillon"
+
+#: ../classes/class-ccf-form-cpt.php:545
+msgid "Y/m/d g:i:s A"
+msgstr ""
+
+#: ../classes/class-ccf-form-cpt.php:552
+#, php-format
+msgid "%s ago"
+msgstr ""
+
+#: ../classes/class-ccf-form-cpt.php:554
+msgid "Y/m/d"
+msgstr ""
+
+#: ../classes/class-ccf-form-cpt.php:570 ../classes/class-ccf-form-cpt.php:582
+msgid "Forms"
+msgstr "Formulaires"
+
+#: ../classes/class-ccf-form-cpt.php:571
+msgid "Form"
+msgstr "Formulaire"
+
+#: ../classes/class-ccf-form-cpt.php:572 ../classes/class-ccf-form-cpt.php:575
+#: ../classes/class-ccf-form-manager.php:81
+msgid "New Form"
+msgstr "Nouveau formulaire"
+
+#: ../classes/class-ccf-form-cpt.php:573
+msgid "Add New Form"
+msgstr "Ajouter un formulaire"
+
+#: ../classes/class-ccf-form-cpt.php:574
+msgid "Edit Form"
+msgstr "Modifier le formulaire"
+
+#: ../classes/class-ccf-form-cpt.php:577
+msgid "View Form"
+msgstr "Voir le formulaire"
+
+#: ../classes/class-ccf-form-cpt.php:578
+msgid "Search Forms"
+msgstr "Recherchez un formulaire"
+
+#: ../classes/class-ccf-form-cpt.php:579
+msgid "No forms found."
+msgstr "Pas de formulaire trouvé."
+
+#: ../classes/class-ccf-form-cpt.php:580
+msgid "No forms found in trash."
+msgstr "Pas de formulaires trouvés dans la corbeille."
+
+#: ../classes/class-ccf-form-handler.php:127 ../classes/class-ccf-form-handler.php:208
+#: ../classes/class-ccf-form-handler.php:245 ../classes/class-ccf-form-handler.php:323
+#: ../classes/class-ccf-form-handler.php:327 ../classes/class-ccf-form-handler.php:331
+#: ../classes/class-ccf-form-handler.php:335 ../classes/class-ccf-form-handler.php:340
+#: ../classes/class-ccf-form-handler.php:365 ../classes/class-ccf-form-handler.php:373
+#: ../classes/class-ccf-form-handler.php:381 ../classes/class-ccf-form-handler.php:435
+#: ../classes/class-ccf-form-renderer.php:49
+msgid "This field is required."
+msgstr "Ce champ est obligatoire."
+
+#: ../classes/class-ccf-form-handler.php:138
+#, php-format
+msgid "This file is too big (%d MB max)"
+msgstr ""
+
+#: ../classes/class-ccf-form-handler.php:142
+msgid "An upload error occurred."
+msgstr "Il y a eu une erreur pendant le téléchargement."
+
+#: ../classes/class-ccf-form-handler.php:164
+msgid "File contains an invalid extension."
+msgstr "Extension de fichier invalide."
+
+#: ../classes/class-ccf-form-handler.php:261 ../classes/class-ccf-form-renderer.php:56
+msgid "Your reCAPTCHA response was incorrect."
+msgstr "Votre réponse reCAPTCHA était erronée."
+
+#: ../classes/class-ccf-form-handler.php:280
+msgid "This field is required"
+msgstr "Ce champ est obligatoire"
+
+#: ../classes/class-ccf-form-handler.php:285
+msgid "This phone number is too short"
+msgstr "Ce numéro de téléphone est trop court"
+
+#: ../classes/class-ccf-form-handler.php:288
+msgid "ccf_field_phoneFormat"
+msgstr ""
+
+#: ../classes/class-ccf-form-handler.php:291
+msgid "This phone number contains invalid characters."
+msgstr "Ce numéro de téléphone contient des caractères invalides."
+
+#: ../classes/class-ccf-form-handler.php:297
+msgid "This phone number is not 10 digits."
+msgstr "Ce n’est pas un numéro de téléphone à 10 chiffres"
+
+#: ../classes/class-ccf-form-handler.php:368 ../classes/class-ccf-form-handler.php:384
+msgid "This is not a valid email"
+msgstr "Ce n’est pas une adresse mél valide"
+
+#: ../classes/class-ccf-form-handler.php:376 ../classes/class-ccf-form-renderer.php:54
+msgid "Emails do not match."
+msgstr "Les adresses mél ne correspondent pas."
+
+#: ../classes/class-ccf-form-handler.php:409
+msgid "First name is required."
+msgstr "Prénom obligatoire."
+
+#: ../classes/class-ccf-form-handler.php:413
+msgid "Last name is required."
+msgstr "Nom obligatoire."
+
+#: ../classes/class-ccf-form-handler.php:438 ../classes/class-ccf-form-renderer.php:66
+msgid "This is not a valid URL. URL's must start with http(s)://"
+msgstr "URL invalide. Les URLs doivent commencer par http:// ou https://"
+
+#: ../classes/class-ccf-form-handler.php:466 ../classes/class-ccf-form-handler.php:498
+#: ../classes/class-ccf-form-renderer.php:50
+msgid "Date is required."
+msgstr "La date est obligatoire."
+
+#: ../classes/class-ccf-form-handler.php:469 ../classes/class-ccf-form-handler.php:501
+#: ../classes/class-ccf-form-renderer.php:61
+msgid "This date is not valid."
+msgstr "Cette date est invalide."
+
+#: ../classes/class-ccf-form-handler.php:474 ../classes/class-ccf-form-handler.php:506
+#: ../classes/class-ccf-form-renderer.php:51
+msgid "Hour is required."
+msgstr "L’heure est obligatoire."
+
+#: ../classes/class-ccf-form-handler.php:477 ../classes/class-ccf-form-handler.php:509
+#: ../classes/class-ccf-form-renderer.php:60
+msgid "This is not a valid hour."
+msgstr "Ce n’est une heure valide."
+
+#: ../classes/class-ccf-form-handler.php:482 ../classes/class-ccf-form-handler.php:514
+#: ../classes/class-ccf-form-renderer.php:52
+msgid "Minute is required."
+msgstr "Les minutes sont obligatoires."
+
+#: ../classes/class-ccf-form-handler.php:485 ../classes/class-ccf-form-handler.php:517
+#: ../classes/class-ccf-form-renderer.php:62
+msgid "This is not a valid minute."
+msgstr "Cette minute est invalide."
+
+#: ../classes/class-ccf-form-handler.php:490 ../classes/class-ccf-form-handler.php:522
+#: ../classes/class-ccf-form-renderer.php:53
+msgid "AM/PM is required."
+msgstr "AM/PM est obligatoire."
+
+#: ../classes/class-ccf-form-handler.php:708
+msgid "*Hidden Field*"
+msgstr "*Champ caché*"
+
+#: ../classes/class-ccf-form-handler.php:782
+msgid "Form submitted from"
+msgstr "Formulaire soumis depuis"
+
+#: ../classes/class-ccf-form-handler.php:791
+msgid "Form submitter IP"
+msgstr "Adresse IP de soumission"
+
+#: ../classes/class-ccf-form-handler.php:846
+#, php-format
+msgid "%s: Form Submission"
+msgstr "%s: Soumissions de formulaire"
+
+#: ../classes/class-ccf-form-handler.php:848
+#, php-format
+msgid " to \"%s\""
+msgstr ""
+
+#: ../classes/class-ccf-form-handler.php:863 ../classes/class-ccf-form-renderer.php:134
+msgid "Thank you for your submission."
+msgstr "Merci pour votre soumission"
+
+#: ../classes/class-ccf-form-manager.php:63
+msgid "Custom Contact Forms is experiencing issues."
+msgstr ""
+
+#: ../classes/class-ccf-form-manager.php:67
+#, php-format
+msgid ""
+"There is an issue with synchronizing data. Please try deactivating all other plugins "
+"and activating the TwentyFifteen theme. If this fixes the problem, you have a plugin or "
+"theme conflict. If it does not, please post in the <a href=\"%s\">support forums</a> or "
+"<a href=\"%s\">Github</a>."
+msgstr ""
+
+#: ../classes/class-ccf-form-manager.php:78
+msgid "Manage Forms"
+msgstr "Gérer les formulaires"
+
+#: ../classes/class-ccf-form-manager.php:82
+msgid "Existing Forms"
+msgstr "Formulaires existants"
+
+#: ../classes/class-ccf-form-manager.php:106
+msgid "Standard Fields"
+msgstr "Champs standards"
+
+#: ../classes/class-ccf-form-manager.php:112
+msgid "Special Fields"
+msgstr "Champs spéciaux"
+
+#: ../classes/class-ccf-form-manager.php:118
+msgid "Structure"
+msgstr ""
+
+#: ../classes/class-ccf-form-manager.php:127
+msgid "&larr; Drag fields from the left here."
+msgstr "&larr; Déplacer les champs à gauche jusqu’ici."
+
+#: ../classes/class-ccf-form-manager.php:133 ../classes/class-ccf-form-manager.php:1250
+msgid "Insert into post"
+msgstr "Insérer dans l’article"
+
+#: ../classes/class-ccf-form-manager.php:134
+msgid "Save Form"
+msgstr "Enregistrer le formulaire"
+
+#: ../classes/class-ccf-form-manager.php:140
+msgid "Form Settings"
+msgstr "Paramètres du formulaire"
+
+#: ../classes/class-ccf-form-manager.php:143
+msgid "Form Title:"
+msgstr "Titre du formulaire :"
+
+#: ../classes/class-ccf-form-manager.php:148
+msgid "Form Description:"
+msgstr "Description du formulaire :"
+
+#: ../classes/class-ccf-form-manager.php:153
+msgid "Button Text:"
+msgstr "Texte du bouton :"
+
+#: ../classes/class-ccf-form-manager.php:158
+msgid "On form completion:"
+msgstr "A la validation du formulaire :"
+
+#: ../classes/class-ccf-form-manager.php:161
+msgid "Show text"
+msgstr "Afficher un message"
+
+#: ../classes/class-ccf-form-manager.php:162
+msgid "Redirect"
+msgstr "Rediriger"
+
+#: ../classes/class-ccf-form-manager.php:166
+msgid "Redirect URL:"
+msgstr "URL de redirection"
+
+#: ../classes/class-ccf-form-manager.php:170
+msgid "Completion Message:"
+msgstr "Message de validation :"
+
+#: ../classes/class-ccf-form-manager.php:174
+msgid "Pause form:"
+msgstr "Bloquer ce formulaire :"
+
+#: ../classes/class-ccf-form-manager.php:177 ../classes/class-ccf-form-manager.php:196
+#: ../classes/class-ccf-form-manager.php:328 ../classes/class-ccf-form-manager.php:378
+#: ../classes/class-ccf-form-manager.php:454 ../classes/class-ccf-form-manager.php:544
+#: ../classes/class-ccf-form-manager.php:609 ../classes/class-ccf-form-manager.php:651
+#: ../classes/class-ccf-form-manager.php:712 ../classes/class-ccf-form-manager.php:759
+#: ../classes/class-ccf-form-manager.php:801 ../classes/class-ccf-form-manager.php:808
+#: ../classes/class-ccf-form-manager.php:859 ../classes/class-ccf-form-manager.php:902
+#: ../classes/class-ccf-form-manager.php:945
+msgid "No"
+msgstr "Non"
+
+#: ../classes/class-ccf-form-manager.php:178 ../classes/class-ccf-form-manager.php:195
+#: ../classes/class-ccf-form-manager.php:327 ../classes/class-ccf-form-manager.php:377
+#: ../classes/class-ccf-form-manager.php:453 ../classes/class-ccf-form-manager.php:543
+#: ../classes/class-ccf-form-manager.php:608 ../classes/class-ccf-form-manager.php:650
+#: ../classes/class-ccf-form-manager.php:711 ../classes/class-ccf-form-manager.php:758
+#: ../classes/class-ccf-form-manager.php:800 ../classes/class-ccf-form-manager.php:807
+#: ../classes/class-ccf-form-manager.php:858 ../classes/class-ccf-form-manager.php:901
+#: ../classes/class-ccf-form-manager.php:944
+msgid "Yes"
+msgstr "Oui"
+
+#: ../classes/class-ccf-form-manager.php:182
+msgid "Pause Message:"
+msgstr "Message de blocage :"
+
+#: ../classes/class-ccf-form-manager.php:189
+msgid "Form Notifications"
+msgstr "Notifications du formulaire"
+
+#: ../classes/class-ccf-form-manager.php:192
+msgid "Send Email Notifications:"
+msgstr "Envoyer un mél de notification :"
+
+#: ../classes/class-ccf-form-manager.php:201
+msgid "\"To\" Email Addresses (comma separated):"
+msgstr "Adresses mél de destination (séparée par une virgule) :"
+
+#: ../classes/class-ccf-form-manager.php:206
+msgid "\"From\" Email Address Type:"
+msgstr "Type d’adresse mél d’origine"
+
+#: ../classes/class-ccf-form-manager.php:208
+msgid "WordPress Default"
+msgstr "Wordpress par défaut"
+
+#: ../classes/class-ccf-form-manager.php:209
+msgid "Custom Email"
+msgstr "Mél personnalisé"
+
+#: ../classes/class-ccf-form-manager.php:210 ../classes/class-ccf-form-manager.php:231
+msgid "Form Field"
+msgstr "Champ du formulaire"
+
+#: ../classes/class-ccf-form-manager.php:213
+msgid ""
+"You can set the notification emails from address to be the WP default, a custom email "
+"address, or pull the address from a field in the form."
+msgstr ""
+
+#: ../classes/class-ccf-form-manager.php:217
+msgid "Custom \"From\" Email Address:"
+msgstr ""
+
+#: ../classes/class-ccf-form-manager.php:222
+msgid "Pull \"From\" Email Dynamically from Field:"
+msgstr ""
+
+#: ../classes/class-ccf-form-manager.php:228
+msgid "\"From\" Name Type:"
+msgstr ""
+
+#: ../classes/class-ccf-form-manager.php:230
+msgid "Custom Name"
+msgstr "Nom personnalisé"
+
+#: ../classes/class-ccf-form-manager.php:234
+msgid ""
+"You can set the notification emails from name to be a custom name or pull the name from "
+"a field in the form."
+msgstr ""
+
+#: ../classes/class-ccf-form-manager.php:238
+msgid "Custom \"From\" Name:"
+msgstr ""
+
+#: ../classes/class-ccf-form-manager.php:243
+msgid "Pull \"From\" Name Dynamically from Field:"
+msgstr ""
+
+#: ../classes/class-ccf-form-manager.php:257
+msgid "items"
+msgstr ""
+
+#: ../classes/class-ccf-form-manager.php:272 ../classes/class-ccf-form-manager.php:285
+msgid "ID"
+msgstr ""
+
+#: ../classes/class-ccf-form-manager.php:273 ../classes/class-ccf-form-manager.php:286
+msgid "Title"
+msgstr "Titre"
+
+#: ../classes/class-ccf-form-manager.php:300
+msgid "<span>&larr;</span> Click on a field to edit it."
+msgstr "<span>&larr;</span> Cliquez sur un champ pour le modifier."
+
+#: ../classes/class-ccf-form-manager.php:309 ../classes/class-ccf-form-manager.php:353
+#: ../classes/class-ccf-form-manager.php:435 ../classes/class-ccf-form-manager.php:525
+msgid "Internal Unique Slug"
+msgstr ""
+
+#: ../classes/class-ccf-form-manager.php:313 ../classes/class-ccf-form-manager.php:357
+#: ../classes/class-ccf-form-manager.php:400 ../classes/class-ccf-form-manager.php:439
+#: ../classes/class-ccf-form-manager.php:529 ../classes/class-ccf-form-manager.php:598
+#: ../classes/class-ccf-form-manager.php:634 ../classes/class-ccf-form-manager.php:690
+#: ../classes/class-ccf-form-manager.php:741 ../classes/class-ccf-form-manager.php:784
+#: ../classes/class-ccf-form-manager.php:848 ../classes/class-ccf-form-manager.php:891
+#: ../classes/class-ccf-form-manager.php:934
+msgid "Label:"
+msgstr "Libellé:"
+
+#: ../classes/class-ccf-form-manager.php:317 ../classes/class-ccf-form-manager.php:361
+#: ../classes/class-ccf-form-manager.php:404 ../classes/class-ccf-form-manager.php:443
+#: ../classes/class-ccf-form-manager.php:533 ../classes/class-ccf-form-manager.php:602
+#: ../classes/class-ccf-form-manager.php:638 ../classes/class-ccf-form-manager.php:694
+#: ../classes/class-ccf-form-manager.php:745 ../classes/class-ccf-form-manager.php:788
+#: ../classes/class-ccf-form-manager.php:852 ../classes/class-ccf-form-manager.php:895
+#: ../classes/class-ccf-form-manager.php:938
+msgid "Description:"
+msgstr "Description :"
+
+#: ../classes/class-ccf-form-manager.php:321 ../classes/class-ccf-form-manager.php:447
+#: ../classes/class-ccf-form-manager.php:537 ../classes/class-ccf-form-manager.php:573
+#: ../classes/class-ccf-form-manager.php:643 ../classes/class-ccf-form-manager.php:698
+#: ../classes/class-ccf-form-manager.php:793
+msgid "Initial Value:"
+msgstr "Valeur par défaut :"
+
+#: ../classes/class-ccf-form-manager.php:325 ../classes/class-ccf-form-manager.php:375
+#: ../classes/class-ccf-form-manager.php:451 ../classes/class-ccf-form-manager.php:541
+#: ../classes/class-ccf-form-manager.php:606 ../classes/class-ccf-form-manager.php:648
+#: ../classes/class-ccf-form-manager.php:709 ../classes/class-ccf-form-manager.php:756
+#: ../classes/class-ccf-form-manager.php:798 ../classes/class-ccf-form-manager.php:856
+#: ../classes/class-ccf-form-manager.php:899 ../classes/class-ccf-form-manager.php:942
+msgid "Required:"
+msgstr "Obligatoire :"
+
+#: ../classes/class-ccf-form-manager.php:334 ../classes/class-ccf-form-manager.php:384
+#: ../classes/class-ccf-form-manager.php:420 ../classes/class-ccf-form-manager.php:460
+#: ../classes/class-ccf-form-manager.php:485 ../classes/class-ccf-form-manager.php:510
+#: ../classes/class-ccf-form-manager.php:550 ../classes/class-ccf-form-manager.php:579
+#: ../classes/class-ccf-form-manager.php:615 ../classes/class-ccf-form-manager.php:665
+#: ../classes/class-ccf-form-manager.php:718 ../classes/class-ccf-form-manager.php:765
+#: ../classes/class-ccf-form-manager.php:814 ../classes/class-ccf-form-manager.php:872
+#: ../classes/class-ccf-form-manager.php:915 ../classes/class-ccf-form-manager.php:958
+msgid "Advanced"
+msgstr "Avancé"
+
+#: ../classes/class-ccf-form-manager.php:337 ../classes/class-ccf-form-manager.php:387
+#: ../classes/class-ccf-form-manager.php:423 ../classes/class-ccf-form-manager.php:463
+#: ../classes/class-ccf-form-manager.php:488 ../classes/class-ccf-form-manager.php:513
+#: ../classes/class-ccf-form-manager.php:553 ../classes/class-ccf-form-manager.php:582
+#: ../classes/class-ccf-form-manager.php:618 ../classes/class-ccf-form-manager.php:668
+#: ../classes/class-ccf-form-manager.php:721 ../classes/class-ccf-form-manager.php:768
+#: ../classes/class-ccf-form-manager.php:817 ../classes/class-ccf-form-manager.php:875
+#: ../classes/class-ccf-form-manager.php:918 ../classes/class-ccf-form-manager.php:961
+msgid "Class Name:"
+msgstr "Nom de la classe :"
+
+#: ../classes/class-ccf-form-manager.php:341 ../classes/class-ccf-form-manager.php:467
+#: ../classes/class-ccf-form-manager.php:557 ../classes/class-ccf-form-manager.php:673
+#: ../classes/class-ccf-form-manager.php:725 ../classes/class-ccf-form-manager.php:822
+msgid "Placeholder Text:"
+msgstr "Texte de substitution :"
+
+#: ../classes/class-ccf-form-manager.php:365
+msgid "Allowed File Extensions (comma separate):"
+msgstr "Extensions de fichier autorisées (séparées par une virgule) :"
+
+#: ../classes/class-ccf-form-manager.php:367
+msgid ""
+"If left blank, will default to all extensions registered by WordPress. If you use a "
+"file extension or mime type not <a href=\"http://codex.wordpress.org/Function_Reference/"
+"get_allowed_mime_types\">whitelisted by WordPress</a>, you will need to filter and "
+"manually whitelist the new extension."
+msgstr ""
+
+#: ../classes/class-ccf-form-manager.php:370
+msgid "Max File Size (in MB):"
+msgstr ""
+
+#: ../classes/class-ccf-form-manager.php:372
+#, php-format
+msgid "If left blank, will default to %d MB. Maximum allowed by server is %d MB."
+msgstr ""
+
+#: ../classes/class-ccf-form-manager.php:398
+msgid ""
+"reCAPTCHA is a simple captcha service provided by Google. <a target=\"_blank\" href="
+"\"https://www.google.com/recaptcha/intro/index.html\">Learn more</a>"
+msgstr ""
+"reCAPTCHA est un service simple de <abbr title=‘Tests permettant de différencier de "
+"manière automatisée un utilisateur humain d'un ordinateur’>captcha</abbr> fourni par "
+"Gooogle. <a target=\"_blank\" href=\"https://www.google.com/recaptcha/intro/index.html"
+"\">En savoir plus</a>"
+
+#: ../classes/class-ccf-form-manager.php:408
+msgid "Site Key:"
+msgstr "Clé du site :"
+
+#: ../classes/class-ccf-form-manager.php:410 ../classes/class-ccf-form-manager.php:415
+msgid "Don't have one?"
+msgstr "Vous n’en avez pas ?"
+
+#: ../classes/class-ccf-form-manager.php:413
+msgid "Secret Key:"
+msgstr "Clé secrète :"
+
+#: ../classes/class-ccf-form-manager.php:476 ../classes/class-ccf-form-manager.php:497
+#: ../classes/class-ccf-form-manager.php:522 ../classes/class-ccf-form-manager.php:566
+#: ../classes/class-ccf-form-manager.php:591 ../classes/class-ccf-form-manager.php:627
+#: ../classes/class-ccf-form-manager.php:683 ../classes/class-ccf-form-manager.php:734
+#: ../classes/class-ccf-form-manager.php:777 ../classes/class-ccf-form-manager.php:841
+#: ../classes/class-ccf-form-manager.php:884 ../classes/class-ccf-form-manager.php:927
+msgid "Basic"
+msgstr "Basique"
+
+#: ../classes/class-ccf-form-manager.php:479
+msgid "HTML Content:"
+msgstr ""
+
+#: ../classes/class-ccf-form-manager.php:500
+msgid "Heading:"
+msgstr "Titre :"
+
+#: ../classes/class-ccf-form-manager.php:504
+msgid "Sub Heading:"
+msgstr "Sous-titre :"
+
+#: ../classes/class-ccf-form-manager.php:569 ../classes/class-ccf-form-manager.php:594
+#: ../classes/class-ccf-form-manager.php:630 ../classes/class-ccf-form-manager.php:686
+#: ../classes/class-ccf-form-manager.php:737 ../classes/class-ccf-form-manager.php:780
+#: ../classes/class-ccf-form-manager.php:844 ../classes/class-ccf-form-manager.php:887
+#: ../classes/class-ccf-form-manager.php:930
+msgid "Internal Unique Slug (a-z, 0-9, -, _):"
+msgstr ""
+
+#: ../classes/class-ccf-form-manager.php:656
+msgid "Enable Date Select"
+msgstr "Autoriser la sélection de la date"
+
+#: ../classes/class-ccf-form-manager.php:660
+msgid "Enable Time Select"
+msgstr "Autoriser la sélection de l’heure"
+
+#: ../classes/class-ccf-form-manager.php:702
+msgid "Format:"
+msgstr "Format :"
+
+#: ../classes/class-ccf-form-manager.php:705 ../classes/class-ccf-form-manager.php:752
+msgid "International"
+msgstr ""
+
+#: ../classes/class-ccf-form-manager.php:749
+msgid "Type:"
+msgstr "Type :"
+
+#: ../classes/class-ccf-form-manager.php:751
+msgid "United States"
+msgstr "Etats-Unis"
+
+#: ../classes/class-ccf-form-manager.php:805
+msgid "Require Confirmation:"
+msgstr "Confirmation obligatoire :"
+
+#: ../classes/class-ccf-form-manager.php:833
+msgid "Label"
+msgstr "Libellé"
+
+#: ../classes/class-ccf-form-manager.php:834
+msgid "Value"
+msgstr "Valeur"
+
+#: ../classes/class-ccf-form-manager.php:863 ../classes/class-ccf-form-manager.php:906
+#: ../classes/class-ccf-form-manager.php:949
+msgid "Manage field choices:"
+msgstr "Gérer les valeurs du champ :"
+
+#: ../classes/class-ccf-form-manager.php:867 ../classes/class-ccf-form-manager.php:910
+#: ../classes/class-ccf-form-manager.php:953
+msgid ""
+"Note: If an option does not have a \"value\", it will not be considered a valid "
+"selection if the field is required. The \"value\" is what's read, stored, and displayed "
+"in the submission."
+msgstr ""
+
+#: ../classes/class-ccf-form-manager.php:970
+msgid "You currently have no forms. Add some!"
+msgstr ""
+
+#: ../classes/class-ccf-form-manager.php:993
+msgid "Allowed file extensions are {{ extensions }}. "
+msgstr ""
+
+#: ../classes/class-ccf-form-manager.php:995
+msgid "Max file size is {{ file_size }} MB. "
+msgstr "La taille maximum du fichier est de {{file_size}} Mo. "
+
+#: ../classes/class-ccf-form-manager.php:1020 ../classes/class-ccf-form-manager.php:1036
+#: ../classes/class-ccf-form-manager.php:1054
+msgid "An example choice"
+msgstr ""
+
+#: ../classes/class-ccf-form-manager.php:1072
+msgid "Arbitrary block of HTML."
+msgstr "Bloc de code HTML"
+
+#: ../classes/class-ccf-form-manager.php:1078
+msgid "Section Heading"
+msgstr "Titre de section"
+
+#: ../classes/class-ccf-form-manager.php:1080
+msgid "This is the sub-heading text."
+msgstr "C’est un texte de sous-titre."
+
+#: ../classes/class-ccf-form-manager.php:1211
+msgid "email@example.com"
+msgstr "nom@exemple.fr"
+
+#: ../classes/class-ccf-form-manager.php:1249
+msgid "Edit"
+msgstr "Modifier"
+
+#: ../classes/class-ccf-form-manager.php:1251
+msgid "Trash"
+msgstr "Corbeille"
+
+#: ../classes/class-ccf-form-manager.php:1294
+msgid "There is a problem with this form. Is it trashed or deleted?"
+msgstr ""
+
+#: ../classes/class-ccf-form-manager.php:1436
+msgid "IP Address"
+msgstr "Adresse IP"
+
+#: ../classes/class-ccf-form-manager.php:1448
+msgid "There are no submissions."
+msgstr ""
+
+#: ../classes/class-ccf-form-manager.php:1477
+msgid "Add Form"
+msgstr "Ajouter un formulaire"
+
+#: ../classes/class-ccf-form-manager.php:1501
+msgid "Single Line Text"
+msgstr "Texte"
+
+#: ../classes/class-ccf-form-manager.php:1502
+msgid "Dropdown"
+msgstr "Liste déroulante"
+
+#: ../classes/class-ccf-form-manager.php:1503
+msgid "Checkboxes"
+msgstr "Case à cocher"
+
+#: ../classes/class-ccf-form-manager.php:1504
+msgid "Radio Buttons"
+msgstr "Boutons radio"
+
+#: ../classes/class-ccf-form-manager.php:1505
+msgid "Paragraph Text"
+msgstr "Zone de texte"
+
+#: ../classes/class-ccf-form-manager.php:1506
+msgid "Hidden"
+msgstr "Caché"
+
+#: ../classes/class-ccf-form-manager.php:1507
+msgid "File Upload"
+msgstr "Envoi de fichier"
+
+#: ../classes/class-ccf-form-manager.php:1511
+msgid "HTML"
+msgstr ""
+
+#: ../classes/class-ccf-form-manager.php:1512
+msgid "Section Header"
+msgstr "Entête de section"
+
+#: ../classes/class-ccf-form-manager.php:1517
+msgid "Name"
+msgstr "Nom"
+
+#: ../classes/class-ccf-form-manager.php:1518
+msgid "Date/Time"
+msgstr "Date/Heure"
+
+#: ../classes/class-ccf-form-manager.php:1519
+msgid "Website"
+msgstr "Site internet"
+
+#: ../classes/class-ccf-form-manager.php:1520
+msgid "Address"
+msgstr "Adresse"
+
+#: ../classes/class-ccf-form-manager.php:1521
+msgid "Phone"
+msgstr "Téléphone"
+
+#: ../classes/class-ccf-form-manager.php:1522
+msgid "reCAPTCHA"
+msgstr ""
+
+#: ../classes/class-ccf-form-manager.php:1541
+msgid "You have no email fields"
+msgstr "Vous n’avez pas de champ mél"
+
+#: ../classes/class-ccf-form-manager.php:1542
+msgid "You have no name fields"
+msgstr "Vous n’avez pas de champ nom"
+
+#: ../classes/class-ccf-form-manager.php:1543
+msgid "Invalid date"
+msgstr "Date invalide"
+
+#: ../classes/class-ccf-form-manager.php:1545
+msgid "Form Submission"
+msgstr "Soumission du formulaire"
+
+#: ../classes/class-ccf-form-manager.php:1546 ../classes/class-ccf-form-renderer.php:120
+msgid "This form is paused right now. Check back later!"
+msgstr "Ce formulaire est bloqué. Ressayer plus tard !"
+
+#: ../classes/class-ccf-form-renderer.php:55
+msgid "This is not a valid email address."
+msgstr "Ce n’est pas une adresse mél valide."
+
+#: ../classes/class-ccf-form-renderer.php:58
+msgid "This is not a valid phone number."
+msgstr "Ce n’est pas un numéro de téléphone valide."
+
+#: ../classes/class-ccf-form-renderer.php:59
+msgid "This phone number is not 10 digits"
+msgstr "Ce n’est pas un numéro de téléphone à 10 chiffres"
+
+#: ../classes/class-ccf-form-renderer.php:63
+msgid "This is not an allowed file extension"
+msgstr "Ce n’est pas une extension de fichier autorisée"
+
+#: ../classes/class-ccf-form-renderer.php:64
+msgid "This file is bigger than"
+msgstr "Ce fichier est plus grand que"
+
+#: ../classes/class-ccf-form-renderer.php:65
+msgid "An unknown error occured."
+msgstr ""
+
+#: ../classes/class-ccf-submission-cpt.php:41
+msgid "Form Submissions"
+msgstr "Soumissions de formulaire"
+
+#: ../classes/class-ccf-upgrader.php:37
+msgid ""
+"Did you just upgrade to a post 6.0 version of Custom Contact Forms? If so, you might "
+"need to upgrade your database to use your old forms. Please backup your database before "
+"running the upgrade."
+msgstr ""
+
+#: ../classes/class-ccf-upgrader.php:38
+msgid "Upgrade"
+msgstr ""
+
+#: ../classes/class-ccf-upgrader.php:39
+msgid "Dismiss"
+msgstr ""
+
+#: ../classes/class-ccf-upgrader.php:61
+msgid "Database update complete."
+msgstr ""
+
+#: ../classes/class-ccf-widget.php:17
+msgid "Add a custom contact form to a sidebar."
+msgstr ""
+
+#: ../classes/class-ccf-widget.php:18
+msgid "Custom Contact Form"
+msgstr ""
+
+#: ../classes/class-ccf-widget.php:64
+msgid "Title:"
+msgstr "Titre :"
+
+#: ../classes/class-ccf-widget.php:71
+msgid "Choose a form:"
+msgstr ""
+
+#: ../classes/class-ccf-widget.php:80
+msgid "Untitled"
+msgstr "Sans titre"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-comments.php:42
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-comments.php:48
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-comments.php:108
+msgid "Invalid comment ID."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-comments.php:52
+msgid "Sorry, you are not allowed to delete this comment."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-comments.php:58
+msgid "The comment cannot be deleted."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-comments.php:62
+msgid "Permanently deleted comment"
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-comments.php:65
+msgid "Deleted comment"
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-customposttype.php:33
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:29
+msgid "The route base must be overridden"
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-customposttype.php:37
+msgid "The post type must be overridden"
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-customposttype.php:115
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-customposttype.php:136
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-customposttype.php:161
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-customposttype.php:182
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:35
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:78
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:153
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:174
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:205
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:768
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:788
+msgid "Invalid post type"
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:210
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:803
+msgid "Sorry, you are not allowed to post on this site."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:215
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:795
+msgid "Sorry, you are not allowed to edit this post."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:288
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:371
+msgid "No data supplied"
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:292
+msgid "No Content-Type supplied"
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:296
+msgid "No Content-Disposition supplied"
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:315
+msgid "Invalid Content-Disposition supplied"
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:323
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:378
+msgid "Content hash did not match expected"
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:336
+msgid "Could not open file handle"
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:414
+msgid "Invalid featured image."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta-posts.php:34
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:655
+msgid "Sorry, you cannot edit this post"
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:33
+msgid "The object type must be overridden"
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:134
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:241
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:388
+msgid "Invalid meta ID."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:138
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:245
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:392
+msgid "Meta does not belong to this object"
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:159
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:272
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:276
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:349
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:402
+#, php-format
+msgid "%s is marked as a protected field."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:169
+#, php-format
+msgid "%s contains serialized data."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:257
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:338
+msgid "Invalid meta key."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:263
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:398
+msgid "Invalid existing meta data for action."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:268
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:345
+msgid "Invalid provided meta data for action."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:289
+msgid "Could not update meta."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:330
+msgid "Missing meta key."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:334
+msgid "Missing meta value."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:358
+msgid "Could not add meta."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:406
+msgid "Could not delete meta."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:409
+msgid "Deleted meta"
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:78
+msgid "Sorry, you cannot view the revisions for this post."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:347
+msgid "There is a revision of this post that is more recent."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:378
+msgid "Sorry, you are not allowed to delete this post."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:384
+msgid "The post cannot be deleted."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:388
+msgid "Permanently deleted post"
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:431
+msgid "Cannot view post type"
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:665
+msgid "Sorry, you cannot view this revision"
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:701
+msgid "There is no excerpt because this is a protected post."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:799
+msgid "The post type may not be changed."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:817
+msgid "Sorry, you are not allowed to create private posts in this post type"
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:823
+msgid "Sorry, you are not allowed to publish posts in this post type"
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:864
+msgid "Invalid author object."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:874
+msgid "You are not allowed to edit posts as this user."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:880
+msgid "Invalid author ID."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:892
+msgid "Sorry, you are not allowed to create password protected posts in this post type"
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:909
+msgid "Invalid post parent ID."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:935
+msgid "Invalid post format."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-server.php:196
+msgid "The JSON API is disabled on this site."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-server.php:201
+msgid "JSONP support is disabled on this site."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-server.php:207
+msgid "The JSONP callback function is invalid."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-server.php:371
+msgid "Unsupported request method"
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-server.php:390
+msgid "The handler for the route is invalid"
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-server.php:450
+msgid "No route was found matching the URL and request method"
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-server.php:502
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:252
+#, php-format
+msgid "Missing parameter %s"
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-taxonomies.php:106
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-taxonomies.php:212
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-taxonomies.php:288
+msgid "Invalid taxonomy ID."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-taxonomies.php:138
+msgid "Cannot view taxonomy"
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-taxonomies.php:294
+msgid "Invalid term ID."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:56
+msgid "Sorry, you are not allowed to list users."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:97
+msgid "You are not currently logged in."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:130
+msgid "Sorry, you are not allowed to view this user."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:136
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:234
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:433
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:444
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:452
+msgid "Invalid user ID."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:238
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:355
+msgid "Sorry, you are not allowed to edit this user."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:245
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:383
+msgid "Sorry, you are not allowed to create users."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:294
+msgid "Invalid user URL."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:350
+msgid "User ID must be supplied."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:360
+msgid "User ID is invalid."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:387
+msgid "Cannot create existing user."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:438
+msgid "Sorry, you are not allowed to delete this user."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:461
+msgid "The user cannot be deleted."
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:463
+msgid "Deleted user"
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/plugin.php:375
+msgid "Cookie nonce is invalid"
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/plugin.php:686
+#, php-format
+msgid "%1$s (since %2$s; use %3$s instead)"
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/plugin.php:689 ../vendor/wp-api/wp-api/plugin.php:707
+#, php-format
+msgid "%1$s (since %2$s; no alternative available)"
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/plugin.php:704
+#, php-format
+msgid "%1$s (since %2$s; %3$s)"
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/tests/helper.php:61
+msgid "No report data available"
+msgstr ""
+
+#: ../vendor/wp-api/wp-api/tests/helper.php:65
+msgid "The CodeCoverage classes are missing"
+msgstr ""
