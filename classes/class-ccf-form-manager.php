@@ -1542,6 +1542,7 @@ class CCF_Form_Manager {
 				'noNameFields' => esc_html__( 'You have no name fields', 'custom-contact-forms' ),
 				'invalidDate' => esc_html__( 'Invalid date', 'custom-contact-forms' ),
 				'allLabels' => array_merge( $field_labels, $structure_field_labels, $special_field_labels ),
+				'fieldLabel' => esc_html__( 'Field Label', 'custom-contact-forms' ),
 				'thickboxTitle' => esc_html__( 'Form Submission', 'custom-contact-forms' ),
 				'pauseMessage' => esc_html__( 'This form is paused right now. Check back later!', 'custom-contact-forms' ),
 				'skipFields' => apply_filters( 'ccf_no_submission_display_fields', array( 'html', 'section-header', 'recaptcha' ) ),

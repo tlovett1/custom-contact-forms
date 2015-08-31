@@ -790,7 +790,7 @@ class CCF_Field_Renderer {
 				<?php echo esc_html( $label ); ?>
 			</label>
 			<?php if ( empty( $email_confirmation ) ) { ?>
-				<input class="<?php if ( ! empty( $errors ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> name="ccf_field_<?php echo esc_attr( $slug ); ?>" id="ccf_field_<?php echo esc_attr( $slug ); ?>"  placeholder="<?php if ( ! empty( $placeholder ) ) { ?><?php echo esc_attr( $placeholder ) ?><?php } else { ?>email@example.com<?php } ?>" type="text" value="<?php if ( ! empty( $email_post_value ) ) { echo esc_attr( $email_post_value ); } else { echo esc_attr( $value ); } ?>">
+				<input class="<?php if ( ! empty( $errors ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> name="ccf_field_<?php echo esc_attr( $slug ); ?>" id="ccf_field_<?php echo esc_attr( $slug ); ?>"  placeholder="<?php if ( ! empty( $placeholder ) ) { ?><?php echo esc_attr( $placeholder ) ?><?php } else { ?><?php esc_html_e( 'email@example.com', 'custom-contact-forms' ); ?><?php } ?>" type="text" value="<?php if ( ! empty( $email_post_value ) ) { echo esc_attr( $email_post_value ); } else { echo esc_attr( $value ); } ?>">
 				<?php if ( ! empty( $errors ) ) : foreach ( $errors as $error ) : ?>
 					<div class="error"><?php echo esc_html( $error ); ?></div>
 				<?php endforeach; endif; ?>

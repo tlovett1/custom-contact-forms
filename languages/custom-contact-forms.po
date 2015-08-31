@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: Custom Contact Forms\n"
 "Report-Msgid-Bugs-To: https://github.com/tlovett1/custom-contact-forms/"
 "issues\n"
-"POT-Creation-Date: 2015-06-29 10:27-0500\n"
-"PO-Revision-Date: 2015-06-29 10:27-0500\n"
+"POT-Creation-Date: 2015-08-31 09:26-0500\n"
+"PO-Revision-Date: 2015-08-31 09:26-0500\n"
 "Last-Translator: Taylor Lovett <tlovett88@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: en\n"
@@ -96,14 +96,14 @@ msgstr ""
 msgid "Form Field Choices"
 msgstr ""
 
-#: ../classes/class-ccf-custom-contact-forms.php:49
+#: ../classes/class-ccf-custom-contact-forms.php:71
 #, php-format
 msgid ""
 "Custom Contact Forms will not work unless pretty permalinks (not default) "
 "are enabled. Please update your <a href=\"%s\">permalinks settings</a>."
 msgstr ""
 
-#: ../classes/class-ccf-custom-contact-forms.php:67
+#: ../classes/class-ccf-custom-contact-forms.php:89
 #, php-format
 msgid "<a href=\"%s\">Forms and Submissions</a>"
 msgstr ""
@@ -171,6 +171,11 @@ msgstr ""
 #: ../classes/class-ccf-field-renderer.php:618
 #: ../classes/class-ccf-form-manager.php:1200
 msgid "Country"
+msgstr ""
+
+#: ../classes/class-ccf-field-renderer.php:793
+#: ../classes/class-ccf-form-manager.php:1211
+msgid "email@example.com"
 msgstr ""
 
 #: ../classes/class-ccf-field-renderer.php:803
@@ -987,10 +992,6 @@ msgstr ""
 msgid "This is the sub-heading text."
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1211
-msgid "email@example.com"
-msgstr ""
-
 #: ../classes/class-ccf-form-manager.php:1249
 msgid "Edit"
 msgstr ""
@@ -1088,10 +1089,14 @@ msgid "Invalid date"
 msgstr ""
 
 #: ../classes/class-ccf-form-manager.php:1545
-msgid "Form Submission"
+msgid "Field Label"
 msgstr ""
 
 #: ../classes/class-ccf-form-manager.php:1546
+msgid "Form Submission"
+msgstr ""
+
+#: ../classes/class-ccf-form-manager.php:1547
 #: ../classes/class-ccf-form-renderer.php:120
 msgid "This form is paused right now. Check back later!"
 msgstr ""

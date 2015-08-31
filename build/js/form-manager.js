@@ -520,7 +520,7 @@
 
 			defaults: function() {
 				var defaults = {
-					label: 'Field Label',
+					label: ccfSettings.fieldLabel,
 					value: '',
 					placeholder: '',
 					slug: '',
