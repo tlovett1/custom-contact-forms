@@ -361,6 +361,9 @@
 					emailNotificationFromType: 'default',
 					emailNotificationFromAddress: '',
 					emailNotificationFromField: '',
+					emailNotificationSubjectType: 'default',
+					emailNotificationSubject: '',
+					emailNotificationSubjectField: '',
 					emailNotificationFromNameType: 'custom',
 					emailNotificationFromName: 'WordPress',
 					emailNotificationFromNameField: '',
@@ -1783,7 +1786,8 @@
 				'change select': 'save',
 				'change select.form-send-email-notifications': 'toggleNotificationFields',
 				'change select.form-email-notification-from-type': 'toggleNotificationFields',
-				'change select.form-email-notification-from-name-type': 'toggleNotificationFields'
+				'change select.form-email-notification-from-name-type': 'toggleNotificationFields',
+				'change select.form-email-notification-subject-type': 'toggleNotificationFields'
 			},
 
 			initialize: function( options ) {
@@ -1802,15 +1806,21 @@
 				emailNotificationFromField.innerHTML = '';
 				emailNotificationFromField.disabled = false;
 
+				var emailNotificationSubjectField = this.el.querySelectorAll( '.form-email-notification-subject-field' )[0];
+				emailNotificationSubjectField.innerHTML = '';
+				emailNotificationSubjectField.disabled = false;
+
 				var emailNotificationFromNameField = this.el.querySelectorAll( '.form-email-notification-from-name-field' )[0];
 				emailNotificationFromNameField.innerHTML = '';
 				emailNotificationFromNameField.disabled = false;
 
-				var fields = this.model.get( 'fields'),
+				var fields = this.model.get( 'fields' ),
 					addressFieldsAdded = 0,
-					nameFieldsAdded = 0;
+					nameFieldsAdded = 0,
+					subjectFieldsAdded = 0;
 
 				var addressField = this.model.get( 'emailNotificationFromField' );
+				var subjectField = this.model.get( 'emailNotificationSubjectField' );
 				var nameField = this.model.get( 'emailNotificationFromNameField' ),
 					option;
 
@@ -1840,6 +1850,20 @@
 							emailNotificationFromNameField.appendChild( option );
 
 							nameFieldsAdded++;
+						}  else if ( 'single-line-text' === field.get( 'type' ) ) {
+							// @Todo: add more applicable fields
+
+							option = document.createElement( 'option' );
+							option.innerHTML = field.get( 'slug' );
+							option.value = field.get( 'slug' );
+
+							if ( field.get( 'slug' ) === subjectField ) {
+								option.selected = true;
+							}
+
+							emailNotificationSubjectField.appendChild( option );
+
+							subjectFieldsAdded++;
 						}
 					});
 				}
@@ -1857,6 +1881,13 @@
 					emailNotificationFromNameField.appendChild( option );
 					emailNotificationFromNameField.disabled = true;
 				}
+
+				if ( 0 === subjectFieldsAdded ) {
+					option = document.createElement( 'option' );
+					option.innerHTML = ccfSettings.noApplicableFields;
+					emailNotificationSubjectField.appendChild( option );
+					emailNotificationSubjectField.disabled = true;
+				}
 			},
 
 			toggleNotificationFields: function() {
@@ -1871,6 +1902,12 @@
 				var emailNotificationFromField = this.el.querySelectorAll( '.email-notification-from-field' )[0];
 
 				var emailNotificationFromType = this.el.querySelectorAll( '.form-email-notification-from-type' )[0];
+
+				var emailNotificationSubject = this.el.querySelectorAll( '.email-notification-subject' )[0];
+
+				var emailNotificationSubjectField = this.el.querySelectorAll( '.email-notification-subject-field' )[0];
+
+				var emailNotificationSubjectType = this.el.querySelectorAll( '.form-email-notification-subject-type' )[0];
 
 				var emailNotificationFromName = this.el.querySelectorAll( '.email-notification-from-name' )[0];
 
@@ -1892,6 +1929,15 @@
 						emailNotificationFromField.style.display = 'block';
 					}
 
+					emailNotificationSubject.style.display = 'none';
+					emailNotificationSubjectField.style.display = 'none';
+
+					if ( 'custom' === emailNotificationSubjectType.value ) {
+						emailNotificationSubject.style.display = 'block';
+					} else if ( 'field' === emailNotificationSubjectType.value ) {
+						emailNotificationSubjectField.style.display = 'block';
+					}
+
 					emailNotificationFromName.style.display = 'none';
 					emailNotificationFromNameField.style.display = 'none';
 
@@ -1907,6 +1953,9 @@
 
 					emailNotificationFromAddress.style.display = 'none';
 					emailNotificationFromField.style.display = 'none';
+
+					emailNotificationSubject.style.display = 'none';
+					emailNotificationSubjectField.style.display = 'none';
 
 					emailNotificationFromName.style.display = 'none';
 					emailNotificationFromNameField.style.display = 'none';
@@ -1944,6 +1993,15 @@
 
 				var emailNotificationFromNameField = this.el.querySelectorAll( '.form-email-notification-from-name-field' )[0].value;
 				this.model.set( 'emailNotificationFromNameField', emailNotificationFromNameField );
+
+				var emailNotificationSubjectType = this.el.querySelectorAll( '.form-email-notification-subject-type' )[0].value;
+				this.model.set( 'emailNotificationSubjectType', emailNotificationSubjectType );
+
+				var emailNotificationSubject = this.el.querySelectorAll( '.form-email-notification-subject' )[0].value;
+				this.model.set( 'emailNotificationSubject', emailNotificationSubject );
+
+				var emailNotificationSubjectField = this.el.querySelectorAll( '.form-email-notification-subject-field' )[0].value;
+				this.model.set( 'emailNotificationSubjectField', emailNotificationSubjectField );
 
 				if ( typeof $promise !== 'undefined' && typeof $promise.promise !== 'undefined' ) {
 					$promise.resolve();

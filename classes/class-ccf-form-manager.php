@@ -244,6 +244,33 @@ class CCF_Form_Manager {
 					<select name="email_notification_from_name_field" class="form-email-notification-from-name-field" id="ccf_form_email_notification_from_name_field">
 					</select>
 				</p>
+
+
+
+
+
+
+				<p class="email-notification-setting">
+					<label for="ccf_form_email_notification_subject_type"><?php esc_html_e( 'Email Subject Type:', 'custom-contact-forms' ); ?></label>
+					<select name="email_notification_subject_type" class="form-email-notification-subject-type" id="ccf_form_email_notification_subject_type">
+						<option value="default"><?php esc_html_e( 'Default', 'custom-contact-forms' ); ?></option>
+						<option value="custom" <# if ( 'custom' === form.emailNotificationSubjectType ) { #>selected<# } #>><?php esc_html_e( 'Custom Subject', 'custom-contact-forms' ); ?></option>
+						<option value="field" <# if ( 'field' === form.emailNotificationSubjectType ) { #>selected<# } #>><?php esc_html_e( 'Form Field', 'custom-contact-forms' ); ?></option>
+					</select>
+
+					<span class="explain"><?php esc_html_e( 'You can set the notification emails subject line to be the CCF default, custom text, or pull the subject from a field in the form.', 'custom-contact-forms' ); ?></span>
+				</p>
+
+				<p class="email-notification-subject">
+					<label for="ccf_form_email_notification_subject"><?php esc_html_e( 'Custom Email Subject:', 'custom-contact-forms' ); ?></label>
+					<input class="widefat form-email-notification-subject" id="ccf_form_email_notification_subject" name="email-notification-subject" value="{{ form.emailNotificationSubject }}">
+				</p>
+
+				<p class="email-notification-subject-field">
+					<label for="ccf_form_email_notification_subject_field"><?php esc_html_e( 'Pull Email Subject Dynamically from Field:', 'custom-contact-forms' ); ?></label>
+					<select name="email_notification_subject_field" class="form-email-notification-subject-field" id="ccf_form_email_notification_subject_field">
+					</select>
+				</p>
 			</div>
 		</script>
 
@@ -1540,6 +1567,7 @@ class CCF_Form_Manager {
 				'maxFileSize' => floor( wp_max_upload_size() / 1000 / 1000 ),
 				'noEmailFields' => esc_html__( 'You have no email fields', 'custom-contact-forms' ),
 				'noNameFields' => esc_html__( 'You have no name fields', 'custom-contact-forms' ),
+				'noApplicableFields' => esc_html__( 'You have no applicable fields', 'custom-contact-forms' ),
 				'invalidDate' => esc_html__( 'Invalid date', 'custom-contact-forms' ),
 				'allLabels' => array_merge( $field_labels, $structure_field_labels, $special_field_labels ),
 				'fieldLabel' => esc_html__( 'Field Label', 'custom-contact-forms' ),
