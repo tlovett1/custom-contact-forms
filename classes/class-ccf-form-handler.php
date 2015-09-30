@@ -811,7 +811,7 @@ class CCF_Form_Handler {
 					} else {
 						$name_field = get_post_meta( $form_id, 'ccf_form_email_notification_from_name_field', true );
 					
-						if ( ! empty( $name_field ) && is_array( $submission[$name_field] ) ) {
+						if ( ! empty( $name_field ) && ! empty( $submission[$name_field] ) && is_array( $submission[$name_field] ) ) {
 							if ( ! empty( $submission[$name_field]['first'] ) || ! empty( $submission[$name_field]['last'] ) ) {
 								$name = $submission[$name_field]['first'] . ' ' . $submission[$name_field]['last'];
 							}
@@ -842,12 +842,24 @@ class CCF_Form_Handler {
 						$headers[] = 'Reply-To: ' . sanitize_email( $email );
 					}
 
-					foreach ( $email_addresses as $email ) {
-						$subject = sprintf( __( '%s: Form Submission', 'custom-contact-forms' ), wp_specialchars_decode( get_bloginfo( 'name' ) ) );
-						if ( ! empty( $form->post_title ) ) {
-							$subject .= sprintf( __( ' to "%s"', 'custom-contact-forms' ), wp_specialchars_decode( $form->post_title ) );
-						}
+					$email_notification_subject_type = get_post_meta( $form_id, 'ccf_form_email_notification_subject_type', true );
 
+					$subject = sprintf( __( '%s: Form Submission', 'custom-contact-forms' ), wp_specialchars_decode( get_bloginfo( 'name' ) ) );
+					if ( ! empty( $form->post_title ) ) {
+						$subject .= sprintf( __( ' to "%s"', 'custom-contact-forms' ), wp_specialchars_decode( $form->post_title ) );
+					}
+
+					if ( 'custom' === $email_notification_subject_type ) {
+						$subject = get_post_meta( $form_id, 'ccf_form_email_notification_subject', true );
+					} elseif ( 'field' === $email_notification_subject_type ) {
+						$subject_field = get_post_meta( $form_id, 'ccf_form_email_notification_subject_field', true );
+					
+						if ( ! empty( $subject_field ) && ! empty( $submission[$subject_field] ) ) {
+							$subject = $submission[$subject_field];
+						}
+					}
+
+					foreach ( $email_addresses as $email ) {
 						$subject = apply_filters( 'ccf_email_subject', $subject, $form_id, $email, $form_page );
 						wp_mail( $email, $subject, apply_filters( 'ccf_email_content', $message, $form_id, $email, $form_page ), apply_filters( 'ccf_email_headers', $headers, $form_id, $email, $form_page ) );
 					}

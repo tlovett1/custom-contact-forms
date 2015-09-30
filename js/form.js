@@ -413,7 +413,11 @@
 
 					if ( data.success ) {
 						if ( 'text' === data.action_type && data.completion_message ) {
-							form.innerHTML = data.completion_message;
+							form.innerHTML = '';
+							var completionWrapper = document.createElement( 'div' );
+							completionWrapper.innerHTML = data.completion_message;
+							completionWrapper.className = 'ccf-form-complete';
+							form.appendChild( completionWrapper );
 
 							$( 'html, body' ).animate( {
 								scrollTop: $( form ).offset().top

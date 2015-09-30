@@ -71,6 +71,12 @@ Each form has a number of settings that you should understand.
   Default` will use the default WordPress email address. `Custom Email` will allow you to manually type in a from
   address. `Form Field` will allow you to choose an email field within the form to dynamically pull a from email
   address.
+  * `"From" Name Type` - This allows you to set what name the notification email is sent from. `Custom Name` 
+  will allow you to manually type in a from name. `Form Field` will allow you to choose a name field within 
+  the form to dynamically pull a from email name.
+  * `Email Subject Type` - This allows you to set what subject line is used on the notification email. `Default` 
+  will use the CCF default subject. `Custom Subject` will allow you to manually type in an email subject. 
+  `Form Field` will allow you to choose a field within the form to dynamically pull a subject line.
 
 
 
