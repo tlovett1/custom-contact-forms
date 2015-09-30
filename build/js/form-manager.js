@@ -1811,12 +1811,13 @@
 					nameFieldsAdded = 0;
 
 				var addressField = this.model.get( 'emailNotificationFromField' );
-				var nameField = this.model.get( 'emailNotificationFromNameField' );
+				var nameField = this.model.get( 'emailNotificationFromNameField' ),
+					option;
 
 				if ( fields.length >= 1 ) {
 					fields.each( function( field ) {
 						if ( 'email' === field.get( 'type' ) ) {
-							var option = document.createElement( 'option' );
+							option = document.createElement( 'option' );
 							option.innerHTML = field.get( 'slug' );
 							option.value = field.get( 'slug' );
 
@@ -1828,7 +1829,7 @@
 
 							addressFieldsAdded++;
 						} else if ( 'name' === field.get( 'type' ) ) {
-							var option = document.createElement( 'option' );
+							option = document.createElement( 'option' );
 							option.innerHTML = field.get( 'slug' );
 							option.value = field.get( 'slug' );
 
@@ -1844,14 +1845,14 @@
 				}
 
 				if ( 0 === addressFieldsAdded ) {
-					var option = document.createElement( 'option' );
+					option = document.createElement( 'option' );
 					option.innerHTML = ccfSettings.noEmailFields;
 					emailNotificationFromField.appendChild( option );
 					emailNotificationFromField.disabled = true;
 				}
 
 				if ( 0 === nameFieldsAdded ) {
-					var option = document.createElement( 'option' );
+					option = document.createElement( 'option' );
 					option.innerHTML = ccfSettings.noNameFields;
 					emailNotificationFromNameField.appendChild( option );
 					emailNotificationFromNameField.disabled = true;
