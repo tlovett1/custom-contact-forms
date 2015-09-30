@@ -1,0 +1,1425 @@
+# Copyright (C) 2014 Taylor Lovett
+# This file is distributed under the same license as the Editorial Access Manager package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Custom Contact Forms\n"
+"Report-Msgid-Bugs-To: https://github.com/tlovett1/custom-contact-forms/issues\n"
+"POT-Creation-Date: 2015-08-31 09:26-0500\n"
+"PO-Revision-Date: 2015-09-13 00:06+0200\n"
+"Last-Translator: Taylor Lovett <tlovett88@gmail.com>\n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.4\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,"
+"_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;esc_html_e;esc_html__;esc_attr__;"
+"esc_attr_e\n"
+"X-Textdomain-Support: yes\n"
+"Language-Team: \n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../classes/class-ccf-api.php:160
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-comments.php:82
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-customposttype.php:130
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-customposttype.php:151
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-customposttype.php:157
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-customposttype.php:176
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:72
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:143
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:149
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:168
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta-posts.php:30
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-pages.php:69
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-pages.php:88
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-pages.php:106
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:74
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:271
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:329
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:374
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:749
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:777
+msgid "Invalid post ID."
+msgstr "Ugyldigt indlæg ID."
+
+#: ../classes/class-ccf-api.php:164
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-comments.php:86
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:285
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:527
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:539
+msgid "Sorry, you cannot read this post."
+msgstr "Desværre, du kan ikke læse dette indlæg."
+
+#: ../classes/class-ccf-api.php:220
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:122
+#, php-format
+msgid "The post type \"%s\" is not valid"
+msgstr "Indlæg type \"%s\" er ikke gyldigt"
+
+#: ../classes/class-ccf-api.php:447 ../classes/class-ccf-api.php:762
+#: ../classes/class-ccf-api.php:787 ../classes/class-ccf-api.php:816
+#: ../classes/class-ccf-api.php:933
+msgid "Invalid form ID."
+msgstr "Ugyldig formular ID."
+
+#: ../classes/class-ccf-api.php:452 ../classes/class-ccf-api.php:747
+#: ../classes/class-ccf-api.php:767
+msgid "Sorry, you cannot view forms."
+msgstr "Desværre, du kan ikke se formularer."
+
+#: ../classes/class-ccf-api.php:793 ../classes/class-ccf-api.php:822
+msgid "Invalid form."
+msgstr "Ugyldig formular."
+
+#: ../classes/class-ccf-api.php:797
+msgid "Sorry, you cannot view this form."
+msgstr "Desværre, du kan ikke se denne formular."
+
+#: ../classes/class-ccf-api.php:944
+msgid "The form cannot be deleted."
+msgstr "Formularen kan ikke slettes."
+
+#: ../classes/class-ccf-api.php:948
+msgid "Permanently deleted form"
+msgstr "Formular slettet permanent"
+
+#: ../classes/class-ccf-api.php:951
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:391
+msgid "Deleted post"
+msgstr "Indlæg slettet"
+
+#: ../classes/class-ccf-choice-cpt.php:29
+msgid "Form Field Choices"
+msgstr "Formular Felter Valg"
+
+#: ../classes/class-ccf-custom-contact-forms.php:71
+#, php-format
+msgid ""
+"Custom Contact Forms will not work unless pretty permalinks (not default) are enabled. "
+"Please update your <a href=\"%s\">permalinks settings</a>."
+msgstr ""
+"Custom Contact Forms virker ikke medmindre pæne permanente links (ikke standard) er "
+"aktiveret. Opdater venligst dine <a href=\"%s\">permanente links indstillinger</a>."
+
+#: ../classes/class-ccf-custom-contact-forms.php:89
+#, php-format
+msgid "<a href=\"%s\">Forms and Submissions</a>"
+msgstr "<a href=\"%s\">Formularer og Indlæg</a>"
+
+#: ../classes/class-ccf-export.php:58 ../classes/class-ccf-form-cpt.php:576
+msgid "Forms and Submissions"
+msgstr "Formularer og Indlæg"
+
+#: ../classes/class-ccf-export.php:90
+msgid "Import"
+msgstr "Importer"
+
+#: ../classes/class-ccf-field-cpt.php:30
+msgid "Form Fields"
+msgstr "Formular Felter"
+
+#: ../classes/class-ccf-field-renderer.php:122
+#, php-format
+msgid "Allowed file extensions are %s. "
+msgstr "Tilladte filtyper er %s."
+
+#: ../classes/class-ccf-field-renderer.php:124
+#, php-format
+msgid "Max file size is %d MB. "
+msgstr "Maks fil størrelse er %d MB."
+
+#: ../classes/class-ccf-field-renderer.php:556 ../classes/class-ccf-form-manager.php:1151
+#: ../classes/class-ccf-form-manager.php:1176
+msgid "Street Address"
+msgstr "Adresse"
+
+#: ../classes/class-ccf-field-renderer.php:560 ../classes/class-ccf-form-manager.php:1155
+#: ../classes/class-ccf-form-manager.php:1180
+msgid "Address Line 2"
+msgstr "Adresse linje 2"
+
+#: ../classes/class-ccf-field-renderer.php:567 ../classes/class-ccf-form-manager.php:1159
+#: ../classes/class-ccf-form-manager.php:1184
+msgid "City"
+msgstr "By"
+
+#: ../classes/class-ccf-field-renderer.php:580 ../classes/class-ccf-form-manager.php:1167
+msgid "State"
+msgstr "Stat"
+
+#: ../classes/class-ccf-field-renderer.php:588 ../classes/class-ccf-form-manager.php:1171
+msgid "ZIP Code"
+msgstr "Postnummer"
+
+#: ../classes/class-ccf-field-renderer.php:598 ../classes/class-ccf-form-manager.php:1188
+msgid "State / Region / Province"
+msgstr "Stat / Region / Provins"
+
+#: ../classes/class-ccf-field-renderer.php:606 ../classes/class-ccf-form-manager.php:1192
+msgid "ZIP / Postal Code"
+msgstr "Postnummer"
+
+#: ../classes/class-ccf-field-renderer.php:618 ../classes/class-ccf-form-manager.php:1200
+msgid "Country"
+msgstr "Land"
+
+#: ../classes/class-ccf-field-renderer.php:793 ../classes/class-ccf-form-manager.php:1211
+msgid "email@example.com"
+msgstr "email@eksempel.dk"
+
+#: ../classes/class-ccf-field-renderer.php:803 ../classes/class-ccf-form-manager.php:1215
+#: ../classes/class-ccf-form-manager.php:1516
+msgid "Email"
+msgstr "Email"
+
+#: ../classes/class-ccf-field-renderer.php:810 ../classes/class-ccf-form-manager.php:1219
+msgid "Confirm Email"
+msgstr "Bekræft Email"
+
+#: ../classes/class-ccf-field-renderer.php:876 ../classes/class-ccf-form-manager.php:1087
+msgid "First"
+msgstr "Fornavn"
+
+#: ../classes/class-ccf-field-renderer.php:883 ../classes/class-ccf-form-manager.php:1091
+msgid "Last"
+msgstr "Efternavn"
+
+#: ../classes/class-ccf-field-renderer.php:955 ../classes/class-ccf-field-renderer.php:976
+#: ../classes/class-ccf-form-manager.php:1106 ../classes/class-ccf-form-manager.php:1127
+msgid "HH"
+msgstr "TT"
+
+#: ../classes/class-ccf-field-renderer.php:959 ../classes/class-ccf-field-renderer.php:980
+#: ../classes/class-ccf-form-manager.php:1110 ../classes/class-ccf-form-manager.php:1131
+msgid "MM"
+msgstr "MM"
+
+#: ../classes/class-ccf-field-renderer.php:963 ../classes/class-ccf-field-renderer.php:984
+#: ../classes/class-ccf-form-manager.php:1114 ../classes/class-ccf-form-manager.php:1135
+msgid "AM"
+msgstr "AM"
+
+#: ../classes/class-ccf-field-renderer.php:964 ../classes/class-ccf-field-renderer.php:985
+#: ../classes/class-ccf-form-manager.php:1115 ../classes/class-ccf-form-manager.php:1136
+msgid "PM"
+msgstr "PM"
+
+#: ../classes/class-ccf-field-renderer.php:971 ../classes/class-ccf-form-cpt.php:510
+#: ../classes/class-ccf-form-manager.php:274 ../classes/class-ccf-form-manager.php:287
+#: ../classes/class-ccf-form-manager.php:1122 ../classes/class-ccf-form-manager.php:1305
+#: ../classes/class-ccf-form-manager.php:1319 ../classes/class-ccf-form-manager.php:1457
+msgid "Date"
+msgstr "Dato"
+
+#: ../classes/class-ccf-form-cpt.php:277
+msgid "Form Submission Columns"
+msgstr "Formular Indlæg Kolonner"
+
+#: ../classes/class-ccf-form-cpt.php:326 ../classes/class-ccf-form-cpt.php:344
+#: ../classes/class-ccf-form-cpt.php:508 ../classes/class-ccf-form-manager.php:277
+#: ../classes/class-ccf-form-manager.php:290
+msgid "Submissions"
+msgstr "Indlæg"
+
+#: ../classes/class-ccf-form-cpt.php:340
+msgid "At a Glance"
+msgstr "Overblink"
+
+#: ../classes/class-ccf-form-cpt.php:341
+msgid "Preview"
+msgstr "Forhåndsvisning"
+
+#: ../classes/class-ccf-form-cpt.php:361
+msgid "Save your new form to see a preview."
+msgstr "Gem din nye formular for at se en forhåndsvisning"
+
+#: ../classes/class-ccf-form-cpt.php:398
+msgid "Created on:"
+msgstr "Oprettet den:"
+
+#: ../classes/class-ccf-form-cpt.php:401
+msgid "Author:"
+msgstr "Forfatter:"
+
+#: ../classes/class-ccf-form-cpt.php:404
+msgid "Number of fields:"
+msgstr "Antal felter:"
+
+#: ../classes/class-ccf-form-cpt.php:407
+msgid "Number of submissions:"
+msgstr "Antal indlæg:"
+
+#: ../classes/class-ccf-form-cpt.php:413
+msgid "Move to Trash"
+msgstr "Flyt til papirkurv"
+
+#: ../classes/class-ccf-form-cpt.php:417
+msgid "Export"
+msgstr "Eksporter"
+
+#: ../classes/class-ccf-form-cpt.php:446 ../classes/class-ccf-form-manager.php:1247
+msgid "(No title)"
+msgstr "(Ingen titel)"
+
+#: ../classes/class-ccf-form-cpt.php:451
+msgid "Manage Form"
+msgstr "Administrer Formular"
+
+#: ../classes/class-ccf-form-cpt.php:506
+msgid "Form Title"
+msgstr "Formular Titel"
+
+#: ../classes/class-ccf-form-cpt.php:507 ../classes/class-ccf-form-manager.php:275
+#: ../classes/class-ccf-form-manager.php:288
+msgid "Author"
+msgstr "Forfatter"
+
+#: ../classes/class-ccf-form-cpt.php:509 ../classes/class-ccf-form-manager.php:276
+#: ../classes/class-ccf-form-manager.php:289
+msgid "Number of Fields"
+msgstr "Antal felter"
+
+#: ../classes/class-ccf-form-cpt.php:543
+msgid "Unpublished"
+msgstr "Kladde"
+
+#: ../classes/class-ccf-form-cpt.php:545
+msgid "Y/m/d g:i:s A"
+msgstr "d/m/Y G:i:s"
+
+#: ../classes/class-ccf-form-cpt.php:552
+#, php-format
+msgid "%s ago"
+msgstr "%s siden"
+
+#: ../classes/class-ccf-form-cpt.php:554
+msgid "Y/m/d"
+msgstr "d/m/Y"
+
+#: ../classes/class-ccf-form-cpt.php:570 ../classes/class-ccf-form-cpt.php:582
+msgid "Forms"
+msgstr "Formularer"
+
+#: ../classes/class-ccf-form-cpt.php:571
+msgid "Form"
+msgstr "Formular"
+
+#: ../classes/class-ccf-form-cpt.php:572 ../classes/class-ccf-form-cpt.php:575
+#: ../classes/class-ccf-form-manager.php:81
+msgid "New Form"
+msgstr "Ny Formular"
+
+#: ../classes/class-ccf-form-cpt.php:573
+msgid "Add New Form"
+msgstr "Tilføj Ny Formular"
+
+#: ../classes/class-ccf-form-cpt.php:574
+msgid "Edit Form"
+msgstr "Rediger Formular"
+
+#: ../classes/class-ccf-form-cpt.php:577
+msgid "View Form"
+msgstr "Vis Formular"
+
+#: ../classes/class-ccf-form-cpt.php:578
+msgid "Search Forms"
+msgstr "Søg Formularer"
+
+#: ../classes/class-ccf-form-cpt.php:579
+msgid "No forms found."
+msgstr "Ingen formularer fundet."
+
+#: ../classes/class-ccf-form-cpt.php:580
+msgid "No forms found in trash."
+msgstr "Ingen formularer fundet i papirkurven."
+
+#: ../classes/class-ccf-form-handler.php:127 ../classes/class-ccf-form-handler.php:208
+#: ../classes/class-ccf-form-handler.php:245 ../classes/class-ccf-form-handler.php:323
+#: ../classes/class-ccf-form-handler.php:327 ../classes/class-ccf-form-handler.php:331
+#: ../classes/class-ccf-form-handler.php:335 ../classes/class-ccf-form-handler.php:340
+#: ../classes/class-ccf-form-handler.php:365 ../classes/class-ccf-form-handler.php:373
+#: ../classes/class-ccf-form-handler.php:381 ../classes/class-ccf-form-handler.php:435
+#: ../classes/class-ccf-form-renderer.php:49
+msgid "This field is required."
+msgstr "Dette felt er påkrævet."
+
+#: ../classes/class-ccf-form-handler.php:138
+#, php-format
+msgid "This file is too big (%d MB max)"
+msgstr "Denne fil er for stor (%d MB maks)"
+
+#: ../classes/class-ccf-form-handler.php:142
+msgid "An upload error occurred."
+msgstr "Der opstod en upload fejl."
+
+#: ../classes/class-ccf-form-handler.php:164
+msgid "File contains an invalid extension."
+msgstr "Filen indeholder en ugyldig filtype."
+
+#: ../classes/class-ccf-form-handler.php:261 ../classes/class-ccf-form-renderer.php:56
+msgid "Your reCAPTCHA response was incorrect."
+msgstr "Dit reCAPTCHA svar var forkert."
+
+#: ../classes/class-ccf-form-handler.php:280
+msgid "This field is required"
+msgstr "Dette felt er påkrævet"
+
+#: ../classes/class-ccf-form-handler.php:285
+msgid "This phone number is too short"
+msgstr "Dette telefonnummer er for kort"
+
+#: ../classes/class-ccf-form-handler.php:288
+msgid "ccf_field_phoneFormat"
+msgstr "ccf_field_phoneFormat"
+
+#: ../classes/class-ccf-form-handler.php:291
+msgid "This phone number contains invalid characters."
+msgstr "Dette telefonnummer indeholder ugyldige tegn."
+
+#: ../classes/class-ccf-form-handler.php:297
+msgid "This phone number is not 10 digits."
+msgstr "Dette telefonnummer er ikke 10 cifre."
+
+#: ../classes/class-ccf-form-handler.php:368 ../classes/class-ccf-form-handler.php:384
+msgid "This is not a valid email"
+msgstr "Dette er ikke en valid email"
+
+#: ../classes/class-ccf-form-handler.php:376 ../classes/class-ccf-form-renderer.php:54
+msgid "Emails do not match."
+msgstr "Emails er ikke ens."
+
+#: ../classes/class-ccf-form-handler.php:409
+msgid "First name is required."
+msgstr "Fornavn er påkrævet."
+
+#: ../classes/class-ccf-form-handler.php:413
+msgid "Last name is required."
+msgstr "Efternavn er påkrævet."
+
+#: ../classes/class-ccf-form-handler.php:438 ../classes/class-ccf-form-renderer.php:66
+msgid "This is not a valid URL. URL's must start with http(s)://"
+msgstr "Dette er ikke en gyldig URL. URL's skal starte med http(s)://"
+
+#: ../classes/class-ccf-form-handler.php:466 ../classes/class-ccf-form-handler.php:498
+#: ../classes/class-ccf-form-renderer.php:50
+msgid "Date is required."
+msgstr "Dato er påkrævet."
+
+#: ../classes/class-ccf-form-handler.php:469 ../classes/class-ccf-form-handler.php:501
+#: ../classes/class-ccf-form-renderer.php:61
+msgid "This date is not valid."
+msgstr "Denne dato er ikke gyldig."
+
+#: ../classes/class-ccf-form-handler.php:474 ../classes/class-ccf-form-handler.php:506
+#: ../classes/class-ccf-form-renderer.php:51
+msgid "Hour is required."
+msgstr "Time er påkrævet."
+
+#: ../classes/class-ccf-form-handler.php:477 ../classes/class-ccf-form-handler.php:509
+#: ../classes/class-ccf-form-renderer.php:60
+msgid "This is not a valid hour."
+msgstr "Dette er ikke en gyldig time."
+
+#: ../classes/class-ccf-form-handler.php:482 ../classes/class-ccf-form-handler.php:514
+#: ../classes/class-ccf-form-renderer.php:52
+msgid "Minute is required."
+msgstr "Minut er påkrævet."
+
+#: ../classes/class-ccf-form-handler.php:485 ../classes/class-ccf-form-handler.php:517
+#: ../classes/class-ccf-form-renderer.php:62
+msgid "This is not a valid minute."
+msgstr "Dette er ikke et gyldigt minut."
+
+#: ../classes/class-ccf-form-handler.php:490 ../classes/class-ccf-form-handler.php:522
+#: ../classes/class-ccf-form-renderer.php:53
+msgid "AM/PM is required."
+msgstr "AM/PM er påkrævet."
+
+#: ../classes/class-ccf-form-handler.php:708
+msgid "*Hidden Field*"
+msgstr "*Skjult Felt*"
+
+#: ../classes/class-ccf-form-handler.php:782
+msgid "Form submitted from"
+msgstr "Formular afsendt fra"
+
+#: ../classes/class-ccf-form-handler.php:791
+msgid "Form submitter IP"
+msgstr "Formular afsender IP"
+
+#: ../classes/class-ccf-form-handler.php:846
+#, php-format
+msgid "%s: Form Submission"
+msgstr "%s: Formular Afsender"
+
+#: ../classes/class-ccf-form-handler.php:848
+#, php-format
+msgid " to \"%s\""
+msgstr " til \"%s\""
+
+#: ../classes/class-ccf-form-handler.php:863 ../classes/class-ccf-form-renderer.php:134
+msgid "Thank you for your submission."
+msgstr "Tak for dit indlæg."
+
+#: ../classes/class-ccf-form-manager.php:63
+msgid "Custom Contact Forms is experiencing issues."
+msgstr "Custom Contact Froms oplever problemer."
+
+#: ../classes/class-ccf-form-manager.php:67
+#, php-format
+msgid ""
+"There is an issue with synchronizing data. Please try deactivating all other plugins "
+"and activating the TwentyFifteen theme. If this fixes the problem, you have a plugin or "
+"theme conflict. If it does not, please post in the <a href=\"%s\">support forums</a> or "
+"<a href=\"%s\">Github</a>."
+msgstr ""
+"Der er problemer med synkronisering af data. Prøv venligst at deaktivere alle andre "
+"plugins og aktiver TwentyFifteen tema. Hvis dette løser problemet, har du plugin eller "
+"tema konflikt. Hvis det ikke løser problemet, skriv venligst i <a href=\"%s\">support "
+"forumet</a> eller <a href=\"%s\">Github</a>."
+
+#: ../classes/class-ccf-form-manager.php:78
+msgid "Manage Forms"
+msgstr "Administrer Formularer"
+
+#: ../classes/class-ccf-form-manager.php:82
+msgid "Existing Forms"
+msgstr "Eksisterende Formularer"
+
+#: ../classes/class-ccf-form-manager.php:106
+msgid "Standard Fields"
+msgstr "Standard Felter"
+
+#: ../classes/class-ccf-form-manager.php:112
+msgid "Special Fields"
+msgstr "Special Felter"
+
+#: ../classes/class-ccf-form-manager.php:118
+msgid "Structure"
+msgstr "Opbygning"
+
+#: ../classes/class-ccf-form-manager.php:127
+msgid "&larr; Drag fields from the left here."
+msgstr "&larr; Træk felter fra venstre her."
+
+#: ../classes/class-ccf-form-manager.php:133 ../classes/class-ccf-form-manager.php:1250
+msgid "Insert into post"
+msgstr "Indsæt i indlæg"
+
+#: ../classes/class-ccf-form-manager.php:134
+msgid "Save Form"
+msgstr "Gem Formular"
+
+#: ../classes/class-ccf-form-manager.php:140
+msgid "Form Settings"
+msgstr "Formular Indstillinger"
+
+#: ../classes/class-ccf-form-manager.php:143
+msgid "Form Title:"
+msgstr "Formular Titel:"
+
+#: ../classes/class-ccf-form-manager.php:148
+msgid "Form Description:"
+msgstr "Formular Beskrivelse:"
+
+#: ../classes/class-ccf-form-manager.php:153
+msgid "Button Text:"
+msgstr "Knap Tekst:"
+
+#: ../classes/class-ccf-form-manager.php:158
+msgid "On form completion:"
+msgstr "Ved formular afslutning:"
+
+#: ../classes/class-ccf-form-manager.php:161
+msgid "Show text"
+msgstr "Vis tekst"
+
+#: ../classes/class-ccf-form-manager.php:162
+msgid "Redirect"
+msgstr "Omdiriger"
+
+#: ../classes/class-ccf-form-manager.php:166
+msgid "Redirect URL:"
+msgstr "Omdiriger URL:"
+
+#: ../classes/class-ccf-form-manager.php:170
+msgid "Completion Message:"
+msgstr "Afslutnings Besked:"
+
+#: ../classes/class-ccf-form-manager.php:174
+msgid "Pause form:"
+msgstr "Pause formular:"
+
+#: ../classes/class-ccf-form-manager.php:177 ../classes/class-ccf-form-manager.php:196
+#: ../classes/class-ccf-form-manager.php:328 ../classes/class-ccf-form-manager.php:378
+#: ../classes/class-ccf-form-manager.php:454 ../classes/class-ccf-form-manager.php:544
+#: ../classes/class-ccf-form-manager.php:609 ../classes/class-ccf-form-manager.php:651
+#: ../classes/class-ccf-form-manager.php:712 ../classes/class-ccf-form-manager.php:759
+#: ../classes/class-ccf-form-manager.php:801 ../classes/class-ccf-form-manager.php:808
+#: ../classes/class-ccf-form-manager.php:859 ../classes/class-ccf-form-manager.php:902
+#: ../classes/class-ccf-form-manager.php:945
+msgid "No"
+msgstr "Nej"
+
+#: ../classes/class-ccf-form-manager.php:178 ../classes/class-ccf-form-manager.php:195
+#: ../classes/class-ccf-form-manager.php:327 ../classes/class-ccf-form-manager.php:377
+#: ../classes/class-ccf-form-manager.php:453 ../classes/class-ccf-form-manager.php:543
+#: ../classes/class-ccf-form-manager.php:608 ../classes/class-ccf-form-manager.php:650
+#: ../classes/class-ccf-form-manager.php:711 ../classes/class-ccf-form-manager.php:758
+#: ../classes/class-ccf-form-manager.php:800 ../classes/class-ccf-form-manager.php:807
+#: ../classes/class-ccf-form-manager.php:858 ../classes/class-ccf-form-manager.php:901
+#: ../classes/class-ccf-form-manager.php:944
+msgid "Yes"
+msgstr "Ja"
+
+#: ../classes/class-ccf-form-manager.php:182
+msgid "Pause Message:"
+msgstr "Pause Besked:"
+
+#: ../classes/class-ccf-form-manager.php:189
+msgid "Form Notifications"
+msgstr "Formular Advisering"
+
+#: ../classes/class-ccf-form-manager.php:192
+msgid "Send Email Notifications:"
+msgstr "Send Email Advisering"
+
+#: ../classes/class-ccf-form-manager.php:201
+msgid "\"To\" Email Addresses (comma separated):"
+msgstr "\"Til\" Email Adresser (kommasepareret):"
+
+#: ../classes/class-ccf-form-manager.php:206
+msgid "\"From\" Email Address Type:"
+msgstr "\"Fra\" Email Adresse Type:"
+
+#: ../classes/class-ccf-form-manager.php:208
+msgid "WordPress Default"
+msgstr "WordPress Standard"
+
+#: ../classes/class-ccf-form-manager.php:209
+msgid "Custom Email"
+msgstr "Brugerdefineret Email"
+
+#: ../classes/class-ccf-form-manager.php:210 ../classes/class-ccf-form-manager.php:231
+msgid "Form Field"
+msgstr "Formular Felt"
+
+#: ../classes/class-ccf-form-manager.php:213
+msgid ""
+"You can set the notification emails from address to be the WP default, a custom email "
+"address, or pull the address from a field in the form."
+msgstr ""
+"Du kan sætte advisering emails fra adresse til at være WP standard, en brugerdefineret "
+"email adresse, eller trække adressen fra et felt i formularen."
+
+#: ../classes/class-ccf-form-manager.php:217
+msgid "Custom \"From\" Email Address:"
+msgstr "Brugerdefineret \"Fra\" Email Adresse:"
+
+#: ../classes/class-ccf-form-manager.php:222
+msgid "Pull \"From\" Email Dynamically from Field:"
+msgstr "Træk \"Fra\" Email dynamisk fra felt:"
+
+#: ../classes/class-ccf-form-manager.php:228
+msgid "\"From\" Name Type:"
+msgstr "\"Fra\" Navn Type:"
+
+#: ../classes/class-ccf-form-manager.php:230
+msgid "Custom Name"
+msgstr "Brugerdefineret Navn"
+
+#: ../classes/class-ccf-form-manager.php:234
+msgid ""
+"You can set the notification emails from name to be a custom name or pull the name from "
+"a field in the form."
+msgstr ""
+"Du kan indstille advisering emails fra navn til at være et brugerdefineret navn eller "
+"trække navnet fra et felt i formularen."
+
+#: ../classes/class-ccf-form-manager.php:238
+msgid "Custom \"From\" Name:"
+msgstr "Brugerdefineret \"Fra\" Navn:"
+
+#: ../classes/class-ccf-form-manager.php:243
+msgid "Pull \"From\" Name Dynamically from Field:"
+msgstr "Træk \"Fra\" Navn dynamisk fra felt:"
+
+#: ../classes/class-ccf-form-manager.php:257
+msgid "items"
+msgstr "emner"
+
+#: ../classes/class-ccf-form-manager.php:272 ../classes/class-ccf-form-manager.php:285
+msgid "ID"
+msgstr "ID"
+
+#: ../classes/class-ccf-form-manager.php:273 ../classes/class-ccf-form-manager.php:286
+msgid "Title"
+msgstr "Titel"
+
+#: ../classes/class-ccf-form-manager.php:300
+msgid "<span>&larr;</span> Click on a field to edit it."
+msgstr "<span>&larr;</span> Klik på et felt for at redigere det."
+
+#: ../classes/class-ccf-form-manager.php:309 ../classes/class-ccf-form-manager.php:353
+#: ../classes/class-ccf-form-manager.php:435 ../classes/class-ccf-form-manager.php:525
+msgid "Internal Unique Slug"
+msgstr "Intern Unik Slug"
+
+#: ../classes/class-ccf-form-manager.php:313 ../classes/class-ccf-form-manager.php:357
+#: ../classes/class-ccf-form-manager.php:400 ../classes/class-ccf-form-manager.php:439
+#: ../classes/class-ccf-form-manager.php:529 ../classes/class-ccf-form-manager.php:598
+#: ../classes/class-ccf-form-manager.php:634 ../classes/class-ccf-form-manager.php:690
+#: ../classes/class-ccf-form-manager.php:741 ../classes/class-ccf-form-manager.php:784
+#: ../classes/class-ccf-form-manager.php:848 ../classes/class-ccf-form-manager.php:891
+#: ../classes/class-ccf-form-manager.php:934
+msgid "Label:"
+msgstr "Etiket:"
+
+#: ../classes/class-ccf-form-manager.php:317 ../classes/class-ccf-form-manager.php:361
+#: ../classes/class-ccf-form-manager.php:404 ../classes/class-ccf-form-manager.php:443
+#: ../classes/class-ccf-form-manager.php:533 ../classes/class-ccf-form-manager.php:602
+#: ../classes/class-ccf-form-manager.php:638 ../classes/class-ccf-form-manager.php:694
+#: ../classes/class-ccf-form-manager.php:745 ../classes/class-ccf-form-manager.php:788
+#: ../classes/class-ccf-form-manager.php:852 ../classes/class-ccf-form-manager.php:895
+#: ../classes/class-ccf-form-manager.php:938
+msgid "Description:"
+msgstr "Beskrivelse:"
+
+#: ../classes/class-ccf-form-manager.php:321 ../classes/class-ccf-form-manager.php:447
+#: ../classes/class-ccf-form-manager.php:537 ../classes/class-ccf-form-manager.php:573
+#: ../classes/class-ccf-form-manager.php:643 ../classes/class-ccf-form-manager.php:698
+#: ../classes/class-ccf-form-manager.php:793
+msgid "Initial Value:"
+msgstr "Startværdi:"
+
+#: ../classes/class-ccf-form-manager.php:325 ../classes/class-ccf-form-manager.php:375
+#: ../classes/class-ccf-form-manager.php:451 ../classes/class-ccf-form-manager.php:541
+#: ../classes/class-ccf-form-manager.php:606 ../classes/class-ccf-form-manager.php:648
+#: ../classes/class-ccf-form-manager.php:709 ../classes/class-ccf-form-manager.php:756
+#: ../classes/class-ccf-form-manager.php:798 ../classes/class-ccf-form-manager.php:856
+#: ../classes/class-ccf-form-manager.php:899 ../classes/class-ccf-form-manager.php:942
+msgid "Required:"
+msgstr "Påkrævet:"
+
+#: ../classes/class-ccf-form-manager.php:334 ../classes/class-ccf-form-manager.php:384
+#: ../classes/class-ccf-form-manager.php:420 ../classes/class-ccf-form-manager.php:460
+#: ../classes/class-ccf-form-manager.php:485 ../classes/class-ccf-form-manager.php:510
+#: ../classes/class-ccf-form-manager.php:550 ../classes/class-ccf-form-manager.php:579
+#: ../classes/class-ccf-form-manager.php:615 ../classes/class-ccf-form-manager.php:665
+#: ../classes/class-ccf-form-manager.php:718 ../classes/class-ccf-form-manager.php:765
+#: ../classes/class-ccf-form-manager.php:814 ../classes/class-ccf-form-manager.php:872
+#: ../classes/class-ccf-form-manager.php:915 ../classes/class-ccf-form-manager.php:958
+msgid "Advanced"
+msgstr "Avanceret"
+
+#: ../classes/class-ccf-form-manager.php:337 ../classes/class-ccf-form-manager.php:387
+#: ../classes/class-ccf-form-manager.php:423 ../classes/class-ccf-form-manager.php:463
+#: ../classes/class-ccf-form-manager.php:488 ../classes/class-ccf-form-manager.php:513
+#: ../classes/class-ccf-form-manager.php:553 ../classes/class-ccf-form-manager.php:582
+#: ../classes/class-ccf-form-manager.php:618 ../classes/class-ccf-form-manager.php:668
+#: ../classes/class-ccf-form-manager.php:721 ../classes/class-ccf-form-manager.php:768
+#: ../classes/class-ccf-form-manager.php:817 ../classes/class-ccf-form-manager.php:875
+#: ../classes/class-ccf-form-manager.php:918 ../classes/class-ccf-form-manager.php:961
+msgid "Class Name:"
+msgstr "Klasse Navn:"
+
+#: ../classes/class-ccf-form-manager.php:341 ../classes/class-ccf-form-manager.php:467
+#: ../classes/class-ccf-form-manager.php:557 ../classes/class-ccf-form-manager.php:673
+#: ../classes/class-ccf-form-manager.php:725 ../classes/class-ccf-form-manager.php:822
+msgid "Placeholder Text:"
+msgstr "Eksempeltekst:"
+
+#: ../classes/class-ccf-form-manager.php:365
+msgid "Allowed File Extensions (comma separate):"
+msgstr "Tilladte Filtyper (kommasepareret):"
+
+#: ../classes/class-ccf-form-manager.php:367
+msgid ""
+"If left blank, will default to all extensions registered by WordPress. If you use a "
+"file extension or mime type not <a href=\"http://codex.wordpress.org/Function_Reference/"
+"get_allowed_mime_types\">whitelisted by WordPress</a>, you will need to filter and "
+"manually whitelist the new extension."
+msgstr ""
+"Hvis tom, vil standard være alle udvidelser der er registreret af WordPress. Hvis du "
+"bruger en filtype eller mimetype som ikke er <a href=\"http://codex.wordpress.org/"
+"Function_Reference/get_allowed_mime_types\">whitelisted af WordPress</a>, skal du "
+"filtrere og manuelt whileliste den nye udvidelse."
+
+#: ../classes/class-ccf-form-manager.php:370
+msgid "Max File Size (in MB):"
+msgstr "Maks filstørrelse (i MB):"
+
+#: ../classes/class-ccf-form-manager.php:372
+#, php-format
+msgid "If left blank, will default to %d MB. Maximum allowed by server is %d MB."
+msgstr "Hvis blank, vil standard være %d MB. Maksimum tilladt af serveren er %d MB."
+
+#: ../classes/class-ccf-form-manager.php:398
+msgid ""
+"reCAPTCHA is a simple captcha service provided by Google. <a target=\"_blank\" href="
+"\"https://www.google.com/recaptcha/intro/index.html\">Learn more</a>"
+msgstr ""
+"reCAPTCHA er en simpel captcha service leveret af Google. <a target=\"_blank\" href="
+"\"https://www.google.com/recaptcha/intro/index.html\">Læs mere</a>"
+
+#: ../classes/class-ccf-form-manager.php:408
+msgid "Site Key:"
+msgstr "Side Nøgle:"
+
+#: ../classes/class-ccf-form-manager.php:410 ../classes/class-ccf-form-manager.php:415
+msgid "Don't have one?"
+msgstr "Har du ikke en?"
+
+#: ../classes/class-ccf-form-manager.php:413
+msgid "Secret Key:"
+msgstr "Hemmelig Nøgle:"
+
+#: ../classes/class-ccf-form-manager.php:476 ../classes/class-ccf-form-manager.php:497
+#: ../classes/class-ccf-form-manager.php:522 ../classes/class-ccf-form-manager.php:566
+#: ../classes/class-ccf-form-manager.php:591 ../classes/class-ccf-form-manager.php:627
+#: ../classes/class-ccf-form-manager.php:683 ../classes/class-ccf-form-manager.php:734
+#: ../classes/class-ccf-form-manager.php:777 ../classes/class-ccf-form-manager.php:841
+#: ../classes/class-ccf-form-manager.php:884 ../classes/class-ccf-form-manager.php:927
+msgid "Basic"
+msgstr "Grundlæggende"
+
+#: ../classes/class-ccf-form-manager.php:479
+msgid "HTML Content:"
+msgstr "HTML Indhold:"
+
+#: ../classes/class-ccf-form-manager.php:500
+msgid "Heading:"
+msgstr "Overskrift:"
+
+#: ../classes/class-ccf-form-manager.php:504
+msgid "Sub Heading:"
+msgstr "Underoverskrift:"
+
+#: ../classes/class-ccf-form-manager.php:569 ../classes/class-ccf-form-manager.php:594
+#: ../classes/class-ccf-form-manager.php:630 ../classes/class-ccf-form-manager.php:686
+#: ../classes/class-ccf-form-manager.php:737 ../classes/class-ccf-form-manager.php:780
+#: ../classes/class-ccf-form-manager.php:844 ../classes/class-ccf-form-manager.php:887
+#: ../classes/class-ccf-form-manager.php:930
+msgid "Internal Unique Slug (a-z, 0-9, -, _):"
+msgstr "Intern Unik Slug (a-z, 0-9, -, _):"
+
+#: ../classes/class-ccf-form-manager.php:656
+msgid "Enable Date Select"
+msgstr "Aktiver Dato Vælg"
+
+#: ../classes/class-ccf-form-manager.php:660
+msgid "Enable Time Select"
+msgstr "Aktiver Tid Vælg"
+
+#: ../classes/class-ccf-form-manager.php:702
+msgid "Format:"
+msgstr "Format:"
+
+#: ../classes/class-ccf-form-manager.php:705 ../classes/class-ccf-form-manager.php:752
+msgid "International"
+msgstr "International"
+
+#: ../classes/class-ccf-form-manager.php:749
+msgid "Type:"
+msgstr "Type:"
+
+#: ../classes/class-ccf-form-manager.php:751
+msgid "United States"
+msgstr "Forenede Stater"
+
+#: ../classes/class-ccf-form-manager.php:805
+msgid "Require Confirmation:"
+msgstr "Kræv Bekræftelse:"
+
+#: ../classes/class-ccf-form-manager.php:833
+msgid "Label"
+msgstr "Etiket"
+
+#: ../classes/class-ccf-form-manager.php:834
+msgid "Value"
+msgstr "Værdi"
+
+#: ../classes/class-ccf-form-manager.php:863 ../classes/class-ccf-form-manager.php:906
+#: ../classes/class-ccf-form-manager.php:949
+msgid "Manage field choices:"
+msgstr "Administerer felt valg:"
+
+#: ../classes/class-ccf-form-manager.php:867 ../classes/class-ccf-form-manager.php:910
+#: ../classes/class-ccf-form-manager.php:953
+msgid ""
+"Note: If an option does not have a \"value\", it will not be considered a valid "
+"selection if the field is required. The \"value\" is what's read, stored, and displayed "
+"in the submission."
+msgstr ""
+"Bemærk: Hvis en option ikke har en \"værdi\", vil det ikke blive betragtet som et "
+"gyldigt valg hvis feltet er påkrævet. \"Værdien\" er hvad der læses, gemmes og vises i "
+"indsendelsen."
+
+#: ../classes/class-ccf-form-manager.php:970
+msgid "You currently have no forms. Add some!"
+msgstr "Du har i øjeblikket ingen formularer. Tilføj nogle!"
+
+#: ../classes/class-ccf-form-manager.php:993
+msgid "Allowed file extensions are {{ extensions }}. "
+msgstr "Tilladte filtyper er  {{ extensions }}."
+
+#: ../classes/class-ccf-form-manager.php:995
+msgid "Max file size is {{ file_size }} MB. "
+msgstr "Maks filstørrelse er {{ file_size }} MB."
+
+#: ../classes/class-ccf-form-manager.php:1020 ../classes/class-ccf-form-manager.php:1036
+#: ../classes/class-ccf-form-manager.php:1054
+msgid "An example choice"
+msgstr "Et eksempel valg"
+
+#: ../classes/class-ccf-form-manager.php:1072
+msgid "Arbitrary block of HTML."
+msgstr "Vilkårlig blok af HTML."
+
+#: ../classes/class-ccf-form-manager.php:1078
+msgid "Section Heading"
+msgstr "Afsnitsoverskrift"
+
+#: ../classes/class-ccf-form-manager.php:1080
+msgid "This is the sub-heading text."
+msgstr "Dette er underoverskrifts teksten."
+
+#: ../classes/class-ccf-form-manager.php:1249
+msgid "Edit"
+msgstr "Rediger"
+
+#: ../classes/class-ccf-form-manager.php:1251
+msgid "Trash"
+msgstr "Papirkurv"
+
+#: ../classes/class-ccf-form-manager.php:1294
+msgid "There is a problem with this form. Is it trashed or deleted?"
+msgstr "Der er et problem med formularen. Er den smidt i papirkurven eller slettet?"
+
+#: ../classes/class-ccf-form-manager.php:1436
+msgid "IP Address"
+msgstr "IP Adresse"
+
+#: ../classes/class-ccf-form-manager.php:1448
+msgid "There are no submissions."
+msgstr "Der er ingen indlæg."
+
+#: ../classes/class-ccf-form-manager.php:1477
+msgid "Add Form"
+msgstr "Tilføj Formular"
+
+#: ../classes/class-ccf-form-manager.php:1501
+msgid "Single Line Text"
+msgstr "Enkelt Linje Tekst"
+
+#: ../classes/class-ccf-form-manager.php:1502
+msgid "Dropdown"
+msgstr "Dropdown"
+
+#: ../classes/class-ccf-form-manager.php:1503
+msgid "Checkboxes"
+msgstr "Afkrydsningsfelter"
+
+#: ../classes/class-ccf-form-manager.php:1504
+msgid "Radio Buttons"
+msgstr "Radio Buttons"
+
+#: ../classes/class-ccf-form-manager.php:1505
+msgid "Paragraph Text"
+msgstr "Afsnits Tekst"
+
+#: ../classes/class-ccf-form-manager.php:1506
+msgid "Hidden"
+msgstr "Skjult"
+
+#: ../classes/class-ccf-form-manager.php:1507
+msgid "File Upload"
+msgstr "Fil Upload"
+
+#: ../classes/class-ccf-form-manager.php:1511
+msgid "HTML"
+msgstr "HTML"
+
+#: ../classes/class-ccf-form-manager.php:1512
+msgid "Section Header"
+msgstr "Sektions Overskrift"
+
+#: ../classes/class-ccf-form-manager.php:1517
+msgid "Name"
+msgstr "Navn"
+
+#: ../classes/class-ccf-form-manager.php:1518
+msgid "Date/Time"
+msgstr "Dato/Tid"
+
+#: ../classes/class-ccf-form-manager.php:1519
+msgid "Website"
+msgstr "Webside"
+
+#: ../classes/class-ccf-form-manager.php:1520
+msgid "Address"
+msgstr "Adresse"
+
+#: ../classes/class-ccf-form-manager.php:1521
+msgid "Phone"
+msgstr "Telefon"
+
+#: ../classes/class-ccf-form-manager.php:1522
+msgid "reCAPTCHA"
+msgstr "reCAPTCHA"
+
+#: ../classes/class-ccf-form-manager.php:1541
+msgid "You have no email fields"
+msgstr "Du har ingen email felter"
+
+#: ../classes/class-ccf-form-manager.php:1542
+msgid "You have no name fields"
+msgstr "Du har ingen navne felter"
+
+#: ../classes/class-ccf-form-manager.php:1543
+msgid "Invalid date"
+msgstr "Ugyldig dato"
+
+#: ../classes/class-ccf-form-manager.php:1545
+msgid "Field Label"
+msgstr "Felt Etiket"
+
+#: ../classes/class-ccf-form-manager.php:1546
+msgid "Form Submission"
+msgstr "Formular Indlæg"
+
+#: ../classes/class-ccf-form-manager.php:1547 ../classes/class-ccf-form-renderer.php:120
+msgid "This form is paused right now. Check back later!"
+msgstr "Denne formular er sat på pause lige nu. Check tilbage senere!"
+
+#: ../classes/class-ccf-form-renderer.php:55
+msgid "This is not a valid email address."
+msgstr "Detter er ikke en gyldig email adresse."
+
+#: ../classes/class-ccf-form-renderer.php:58
+msgid "This is not a valid phone number."
+msgstr "Dette er ikke et gyldigt telefonnummer."
+
+#: ../classes/class-ccf-form-renderer.php:59
+msgid "This phone number is not 10 digits"
+msgstr "Dette telefonnummer er ikke 10 cifre"
+
+#: ../classes/class-ccf-form-renderer.php:63
+msgid "This is not an allowed file extension"
+msgstr "Detter er ikke en tilladt filtype"
+
+#: ../classes/class-ccf-form-renderer.php:64
+msgid "This file is bigger than"
+msgstr "Denne fil er større end"
+
+#: ../classes/class-ccf-form-renderer.php:65
+msgid "An unknown error occured."
+msgstr "Der skete en ukendt fejl."
+
+#: ../classes/class-ccf-submission-cpt.php:41
+msgid "Form Submissions"
+msgstr "Formular Indsendelser"
+
+#: ../classes/class-ccf-upgrader.php:37
+msgid ""
+"Did you just upgrade to a post 6.0 version of Custom Contact Forms? If so, you might "
+"need to upgrade your database to use your old forms. Please backup your database before "
+"running the upgrade."
+msgstr ""
+"Har du lige opgraderet til en version nyere end 6.0 af Custom Contact Forms? Hvis det "
+"er tilfældet, skal du muligvis opgradere din database for at bruge dine gamle "
+"formularer. Venligst backup din database før du kører opgraderingen."
+
+#: ../classes/class-ccf-upgrader.php:38
+msgid "Upgrade"
+msgstr "Opgrader"
+
+#: ../classes/class-ccf-upgrader.php:39
+msgid "Dismiss"
+msgstr "Afvis"
+
+#: ../classes/class-ccf-upgrader.php:61
+msgid "Database update complete."
+msgstr "Database opgradering gennemført."
+
+#: ../classes/class-ccf-widget.php:17
+msgid "Add a custom contact form to a sidebar."
+msgstr "Tilføj en tilpasset kontaktformular til et sidepanel."
+
+#: ../classes/class-ccf-widget.php:18
+msgid "Custom Contact Form"
+msgstr "Tilpasset Kontaktformular"
+
+#: ../classes/class-ccf-widget.php:64
+msgid "Title:"
+msgstr "Titel:"
+
+#: ../classes/class-ccf-widget.php:71
+msgid "Choose a form:"
+msgstr "Vælg en formular:"
+
+#: ../classes/class-ccf-widget.php:80
+msgid "Untitled"
+msgstr "Unavngivet"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-comments.php:42
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-comments.php:48
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-comments.php:108
+msgid "Invalid comment ID."
+msgstr "Ugyldig kommentar ID."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-comments.php:52
+msgid "Sorry, you are not allowed to delete this comment."
+msgstr "Beklager, du har ikke tilladelse til at slette denne kommentar."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-comments.php:58
+msgid "The comment cannot be deleted."
+msgstr "Denne kommentar kan ikke slettes."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-comments.php:62
+msgid "Permanently deleted comment"
+msgstr "Kommentar slettet permanent "
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-comments.php:65
+msgid "Deleted comment"
+msgstr "Kommentar slettet"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-customposttype.php:33
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:29
+msgid "The route base must be overridden"
+msgstr "Route base skal overskrives"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-customposttype.php:37
+msgid "The post type must be overridden"
+msgstr "Indlæg type skal overskrives"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-customposttype.php:115
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-customposttype.php:136
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-customposttype.php:161
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-customposttype.php:182
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:35
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:78
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:153
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:174
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:205
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:768
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:788
+msgid "Invalid post type"
+msgstr "Ugyldig indlæg type"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:210
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:803
+msgid "Sorry, you are not allowed to post on this site."
+msgstr "Beklager, du har ikke tilladelse til at tilføje indlæg på denne side."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:215
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:795
+msgid "Sorry, you are not allowed to edit this post."
+msgstr "Beklager, du har ikke tilladelse til at redigere dette indlæg."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:288
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:371
+msgid "No data supplied"
+msgstr "Ingen data leveret"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:292
+msgid "No Content-Type supplied"
+msgstr "Ingen Content-Type leveret"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:296
+msgid "No Content-Disposition supplied"
+msgstr "Ingen Content-Disposition leveret"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:315
+msgid "Invalid Content-Disposition supplied"
+msgstr "Ugyldig Content-Disposition leveret"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:323
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:378
+msgid "Content hash did not match expected"
+msgstr "Indhold hash matchede ikke det forventede"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:336
+msgid "Could not open file handle"
+msgstr "Kunne ikke åbne filhåndtering"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:414
+msgid "Invalid featured image."
+msgstr "Ugyldig fremhævet billede."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta-posts.php:34
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:655
+msgid "Sorry, you cannot edit this post"
+msgstr "Beklager, du kan ikke redigere dette indlæg"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:33
+msgid "The object type must be overridden"
+msgstr "Objekttypen skal overskrives"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:134
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:241
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:388
+msgid "Invalid meta ID."
+msgstr "Ugyldig meta ID."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:138
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:245
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:392
+msgid "Meta does not belong to this object"
+msgstr "Meta tilhører ikke dette objekt."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:159
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:272
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:276
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:349
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:402
+#, php-format
+msgid "%s is marked as a protected field."
+msgstr "%s er makreret som et beskyttet felt."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:169
+#, php-format
+msgid "%s contains serialized data."
+msgstr "%s indeholder serialized data."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:257
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:338
+msgid "Invalid meta key."
+msgstr "Ugyldig metanøgle."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:263
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:398
+msgid "Invalid existing meta data for action."
+msgstr "Ugyldig eksisterende metadata for handling."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:268
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:345
+msgid "Invalid provided meta data for action."
+msgstr "Ugyldig forsyntet metadata for handling."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:289
+msgid "Could not update meta."
+msgstr "Kunne ikke opdatere meta."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:330
+msgid "Missing meta key."
+msgstr "Manglende meta nøgle."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:334
+msgid "Missing meta value."
+msgstr "Manglende meta værdi."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:358
+msgid "Could not add meta."
+msgstr "Kunne ikke tilføje meta."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:406
+msgid "Could not delete meta."
+msgstr "Kunne ikke slette meta."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:409
+msgid "Deleted meta"
+msgstr "Meta slettet"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:78
+msgid "Sorry, you cannot view the revisions for this post."
+msgstr "Beklager, du kan ikke få vist revisionerne for dette indlæg."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:347
+msgid "There is a revision of this post that is more recent."
+msgstr "Der er en revision af dette indlæg der er nyere."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:378
+msgid "Sorry, you are not allowed to delete this post."
+msgstr "Beklager, du har ikke tilladelse til at slette dette indlæg."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:384
+msgid "The post cannot be deleted."
+msgstr "Dette indlæg kan ikke slettes."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:388
+msgid "Permanently deleted post"
+msgstr "Indlæg slettet permanent"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:431
+msgid "Cannot view post type"
+msgstr "Kan ikke vist indlæg type"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:665
+msgid "Sorry, you cannot view this revision"
+msgstr "Beklager, du kan ikke se denne revision"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:701
+msgid "There is no excerpt because this is a protected post."
+msgstr "Der er ingen uddrag fordi dette er et beskyttet indlæg."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:799
+msgid "The post type may not be changed."
+msgstr "Indlæg typen kan ikke ændres."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:817
+msgid "Sorry, you are not allowed to create private posts in this post type"
+msgstr ""
+"Beklager, du har ikke tilladelse til at oprette private indlæg i denne indlægs type."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:823
+msgid "Sorry, you are not allowed to publish posts in this post type"
+msgstr "Beklager, du har ikke tilladelse til at udgive indlæg i denne indlægs type"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:864
+msgid "Invalid author object."
+msgstr "Ugyldigt forfatter objekt."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:874
+msgid "You are not allowed to edit posts as this user."
+msgstr "Du har ikke tilladelse til at redigere indlæg som denne bruger."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:880
+msgid "Invalid author ID."
+msgstr "Ugyldigt forfatter ID."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:892
+msgid "Sorry, you are not allowed to create password protected posts in this post type"
+msgstr ""
+"Beklager, du har ikke tillladelse til at oprette password beskyttede indlæg i denne "
+"indlægs type"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:909
+msgid "Invalid post parent ID."
+msgstr "Ugyldigt indlæg forælder ID."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:935
+msgid "Invalid post format."
+msgstr "Ugyldigt indlæg format."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-server.php:196
+msgid "The JSON API is disabled on this site."
+msgstr "JSON API er deaktiveret på denne side."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-server.php:201
+msgid "JSONP support is disabled on this site."
+msgstr "JSONP understøttelse er deaktiveret på denne side."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-server.php:207
+msgid "The JSONP callback function is invalid."
+msgstr "JSONP callback funktionen er ugyldig."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-server.php:371
+msgid "Unsupported request method"
+msgstr "Ikke understøttet anmodning metode"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-server.php:390
+msgid "The handler for the route is invalid"
+msgstr "Handler for ruten er ugyldig"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-server.php:450
+msgid "No route was found matching the URL and request method"
+msgstr "Ingen rute blev fundet som matcher URL'en og anmodnings metoden"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-server.php:502
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:252
+#, php-format
+msgid "Missing parameter %s"
+msgstr "Manglende paramter %s"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-taxonomies.php:106
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-taxonomies.php:212
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-taxonomies.php:288
+msgid "Invalid taxonomy ID."
+msgstr "Ugyldig taksonomi ID."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-taxonomies.php:138
+msgid "Cannot view taxonomy"
+msgstr "Kan ikke vise taksonomi"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-taxonomies.php:294
+msgid "Invalid term ID."
+msgstr "Ugyldig begreb ID."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:56
+msgid "Sorry, you are not allowed to list users."
+msgstr "Beklager, du har ikke tilladelse til at vise brugere."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:97
+msgid "You are not currently logged in."
+msgstr "Du er ikke logget ind."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:130
+msgid "Sorry, you are not allowed to view this user."
+msgstr "Beklager, du har ikke tilladelse til at se denne bruger."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:136
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:234
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:433
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:444
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:452
+msgid "Invalid user ID."
+msgstr "Ugyldig bruger ID."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:238
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:355
+msgid "Sorry, you are not allowed to edit this user."
+msgstr "Beklager, du har ikke tilladelse til at redigere denne bruger."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:245
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:383
+msgid "Sorry, you are not allowed to create users."
+msgstr "Beklager, du har ikke tilladelse til at oprette brugere."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:294
+msgid "Invalid user URL."
+msgstr "Ugyldig bruger URL."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:350
+msgid "User ID must be supplied."
+msgstr "Bruger ID skal angives."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:360
+msgid "User ID is invalid."
+msgstr "Bruger ID er ugyldigt."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:387
+msgid "Cannot create existing user."
+msgstr "Kan ikke oprette eksisterende bruger."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:438
+msgid "Sorry, you are not allowed to delete this user."
+msgstr "Beklager, du har ikke tilladelse til at slette denne bruger."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:461
+msgid "The user cannot be deleted."
+msgstr "Brugeren kan ikke slettes."
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:463
+msgid "Deleted user"
+msgstr "Bruger slettet"
+
+#: ../vendor/wp-api/wp-api/plugin.php:375
+msgid "Cookie nonce is invalid"
+msgstr "Cookie nonce er ugyldig"
+
+#: ../vendor/wp-api/wp-api/plugin.php:686
+#, php-format
+msgid "%1$s (since %2$s; use %3$s instead)"
+msgstr "%1$s (siden %2$s; use %3$s i stedet for)"
+
+#: ../vendor/wp-api/wp-api/plugin.php:689 ../vendor/wp-api/wp-api/plugin.php:707
+#, php-format
+msgid "%1$s (since %2$s; no alternative available)"
+msgstr "%1$s (siden %2$s; intet alternativ til rådighed)"
+
+#: ../vendor/wp-api/wp-api/plugin.php:704
+#, php-format
+msgid "%1$s (since %2$s; %3$s)"
+msgstr "%1$s (siden %2$s; %3$s)"
+
+#: ../vendor/wp-api/wp-api/tests/helper.php:61
+msgid "No report data available"
+msgstr "Ingen report data tilgængelig"
+
+#: ../vendor/wp-api/wp-api/tests/helper.php:65
+msgid "The CodeCoverage classes are missing"
+msgstr "CodeCoverage klassen mangler"
