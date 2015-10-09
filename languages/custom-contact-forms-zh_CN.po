@@ -1,0 +1,1444 @@
+# Copyright (C) 2014 Taylor Lovett
+# This file is distributed under the same license as the Editorial Access Manager package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Custom Contact Forms\n"
+"Report-Msgid-Bugs-To: https://github.com/tlovett1/custom-contact-forms/issues\n"
+"POT-Creation-Date: 2015-09-30 00:03-0500\n"
+"PO-Revision-Date: 2015-10-09 13:13+0800\n"
+"Last-Translator: Taylor Lovett <tlovett88@gmail.com>\n"
+"Language: zh\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.4\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,"
+"_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;esc_html_e;esc_html__;esc_attr__;"
+"esc_attr_e\n"
+"X-Textdomain-Support: yes\n"
+"Language-Team: \n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../classes/class-ccf-api.php:160
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-comments.php:82
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-customposttype.php:130
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-customposttype.php:151
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-customposttype.php:157
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-customposttype.php:176
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:72
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:143
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:149
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:168
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta-posts.php:30
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-pages.php:69
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-pages.php:88
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-pages.php:106
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:74
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:271
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:329
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:374
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:749
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:777
+msgid "Invalid post ID."
+msgstr "无效的文章 ID。"
+
+#: ../classes/class-ccf-api.php:164
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-comments.php:86
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:285
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:527
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:539
+msgid "Sorry, you cannot read this post."
+msgstr "对不起，您无法阅读这篇文章。"
+
+#: ../classes/class-ccf-api.php:220
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:122
+#, php-format
+msgid "The post type \"%s\" is not valid"
+msgstr "文章类型 “%s”是无效的"
+
+#: ../classes/class-ccf-api.php:452 ../classes/class-ccf-api.php:779
+#: ../classes/class-ccf-api.php:804 ../classes/class-ccf-api.php:833
+#: ../classes/class-ccf-api.php:962
+msgid "Invalid form ID."
+msgstr "无效的表单ID"
+
+#: ../classes/class-ccf-api.php:457 ../classes/class-ccf-api.php:764
+#: ../classes/class-ccf-api.php:784
+msgid "Sorry, you cannot view forms."
+msgstr "对不起，您不能查看表单。"
+
+#: ../classes/class-ccf-api.php:810 ../classes/class-ccf-api.php:839
+msgid "Invalid form."
+msgstr "无效的表单"
+
+#: ../classes/class-ccf-api.php:814
+msgid "Sorry, you cannot view this form."
+msgstr "对不起，您不能查看此表单。"
+
+#: ../classes/class-ccf-api.php:973
+msgid "The form cannot be deleted."
+msgstr "该表格​​不能删除。"
+
+#: ../classes/class-ccf-api.php:977
+msgid "Permanently deleted form"
+msgstr "永久删除表单"
+
+#: ../classes/class-ccf-api.php:980
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:391
+msgid "Deleted post"
+msgstr "已删除文章。"
+
+#: ../classes/class-ccf-choice-cpt.php:29
+msgid "Form Field Choices"
+msgstr "字段选项"
+
+#: ../classes/class-ccf-custom-contact-forms.php:71
+#, php-format
+msgid ""
+"Custom Contact Forms will not work unless pretty permalinks (not default) are enabled. "
+"Please update your <a href=\"%s\">permalinks settings</a>."
+msgstr "自定义表单无法工作，需要启用固定链接，请更新您的<a href=\"%s\">固定链接</a>设置。"
+
+#: ../classes/class-ccf-custom-contact-forms.php:89
+#, php-format
+msgid "<a href=\"%s\">Forms and Submissions</a>"
+msgstr "<a href=“%s”>表单和提交数据</a>"
+
+#: ../classes/class-ccf-export.php:58 ../classes/class-ccf-form-cpt.php:576
+msgid "Forms and Submissions"
+msgstr "表单和提交信息"
+
+#: ../classes/class-ccf-export.php:90
+msgid "Import"
+msgstr "导入"
+
+#: ../classes/class-ccf-field-cpt.php:30
+msgid "Form Fields"
+msgstr "表单字段"
+
+#: ../classes/class-ccf-field-renderer.php:122
+#, php-format
+msgid "Allowed file extensions are %s. "
+msgstr "允许的文件扩展名是 %s。"
+
+#: ../classes/class-ccf-field-renderer.php:124
+#, php-format
+msgid "Max file size is %d MB. "
+msgstr "最大文件大小是 %d MB。"
+
+#: ../classes/class-ccf-field-renderer.php:556 ../classes/class-ccf-form-manager.php:1178
+#: ../classes/class-ccf-form-manager.php:1203
+msgid "Street Address"
+msgstr "详细地址"
+
+#: ../classes/class-ccf-field-renderer.php:560 ../classes/class-ccf-form-manager.php:1182
+#: ../classes/class-ccf-form-manager.php:1207
+msgid "Address Line 2"
+msgstr "地址第二行"
+
+#: ../classes/class-ccf-field-renderer.php:567 ../classes/class-ccf-form-manager.php:1186
+#: ../classes/class-ccf-form-manager.php:1211
+msgid "City"
+msgstr "城市"
+
+#: ../classes/class-ccf-field-renderer.php:580 ../classes/class-ccf-form-manager.php:1194
+msgid "State"
+msgstr "国家"
+
+#: ../classes/class-ccf-field-renderer.php:588 ../classes/class-ccf-form-manager.php:1198
+msgid "ZIP Code"
+msgstr "邮政编码"
+
+#: ../classes/class-ccf-field-renderer.php:598 ../classes/class-ccf-form-manager.php:1215
+msgid "State / Region / Province"
+msgstr "国家 / 地区 / 省"
+
+#: ../classes/class-ccf-field-renderer.php:606 ../classes/class-ccf-form-manager.php:1219
+msgid "ZIP / Postal Code"
+msgstr "邮编"
+
+#: ../classes/class-ccf-field-renderer.php:618 ../classes/class-ccf-form-manager.php:1227
+msgid "Country"
+msgstr "国家"
+
+#: ../classes/class-ccf-field-renderer.php:793 ../classes/class-ccf-form-manager.php:1238
+msgid "email@example.com"
+msgstr "email@example.com"
+
+#: ../classes/class-ccf-field-renderer.php:803 ../classes/class-ccf-form-manager.php:1242
+#: ../classes/class-ccf-form-manager.php:1543
+msgid "Email"
+msgstr "邮件"
+
+#: ../classes/class-ccf-field-renderer.php:810 ../classes/class-ccf-form-manager.php:1246
+msgid "Confirm Email"
+msgstr "确认电子邮箱﻿"
+
+#: ../classes/class-ccf-field-renderer.php:876 ../classes/class-ccf-form-manager.php:1114
+msgid "First"
+msgstr "首页"
+
+#: ../classes/class-ccf-field-renderer.php:883 ../classes/class-ccf-form-manager.php:1118
+msgid "Last"
+msgstr "尾页"
+
+#: ../classes/class-ccf-field-renderer.php:955 ../classes/class-ccf-field-renderer.php:976
+#: ../classes/class-ccf-form-manager.php:1133 ../classes/class-ccf-form-manager.php:1154
+msgid "HH"
+msgstr "小时"
+
+#: ../classes/class-ccf-field-renderer.php:959 ../classes/class-ccf-field-renderer.php:980
+#: ../classes/class-ccf-form-manager.php:1137 ../classes/class-ccf-form-manager.php:1158
+msgid "MM"
+msgstr "分"
+
+#: ../classes/class-ccf-field-renderer.php:963 ../classes/class-ccf-field-renderer.php:984
+#: ../classes/class-ccf-form-manager.php:1141 ../classes/class-ccf-form-manager.php:1162
+msgid "AM"
+msgstr "上午"
+
+#: ../classes/class-ccf-field-renderer.php:964 ../classes/class-ccf-field-renderer.php:985
+#: ../classes/class-ccf-form-manager.php:1142 ../classes/class-ccf-form-manager.php:1163
+msgid "PM"
+msgstr "下午"
+
+#: ../classes/class-ccf-field-renderer.php:971 ../classes/class-ccf-form-cpt.php:510
+#: ../classes/class-ccf-form-manager.php:301 ../classes/class-ccf-form-manager.php:314
+#: ../classes/class-ccf-form-manager.php:1149 ../classes/class-ccf-form-manager.php:1332
+#: ../classes/class-ccf-form-manager.php:1346 ../classes/class-ccf-form-manager.php:1484
+msgid "Date"
+msgstr "日期"
+
+#: ../classes/class-ccf-form-cpt.php:277
+msgid "Form Submission Columns"
+msgstr "表单提交列表"
+
+#: ../classes/class-ccf-form-cpt.php:326 ../classes/class-ccf-form-cpt.php:344
+#: ../classes/class-ccf-form-cpt.php:508 ../classes/class-ccf-form-manager.php:304
+#: ../classes/class-ccf-form-manager.php:317
+msgid "Submissions"
+msgstr "查看提交信息"
+
+#: ../classes/class-ccf-form-cpt.php:340
+msgid "At a Glance"
+msgstr "简介"
+
+#: ../classes/class-ccf-form-cpt.php:341
+msgid "Preview"
+msgstr "预览"
+
+#: ../classes/class-ccf-form-cpt.php:361
+msgid "Save your new form to see a preview."
+msgstr "保存并预览"
+
+#: ../classes/class-ccf-form-cpt.php:398
+msgid "Created on:"
+msgstr "创建时间"
+
+#: ../classes/class-ccf-form-cpt.php:401
+msgid "Author:"
+msgstr "作者"
+
+#: ../classes/class-ccf-form-cpt.php:404
+msgid "Number of fields:"
+msgstr "字段数量"
+
+#: ../classes/class-ccf-form-cpt.php:407
+msgid "Number of submissions:"
+msgstr "信息数量"
+
+#: ../classes/class-ccf-form-cpt.php:413
+msgid "Move to Trash"
+msgstr "移到垃圾桶"
+
+#: ../classes/class-ccf-form-cpt.php:417
+msgid "Export"
+msgstr "导出"
+
+#: ../classes/class-ccf-form-cpt.php:446 ../classes/class-ccf-form-manager.php:1274
+msgid "(No title)"
+msgstr "(无标题)"
+
+#: ../classes/class-ccf-form-cpt.php:451
+msgid "Manage Form"
+msgstr "管理表单"
+
+#: ../classes/class-ccf-form-cpt.php:506
+msgid "Form Title"
+msgstr "表单标题"
+
+#: ../classes/class-ccf-form-cpt.php:507 ../classes/class-ccf-form-manager.php:302
+#: ../classes/class-ccf-form-manager.php:315
+msgid "Author"
+msgstr "作者"
+
+#: ../classes/class-ccf-form-cpt.php:509 ../classes/class-ccf-form-manager.php:303
+#: ../classes/class-ccf-form-manager.php:316
+msgid "Number of Fields"
+msgstr "字段数量"
+
+#: ../classes/class-ccf-form-cpt.php:543
+msgid "Unpublished"
+msgstr "未发布"
+
+#: ../classes/class-ccf-form-cpt.php:545
+msgid "Y/m/d g:i:s A"
+msgstr "年/月/日 g:i:s A"
+
+#: ../classes/class-ccf-form-cpt.php:552
+#, php-format
+msgid "%s ago"
+msgstr "%s 以前"
+
+#: ../classes/class-ccf-form-cpt.php:554
+msgid "Y/m/d"
+msgstr "年/月/日"
+
+#: ../classes/class-ccf-form-cpt.php:570 ../classes/class-ccf-form-cpt.php:582
+msgid "Forms"
+msgstr "通用表单"
+
+#: ../classes/class-ccf-form-cpt.php:571
+msgid "Form"
+msgstr "通用表单"
+
+#: ../classes/class-ccf-form-cpt.php:572 ../classes/class-ccf-form-cpt.php:575
+#: ../classes/class-ccf-form-manager.php:81
+msgid "New Form"
+msgstr "新建表单"
+
+#: ../classes/class-ccf-form-cpt.php:573
+msgid "Add New Form"
+msgstr "添加新表单"
+
+#: ../classes/class-ccf-form-cpt.php:574
+msgid "Edit Form"
+msgstr "编辑表单"
+
+#: ../classes/class-ccf-form-cpt.php:577
+msgid "View Form"
+msgstr "查看表单"
+
+#: ../classes/class-ccf-form-cpt.php:578
+msgid "Search Forms"
+msgstr "搜索表单"
+
+#: ../classes/class-ccf-form-cpt.php:579
+msgid "No forms found."
+msgstr "没有找到表单"
+
+#: ../classes/class-ccf-form-cpt.php:580
+msgid "No forms found in trash."
+msgstr "没有表单在垃圾桶里。"
+
+#: ../classes/class-ccf-form-handler.php:127 ../classes/class-ccf-form-handler.php:208
+#: ../classes/class-ccf-form-handler.php:245 ../classes/class-ccf-form-handler.php:323
+#: ../classes/class-ccf-form-handler.php:327 ../classes/class-ccf-form-handler.php:331
+#: ../classes/class-ccf-form-handler.php:335 ../classes/class-ccf-form-handler.php:340
+#: ../classes/class-ccf-form-handler.php:365 ../classes/class-ccf-form-handler.php:373
+#: ../classes/class-ccf-form-handler.php:381 ../classes/class-ccf-form-handler.php:435
+#: ../classes/class-ccf-form-renderer.php:49
+msgid "This field is required."
+msgstr "必填项目"
+
+#: ../classes/class-ccf-form-handler.php:138
+#, php-format
+msgid "This file is too big (%d MB max)"
+msgstr "此文件是太大 (超过%d MB)"
+
+#: ../classes/class-ccf-form-handler.php:142
+msgid "An upload error occurred."
+msgstr "上传时出错。"
+
+#: ../classes/class-ccf-form-handler.php:164
+msgid "File contains an invalid extension."
+msgstr "文件格式不对，请检查。"
+
+#: ../classes/class-ccf-form-handler.php:261 ../classes/class-ccf-form-renderer.php:56
+msgid "Your reCAPTCHA response was incorrect."
+msgstr "您的验证码不正确。"
+
+#: ../classes/class-ccf-form-handler.php:280
+msgid "This field is required"
+msgstr "此栏为必填项。"
+
+#: ../classes/class-ccf-form-handler.php:285
+msgid "This phone number is too short"
+msgstr "电话号码太短"
+
+#: ../classes/class-ccf-form-handler.php:288
+msgid "ccf_field_phoneFormat"
+msgstr "ccf_field_phoneFormat"
+
+#: ../classes/class-ccf-form-handler.php:291
+msgid "This phone number contains invalid characters."
+msgstr "电话号码格式错误"
+
+#: ../classes/class-ccf-form-handler.php:297
+msgid "This phone number is not 10 digits."
+msgstr "电话号码不足10位。"
+
+#: ../classes/class-ccf-form-handler.php:368 ../classes/class-ccf-form-handler.php:384
+msgid "This is not a valid email"
+msgstr "不是有效的邮箱"
+
+#: ../classes/class-ccf-form-handler.php:376 ../classes/class-ccf-form-renderer.php:54
+msgid "Emails do not match."
+msgstr "邮箱不匹配"
+
+#: ../classes/class-ccf-form-handler.php:409
+msgid "First name is required."
+msgstr "姓是必须填写的"
+
+#: ../classes/class-ccf-form-handler.php:413
+msgid "Last name is required."
+msgstr "名是必须填写的"
+
+#: ../classes/class-ccf-form-handler.php:438 ../classes/class-ccf-form-renderer.php:66
+msgid "This is not a valid URL. URL's must start with http(s)://"
+msgstr "无效的网站地址，url必须是以http://开头"
+
+#: ../classes/class-ccf-form-handler.php:466 ../classes/class-ccf-form-handler.php:498
+#: ../classes/class-ccf-form-renderer.php:50
+msgid "Date is required."
+msgstr "日期必须填写。"
+
+#: ../classes/class-ccf-form-handler.php:469 ../classes/class-ccf-form-handler.php:501
+#: ../classes/class-ccf-form-renderer.php:61
+msgid "This date is not valid."
+msgstr "日期无效。"
+
+#: ../classes/class-ccf-form-handler.php:474 ../classes/class-ccf-form-handler.php:506
+#: ../classes/class-ccf-form-renderer.php:51
+msgid "Hour is required."
+msgstr "小时无效"
+
+#: ../classes/class-ccf-form-handler.php:477 ../classes/class-ccf-form-handler.php:509
+#: ../classes/class-ccf-form-renderer.php:60
+msgid "This is not a valid hour."
+msgstr "这是无效的小时"
+
+#: ../classes/class-ccf-form-handler.php:482 ../classes/class-ccf-form-handler.php:514
+#: ../classes/class-ccf-form-renderer.php:52
+msgid "Minute is required."
+msgstr "分钟要必须填写。"
+
+#: ../classes/class-ccf-form-handler.php:485 ../classes/class-ccf-form-handler.php:517
+#: ../classes/class-ccf-form-renderer.php:62
+msgid "This is not a valid minute."
+msgstr "是一个无效的分钟。"
+
+#: ../classes/class-ccf-form-handler.php:490 ../classes/class-ccf-form-handler.php:522
+#: ../classes/class-ccf-form-renderer.php:53
+msgid "AM/PM is required."
+msgstr "AM/PM 必须填写。"
+
+#: ../classes/class-ccf-form-handler.php:708
+msgid "*Hidden Field*"
+msgstr "*Hidden Field*"
+
+#: ../classes/class-ccf-form-handler.php:782
+msgid "Form submitted from"
+msgstr "表单来源"
+
+#: ../classes/class-ccf-form-handler.php:791
+msgid "Form submitter IP"
+msgstr "表单提交IP地址"
+
+#: ../classes/class-ccf-form-handler.php:847
+#, php-format
+msgid "%s: Form Submission"
+msgstr "%s: 表单提交"
+
+#: ../classes/class-ccf-form-handler.php:849
+#, php-format
+msgid " to \"%s\""
+msgstr " 到 “%s”"
+
+#: ../classes/class-ccf-form-handler.php:875 ../classes/class-ccf-form-renderer.php:134
+msgid "Thank you for your submission."
+msgstr "感谢你提交的信息。"
+
+#: ../classes/class-ccf-form-manager.php:63
+msgid "Custom Contact Forms is experiencing issues."
+msgstr "通用表单系统遇到了问题。"
+
+#: ../classes/class-ccf-form-manager.php:67
+#, php-format
+msgid ""
+"There is an issue with synchronizing data. Please try deactivating all other plugins "
+"and activating the TwentyFifteen theme. If this fixes the problem, you have a plugin or "
+"theme conflict. If it does not, please post in the <a href=\"%s\">support forums</a> or "
+"<a href=\"%s\">Github</a>."
+msgstr ""
+"数据同步问题。请尝试停用所有其他插件并激活 TwentyFifteen 主题。如果这修正了问题，你有插"
+"件或者主题的冲突。如果它不存在，请在<a href=“%s”>支持论坛</a>或<a href=“%s”>Github</a>。"
+
+#: ../classes/class-ccf-form-manager.php:78
+msgid "Manage Forms"
+msgstr "管理表单"
+
+#: ../classes/class-ccf-form-manager.php:82
+msgid "Existing Forms"
+msgstr "现有表单"
+
+#: ../classes/class-ccf-form-manager.php:106
+msgid "Standard Fields"
+msgstr "标准字段"
+
+#: ../classes/class-ccf-form-manager.php:112
+msgid "Special Fields"
+msgstr "特殊字段"
+
+#: ../classes/class-ccf-form-manager.php:118
+msgid "Structure"
+msgstr "结构"
+
+#: ../classes/class-ccf-form-manager.php:127
+msgid "&larr; Drag fields from the left here."
+msgstr "&larr; 从左边拖到这里。"
+
+#: ../classes/class-ccf-form-manager.php:133 ../classes/class-ccf-form-manager.php:1277
+msgid "Insert into post"
+msgstr "插入到文章"
+
+#: ../classes/class-ccf-form-manager.php:134
+msgid "Save Form"
+msgstr "保存表单"
+
+#: ../classes/class-ccf-form-manager.php:140
+msgid "Form Settings"
+msgstr "页面设置"
+
+#: ../classes/class-ccf-form-manager.php:143
+msgid "Form Title:"
+msgstr "表单标题"
+
+#: ../classes/class-ccf-form-manager.php:148
+msgid "Form Description:"
+msgstr "表单描述"
+
+#: ../classes/class-ccf-form-manager.php:153
+msgid "Button Text:"
+msgstr "按钮文本"
+
+#: ../classes/class-ccf-form-manager.php:158
+msgid "On form completion:"
+msgstr "表单完成:"
+
+#: ../classes/class-ccf-form-manager.php:161
+msgid "Show text"
+msgstr "显示文本"
+
+#: ../classes/class-ccf-form-manager.php:162
+msgid "Redirect"
+msgstr "重定向"
+
+#: ../classes/class-ccf-form-manager.php:166
+msgid "Redirect URL:"
+msgstr "重定向 URL:"
+
+#: ../classes/class-ccf-form-manager.php:170
+msgid "Completion Message:"
+msgstr "完成消息:"
+
+#: ../classes/class-ccf-form-manager.php:174
+msgid "Pause form:"
+msgstr "暂停表单："
+
+#: ../classes/class-ccf-form-manager.php:177 ../classes/class-ccf-form-manager.php:196
+#: ../classes/class-ccf-form-manager.php:355 ../classes/class-ccf-form-manager.php:405
+#: ../classes/class-ccf-form-manager.php:481 ../classes/class-ccf-form-manager.php:571
+#: ../classes/class-ccf-form-manager.php:636 ../classes/class-ccf-form-manager.php:678
+#: ../classes/class-ccf-form-manager.php:739 ../classes/class-ccf-form-manager.php:786
+#: ../classes/class-ccf-form-manager.php:828 ../classes/class-ccf-form-manager.php:835
+#: ../classes/class-ccf-form-manager.php:886 ../classes/class-ccf-form-manager.php:929
+#: ../classes/class-ccf-form-manager.php:972
+msgid "No"
+msgstr "否"
+
+#: ../classes/class-ccf-form-manager.php:178 ../classes/class-ccf-form-manager.php:195
+#: ../classes/class-ccf-form-manager.php:354 ../classes/class-ccf-form-manager.php:404
+#: ../classes/class-ccf-form-manager.php:480 ../classes/class-ccf-form-manager.php:570
+#: ../classes/class-ccf-form-manager.php:635 ../classes/class-ccf-form-manager.php:677
+#: ../classes/class-ccf-form-manager.php:738 ../classes/class-ccf-form-manager.php:785
+#: ../classes/class-ccf-form-manager.php:827 ../classes/class-ccf-form-manager.php:834
+#: ../classes/class-ccf-form-manager.php:885 ../classes/class-ccf-form-manager.php:928
+#: ../classes/class-ccf-form-manager.php:971
+msgid "Yes"
+msgstr "是"
+
+#: ../classes/class-ccf-form-manager.php:182
+msgid "Pause Message:"
+msgstr "暂停的消息:"
+
+#: ../classes/class-ccf-form-manager.php:189
+msgid "Form Notifications"
+msgstr "表单通知"
+
+#: ../classes/class-ccf-form-manager.php:192
+msgid "Send Email Notifications:"
+msgstr "发送电子邮件通知:"
+
+#: ../classes/class-ccf-form-manager.php:201
+msgid "\"To\" Email Addresses (comma separated):"
+msgstr "发送电子邮件地址 (用逗号分隔):"
+
+#: ../classes/class-ccf-form-manager.php:206
+msgid "\"From\" Email Address Type:"
+msgstr "表单邮件地址类型"
+
+#: ../classes/class-ccf-form-manager.php:208
+msgid "WordPress Default"
+msgstr "WordPress 默认"
+
+#: ../classes/class-ccf-form-manager.php:209
+msgid "Custom Email"
+msgstr "确认电子邮箱﻿"
+
+#: ../classes/class-ccf-form-manager.php:210 ../classes/class-ccf-form-manager.php:231
+#: ../classes/class-ccf-form-manager.php:258
+msgid "Form Field"
+msgstr "表单域"
+
+#: ../classes/class-ccf-form-manager.php:213
+msgid ""
+"You can set the notification emails from address to be the WP default, a custom email "
+"address, or pull the address from a field in the form."
+msgstr ""
+"你可以设置通知电子邮件发件人地址要 WP 默认情况下，自定义电子邮件地址，或从表单中的字段的"
+"地址。"
+
+#: ../classes/class-ccf-form-manager.php:217
+msgid "Custom \"From\" Email Address:"
+msgstr "自定义”发件人”电子邮件地址:"
+
+#: ../classes/class-ccf-form-manager.php:222
+msgid "Pull \"From\" Email Dynamically from Field:"
+msgstr "拉”从”动态地从域的电子邮件:"
+
+#: ../classes/class-ccf-form-manager.php:228
+msgid "\"From\" Name Type:"
+msgstr "表单名称类型："
+
+#: ../classes/class-ccf-form-manager.php:230
+msgid "Custom Name"
+msgstr "默认名称"
+
+#: ../classes/class-ccf-form-manager.php:234
+msgid ""
+"You can set the notification emails from name to be a custom name or pull the name from "
+"a field in the form."
+msgstr "从名称自定义名称或拉从表单中的字段的名称，您可以设置通知电子邮件。"
+
+#: ../classes/class-ccf-form-manager.php:238
+msgid "Custom \"From\" Name:"
+msgstr "默认来自名称："
+
+#: ../classes/class-ccf-form-manager.php:243
+msgid "Pull \"From\" Name Dynamically from Field:"
+msgstr "从字段中获取来源名称："
+
+#: ../classes/class-ccf-form-manager.php:254
+msgid "Email Subject Type:"
+msgstr "Email主题类型："
+
+#: ../classes/class-ccf-form-manager.php:256
+msgid "Default"
+msgstr "默认"
+
+#: ../classes/class-ccf-form-manager.php:257
+msgid "Custom Subject"
+msgstr "自定义主题"
+
+#: ../classes/class-ccf-form-manager.php:261
+msgid ""
+"You can set the notification emails subject line to be the CCF default, custom text, or "
+"pull the subject from a field in the form."
+msgstr "你可以设置通知电子邮件主题行成为通用表单默认的文本，或获取表单字段中的主题。"
+
+#: ../classes/class-ccf-form-manager.php:265
+msgid "Custom Email Subject:"
+msgstr "默认邮件主题："
+
+#: ../classes/class-ccf-form-manager.php:270
+msgid "Pull Email Subject Dynamically from Field:"
+msgstr "从字段中获取邮件主题："
+
+#: ../classes/class-ccf-form-manager.php:284
+msgid "items"
+msgstr "项目"
+
+#: ../classes/class-ccf-form-manager.php:299 ../classes/class-ccf-form-manager.php:312
+msgid "ID"
+msgstr "ID"
+
+#: ../classes/class-ccf-form-manager.php:300 ../classes/class-ccf-form-manager.php:313
+msgid "Title"
+msgstr "标题"
+
+#: ../classes/class-ccf-form-manager.php:327
+msgid "<span>&larr;</span> Click on a field to edit it."
+msgstr "<span>←</span>单击字段来编辑它。"
+
+#: ../classes/class-ccf-form-manager.php:336 ../classes/class-ccf-form-manager.php:380
+#: ../classes/class-ccf-form-manager.php:462 ../classes/class-ccf-form-manager.php:552
+msgid "Internal Unique Slug"
+msgstr "独一无二的URL地址"
+
+#: ../classes/class-ccf-form-manager.php:340 ../classes/class-ccf-form-manager.php:384
+#: ../classes/class-ccf-form-manager.php:427 ../classes/class-ccf-form-manager.php:466
+#: ../classes/class-ccf-form-manager.php:556 ../classes/class-ccf-form-manager.php:625
+#: ../classes/class-ccf-form-manager.php:661 ../classes/class-ccf-form-manager.php:717
+#: ../classes/class-ccf-form-manager.php:768 ../classes/class-ccf-form-manager.php:811
+#: ../classes/class-ccf-form-manager.php:875 ../classes/class-ccf-form-manager.php:918
+#: ../classes/class-ccf-form-manager.php:961
+msgid "Label:"
+msgstr "标签："
+
+#: ../classes/class-ccf-form-manager.php:344 ../classes/class-ccf-form-manager.php:388
+#: ../classes/class-ccf-form-manager.php:431 ../classes/class-ccf-form-manager.php:470
+#: ../classes/class-ccf-form-manager.php:560 ../classes/class-ccf-form-manager.php:629
+#: ../classes/class-ccf-form-manager.php:665 ../classes/class-ccf-form-manager.php:721
+#: ../classes/class-ccf-form-manager.php:772 ../classes/class-ccf-form-manager.php:815
+#: ../classes/class-ccf-form-manager.php:879 ../classes/class-ccf-form-manager.php:922
+#: ../classes/class-ccf-form-manager.php:965
+msgid "Description:"
+msgstr "描述:"
+
+#: ../classes/class-ccf-form-manager.php:348 ../classes/class-ccf-form-manager.php:474
+#: ../classes/class-ccf-form-manager.php:564 ../classes/class-ccf-form-manager.php:600
+#: ../classes/class-ccf-form-manager.php:670 ../classes/class-ccf-form-manager.php:725
+#: ../classes/class-ccf-form-manager.php:820
+msgid "Initial Value:"
+msgstr "初始值:"
+
+#: ../classes/class-ccf-form-manager.php:352 ../classes/class-ccf-form-manager.php:402
+#: ../classes/class-ccf-form-manager.php:478 ../classes/class-ccf-form-manager.php:568
+#: ../classes/class-ccf-form-manager.php:633 ../classes/class-ccf-form-manager.php:675
+#: ../classes/class-ccf-form-manager.php:736 ../classes/class-ccf-form-manager.php:783
+#: ../classes/class-ccf-form-manager.php:825 ../classes/class-ccf-form-manager.php:883
+#: ../classes/class-ccf-form-manager.php:926 ../classes/class-ccf-form-manager.php:969
+msgid "Required:"
+msgstr "必填："
+
+#: ../classes/class-ccf-form-manager.php:361 ../classes/class-ccf-form-manager.php:411
+#: ../classes/class-ccf-form-manager.php:447 ../classes/class-ccf-form-manager.php:487
+#: ../classes/class-ccf-form-manager.php:512 ../classes/class-ccf-form-manager.php:537
+#: ../classes/class-ccf-form-manager.php:577 ../classes/class-ccf-form-manager.php:606
+#: ../classes/class-ccf-form-manager.php:642 ../classes/class-ccf-form-manager.php:692
+#: ../classes/class-ccf-form-manager.php:745 ../classes/class-ccf-form-manager.php:792
+#: ../classes/class-ccf-form-manager.php:841 ../classes/class-ccf-form-manager.php:899
+#: ../classes/class-ccf-form-manager.php:942 ../classes/class-ccf-form-manager.php:985
+msgid "Advanced"
+msgstr "高级"
+
+#: ../classes/class-ccf-form-manager.php:364 ../classes/class-ccf-form-manager.php:414
+#: ../classes/class-ccf-form-manager.php:450 ../classes/class-ccf-form-manager.php:490
+#: ../classes/class-ccf-form-manager.php:515 ../classes/class-ccf-form-manager.php:540
+#: ../classes/class-ccf-form-manager.php:580 ../classes/class-ccf-form-manager.php:609
+#: ../classes/class-ccf-form-manager.php:645 ../classes/class-ccf-form-manager.php:695
+#: ../classes/class-ccf-form-manager.php:748 ../classes/class-ccf-form-manager.php:795
+#: ../classes/class-ccf-form-manager.php:844 ../classes/class-ccf-form-manager.php:902
+#: ../classes/class-ccf-form-manager.php:945 ../classes/class-ccf-form-manager.php:988
+msgid "Class Name:"
+msgstr "样式名称"
+
+#: ../classes/class-ccf-form-manager.php:368 ../classes/class-ccf-form-manager.php:494
+#: ../classes/class-ccf-form-manager.php:584 ../classes/class-ccf-form-manager.php:700
+#: ../classes/class-ccf-form-manager.php:752 ../classes/class-ccf-form-manager.php:849
+msgid "Placeholder Text:"
+msgstr "占位文本："
+
+#: ../classes/class-ccf-form-manager.php:392
+msgid "Allowed File Extensions (comma separate):"
+msgstr "允许的文件扩展名 (用逗号分开):"
+
+#: ../classes/class-ccf-form-manager.php:394
+msgid ""
+"If left blank, will default to all extensions registered by WordPress. If you use a "
+"file extension or mime type not <a href=\"http://codex.wordpress.org/Function_Reference/"
+"get_allowed_mime_types\">whitelisted by WordPress</a>, you will need to filter and "
+"manually whitelist the new extension."
+msgstr ""
+"如果左侧为空，则将默认为所有注册的 WordPress 的扩展。如果您使用的文件扩展名或 mime 类型"
+"没有<a href=“http://codex.wordpress.org/Function_Reference/get_allowed_mime_types”>列入"
+"白名单的 WordPress</a>，你将需要筛选器和手动白新的扩展。"
+
+#: ../classes/class-ccf-form-manager.php:397
+msgid "Max File Size (in MB):"
+msgstr "最大文件大小 (以 mb 为单位):"
+
+#: ../classes/class-ccf-form-manager.php:399
+#, php-format
+msgid "If left blank, will default to %d MB. Maximum allowed by server is %d MB."
+msgstr "如果左侧为空，则将默认为 %d MB。服务器所允许的最大值是 %d MB。"
+
+#: ../classes/class-ccf-form-manager.php:425
+msgid ""
+"reCAPTCHA is a simple captcha service provided by Google. <a target=\"_blank\" href="
+"\"https://www.google.com/recaptcha/intro/index.html\">Learn more</a>"
+msgstr ""
+"验证码是由谷歌提供的简单验证码服务。<a target=“_blank” href=“https://www.google.com/"
+"recaptcha/intro/index.html”>了解更多</a>"
+
+#: ../classes/class-ccf-form-manager.php:435
+msgid "Site Key:"
+msgstr "网站的key:"
+
+#: ../classes/class-ccf-form-manager.php:437 ../classes/class-ccf-form-manager.php:442
+msgid "Don't have one?"
+msgstr "没有一个人吗?"
+
+#: ../classes/class-ccf-form-manager.php:440
+msgid "Secret Key:"
+msgstr "秘钥："
+
+#: ../classes/class-ccf-form-manager.php:503 ../classes/class-ccf-form-manager.php:524
+#: ../classes/class-ccf-form-manager.php:549 ../classes/class-ccf-form-manager.php:593
+#: ../classes/class-ccf-form-manager.php:618 ../classes/class-ccf-form-manager.php:654
+#: ../classes/class-ccf-form-manager.php:710 ../classes/class-ccf-form-manager.php:761
+#: ../classes/class-ccf-form-manager.php:804 ../classes/class-ccf-form-manager.php:868
+#: ../classes/class-ccf-form-manager.php:911 ../classes/class-ccf-form-manager.php:954
+msgid "Basic"
+msgstr "基础"
+
+#: ../classes/class-ccf-form-manager.php:506
+msgid "HTML Content:"
+msgstr "HTML内容"
+
+#: ../classes/class-ccf-form-manager.php:527
+msgid "Heading:"
+msgstr "标题"
+
+#: ../classes/class-ccf-form-manager.php:531
+msgid "Sub Heading:"
+msgstr "子标题："
+
+#: ../classes/class-ccf-form-manager.php:596 ../classes/class-ccf-form-manager.php:621
+#: ../classes/class-ccf-form-manager.php:657 ../classes/class-ccf-form-manager.php:713
+#: ../classes/class-ccf-form-manager.php:764 ../classes/class-ccf-form-manager.php:807
+#: ../classes/class-ccf-form-manager.php:871 ../classes/class-ccf-form-manager.php:914
+#: ../classes/class-ccf-form-manager.php:957
+msgid "Internal Unique Slug (a-z, 0-9, -, _):"
+msgstr ""
+
+#: ../classes/class-ccf-form-manager.php:683
+msgid "Enable Date Select"
+msgstr "启用日期选择"
+
+#: ../classes/class-ccf-form-manager.php:687
+msgid "Enable Time Select"
+msgstr "启用时间选择"
+
+#: ../classes/class-ccf-form-manager.php:729
+msgid "Format:"
+msgstr "格式："
+
+#: ../classes/class-ccf-form-manager.php:732 ../classes/class-ccf-form-manager.php:779
+msgid "International"
+msgstr "国际的"
+
+#: ../classes/class-ccf-form-manager.php:776
+msgid "Type:"
+msgstr "类型："
+
+#: ../classes/class-ccf-form-manager.php:778
+msgid "United States"
+msgstr "美国"
+
+#: ../classes/class-ccf-form-manager.php:832
+msgid "Require Confirmation:"
+msgstr "需要确认:"
+
+#: ../classes/class-ccf-form-manager.php:860
+msgid "Label"
+msgstr "标签"
+
+#: ../classes/class-ccf-form-manager.php:861
+msgid "Value"
+msgstr "值"
+
+#: ../classes/class-ccf-form-manager.php:890 ../classes/class-ccf-form-manager.php:933
+#: ../classes/class-ccf-form-manager.php:976
+msgid "Manage field choices:"
+msgstr "管理字段选择:"
+
+#: ../classes/class-ccf-form-manager.php:894 ../classes/class-ccf-form-manager.php:937
+#: ../classes/class-ccf-form-manager.php:980
+msgid ""
+"Note: If an option does not have a \"value\", it will not be considered a valid "
+"selection if the field is required. The \"value\" is what's read, stored, and displayed "
+"in the submission."
+msgstr ""
+"注: 如果选项没有一个”值”，如果该字段是必需，它将不是一个有效值。”值”是读取、 存储和显示"
+"在提交里的信息。"
+
+#: ../classes/class-ccf-form-manager.php:997
+msgid "You currently have no forms. Add some!"
+msgstr "你目前有没有表单。添加一些吧!"
+
+#: ../classes/class-ccf-form-manager.php:1020
+msgid "Allowed file extensions are {{ extensions }}. "
+msgstr "允许的文件扩展名 (用逗号分开):"
+
+#: ../classes/class-ccf-form-manager.php:1022
+msgid "Max file size is {{ file_size }} MB. "
+msgstr "最大文件大小是 {{file_size}} MB。"
+
+#: ../classes/class-ccf-form-manager.php:1047 ../classes/class-ccf-form-manager.php:1063
+#: ../classes/class-ccf-form-manager.php:1081
+msgid "An example choice"
+msgstr "示例选择"
+
+#: ../classes/class-ccf-form-manager.php:1099
+msgid "Arbitrary block of HTML."
+msgstr "HTML内容"
+
+#: ../classes/class-ccf-form-manager.php:1105
+msgid "Section Heading"
+msgstr "区段标题"
+
+#: ../classes/class-ccf-form-manager.php:1107
+msgid "This is the sub-heading text."
+msgstr "这是子标题文本。"
+
+#: ../classes/class-ccf-form-manager.php:1276
+msgid "Edit"
+msgstr "编辑"
+
+#: ../classes/class-ccf-form-manager.php:1278
+msgid "Trash"
+msgstr "移到垃圾桶"
+
+#: ../classes/class-ccf-form-manager.php:1321
+msgid "There is a problem with this form. Is it trashed or deleted?"
+msgstr "表单出现问题。要删除吗?"
+
+#: ../classes/class-ccf-form-manager.php:1463
+msgid "IP Address"
+msgstr "IP地址"
+
+#: ../classes/class-ccf-form-manager.php:1475
+msgid "There are no submissions."
+msgstr "没有提交的信息。"
+
+#: ../classes/class-ccf-form-manager.php:1504
+msgid "Add Form"
+msgstr "添加新表单"
+
+#: ../classes/class-ccf-form-manager.php:1528
+msgid "Single Line Text"
+msgstr "单行文本"
+
+#: ../classes/class-ccf-form-manager.php:1529
+msgid "Dropdown"
+msgstr "下拉菜单"
+
+#: ../classes/class-ccf-form-manager.php:1530
+msgid "Checkboxes"
+msgstr "复选框"
+
+#: ../classes/class-ccf-form-manager.php:1531
+msgid "Radio Buttons"
+msgstr "单选"
+
+#: ../classes/class-ccf-form-manager.php:1532
+msgid "Paragraph Text"
+msgstr "多行文本框"
+
+#: ../classes/class-ccf-form-manager.php:1533
+msgid "Hidden"
+msgstr "隐藏域"
+
+#: ../classes/class-ccf-form-manager.php:1534
+msgid "File Upload"
+msgstr "上传文件"
+
+#: ../classes/class-ccf-form-manager.php:1538
+msgid "HTML"
+msgstr "HTML"
+
+#: ../classes/class-ccf-form-manager.php:1539
+msgid "Section Header"
+msgstr "标题区域"
+
+#: ../classes/class-ccf-form-manager.php:1544
+msgid "Name"
+msgstr "姓名"
+
+#: ../classes/class-ccf-form-manager.php:1545
+msgid "Date/Time"
+msgstr "日期/时间"
+
+#: ../classes/class-ccf-form-manager.php:1546
+msgid "Website"
+msgstr "网站"
+
+#: ../classes/class-ccf-form-manager.php:1547
+msgid "Address"
+msgstr "详细地址"
+
+#: ../classes/class-ccf-form-manager.php:1548
+msgid "Phone"
+msgstr "电话"
+
+#: ../classes/class-ccf-form-manager.php:1549
+msgid "reCAPTCHA"
+msgstr "验证码"
+
+#: ../classes/class-ccf-form-manager.php:1568
+msgid "You have no email fields"
+msgstr "你有没有电子邮件字段"
+
+#: ../classes/class-ccf-form-manager.php:1569
+msgid "You have no name fields"
+msgstr "你有没有名称字段"
+
+#: ../classes/class-ccf-form-manager.php:1570
+msgid "You have no applicable fields"
+msgstr "你有没有适用的字段"
+
+#: ../classes/class-ccf-form-manager.php:1571
+msgid "Invalid date"
+msgstr "日期无效。"
+
+#: ../classes/class-ccf-form-manager.php:1573
+msgid "Field Label"
+msgstr "字段标签"
+
+#: ../classes/class-ccf-form-manager.php:1574
+msgid "Form Submission"
+msgstr "表单提交"
+
+#: ../classes/class-ccf-form-manager.php:1575 ../classes/class-ccf-form-renderer.php:120
+msgid "This form is paused right now. Check back later!"
+msgstr "这种形式现在已暂停。稍候回来检查!"
+
+#: ../classes/class-ccf-form-renderer.php:55
+msgid "This is not a valid email address."
+msgstr "这不是一个有效的电子邮件地址。"
+
+#: ../classes/class-ccf-form-renderer.php:58
+msgid "This is not a valid phone number."
+msgstr "这不是一个有效的电话号码。"
+
+#: ../classes/class-ccf-form-renderer.php:59
+msgid "This phone number is not 10 digits"
+msgstr "电话号码不足10位。"
+
+#: ../classes/class-ccf-form-renderer.php:63
+msgid "This is not an allowed file extension"
+msgstr "这是不允许的文件扩展名"
+
+#: ../classes/class-ccf-form-renderer.php:64
+msgid "This file is bigger than"
+msgstr "此文件太大"
+
+#: ../classes/class-ccf-form-renderer.php:65
+msgid "An unknown error occured."
+msgstr "出现未知错误！"
+
+#: ../classes/class-ccf-submission-cpt.php:41
+msgid "Form Submissions"
+msgstr "表单提交信息"
+
+#: ../classes/class-ccf-upgrader.php:37
+msgid ""
+"Did you just upgrade to a post 6.0 version of Custom Contact Forms? If so, you might "
+"need to upgrade your database to use your old forms. Please backup your database before "
+"running the upgrade."
+msgstr ""
+"你只是升级到邮政 6.0 版本的通用表单?如果是这样，你可能需要升级您的数据库使用你旧的形式。"
+"请在运行升级之前备份您的数据库。"
+
+#: ../classes/class-ccf-upgrader.php:38
+msgid "Upgrade"
+msgstr "升级"
+
+#: ../classes/class-ccf-upgrader.php:39
+msgid "Dismiss"
+msgstr "解除"
+
+#: ../classes/class-ccf-upgrader.php:61
+msgid "Database update complete."
+msgstr "数据库更新完成。"
+
+#: ../classes/class-ccf-widget.php:17
+msgid "Add a custom contact form to a sidebar."
+msgstr "将通用表单添加到边栏。"
+
+#: ../classes/class-ccf-widget.php:18
+msgid "Custom Contact Form"
+msgstr "通用内容表单"
+
+#: ../classes/class-ccf-widget.php:64
+msgid "Title:"
+msgstr "标题："
+
+#: ../classes/class-ccf-widget.php:71
+msgid "Choose a form:"
+msgstr "选择一个表单："
+
+#: ../classes/class-ccf-widget.php:80
+msgid "Untitled"
+msgstr "未命名"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-comments.php:42
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-comments.php:48
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-comments.php:108
+msgid "Invalid comment ID."
+msgstr "无效评论 ID。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-comments.php:52
+msgid "Sorry, you are not allowed to delete this comment."
+msgstr "抱歉，您无权删除该评论。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-comments.php:58
+msgid "The comment cannot be deleted."
+msgstr "不能删除该评论。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-comments.php:62
+msgid "Permanently deleted comment"
+msgstr "永久删除评论"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-comments.php:65
+msgid "Deleted comment"
+msgstr "删除评论"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-customposttype.php:33
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:29
+msgid "The route base must be overridden"
+msgstr "URL必须被重写"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-customposttype.php:37
+msgid "The post type must be overridden"
+msgstr "文章类型必须被覆盖"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-customposttype.php:115
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-customposttype.php:136
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-customposttype.php:161
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-customposttype.php:182
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:35
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:78
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:153
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:174
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:205
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:768
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:788
+msgid "Invalid post type"
+msgstr "无效的文章类型"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:210
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:803
+msgid "Sorry, you are not allowed to post on this site."
+msgstr "对不起，您不允许发布在本网站上。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:215
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:795
+msgid "Sorry, you are not allowed to edit this post."
+msgstr "抱歉，您没有编辑文章的权限。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:288
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:371
+msgid "No data supplied"
+msgstr "无数据"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:292
+msgid "No Content-Type supplied"
+msgstr "没有提供的内容类型"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:296
+msgid "No Content-Disposition supplied"
+msgstr "没有内容处置提供"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:315
+msgid "Invalid Content-Disposition supplied"
+msgstr "无效的内容处置提供"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:323
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:378
+msgid "Content hash did not match expected"
+msgstr "内容哈希不匹配"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:336
+msgid "Could not open file handle"
+msgstr "不能打开的文件句柄"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-media.php:414
+msgid "Invalid featured image."
+msgstr "无效的特色的图片。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta-posts.php:34
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:655
+msgid "Sorry, you cannot edit this post"
+msgstr "抱歉，您不能编辑这篇文章。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:33
+msgid "The object type must be overridden"
+msgstr "对象类型必须重写"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:134
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:241
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:388
+msgid "Invalid meta ID."
+msgstr "无效的元 id。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:138
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:245
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:392
+msgid "Meta does not belong to this object"
+msgstr "元不属于此对象"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:159
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:272
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:276
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:349
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:402
+#, php-format
+msgid "%s is marked as a protected field."
+msgstr "%s 被标记为受保护的字段。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:169
+#, php-format
+msgid "%s contains serialized data."
+msgstr "%s 包含序列化的数据。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:257
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:338
+msgid "Invalid meta key."
+msgstr "无效的元键。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:263
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:398
+msgid "Invalid existing meta data for action."
+msgstr "现有元数据无效的行为。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:268
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:345
+msgid "Invalid provided meta data for action."
+msgstr "无效的行动提供元数据。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:289
+msgid "Could not update meta."
+msgstr "无法更新元。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:330
+msgid "Missing meta key."
+msgstr "失踪的 meta 键。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:334
+msgid "Missing meta value."
+msgstr "缺少数值"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:358
+msgid "Could not add meta."
+msgstr "不能添加元。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:406
+msgid "Could not delete meta."
+msgstr "无法删除元。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-meta.php:409
+msgid "Deleted meta"
+msgstr "已删除的元"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:78
+msgid "Sorry, you cannot view the revisions for this post."
+msgstr "对不起，您不能查看这篇文章的订正。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:347
+msgid "There is a revision of this post that is more recent."
+msgstr "这篇文章还有一个新版本。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:378
+msgid "Sorry, you are not allowed to delete this post."
+msgstr "抱歉，您无权删除该文章。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:384
+msgid "The post cannot be deleted."
+msgstr "不能删除这篇文章。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:388
+msgid "Permanently deleted post"
+msgstr "永久删除的文章"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:431
+msgid "Cannot view post type"
+msgstr "不能查看文章类型"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:665
+msgid "Sorry, you cannot view this revision"
+msgstr "对不起，您不能查看此修订"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:701
+msgid "There is no excerpt because this is a protected post."
+msgstr "由于这是一篇受保护的文章，此处并无摘录。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:799
+msgid "The post type may not be changed."
+msgstr "文章类型不能修改。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:817
+msgid "Sorry, you are not allowed to create private posts in this post type"
+msgstr "对不起，你不允许创建此类型的保护文章"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:823
+msgid "Sorry, you are not allowed to publish posts in this post type"
+msgstr "抱歉，您不能发布此类型的文章"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:864
+msgid "Invalid author object."
+msgstr "无效的作者对象。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:874
+msgid "You are not allowed to edit posts as this user."
+msgstr "您无法编辑此文章。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:880
+msgid "Invalid author ID."
+msgstr "无效的作者 id。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:892
+msgid "Sorry, you are not allowed to create password protected posts in this post type"
+msgstr "抱歉，不允许在此类文章设置密码"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:909
+msgid "Invalid post parent ID."
+msgstr "无效的文章父 id。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-posts.php:935
+msgid "Invalid post format."
+msgstr "无效的文章格式。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-server.php:196
+msgid "The JSON API is disabled on this site."
+msgstr "在这个网站上禁用了 JSON API。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-server.php:201
+msgid "JSONP support is disabled on this site."
+msgstr "在此网站上禁用 JSONP 支持"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-server.php:207
+msgid "The JSONP callback function is invalid."
+msgstr "JSONP 回调函数无效"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-server.php:371
+msgid "Unsupported request method"
+msgstr "不支持的请求方法"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-server.php:390
+msgid "The handler for the route is invalid"
+msgstr "路由处理程序无效"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-server.php:450
+msgid "No route was found matching the URL and request method"
+msgstr "没有路由发现匹配的 URL 和请求的方法"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-server.php:502
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:252
+#, php-format
+msgid "Missing parameter %s"
+msgstr "缺少参数 %s"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-taxonomies.php:106
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-taxonomies.php:212
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-taxonomies.php:288
+msgid "Invalid taxonomy ID."
+msgstr "无效的分类 id。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-taxonomies.php:138
+msgid "Cannot view taxonomy"
+msgstr "不能查看分类"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-taxonomies.php:294
+msgid "Invalid term ID."
+msgstr "无效的术语 id。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:56
+msgid "Sorry, you are not allowed to list users."
+msgstr "对不起，不允许查看用户列表。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:97
+msgid "You are not currently logged in."
+msgstr "您目前没有登录。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:130
+msgid "Sorry, you are not allowed to view this user."
+msgstr "对不起，不允许查看该用户。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:136
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:234
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:433
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:444
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:452
+msgid "Invalid user ID."
+msgstr "无效的用户ID。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:238
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:355
+msgid "Sorry, you are not allowed to edit this user."
+msgstr "您不能编辑此用户"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:245
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:383
+msgid "Sorry, you are not allowed to create users."
+msgstr "对不起，不允许创建用户。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:294
+msgid "Invalid user URL."
+msgstr "无效的用户的 URL。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:350
+msgid "User ID must be supplied."
+msgstr "必须提供用户 ID。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:360
+msgid "User ID is invalid."
+msgstr "用户 ID 是无效的。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:387
+msgid "Cannot create existing user."
+msgstr "不能创建现有用户。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:438
+msgid "Sorry, you are not allowed to delete this user."
+msgstr "对不起，不允许删除该用户。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:461
+msgid "The user cannot be deleted."
+msgstr "用户不能删除。"
+
+#: ../vendor/wp-api/wp-api/lib/class-wp-json-users.php:463
+msgid "Deleted user"
+msgstr "已删除的用户"
+
+#: ../vendor/wp-api/wp-api/plugin.php:375
+msgid "Cookie nonce is invalid"
+msgstr "Cookie nonce 无效"
+
+#: ../vendor/wp-api/wp-api/plugin.php:686
+#, php-format
+msgid "%1$s (since %2$s; use %3$s instead)"
+msgstr "%1$s (since %2$s; use %3$s instead)"
+
+#: ../vendor/wp-api/wp-api/plugin.php:689 ../vendor/wp-api/wp-api/plugin.php:707
+#, php-format
+msgid "%1$s (since %2$s; no alternative available)"
+msgstr "%1$s (since %2$s; no alternative available)"
+
+#: ../vendor/wp-api/wp-api/plugin.php:704
+#, php-format
+msgid "%1$s (since %2$s; %3$s)"
+msgstr "%1$s (since %2$s; %3$s)"
+
+#: ../vendor/wp-api/wp-api/tests/helper.php:61
+msgid "No report data available"
+msgstr "没有可用的报告数据"
+
+#: ../vendor/wp-api/wp-api/tests/helper.php:65
+msgid "The CodeCoverage classes are missing"
+msgstr "CodeCoverage 类是缺掉的"
