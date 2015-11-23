@@ -20,6 +20,9 @@ class CCF_Ads {
 			$payload = array(
 				'email_address' => $_POST['email'],
 				'status' => 'subscribed',
+				'merge_fields' => array(
+					'URL' => 'http://' . $_SERVER['HTTP_HOST'],
+				)
 			);
 
 			$request = wp_remote_request( 'https://test:b7d9f4eff3654c742a805ed6d8ebc304-us8@us8.api.mailchimp.com/3.0/lists/b4ed816a24/members', array(
@@ -28,7 +31,7 @@ class CCF_Ads {
 			) );
 
 			$headers = 'From: CCF User <' . $_POST['email'] . '>' . "\r\n";
-			wp_mail( 'tlovett88@gmail.com', 'I Want Hosting', 'Hey! I\'d love some info on WordPress hosting. My email is ' . $_POST['email'], $headers );
+			wp_mail( 'tlovett88@gmail.com', 'I Want WordPress Hosting on http://' . $_SERVER['HTTP_HOST'], 'Hey! I\'d love some info on WordPress hosting. My email is ' . $_POST['email'] . ' and my website is http://' . $_SERVER['HTTP_HOST'] . '.', $headers );
 
 			update_option( 'ccf_hide_ads', true );
 		}
@@ -48,22 +51,21 @@ class CCF_Ads {
 		?>
 
 		<form method="post" action="" class="update-nag ccf-hosting-offer">
-			<p>
-				<h3>Is Your WordPress Site Running Slowly</h3>
 
-				<p>Sign up for affordable no hassle, managed WordPress hosting including:</p>
+			<h3>Is Your WordPress Site Running Slowly</h3>
 
-				<ul>
-					<li>Daily backups taken automatically.</li>
-					<li>High speed caching.</li>
-					<li>Dedicated hosting. You won't share space with any other websites.</li>
-					<li>Optimized server settings for WordPress.</li>
-					<li>Free support 9-5pm EDT Monday - Friday. Emergency support 24/7.</li>
-					<li>100% uptime.</li>
-					<li>Latest versions of PHP, MySQL, and WordPress.
-					<li>Free migration to new platform.</li>
-				</ul>
-			</p>
+			<p>Sign up for affordable no hassle, managed WordPress hosting including:</p>
+
+			<ul>
+				<li>Daily backups taken automatically.</li>
+				<li>High speed caching.</li>
+				<li>Dedicated hosting. You won't share space with any other websites.</li>
+				<li>Optimized server settings for WordPress.</li>
+				<li>Free support 9-5pm EDT Monday - Friday. Emergency support 24/7.</li>
+				<li>100% uptime.</li>
+				<li>Latest versions of PHP, MySQL, and WordPress.
+				<li>Free migration to new platform.</li>
+			</ul>
 
 			<p><input name="email" type="text" placeholder="Email address" /> <input name="ccf_hosting_signup" class="button button-primary" type="submit" value="Get more info" /> <input name="ccf_hide_ads" class="button" type="submit" value="No thanks" /></p>
 		</form>
