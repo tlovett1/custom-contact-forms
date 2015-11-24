@@ -23,8 +23,9 @@
 	}
 }
 
-.ccf-hosting-offer {
-	
+.ccf-hosting-offer:after {
+	display: block;
+	content: ' ';
 }
 
 .ccf-hosting-offer ul {

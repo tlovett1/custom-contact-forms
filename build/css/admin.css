@@ -16,6 +16,10 @@
   cursor: pointer;
   -webkit-font-smoothing: antialiased; }
 
+.ccf-hosting-offer:after {
+  display: block;
+  content: ' '; }
+
 .ccf-hosting-offer ul {
   list-style-type: disc;
   margin-left: 30px; }
