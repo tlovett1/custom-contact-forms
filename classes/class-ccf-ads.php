@@ -17,19 +17,6 @@ class CCF_Ads {
 			update_option( 'ccf_hide_ads', true );
 		} elseif ( ! empty( $_POST['ccf_hosting_signup'] ) && ! empty( $_POST['email'] ) ) {
 
-			$payload = array(
-				'email_address' => $_POST['email'],
-				'status' => 'subscribed',
-				'merge_fields' => array(
-					'URL' => 'http://' . $_SERVER['HTTP_HOST'],
-				)
-			);
-
-			$request = wp_remote_request( 'https://test:b7d9f4eff3654c742a805ed6d8ebc304-us8@us8.api.mailchimp.com/3.0/lists/b4ed816a24/members', array(
-				'method' => 'POST',
-				'body' => json_encode( $payload ),
-			) );
-
 			$headers = 'From: CCF User <' . $_POST['email'] . '>' . "\r\n";
 			wp_mail( 'tlovett88@gmail.com', 'I Want WordPress Hosting on http://' . $_SERVER['HTTP_HOST'], 'Hey! I\'d love some info on WordPress hosting. My email is ' . $_POST['email'] . ' and my website is http://' . $_SERVER['HTTP_HOST'] . '.', $headers );
 
