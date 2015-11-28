@@ -226,7 +226,7 @@
         padding-left: 16px;
         padding-right: 16px;
         color: #fff; }
-        @media (max-width: 825px) {
+        @media (max-width: 830px) {
           .ccf-main-modal .ccf-form-pane .bottom .left {
             display: none; } }
         .ccf-main-modal .ccf-form-pane .bottom .left input {
