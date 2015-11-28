@@ -131,7 +131,7 @@ class CCF_Form_Manager {
 
 			<div class="bottom">
 				<div class="left signup">
-					<strong>Interested in great WordPress tips, plugins, and offers? </strong>
+					<strong>Want free WP blogging tips, tutorials, and marketing tricks? </strong>
 					<input type="email" class="email-signup-field" placeholder="Email">
 					<button type="button" class="button signup-button">Sign me up!</button>
 					<span class="signup-check">✓</span>

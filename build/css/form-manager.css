@@ -215,18 +215,23 @@
       left: 0;
       right: 0;
       height: 50px;
-      padding: 0 16px;
+      padding: 0 16px 0 0;
       position: absolute;
       text-align: right;
       line-height: 50px;
       border-top: 1px solid #e5e5e5; }
       .ccf-main-modal .ccf-form-pane .bottom .left {
-        float: left; }
+        float: left;
+        background-color: #00a0d2;
+        padding-left: 16px;
+        padding-right: 16px;
+        color: #fff; }
         @media (max-width: 825px) {
           .ccf-main-modal .ccf-form-pane .bottom .left {
             display: none; } }
         .ccf-main-modal .ccf-form-pane .bottom .left input {
-          vertical-align: middle; }
+          vertical-align: middle;
+          margin-left: 5px; }
         .ccf-main-modal .ccf-form-pane .bottom .left button {
           vertical-align: middle; }
         .ccf-main-modal .ccf-form-pane .bottom .left .signup-x {
