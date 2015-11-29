@@ -52,6 +52,10 @@ class CCF_Ads {
 			}
 		}
 
+		if ( 'post.php' !== $pagenow && 'edit.php' !== $pagenow && 'post-new.php' !== $pagenow ) {
+			return;
+		}
+
 		$subscribed = get_option( 'ccf_subscribed' );
 
 		if ( ! empty( $subscribed ) ) {
