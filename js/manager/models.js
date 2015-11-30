@@ -76,7 +76,7 @@
 	wp.ccf.models.Form = wp.ccf.models.Form || wp.api.models.Post.extend(
 		{
 
-			urlRoot: WP_API_Settings.root + '/ccf/forms',
+			urlRoot: WP_API_Settings.root.replace( /\/$/, '' ) + '/ccf/v1/forms',
 
 			set: _modelSet,
 

@@ -1,5 +1,1585 @@
 # Changelog
 
+## 2.0 Beta 7.0
+
+- Sync infrastructure from WordPress core as of r35691.
+
+  * Remove `register_api_field()` because it's conceptually tied to `WP_REST_Controller` [#34730](https://core.trac.wordpress.org/ticket/34730)
+  * Update the REST API header links to use api.w.org [#34303](https://core.trac.wordpress.org/ticket/34303)
+  * Require the `$namespace` argument in `register_rest_route()` [#34416](https://core.trac.wordpress.org/ticket/34416)
+  * Include `enum` and `description` in help data [#34543](https://core.trac.wordpress.org/ticket/34543)
+  * Save `preg_match` iterations in `WP_REST_Server` [#34488](https://core.trac.wordpress.org/ticket/34488)
+  * Don't return route URL in `WP_REST_Request:get_params()` [#34647](https://core.trac.wordpress.org/ticket/34647)
+
+- Restore `register_api_field()` within the plugin.
+
+  (props @danielbachhuber, [#1748](https://github.com/WP-API/WP-API/pull/1748))
+
+- Require admin functions for use of `wp_handle_upload()`, fixing fatal.
+
+  (props @joehoyle, [#1746](https://github.com/WP-API/WP-API/pull/1746))
+
+- Properly handle requesting terms where `parent=0` and `0` is a string.
+
+  (props @danielbachhuber, [#1739](https://github.com/WP-API/WP-API/pull/1739))
+
+- Prevent PHP error notice when `&filter` isn't an array.
+
+  (props @danielbachhuber, [#1734](https://github.com/WP-API/WP-API/pull/1734))
+
+- Change link relations to use api.w.org.
+
+  (props @danielbachhuber, [#1726](https://github.com/WP-API/WP-API/pull/1726))
+
+
+## 2.0 Beta 6.0
+
+- Remove global inclusion of wp-admin/includes/admin.php
+
+  For a long time, the REST API loaded wp-admin/includes/admin.php to make use of specific admin utilities. Now, it only loads those admin utilities when it needs them.
+
+  If your custom endpoints make use of admin utilities, you'll need to make sure to load wp-admin/includes/admin.php before you use them.
+
+  (props @joehoyle, [#1696](https://github.com/WP-API/WP-API/pull/1696))
+
+- Link directly to the featured image in a Post's links.
+
+  (props @rmccue, [#1563](https://github.com/WP-API/WP-API/pull/1563), [#1711](https://github.com/WP-API/WP-API/pull/1711))
+
+- Provide object type as callback argument for custom API fields.
+
+  (props @jtsternberg, [#1714](https://github.com/WP-API/WP-API/pull/1714))
+
+- Change users schema order to be order of importance instead of alpha.
+
+  (props @rachelbaker, [#1708](https://github.com/WP-API/WP-API/pull/1708))
+
+- Clarify documentation for `date` and `modified` attributes.
+
+  (props @danielbachhuber, [#1715](https://github.com/WP-API/WP-API/pull/1715))
+
+- Update the wp-api.js client from the client-js repo.
+
+  (props @rachelbaker, [#1709](https://github.com/WP-API/WP-API/pull/1709))
+
+- Fix the `format` enum to be an array of strings.
+
+  (props @joehoyle, [#1707](https://github.com/WP-API/WP-API/pull/1707))
+
+- Run revisions for collection through `prepare_response_for_collection()`.
+
+  (props @danielbachhuber, @rachelbaker, [#1671](https://github.com/WP-API/WP-API/pull/1671))
+
+- Expose `date_gmt` for `view` context of Posts and Comments.
+
+  (props @danielbachhuber, [#1690](https://github.com/WP-API/WP-API/pull/1690))
+
+- Fix PHP and JS docblock formatting.
+
+  (props @ahmadawais, [#1699](https://github.com/WP-API/WP-API/pull/1698), [#1699](https://github.com/WP-API/WP-API/pull/1699), [#1701](https://github.com/WP-API/WP-API/pull/1701), [#1700](https://github.com/WP-API/WP-API/pull/1700), [#1702](https://github.com/WP-API/WP-API/pull/1702), [#1703](https://github.com/WP-API/WP-API/pull/1703))
+
+- Include `media_details` attribute for attachments in embed context.
+
+  For image attachments, media_details includes a sizes array of image sizes, which is useful for templating.
+
+  (props @danielbachhuber, [#1667](https://github.com/WP-API/WP-API/pull/1667))
+
+- Make `WP_REST_Controller` error messages more helpful by specifying method to subclass.
+
+  (props @danielbachhuber, [#1670](https://github.com/WP-API/WP-API/pull/1670))
+
+- Expose `slug` in `embed` context for Users.
+
+  `user_nicename` is a public attribute, used in user URLs, so this is safe data to present.
+
+  (props @danielbachhuber, [#1666](https://github.com/WP-API/WP-API/pull/1666))
+
+- Handle falsy value from `wp_count_terms()`, fixing fatal.
+
+  (props @joehoyle, [#1641](https://github.com/WP-API/WP-API/pull/1641))
+
+- Correct methods in `WP_REST_SERVER::EDITABLE` description.
+
+  (props @rachelbaker, [#1601](https://github.com/WP-API/WP-API/pull/1601))
+
+- Add the embed context to Users collection query params.
+
+  (props @rachelbaker, [#1591](https://github.com/WP-API/WP-API/pull/1591))
+
+- Add Terms Controller collection args details.
+
+  (props @rachelbaker, [#1603](https://github.com/WP-API/WP-API/pull/1603))
+
+- Set comment author details from current user.
+
+  (props @rmccue, [#1580](https://github.com/WP-API/WP-API/pull/1580))
+
+- More hook documentation.
+
+  (props @adamsilverstein, [#1556](https://github.com/WP-API/WP-API/pull/1556), [#1560](https://github.com/WP-API/WP-API/pull/1560))
+
+- Return the trashed status of deleted posts/comments.
+
+  When a post or a comment is deleted, returns a flag to say whether it's been trashed or properly deleted.
+
+  (props @pento, [#1499](https://github.com/WP-API/WP-API/pull/1499))
+
+- In `WP_REST_Posts_Controller::update_item()`, check the post ID based on the proper post type.
+
+  (props @rachelbaker, [#1497](https://github.com/WP-API/WP-API/pull/1497))
+
+## 2.0 Beta 5.0
+
+- Load api-core as a compatibility library
+
+  Now api-core has been merged into WordPress trunk (for 4.4) we should no longer load the infrastructure code
+  when it's already available. This also fixes a fatal error for users who were on trunk.
+
+  (props @rmccue)
+
+- Switch to new mysql_to_rfc3339
+
+  (props @rmccue)
+
+- Double-check term taxonomy
+
+  (props @rmccue)
+
+- Load admin functions
+
+  This was removed from the latest beta of WordPress in the REST API infrastructure, a more long term fix is planned.
+
+  (props @joehoyle)
+
+- Add Add compat shim for renamed `rest_mysql_to_rfc3339()`
+
+  (props @danielbachhuber)
+
+- Compat shim for `wp_is_numeric_array()`
+
+  (props @danielbachhuber)
+
+- Revert Switch to register_post_type_args filter
+
+  (props @joehoyle)
+
+## 2.0 Beta 4.0
+
+- Show public user information through the user controller.
+
+  In WordPress as of [r32683](https://core.trac.wordpress.org/changeset/32683) (scheduled for 4.3), `WP_User_Query` now has support for getting users with published posts.
+
+  To match current behaviour in WordPress themes and feeds, we now expose this public user information. This includes the avatar, description, user ID, custom URL, display name, and URL, for users who have published at least one post on the site. This information is available to all clients; other fields and data for all users are still only available when authenticated.
+
+  (props @joehoyle, @rmccue, @Shelob9, [#1397][gh-1397], [#839][gh-839], [#1435][gh-1435])
+
+- Send schema in OPTIONS requests and index.
+
+  Rather than using separate `/schema` endpoints, the schema for items is now available through an OPTIONS request to the route. This means that full documentation is now available for endpoints through an OPTIONS request; this includes available methods, what data you can pass to the endpoint, and the data you'll get back.
+
+  This data is now also available in the main index and namespace indexes. Simply request the index with `context=help` to get full schema data. Warning: this response will be huge. The schema for single endpoints is also available in the collection's OPTIONS response.
+
+  **⚠️ This breaks backwards compatibility** for clients relying on schemas being at their own routes. These clients should instead send `OPTIONS` requests.
+
+  Custom endpoints can register their own schema via the `schema` option on the route. This option should live side-by-side with the endpoints (similar to `relation` in WP's meta queries), so your registration call will look something like:
+
+  ```php
+  register_rest_route( 'test-ns', '/test', array(
+    array(
+      'methods' => 'GET',
+      'callback' => 'my_test_callback',
+    ),
+
+    'schema' => 'my_schema_callback',
+  ) );
+  ```
+
+  (props @rmccue, [#1415][gh-1415], [#1222][gh-1222], [#1305][gh-1305])
+
+- Update JavaScript API for version 2.
+
+  Our fantastic JavaScript API from version 1 is now available for version 2, refreshed with the latest and greatest changes.
+
+  As a refresher: if you want to use it, simply make your script depend on `wp-api` when you enqueue it. If you want to enqueue the script manually, add `wp_enqueue_script( 'wp-api' )` to a callback on `wp_enqueue_scripts`.
+
+  (props @tlovett1, @kadamwhite, @nathanrice, [#1374][gh-1374], [#1320][gh-1320])
+
+- Embed links inside items in a collection.
+
+  Previously when fetching a collection of items, you only received the items themselves. To fetch the links as well via embedding, you needed to make a request to the single item with `_embed` set.
+
+  No longer! You can now request a collection with embeds enabled (try `/wp/v2/posts?_embed`). This will embed links inside each item, allowing you to build interface items much easier (for example, post archive pages can get featured image data at the same time).
+
+  This also applies to custom endpoints. Any endpoint that returns a list of objects will automatically have the embedding applied to objects inside the list.
+
+  (props @rmccue, [#1459][gh-1459], [#865][gh-865])
+
+- Fix potential XSS vulnerability.
+
+  Requests from other origins could potentially run code on the API domain, allowing cross-origin access to authentication cookies or similar.
+
+  Reported by @xknown on 2015-07-23.
+
+- Move `/posts` `WP_Query` vars back to `filter` param.
+
+  In version 1, we had internal `WP_Query` vars available via `filter` (e.g. `filter[s]=search+term`). For our first betas of version 2, we tried something different and exposed these directly on the endpoint. The experiment has now concluded; we didn't like this that much, so `filter` is back.
+
+  We plan on adding nicer looking arguments to collections in future releases, with a view towards being consistent across different collections. We also plan on opening up the underlying query vars via `filter` for users, comments, and terms as well.
+
+  **⚠️ This breaks backwards compatibility** for users using WP Query vars. Simply change your `x=y` parameter to `filter[x]=y`.
+
+  (props @WP-API, [#1420][gh-1420])
+
+- Respect `rest_base` for taxonomies.
+
+  **⚠️ This breaks backwards compatibility** by changing the `/wp/v2/posts/{id}/terms/post_tag` endpoint to `/wp/v2/posts/{id}/tag`.
+
+  (props @joehoyle, [#1466][gh-1466])
+
+- Add permission check for retrieving the posts collection in edit context.
+
+  By extension of the fact that getting any individual post yields a forbidden context error when the `context=edit` and the user is not authorized, the user should also not be permitted to list any post items when unauthorized.
+
+  (props @danielpunkass, [#1412][gh-1412])
+
+- Ensure the REST API URL always has a trailing slash.
+
+  Previously, when pretty permalinks were enabled, the API URL during autodiscovery looked like `/wp-json`, whereas the non-pretty permalink URL looked like `?rest_route=/`. These are now consistent, and always end with a slash character to simplify client URL building.
+
+  (props @danielpunkass, @rmccue, [#1426][gh-1426], [#1442][gh-1442], [#1455][gh-1455], [#1467][gh-1467])
+
+- Use `wp_json_encode` instead of `json_encode`
+
+  Since WordPress 4.1, `wp_json_encode` has been available to ensure encoded values are sane, and that non-UTF8 encodings are supported. We now use this function rather than doing the encode ourselves.
+
+  (props @rmccue, @pento, [#1417][gh-1417])
+
+- Add `role` to schema for users.
+
+  The available roles you can assign to a user are now available in the schema as an `enum`.
+
+  (props @joehoyle, [#1400][gh-1400])
+
+- Use the schema for validation inside the comments controller.
+
+  Previously, the schema was merely a decorative element for documentation inside the comments controller. To bring it inline with our other controllers, the schema is now used internally for validation.
+
+  (props @joehoyle, [#1422][gh-1422])
+
+- Don't set the Location header in update responses.
+
+  Previously, the Location header was sent when updating resources due to some inadvertent copypasta. This header should only be sent when creating to direct clients to the new resource, and isn't required when you're already on the correct resource.
+
+  (props @rachelbaker, [#1441][gh-1441])
+
+- Re-enable the `rest_insert_post` action hook for `WP_REST_Posts_Controller`
+
+  This was disabled during 2.0 development to avoid breaking lots of plugins on the `json_insert_post` action. Now that we've changed namespaces and are Mostly Stable (tm), we can re-enable the action.
+
+  (props @jaredcobb, [#1427][gh-1427], [#1424][gh-1424])
+
+- Fix post taxonomy terms link URLs.
+
+  When moving the routes in a previous beta, we forgot to correct the links on post objects to the new correct route. Sorry!
+
+  (props @rachelbaker, @joehoyle, [#1447][gh-1447], [#1383][gh-1383])
+
+- Use `wp_get_attachment_image_src()` on the image sizes in attachments.
+
+  Since the first versions of the API, we've been building attachment URLs via `str_replace`. Who knows why we were doing this, but it caused problems with custom attachment URLs (such as CDN-hosted images). This now correctly uses the internal functions and filters.
+
+  (props @joehoyle, [#1462][gh-1462])
+
+- Make the embed context a default, not forced.
+
+  If you want embeds to bring in full data rather than with `context=edit`, you can now change the link to specify `context=view` explicitly.
+
+  (props @rmccue, [#1464][gh-1464])
+
+- Ensure we always use the `term_taxonomy_id` and never expose `term_id` publicly.
+
+  Previously, `term_id` was inadvertently exposed in some error responses.
+
+  (props @jdolan, [#1430][gh-1430])
+
+- Fix adding alt text to attachments on creation.
+
+  Previously, this could only be set when updating an attachment, not when creating one.
+
+  (props @joehoyle, [#1398][gh-1398])
+
+- Throw an error when registering routes without a namespace.
+
+  Namespaces should **always** be provided when registering routes. We now throw a `doing_it_wrong` error when attempting to register one. (Previously, this caused a warning, or an invalid internal route.)
+
+  If you *really* need to register namespaceless routes (e.g. to replicate an existing API), call `WP_REST_Server::register_route` directly rather than using the convenience function.
+
+  (props @joehoyle, @rmccue, [#1355][gh-1355])
+
+- Show links on embeds.
+
+  Previously, links were accidentally stripped from embedded response data.
+
+  (props @rmccue, [#1472][gh-1472])
+
+- Clarify insufficient permisssion error when editing posts.
+
+  (props @danielpunkass, [#1411][gh-1411])
+
+- Improve @return inline docs for rest_ensure_response()
+
+  (props @Shelob9, [#1328][gh-1328])
+
+- Check taxonomies exist before trying to set properties.
+
+  (props @joehoyle, @rachelbaker, [#1354][gh-1354])
+
+- Update controllers to ensure we use `sanitize_callback` wherever possible.
+
+  (props @joehoyle, [#1399][gh-1399])
+
+- Add more phpDoc documentation, and correct existing documentation.
+
+  (props @Shelob9, @rmccue, [#1432][gh-1432], [#1433][gh-1433], [#1465][gh-1465])
+
+- Update testing infrastructure.
+
+  Travis now runs our coding standards tests in parallel, and now uses the new, faster container-based testing infrastructure.
+
+  (props @ntwb, @frozzare, [#1449][gh-1449], [#1457][gh-1457])
+
+[View all changes](https://github.com/WP-API/WP-API/compare/2.0-beta3...2.0-beta4)
+
+[gh-839]: https://github.com/WP-API/WP-API/issues/839
+[gh-865]: https://github.com/WP-API/WP-API/issues/865
+[gh-1222]: https://github.com/WP-API/WP-API/issues/1222
+[gh-1305]: https://github.com/WP-API/WP-API/issues/1305
+[gh-1310]: https://github.com/WP-API/WP-API/issues/1310
+[gh-1320]: https://github.com/WP-API/WP-API/issues/1320
+[gh-1328]: https://github.com/WP-API/WP-API/issues/1328
+[gh-1354]: https://github.com/WP-API/WP-API/issues/1354
+[gh-1355]: https://github.com/WP-API/WP-API/issues/1355
+[gh-1372]: https://github.com/WP-API/WP-API/issues/1372
+[gh-1374]: https://github.com/WP-API/WP-API/issues/1374
+[gh-1383]: https://github.com/WP-API/WP-API/issues/1383
+[gh-1397]: https://github.com/WP-API/WP-API/issues/1397
+[gh-1398]: https://github.com/WP-API/WP-API/issues/1398
+[gh-1399]: https://github.com/WP-API/WP-API/issues/1399
+[gh-1400]: https://github.com/WP-API/WP-API/issues/1400
+[gh-1402]: https://github.com/WP-API/WP-API/issues/1402
+[gh-1411]: https://github.com/WP-API/WP-API/issues/1411
+[gh-1412]: https://github.com/WP-API/WP-API/issues/1412
+[gh-1413]: https://github.com/WP-API/WP-API/issues/1413
+[gh-1415]: https://github.com/WP-API/WP-API/issues/1415
+[gh-1417]: https://github.com/WP-API/WP-API/issues/1417
+[gh-1420]: https://github.com/WP-API/WP-API/issues/1420
+[gh-1422]: https://github.com/WP-API/WP-API/issues/1422
+[gh-1424]: https://github.com/WP-API/WP-API/issues/1424
+[gh-1426]: https://github.com/WP-API/WP-API/issues/1426
+[gh-1427]: https://github.com/WP-API/WP-API/issues/1427
+[gh-1430]: https://github.com/WP-API/WP-API/issues/1430
+[gh-1432]: https://github.com/WP-API/WP-API/issues/1432
+[gh-1433]: https://github.com/WP-API/WP-API/issues/1433
+[gh-1435]: https://github.com/WP-API/WP-API/issues/1435
+[gh-1441]: https://github.com/WP-API/WP-API/issues/1441
+[gh-1442]: https://github.com/WP-API/WP-API/issues/1442
+[gh-1447]: https://github.com/WP-API/WP-API/issues/1447
+[gh-1449]: https://github.com/WP-API/WP-API/issues/1449
+[gh-1455]: https://github.com/WP-API/WP-API/issues/1455
+[gh-1455]: https://github.com/WP-API/WP-API/issues/1455
+[gh-1457]: https://github.com/WP-API/WP-API/issues/1457
+[gh-1459]: https://github.com/WP-API/WP-API/issues/1459
+[gh-1462]: https://github.com/WP-API/WP-API/issues/1462
+[gh-1464]: https://github.com/WP-API/WP-API/issues/1464
+[gh-1465]: https://github.com/WP-API/WP-API/issues/1465
+[gh-1466]: https://github.com/WP-API/WP-API/issues/1466
+[gh-1467]: https://github.com/WP-API/WP-API/issues/1467
+[gh-1472]: https://github.com/WP-API/WP-API/issues/1472
+
+## 2.0 Beta 3.0
+
+- Add ability to declare sanitization and default options for schema fields.
+
+  The `arg_options` array can be used to declare the sanitization callback,
+  default value, or requirement of a field.
+
+  (props @joehoyle, [#1345][gh-1345])
+  (props @joehoyle, [#1346][gh-1346])
+
+- Expand supported parameters for creating and updating Comments.
+
+  (props @rachelbaker, [#1245][gh-1245])
+
+- Declare collection parameters for Terms of a Post.
+
+  Define the available collection parameters in `get_collection_params()` and
+  allow Terms of a Post to be queried by term order.
+
+  (props @danielbachhuber, [#1332][gh-1332])
+
+- Improve the Attachment error message for an invalid Content-Disposition
+
+  (props @danielbachhuber, [#1317][gh-1317])
+
+- Return 200 status when updating Attachments, Comments, and Users.
+
+  (props @rachelbaker, [#1348][gh-1348])
+
+- Remove unnecessary `handle_format_param()` method.
+
+  (props @danielbachhuber, [#1331][gh-1331])
+
+- Add `author_avatar_url` field to the Comment response and schema.
+
+  (props @rachelbaker [#1327][gh-1327])
+
+- Introduce `rest_do_request()` for making REST requests internally.
+
+  (props @danielbachhuber, [#1333][gh-1333])
+
+- Remove unused DateTime class.
+
+  (props @rmccue, [#1314][gh-1314])
+
+- Add inline documentation for `$wp_rest_server` global.
+
+  (props @Shelob9, [#1324][gh-1324])
+
+  [View all changes](https://github.com/WP-API/WP-API/compare/2.0-beta2...2.0-beta3)
+  [gh-1245]: https://github.com/WP-API/WP-API/issues/1245
+  [gh-1314]: https://github.com/WP-API/WP-API/issues/1314
+  [gh-1317]: https://github.com/WP-API/WP-API/issues/1317
+  [gh-1318]: https://github.com/WP-API/WP-API/issues/1318
+  [gh-1324]: https://github.com/WP-API/WP-API/issues/1324
+  [gh-1326]: https://github.com/WP-API/WP-API/issues/1326
+  [gh-1327]: https://github.com/WP-API/WP-API/issues/1327
+  [gh-1331]: https://github.com/WP-API/WP-API/issues/1331
+  [gh-1332]: https://github.com/WP-API/WP-API/issues/1332
+  [gh-1333]: https://github.com/WP-API/WP-API/issues/1333
+  [gh-1345]: https://github.com/WP-API/WP-API/issues/1345
+  [gh-1346]: https://github.com/WP-API/WP-API/issues/1346
+  [gh-1347]: https://github.com/WP-API/WP-API/issues/1347
+  [gh-1348]: https://github.com/WP-API/WP-API/issues/1348
+
+## 2.0 Beta 2.0
+
+- Load the WP REST API before the main query runs.
+
+  The `rest_api_loaded` function now hooks into the `parse_request` action.
+  This change prevents the main query from being run on every request and
+  allows sites to set `WP_USE_THEMES` to `false`.  Previously, the main query
+  was always being run (`SELECT * FROM wp_posts LIMIT 10`), even though the
+  result was never used and couldn't be cached.
+
+  (props @rmccue, [#1270][gh-1270])
+
+- Register a new field on an existing WordPress object type.
+
+  Introduces `register_api_field()` to add a field to an object and
+  its schema.
+
+  (props @joehoyle, @rachelbaker, [#927][gh-927])
+  (props @joehoyle, [#1207][gh-1207])
+  (props @joehoyle, [#1243][gh-1243])
+
+- Add endpoints for viewing, creating, updating, and deleting Terms for a Post.
+
+  The new `WP_REST_Posts_Terms_Controller` class controller supports routes for
+  Terms that belong to a Post.
+
+  (props @joehoyle, @danielbachhuber, [#1216][gh-1216])
+
+- Add pagination headers for collection queries.
+
+  The `X-WP-Total` and `X-WP-TotalPages` are now present in terms, comments,
+  and users collection responses.
+
+  (props @danielbachhuber, [#1182][gh-1182])
+  (props @danielbachhuber, [#1191][gh-1191])
+  (props @danielbachhuber, @joehoyle, [#1197][gh-1197])
+
+- List registered namespaces in the index for feature detection.
+
+  The index (`/wp-json` by default) now contains a list of the available
+  namespaces. This allows for simple feature detection. You can grab the index
+  and check namespaces for `wp/v3` or `pluginname/v2`, which indicate the
+  supported endpoints on the site.
+
+  (props @rmccue,, [#1283][gh-1283])
+
+- Standardize link property relations and support embedding for all resources.
+
+  Change link properties to use IANA-registered relations.  Also adds embedding
+  support to Attachments, Comments and Terms.
+
+  (props @rmccue, @rachelbaker, [#1284][gh-1284])
+
+- Add support for Composer dependency management.
+
+  Allows you to recursively install/update the WP REST API inside of WordPress
+  plugins or themes.
+
+  (props @QWp6t, [#1157][gh-1157])
+
+- Return full objects in the delete response.
+
+  Instead of returning a random message when deleting a Post, Comment, Term, or
+  User provide the original resource data.
+
+  (props @danielbachhuber, [#1253][gh-1253])
+  (props @danielbachhuber, [#1254][gh-1254])
+  (props @danielbachhuber, [#1255][gh-1255])
+  (props @danielbachhuber, [#1256][gh-1256])
+
+- Return programmatically readable error messages for invalid or missing
+  required parameters.
+
+  (props @joehoyle, [#1175][gh-1175])
+
+- Declare supported arguments for Comment and User collection queries.
+
+  (props @danielbachhuber, [#1211][gh-1211])
+  (props @danielbachhuber, [#1217][gh-1217])
+
+- Automatically validate parameters based on Schema data.
+
+  (props @joehoyle, [#1128][gh-1128])
+
+- Use the `show_in_rest` attributes for exposing Taxonomies.
+
+  (props @joehoyle, [#1279][gh-1279])
+
+- Handle `parent` when creating or updating a Term.
+
+  (props @joehoyle, [#1221][gh-1221])
+
+- Limit fields returned in `embed` context User responses.
+
+  (props @rachelbaker, [#1251][gh-1251])
+
+- Only include `parent` in term response when tax is hierarchical.
+
+  (props @danielbachhuber, [#1189][gh-1189])
+
+- Fix bug in creating comments if `type` was not set.
+
+  (props @rachelbaker, [#1244][gh-1244])
+
+- Rename `post_name` field to `post_slug`.
+
+  (props @danielbachhuber, [#1235][gh-1235])
+
+- Add check when creating a user to verify the provided role is valid.
+
+  (props @rachelbaker, [#1267][gh-1267])
+
+- Add link properties to the Post Status response.
+
+  (props @joehoyle, [#1243][gh-1243])
+
+- Return `0` for `parent` in Post response instead of `null`.
+
+  (props @danielbachhuber, [#1269][gh-1269])
+
+- Only link `author` when there's a valid author
+
+  (props @danielbachhuber, [#1203][gh-1203])
+
+- Only permit querying by parent term when tax is hierarchical.
+
+  (props @danielbachhuber, [#1219][gh-1219])
+
+- Only permit deleting posts of the proper type
+
+  (props @danielbachhuber, [#1257][gh-1257])
+
+- Set pagination headers even when no found posts.
+
+  (props @danielbachhuber, [#1209][gh-1209])
+
+- Correct prefix in `rest_request_parameter_order` filter.
+
+  (props @quasel, [#1158][gh-1158])
+
+- Retool `WP_REST_Terms_Controller` to follow Posts controller pattern.
+
+  (props @danielbachhuber, [#1170][gh-1170])
+
+- Remove unused `accept_json argument` from the `register_routes` method.
+
+  (props @quasel, [#1160][gh-1160])
+
+- Fix typo in `sanitize_params` inline documentation.
+
+  (props @Shelob9, [#1226][gh-1226])
+
+- Remove commented out code in dispatch method.
+
+  (props @rachelbaker, [#1162][gh-1162])
+
+
+[View all changes](https://github.com/WP-API/WP-API/compare/2.0-beta1.1...2.0-beta2)
+[gh-927]: https://github.com/WP-API/WP-API/issues/927
+[gh-1128]: https://github.com/WP-API/WP-API/issues/1128
+[gh-1157]: https://github.com/WP-API/WP-API/issues/1157
+[gh-1158]: https://github.com/WP-API/WP-API/issues/1158
+[gh-1160]: https://github.com/WP-API/WP-API/issues/1160
+[gh-1162]: https://github.com/WP-API/WP-API/issues/1162
+[gh-1168]: https://github.com/WP-API/WP-API/issues/1168
+[gh-1170]: https://github.com/WP-API/WP-API/issues/1170
+[gh-1171]: https://github.com/WP-API/WP-API/issues/1171
+[gh-1175]: https://github.com/WP-API/WP-API/issues/1175
+[gh-1176]: https://github.com/WP-API/WP-API/issues/1176
+[gh-1177]: https://github.com/WP-API/WP-API/issues/1177
+[gh-1181]: https://github.com/WP-API/WP-API/issues/1181
+[gh-1182]: https://github.com/WP-API/WP-API/issues/1182
+[gh-1188]: https://github.com/WP-API/WP-API/issues/1188
+[gh-1189]: https://github.com/WP-API/WP-API/issues/1189
+[gh-1191]: https://github.com/WP-API/WP-API/issues/1191
+[gh-1197]: https://github.com/WP-API/WP-API/issues/1197
+[gh-1200]: https://github.com/WP-API/WP-API/issues/1200
+[gh-1203]: https://github.com/WP-API/WP-API/issues/1203
+[gh-1207]: https://github.com/WP-API/WP-API/issues/1207
+[gh-1209]: https://github.com/WP-API/WP-API/issues/1209
+[gh-1210]: https://github.com/WP-API/WP-API/issues/1210
+[gh-1211]: https://github.com/WP-API/WP-API/issues/1211
+[gh-1216]: https://github.com/WP-API/WP-API/issues/1216
+[gh-1217]: https://github.com/WP-API/WP-API/issues/1217
+[gh-1219]: https://github.com/WP-API/WP-API/issues/1219
+[gh-1221]: https://github.com/WP-API/WP-API/issues/1221
+[gh-1226]: https://github.com/WP-API/WP-API/issues/1226
+[gh-1235]: https://github.com/WP-API/WP-API/issues/1235
+[gh-1243]: https://github.com/WP-API/WP-API/issues/1243
+[gh-1244]: https://github.com/WP-API/WP-API/issues/1244
+[gh-1249]: https://github.com/WP-API/WP-API/issues/1249
+[gh-1251]: https://github.com/WP-API/WP-API/issues/1251
+[gh-1253]: https://github.com/WP-API/WP-API/issues/1253
+[gh-1254]: https://github.com/WP-API/WP-API/issues/1254
+[gh-1255]: https://github.com/WP-API/WP-API/issues/1255
+[gh-1256]: https://github.com/WP-API/WP-API/issues/1256
+[gh-1257]: https://github.com/WP-API/WP-API/issues/1257
+[gh-1259]: https://github.com/WP-API/WP-API/issues/1259
+[gh-1267]: https://github.com/WP-API/WP-API/issues/1267
+[gh-1268]: https://github.com/WP-API/WP-API/issues/1268
+[gh-1269]: https://github.com/WP-API/WP-API/issues/1269
+[gh-1270]: https://github.com/WP-API/WP-API/issues/1270
+[gh-1276]: https://github.com/WP-API/WP-API/issues/1276
+[gh-1277]: https://github.com/WP-API/WP-API/issues/1277
+[gh-1279]: https://github.com/WP-API/WP-API/issues/1279
+[gh-1283]: https://github.com/WP-API/WP-API/issues/1283
+[gh-1284]: https://github.com/WP-API/WP-API/issues/1284
+[gh-1295]: https://github.com/WP-API/WP-API/issues/1295
+[gh-1301]: https://github.com/WP-API/WP-API/issues/1301
+
+
+## 2.0 Beta 1.1
+
+- Fix user access security vulnerability.
+
+  Authenticated users were able to escalate their privileges bypassing the
+  expected capabilities check.
+
+  Reported by @kacperszurek on 2015-05-16.
+
+
+## 2.0 Beta 1
+
+- Avoid passing server to the controller each time
+
+  (props @rmccue, [#543][gh-543])
+
+- Unify naming of methods across classes
+
+  (props @danielbachhuber, [#546][gh-546])
+
+- Disable unit tests while we move things around
+
+  (props @danielbachhuber, [#548][gh-548])
+
+- Mock code to represent new Resources
+
+  (props @danielbachhuber, [#549][gh-549])
+
+- WP_JSON_Controller POC
+
+  (props @danielbachhuber, [#556][gh-556])
+
+- Add request object
+
+  (props @rmccue, [#563][gh-563])
+
+- Update routes for new-style registration
+
+  (props @rmccue, [#564][gh-564])
+
+- Add compatibility with v1 routing
+
+  (props @rmccue, [#565][gh-565])
+
+- Remove Last-Modified and If-Unmodified-Since
+
+  (props @rmccue, [#566][gh-566])
+
+- Allow multiple route registration
+
+  (props @rmccue, [#586][gh-586])
+
+- Use https in test setup
+
+  (props @danielbachhuber, [#588][gh-588])
+
+- Terms Controller Redux
+
+  (props @danielbachhuber, [#579][gh-579])
+
+- Add hypermedia functionality to the response
+
+  (props @rmccue, @rachelbaker, [#570][gh-570])
+
+- Initial pass at new style Users Controller
+
+  (props @rachelbaker, [#603][gh-603])
+
+- Drop old Users class
+
+  (props @danielbachhuber, [#619][gh-619])
+
+- Fix passing array to 'methods' are in register_json_route()
+
+  (props @joehoyle, [#620][gh-620])
+
+- Allow 'ignore_sticky_posts' filter #415
+
+  (props @Shelob9, [#612][gh-612], [#415][gh-415])
+
+- Initial Extras.php commit
+
+  (props @NikV, [#575][gh-575])
+
+- Allow filtering response before returning
+
+  (props @danielbachhuber, [#573][gh-573])
+
+- Parse JSON data from the request
+
+  (props @rmccue, [#626][gh-626])
+
+- Remove old taxonomies controller
+
+  (props @danielbachhuber, [#637][gh-637])
+
+- Make our code DRY by consolidating use of strtoupper
+
+  (props @danielbachhuber, [#589][gh-589])
+
+- Move WP_Test_JSON_Testcase to a properly named file
+
+  (props @danielbachhuber, [#643][gh-643])
+
+- Speed up builds by only running against MS once
+
+  (props @danielbachhuber, [#638][gh-638])
+
+- `->prepare_post()` should be public
+
+  (props @staylor, [#645][gh-645])
+
+- Get by and return `term_taxonomy_id`
+
+  (props @danielbachhuber, [#648][gh-648])
+
+- Base class with standard test methods for every controller
+
+  (props @danielbachhuber, [#649][gh-649])
+
+- Unused arguments
+
+  (props @staylor, [#647][gh-647])
+
+- JS should be under version control
+
+  (props @staylor, [#644][gh-644])
+
+- Register multiple routes for users correctly
+
+  (props @rmccue, [#654][gh-654])
+
+- Check get_post_type_object() returns an object before using it
+
+  (props @NateWr, [#656][gh-656])
+
+- Run multisite test against PHP 5.2
+
+  (props @danielbachhuber, [#659][gh-659])
+
+- Pass the edit context when returning the create or update response. Fixes
+#661
+
+  (props @rachelbaker, [#664][gh-664], [#661][gh-661])
+
+- Check for errors when responding to create
+
+  (props @rmccue, [#652][gh-652])
+
+- Fix bug in check_required_parameters where JSON params were missed
+
+  (props @rachelbaker, [#673][gh-673])
+
+- Fix parameter handling and improve Users Controller tests
+
+  (props @rachelbaker, [#675][gh-675])
+
+- Check that param is null
+
+  (props @danielbachhuber, [#678][gh-678])
+
+- Parse URL-encoded body with PUT requests
+
+  (props @rmccue, [#681][gh-681])
+
+- End to end testing for users
+
+  (props @rmccue, [#682][gh-682])
+
+- End to end test coverage of Terms Controller
+
+  (props @danielbachhuber, @rmccue, [#676][gh-676])
+
+- Add ability to wrap response in an envelope
+
+  (props @Japh, @rmccue, [#628][gh-628])
+
+- Wrap up PUT handling in Users Controller
+
+  (props @rachelbaker, [#683][gh-683])
+
+- ID shouldn't be a param on update user endpoint
+
+  (props @joehoyle, [#692][gh-692])
+
+- Clean up Terms controller
+
+  (props @danielbachhuber, [#696][gh-696])
+
+- Remove mis-placed duplicate Users Delete route and id parameter
+
+  (props @rachelbaker, [#700][gh-700])
+
+- Fields cleanup for User controller
+
+  (props @danielbachhuber, [#701][gh-701])
+
+- Throw an error when a user tries to update to an existing user's email
+
+  (props @danielbachhuber, [#705][gh-705])
+
+- `PUT User` shouldn't permit using existing `user_login` or `user_nicename`
+
+  (props @danielbachhuber, [#707][gh-707])
+
+- Change return value of WP_JSON_Users_Controller::get_item.
+
+  (props @rachelbaker, [#712][gh-712])
+
+- Add the ability to specify default param values in register_json_route
+
+  (props @WP-API, [#715][gh-715])
+
+- Merge JS into main repo
+
+  (props @tlovett1, [#730][gh-730])
+
+- Make the "required" param on args optional
+
+  (props @joehoyle, @rachelbaker, [#728][gh-728])
+
+- Always allow JSON data for POST and PUT requests
+
+  (props @rachelbaker, [#731][gh-731])
+
+- Initial pass at new style Posts Controller
+
+  (props @rachelbaker, [#684][gh-684])
+
+- Drop required argument declaration
+
+  (props @danielbachhuber, [#736][gh-736])
+
+- Update post format after post has been updated
+
+  (props @danielbachhuber, [#737][gh-737])
+
+- Allow the title to be set via title.raw
+
+  (props @iseulde, [#741][gh-741])
+
+- Fix some incompatible interfaces
+
+  (props @staylor, [#742][gh-742])
+
+- Full Test Coverage for Users Controller
+
+  (props @rachelbaker, [#744][gh-744])
+
+- Refer to BaseCollection statically instead of via this.constructor
+
+  (props @tlovett1, [#750][gh-750])
+
+- Adjustments to Users Controller DocBlocks
+
+  (props @rachelbaker, [#743][gh-743])
+
+- Default `args` to an empty array
+
+  (props @danielbachhuber, [#758][gh-758])
+
+- Do not require type parameter to be set when updating a Post
+
+  (props @rachelbaker, [#761][gh-761])
+
+- Remove from docs the "post_type" filter parameter for /posts endpoint
+
+  (props @NateWr, [#666][gh-666])
+
+- Resolve regressions in Posts Controller
+
+  (props @rachelbaker, [#753][gh-753])
+
+- WP_Json_Server::dispatch() should always return a WP_JSON_Response
+
+  (props @joehoyle, [#714][gh-714])
+
+- Update Timeline note
+
+  (props @tapsboy, [#774][gh-774])
+
+- Make json_pre_dispatch and json_post_dispatch consistent
+
+  (props @joehoyle, [#786][gh-786])
+
+- Normalize our test classes setUP and tearDown methods
+
+  (props @rachelbaker, [#794][gh-794])
+
+- Comments Endpoints
+
+  (props @joehoyle, @rachelbaker, [#693][gh-693])
+
+- Correct /posts/ endpoint read post permission logic
+
+  (props @rachelbaker, [#805][gh-805])
+
+- Ensure global $post has proper state when the json_prepare_post filter f...
+
+  (props @ericandrewlewis, [#823][gh-823])
+
+- Adds missing description field to the Taxonomy response
+
+  (props @rachelbaker, [#826][gh-826])
+
+- Posts controller abstraction
+
+  (props @danielbachhuber, [#820][gh-820])
+
+- Remove old Pages and CustomPostType classes no longer in use
+
+  (props @danielbachhuber, [#831][gh-831])
+
+- Add `featured_image` attribute for post types that support `thumbnails`
+
+  (props @danielbachhuber, [#832][gh-832])
+
+- Specify Capability in Route
+
+  (props @joehoyle, [#602][gh-602])
+
+- Posts Controller Headers and Links Fixes
+
+  (props @rachelbaker, [#836][gh-836])
+
+- Don't noop `future` status. It's confusing
+
+  (props @danielbachhuber, [#841][gh-841])
+
+- Remove unused $request parameter from prepare_links method.
+
+  (props @rachelbaker, [#842][gh-842])
+
+- Expose basic author details when user has published posts
+
+  (props @danielbachhuber, [#838][gh-838])
+
+- Make `get_post_type_base()` public so we can DRY
+
+  (props @danielbachhuber, [#845][gh-845])
+
+- Remove Duplicate Logic for Post Type Attributes
+
+  (props @rachelbaker, [#853][gh-853])
+
+- Move infrastructure classes to `lib/infrastructure`, part one
+
+  (props @danielbachhuber, [#872][gh-872])
+
+- Passing a value for the slug parameter should update the post_name.
+
+  (props @rachelbaker, [#883][gh-883])
+
+- Break Pages tests into a separate class
+
+  (props @danielbachhuber, [#870][gh-870])
+
+- Empty checks in Posts Controller make setting values to Falsy impossible
+
+  (props @joehoyle, [#885][gh-885])
+
+- Change project name to WP REST API in plugin name and Readme title.
+
+  (props @rachelbaker, [#876][gh-876])
+
+- Return 200 and an empty array for valid queries with 0 results.
+
+  (props @rachelbaker, [#888][gh-888])
+
+- Include the taxonomy in the term response
+
+  (props @danielbachhuber, [#891][gh-891])
+
+- JSON Schemas for our Controllers, second attempt
+
+  (props @danielbachhuber, [#844][gh-844])
+
+- From the left with love
+
+  (props @MichaelArestad, [#896][gh-896])
+
+- Add `link` field to Users, Comments and Terms
+
+  (props @danielbachhuber, [#897][gh-897])
+
+- Fix flipped assertions
+
+  (props @danielbachhuber, [#902][gh-902])
+
+- Add missing break statement
+
+  (props @danielbachhuber, [#905][gh-905])
+
+- Move all of our endpoint controllers to `lib/endpoints`
+
+  (props @danielbachhuber, [#906][gh-906])
+
+- Always include `guid` in Post and Page schemas
+
+  (props @danielbachhuber, [#907][gh-907])
+
+- If post type doesn't match controller post type, throw 404
+
+  (props @danielbachhuber, [#908][gh-908])
+
+- Allow post type attributes to be set based on presence in schema
+
+  (props @danielbachhuber, [#910][gh-910])
+
+- Updating another post field shouldn't change sticky status
+
+  (props @danielbachhuber, [#911][gh-911])
+
+- Expose post type data at `/types`
+
+  (props @danielbachhuber, [#914][gh-914])
+
+- Always defer to controller for post type
+
+  (props @danielbachhuber, [#913][gh-913])
+
+- Add `template` parameter to Page response
+
+  (props @danielbachhuber, [#909][gh-909])
+
+- Convert /media to new controller pattern
+
+  (props @danielbachhuber, [#904][gh-904])
+
+- Remove v1.0 Posts (and Media) controller
+
+  (props @WP-API, [#923][gh-923])
+
+- Clean up taxonomies controller tests by running through dispatch; add schema
+
+  (props @danielbachhuber, [#919][gh-919])
+
+- Separate permissions logic for comments
+
+  (props @joehoyle, [#854][gh-854])
+
+- `wp-json.php` isn't needed anymore
+
+  (props @danielbachhuber, [#931][gh-931])
+
+- Tweak the post controller
+
+  (props @rmccue, [#936][gh-936])
+
+- Switch CORS headers callback to new action
+
+  (props @rmccue, [#935][gh-935])
+
+- Remove `_id` suffix from field names
+
+  (props @danielbachhuber, [#941][gh-941])
+
+- Add `author_ip`, `author_user_agent` and `karma` fields to Comment
+
+  (props @danielbachhuber, [#946][gh-946])
+
+- Explicitly test that these additional comment fields aren't present
+
+  (props @danielbachhuber, [#947][gh-947])
+
+- Allow `title` to be set to empty string in request
+
+  (props @danielbachhuber, [#953][gh-953])
+
+- Use real URLs instead of query_params attribute
+
+  (props @rmccue, [#958][gh-958])
+
+- Use `wp_filter_post_kses()` instead of `wp_kses_post()` on insert
+
+  (props @danielbachhuber, [#917][gh-917])
+
+- Add missing core path to post endpoint link hrefs.
+
+  (props @rachelbaker, [#966][gh-966])
+
+- Allow HTTP method to be overwritten by HTTP_X_HTTP_METHOD_OVERRIDE
+
+  (props @tlovett1, [#967][gh-967])
+
+- Fix attachment caption and description fields
+
+  (props @danielbachhuber, [#968][gh-968])
+
+- Move validation to the `WP_JSON_Request` class
+
+  (props @danielbachhuber, [#971][gh-971])
+
+- Move the Route Registering to the Controllers
+
+  (props @joehoyle, [#970][gh-970])
+
+- Correct test method spelling of permission.
+
+  (props @rachelbaker, [#973][gh-973])
+
+- Permission abstractions 2
+
+  (props @joehoyle, [#987][gh-987])
+
+- If an invalid date is supplied to create / update post, return an error
+
+  (props @joehoyle, [#1000][gh-1000])
+
+- Update README.md
+
+  (props @hubdotcom, [#1006][gh-1006])
+
+- Add embeddable attachments to Post response _links
+
+  (props @rachelbaker, [#1026][gh-1026])
+
+- Throw error if requesting user doesn't have capability for context
+
+  (props @danielbachhuber, [#1033][gh-1033])
+
+- `/wp/statuses` endpoint, modeled after `/wp/types`
+
+  (props @danielbachhuber, [#1039][gh-1039])
+
+- Turn post types from array to object, with name as key
+
+  (props @danielbachhuber, [#1042][gh-1042])
+
+- Add missing response fields to the user schema.
+
+  (props @rachelbaker, [#1034][gh-1034])
+
+- Setting a post to be sticky AND password protected should fail
+
+  (props @joehoyle, [#1044][gh-1044])
+
+- Use appropriate functions when creating users on multisite
+
+  (props @danielbachhuber, [#1043][gh-1043])
+
+- Define context in which each schema field appears
+
+  (props @danielbachhuber, [#1046][gh-1046])
+
+- Use schema abstraction to limit which user fields are exposed per context
+
+  (props @danielbachhuber, [#1049][gh-1049])
+
+- Run Statuses, Types, and Taxonomies through our context filter
+
+  (props @danielbachhuber, [#1050][gh-1050])
+
+- Run Terms controller through schema context filter
+
+  (props @danielbachhuber, [#1051][gh-1051])
+
+- Don't allow contributors to set sticky on posts
+
+  (props @joehoyle, [#1052][gh-1052])
+
+- Return correct response code from wp_insert_post() error
+
+  (props @joehoyle, [#999][gh-999])
+
+- Move the permissions checks for password and author into the permissions
+callback
+
+  (props @joehoyle, [#1054][gh-1054])
+
+- Use full Post schema to filter fields based on context
+
+  (props @danielbachhuber, [#1053][gh-1053])
+
+- Allow WP_JSON_Server::send_header()/send_headers() to be accessed publicly
+
+  (props @johnbillion, [#1059][gh-1059])
+
+- Remove unnecessary sticky posts abstraction
+
+  (props @danielbachhuber, [#1064][gh-1064])
+
+- Re-enable the Post endpoint filters
+
+  (props @rachelbaker, [#1028][gh-1028])
+
+- Fix the format of the args when building them from the Schema
+
+  (props @joehoyle, [#1066][gh-1066])
+
+- Add more tests for the server class
+
+  (props @rmccue, [#685][gh-685])
+
+- Fix error with OPTIONS requests
+
+  (props @rmccue, [#1091][gh-1091])
+
+- Ensure the JSON endpoint URL is properly escaped
+
+  (props @johnbillion, [#1097][gh-1097])
+
+- Correct a bunch of filter docs in WP_JSON_Server
+
+  (props @johnbillion, [#1098][gh-1098])
+
+- Require `moderate_comments` capability to context=edit a Comment
+
+  (props @danielbachhuber, @joehoyle, [#951][gh-951])
+
+- Add all the permission check functions to the base controller for better
+consistancy and help to subclasses
+
+  (props @joehoyle, [#1104][gh-1104])
+
+- `author` is the Comment attribute with user ID
+
+  (props @danielbachhuber, [#1106][gh-1106])
+
+- Fix copy pasta in the schema checks
+
+  (props @danielbachhuber, [#1111][gh-1111])
+
+- When `context=edit`, confirm user can `manage_comments`
+
+  (props @danielbachhuber, [#1112][gh-1112])
+
+- Abstract revisions to dedicated controller; only include revisioned fields
+
+  (props @danielbachhuber, [#1110][gh-1110])
+
+- Add Embeddable Taxonomy Term Links to the Post Response
+
+  (props @rachelbaker, [#1048][gh-1048])
+
+- Increase Terms Controller test coverage
+
+  (props @rachelbaker, [#1117][gh-1117])
+
+- Rename the `wp_json_server_before_serve` to `wp_json_init`
+
+  (props @joehoyle, [#1105][gh-1105])
+
+- Drop revision embedding from posts controller; link instead
+
+  (props @danielbachhuber, [#1121][gh-1121])
+
+- Add security section to our README
+
+  (props @rmccue, [#1123][gh-1123])
+
+- Missing @param inline docs in main plugin file.
+
+  (props @Shelob9, [#1122][gh-1122])
+
+- Ensure post deletion is idempotent
+
+  (props @rmccue, [#959][gh-959])
+
+- Support for validation / sanitize callbacks in arguments
+
+  (props @joehoyle, [#989][gh-989])
+
+- Display links in collections
+
+  (props @rmccue, @rachelbaker, [#937][gh-937])
+
+- Sanitize args using new args API
+
+  (props @joehoyle, [#1129][gh-1129])
+
+- Use the user fields from the item schema as the request args in route
+registration
+
+  (props @joehoyle, [#1109][gh-1109])
+
+- Build the array of args for /wp/posts from the allowed query vars
+
+  (props @joehoyle, [#1108][gh-1108])
+
+- Show all the invalid param errors at once
+
+  (props @joehoyle, [#1131][gh-1131])
+
+- Readonly attribute in schema to exclude from args array
+
+  (props @joehoyle, [#1133][gh-1133])
+
+- Use the `required` flags from the schema for CREATE post
+
+  (props @joehoyle, [#1132][gh-1132])
+
+- Only return 201 on Create. Update should be 200
+
+  (props @danielbachhuber, [#1142][gh-1142])
+
+- Convert meta endpoints to new-style
+
+  (props @rmccue, @rachelbaker, [#960][gh-960])
+
+- Specific error codes for permissions failures
+
+  (props @joehoyle, [#1148][gh-1148])
+
+[View all changes](https://github.com/WP-API/WP-API/compare/1.2.1...2.0-beta1)
+[gh-347]: https://github.com/WP-API/WP-API/issues/347
+[gh-378]: https://github.com/WP-API/WP-API/issues/378
+[gh-401]: https://github.com/WP-API/WP-API/issues/401
+[gh-415]: https://github.com/WP-API/WP-API/issues/415
+[gh-448]: https://github.com/WP-API/WP-API/issues/448
+[gh-474]: https://github.com/WP-API/WP-API/issues/474
+[gh-481]: https://github.com/WP-API/WP-API/issues/481
+[gh-524]: https://github.com/WP-API/WP-API/issues/524
+[gh-528]: https://github.com/WP-API/WP-API/issues/528
+[gh-543]: https://github.com/WP-API/WP-API/issues/543
+[gh-546]: https://github.com/WP-API/WP-API/issues/546
+[gh-548]: https://github.com/WP-API/WP-API/issues/548
+[gh-549]: https://github.com/WP-API/WP-API/issues/549
+[gh-550]: https://github.com/WP-API/WP-API/issues/550
+[gh-556]: https://github.com/WP-API/WP-API/issues/556
+[gh-563]: https://github.com/WP-API/WP-API/issues/563
+[gh-564]: https://github.com/WP-API/WP-API/issues/564
+[gh-565]: https://github.com/WP-API/WP-API/issues/565
+[gh-566]: https://github.com/WP-API/WP-API/issues/566
+[gh-567]: https://github.com/WP-API/WP-API/issues/567
+[gh-570]: https://github.com/WP-API/WP-API/issues/570
+[gh-573]: https://github.com/WP-API/WP-API/issues/573
+[gh-575]: https://github.com/WP-API/WP-API/issues/575
+[gh-579]: https://github.com/WP-API/WP-API/issues/579
+[gh-586]: https://github.com/WP-API/WP-API/issues/586
+[gh-588]: https://github.com/WP-API/WP-API/issues/588
+[gh-589]: https://github.com/WP-API/WP-API/issues/589
+[gh-591]: https://github.com/WP-API/WP-API/issues/591
+[gh-595]: https://github.com/WP-API/WP-API/issues/595
+[gh-602]: https://github.com/WP-API/WP-API/issues/602
+[gh-603]: https://github.com/WP-API/WP-API/issues/603
+[gh-612]: https://github.com/WP-API/WP-API/issues/612
+[gh-619]: https://github.com/WP-API/WP-API/issues/619
+[gh-620]: https://github.com/WP-API/WP-API/issues/620
+[gh-626]: https://github.com/WP-API/WP-API/issues/626
+[gh-628]: https://github.com/WP-API/WP-API/issues/628
+[gh-630]: https://github.com/WP-API/WP-API/issues/630
+[gh-637]: https://github.com/WP-API/WP-API/issues/637
+[gh-638]: https://github.com/WP-API/WP-API/issues/638
+[gh-643]: https://github.com/WP-API/WP-API/issues/643
+[gh-644]: https://github.com/WP-API/WP-API/issues/644
+[gh-645]: https://github.com/WP-API/WP-API/issues/645
+[gh-647]: https://github.com/WP-API/WP-API/issues/647
+[gh-648]: https://github.com/WP-API/WP-API/issues/648
+[gh-649]: https://github.com/WP-API/WP-API/issues/649
+[gh-652]: https://github.com/WP-API/WP-API/issues/652
+[gh-654]: https://github.com/WP-API/WP-API/issues/654
+[gh-656]: https://github.com/WP-API/WP-API/issues/656
+[gh-659]: https://github.com/WP-API/WP-API/issues/659
+[gh-661]: https://github.com/WP-API/WP-API/issues/661
+[gh-664]: https://github.com/WP-API/WP-API/issues/664
+[gh-666]: https://github.com/WP-API/WP-API/issues/666
+[gh-673]: https://github.com/WP-API/WP-API/issues/673
+[gh-675]: https://github.com/WP-API/WP-API/issues/675
+[gh-676]: https://github.com/WP-API/WP-API/issues/676
+[gh-678]: https://github.com/WP-API/WP-API/issues/678
+[gh-681]: https://github.com/WP-API/WP-API/issues/681
+[gh-682]: https://github.com/WP-API/WP-API/issues/682
+[gh-683]: https://github.com/WP-API/WP-API/issues/683
+[gh-684]: https://github.com/WP-API/WP-API/issues/684
+[gh-685]: https://github.com/WP-API/WP-API/issues/685
+[gh-692]: https://github.com/WP-API/WP-API/issues/692
+[gh-693]: https://github.com/WP-API/WP-API/issues/693
+[gh-696]: https://github.com/WP-API/WP-API/issues/696
+[gh-700]: https://github.com/WP-API/WP-API/issues/700
+[gh-701]: https://github.com/WP-API/WP-API/issues/701
+[gh-705]: https://github.com/WP-API/WP-API/issues/705
+[gh-707]: https://github.com/WP-API/WP-API/issues/707
+[gh-712]: https://github.com/WP-API/WP-API/issues/712
+[gh-714]: https://github.com/WP-API/WP-API/issues/714
+[gh-715]: https://github.com/WP-API/WP-API/issues/715
+[gh-722]: https://github.com/WP-API/WP-API/issues/722
+[gh-728]: https://github.com/WP-API/WP-API/issues/728
+[gh-730]: https://github.com/WP-API/WP-API/issues/730
+[gh-731]: https://github.com/WP-API/WP-API/issues/731
+[gh-736]: https://github.com/WP-API/WP-API/issues/736
+[gh-737]: https://github.com/WP-API/WP-API/issues/737
+[gh-741]: https://github.com/WP-API/WP-API/issues/741
+[gh-742]: https://github.com/WP-API/WP-API/issues/742
+[gh-743]: https://github.com/WP-API/WP-API/issues/743
+[gh-744]: https://github.com/WP-API/WP-API/issues/744
+[gh-750]: https://github.com/WP-API/WP-API/issues/750
+[gh-753]: https://github.com/WP-API/WP-API/issues/753
+[gh-758]: https://github.com/WP-API/WP-API/issues/758
+[gh-761]: https://github.com/WP-API/WP-API/issues/761
+[gh-774]: https://github.com/WP-API/WP-API/issues/774
+[gh-786]: https://github.com/WP-API/WP-API/issues/786
+[gh-794]: https://github.com/WP-API/WP-API/issues/794
+[gh-805]: https://github.com/WP-API/WP-API/issues/805
+[gh-807]: https://github.com/WP-API/WP-API/issues/807
+[gh-815]: https://github.com/WP-API/WP-API/issues/815
+[gh-820]: https://github.com/WP-API/WP-API/issues/820
+[gh-823]: https://github.com/WP-API/WP-API/issues/823
+[gh-826]: https://github.com/WP-API/WP-API/issues/826
+[gh-831]: https://github.com/WP-API/WP-API/issues/831
+[gh-832]: https://github.com/WP-API/WP-API/issues/832
+[gh-836]: https://github.com/WP-API/WP-API/issues/836
+[gh-838]: https://github.com/WP-API/WP-API/issues/838
+[gh-841]: https://github.com/WP-API/WP-API/issues/841
+[gh-842]: https://github.com/WP-API/WP-API/issues/842
+[gh-844]: https://github.com/WP-API/WP-API/issues/844
+[gh-845]: https://github.com/WP-API/WP-API/issues/845
+[gh-849]: https://github.com/WP-API/WP-API/issues/849
+[gh-853]: https://github.com/WP-API/WP-API/issues/853
+[gh-854]: https://github.com/WP-API/WP-API/issues/854
+[gh-870]: https://github.com/WP-API/WP-API/issues/870
+[gh-872]: https://github.com/WP-API/WP-API/issues/872
+[gh-874]: https://github.com/WP-API/WP-API/issues/874
+[gh-876]: https://github.com/WP-API/WP-API/issues/876
+[gh-879]: https://github.com/WP-API/WP-API/issues/879
+[gh-883]: https://github.com/WP-API/WP-API/issues/883
+[gh-885]: https://github.com/WP-API/WP-API/issues/885
+[gh-888]: https://github.com/WP-API/WP-API/issues/888
+[gh-891]: https://github.com/WP-API/WP-API/issues/891
+[gh-896]: https://github.com/WP-API/WP-API/issues/896
+[gh-897]: https://github.com/WP-API/WP-API/issues/897
+[gh-902]: https://github.com/WP-API/WP-API/issues/902
+[gh-904]: https://github.com/WP-API/WP-API/issues/904
+[gh-905]: https://github.com/WP-API/WP-API/issues/905
+[gh-906]: https://github.com/WP-API/WP-API/issues/906
+[gh-907]: https://github.com/WP-API/WP-API/issues/907
+[gh-908]: https://github.com/WP-API/WP-API/issues/908
+[gh-909]: https://github.com/WP-API/WP-API/issues/909
+[gh-910]: https://github.com/WP-API/WP-API/issues/910
+[gh-911]: https://github.com/WP-API/WP-API/issues/911
+[gh-913]: https://github.com/WP-API/WP-API/issues/913
+[gh-914]: https://github.com/WP-API/WP-API/issues/914
+[gh-917]: https://github.com/WP-API/WP-API/issues/917
+[gh-919]: https://github.com/WP-API/WP-API/issues/919
+[gh-923]: https://github.com/WP-API/WP-API/issues/923
+[gh-931]: https://github.com/WP-API/WP-API/issues/931
+[gh-933]: https://github.com/WP-API/WP-API/issues/933
+[gh-935]: https://github.com/WP-API/WP-API/issues/935
+[gh-936]: https://github.com/WP-API/WP-API/issues/936
+[gh-937]: https://github.com/WP-API/WP-API/issues/937
+[gh-941]: https://github.com/WP-API/WP-API/issues/941
+[gh-946]: https://github.com/WP-API/WP-API/issues/946
+[gh-947]: https://github.com/WP-API/WP-API/issues/947
+[gh-951]: https://github.com/WP-API/WP-API/issues/951
+[gh-953]: https://github.com/WP-API/WP-API/issues/953
+[gh-955]: https://github.com/WP-API/WP-API/issues/955
+[gh-958]: https://github.com/WP-API/WP-API/issues/958
+[gh-959]: https://github.com/WP-API/WP-API/issues/959
+[gh-960]: https://github.com/WP-API/WP-API/issues/960
+[gh-966]: https://github.com/WP-API/WP-API/issues/966
+[gh-967]: https://github.com/WP-API/WP-API/issues/967
+[gh-968]: https://github.com/WP-API/WP-API/issues/968
+[gh-970]: https://github.com/WP-API/WP-API/issues/970
+[gh-971]: https://github.com/WP-API/WP-API/issues/971
+[gh-973]: https://github.com/WP-API/WP-API/issues/973
+[gh-985]: https://github.com/WP-API/WP-API/issues/985
+[gh-987]: https://github.com/WP-API/WP-API/issues/987
+[gh-989]: https://github.com/WP-API/WP-API/issues/989
+[gh-996]: https://github.com/WP-API/WP-API/issues/996
+[gh-999]: https://github.com/WP-API/WP-API/issues/999
+[gh-1000]: https://github.com/WP-API/WP-API/issues/1000
+[gh-1006]: https://github.com/WP-API/WP-API/issues/1006
+[gh-1026]: https://github.com/WP-API/WP-API/issues/1026
+[gh-1028]: https://github.com/WP-API/WP-API/issues/1028
+[gh-1033]: https://github.com/WP-API/WP-API/issues/1033
+[gh-1034]: https://github.com/WP-API/WP-API/issues/1034
+[gh-1039]: https://github.com/WP-API/WP-API/issues/1039
+[gh-1042]: https://github.com/WP-API/WP-API/issues/1042
+[gh-1043]: https://github.com/WP-API/WP-API/issues/1043
+[gh-1044]: https://github.com/WP-API/WP-API/issues/1044
+[gh-1046]: https://github.com/WP-API/WP-API/issues/1046
+[gh-1048]: https://github.com/WP-API/WP-API/issues/1048
+[gh-1049]: https://github.com/WP-API/WP-API/issues/1049
+[gh-1050]: https://github.com/WP-API/WP-API/issues/1050
+[gh-1051]: https://github.com/WP-API/WP-API/issues/1051
+[gh-1052]: https://github.com/WP-API/WP-API/issues/1052
+[gh-1053]: https://github.com/WP-API/WP-API/issues/1053
+[gh-1054]: https://github.com/WP-API/WP-API/issues/1054
+[gh-1059]: https://github.com/WP-API/WP-API/issues/1059
+[gh-1064]: https://github.com/WP-API/WP-API/issues/1064
+[gh-1066]: https://github.com/WP-API/WP-API/issues/1066
+[gh-1091]: https://github.com/WP-API/WP-API/issues/1091
+[gh-1097]: https://github.com/WP-API/WP-API/issues/1097
+[gh-1098]: https://github.com/WP-API/WP-API/issues/1098
+[gh-1103]: https://github.com/WP-API/WP-API/issues/1103
+[gh-1104]: https://github.com/WP-API/WP-API/issues/1104
+[gh-1105]: https://github.com/WP-API/WP-API/issues/1105
+[gh-1106]: https://github.com/WP-API/WP-API/issues/1106
+[gh-1108]: https://github.com/WP-API/WP-API/issues/1108
+[gh-1109]: https://github.com/WP-API/WP-API/issues/1109
+[gh-1110]: https://github.com/WP-API/WP-API/issues/1110
+[gh-1111]: https://github.com/WP-API/WP-API/issues/1111
+[gh-1112]: https://github.com/WP-API/WP-API/issues/1112
+[gh-1115]: https://github.com/WP-API/WP-API/issues/1115
+[gh-1116]: https://github.com/WP-API/WP-API/issues/1116
+[gh-1117]: https://github.com/WP-API/WP-API/issues/1117
+[gh-1121]: https://github.com/WP-API/WP-API/issues/1121
+[gh-1122]: https://github.com/WP-API/WP-API/issues/1122
+[gh-1123]: https://github.com/WP-API/WP-API/issues/1123
+[gh-1129]: https://github.com/WP-API/WP-API/issues/1129
+[gh-1131]: https://github.com/WP-API/WP-API/issues/1131
+[gh-1132]: https://github.com/WP-API/WP-API/issues/1132
+[gh-1133]: https://github.com/WP-API/WP-API/issues/1133
+[gh-1134]: https://github.com/WP-API/WP-API/issues/1134
+[gh-1137]: https://github.com/WP-API/WP-API/issues/1137
+[gh-1142]: https://github.com/WP-API/WP-API/issues/1142
+[gh-1148]: https://github.com/WP-API/WP-API/issues/1148
+
 ## 1.2.1
 
 - Fix information disclosure security vulnerability.

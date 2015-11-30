@@ -141,7 +141,7 @@ class CCF_Form_Manager {
 			<div class="section-content">
 				<p>
 					<label for="ccf_form_title"><?php esc_html_e( 'Form Title:', 'custom-contact-forms' ); ?></label>
-					<input class="widefat form-title" id="ccf_form_title" name="title" type="text" value="{{ form.title }}">
+					<input class="widefat form-title" id="ccf_form_title" name="title" type="text" value="{{ form.title.raw }}">
 				</p>
 
 				<p>
@@ -1271,7 +1271,7 @@ class CCF_Form_Manager {
 
 			<td>{{ form.ID }}</td>
 			<td>
-				<a class="edit edit-form title" data-view="form-pane" data-form-id="{{ form.ID }}" href="#form-pane-{{ form.ID }}"><# if ( form.title ) { #>{{ form.title }}<# } else { #>{{ '<?php esc_html_e( '(No title)', 'custom-contact-forms' ); ?>' }}<# } #></a>
+				<a class="edit edit-form title" data-view="form-pane" data-form-id="{{ form.ID }}" href="#form-pane-{{ form.ID }}"><# if ( form.title.raw ) { #>{{ form.title.raw }}<# } else { #>{{ '<?php esc_html_e( '(No title)', 'custom-contact-forms' ); ?>' }}<# } #></a>
 				<div class="actions">
 					<a class="edit edit-form" data-view="form-pane" data-form-id="{{ form.ID }}" href="#form-pane-{{ form.ID }}"><?php esc_html_e( 'Edit', 'custom-contact-forms' ); ?></a> |
 					<a class="insert-form-button"><?php esc_html_e( 'Insert into post', 'custom-contact-forms' ); ?></a> |
@@ -1294,8 +1294,8 @@ class CCF_Form_Manager {
 
 		<script type="text/html" id="ccf-form-mce-preview">
 			<div class="ccf-form-preview form-id-{{ form.ID }}">
-				<# if ( form.title ) { #>
-					<h2>{{ form.title }}</h2>
+				<# if ( form.title.raw ) { #>
+					<h2>{{ form.title.raw }}</h2>
 				<# } #>
 
 				<# if ( form.description && form.description != '' ) { #>
@@ -1550,6 +1550,10 @@ class CCF_Form_Manager {
 			));
 
 			wp_register_script( 'moment', plugins_url( '/bower_components/moment/moment.js', dirname( __FILE__ ) ) );
+
+			if ( ! wp_script_is( 'wp-api', 'registered' ) ) {
+				wp_register_script( 'wp-api', plugins_url( '/vendor/wp-api/wp-api/wp-api.js', dirname( __FILE__ ) ) );
+			}
 
 			wp_enqueue_script( 'ccf-form-manager', plugins_url( $js_manager_path, dirname( __FILE__ ) ), array( 'json2', 'jquery', 'jquery-ui-core', 'jquery-ui-datepicker', 'underscore', 'backbone', 'jquery-ui-core', 'jquery-ui-draggable', 'jquery-ui-sortable', 'jquery-ui-droppable', 'wp-api', 'moment' ), '1.0', true );
 			wp_localize_script( 'ccf-form-manager', 'ccfSettings', array(

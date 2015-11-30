@@ -336,7 +336,7 @@
 	wp.ccf.models.Form = wp.ccf.models.Form || wp.api.models.Post.extend(
 		{
 
-			urlRoot: WP_API_Settings.root + '/ccf/forms',
+			urlRoot: WP_API_Settings.root.replace( /\/$/, '' ) + '/ccf/v1/forms',
 
 			set: _modelSet,
 
@@ -1730,7 +1730,7 @@
 				}
 
 				var title = this.el.querySelectorAll( '.form-title' )[0].value;
-				this.model.set( 'title', title );
+				this.model.set( 'title', { raw: title } );
 
 				var description = this.el.querySelectorAll( '.form-description' )[0].value;
 				this.model.set( 'description', description );
@@ -2140,7 +2140,7 @@
 							wp.ccf.errorModal.render( messageType ).show();
 						}).done( function( response ) {
 							if (ccfSettings.single && ! ccfSettings.postId ) {
-								window.location = ccfSettings.adminUrl + 'post.php?post=' + SELF.model.get( 'ID' ) + '&action=edit#ccf-form/' + SELF.model.get( 'ID' );
+								//window.location = ccfSettings.adminUrl + 'post.php?post=' + SELF.model.get( 'ID' ) + '&action=edit#ccf-form/' + SELF.model.get( 'ID' );
 							}
 						}).complete( function( response ) {
 							$spinner.fadeOut();
