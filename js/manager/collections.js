@@ -18,7 +18,7 @@
 		{
 			model: wp.ccf.models.Form,
 
-			url: WP_API_Settings.root + '/ccf/forms',
+			url: WP_API_Settings.root.replace( /\/$/, '' ) + '/ccf/v1/forms',
 
 			formsFetching: {},
 
@@ -73,7 +73,7 @@
 			model: wp.ccf.models.Submission,
 
 			url: function() {
-				return WP_API_Settings.root + '/ccf/forms/' + this.formId + '/submissions';
+				return WP_API_Settings.root.replace( /\/$/, '' ) + '/ccf/v1/submissions';
 			},
 
 			initialize: function( models, options ) {
