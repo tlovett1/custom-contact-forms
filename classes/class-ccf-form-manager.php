@@ -1269,7 +1269,7 @@ class CCF_Form_Manager {
 
 		<script type="text/html" id="ccf-existing-form-table-row-template">
 
-			<td>{{ form.ID }}</td>
+			<td>{{ form.id }}</td>
 			<td>
 				<a class="edit edit-form title" data-view="form-pane" data-form-id="{{ form.ID }}" href="#form-pane-{{ form.ID }}"><# if ( form.title.raw ) { #>{{ form.title.raw }}<# } else { #>{{ '<?php esc_html_e( '(No title)', 'custom-contact-forms' ); ?>' }}<# } #></a>
 				<div class="actions">

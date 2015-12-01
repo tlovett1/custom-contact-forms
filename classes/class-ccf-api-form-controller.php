@@ -525,10 +525,17 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 	public function delete_item( $request ) {
 		$params = $request->get_params();
 
-		$deleted = wp_delete_post( $params['id'], true );
+		$force = false;
+		if ( ! empty( $params['force'] ) ) {
+			$force = (bool) $params['force'];
+		}
 
-		$this->delete_fields( $params['id'] );
-		$this->delete_submissions( $params['id'] );
+		$deleted = wp_delete_post( $params['id'], $force );
+
+		if ( $force ) {
+			$this->delete_fields( $params['id'] );
+			$this->delete_submissions( $params['id'] );
+		}
 
 		if ( $deleted ) {
 			return new WP_REST_Response( true, 200 );
@@ -558,7 +565,7 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 	 * @param int $form_id
 	 * @since 7.0
 	 */
-	public function delete_submission( $form_id ) {
+	public function delete_submissions( $form_id ) {
 		$submissions = get_children( array( 'post_parent' => $form_id, 'post_type' => 'ccf_submission', 'numberposts' => apply_filters( 'ccf_max_submissions', 5000, get_post( $form_id ) ) ) );
 		if ( ! empty( $submissions ) ) {
 			foreach ( $submissions as $submission ) {
