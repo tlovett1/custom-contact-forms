@@ -176,13 +176,32 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 			),
 		) );
 
-		register_rest_route( $namespace, '/forms/schema', array(
-			'methods'  => WP_REST_Server::READABLE,
-			'callback' => array( $this, 'get_public_item_schema' ),
+		register_rest_route( $namespace, '/forms/(?P<id>[\d]+)/submissions', array(
+			array(
+				'methods'         => WP_REST_Server::READABLE,
+				'callback'        => array( $this, 'get_submissions' ),
+				'permission_callback' => array( $this, 'get_item_permissions_check' ),
+				'args'            => array(
+					'context'          => array(
+				    	'default'      => 'view',
+					),
+				),
+			),
+		) );
+
+		register_rest_route( $namespace, '/forms/(?P<id>[\d]+)/fields', array(
+			array(
+				'methods'         => WP_REST_Server::READABLE,
+				'callback'        => array( $this, 'get_fields' ),
+				'permission_callback' => array( $this, 'get_item_permissions_check' ),
+				'args'            => array(
+					'context'          => array(
+				    	'default'      => 'view',
+					),
+				),
+			),
 		) );
 	}
-
-
 
 	/**
 	 * Create field choices and attach them to fields. Not an API route.
@@ -409,12 +428,98 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 	}
 
 	/**
-	* Get a collection of items
-	*
-	* @param  WP_REST_Request $request Full data about the request.
-	* @since  7.0
-	* @return WP_Error|WP_REST_Response
-	*/
+	 * Get a collection of submissions
+	 *
+	 * @param  WP_REST_Request $request Full data about the request.
+	 * @since  7.0
+	 * @return WP_Error|WP_REST_Response
+	 */
+	public function get_submissions( $request ) {
+		$params = $request->get_params();
+
+		$data = array();
+
+		if ( ! empty( $params['id'] ) ) {
+			$page = 1;
+			if ( ! empty( $params['page'] ) ) {
+				$page = $params['page'];
+			}
+
+			$query = new WP_Query( array(
+				'post_type'   => 'ccf_submission',
+				'page'        => (int) $page,
+				'post_status' => 'publish',
+				'post_parent' => (int) $params['id']
+			) );
+
+			foreach ( $query->posts as $item ) {
+				$data[] = $this->prepare_submission_for_response( $item );
+			}
+		}
+
+		return new WP_REST_Response( $data, 200 );
+	}
+
+	/**
+	 * Get a collection of fields
+	 *
+	 * @param  WP_REST_Request $request Full data about the request.
+	 * @since  7.0
+	 * @return WP_Error|WP_REST_Response
+	 */
+	public function get_fields( $request ) {
+		$params = $request->get_params();
+
+		$fields = array();
+
+		if ( ! empty( $params['id'] ) ) {
+			$fields = $this->_get_fields( $params['id'] );
+		}
+
+		return new WP_REST_Response( $fields, 200 );
+	}
+
+	/**
+	 * Prepare submission for the REST response
+	 *
+	 * @param  int $item
+	 * @param  int $item_id
+	 * @since  7.0
+	 * @return array
+	 */
+	public function prepare_submission_for_response( $item ) {
+		$data = array(
+			'id'           => $item->ID,
+			'date'         => $this->prepare_date_response( $item->post_date_gmt, $item->post_date ),
+			'date_gmt'     => $this->prepare_date_response( $item->post_date_gmt ),
+			'guid'         => array(
+				'raw'      => $item->guid,
+			),
+			'modified'     => $this->prepare_date_response( $item->post_modified_gmt, $item->post_modified ),
+			'modified_gmt' => $this->prepare_date_response( $item->post_modified_gmt ),
+			'slug'         => $item->post_name,
+			'status'       => $item->post_status,
+			'type'         => $item->post_type,
+			'link'         => get_permalink( $item->ID ),
+			'title'        => array(
+				'raw'      => $item->post_title,
+				'rendered' => get_the_title( $item->ID ),
+			),
+		);
+
+		$data['data'] = get_post_meta( $item->ID, 'ccf_submission_data', true );
+		$data['ip_address'] = esc_html( get_post_meta( $item->ID, 'ccf_submission_ip', true ) );
+
+		return $data;
+	}
+
+	/**
+	 * Get a collection of items
+	 *
+	 * @param  WP_REST_Request $request Full data about the request.
+	 * @since  7.0
+	 * @return WP_Error|WP_REST_Response
+	 */
 	public function get_items( $request ) {
 		$params = $request->get_params();
 
@@ -439,12 +544,12 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 	}
 
 	/**
-	* Get one item from the collection
-	*
-	* @param  WP_REST_Request $request Full data about the request.
-	* @since  7.0
-	* @return WP_Error|WP_REST_Response
-	*/
+	 * Get one item from the collection
+	 *
+	 * @param  WP_REST_Request $request Full data about the request.
+	 * @since  7.0
+	 * @return WP_Error|WP_REST_Response
+	 */
 	public function get_item( $request ) {
 		$params = $request->get_params();
 
@@ -461,12 +566,12 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 	}
 
 	/**
-	* Create one item from the collection
-	*
-	* @param  WP_REST_Request $request Full data about the request.
-	* @since  7.0
-	* @return WP_Error|WP_REST_Request
-	*/
+	 * Create one item from the collection
+	 *
+	 * @param  WP_REST_Request $request Full data about the request.
+	 * @since  7.0
+	 * @return WP_Error|WP_REST_Request
+	 */
 	public function create_item( $request ) {
 
 		$item = $this->prepare_item_for_database( $request );
@@ -516,12 +621,12 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 	}
 
 	/**
-	* Delete one item from the collection
-	*
-	* @param  WP_REST_Request $request Full data about the request.
-	* @since  7.0
-	* @return WP_Error|WP_REST_Request
-	*/
+	 * Delete one item from the collection
+	 *
+	 * @param  WP_REST_Request $request Full data about the request.
+	 * @since  7.0
+	 * @return WP_Error|WP_REST_Request
+	 */
 	public function delete_item( $request ) {
 		$params = $request->get_params();
 
@@ -590,66 +695,66 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 	}
 
 	/**
-	* Check if a given request has access to get items
-	*
-	* @param WP_REST_Request $request Full data about the request.
-	* @return WP_Error|bool
-	*/
+	 * Check if a given request has access to get items
+	 *
+	 * @param WP_REST_Request $request Full data about the request.
+	 * @return WP_Error|bool
+	 */
 	public function get_items_permissions_check( $request ) {
-		return current_user_can( 'edit_posts' );
+		return true;
 	}
 
 	/**
-	* Check if a given request has access to get a specific item
-	*
-	* @param  WP_REST_Request $request Full data about the request.
-	* @since  7.0
-	* @return WP_Error|bool
-	*/
+	 * Check if a given request has access to get a specific item
+	 *
+	 * @param  WP_REST_Request $request Full data about the request.
+	 * @since  7.0
+	 * @return WP_Error|bool
+	 */
 	public function get_item_permissions_check( $request ) {
 		return $this->get_items_permissions_check( $request );
 	}
 
 	/**
-	* Check if a given request has access to create items
-	*
-	* @param  WP_REST_Request $request Full data about the request.
-	* @since  7.0
-	* @return WP_Error|bool
-	*/
+	 * Check if a given request has access to create items
+	 *
+	 * @param  WP_REST_Request $request Full data about the request.
+	 * @since  7.0
+	 * @return WP_Error|bool
+	 */
 	public function create_item_permissions_check( $request ) {
 		return current_user_can( 'edit_posts' );
 	}
 
 	/**
-	* Check if a given request has access to update a specific item
-	*
-	* @param  WP_REST_Request $request Full data about the request.
-	* @since  7.0
-	* @return WP_Error|bool
-	*/
+	 * Check if a given request has access to update a specific item
+	 *
+	 * @param  WP_REST_Request $request Full data about the request.
+	 * @since  7.0
+	 * @return WP_Error|bool
+	 */
 	public function update_item_permissions_check( $request ) {
 		return $this->create_item_permissions_check( $request );
 	}
 
 	/**
-	* Check if a given request has access to delete a specific item
-	*
-	* @param  WP_REST_Request $request Full data about the request.
-	* @since  7.0
-	* @return WP_Error|bool
-	*/
+	 * Check if a given request has access to delete a specific item
+	 *
+	 * @param  WP_REST_Request $request Full data about the request.
+	 * @since  7.0
+	 * @return WP_Error|bool
+	 */
 	public function delete_item_permissions_check( $request ) {
 		return $this->create_item_permissions_check( $request );
 	}
 
 	/**
-	* Prepare the item for create or update operation
-	*
-	* @param  WP_REST_Request $request Request object
-	* @since  7.0
-	* @return WP_Error|object $prepared_item
-	*/
+	 * Prepare the item for create or update operation
+	 *
+	 * @param  WP_REST_Request $request Request object
+	 * @since  7.0
+	 * @return WP_Error|object $prepared_item
+	 */
 	protected function prepare_item_for_database( $request ) {
 		$body = $request->get_body();
 
@@ -719,13 +824,13 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 	}
 
 	/**
-	* Prepare the item for the REST response
-	*
-	* @param  int|object $item
-	* @param  int $item_id
-	* @since  7.0
-	* @return array
-	*/
+	 * Prepare the item for the REST response
+	 *
+	 * @param  int|object $item
+	 * @param  int $item_id
+	 * @since  7.0
+	 * @return array
+	 */
 	public function prepare_item_for_response( $item ) {
 		$data = array(
 			'id'           => $item->ID,
@@ -798,11 +903,11 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 	}
 
 	/**
-	* Get the query params for collections
-	*
-	* @since  7.0
-	* @return array
-	*/
+	 * Get the query params for collections
+	 *
+	 * @since  7.0
+	 * @return array
+	 */
 	public function get_collection_params() {
 		return array(
 			'page'                   => array(

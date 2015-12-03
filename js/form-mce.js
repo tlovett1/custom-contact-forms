@@ -10,7 +10,7 @@
 		},
 
 		triggerRefresh: function( form ) {
-			if ( form === wp.ccf.forms.findWhere( { ID: parseInt( this.shortcode.attrs.named.id ) } ) ) {
+			if ( form === wp.ccf.forms.findWhere( { id: parseInt( this.shortcode.attrs.named.id ) } ) ) {
 				this.renderPreviews();
 				this.render( this.getHtml(), true );
 			}
@@ -21,14 +21,14 @@
 
 			var id = parseInt( SELF.shortcode.attrs.named.id );
 
-			var form = wp.ccf.forms.findWhere( { ID: id } );
+			var form = wp.ccf.forms.findWhere( { id: id } );
 
 			if ( ! form ) {
 
 				if ( typeof wp.ccf.forms.formsFetching[id] !== 'undefined' ) {
 					SELF.formFetch = wp.ccf.forms.formsFetching[id];
 				} else {
-					form = new wp.ccf.models.Form( { ID: id } );
+					form = new wp.ccf.models.Form( { id: id } );
 					SELF.formFetch = form.fetch();
 					wp.ccf.forms.formsFetching[id] = SELF.formFetch;
 				}
@@ -53,7 +53,7 @@
 		renderPreviews: function() {
 			var id = parseInt( this.shortcode.attrs.named.id );
 
-			var form = wp.ccf.forms.findWhere( { ID: id } );
+			var form = wp.ccf.forms.findWhere( { id: id } );
 
 			if ( form ) {
 				var fields = form.get( 'fields' );
@@ -73,7 +73,7 @@
 			var id = parseInt( this.shortcode.attrs.named.id );
 
 			if ( typeof this.formFetch === 'undefined' || this.formFetch.state() === 'resolved' || this.formFetch.state() === 'rejected' ) {
-				var form = wp.ccf.forms.findWhere( { ID: id } );
+				var form = wp.ccf.forms.findWhere( { id: id } );
 
 				if ( typeof this.formFetch === 'undefined' ) {
 					return this.template( { form: form.toJSON() } );
@@ -92,7 +92,7 @@
 		edit: function() {
 			var id = this.shortcode.attrs.named.id;
 
-			var form = wp.ccf.forms.findWhere( { ID: parseInt( id ) } );
+			var form = wp.ccf.forms.findWhere( { id: parseInt( id ) } );
 
 			if ( form ) {
 				wp.ccf.show( form );

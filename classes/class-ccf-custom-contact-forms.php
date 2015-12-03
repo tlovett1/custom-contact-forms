@@ -146,13 +146,9 @@ class CCF_Custom_Contact_Forms {
 	 */
 	public function api_init( $server ) {
 		require_once( dirname( __FILE__ ) . '/../classes/class-ccf-api-form-controller.php' );
-		require_once( dirname( __FILE__ ) . '/../classes/class-ccf-api-submission-controller.php' );
 
 		$form_controller = new CCF_API_Form_Controller;
 		$form_controller->register_routes();
-
-		$submission_controller = new CCF_API_Submission_Controller;
-		$submission_controller->register_routes();
 	}
 
 	/**

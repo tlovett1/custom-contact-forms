@@ -73,7 +73,7 @@
 			model: wp.ccf.models.Submission,
 
 			url: function() {
-				return WP_API_Settings.root.replace( /\/$/, '' ) + '/ccf/v1/submissions';
+				return WP_API_Settings.root.replace( /\/$/, '' ) + '/ccf/v1/forms/' + this.formId + '/submissions';
 			},
 
 			initialize: function( models, options ) {

@@ -213,10 +213,6 @@
 
 	wp.ccf.models.Submission = wp.api.models.Submission || wp.api.models.Post.extend(
 		{
-			idAttribute: 'id',
-
-			urlRoot: WP_API_Settings.root.replace( /\/$/, '' ) + '/ccf/v1/submissions',
-
 			defaults: {
 				id: null,
 				data: {}

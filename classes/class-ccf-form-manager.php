@@ -1278,9 +1278,9 @@ class CCF_Form_Manager {
 
 			<td>{{ form.id }}</td>
 			<td>
-				<a class="edit edit-form title" data-view="form-pane" data-form-id="{{ form.ID }}" href="#form-pane-{{ form.ID }}"><# if ( form.title.raw ) { #>{{ form.title.raw }}<# } else { #>{{ '<?php esc_html_e( '(No title)', 'custom-contact-forms' ); ?>' }}<# } #></a>
+				<a class="edit edit-form title" data-view="form-pane" data-form-id="{{ form.id }}" href="#form-pane-{{ form.id }}"><# if ( form.title.raw ) { #>{{ form.title.raw }}<# } else { #>{{ '<?php esc_html_e( '(No title)', 'custom-contact-forms' ); ?>' }}<# } #></a>
 				<div class="actions">
-					<a class="edit edit-form" data-view="form-pane" data-form-id="{{ form.ID }}" href="#form-pane-{{ form.ID }}"><?php esc_html_e( 'Edit', 'custom-contact-forms' ); ?></a> |
+					<a class="edit edit-form" data-view="form-pane" data-form-id="{{ form.id }}" href="#form-pane-{{ form.id }}"><?php esc_html_e( 'Edit', 'custom-contact-forms' ); ?></a> |
 					<a class="insert-form-button"><?php esc_html_e( 'Insert into post', 'custom-contact-forms' ); ?></a> |
 					<a class="delete"><?php esc_html_e( 'Trash', 'custom-contact-forms' ); ?></a>
 				</div>
@@ -1300,7 +1300,7 @@ class CCF_Form_Manager {
 		</script>
 
 		<script type="text/html" id="ccf-form-mce-preview">
-			<div class="ccf-form-preview form-id-{{ form.ID }}">
+			<div class="ccf-form-preview form-id-{{ form.id }}">
 				<# if ( form.title.raw ) { #>
 					<h2>{{ form.title.raw }}</h2>
 				<# } #>
@@ -1311,7 +1311,7 @@ class CCF_Form_Manager {
 
 				<# if ( form.fields ) { #>
 					<# _.each( form.fields, function( field ) { #>
-						<div class="field {{ field.type }} field-{{ field.ID }}">
+						<div class="field {{ field.type }} field-{{ field.id }}">
 							{{{ field.preview }}}
 						</div>
 					<# } ); #>
@@ -1418,10 +1418,10 @@ class CCF_Form_Manager {
 				<# } #>
 			<# } ); #>
 			<td class="actions">
-				<a href="#TB_inline?height=300&amp;width=400&amp;inlineId=submission-content" data-submission-date="{{ submission.date_gmt }}" data-submission-id="{{ submission.ID }}" class="view"  data-icon="&#xe601;"></a>
+				<a href="#TB_inline?height=300&amp;width=400&amp;inlineId=submission-content" data-submission-date="{{ submission.date_gmt }}" data-submission-id="{{ submission.id }}" class="view"  data-icon="&#xe601;"></a>
 				<a class="delete" data-icon="&#xe602;"></a>
 
-				<div class="submission-wrapper" id="ccf-submission-content-{{ submission.ID }}">
+				<div class="submission-wrapper" id="ccf-submission-content-{{ submission.id }}">
 					<div class="ccf-submission-content">
 						<# for ( column in submission.data ) { #>
 							<div class="field-slug">
