@@ -12,7 +12,10 @@ class CCFTestAPI extends CCFTestBase {
 		$form = $this->_createForm();
 		$this->_createForm();
 
-		$get_form_result = $this->api->get_form( $form->data['ID'] );
+		$request = new WP_REST_Request();
+		$request->set_param( 'id', $form->data['ID'] );
+
+		$get_form_result = $this->api->get_item( $form->data['ID'] );
 
 		$this->assertTrue( ! is_wp_error( $get_form_result ) );
 
@@ -38,7 +41,7 @@ class CCFTestAPI extends CCFTestBase {
 		$this->_createForm();
 		$this->_createForm();
 
-		$get_forms_result = $this->api->get_forms();
+		$get_forms_result = $this->api->get_items();
 
 		$forms = $get_forms_result->data;
 
@@ -209,7 +212,11 @@ class CCFTestAPI extends CCFTestBase {
 			'featured_image' => null,
 		);
 
-		$edit_form_result = $this->api->edit_form( $form->data['ID'], $edit_data );
+		$request = new WP_REST_Request();
+		$request->set_param( 'id', $form->data['ID'] );
+		$request->set_body( json_encode( $data ) );
+
+		$edit_form_result = $this->api->update_item( $request );
 
 		$this->assertTrue( ! empty( $edit_form_result->data['ID'] ) );
 
@@ -258,7 +265,10 @@ class CCFTestAPI extends CCFTestBase {
 		$this->_createForm();
 		$this->_createForm();
 
-		$this->api->delete_form( $form->data['ID'] );
+		$request = new WP_REST_Request();
+		$request->set_param( 'id', $form->data['ID'] );
+
+		$this->api->delete_item( $request );
 
 		$form = get_post( $form->data['ID'] );
 
@@ -312,7 +322,10 @@ class CCFTestAPI extends CCFTestBase {
 		$this->_createSubmission( $form->data['ID'] );
 		$this->_createSubmission( $form->data['ID'] );
 
-		$get_submissions_result = $this->api->get_submissions( $form->data['ID'] );
+		$request = new WP_REST_Request();
+		$request->set_param( 'id', $form->data['ID'] );
+
+		$get_submissions_result = $this->api->get_submissions( $request );
 
 		$submissions = $get_submissions_result->data;
 
