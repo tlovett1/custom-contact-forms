@@ -130,6 +130,13 @@ class CCF_Form_Manager {
 			<div class="right-sidebar ccf-field-sidebar accordion-container"></div>
 
 			<div class="bottom">
+				<div class="left signup">
+					<strong>Want free WP blogging tips, tutorials, and marketing tricks? </strong>
+					<input type="email" class="email-signup-field" placeholder="Email">
+					<button type="button" class="button signup-button">Sign me up!</button>
+					<span class="signup-check">✓</span>
+					<span class="signup-x">&times;</span>
+				</div>
 				<input type="button" class="button insert-form-button" value="<?php esc_html_e( 'Insert into post', 'custom-contact-forms' ); ?>">
 				<input type="button" class="button button-primary save-button" value="<?php esc_html_e( 'Save Form', 'custom-contact-forms' ); ?>">
 				<div class="spinner" style="background: url( '<?php echo esc_url( admin_url( 'images/wpspin_light.gif' ) ); ?>' ) no-repeat;"></div>

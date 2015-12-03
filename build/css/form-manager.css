@@ -215,11 +215,43 @@
       left: 0;
       right: 0;
       height: 50px;
-      padding: 0 16px;
+      padding: 0 16px 0 0;
       position: absolute;
       text-align: right;
       line-height: 50px;
       border-top: 1px solid #e5e5e5; }
+      .ccf-main-modal .ccf-form-pane .bottom .left {
+        float: left;
+        background-color: #00a0d2;
+        padding-left: 16px;
+        padding-right: 16px;
+        color: #fff; }
+        @media (max-width: 830px) {
+          .ccf-main-modal .ccf-form-pane .bottom .left {
+            display: none; } }
+        .ccf-main-modal .ccf-form-pane .bottom .left input {
+          vertical-align: middle;
+          margin-left: 5px; }
+        .ccf-main-modal .ccf-form-pane .bottom .left button {
+          vertical-align: middle; }
+        .ccf-main-modal .ccf-form-pane .bottom .left .signup-x {
+          color: red;
+          display: none;
+          font-size: 150%;
+          vertical-align: middle;
+          font-weight: bold;
+          margin-left: 4px; }
+        .ccf-main-modal .ccf-form-pane .bottom .left .signup-check {
+          color: green;
+          display: none;
+          vertical-align: middle;
+          font-size: 150%;
+          font-weight: bold;
+          margin-left: 4px; }
+      .ccf-main-modal .ccf-form-pane .bottom .left.signup-success .signup-check {
+        display: inline; }
+      .ccf-main-modal .ccf-form-pane .bottom .left.signup-error .signup-x {
+        display: inline; }
       .ccf-main-modal .ccf-form-pane .bottom .spinner {
         display: none;
         visibility: visible;
@@ -227,7 +259,7 @@
         width: 16px;
         height: 16px;
         margin-top: 16px; }
-      .ccf-main-modal .ccf-form-pane .bottom input {
+      .ccf-main-modal .ccf-form-pane .bottom input[type="button"] {
         margin-top: 11px;
         float: right;
         margin-left: 6px; }
