@@ -537,7 +537,7 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 		$data = array();
 
 		foreach ( $query->posts as $item ) {
-			$data[] = $this->prepare_item_for_response( $item );
+			$data[] = $this->prepare_item_for_response( $item, $request );
 		}
 
 		return new WP_REST_Response( $data, 200 );
@@ -556,7 +556,7 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 		$item = get_post( $params['id'] );
 		$item->ID = (int) $params['id'];
 
-		$data = $this->prepare_item_for_response( $item );
+		$data = $this->prepare_item_for_response( $item, $request );
 
 		if ( is_array( $data ) ) {
 			return new WP_REST_Response( $data, 200 );
@@ -581,7 +581,7 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 		$item = get_post( $item_id );
 		$item->ID = (int) $item_id;
 
-		$data = $this->prepare_item_for_response( $item );
+		$data = $this->prepare_item_for_response( $item, $request );
 
 		if ( is_array( $data ) ) {
 			return new WP_REST_Response( $data, 200 );
@@ -610,7 +610,7 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 			$item = get_post( $item_id );
 			$item->ID = (int) $item_id;
 
-			$data = $this->prepare_item_for_response( $item );
+			$data = $this->prepare_item_for_response( $item, $request );
 
 			if ( is_array( $data ) ) {
 				return new WP_REST_Response( $data, 200 );
@@ -635,11 +635,10 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 			$force = (bool) $params['force'];
 		}
 
-		$deleted = wp_delete_post( $params['id'], $force );
-
 		if ( $force ) {
-			$this->delete_fields( $params['id'] );
-			$this->delete_submissions( $params['id'] );
+			$deleted = wp_delete_post( $params['id'], true );
+		} else {
+			$deleted = wp_trash_post( $params['id'] );
 		}
 
 		if ( $deleted ) {
@@ -827,11 +826,11 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 	 * Prepare the item for the REST response
 	 *
 	 * @param  int|object $item
-	 * @param  int $item_id
+	 * @param  WP_REST_Request
 	 * @since  7.0
 	 * @return array
 	 */
-	public function prepare_item_for_response( $item ) {
+	public function prepare_item_for_response( $item, $request ) {
 		$data = array(
 			'id'           => $item->ID,
 			'date'         => $this->prepare_date_response( $item->post_date_gmt, $item->post_date ),
