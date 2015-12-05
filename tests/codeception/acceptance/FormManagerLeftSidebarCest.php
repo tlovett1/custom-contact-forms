@@ -4,7 +4,7 @@ require_once( 'AcceptanceTester.php' );
 
 use WPCC\Helper\PageObject\LoginPage;
 
-class FormManagerLeftSidebarCept {
+class FormManagerLeftSidebarCest {
 
 	/**
 	 * The temporary user.

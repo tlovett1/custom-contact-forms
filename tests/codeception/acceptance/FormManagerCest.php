@@ -4,7 +4,7 @@ require_once( 'AcceptanceTester.php' );
 
 use WPCC\Helper\PageObject\LoginPage;
 
-class FormManagerCept {
+class FormManagerCest {
 
 	/**
 	 * The temporary user.
@@ -43,22 +43,6 @@ class FormManagerCept {
 		$I->wantTo( 'Ensure the form manager opens in the post editor' );
 
 		$I->amOnPage( admin_url( 'post-new.php' ) );
-
-		$I->click( 'Add Form' );
-
-		$I->see( 'Click on a field to edit it' );
-	}
-
-	/**
-	 * Tests that form manager opens on the new form page
-	 *
-	 * @since 7.0
-	 * @param \GLM\Tests\Acceptance\AcceptanceTester $I The current actor.
-	 */
-	public function formManagerOpensNewFormPage( AcceptanceTester $I ) {
-		$I->wantTo( 'Ensure the form manager opens in the new form page' );
-
-		$I->amOnPage( admin_url( 'post-new.php?post_type=ccf_form' ) );
 
 		$I->click( 'Add Form' );
 
