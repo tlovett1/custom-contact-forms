@@ -103,19 +103,19 @@ class CCF_Form_Manager {
 			<div class="disabled-overlay"></div>
 			<div class="left-sidebar accordion-container">
 				<div class="accordion-section expanded">
-					<h2 aria-hidden="true"><?php esc_html_e( 'Standard Fields', 'custom-contact-forms' ); ?></h2>
+					<a class="accordion-heading"><?php esc_html_e( 'Standard Fields', 'custom-contact-forms' ); ?></a>
 					<div class="section-content">
 						<div class="fields draggable-fields"></div>
 					</div>
 				</div>
-				<div class="accordion-section">
-					<h2 aria-hidden="true"><?php esc_html_e( 'Special Fields', 'custom-contact-forms' ); ?></h2>
+				<div class="accordion-section" class="special-fields">
+					<a class="accordion-heading"><?php esc_html_e( 'Special Fields', 'custom-contact-forms' ); ?></a>
 					<div class="section-content">
 						<div class="special-fields draggable-fields"></div>
 					</div>
 				</div>
 				<div class="accordion-section">
-					<h2 aria-hidden="true"><?php esc_html_e( 'Structure', 'custom-contact-forms' ); ?></h2>
+					<a class="accordion-heading"><?php esc_html_e( 'Structure', 'custom-contact-forms' ); ?></a>
 					<div class="section-content">
 						<div class="structure-fields draggable-fields"></div>
 					</div>
@@ -144,7 +144,7 @@ class CCF_Form_Manager {
 		</script>
 
 		<script type="text/html" id="ccf-form-settings-template">
-			<h2 aria-hidden="true"><?php esc_html_e( 'Form Settings', 'custom-contact-forms' ); ?></h2>
+			<a class="accordion-heading"><?php esc_html_e( 'Form Settings', 'custom-contact-forms' ); ?></a>
 			<div class="section-content">
 				<p>
 					<label for="ccf_form_title"><?php esc_html_e( 'Form Title:', 'custom-contact-forms' ); ?></label>
@@ -193,7 +193,7 @@ class CCF_Form_Manager {
 		</script>
 
 		<script type="text/html" id="ccf-form-notifications-template">
-			<h2 aria-hidden="true"><?php esc_html_e( 'Form Notifications', 'custom-contact-forms' ); ?></h2>
+			<a class="accordion-heading"><?php esc_html_e( 'Form Notifications', 'custom-contact-forms' ); ?></a>
 			<div class="section-content">
 				<p>
 					<label for="ccf_form_send_email_notifications"><?php esc_html_e( 'Send Email Notifications:', 'custom-contact-forms' ); ?></label>

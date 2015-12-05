@@ -1,2 +1,12 @@
 node_modules
 .sass-cache
+
+
+tests/_output/*
+tests/_output/*
+tests/_output/*
+tests/_output/*
+tests/_output/*
+tests/_output/*
+tests/_output/*
+tests/codeception/acceptance/AcceptanceTester.php

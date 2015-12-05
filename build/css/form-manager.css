@@ -272,14 +272,17 @@
         display: block; }
       .ccf-main-modal .ccf-form-pane .accordion-section.expanded h2:before {
         content: ""; }
-      .ccf-main-modal .ccf-form-pane .accordion-section h2 {
+      .ccf-main-modal .ccf-form-pane .accordion-section .accordion-heading {
         cursor: pointer;
+        display: block;
+        line-height: 29px;
+        color: inherit;
         padding: 10px 20px;
         border-bottom: 1px solid #e5e5e5;
         font-size: 150%;
         background-color: #fafafa;
         margin: 0; }
-        .ccf-main-modal .ccf-form-pane .accordion-section h2:before {
+        .ccf-main-modal .ccf-form-pane .accordion-section .accordion-heading:before {
           margin-right: 8px;
           font-family: 'form-manager';
           content: "";

@@ -1139,7 +1139,7 @@
 			events: {
 				'click .save-button': 'sync',
 				'click .signup-button': 'signup',
-				'click h2': 'accordionClick',
+				'click .accordion-heading': 'accordionClick',
 				'click .insert-form-button': 'insertForm'
 			},
 
