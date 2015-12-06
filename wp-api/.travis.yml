@@ -1,0 +1,83 @@
+# Travis CI Configuration File
+
+# Tell Travis CI we're using PHP
+language: php
+
+sudo: false
+
+matrix:
+  include:
+  - php: 5.6
+    env: WP_TRAVISCI=travis:phpunit WP_VERSION=nightly
+  - php: 5.6
+    env: WP_TRAVISCI=travis:phpunit WP_VERSION=latest
+  - php: 5.6
+    env: WP_TRAVISCI=travis:phpvalidate
+  - php: 5.6
+    env: WP_TRAVISCI=travis:codecoverage
+  - php: 5.5
+    env: WP_TRAVISCI=travis:phpunit WP_VERSION=nightly
+  - php: 5.4
+    env: WP_TRAVISCI=travis:phpunit WP_VERSION=nightly
+  - php: 5.3
+    env: WP_TRAVISCI=travis:phpunit WP_VERSION=nightly
+  - php: 5.2
+    env: WP_TRAVISCI=travis:phpunit WP_VERSION=nightly
+  - php: hhvm
+    env: WP_TRAVISCI=travis:phpunit WP_VERSION=nightly
+  - php: 7.0
+    env: WP_TRAVISCI=travis:phpunit WP_VERSION=nightly
+  allow_failures:
+  - php: hhvm
+  - php: 7.0
+  fast_finish: true
+
+cache:
+  directories:
+  - vendor
+  - $HOME/.composer/cache
+  - node_modules
+
+before_install:
+  # set up WP install
+  - bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
+  # prepare for running the tests
+  - cd $TRAVIS_BUILD_DIR
+  - npm install -g npm
+  - npm install -g grunt-cli
+  - npm install
+  - node --version
+  - npm --version
+  - grunt --version
+
+before_script:
+  # Setup Coveralls
+  - |
+    if [[ "$WP_TRAVISCI" == "travis:phpvalidate" ]] ; then
+      composer self-update
+      composer install --no-interaction
+    fi
+  # Setup Coveralls
+  - |
+    if [[ "$WP_TRAVISCI" == "travis:codecoverage" ]] ; then
+      composer self-update
+      composer install --no-interaction
+    fi
+
+script:
+  - grunt $WP_TRAVISCI
+
+after_script:
+  # Push coverage off to Codecov
+- |
+  if [[ "$WP_TRAVISCI" == "travis:codecoverage" ]] ; then
+    bash <(curl -s https://codecov.io/bash)
+  fi
+
+git:
+  depth: 1
+
+notifications:
+  email:
+    on_success: never
+    on_failure: change

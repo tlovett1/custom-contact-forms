@@ -135,7 +135,7 @@ class CCF_Custom_Contact_Forms {
 			return;
 		}
 
-		require_once( dirname( __FILE__ ) . '/../vendor/wp-api/wp-api/plugin.php' );
+		require_once( dirname( __FILE__ ) . '/../wp-api/plugin.php' );
 	}
 
 	/**
