@@ -16,7 +16,7 @@ class FormManagerLeftSidebarCest {
 	/**
 	 * Logins temp user and creates him if it doesn't exist yet.
 	 *
-	 * @since 1.0.0
+	 * @since 7.0
 	 *
 	 * @access public
 	 * @param \GLM\Tests\Acceptance\AcceptanceTester $I The current actor.
@@ -30,7 +30,7 @@ class FormManagerLeftSidebarCest {
 			) );
 		}
 
-		LoginPage::of( $I )->login( $this->_user->user_login, $this->_user_password );
+		LoginPage::of( $I )->login( $this->_user->user_login, 'test' );
 	}
 
 	/**
@@ -187,20 +187,64 @@ class FormManagerLeftSidebarCest {
 	 * @since 7.0
 	 * @param \GLM\Tests\Acceptance\AcceptanceTester $I The current actor.
 	 */
-	public function formNotificationsFormEmailTypeShow( AcceptanceTester $I ) {
+	public function formNotificationsFromEmailTypeShow( AcceptanceTester $I ) {
 		$I->amOnPage( admin_url( 'post-new.php' ) );
 
 		$I->click( 'Add Form' );
 		
-		$I->wantTo( 'Ensure form notifications send email notifications works properly' );
+		$I->wantTo( 'Ensure form notifications from email type shows' );
 
 		$I->click( 'Form Notifications' );
-		$I->dontSee( '"To" Email Addresses' );
 		$I->selectOption( 'Send Email Notifications', 'Yes' );
-		$I->see( '"To" Email Addresses (comma separated)' );
-		$I->see( '"From" Email Address Type' );
-		$I->see( '"From" Name Type' );
-		$I->see( 'Custom "From" Name' );
-		$I->see( 'Email Subject Type' );
+		$I->see('Email Address Type');
+		$I->selectOption( 'Email Address Type:', 'Custom Email' );
+		$I->see( 'Custom "From" Email Address' );
+		$I->selectOption( 'Email Address Type:', 'Form Field' ); // Form Field not working
+		$I->see( 'Pull "From" Email Dynamically from Field' );
+	}
+
+	/**
+	 * Ensure form notifications email name type shows
+	 *
+	 * @since 7.0
+	 * @param \GLM\Tests\Acceptance\AcceptanceTester $I The current actor.
+	 */
+	public function formNotificationsFromEmailNameTypeShow( AcceptanceTester $I ) {
+		$I->amOnPage( admin_url( 'post-new.php' ) );
+
+		$I->click( 'Add Form' );
+		
+		$I->wantTo( 'Ensure form notifications from email name type shows' );
+
+		$I->click( 'Form Notifications' );
+		$I->selectOption( 'Send Email Notifications', 'Yes' );
+		$I->see('"From" Name Type');
+		$I->see( 'Custom "From" Name:' );
+		$I->selectOption( '"From" Name Type', 'Form Field' );
+		$I->dontSee( 'Custom From Name:' );
+		$I->see( 'Pull "From" Name Dynamically from Field' );
+	}
+
+	/**
+	 * Ensure form notifications subject type shows
+	 *
+	 * @since 7.0
+	 * @param \GLM\Tests\Acceptance\AcceptanceTester $I The current actor.
+	 */
+	public function formNotificationsEmailSubjectTypeShow( AcceptanceTester $I ) {
+		$I->amOnPage( admin_url( 'post-new.php' ) );
+
+		$I->click( 'Add Form' );
+		
+		$I->wantTo( 'Ensure form notifications from email type shows' );
+
+		$I->click( 'Form Notifications' );
+		$I->selectOption( 'Send Email Notifications', 'Yes' );
+		$I->dontSee( 'Custom Email Subject:' );
+		$I->selectOption( 'Email Subject Type:', 'Custom Subject' );
+		$I->see( 'Custom Email Subject:' );
+		$I->selectOption( 'Email Subject Type:', 'Form Field' );
+		$I->see( 'Pull Email Subject Dynamically from Field' );
+		$I->dontSee( 'Custom Email Subject:' );
 	}
 }

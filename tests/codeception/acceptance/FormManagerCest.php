@@ -16,7 +16,7 @@ class FormManagerCest {
 	/**
 	 * Logins temp user and creates him if it doesn't exist yet.
 	 *
-	 * @since 1.0.0
+	 * @since 7.0
 	 *
 	 * @access public
 	 * @param \GLM\Tests\Acceptance\AcceptanceTester $I The current actor.
@@ -30,21 +30,37 @@ class FormManagerCest {
 			) );
 		}
 
-		LoginPage::of( $I )->login( $this->_user->user_login, $this->_user_password );
+		LoginPage::of( $I )->login( $this->_user->user_login, 'test' );
 	}
 
 	/**
-	 * Tests that form manager opens on the post editor
+	 * Tests that form manager opens on the new post page
 	 *
 	 * @since 7.0
 	 * @param \GLM\Tests\Acceptance\AcceptanceTester $I The current actor.
 	 */
-	public function formManagerOpensPostEditor( AcceptanceTester $I ) {
-		$I->wantTo( 'Ensure the form manager opens in the post editor' );
+	public function formManagerOpensNewPort( AcceptanceTester $I ) {
+		$I->wantTo( 'Ensure the form manager opens in the new post page' );
 
 		$I->amOnPage( admin_url( 'post-new.php' ) );
 
 		$I->click( 'Add Form' );
+
+		$I->see( 'Click on a field to edit it' );
+	}
+
+	/**
+	 * Tests that form manager opens on the new form page
+	 *
+	 * @since 7.0
+	 * @param \GLM\Tests\Acceptance\AcceptanceTester $I The current actor.
+	 */
+	public function formManagerOpensNewForm( AcceptanceTester $I ) {
+		$I->wantTo( 'Ensure the form manager opens in the new form page' );
+
+		$I->amOnPage( admin_url( 'post-new.php?post_type=ccf_form' ) );
+
+		$I->click( 'Manage Form' );
 
 		$I->see( 'Click on a field to edit it' );
 	}
