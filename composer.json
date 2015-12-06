@@ -1,7 +1,8 @@
 {
     "name": "tlovett1/custom-contact-forms",
 	"require": {
-        "10up/wp-codeception": "^1.0"
+        "10up/wp-codeception": "^1.0",
+        "wp-cli/wp-cli": "^0.21.1"
 	},
 	 "extra": {
         "installer-paths": {
