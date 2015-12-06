@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: contact form, web form, custom contact form, custom forms, captcha form, contact fields, form mailers, forms
 Requires at least: 3.9
 Tested up to: 4.4
-Stable tag: 6.9.3
+Stable tag: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,8 +37,11 @@ For questions, feature requests, and support concerning the Custom Contact Forms
 
 == Changelog ==
 
+= 6.9.4 =
+* WordPress list signup
+
 = 6.9.3 =
-Ad removal
+* Ad removal
 
 = 6.9.0 =
 * Add Danish translation. Props [KasperLK](https://github.com/KasperLK)

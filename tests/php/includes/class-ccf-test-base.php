@@ -176,7 +176,7 @@ class CCFTestBase extends WP_UnitTestCase {
 			'type' => 'ccf_form',
 			'status' => 'publish',
 			'ID' => null,
-			'title' => 'Test Form',
+			'title' => array( 'raw' => 'Test Form', ),
 			'description' => 'Test form description',
 			'buttonText' => 'Submit Text',
 			'author' => array(),
@@ -198,7 +198,10 @@ class CCFTestBase extends WP_UnitTestCase {
 			'featured_image' => null,
 		);
 
-		return $this->api->create_form( $data );
+		$request = new WP_REST_Request();
+		$request->set_body( json_encode( $data ) );
+
+		return $this->api->create_item( $request );
 	}
 
 	/**
@@ -228,7 +231,6 @@ class CCFTestBase extends WP_UnitTestCase {
 
 		wp_set_current_user( $admin_id );
 
-		$wp_json_server = new WP_JSON_Server;
-		$this->api = new CCF_API( $wp_json_server );
+		$this->api = new CCF_API_Form_Controller;
 	}
 }

@@ -320,11 +320,58 @@
 			left: 0;
 			right: 0;
 			height: 50px;
-			padding: 0 16px;
+			padding: 0 16px 0 0;
 			position: absolute;
 			text-align: right;
 			line-height: 50px;
 			border-top: 1px solid #e5e5e5;
+
+			.left {
+				float: left;
+				background-color: #00a0d2;
+				padding-left: 16px;
+				padding-right: 16px;
+				color: #fff;
+
+				@media (max-width: 830px) {
+					display: none;
+				}
+
+				input {
+					vertical-align: middle;
+					margin-left: 5px;
+				}
+
+				button {
+					vertical-align: middle;
+				}
+
+				.signup-x {
+					color: red;
+					display: none;
+					font-size: 150%;
+					vertical-align: middle;
+					font-weight: bold;
+					margin-left: 4px;
+				}
+
+				.signup-check {
+					color: green;
+					display: none;
+					vertical-align: middle;
+					font-size: 150%;
+					font-weight: bold;
+					margin-left: 4px;
+				}
+			}
+
+			.left.signup-success .signup-check {
+				display: inline;
+			}
+
+			.left.signup-error .signup-x {
+				display: inline;
+			}
 
 			.spinner {
 				display: none;
@@ -335,7 +382,7 @@
 				margin-top: 16px;
 			}
 
-			input {
+			input[type="button"] {
 				margin-top: 11px;
 				float: right;
 				margin-left: 6px;
@@ -360,7 +407,7 @@
 				}
 			}
 
-			h2 {
+			.accordion-heading {
 				&:before {
 					margin-right: 8px;
 					font-family: 'form-manager';
@@ -375,6 +422,9 @@
 				}
 
 				cursor: pointer;
+				display: block;
+				line-height: 29px;
+				color: inherit;
 				padding: 10px 20px;
 				border-bottom: 1px solid #e5e5e5;
 				font-size: 150%;

@@ -26,13 +26,13 @@
 	});
 
 	wp.ccf.utils.insertFormShortcode = function( form ) {
-		var existingForm = wp.ccf.forms.findWhere( { ID: form.get( 'ID' ) } );
+		var existingForm = wp.ccf.forms.findWhere( { id: form.get( 'id' ) } );
 		if ( ! existingForm ) {
 			wp.ccf.forms.add( form );
 		}
 
 		var editor = tinymce.get( wpActiveEditor );
-		var shortcode = '[ccf_form id="' + form.get( 'ID' ) + '"]';
+		var shortcode = '[ccf_form id="' + form.get( 'id' ) + '"]';
 
 		if ( editor && ! editor.isHidden() ) {
 			tinymce.activeEditor.execCommand( 'mceInsertContent', false, shortcode );

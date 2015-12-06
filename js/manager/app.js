@@ -37,7 +37,7 @@
 			if ( +form === parseInt( form ) ) {
 				var formId = parseInt( form );
 
-				form = SELF.forms.findWhere( { ID: parseInt( formId ) } );
+				form = SELF.forms.findWhere( { id: parseInt( formId ) } );
 
 				if ( ! form ) {
 					var $deferred;
@@ -46,7 +46,7 @@
 						$deferred = SELF.forms.formsFetching[formId];
 						form = null;
 					} else {
-						form = new wp.ccf.models.Form( { ID: formId } );
+						form = new wp.ccf.models.Form( { id: formId } );
 						$deferred = form.fetch();
 						SELF.forms.formsFetching[formId] = $deferred;
 					}
@@ -56,7 +56,7 @@
 							delete SELF.forms.formsFetching[formId];
 							SELF.forms.add( form );
 						} else {
-							form = SELF.forms.findWhere( { ID: formId } );
+							form = SELF.forms.findWhere( { id: formId } );
 						}
 
 						SELF.currentForm = form;
@@ -145,7 +145,7 @@
 
 					if ( typeof SELF.forms.formsFetching[formId] === 'undefined' ) {
 
-						var form = new wp.ccf.models.Form( { ID: formId } );
+						var form = new wp.ccf.models.Form( { id: formId } );
 						var $deferred = form.fetch();
 						SELF.forms.formsFetching[formId] = $deferred;
 						SELF._currentFormDeferred = $deferred;
@@ -159,7 +159,7 @@
 						SELF._currentFormDeferred = SELF.forms.formsFetching[formId];
 
 						SELF._currentFormDeferred.done( function() {
-							SELF.currentForm = SELF.forms.findWhere( { 'ID': formId } );
+							SELF.currentForm = SELF.forms.findWhere( { id: formId } );
 						});
 					}
 

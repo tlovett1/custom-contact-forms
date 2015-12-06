@@ -103,19 +103,19 @@ class CCF_Form_Manager {
 			<div class="disabled-overlay"></div>
 			<div class="left-sidebar accordion-container">
 				<div class="accordion-section expanded">
-					<h2 aria-hidden="true"><?php esc_html_e( 'Standard Fields', 'custom-contact-forms' ); ?></h2>
+					<a class="accordion-heading"><?php esc_html_e( 'Standard Fields', 'custom-contact-forms' ); ?></a>
 					<div class="section-content">
 						<div class="fields draggable-fields"></div>
 					</div>
 				</div>
-				<div class="accordion-section">
-					<h2 aria-hidden="true"><?php esc_html_e( 'Special Fields', 'custom-contact-forms' ); ?></h2>
+				<div class="accordion-section" class="special-fields">
+					<a class="accordion-heading"><?php esc_html_e( 'Special Fields', 'custom-contact-forms' ); ?></a>
 					<div class="section-content">
 						<div class="special-fields draggable-fields"></div>
 					</div>
 				</div>
 				<div class="accordion-section">
-					<h2 aria-hidden="true"><?php esc_html_e( 'Structure', 'custom-contact-forms' ); ?></h2>
+					<a class="accordion-heading"><?php esc_html_e( 'Structure', 'custom-contact-forms' ); ?></a>
 					<div class="section-content">
 						<div class="structure-fields draggable-fields"></div>
 					</div>
@@ -130,6 +130,13 @@ class CCF_Form_Manager {
 			<div class="right-sidebar ccf-field-sidebar accordion-container"></div>
 
 			<div class="bottom">
+				<div class="left signup">
+					<strong>Want free WP blogging tips, tutorials, and marketing tricks? </strong>
+					<input type="email" class="email-signup-field" placeholder="Email">
+					<button type="button" class="button signup-button">Sign me up!</button>
+					<span class="signup-check">✓</span>
+					<span class="signup-x">&times;</span>
+				</div>
 				<input type="button" class="button insert-form-button" value="<?php esc_html_e( 'Insert into post', 'custom-contact-forms' ); ?>">
 				<input type="button" class="button button-primary save-button" value="<?php esc_html_e( 'Save Form', 'custom-contact-forms' ); ?>">
 				<div class="spinner" style="background: url( '<?php echo esc_url( admin_url( 'images/wpspin_light.gif' ) ); ?>' ) no-repeat;"></div>
@@ -137,11 +144,11 @@ class CCF_Form_Manager {
 		</script>
 
 		<script type="text/html" id="ccf-form-settings-template">
-			<h2 aria-hidden="true"><?php esc_html_e( 'Form Settings', 'custom-contact-forms' ); ?></h2>
+			<a class="accordion-heading"><?php esc_html_e( 'Form Settings', 'custom-contact-forms' ); ?></a>
 			<div class="section-content">
 				<p>
 					<label for="ccf_form_title"><?php esc_html_e( 'Form Title:', 'custom-contact-forms' ); ?></label>
-					<input class="widefat form-title" id="ccf_form_title" name="title" type="text" value="{{ form.title }}">
+					<input class="widefat form-title" id="ccf_form_title" name="title" type="text" value="{{ form.title.raw }}">
 				</p>
 
 				<p>
@@ -186,7 +193,7 @@ class CCF_Form_Manager {
 		</script>
 
 		<script type="text/html" id="ccf-form-notifications-template">
-			<h2 aria-hidden="true"><?php esc_html_e( 'Form Notifications', 'custom-contact-forms' ); ?></h2>
+			<a class="accordion-heading"><?php esc_html_e( 'Form Notifications', 'custom-contact-forms' ); ?></a>
 			<div class="section-content">
 				<p>
 					<label for="ccf_form_send_email_notifications"><?php esc_html_e( 'Send Email Notifications:', 'custom-contact-forms' ); ?></label>
@@ -1269,11 +1276,11 @@ class CCF_Form_Manager {
 
 		<script type="text/html" id="ccf-existing-form-table-row-template">
 
-			<td>{{ form.ID }}</td>
+			<td>{{ form.id }}</td>
 			<td>
-				<a class="edit edit-form title" data-view="form-pane" data-form-id="{{ form.ID }}" href="#form-pane-{{ form.ID }}"><# if ( form.title ) { #>{{ form.title }}<# } else { #>{{ '<?php esc_html_e( '(No title)', 'custom-contact-forms' ); ?>' }}<# } #></a>
+				<a class="edit edit-form title" data-view="form-pane" data-form-id="{{ form.id }}" href="#form-pane-{{ form.id }}"><# if ( form.title.raw ) { #>{{ form.title.raw }}<# } else { #>{{ '<?php esc_html_e( '(No title)', 'custom-contact-forms' ); ?>' }}<# } #></a>
 				<div class="actions">
-					<a class="edit edit-form" data-view="form-pane" data-form-id="{{ form.ID }}" href="#form-pane-{{ form.ID }}"><?php esc_html_e( 'Edit', 'custom-contact-forms' ); ?></a> |
+					<a class="edit edit-form" data-view="form-pane" data-form-id="{{ form.id }}" href="#form-pane-{{ form.id }}"><?php esc_html_e( 'Edit', 'custom-contact-forms' ); ?></a> |
 					<a class="insert-form-button"><?php esc_html_e( 'Insert into post', 'custom-contact-forms' ); ?></a> |
 					<a class="delete"><?php esc_html_e( 'Trash', 'custom-contact-forms' ); ?></a>
 				</div>
@@ -1293,9 +1300,9 @@ class CCF_Form_Manager {
 		</script>
 
 		<script type="text/html" id="ccf-form-mce-preview">
-			<div class="ccf-form-preview form-id-{{ form.ID }}">
-				<# if ( form.title ) { #>
-					<h2>{{ form.title }}</h2>
+			<div class="ccf-form-preview form-id-{{ form.id }}">
+				<# if ( form.title.raw ) { #>
+					<h2>{{ form.title.raw }}</h2>
 				<# } #>
 
 				<# if ( form.description && form.description != '' ) { #>
@@ -1304,7 +1311,7 @@ class CCF_Form_Manager {
 
 				<# if ( form.fields ) { #>
 					<# _.each( form.fields, function( field ) { #>
-						<div class="field {{ field.type }} field-{{ field.ID }}">
+						<div class="field {{ field.type }} field-{{ field.id }}">
 							{{{ field.preview }}}
 						</div>
 					<# } ); #>
@@ -1411,10 +1418,10 @@ class CCF_Form_Manager {
 				<# } #>
 			<# } ); #>
 			<td class="actions">
-				<a href="#TB_inline?height=300&amp;width=400&amp;inlineId=submission-content" data-submission-date="{{ submission.date_gmt }}" data-submission-id="{{ submission.ID }}" class="view"  data-icon="&#xe601;"></a>
+				<a href="#TB_inline?height=300&amp;width=400&amp;inlineId=submission-content" data-submission-date="{{ submission.date_gmt }}" data-submission-id="{{ submission.id }}" class="view"  data-icon="&#xe601;"></a>
 				<a class="delete" data-icon="&#xe602;"></a>
 
-				<div class="submission-wrapper" id="ccf-submission-content-{{ submission.ID }}">
+				<div class="submission-wrapper" id="ccf-submission-content-{{ submission.id }}">
 					<div class="ccf-submission-content">
 						<# for ( column in submission.data ) { #>
 							<div class="field-slug">
@@ -1550,6 +1557,10 @@ class CCF_Form_Manager {
 			));
 
 			wp_register_script( 'moment', plugins_url( '/bower_components/moment/moment.js', dirname( __FILE__ ) ) );
+
+			if ( ! wp_script_is( 'wp-api', 'registered' ) ) {
+				wp_register_script( 'wp-api', plugins_url( '/vendor/wp-api/wp-api/wp-api.js', dirname( __FILE__ ) ) );
+			}
 
 			wp_enqueue_script( 'ccf-form-manager', plugins_url( $js_manager_path, dirname( __FILE__ ) ), array( 'json2', 'jquery', 'jquery-ui-core', 'jquery-ui-datepicker', 'underscore', 'backbone', 'jquery-ui-core', 'jquery-ui-draggable', 'jquery-ui-sortable', 'jquery-ui-droppable', 'wp-api', 'moment' ), '1.0', true );
 			wp_localize_script( 'ccf-form-manager', 'ccfSettings', array(

@@ -1,0 +1,15 @@
+{
+    "name": "wp-api/api-core",
+    "description": "Compatibility repo for WP-API infrastructure components.",
+    "homepage": "http://wp-api.org/",
+    "license": "GPL2+",
+    "authors": [
+        {
+            "name": "WP-API Team",
+            "homepage": "http://wp-api.org/"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/WP-API/WP-API/issues"
+    }
+}

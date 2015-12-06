@@ -12,17 +12,20 @@ class CCFTestAPI extends CCFTestBase {
 		$form = $this->_createForm();
 		$this->_createForm();
 
-		$get_form_result = $this->api->get_form( $form->data['ID'] );
+		$request = new WP_REST_Request();
+		$request->set_param( 'id', $form->data['id'] );
+
+		$get_form_result = $this->api->get_item( $request );
 
 		$this->assertTrue( ! is_wp_error( $get_form_result ) );
 
-		$this->assertTrue( ! empty( $get_form_result->data['ID'] ) );
+		$this->assertTrue( ! empty( $get_form_result->data['id'] ) );
 
-		$form = get_post( $get_form_result->data['ID'] );
+		$form = get_post( $get_form_result->data['id'] );
 
 		$this->assertTrue( ! empty( $form ) );
 
-		$button_text = get_post_meta( $get_form_result->data['ID'], 'ccf_form_buttonText', true );
+		$button_text = get_post_meta( $get_form_result->data['id'], 'ccf_form_buttonText', true );
 		$this->assertTrue( ! empty( $button_text ) );
 	}
 
@@ -38,18 +41,20 @@ class CCFTestAPI extends CCFTestBase {
 		$this->_createForm();
 		$this->_createForm();
 
-		$get_forms_result = $this->api->get_forms();
+		$request = new WP_REST_Request();
+
+		$get_forms_result = $this->api->get_items( $request );
 
 		$forms = $get_forms_result->data;
 
 		$this->assertEquals( 5, count( $forms ) );
 
 		foreach ( $forms as $form_object ) {
-			$form = get_post( $form_object['ID'] );
+			$form = get_post( $form_object['id'] );
 
 			$this->assertTrue( ! empty( $form ) );
 
-			$button_text = get_post_meta( $form_object['ID'], 'ccf_form_buttonText', true );
+			$button_text = get_post_meta( $form_object['id'], 'ccf_form_buttonText', true );
 			$this->assertTrue( ! empty( $button_text ) );
 		}
 	}
@@ -65,21 +70,21 @@ class CCFTestAPI extends CCFTestBase {
 
 		$this->assertTrue( ! is_wp_error( $form_result ) );
 
-		$this->assertTrue( ! empty( $form_result->data['ID'] ) );
+		$this->assertTrue( ! empty( $form_result->data['id'] ) );
 
-		$form = get_post( $form_result->data['ID'] );
+		$form = get_post( $form_result->data['id'] );
 
 		$this->assertTrue( ! empty( $form ) );
 
-		$this->assertEquals( 'Test Form', get_the_title( $form_result->data['ID'] ) );
+		$this->assertEquals( 'Test Form', get_the_title( $form_result->data['id'] ) );
 
-		$description = get_post_meta( $form_result->data['ID'], 'ccf_form_description', true );
+		$description = get_post_meta( $form_result->data['id'], 'ccf_form_description', true );
 		$this->assertEquals( 'Test form description', $description );
 
-		$button_text = get_post_meta( $form_result->data['ID'], 'ccf_form_buttonText', true );
+		$button_text = get_post_meta( $form_result->data['id'], 'ccf_form_buttonText', true );
 		$this->assertTrue( ! empty( $button_text ) );
 
-		$fields = get_post_meta( $form_result->data['ID'], 'ccf_attached_fields', true );
+		$fields = get_post_meta( $form_result->data['id'], 'ccf_attached_fields', true );
 
 		$this->assertTrue( ! empty( $fields ) );
 
@@ -102,22 +107,22 @@ class CCFTestAPI extends CCFTestBase {
 
 		$this->assertTrue( ! is_wp_error( $form_result ) );
 
-		$this->assertTrue( ! empty( $form_result->data['ID'] ) );
+		$this->assertTrue( ! empty( $form_result->data['id'] ) );
 
-		$form = get_post( $form_result->data['ID'] );
+		$form = get_post( $form_result->data['id'] );
 
 		$this->assertTrue( ! empty( $form ) );
 
-		$this->assertEquals( 'Test Form', get_the_title( $form_result->data['ID'] ) );
+		$this->assertEquals( 'Test Form', get_the_title( $form_result->data['id'] ) );
 
-		$description = get_post_meta( $form_result->data['ID'], 'ccf_form_description', true );
+		$description = get_post_meta( $form_result->data['id'], 'ccf_form_description', true );
 		$this->assertEquals( 'Test form description', $description );
 
-		$button_text = get_post_meta( $form_result->data['ID'], 'ccf_form_buttonText', true );
+		$button_text = get_post_meta( $form_result->data['id'], 'ccf_form_buttonText', true );
 
 		$this->assertTrue( ! empty( $button_text ) );
 
-		$attached_fields = get_post_meta( $form_result->data['ID'], 'ccf_attached_fields', true );
+		$attached_fields = get_post_meta( $form_result->data['id'], 'ccf_attached_fields', true );
 
 		$this->assertTrue( ! empty( $attached_fields ) );
 
@@ -186,8 +191,8 @@ class CCFTestAPI extends CCFTestBase {
 			'fields' => $fields,
 			'type' => 'ccf_form',
 			'status' => 'publish',
-			'ID' => null,
-			'title' => 'Edit Test Form',
+			'id' => null,
+			'title' => array( 'raw' => 'Edit Test Form', ),
 			'description' => 'Edit test form description',
 			'buttonText' => 'Edit Submit Text',
 			'author' => array(),
@@ -209,24 +214,28 @@ class CCFTestAPI extends CCFTestBase {
 			'featured_image' => null,
 		);
 
-		$edit_form_result = $this->api->edit_form( $form->data['ID'], $edit_data );
+		$request = new WP_REST_Request();
+		$request->set_param( 'id', $form->data['id'] );
+		$request->set_body( json_encode( $edit_data ) );
 
-		$this->assertTrue( ! empty( $edit_form_result->data['ID'] ) );
+		$edit_form_result = $this->api->update_item( $request );
 
-		$form = get_post( $edit_form_result->data['ID'] );
+		$this->assertTrue( ! empty( $edit_form_result->data['id'] ) );
+
+		$form = get_post( $edit_form_result->data['id'] );
 
 		$this->assertTrue( ! empty( $form ) );
 
-		$this->assertEquals( 'Edit Test Form', get_the_title( $edit_form_result->data['ID'] ) );
+		$this->assertEquals( 'Edit Test Form', get_the_title( $edit_form_result->data['id'] ) );
 
-		$description = get_post_meta( $edit_form_result->data['ID'], 'ccf_form_description', true );
+		$description = get_post_meta( $edit_form_result->data['id'], 'ccf_form_description', true );
 		$this->assertEquals( 'Edit test form description', $description );
 
-		$button_text = get_post_meta( $edit_form_result->data['ID'], 'ccf_form_buttonText', true );
+		$button_text = get_post_meta( $edit_form_result->data['id'], 'ccf_form_buttonText', true );
 
 		$this->assertEquals( 'Edit Submit Text', $button_text  );
 
-		$attached_fields = get_post_meta( $edit_form_result->data['ID'], 'ccf_attached_fields', true );
+		$attached_fields = get_post_meta( $edit_form_result->data['id'], 'ccf_attached_fields', true );
 
 		$this->assertTrue( ! empty( $attached_fields ) );
 
@@ -258,9 +267,12 @@ class CCFTestAPI extends CCFTestBase {
 		$this->_createForm();
 		$this->_createForm();
 
-		$this->api->delete_form( $form->data['ID'] );
+		$request = new WP_REST_Request();
+		$request->set_param( 'id', $form->data['id'] );
 
-		$form = get_post( $form->data['ID'] );
+		$this->api->delete_item( $request );
+
+		$form = get_post( $form->data['id'] );
 
 		$this->assertTrue( $form->post_status === 'trash' );
 	}
@@ -277,13 +289,13 @@ class CCFTestAPI extends CCFTestBase {
 		$this->_createForm();
 		$this->_createForm();
 
-		$attached_fields = get_post_meta( $form->data['ID'], 'ccf_attached_fields', true );
+		$attached_fields = get_post_meta( $form->data['id'], 'ccf_attached_fields', true );
 
 		$attached_choices = get_post_meta( $attached_fields[5], 'ccf_attached_choices', true );
 
-		wp_delete_post( $form->data['ID'], true );
+		wp_delete_post( $form->data['id'], true );
 
-		$form = get_post( $form->data['ID'] );
+		$form = get_post( $form->data['id'] );
 
 		$this->assertTrue( $form === null );
 
@@ -307,23 +319,26 @@ class CCFTestAPI extends CCFTestBase {
 	 */
 	public function testGetSubmissions() {
 		$form = $this->_createForm();
-		$this->_createSubmission( $form->data['ID'] );
-		$this->_createSubmission( $form->data['ID'] );
-		$this->_createSubmission( $form->data['ID'] );
-		$this->_createSubmission( $form->data['ID'] );
+		$this->_createSubmission( $form->data['id'] );
+		$this->_createSubmission( $form->data['id'] );
+		$this->_createSubmission( $form->data['id'] );
+		$this->_createSubmission( $form->data['id'] );
 
-		$get_submissions_result = $this->api->get_submissions( $form->data['ID'] );
+		$request = new WP_REST_Request();
+		$request->set_param( 'id', $form->data['id'] );
+
+		$get_submissions_result = $this->api->get_submissions( $request );
 
 		$submissions = $get_submissions_result->data;
 
 		$this->assertEquals( 4, count( $submissions ) );
 
 		foreach ( $submissions as $submission_object ) {
-			$submission = get_post( $submission_object['ID'] );
+			$submission = get_post( $submission_object['id'] );
 
 			$this->assertTrue( ! empty( $submission ) );
 
-			$data = get_post_meta( $submission_object['ID'], 'ccf_submission_data', true );
+			$data = get_post_meta( $submission_object['id'], 'ccf_submission_data', true );
 			$this->assertTrue( ! empty( $data ) );
 		}
 	}

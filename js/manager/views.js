@@ -827,7 +827,7 @@
 				}
 
 				var title = this.el.querySelectorAll( '.form-title' )[0].value;
-				this.model.set( 'title', title );
+				this.model.set( 'title', { raw: title } );
 
 				var description = this.el.querySelectorAll( '.form-description' )[0].value;
 				this.model.set( 'description', description );
@@ -1138,7 +1138,8 @@
 
 			events: {
 				'click .save-button': 'sync',
-				'click h2': 'accordionClick',
+				'click .signup-button': 'signup',
+				'click .accordion-heading': 'accordionClick',
 				'click .insert-form-button': 'insertForm'
 			},
 
@@ -1150,6 +1151,27 @@
 				wp.ccf.utils.insertFormShortcode( this.model );
 
 				wp.ccf.toggle();
+			},
+
+			signup: function( event ) {
+				var email = this.el.querySelectorAll( '.email-signup-field' )[0].value;
+				var signupContainer = this.el.querySelectorAll( '.bottom .left.signup' )[0];
+				signupContainer.className = 'left signup';
+
+				if (email) {
+					$.ajax( {
+						url: '//taylorlovett.us8.list-manage.com/subscribe/post-json?u=66118f9a5b0ab0414e83f043a&amp;id=b4ed816a24&c=?',
+						method: 'post',
+						dataType: 'jsonp',
+						data: {
+							EMAIL: email
+						}
+					}).done(function() {
+						signupContainer.className = 'left signup signup-success';
+					});
+				} else {
+					signupContainer.className = 'left signup signup-error';
+				}
 			},
 
 			accordionClick: function( event ) {
@@ -1237,7 +1259,7 @@
 							wp.ccf.errorModal.render( messageType ).show();
 						}).done( function( response ) {
 							if (ccfSettings.single && ! ccfSettings.postId ) {
-								window.location = ccfSettings.adminUrl + 'post.php?post=' + SELF.model.get( 'ID' ) + '&action=edit#ccf-form/' + SELF.model.get( 'ID' );
+								window.location = ccfSettings.adminUrl + 'post.php?post=' + SELF.model.get( 'id' ) + '&action=edit#ccf-form/' + SELF.model.get( 'id' );
 							}
 						}).complete( function( response ) {
 							$spinner.fadeOut();
@@ -1254,7 +1276,7 @@
 
 			enableDisableInsert: function() {
 				var insertButton = this.el.querySelectorAll( '.insert-form-button' )[0];
-				if ( this.model.get( 'ID' ) ) {
+				if ( this.model.get( 'id' ) ) {
 					insertButton.removeAttribute( 'disabled' );
 				} else {
 					insertButton.setAttribute( 'disabled', 'disabled' );

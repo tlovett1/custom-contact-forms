@@ -6,24 +6,19 @@
 	convertNoticesToExceptions="true"
 	convertWarningsToExceptions="true"
 	>
-    <testsuites>
-        <!-- Default test suite to run all tests -->
-        <testsuite>
-            <directory prefix="test-" suffix=".php">tests</directory>
-        </testsuite>
-    </testsuites>
-
-	<logging>
-		<log type="coverage-html" target="coverage" title="PHPUnit"
-			 charset="UTF-8" yui="true" highlight="true" />
-	</logging>
-
+	<testsuites>
+		<!-- Default test suite to run all tests -->
+		<testsuite>
+			<directory prefix="test-" suffix=".php">tests</directory>
+		</testsuite>
+	</testsuites>
 	<filter>
 		<blacklist>
 			<directory suffix=".php">.</directory>
 		</blacklist>
 		<whitelist>
 			<directory suffix=".php">./lib</directory>
+			<file>./plugin.php</file>
 		</whitelist>
 	</filter>
 </phpunit>
