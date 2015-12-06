@@ -23,6 +23,10 @@ class ComposerAutoloaderInitc94ec4b71185dd8918b0b7819b7f8c28
         self::$loader = $loader = new \Composer\Autoload\ClassLoader();
         spl_autoload_unregister(array('ComposerAutoloaderInitc94ec4b71185dd8918b0b7819b7f8c28', 'loadClassLoader'));
 
+        $includePaths = require __DIR__ . '/include_paths.php';
+        array_push($includePaths, get_include_path());
+        set_include_path(join(PATH_SEPARATOR, $includePaths));
+
         $map = require __DIR__ . '/autoload_namespaces.php';
         foreach ($map as $namespace => $path) {
             $loader->set($namespace, $path);
@@ -40,11 +44,20 @@ class ComposerAutoloaderInitc94ec4b71185dd8918b0b7819b7f8c28
 
         $loader->register(true);
 
+        $includeFiles = require __DIR__ . '/autoload_files.php';
+        foreach ($includeFiles as $fileIdentifier => $file) {
+            composerRequirec94ec4b71185dd8918b0b7819b7f8c28($fileIdentifier, $file);
+        }
+
         return $loader;
     }
 }
 
-function composerRequirec94ec4b71185dd8918b0b7819b7f8c28($file)
+function composerRequirec94ec4b71185dd8918b0b7819b7f8c28($fileIdentifier, $file)
 {
-    require $file;
+    if (empty($GLOBALS['__composer_autoload_files'][$fileIdentifier])) {
+        require $file;
+
+        $GLOBALS['__composer_autoload_files'][$fileIdentifier] = true;
+    }
 }

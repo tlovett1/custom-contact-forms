@@ -1,20 +1,16 @@
 {
     "name": "tlovett1/custom-contact-forms",
 	"require": {
-		"wp-api/wp-api": "dev-master#329fc65824675612a0999502616e9d3ccc4c5eb2"
+        "10up/wp-codeception": "^1.0"
 	},
-	"repositories": [
-		{
-			"type": "package",
-			"package": {
-				"name": "wp-api/wp-api",
-				"version": "dev-master",
-				"source": {
-					"url": "https://github.com/wp-api/wp-api",
-					"type": "git",
-					"reference": "origin/master"
-				}
-			}
-		}
-	]
+	 "extra": {
+        "installer-paths": {
+            "vendor/{$name}/": ["type:wordpress-plugin"]
+        }
+    },
+    "autoload": {
+        "files": [
+            "vendor/wp-codeception/wp-codeception.php"
+        ]
+    }
 }

@@ -6,4 +6,9 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'phpDocumentor' => array($vendorDir . '/phpdocumentor/reflection-docblock/src'),
+    'WPCC' => array($vendorDir . '/wp-codeception/classes'),
+    'Prophecy\\' => array($vendorDir . '/phpspec/prophecy/src'),
+    'Composer\\Installers\\' => array($vendorDir . '/composer/installers/src'),
+    'Codeception' => array($vendorDir . '/codeception/codeception/src'),
 );
