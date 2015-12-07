@@ -218,7 +218,9 @@
 				data: {}
 			},
 
-			sync: _sync
+			sync: _sync,
+
+			urlRoot: WP_API_Settings.root.replace( /\/$/, '' ) + '/ccf/v1/submissions'
 		}
 	);
 

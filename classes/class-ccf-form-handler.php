@@ -91,6 +91,9 @@ class CCF_Form_Handler {
 	 * @return array|int
 	 */
 	public function handle_file( $value, $field_id ) {
+		require_once( trailingslashit( ABSPATH ) . 'wp-admin/includes/file.php' );
+		require_once( trailingslashit( ABSPATH ) . 'wp-admin/includes/image.php' );
+		require_once( trailingslashit( ABSPATH ) . 'wp-admin/includes/media.php' );
 
 		$slug = get_post_meta( $field_id, 'ccf_field_slug', true );
 

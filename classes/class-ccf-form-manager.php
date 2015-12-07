@@ -1295,7 +1295,7 @@ class CCF_Form_Manager {
 				{{ form.fields.length }}
 			</td>
 			<td>
-				0
+				{{ form.submissions }}
 			</td>
 		</script>
 

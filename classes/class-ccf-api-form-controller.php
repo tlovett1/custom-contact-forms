@@ -189,6 +189,19 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 			),
 		) );
 
+		register_rest_route( $namespace, '/submissions/(?P<id>[\d]+)', array(
+			array(
+				'methods'         => WP_REST_Server::DELETABLE,
+				'callback'        => array( $this, 'delete_submission' ),
+				'permission_callback' => array( $this, 'delete_item_permissions_check' ),
+				'args'     => array(
+					'force'    => array(
+				    	'default'     => true,
+					),
+				),
+			),
+		) );
+
 		register_rest_route( $namespace, '/forms/(?P<id>[\d]+)/fields', array(
 			array(
 				'methods'         => WP_REST_Server::READABLE,
@@ -437,27 +450,30 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 	public function get_submissions( $request ) {
 		$params = $request->get_params();
 
-		$data = array();
+		$args                   = array( 'post_type' => 'ccf_submission' );
+		$args['post_parent']    = $params['id'];
+		$args['paged']          = $request['page'];
+		$args['posts_per_page'] = ( ! empty( $request['per_page'] ) ) ? $request['per_page'] : get_option( 'posts_per_page' );
 
-		if ( ! empty( $params['id'] ) ) {
-			$page = 1;
-			if ( ! empty( $params['page'] ) ) {
-				$page = $params['page'];
-			}
-
-			$query = new WP_Query( array(
-				'post_type'   => 'ccf_submission',
-				'page'        => (int) $page,
-				'post_status' => 'publish',
-				'post_parent' => (int) $params['id']
-			) );
-
-			foreach ( $query->posts as $item ) {
-				$data[] = $this->prepare_submission_for_response( $item );
-			}
+		if ( is_array( $request['filter'] ) ) {
+			$args = array_merge( $args, $request['filter'] );
+			unset( $args['filter'] );
 		}
 
-		return new WP_REST_Response( $data, 200 );
+		$query = new WP_Query( $args );
+
+		$posts = array();
+		foreach ( $query->posts as $item ) {
+			$posts[] = $this->prepare_submission_for_response( $item, $request );
+		}
+
+		$response = rest_ensure_response( $posts );
+		unset( $query_args['paged'] );
+		$response->header( 'X-WP-Total', (int) $query->found_posts );
+		$max_pages = ceil( (int) $query->found_posts / $args['posts_per_page'] );
+		$response->header( 'X-WP-TotalPages', (int) $max_pages );
+
+		return $response;
 	}
 
 	/**
@@ -521,26 +537,29 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 	 * @return WP_Error|WP_REST_Response
 	 */
 	public function get_items( $request ) {
-		$params = $request->get_params();
+		$args                   = array( 'post_type' => 'ccf_form' );
+		$args['paged']          = $request['page'];
+		$args['posts_per_page'] = ( ! empty( $request['per_page'] ) ) ? $request['per_page'] : get_option( 'posts_per_page' );
 
-		$page = 1;
-		if ( ! empty( $params['page'] ) ) {
-			$page = $params['page'];
+		if ( is_array( $request['filter'] ) ) {
+			$args = array_merge( $args, $request['filter'] );
+			unset( $args['filter'] );
 		}
 
-		$query = new WP_Query( array(
-			'post_type'   => 'ccf_form',
-			'page'        => (int) $page,
-			'post_status' => 'publish',
-		) );
+		$query = new WP_Query( $args );
 
-		$data = array();
-
+		$posts = array();
 		foreach ( $query->posts as $item ) {
-			$data[] = $this->prepare_item_for_response( $item, $request );
+			$posts[] = $this->prepare_item_for_response( $item, $request );
 		}
 
-		return new WP_REST_Response( $data, 200 );
+		$response = rest_ensure_response( $posts );
+		unset( $query_args['paged'] );
+		$response->header( 'X-WP-Total', (int) $query->found_posts );
+		$max_pages = ceil( (int) $query->found_posts / $args['posts_per_page'] );
+		$response->header( 'X-WP-TotalPages', (int) $max_pages );
+
+		return $response;
 	}
 
 	/**
@@ -646,6 +665,35 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 		}
 
 		return new WP_Error( 'cant-delete', __( 'Could not delete form', 'custom-contact-forms'), array( 'status' => 500 ) );
+	}
+
+
+	/**
+	 * Delete one submission from the collection
+	 *
+	 * @param  WP_REST_Request $request Full data about the request.
+	 * @since  7.0
+	 * @return WP_Error|WP_REST_Request
+	 */
+	public function delete_submission( $request ) {
+		$params = $request->get_params();
+
+		$force = false;
+		if ( ! empty( $params['force'] ) ) {
+			$force = (bool) $params['force'];
+		}
+
+		if ( $force ) {
+			$deleted = wp_delete_post( $params['id'], true );
+		} else {
+			$deleted = wp_trash_post( $params['id'] );
+		}
+
+		if ( $deleted ) {
+			return new WP_REST_Response( true, 200 );
+		}
+
+		return new WP_Error( 'cant-delete', __( 'Could not delete submission', 'custom-contact-forms'), array( 'status' => 500 ) );
 	}
 
 	/**
@@ -875,8 +923,9 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 		$data['emailNotificationFromName'] = esc_html( get_post_meta( $data['id'], 'ccf_form_email_notification_from_name', true ) );
 		$data['emailNotificationFromNameField'] = esc_html( get_post_meta( $data['id'], 'ccf_form_email_notification_from_name_field', true ) );
 
-		$submissions = get_children( array( 'post_parent' => $data['id'], 'numberposts' => array( 'ccf_max_submissions', 5000, $data ) ) );
-		$data['submissions'] = esc_html( count( $submissions ) );
+		$submissions = get_children( array( 'post_type' => 'ccf_submission', 'post_parent' => $data['id'], 'numberposts' => array( 'ccf_max_submissions', 5000, $data ) ) );
+		
+		$data['submissions'] = count( $submissions );
 
 		return $data;
 	}
