@@ -83,6 +83,7 @@ class CCF_Form_CPT {
 		header( 'Expires: 0' );
 
 		$output = fopen( 'php://output', 'w' );
+		fwrite($output,chr(0xEF).chr(0xBB).chr(0xBF)); 
 		if ( $submissions->have_posts() ) {
 			$last_submission_id = $submissions->posts[0];
 
@@ -619,4 +620,3 @@ class CCF_Form_CPT {
 		return $instance;
 	}
 }
-
