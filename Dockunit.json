@@ -5,7 +5,7 @@
 			"image": "dockunit/prebuilt-images:php-mysql-phpunit-5.2-fpm",
 			"beforeScripts": [
 				"service mysql start",
-				"bash bin/install-wp-tests.sh wordpress_test root '' localhost 4.1"
+				"bash bin/install-wp-tests.sh wordpress_test root '' localhost 3.9"
 			],
 			"testCommand": "phpunit"
 		},
@@ -14,7 +14,7 @@
 			"image": "dockunit/prebuilt-images:php-mysql-phpunit-5.6-fpm",
 			"beforeScripts": [
 				"service mysql start",
-				"bash bin/install-wp-tests.sh wordpress_test root '' localhost 4.1"
+				"bash bin/install-wp-tests.sh wordpress_test root '' localhost 4.3"
 			],
 			"testCommand": "phpunit"
 		}
