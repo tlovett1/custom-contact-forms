@@ -113,9 +113,8 @@ class CCF_Field_Renderer {
 				<?php if ( ! empty( $required ) ) : ?><span class="required">*</span><?php endif; ?>
 				<?php echo esc_html( $label ); ?>
 			</label>
-			
-			<input class="<?php if ( ! empty( $errors ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> type="file" name="ccf_field_<?php echo esc_attr( $slug ); ?>" id="ccf_field_<?php echo esc_attr( $slug ); ?>" placeholder="<?php echo esc_attr( $placeholder ); ?>" value="<?php if ( ! empty( $post_value ) ) { echo esc_attr( $post_value ); } else { echo esc_attr( $value ); } ?>">
 
+			<input class="<?php if ( ! empty( $errors ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> type="file" name="ccf_field_<?php echo esc_attr( $slug ); ?>" id="ccf_field_<?php echo esc_attr( $slug ); ?>" placeholder="<?php echo esc_attr( $placeholder ); ?>" value="<?php if ( ! empty( $post_value ) ) { echo esc_attr( $post_value ); } else { echo esc_attr( $value ); } ?>" accept="<?php echo esc_attr( preg_replace( '/([^,\s]+)/', '.$1', $file_extensions ) ); ?>">
 
 			<div class="field-description">
 				<?php if ( ! empty( $file_extensions ) ) : ?>
