@@ -468,7 +468,7 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 		}
 
 		$response = rest_ensure_response( $posts );
-		unset( $query_args['paged'] );
+
 		$response->header( 'X-WP-Total', (int) $query->found_posts );
 		$max_pages = ceil( (int) $query->found_posts / $args['posts_per_page'] );
 		$response->header( 'X-WP-TotalPages', (int) $max_pages );
@@ -554,7 +554,7 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 		}
 
 		$response = rest_ensure_response( $posts );
-		unset( $query_args['paged'] );
+		
 		$response->header( 'X-WP-Total', (int) $query->found_posts );
 		$max_pages = ceil( (int) $query->found_posts / $args['posts_per_page'] );
 		$response->header( 'X-WP-TotalPages', (int) $max_pages );
