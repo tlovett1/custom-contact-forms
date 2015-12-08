@@ -39,6 +39,8 @@ For questions, feature requests, and support concerning the Custom Contact Forms
 
 = 7.0 =
 * Redo API integration for WordPress 4.4 improving stability
+* Add `accept` attribute to file upload input. Props [tuamo](http://github.com/tuamo)
+* Fix Chinese exporting. Props [davidabm](http://github.com/davidabm)
 
 = 6.9.4 =
 * WordPress list signup
