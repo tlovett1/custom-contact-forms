@@ -212,7 +212,7 @@ class CCFTestBase extends WP_UnitTestCase {
 	public function setUp() {
 		set_time_limit(0);
 
-		if ( ! self::$hooks_saved ) {
+		if ( property_exists( 'CCFTestBase', 'hooks_saved' ) && ! self::$hooks_saved ) {
 			$this->_backup_hooks();
 		}
 
