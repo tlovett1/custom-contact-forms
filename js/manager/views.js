@@ -827,7 +827,7 @@
 				}
 
 				var title = this.el.querySelectorAll( '.form-title' )[0].value;
-				this.model.set( 'title', title );
+				this.model.set( 'title', { raw: title } );
 
 				var description = this.el.querySelectorAll( '.form-description' )[0].value;
 				this.model.set( 'description', description );
@@ -1139,7 +1139,7 @@
 			events: {
 				'click .save-button': 'sync',
 				'click .signup-button': 'signup',
-				'click h2': 'accordionClick',
+				'click .accordion-heading': 'accordionClick',
 				'click .insert-form-button': 'insertForm'
 			},
 
@@ -1259,7 +1259,7 @@
 							wp.ccf.errorModal.render( messageType ).show();
 						}).done( function( response ) {
 							if (ccfSettings.single && ! ccfSettings.postId ) {
-								window.location = ccfSettings.adminUrl + 'post.php?post=' + SELF.model.get( 'ID' ) + '&action=edit#ccf-form/' + SELF.model.get( 'ID' );
+								window.location = ccfSettings.adminUrl + 'post.php?post=' + SELF.model.get( 'id' ) + '&action=edit#ccf-form/' + SELF.model.get( 'id' );
 							}
 						}).complete( function( response ) {
 							$spinner.fadeOut();
@@ -1276,7 +1276,7 @@
 
 			enableDisableInsert: function() {
 				var insertButton = this.el.querySelectorAll( '.insert-form-button' )[0];
-				if ( this.model.get( 'ID' ) ) {
+				if ( this.model.get( 'id' ) ) {
 					insertButton.removeAttribute( 'disabled' );
 				} else {
 					insertButton.setAttribute( 'disabled', 'disabled' );

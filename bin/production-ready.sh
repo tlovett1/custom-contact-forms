@@ -14,12 +14,16 @@ if [ "$input_variable" == "y" ]; then
     rm -rf node_modules > /dev/null 2>&1
     rm -rf scss > /dev/null 2>&1
     rm -rf tests > /dev/null 2>&1
+    rm -rf vendor > /dev/null 2>&1
     rm -rf .sass-cache > /dev/null 2>&1
-    rm -rf vendor/wp-api/wp-api/.git > /dev/null 2>&1
 
     rm .travis.yml > /dev/null 2>&1
+    rm codeception.yml > /dev/null 2>&1
     rm Gruntfile.js > /dev/null 2>&1
     rm Dockunit.json > /dev/null 2>&1
+    rm composer.json > /dev/null 2>&1
+    rm Dockunit.json > /dev/null 2>&1
+    rm composer.lock > /dev/null 2>&1
     rm phpunit.xml > /dev/null 2>&1
     rm .jshintrc > /dev/null 2>&1
 

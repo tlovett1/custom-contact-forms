@@ -76,11 +76,13 @@
 	wp.ccf.models.Form = wp.ccf.models.Form || wp.api.models.Post.extend(
 		{
 
-			urlRoot: WP_API_Settings.root + '/ccf/forms',
+			urlRoot: WP_API_Settings.root.replace( /\/$/, '' ) + '/ccf/v1/forms',
 
 			set: _modelSet,
 
 			sync: _sync,
+			
+			idAttribute: 'id',
 
 			initialize: function() {
 				this.on( 'sync', this.decode, this );
@@ -186,7 +188,7 @@
 							newFields.push( fieldModel );
 						});
 
-						response.fields = new wp.ccf.collections.Fields( newFields, { formId: response.ID } );
+						response.fields = new wp.ccf.collections.Fields( newFields, { formId: response.id } );
 					}
 				}
 
@@ -211,23 +213,23 @@
 
 	wp.ccf.models.Submission = wp.api.models.Submission || wp.api.models.Post.extend(
 		{
-			idAttribute: 'ID',
-
 			defaults: {
-				ID: null,
+				id: null,
 				data: {}
 			},
 
-			sync: _sync
+			sync: _sync,
+
+			urlRoot: WP_API_Settings.root.replace( /\/$/, '' ) + '/ccf/v1/submissions'
 		}
 	);
 
 	wp.ccf.models.Field = wp.api.models.Field || wp.api.models.Post.extend(
 		{
-			idAttribute: 'ID',
+			idAttribute: 'id',
 
 			defaults: {
-				ID: null
+				id: null
 			},
 
 			set: _modelSet,
@@ -259,7 +261,7 @@
 
 	wp.ccf.models.StandardField = wp.ccf.models.StandardField || wp.ccf.models.Field.extend(
 		{
-			idAttribute: 'ID',
+			idAttribute: 'id',
 
 			defaults: function() {
 				var defaults = {

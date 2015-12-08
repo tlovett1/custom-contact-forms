@@ -103,19 +103,19 @@ class CCF_Form_Manager {
 			<div class="disabled-overlay"></div>
 			<div class="left-sidebar accordion-container">
 				<div class="accordion-section expanded">
-					<h2 aria-hidden="true"><?php esc_html_e( 'Standard Fields', 'custom-contact-forms' ); ?></h2>
+					<a class="accordion-heading"><?php esc_html_e( 'Standard Fields', 'custom-contact-forms' ); ?></a>
 					<div class="section-content">
 						<div class="fields draggable-fields"></div>
 					</div>
 				</div>
-				<div class="accordion-section">
-					<h2 aria-hidden="true"><?php esc_html_e( 'Special Fields', 'custom-contact-forms' ); ?></h2>
+				<div class="accordion-section" class="special-fields">
+					<a class="accordion-heading"><?php esc_html_e( 'Special Fields', 'custom-contact-forms' ); ?></a>
 					<div class="section-content">
 						<div class="special-fields draggable-fields"></div>
 					</div>
 				</div>
 				<div class="accordion-section">
-					<h2 aria-hidden="true"><?php esc_html_e( 'Structure', 'custom-contact-forms' ); ?></h2>
+					<a class="accordion-heading"><?php esc_html_e( 'Structure', 'custom-contact-forms' ); ?></a>
 					<div class="section-content">
 						<div class="structure-fields draggable-fields"></div>
 					</div>
@@ -144,11 +144,11 @@ class CCF_Form_Manager {
 		</script>
 
 		<script type="text/html" id="ccf-form-settings-template">
-			<h2 aria-hidden="true"><?php esc_html_e( 'Form Settings', 'custom-contact-forms' ); ?></h2>
+			<a class="accordion-heading"><?php esc_html_e( 'Form Settings', 'custom-contact-forms' ); ?></a>
 			<div class="section-content">
 				<p>
 					<label for="ccf_form_title"><?php esc_html_e( 'Form Title:', 'custom-contact-forms' ); ?></label>
-					<input class="widefat form-title" id="ccf_form_title" name="title" type="text" value="{{ form.title }}">
+					<input class="widefat form-title" id="ccf_form_title" name="title" type="text" value="{{ form.title.raw }}">
 				</p>
 
 				<p>
@@ -193,7 +193,7 @@ class CCF_Form_Manager {
 		</script>
 
 		<script type="text/html" id="ccf-form-notifications-template">
-			<h2 aria-hidden="true"><?php esc_html_e( 'Form Notifications', 'custom-contact-forms' ); ?></h2>
+			<a class="accordion-heading"><?php esc_html_e( 'Form Notifications', 'custom-contact-forms' ); ?></a>
 			<div class="section-content">
 				<p>
 					<label for="ccf_form_send_email_notifications"><?php esc_html_e( 'Send Email Notifications:', 'custom-contact-forms' ); ?></label>
@@ -337,7 +337,7 @@ class CCF_Form_Manager {
 
 		<script type="text/html" id="ccf-single-line-text-template">
 			<div class="accordion-section expanded">
-				<h2 aria-hidden="true">Basic</h2>
+				<a class="accordion-heading">Basic</a>
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Unique Slug', 'custom-contact-forms' ); ?> (a-z, 0-9, -, _):</label>
@@ -365,7 +365,7 @@ class CCF_Form_Manager {
 				</div>
 			</div>
 			<div class="accordion-section">
-				<h2 aria-hidden="true"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></h2>
+				<a class="accordion-heading"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
@@ -381,7 +381,7 @@ class CCF_Form_Manager {
 
 		<script type="text/html" id="ccf-file-template">
 			<div class="accordion-section expanded">
-				<h2 aria-hidden="true">Basic</h2>
+				<a class="accordion-heading">Basic</a>
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Unique Slug', 'custom-contact-forms' ); ?> (a-z, 0-9, -, _):</label>
@@ -415,7 +415,7 @@ class CCF_Form_Manager {
 				</div>
 			</div>
 			<div class="accordion-section">
-				<h2 aria-hidden="true"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></h2>
+				<a class="accordion-heading"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
@@ -427,7 +427,7 @@ class CCF_Form_Manager {
 
 		<script type="text/html" id="ccf-recaptcha-template">
 			<div class="accordion-section expanded">
-				<h2 aria-hidden="true">Basic</h2>
+				<a class="accordion-heading">Basic</a>
 				<div class="section-content">
 					<p><?php _e( 'reCAPTCHA is a simple captcha service provided by Google. <a target="_blank" href="https://www.google.com/recaptcha/intro/index.html">Learn more</a>', 'custom-contact-forms' ); ?></p>
 					<div>
@@ -451,7 +451,7 @@ class CCF_Form_Manager {
 				</div>
 			</div>
 			<div class="accordion-section">
-				<h2 aria-hidden="true"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></h2>
+				<a class="accordion-heading"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
@@ -463,7 +463,7 @@ class CCF_Form_Manager {
 
 		<script type="text/html" id="ccf-website-template">
 			<div class="accordion-section expanded">
-				<h2 aria-hidden="true">Basic</h2>
+				<a class="accordion-heading">Basic</a>
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Unique Slug', 'custom-contact-forms' ); ?> (a-z, 0-9, -, _):</label>
@@ -491,7 +491,7 @@ class CCF_Form_Manager {
 				</div>
 			</div>
 			<div class="accordion-section">
-				<h2 aria-hidden="true"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></h2>
+				<a class="accordion-heading"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
@@ -507,7 +507,7 @@ class CCF_Form_Manager {
 
 		<script type="text/html" id="ccf-html-template">
 			<div class="accordion-section expanded">
-				<h2 aria-hidden="true"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></h2>
+				<a class="accordion-heading"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-html"><?php esc_html_e( 'HTML Content:', 'custom-contact-forms' ); ?></label>
@@ -516,7 +516,7 @@ class CCF_Form_Manager {
 				</div>
 			</div>
 			<div class="accordion-section">
-				<h2 aria-hidden="true"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></h2>
+				<a class="accordion-heading"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
@@ -528,7 +528,7 @@ class CCF_Form_Manager {
 
 		<script type="text/html" id="ccf-section-header-template">
 			<div class="accordion-section expanded">
-				<h2 aria-hidden="true"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></h2>
+				<a class="accordion-heading"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-heading"><?php esc_html_e( 'Heading:', 'custom-contact-forms' ); ?></label>
@@ -541,7 +541,7 @@ class CCF_Form_Manager {
 				</div>
 			</div>
 			<div class="accordion-section">
-				<h2 aria-hidden="true"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></h2>
+				<a class="accordion-heading"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
@@ -553,7 +553,7 @@ class CCF_Form_Manager {
 
 		<script type="text/html" id="ccf-paragraph-text-template">
 			<div class="accordion-section expanded">
-				<h2 aria-hidden="true"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></h2>
+				<a class="accordion-heading"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Unique Slug', 'custom-contact-forms' ); ?> (a-z, 0-9, -, _):</label>
@@ -581,7 +581,7 @@ class CCF_Form_Manager {
 				</div>
 			</div>
 			<div class="accordion-section">
-				<h2 aria-hidden="true"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></h2>
+				<a class="accordion-heading"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
@@ -597,7 +597,7 @@ class CCF_Form_Manager {
 
 		<script type="text/html" id="ccf-hidden-template">
 			<div class="accordion-section expanded">
-				<h2 aria-hidden="true"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></h2>
+				<a class="accordion-heading"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Unique Slug (a-z, 0-9, -, _):', 'custom-contact-forms' ); ?></label>
@@ -610,7 +610,7 @@ class CCF_Form_Manager {
 				</div>
 			</div>
 			<div class="accordion-section">
-				<h2 aria-hidden="true"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></h2>
+				<a class="accordion-heading"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
@@ -622,7 +622,7 @@ class CCF_Form_Manager {
 
 		<script type="text/html" id="ccf-name-template">
 			<div class="accordion-section expanded">
-				<h2 aria-hidden="true"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></h2>
+				<a class="accordion-heading"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Unique Slug (a-z, 0-9, -, _):', 'custom-contact-forms' ); ?></label>
@@ -646,7 +646,7 @@ class CCF_Form_Manager {
 				</div>
 			</div>
 			<div class="accordion-section">
-				<h2 aria-hidden="true"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></h2>
+				<a class="accordion-heading"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
@@ -658,7 +658,7 @@ class CCF_Form_Manager {
 
 		<script type="text/html" id="ccf-date-template">
 			<div class="accordion-section expanded">
-				<h2 aria-hidden="true"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></h2>
+				<a class="accordion-heading"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Unique Slug (a-z, 0-9, -, _):', 'custom-contact-forms' ); ?></label>
@@ -696,7 +696,7 @@ class CCF_Form_Manager {
 				</div>
 			</div>
 			<div class="accordion-section">
-				<h2 aria-hidden="true"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></h2>
+				<a class="accordion-heading"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
@@ -714,7 +714,7 @@ class CCF_Form_Manager {
 
 		<script type="text/html" id="ccf-phone-template">
 			<div class="accordion-section expanded">
-				<h2 aria-hidden="true"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></h2>
+				<a class="accordion-heading"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Unique Slug (a-z, 0-9, -, _):', 'custom-contact-forms' ); ?></label>
@@ -749,7 +749,7 @@ class CCF_Form_Manager {
 				</div>
 			</div>
 			<div class="accordion-section">
-				<h2 aria-hidden="true"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></h2>
+				<a class="accordion-heading"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
@@ -765,7 +765,7 @@ class CCF_Form_Manager {
 
 		<script type="text/html" id="ccf-address-template">
 			<div class="accordion-section expanded">
-				<h2 aria-hidden="true"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></h2>
+				<a class="accordion-heading"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Unique Slug (a-z, 0-9, -, _):', 'custom-contact-forms' ); ?></label>
@@ -796,7 +796,7 @@ class CCF_Form_Manager {
 				</div>
 			</div>
 			<div class="accordion-section">
-				<h2 aria-hidden="true"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></h2>
+				<a class="accordion-heading"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
@@ -808,7 +808,7 @@ class CCF_Form_Manager {
 
 		<script type="text/html" id="ccf-email-template">
 			<div class="accordion-section expanded">
-				<h2 aria-hidden="true"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></h2>
+				<a class="accordion-heading"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Unique Slug (a-z, 0-9, -, _):', 'custom-contact-forms' ); ?></label>
@@ -845,7 +845,7 @@ class CCF_Form_Manager {
 				</div>
 			</div>
 			<div class="accordion-section">
-				<h2 aria-hidden="true"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></h2>
+				<a class="accordion-heading"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
@@ -872,7 +872,7 @@ class CCF_Form_Manager {
 
 		<script type="text/html" id="ccf-dropdown-template">
 			<div class="accordion-section expanded">
-				<h2 aria-hidden="true"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></h2>
+				<a class="accordion-heading"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Unique Slug (a-z, 0-9, -, _):', 'custom-contact-forms' ); ?></label>
@@ -903,7 +903,7 @@ class CCF_Form_Manager {
 				</div>
 			</div>
 			<div class="accordion-section">
-				<h2 aria-hidden="true"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></h2>
+				<a class="accordion-heading"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
@@ -915,7 +915,7 @@ class CCF_Form_Manager {
 
 		<script type="text/html" id="ccf-radio-template">
 			<div class="accordion-section expanded">
-				<h2 aria-hidden="true"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></h2>
+				<a class="accordion-heading"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Unique Slug (a-z, 0-9, -, _):', 'custom-contact-forms' ); ?></label>
@@ -946,7 +946,7 @@ class CCF_Form_Manager {
 				</div>
 			</div>
 			<div class="accordion-section">
-				<h2 aria-hidden="true"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></h2>
+				<a class="accordion-heading"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
@@ -958,7 +958,7 @@ class CCF_Form_Manager {
 
 		<script type="text/html" id="ccf-checkboxes-template">
 			<div class="accordion-section expanded">
-				<h2 aria-hidden="true"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></h2>
+				<a class="accordion-heading"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-slug"><span class="required">*</span> <?php esc_html_e( 'Internal Unique Slug (a-z, 0-9, -, _):', 'custom-contact-forms' ); ?></label>
@@ -989,7 +989,7 @@ class CCF_Form_Manager {
 				</div>
 			</div>
 			<div class="accordion-section">
-				<h2 aria-hidden="true"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></h2>
+				<a class="accordion-heading"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
@@ -1276,11 +1276,11 @@ class CCF_Form_Manager {
 
 		<script type="text/html" id="ccf-existing-form-table-row-template">
 
-			<td>{{ form.ID }}</td>
+			<td>{{ form.id }}</td>
 			<td>
-				<a class="edit edit-form title" data-view="form-pane" data-form-id="{{ form.ID }}" href="#form-pane-{{ form.ID }}"><# if ( form.title ) { #>{{ form.title }}<# } else { #>{{ '<?php esc_html_e( '(No title)', 'custom-contact-forms' ); ?>' }}<# } #></a>
+				<a class="edit edit-form title" data-view="form-pane" data-form-id="{{ form.id }}" href="#form-pane-{{ form.id }}"><# if ( form.title.raw ) { #>{{ form.title.raw }}<# } else { #>{{ '<?php esc_html_e( '(No title)', 'custom-contact-forms' ); ?>' }}<# } #></a>
 				<div class="actions">
-					<a class="edit edit-form" data-view="form-pane" data-form-id="{{ form.ID }}" href="#form-pane-{{ form.ID }}"><?php esc_html_e( 'Edit', 'custom-contact-forms' ); ?></a> |
+					<a class="edit edit-form" data-view="form-pane" data-form-id="{{ form.id }}" href="#form-pane-{{ form.id }}"><?php esc_html_e( 'Edit', 'custom-contact-forms' ); ?></a> |
 					<a class="insert-form-button"><?php esc_html_e( 'Insert into post', 'custom-contact-forms' ); ?></a> |
 					<a class="delete"><?php esc_html_e( 'Trash', 'custom-contact-forms' ); ?></a>
 				</div>
@@ -1289,20 +1289,20 @@ class CCF_Form_Manager {
 				{{ utils.getPrettyPostDate( form.date_gmt ) }}
 			</td>
 			<td>
-				{{ form.author.username }}
+				{{ form.author.user_login }}
 			</td>
 			<td>
 				{{ form.fields.length }}
 			</td>
 			<td>
-				0
+				{{ form.submissions }}
 			</td>
 		</script>
 
 		<script type="text/html" id="ccf-form-mce-preview">
-			<div class="ccf-form-preview form-id-{{ form.ID }}">
-				<# if ( form.title ) { #>
-					<h2>{{ form.title }}</h2>
+			<div class="ccf-form-preview form-id-{{ form.id }}">
+				<# if ( form.title.raw ) { #>
+					<h2>{{ form.title.raw }}</h2>
 				<# } #>
 
 				<# if ( form.description && form.description != '' ) { #>
@@ -1311,7 +1311,7 @@ class CCF_Form_Manager {
 
 				<# if ( form.fields ) { #>
 					<# _.each( form.fields, function( field ) { #>
-						<div class="field {{ field.type }} field-{{ field.ID }}">
+						<div class="field {{ field.type }} field-{{ field.id }}">
 							{{{ field.preview }}}
 						</div>
 					<# } ); #>
@@ -1418,10 +1418,10 @@ class CCF_Form_Manager {
 				<# } #>
 			<# } ); #>
 			<td class="actions">
-				<a href="#TB_inline?height=300&amp;width=400&amp;inlineId=submission-content" data-submission-date="{{ submission.date_gmt }}" data-submission-id="{{ submission.ID }}" class="view"  data-icon="&#xe601;"></a>
+				<a href="#TB_inline?height=300&amp;width=400&amp;inlineId=submission-content" data-submission-date="{{ submission.date_gmt }}" data-submission-id="{{ submission.id }}" class="view"  data-icon="&#xe601;"></a>
 				<a class="delete" data-icon="&#xe602;"></a>
 
-				<div class="submission-wrapper" id="ccf-submission-content-{{ submission.ID }}">
+				<div class="submission-wrapper" id="ccf-submission-content-{{ submission.id }}">
 					<div class="ccf-submission-content">
 						<# for ( column in submission.data ) { #>
 							<div class="field-slug">
@@ -1557,6 +1557,10 @@ class CCF_Form_Manager {
 			));
 
 			wp_register_script( 'moment', plugins_url( '/bower_components/moment/moment.js', dirname( __FILE__ ) ) );
+
+			if ( ! wp_script_is( 'wp-api', 'registered' ) ) {
+				wp_register_script( 'wp-api', plugins_url( '/vendor/wp-api/wp-api/wp-api.js', dirname( __FILE__ ) ) );
+			}
 
 			wp_enqueue_script( 'ccf-form-manager', plugins_url( $js_manager_path, dirname( __FILE__ ) ), array( 'json2', 'jquery', 'jquery-ui-core', 'jquery-ui-datepicker', 'underscore', 'backbone', 'jquery-ui-core', 'jquery-ui-draggable', 'jquery-ui-sortable', 'jquery-ui-droppable', 'wp-api', 'moment' ), '1.0', true );
 			wp_localize_script( 'ccf-form-manager', 'ccfSettings', array(

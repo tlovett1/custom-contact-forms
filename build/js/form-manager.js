@@ -26,13 +26,13 @@
 	});
 
 	wp.ccf.utils.insertFormShortcode = function( form ) {
-		var existingForm = wp.ccf.forms.findWhere( { ID: form.get( 'ID' ) } );
+		var existingForm = wp.ccf.forms.findWhere( { id: form.get( 'id' ) } );
 		if ( ! existingForm ) {
 			wp.ccf.forms.add( form );
 		}
 
 		var editor = tinymce.get( wpActiveEditor );
-		var shortcode = '[ccf_form id="' + form.get( 'ID' ) + '"]';
+		var shortcode = '[ccf_form id="' + form.get( 'id' ) + '"]';
 
 		if ( editor && ! editor.isHidden() ) {
 			tinymce.activeEditor.execCommand( 'mceInsertContent', false, shortcode );
@@ -336,11 +336,13 @@
 	wp.ccf.models.Form = wp.ccf.models.Form || wp.api.models.Post.extend(
 		{
 
-			urlRoot: WP_API_Settings.root + '/ccf/forms',
+			urlRoot: WP_API_Settings.root.replace( /\/$/, '' ) + '/ccf/v1/forms',
 
 			set: _modelSet,
 
 			sync: _sync,
+			
+			idAttribute: 'id',
 
 			initialize: function() {
 				this.on( 'sync', this.decode, this );
@@ -446,7 +448,7 @@
 							newFields.push( fieldModel );
 						});
 
-						response.fields = new wp.ccf.collections.Fields( newFields, { formId: response.ID } );
+						response.fields = new wp.ccf.collections.Fields( newFields, { formId: response.id } );
 					}
 				}
 
@@ -471,23 +473,23 @@
 
 	wp.ccf.models.Submission = wp.api.models.Submission || wp.api.models.Post.extend(
 		{
-			idAttribute: 'ID',
-
 			defaults: {
-				ID: null,
+				id: null,
 				data: {}
 			},
 
-			sync: _sync
+			sync: _sync,
+
+			urlRoot: WP_API_Settings.root.replace( /\/$/, '' ) + '/ccf/v1/submissions'
 		}
 	);
 
 	wp.ccf.models.Field = wp.api.models.Field || wp.api.models.Post.extend(
 		{
-			idAttribute: 'ID',
+			idAttribute: 'id',
 
 			defaults: {
-				ID: null
+				id: null
 			},
 
 			set: _modelSet,
@@ -519,7 +521,7 @@
 
 	wp.ccf.models.StandardField = wp.ccf.models.StandardField || wp.ccf.models.Field.extend(
 		{
-			idAttribute: 'ID',
+			idAttribute: 'id',
 
 			defaults: function() {
 				var defaults = {
@@ -824,7 +826,7 @@
 		{
 			model: wp.ccf.models.Form,
 
-			url: WP_API_Settings.root + '/ccf/forms',
+			url: WP_API_Settings.root.replace( /\/$/, '' ) + '/ccf/v1/forms',
 
 			formsFetching: {},
 
@@ -879,7 +881,7 @@
 			model: wp.ccf.models.Submission,
 
 			url: function() {
-				return WP_API_Settings.root + '/ccf/forms/' + this.formId + '/submissions';
+				return WP_API_Settings.root.replace( /\/$/, '' ) + '/ccf/v1/forms/' + this.formId + '/submissions';
 			},
 
 			initialize: function( models, options ) {
@@ -1730,7 +1732,7 @@
 				}
 
 				var title = this.el.querySelectorAll( '.form-title' )[0].value;
-				this.model.set( 'title', title );
+				this.model.set( 'title', { raw: title } );
 
 				var description = this.el.querySelectorAll( '.form-description' )[0].value;
 				this.model.set( 'description', description );
@@ -2042,7 +2044,7 @@
 			events: {
 				'click .save-button': 'sync',
 				'click .signup-button': 'signup',
-				'click h2': 'accordionClick',
+				'click .accordion-heading': 'accordionClick',
 				'click .insert-form-button': 'insertForm'
 			},
 
@@ -2162,7 +2164,7 @@
 							wp.ccf.errorModal.render( messageType ).show();
 						}).done( function( response ) {
 							if (ccfSettings.single && ! ccfSettings.postId ) {
-								window.location = ccfSettings.adminUrl + 'post.php?post=' + SELF.model.get( 'ID' ) + '&action=edit#ccf-form/' + SELF.model.get( 'ID' );
+								window.location = ccfSettings.adminUrl + 'post.php?post=' + SELF.model.get( 'id' ) + '&action=edit#ccf-form/' + SELF.model.get( 'id' );
 							}
 						}).complete( function( response ) {
 							$spinner.fadeOut();
@@ -2179,7 +2181,7 @@
 
 			enableDisableInsert: function() {
 				var insertButton = this.el.querySelectorAll( '.insert-form-button' )[0];
-				if ( this.model.get( 'ID' ) ) {
+				if ( this.model.get( 'id' ) ) {
 					insertButton.removeAttribute( 'disabled' );
 				} else {
 					insertButton.setAttribute( 'disabled', 'disabled' );
@@ -2906,7 +2908,7 @@
 			if ( +form === parseInt( form ) ) {
 				var formId = parseInt( form );
 
-				form = SELF.forms.findWhere( { ID: parseInt( formId ) } );
+				form = SELF.forms.findWhere( { id: parseInt( formId ) } );
 
 				if ( ! form ) {
 					var $deferred;
@@ -2915,7 +2917,7 @@
 						$deferred = SELF.forms.formsFetching[formId];
 						form = null;
 					} else {
-						form = new wp.ccf.models.Form( { ID: formId } );
+						form = new wp.ccf.models.Form( { id: formId } );
 						$deferred = form.fetch();
 						SELF.forms.formsFetching[formId] = $deferred;
 					}
@@ -2925,7 +2927,7 @@
 							delete SELF.forms.formsFetching[formId];
 							SELF.forms.add( form );
 						} else {
-							form = SELF.forms.findWhere( { ID: formId } );
+							form = SELF.forms.findWhere( { id: formId } );
 						}
 
 						SELF.currentForm = form;
@@ -3014,7 +3016,7 @@
 
 					if ( typeof SELF.forms.formsFetching[formId] === 'undefined' ) {
 
-						var form = new wp.ccf.models.Form( { ID: formId } );
+						var form = new wp.ccf.models.Form( { id: formId } );
 						var $deferred = form.fetch();
 						SELF.forms.formsFetching[formId] = $deferred;
 						SELF._currentFormDeferred = $deferred;
@@ -3028,7 +3030,7 @@
 						SELF._currentFormDeferred = SELF.forms.formsFetching[formId];
 
 						SELF._currentFormDeferred.done( function() {
-							SELF.currentForm = SELF.forms.findWhere( { 'ID': formId } );
+							SELF.currentForm = SELF.forms.findWhere( { id: formId } );
 						});
 					}
 
