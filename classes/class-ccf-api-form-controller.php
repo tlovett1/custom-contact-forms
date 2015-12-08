@@ -879,6 +879,17 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 	 * @return array
 	 */
 	public function prepare_item_for_response( $item, $request ) {
+		$user = get_user_by( 'id', (int) $item->post_author );
+
+		if ( ! empty( $user ) ) {
+			$user = (array) $user->data;
+			
+			unset( $user['user_pass'] );
+			unset( $user['user_activation_key'] );
+		} else {
+			$user = 0;
+		}
+
 		$data = array(
 			'id'           => $item->ID,
 			'date'         => $this->prepare_date_response( $item->post_date_gmt, $item->post_date ),
@@ -896,7 +907,7 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 				'raw'      => $item->post_title,
 				'rendered' => get_the_title( $item->ID ),
 			),
-			'author'       => (int) $item->post_author,
+			'author'       => $user,
 		);
 
 		$data['fields'] = $this->_get_fields( $data['id'] );

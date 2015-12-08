@@ -1289,7 +1289,7 @@ class CCF_Form_Manager {
 				{{ utils.getPrettyPostDate( form.date_gmt ) }}
 			</td>
 			<td>
-				{{ form.author.username }}
+				{{ form.author.user_login }}
 			</td>
 			<td>
 				{{ form.fields.length }}
