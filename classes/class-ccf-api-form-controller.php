@@ -923,7 +923,7 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 		$data['emailNotificationFromName'] = esc_html( get_post_meta( $data['id'], 'ccf_form_email_notification_from_name', true ) );
 		$data['emailNotificationFromNameField'] = esc_html( get_post_meta( $data['id'], 'ccf_form_email_notification_from_name_field', true ) );
 
-		$submissions = get_children( array( 'post_type' => 'ccf_submission', 'post_parent' => $data['id'], 'numberposts' => array( 'ccf_max_submissions', 5000, $data ) ) );
+		$submissions = get_children( array( 'post_type' => 'ccf_submission', 'post_parent' => $data['id'], 'numberposts' => apply_filters( 'ccf_max_submissions', 5000, $data ) ) );
 		
 		$data['submissions'] = count( $submissions );
 
