@@ -1520,6 +1520,7 @@ class CCF_Form_Manager {
 		global $pagenow;
 
 		if ( 'post.php' == $pagenow || 'post-new.php' == $pagenow ) {
+			$version = '7.0.2';
 
 			if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
 				$js_manager_path = '/build/js/form-manager.js';
@@ -1556,13 +1557,13 @@ class CCF_Form_Manager {
 				'recaptcha' => __( 'reCAPTCHA', 'custom-contact-forms' ),
 			));
 
-			wp_register_script( 'moment', plugins_url( '/bower_components/moment/moment.js', dirname( __FILE__ ) ) );
+			wp_register_script( 'moment', plugins_url( '/bower_components/moment/moment.js', dirname( __FILE__ ) ), array(), $version );
 
 			if ( ! wp_script_is( 'wp-api', 'registered' ) ) {
-				wp_register_script( 'wp-api', plugins_url( '/vendor/wp-api/wp-api/wp-api.js', dirname( __FILE__ ) ) );
+				wp_register_script( 'wp-api', plugins_url( '/vendor/wp-api/wp-api/wp-api.js', dirname( __FILE__ ) ), array(), $version );
 			}
 
-			wp_enqueue_script( 'ccf-form-manager', plugins_url( $js_manager_path, dirname( __FILE__ ) ), array( 'json2', 'jquery', 'jquery-ui-core', 'jquery-ui-datepicker', 'underscore', 'backbone', 'jquery-ui-core', 'jquery-ui-draggable', 'jquery-ui-sortable', 'jquery-ui-droppable', 'wp-api', 'moment' ), '1.0', true );
+			wp_enqueue_script( 'ccf-form-manager', plugins_url( $js_manager_path, dirname( __FILE__ ) ), array( 'json2', 'jquery', 'jquery-ui-core', 'jquery-ui-datepicker', 'underscore', 'backbone', 'jquery-ui-core', 'jquery-ui-draggable', 'jquery-ui-sortable', 'jquery-ui-droppable', 'wp-api', 'moment' ), $version, true );
 			wp_localize_script( 'ccf-form-manager', 'ccfSettings', array(
 				'nonce' => wp_create_nonce( 'ccf_nonce' ),
 				'downloadSubmissionsNonce' => wp_create_nonce( 'ccf_download_submissions_nonce' ),
@@ -1587,10 +1588,10 @@ class CCF_Form_Manager {
 				'skipFields' => apply_filters( 'ccf_no_submission_display_fields', array( 'html', 'section-header', 'recaptcha' ) ),
 			) );
 
-			wp_enqueue_style( 'ccf-form-manager', plugins_url( $css_path, dirname( __FILE__ ) ) );
+			wp_enqueue_style( 'ccf-form-manager', plugins_url( $css_path, dirname( __FILE__ ) ), array(), $version );
 
 			if ( apply_filters( 'ccf_enable_tinymce_previews', true ) && 'ccf_form' !== get_post_type() ) {
-				wp_enqueue_script( 'ccf-form-mce', plugins_url( $js_mce_path, dirname( __FILE__ ) ), array( 'mce-view', 'jquery', 'ccf-form-manager' ), '1.0', true );
+				wp_enqueue_script( 'ccf-form-mce', plugins_url( $js_mce_path, dirname( __FILE__ ) ), array( 'mce-view', 'jquery', 'ccf-form-manager' ), $version, true );
 			}
 		}
 	}
