@@ -1,4 +1,4 @@
-( function( $, Backbone, _, ccfSettings, WP_API_Settings ) {
+( function( $, Backbone, _, ccfSettings ) {
 	'use strict';
 
 	wp.ccf.models = wp.ccf.models || {};
@@ -76,12 +76,12 @@
 	wp.ccf.models.Form = wp.ccf.models.Form || wp.api.models.Post.extend(
 		{
 
-			urlRoot: WP_API_Settings.root.replace( /\/$/, '' ) + '/ccf/v1/forms',
+			urlRoot: ccfSettings.apiRoot.replace( /\/$/, '' ) + '/ccf/v1/forms',
 
 			set: _modelSet,
 
 			sync: _sync,
-			
+
 			idAttribute: 'id',
 
 			initialize: function() {
@@ -220,7 +220,7 @@
 
 			sync: _sync,
 
-			urlRoot: WP_API_Settings.root.replace( /\/$/, '' ) + '/ccf/v1/submissions'
+			urlRoot: ccfSettings.apiRoot.replace( /\/$/, '' ) + '/ccf/v1/submissions'
 		}
 	);
 
@@ -545,4 +545,4 @@
 			}
 		}
 	);
-})( jQuery, Backbone, _, ccfSettings, WP_API_Settings );
+})( jQuery, Backbone, _, ccfSettings );

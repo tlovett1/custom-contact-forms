@@ -20,6 +20,10 @@ class CCF_Ads {
 	}
 
 	public function process_submission() {
+		if ( apply_filters( 'ccf_hide_ads', false ) ) {
+			return;
+		}
+		
 		if ( ! empty( $_POST['ccf_subscribe'] ) && ! empty( $_POST['email'] ) ) {
 			$request = wp_remote_request( 'http://taylorlovett.us8.list-manage.com/subscribe/post?u=66118f9a5b0ab0414e83f043a&amp;id=b4ed816a24', array(
 				'method' => 'post',
@@ -39,6 +43,10 @@ class CCF_Ads {
 	 */
 	public function show_ad() {
 		global $pagenow;
+
+		if ( apply_filters( 'ccf_hide_ads', false ) ) {
+			return;
+		}
 
 		if ( 'edit.php' === $pagenow || 'post-new.php' === $pagenow ) {
 			if ( empty( $_GET['post_type'] ) || 'ccf_form' !== $_GET['post_type'] ) {
@@ -61,13 +69,13 @@ class CCF_Ads {
 		if ( ! empty( $subscribed ) ) {
 			return;
 		}
-		
+
 		?>
 		<div class="updated update-nag ccf-subscribe">
 			<form method="post">
 				<p>
 					<?php if ( empty( $_POST['ccf_subscribe'] ) || empty( $_POST['email'] ) ) : ?>
-						WordPress exclusive tutorials, blogging tips, plugins, and more. 
+						WordPress exclusive tutorials, blogging tips, plugins, and more.
 						<input type="email" name="email">
 						<input type="hidden" name="ccf_subscribe" value="1">
 						<input type="submit" class="button button-primary" value="Sign Me Up">

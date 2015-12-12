@@ -18,7 +18,7 @@
 		{
 			model: wp.ccf.models.Form,
 
-			url: WP_API_Settings.root.replace( /\/$/, '' ) + '/ccf/v1/forms',
+			url: ccfSettings.apiRoot.replace( /\/$/, '' ) + '/ccf/v1/forms',
 
 			formsFetching: {},
 
@@ -55,7 +55,7 @@
 			model: wp.ccf.models.Field,
 
 			url: function() {
-				return WP_API_Settings.root + '/ccf/forms/' + this.formId + '/fields';
+				return ccfSettings.apiRoot + '/ccf/forms/' + this.formId + '/fields';
 			},
 
 			initialize: function( models, options ) {
@@ -73,7 +73,7 @@
 			model: wp.ccf.models.Submission,
 
 			url: function() {
-				return WP_API_Settings.root.replace( /\/$/, '' ) + '/ccf/v1/forms/' + this.formId + '/submissions';
+				return ccfSettings.apiRoot.replace( /\/$/, '' ) + '/ccf/v1/forms/' + this.formId + '/submissions';
 			},
 
 			initialize: function( models, options ) {

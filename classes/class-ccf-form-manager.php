@@ -130,13 +130,15 @@ class CCF_Form_Manager {
 			<div class="right-sidebar ccf-field-sidebar accordion-container"></div>
 
 			<div class="bottom">
-				<div class="left signup">
-					<strong>Want free WP blogging tips, tutorials, and marketing tricks? </strong>
-					<input type="email" class="email-signup-field" placeholder="Email">
-					<button type="button" class="button signup-button">Sign me up!</button>
-					<span class="signup-check">✓</span>
-					<span class="signup-x">&times;</span>
-				</div>
+				<?php if ( ! apply_filters( 'ccf_hide_ads', false ) ) : ?>
+					<div class="left signup">
+						<strong>Want free WP blogging tips, tutorials, and marketing tricks? </strong>
+						<input type="email" class="email-signup-field" placeholder="Email">
+						<button type="button" class="button signup-button">Sign me up!</button>
+						<span class="signup-check">✓</span>
+						<span class="signup-x">&times;</span>
+					</div>
+				<?php endif; ?>
 				<input type="button" class="button insert-form-button" value="<?php esc_html_e( 'Insert into post', 'custom-contact-forms' ); ?>">
 				<input type="button" class="button button-primary save-button" value="<?php esc_html_e( 'Save Form', 'custom-contact-forms' ); ?>">
 				<div class="spinner" style="background: url( '<?php echo esc_url( admin_url( 'images/wpspin_light.gif' ) ); ?>' ) no-repeat;"></div>
@@ -1565,6 +1567,7 @@ class CCF_Form_Manager {
 
 			wp_enqueue_script( 'ccf-form-manager', plugins_url( $js_manager_path, dirname( __FILE__ ) ), array( 'json2', 'jquery', 'jquery-ui-core', 'jquery-ui-datepicker', 'underscore', 'backbone', 'jquery-ui-core', 'jquery-ui-draggable', 'jquery-ui-sortable', 'jquery-ui-droppable', 'wp-api', 'moment' ), $version, true );
 			wp_localize_script( 'ccf-form-manager', 'ccfSettings', array(
+				'apiRoot' => site_url( 'wp-json' ),
 				'nonce' => wp_create_nonce( 'ccf_nonce' ),
 				'downloadSubmissionsNonce' => wp_create_nonce( 'ccf_download_submissions_nonce' ),
 				'adminUrl' => esc_url_raw( admin_url() ),

@@ -16,7 +16,6 @@ class CCF_Custom_Contact_Forms {
 	 */
 	public function setup() {
 		add_action( 'rest_api_init', array( $this, 'api_init' ), 1000 );
-		add_filter( 'json_url', 'set_url_scheme' );
 		add_action( 'plugins_loaded', array( $this, 'manually_load_api' ), 1000 );
 		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 		add_filter( 'plugin_action_links', array( $this, 'filter_plugin_action_links' ), 10, 2 );
@@ -25,7 +24,6 @@ class CCF_Custom_Contact_Forms {
 		add_action( 'admin_init', array( $this, 'flush_rewrites' ), 10000 );
 
 	}
-
 
 	/**
 	 * Trick API into thinking non publically queryable post types are queryable

@@ -234,7 +234,7 @@ class WP_REST_Server {
 		 */
 		$this->send_header( 'X-Content-Type-Options', 'nosniff' );
 		$this->send_header( 'Access-Control-Expose-Headers', 'X-WP-Total, X-WP-TotalPages' );
-		$this->send_header( 'Access-Control-Allow-Headers', 'Authorization, X-WP-Nonce' );
+		$this->send_header( 'Access-Control-Allow-Headers', 'Authorization' );
 
 		/**
 		 * Filter whether the REST API is enabled.
