@@ -375,7 +375,8 @@
 				var defaults = {
 					type: 'date',
 					showDate: true,
-					showTime: true
+					showTime: true,
+					dateFormat: 'mm/dd/yyyy'
 				};
 
 				return _.defaults( defaults, this.constructor.__super__.defaults() );

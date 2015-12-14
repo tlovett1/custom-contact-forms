@@ -689,12 +689,21 @@ class CCF_Form_Manager {
 					</div>
 					<div>
 						<input type="checkbox" <# if ( field.showDate ) { #>checked="checked"<# } #> class="field-show-date" value="1" id="ccf-field-show-date">
-						<label for="ccf-show-date"><?php esc_html_e( 'Enable Date Select', 'custom-contact-forms' ); ?></label>
+						<label for="ccf-field-show-date"><?php esc_html_e( 'Enable Date Select', 'custom-contact-forms' ); ?></label>
 					</div>
 					<div>
 						<input type="checkbox" <# if ( field.showTime ) { #>checked="checked"<# } #> class="field-show-time" value="1" id="ccf-field-show-time">
-						<label for="ccf-show-time"><?php esc_html_e( 'Enable Time Select', 'custom-contact-forms' ); ?></label>
+						<label for="ccf-field-show-time"><?php esc_html_e( 'Enable Time Select', 'custom-contact-forms' ); ?></label>
 					</div>
+					<# if ( field.showDate ) { #>
+						<div>
+							<label for="ccf-date-format"><?php esc_html_e( 'Date Format:', 'custom-contact-forms' ); ?></label>
+							<select id="ccf-date-format" class="field-date-format">
+								<option value="mm/dd/yyyy">mm/dd/yyyy</option>
+								<option <# if ( 'dd/mm/yyyy' === field.dateFormat ) { #>selected="selected"<# } #>>dd/mm/yyyy</option>
+							</select>
+						</div>
+					<# } #>
 				</div>
 			</div>
 			<div class="accordion-section">

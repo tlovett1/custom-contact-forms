@@ -911,6 +911,7 @@ class CCF_Field_Renderer {
 		$class_name = get_post_meta( $field_id, 'ccf_field_className', true );
 		$show_date = get_post_meta( $field_id, 'ccf_field_showDate', true );
 		$show_time = get_post_meta( $field_id, 'ccf_field_showTime', true );
+		$date_format = get_post_meta( $field_id, 'ccf_field_dateFormat', true );
 		$description = get_post_meta( $field_id, 'ccf_field_description', true );
 
 		$errors = CCF_Form_Handler::factory()->get_errors( $form_id, $slug );
@@ -947,7 +948,7 @@ class CCF_Field_Renderer {
 				<?php echo esc_html( $label ); ?>
 			</label>
 			<?php if ( ! empty( $show_date ) && empty( $show_time ) ) { ?>
-				<input <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> name="ccf_field_<?php echo esc_attr( $slug ); ?>[date]" value="<?php if ( ! empty( $date_post_value ) ) { echo esc_attr( $date_post_value ); } else { echo esc_attr( $value ); } ?>" class="<?php if ( ! empty( $errors ) ) : ?>field-error-input<?php endif; ?> ccf-datepicker field-input" id="ccf_field_<?php echo esc_attr( $slug ); ?>" type="text">
+				<input data-date-format="<?php echo esc_attr( $date_format ); ?>" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> name="ccf_field_<?php echo esc_attr( $slug ); ?>[date]" value="<?php if ( ! empty( $date_post_value ) ) { echo esc_attr( $date_post_value ); } else { echo esc_attr( $value ); } ?>" class="<?php if ( ! empty( $errors ) ) : ?>field-error-input<?php endif; ?> ccf-datepicker field-input" id="ccf_field_<?php echo esc_attr( $slug ); ?>" type="text">
 			<?php } else if ( empty( $show_date ) && ! empty( $show_time ) ) { ?>
 				<div class="hour">
 					<input maxlength="2" class="<?php if ( ! empty( $errors['hour_required'] ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> name="ccf_field_<?php echo esc_attr( $slug ); ?>[hour]" value="<?php if ( ! empty( $hour_post_value ) ) { echo esc_attr( $hour_post_value ); } ?>" id="ccf_field_<?php echo esc_attr( $slug ); ?>-hour" type="text">
@@ -966,7 +967,7 @@ class CCF_Field_Renderer {
 				<div class="ccf-clear"></div>
 			<?php } else { ?>
 				<div class="left">
-					<input value="<?php if ( ! empty( $date_post_value ) ) { echo esc_attr( $date_post_value ); } ?>" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> name="ccf_field_<?php echo esc_attr( $slug ); ?>[date]" class="<?php if ( ! empty( $errors['date_required'] ) ) : ?>field-error-input<?php endif; ?> ccf-datepicker field-input" id="ccf_field_<?php echo esc_attr( $slug ); ?>-date" type="text">
+					<input data-date-format="<?php echo esc_attr( $date_format ); ?>" value="<?php if ( ! empty( $date_post_value ) ) { echo esc_attr( $date_post_value ); } ?>" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> name="ccf_field_<?php echo esc_attr( $slug ); ?>[date]" class="<?php if ( ! empty( $errors['date_required'] ) ) : ?>field-error-input<?php endif; ?> ccf-datepicker field-input" id="ccf_field_<?php echo esc_attr( $slug ); ?>-date" type="text">
 					<label for="ccf_field_<?php echo esc_attr( $slug ); ?>-date" class="sub-label"><?php esc_html_e( 'Date', 'custom-contact-forms' ); ?></label>
 				</div>
 				<div class="right">

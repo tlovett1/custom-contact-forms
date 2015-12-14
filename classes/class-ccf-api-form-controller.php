@@ -20,7 +20,7 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 
 	/**
 	 * Setup instance variables
-	 * 
+	 *
 	 * @since 7.0
 	 */
 	public function __construct() {
@@ -84,6 +84,10 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 			'showTime' => array(
 				'sanitize' => array( $this, 'boolval' ),
 				'escape' => array( $this, 'boolval' ),
+			),
+			'dateFormat' => array(
+				'sanitize' => 'sanitize_text_field',
+				'escape' => 'esc_html',
 			),
 			'heading' => array(
 				'sanitize' => 'sanitize_text_field',
@@ -325,7 +329,7 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 
 	/**
 	 * Create/update a form
-	 * 
+	 *
 	 * @param array $data
 	 * @since 7.0
 	 * @return array
@@ -554,7 +558,7 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 		}
 
 		$response = rest_ensure_response( $posts );
-		
+
 		$response->header( 'X-WP-Total', (int) $query->found_posts );
 		$max_pages = ceil( (int) $query->found_posts / $args['posts_per_page'] );
 		$response->header( 'X-WP-TotalPages', (int) $max_pages );
@@ -883,7 +887,7 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 
 		if ( ! empty( $user ) ) {
 			$user = (array) $user->data;
-			
+
 			unset( $user['user_pass'] );
 			unset( $user['user_activation_key'] );
 		} else {
@@ -921,7 +925,7 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 		$data['pause'] = (bool) get_post_meta( $data['id'], 'ccf_form_pause', true );
 		$data['pauseMessage'] = esc_html( get_post_meta( $data['id'], 'ccf_form_pause_message', true ) );
 		$data['emailNotificationAddresses'] = esc_html( get_post_meta( $data['id'], 'ccf_form_email_notification_addresses', true ) );
-		
+
 		$data['emailNotificationFromType'] = esc_html( get_post_meta( $data['id'], 'ccf_form_email_notification_from_type', true ) );
 		$data['emailNotificationFromAddress'] = esc_html( get_post_meta( $data['id'], 'ccf_form_email_notification_from_address', true ) );
 		$data['emailNotificationFromField'] = esc_html( get_post_meta( $data['id'], 'ccf_form_email_notification_from_field', true ) );
@@ -935,7 +939,7 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 		$data['emailNotificationFromNameField'] = esc_html( get_post_meta( $data['id'], 'ccf_form_email_notification_from_name_field', true ) );
 
 		$submissions = get_children( array( 'post_type' => 'ccf_submission', 'post_parent' => $data['id'], 'numberposts' => apply_filters( 'ccf_max_submissions', 5000, $data ) ) );
-		
+
 		$data['submissions'] = count( $submissions );
 
 		return $data;
@@ -943,7 +947,7 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 
 	/**
 	 * Format date for response
-	 * 
+	 *
 	 * @param  string $date_gmt
 	 * @param  string $date
 	 * @since  7.0

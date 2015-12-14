@@ -635,7 +635,8 @@
 				var defaults = {
 					type: 'date',
 					showDate: true,
-					showTime: true
+					showTime: true,
+					dateFormat: 'mm/dd/yyyy'
 				};
 
 				return _.defaults( defaults, this.constructor.__super__.defaults() );
@@ -1238,8 +1239,15 @@
 					this.model.set( 'value', value[0].value );
 				}
 
+				var dateFormat = this.el.querySelectorAll( '.field-date-format' );
+				if ( dateFormat.length ) {
+					this.model.set( 'dateFormat', dateFormat[0].value );
+				}
+
+				var oldShowDate = this.model.get( 'showDate' );
+				var showDate = ( this.el.querySelectorAll( '.field-show-date' )[0].checked ) ? true : false;
 				this.model.set( 'className', this.el.querySelectorAll( '.field-class-name' )[0].value );
-				this.model.set( 'showDate', ( this.el.querySelectorAll( '.field-show-date' )[0].checked ) ? true : false );
+				this.model.set( 'showDate', showDate );
 
 				var oldShowTime = this.model.get( 'showTime' );
 				var showTime = ( this.el.querySelectorAll( '.field-show-time' )[0].checked ) ? true : false;
@@ -1247,7 +1255,7 @@
 				this.model.set( 'showTime', showTime );
 				this.model.set( 'required', ( this.el.querySelectorAll( '.field-required' )[0].value == 1 ) ? true : false  );
 
-				if ( showTime != oldShowTime ) {
+				if ( showTime != oldShowTime || showDate != oldShowDate ) {
 					this.render();
 				}
 
@@ -2857,6 +2865,7 @@
 		}
 	);
 })( jQuery, Backbone, _, ccfSettings );
+
 ( function( $, Backbone, _, ccfSettings ) {
 	'use strict';
 
