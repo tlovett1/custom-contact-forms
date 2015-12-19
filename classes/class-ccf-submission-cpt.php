@@ -39,7 +39,7 @@ class CCF_Submission_CPT {
 	public function setup_cpt() {
 		$args = array(
 			'label' => esc_html__( 'Form Submissions', 'custom-contact-forms' ),
-			'public' => true,
+			'public' => false,
 			'exclude_from_search' => true,
 			'show_in_nav_menus' => false,
 			'show_ui' => false,
