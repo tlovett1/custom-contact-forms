@@ -270,9 +270,9 @@
         border-top: 1px solid #e5e5e5; }
       .ccf-main-modal .ccf-form-pane .accordion-section.expanded .section-content {
         display: block; }
-      .ccf-main-modal .ccf-form-pane .accordion-section.expanded h2:before {
+      .ccf-main-modal .ccf-form-pane .accordion-section.expanded .accordion-heading:before, .ccf-main-modal .ccf-form-pane .accordion-section.expanded .form-settings-heading:before {
         content: ""; }
-      .ccf-main-modal .ccf-form-pane .accordion-section .accordion-heading {
+      .ccf-main-modal .ccf-form-pane .accordion-section .accordion-heading, .ccf-main-modal .ccf-form-pane .accordion-section .form-settings-heading {
         cursor: pointer;
         display: block;
         line-height: 29px;
@@ -282,7 +282,7 @@
         font-size: 150%;
         background-color: #fafafa;
         margin: 0; }
-        .ccf-main-modal .ccf-form-pane .accordion-section .accordion-heading:before {
+        .ccf-main-modal .ccf-form-pane .accordion-section .accordion-heading:before, .ccf-main-modal .ccf-form-pane .accordion-section .form-settings-heading:before {
           margin-right: 8px;
           font-family: 'form-manager';
           content: "";
@@ -304,6 +304,21 @@
       margin-top: 5px;
       font-style: italic;
       display: block; }
+    .ccf-main-modal .ccf-form-pane.show-form-settings .ccf-form-settings {
+      display: block; }
+    .ccf-main-modal .ccf-form-pane .ccf-form-settings {
+      display: none;
+      position: absolute;
+      width: 75%;
+      bottom: 50px;
+      left: 25%;
+      z-index: 2;
+      top: 0;
+      overflow: auto;
+      background-color: #fff;
+      border-top: 1px solid #ddd;
+      padding: 21px;
+      box-sizing: border-box; }
     .ccf-main-modal .ccf-form-pane .left-sidebar {
       box-sizing: border-box;
       background-color: #f3f3f3;

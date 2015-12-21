@@ -402,12 +402,12 @@
 					display: block;
 				}
 
-				h2:before {
+				.accordion-heading:before, .form-settings-heading:before {
 					content: "";
 				}
 			}
 
-			.accordion-heading {
+			.accordion-heading, .form-settings-heading {
 				&:before {
 					margin-right: 8px;
 					font-family: 'form-manager';
@@ -448,6 +448,25 @@
 			margin-top: 5px;
 			font-style: italic;
 			display: block;
+		}
+
+		&.show-form-settings .ccf-form-settings {
+			display: block;
+		}
+
+		.ccf-form-settings {
+			display: none;
+		    position: absolute;
+		    width: 75%;
+		    bottom: 50px;
+		    left: 25%;
+		    z-index: 2;
+		    top: 0;
+		    overflow: auto;
+		    background-color: #fff;
+			border-top: 1px solid #ddd;
+			padding: 21px;
+			box-sizing: border-box;
 		}
 
 		.left-sidebar {

@@ -1789,7 +1789,7 @@
 		}
 	);
 
-	wp.ccf.views.FormNotifications = wp.ccf.views.FormNotifications || Backbone.View.extend(
+	/*wp.ccf.views.FormNotifications = wp.ccf.views.FormNotifications || Backbone.View.extend(
 		{
 			template: wp.ccf.utils.template( 'ccf-form-notifications-template' ),
 
@@ -2040,21 +2040,21 @@
 				return this;
 			}
 		}
-	);
+	);*/
 
 	wp.ccf.views.FormPane = wp.ccf.views.FormPane || Backbone.View.extend( _.defaults(
 		{
 			template: wp.ccf.utils.template( 'ccf-form-pane-template' ),
 			subViews: {
 				'field-sidebar': wp.ccf.views.FieldSidebar,
-				'form-settings': wp.ccf.views.FormSettings,
-				'form-notifications': wp.ccf.views.FormNotifications
+				'form-settings': wp.ccf.views.FormSettings
 			},
 
 			events: {
 				'click .save-button': 'sync',
 				'click .signup-button': 'signup',
 				'click .accordion-heading': 'accordionClick',
+				'click .form-settings-heading': 'formSettingsClick',
 				'click .insert-form-button': 'insertForm'
 			},
 
@@ -2105,6 +2105,32 @@
 						section.className = section.className.replace( /expanded/i, '' );
 					}
 				});
+			},
+
+			formSettingsClick: function( event ) {
+				event.preventDefault();
+
+				var parentContainer = $( event.currentTarget ).parents( '.accordion-container' )[0];
+
+				var sections = parentContainer.querySelectorAll( '.accordion-section' );
+
+				if ( event.currentTarget.parentNode.className.match( /expanded/i ) ) {
+					event.currentTarget.parentNode.className = event.currentTarget.parentNode.className.replace( /expanded/i, '' );
+				} else {
+					event.currentTarget.parentNode.className += ' expanded';
+				}
+
+				_.each( sections, function( section, index ) {
+					if ( section != event.currentTarget.parentNode && section.className.match( /expanded/i ) ) {
+						section.className = section.className.replace( /expanded/i, '' );
+					}
+				});
+
+				if ( this.el.className.match( /show-form-settings/i ) ) {
+					this.el.className = this.el.className.replace( /show-form-settings/i, '' );
+				} else {
+					this.el.className += ' show-form-settings';
+				}
 			},
 
 			openEditField: function( field ) {
@@ -2315,7 +2341,7 @@
 
 				});
 
-				SELF.initRenderSubViews( true, true, { form: SELF.model } );
+				SELF.initRenderSubViews( false, true, { form: SELF.model } );
 
 				SELF.enableDisableInsert();
 
