@@ -180,10 +180,10 @@ class CCF_Form_Manager {
 					<# } #>
 				</td>
 				<td>
-					<# if ( ! notification.addresses.length || ( 1 === notification.addresses.length && ( ! notification.addresses[0].email || notification.addresses[0].field ) ) ) { #>
+					<# if ( ! notification.addresses.length || ( 1 === notification.addresses.length && ! notification.addresses[0].email && ! notification.addresses[0].field ) ) { #>
 						<?php esc_html_e( 'No One', 'custom-contact-forms' ); ?>
 					<# } else { #>
-						<# var i = 0; _.each( notification.addresses, function( address ) { i++ #>
+						<# var i = 0; _.each( notification.addresses, function( address ) { if ( ( 'custom' === address.type && address.email ) || ( 'field' === address.type && address.field ) ) { i++ #>
 							<# if ( i > 1 ) { #>
 								,
 							<# } #>
@@ -193,7 +193,7 @@ class CCF_Form_Manager {
 							<# } else { #>
 								&quot;{{ address.field }}&quot; <?php esc_html_e( 'Field', 'custom-contact-forms' ); ?>
 							<# }  #>
-						<# } ); #>
+						<# } } ); #>
 					<# } #>
 				</td>
 				<td>
