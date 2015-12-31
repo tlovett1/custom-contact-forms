@@ -189,6 +189,7 @@ class CCFTestAPI extends CCFTestBase {
 
 		$edit_data = array(
 			'fields' => $fields,
+			'notifications' => array(),
 			'type' => 'ccf_form',
 			'status' => 'publish',
 			'id' => null,

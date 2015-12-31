@@ -208,7 +208,7 @@
       filter: alpha(opacity=1);
       -moz-opacity: 0.1;
       -khtml-opacity: 0.1;
-      z-index: 1;
+      z-index: 3;
       display: none; }
     .ccf-main-modal .ccf-form-pane .bottom {
       bottom: 0;
@@ -270,8 +270,10 @@
         border-top: 1px solid #e5e5e5; }
       .ccf-main-modal .ccf-form-pane .accordion-section.expanded .section-content {
         display: block; }
-      .ccf-main-modal .ccf-form-pane .accordion-section.expanded .accordion-heading:before, .ccf-main-modal .ccf-form-pane .accordion-section.expanded .form-settings-heading:before {
-        content: ""; }
+      .ccf-main-modal .ccf-form-pane .accordion-section.expanded .accordion-heading:before {
+        content: ""; }
+      .ccf-main-modal .ccf-form-pane .accordion-section.expanded .form-settings-heading:before {
+        content: ""; }
       .ccf-main-modal .ccf-form-pane .accordion-section .accordion-heading, .ccf-main-modal .ccf-form-pane .accordion-section .form-settings-heading {
         cursor: pointer;
         display: block;
@@ -285,7 +287,7 @@
         .ccf-main-modal .ccf-form-pane .accordion-section .accordion-heading:before, .ccf-main-modal .ccf-form-pane .accordion-section .form-settings-heading:before {
           margin-right: 8px;
           font-family: 'form-manager';
-          content: "";
+          content: "";
           speak: none;
           font-weight: normal;
           font-variant: normal;
@@ -319,6 +321,35 @@
       border-top: 1px solid #ddd;
       padding: 21px;
       box-sizing: border-box; }
+    .ccf-main-modal .ccf-form-pane .ccf-form-settings p:first-child,
+    .ccf-main-modal .ccf-form-pane .ccf-form-settings h3:first-child {
+      margin-top: 0; }
+    .ccf-main-modal .ccf-form-pane .ccf-form-settings h3 {
+      border-bottom: 1px solid #ccc;
+      padding-bottom: .75em;
+      margin-top: 2em; }
+    .ccf-main-modal .ccf-form-pane .ccf-form-settings .ccf-form-notifications td {
+      position: relative; }
+    .ccf-main-modal .ccf-form-pane .ccf-form-settings .ccf-form-notifications .active {
+      width: 15%; }
+    .ccf-main-modal .ccf-form-pane .ccf-form-settings .ccf-form-notifications .active-indicator {
+      color: #33CA33;
+      font-size: 40px; }
+    .ccf-main-modal .ccf-form-pane .ccf-form-settings .ccf-form-notifications .inactive-indicator {
+      color: red;
+      font-size: 40px; }
+    .ccf-main-modal .ccf-form-pane .ccf-form-settings .ccf-form-notifications .add-notification {
+      margin-top: 1em;
+      cursor: pointer; }
+    .ccf-main-modal .ccf-form-pane .ccf-form-settings .close-notification {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+      font-size: 200%;
+      color: inherit; }
+    .ccf-main-modal .ccf-form-pane .ccf-form-settings .delete-notification {
+      color: red; }
     .ccf-main-modal .ccf-form-pane .left-sidebar {
       box-sizing: border-box;
       background-color: #f3f3f3;
@@ -436,61 +467,110 @@
     bottom: 0;
     background-color: #fff;
     padding: 16px; }
-    .ccf-main-modal .ccf-existing-form-pane table {
-      width: 100%;
-      border-collapse: collapse;
-      table-layout: fixed;
-      border: 1px solid #ddd; }
-      .ccf-main-modal .ccf-existing-form-pane table td {
+  .ccf-main-modal .ccf-existing-form-pane table,
+  .ccf-main-modal .ccf-form-notifications table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    border: 1px solid #ddd; }
+    .ccf-main-modal .ccf-existing-form-pane table .left,
+    .ccf-main-modal .ccf-form-notifications table .left {
+      float: left;
+      width: 50%;
+      padding-right: 10px;
+      box-sizing: border-box; }
+      .ccf-main-modal .ccf-existing-form-pane table .left textarea,
+      .ccf-main-modal .ccf-form-notifications table .left textarea {
+        width: 100%;
+        height: 300px; }
+    .ccf-main-modal .ccf-existing-form-pane table .right,
+    .ccf-main-modal .ccf-form-notifications table .right {
+      padding-left: 10px;
+      box-sizing: border-box;
+      float: right;
+      width: 50%; }
+    .ccf-main-modal .ccf-existing-form-pane table td,
+    .ccf-main-modal .ccf-form-notifications table td {
+      margin: 0;
+      padding: 14px 21px;
+      text-align: left; }
+    .ccf-main-modal .ccf-existing-form-pane table .empty-form-table,
+    .ccf-main-modal .ccf-existing-form-pane table .no-notifications,
+    .ccf-main-modal .ccf-form-notifications table .empty-form-table,
+    .ccf-main-modal .ccf-form-notifications table .no-notifications {
+      text-align: center; }
+    .ccf-main-modal .ccf-existing-form-pane table thead, .ccf-main-modal .ccf-existing-form-pane table tfoot,
+    .ccf-main-modal .ccf-form-notifications table thead,
+    .ccf-main-modal .ccf-form-notifications table tfoot {
+      background-color: #f0f0f0; }
+      .ccf-main-modal .ccf-existing-form-pane table thead tr, .ccf-main-modal .ccf-existing-form-pane table tfoot tr,
+      .ccf-main-modal .ccf-form-notifications table thead tr,
+      .ccf-main-modal .ccf-form-notifications table tfoot tr {
+        border-bottom: 1px solid #e5e5e5;
+        border-top: 1px solid #e5e5e5; }
+      .ccf-main-modal .ccf-existing-form-pane table thead th, .ccf-main-modal .ccf-existing-form-pane table tfoot th,
+      .ccf-main-modal .ccf-form-notifications table thead th,
+      .ccf-main-modal .ccf-form-notifications table tfoot th {
         margin: 0;
+        text-align: left;
         padding: 14px 21px;
-        text-align: left; }
-      .ccf-main-modal .ccf-existing-form-pane table .empty-form-table {
-        text-align: center; }
-      .ccf-main-modal .ccf-existing-form-pane table thead, .ccf-main-modal .ccf-existing-form-pane table tfoot {
-        background-color: #f0f0f0; }
-        .ccf-main-modal .ccf-existing-form-pane table thead tr, .ccf-main-modal .ccf-existing-form-pane table tfoot tr {
-          border-bottom: 1px solid #e5e5e5;
-          border-top: 1px solid #e5e5e5; }
-        .ccf-main-modal .ccf-existing-form-pane table thead th, .ccf-main-modal .ccf-existing-form-pane table tfoot th {
-          margin: 0;
-          text-align: left;
-          padding: 14px 21px;
-          box-sizing: border-box; }
-        .ccf-main-modal .ccf-existing-form-pane table thead .id, .ccf-main-modal .ccf-existing-form-pane table tfoot .id {
-          width: 5%; }
-        .ccf-main-modal .ccf-existing-form-pane table thead .title, .ccf-main-modal .ccf-existing-form-pane table tfoot .title {
-          width: 30%; }
-        .ccf-main-modal .ccf-existing-form-pane table thead .author, .ccf-main-modal .ccf-existing-form-pane table tfoot .author {
-          width: 10%; }
-        .ccf-main-modal .ccf-existing-form-pane table thead .entries, .ccf-main-modal .ccf-existing-form-pane table tfoot .entries {
-          width: 10%; }
-        .ccf-main-modal .ccf-existing-form-pane table thead .submissions, .ccf-main-modal .ccf-existing-form-pane table tfoot .submissions {
-          width: 10%; }
-        .ccf-main-modal .ccf-existing-form-pane table thead .number-of-fields, .ccf-main-modal .ccf-existing-form-pane table tfoot .number-of-fields {
-          width: 15%; }
-        .ccf-main-modal .ccf-existing-form-pane table thead .date, .ccf-main-modal .ccf-existing-form-pane table tfoot .date {
-          width: 20%; }
-      .ccf-main-modal .ccf-existing-form-pane table tbody tr:nth-child(odd) {
-        background-color: #fafafa;
-        margin: 0; }
-      .ccf-main-modal .ccf-existing-form-pane table tbody tr {
-        background-color: #fff; }
-      .ccf-main-modal .ccf-existing-form-pane table tbody td {
-        vertical-align: top; }
-        .ccf-main-modal .ccf-existing-form-pane table tbody td a {
-          text-decoration: none;
-          cursor: pointer; }
-        .ccf-main-modal .ccf-existing-form-pane table tbody td .title {
-          font-weight: bold;
-          font-size: 14px; }
-        .ccf-main-modal .ccf-existing-form-pane table tbody td .actions {
-          visibility: hidden;
-          margin-top: 6px; }
-          .ccf-main-modal .ccf-existing-form-pane table tbody td .actions .delete {
-            color: #ff0000; }
-      .ccf-main-modal .ccf-existing-form-pane table tbody tr:hover td .actions {
-        visibility: visible; }
+        box-sizing: border-box; }
+      .ccf-main-modal .ccf-existing-form-pane table thead .id, .ccf-main-modal .ccf-existing-form-pane table tfoot .id,
+      .ccf-main-modal .ccf-form-notifications table thead .id,
+      .ccf-main-modal .ccf-form-notifications table tfoot .id {
+        width: 5%; }
+      .ccf-main-modal .ccf-existing-form-pane table thead .title, .ccf-main-modal .ccf-existing-form-pane table tfoot .title,
+      .ccf-main-modal .ccf-form-notifications table thead .title,
+      .ccf-main-modal .ccf-form-notifications table tfoot .title {
+        width: 30%; }
+      .ccf-main-modal .ccf-existing-form-pane table thead .author, .ccf-main-modal .ccf-existing-form-pane table tfoot .author,
+      .ccf-main-modal .ccf-form-notifications table thead .author,
+      .ccf-main-modal .ccf-form-notifications table tfoot .author {
+        width: 10%; }
+      .ccf-main-modal .ccf-existing-form-pane table thead .entries, .ccf-main-modal .ccf-existing-form-pane table tfoot .entries,
+      .ccf-main-modal .ccf-form-notifications table thead .entries,
+      .ccf-main-modal .ccf-form-notifications table tfoot .entries {
+        width: 10%; }
+      .ccf-main-modal .ccf-existing-form-pane table thead .submissions, .ccf-main-modal .ccf-existing-form-pane table tfoot .submissions,
+      .ccf-main-modal .ccf-form-notifications table thead .submissions,
+      .ccf-main-modal .ccf-form-notifications table tfoot .submissions {
+        width: 10%; }
+      .ccf-main-modal .ccf-existing-form-pane table thead .number-of-fields, .ccf-main-modal .ccf-existing-form-pane table tfoot .number-of-fields,
+      .ccf-main-modal .ccf-form-notifications table thead .number-of-fields,
+      .ccf-main-modal .ccf-form-notifications table tfoot .number-of-fields {
+        width: 15%; }
+      .ccf-main-modal .ccf-existing-form-pane table thead .date, .ccf-main-modal .ccf-existing-form-pane table tfoot .date,
+      .ccf-main-modal .ccf-form-notifications table thead .date,
+      .ccf-main-modal .ccf-form-notifications table tfoot .date {
+        width: 20%; }
+    .ccf-main-modal .ccf-existing-form-pane table tbody tr:nth-child(odd),
+    .ccf-main-modal .ccf-form-notifications table tbody tr:nth-child(odd) {
+      background-color: #fafafa;
+      margin: 0; }
+    .ccf-main-modal .ccf-existing-form-pane table tbody tr,
+    .ccf-main-modal .ccf-form-notifications table tbody tr {
+      background-color: #fff; }
+    .ccf-main-modal .ccf-existing-form-pane table tbody td,
+    .ccf-main-modal .ccf-form-notifications table tbody td {
+      vertical-align: top; }
+      .ccf-main-modal .ccf-existing-form-pane table tbody td a,
+      .ccf-main-modal .ccf-form-notifications table tbody td a {
+        text-decoration: none;
+        cursor: pointer; }
+      .ccf-main-modal .ccf-existing-form-pane table tbody td .title,
+      .ccf-main-modal .ccf-form-notifications table tbody td .title {
+        font-weight: bold;
+        font-size: 14px; }
+      .ccf-main-modal .ccf-existing-form-pane table tbody td .actions,
+      .ccf-main-modal .ccf-form-notifications table tbody td .actions {
+        visibility: hidden;
+        margin-top: 6px; }
+        .ccf-main-modal .ccf-existing-form-pane table tbody td .actions .delete,
+        .ccf-main-modal .ccf-form-notifications table tbody td .actions .delete {
+          color: #ff0000; }
+    .ccf-main-modal .ccf-existing-form-pane table tbody tr:hover td .actions,
+    .ccf-main-modal .ccf-form-notifications table tbody tr:hover td .actions {
+      visibility: visible; }
 
 .ccf-main-modal-overlay {
   display: none;
