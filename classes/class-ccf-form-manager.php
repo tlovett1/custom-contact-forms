@@ -224,7 +224,7 @@ class CCF_Form_Manager {
 							</div>
 						</p>
 
-						<p><em><?php _e( 'If you are not receiving email notifications, we highly recommend installing the <a href="https://wordpress.org/plugins/easy-wp-smtp/">WP Easy SMTP</a> plugin as there is probably an issue with emailing on your host.' ); ?></em></p>
+						<p><em><?php _e( 'If you are not receiving email notifications, we highly recommend installing the <a href="https://wordpress.org/plugins/easy-wp-smtp/">WP Easy SMTP</a> plugin as there is probably an issue with emailing on your host.', 'custom-contact-forms' ); ?></em></p>
 					</div>
 					<div class="right">
 						<p class="email-notification-active">
