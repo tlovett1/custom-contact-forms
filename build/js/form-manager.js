@@ -1440,6 +1440,7 @@
 				if ( 0 === addressFieldsAdded ) {
 					option = document.createElement( 'option' );
 					option.innerHTML = ccfSettings.noEmailFields;
+					option.value = '';
 					emailNotificationFromField.appendChild( option );
 					emailNotificationFromField.disabled = true;
 				}
@@ -1447,6 +1448,7 @@
 				if ( 0 === nameFieldsAdded ) {
 					option = document.createElement( 'option' );
 					option.innerHTML = ccfSettings.noNameFields;
+					option.value = '';
 					emailNotificationFromNameField.appendChild( option );
 					emailNotificationFromNameField.disabled = true;
 				}
@@ -1454,6 +1456,7 @@
 				if ( 0 === subjectFieldsAdded ) {
 					option = document.createElement( 'option' );
 					option.innerHTML = ccfSettings.noApplicableFields;
+					option.value = '';
 					emailNotificationSubjectField.appendChild( option );
 					emailNotificationSubjectField.disabled = true;
 				}
