@@ -40,6 +40,7 @@ For questions, feature requests, and support concerning the Custom Contact Forms
 = 7.1.0 =
 * Enable non-American date formats
 * Make submissions and forms private so they don't show in sitemaps
+* Redo form email notifications and settings UI
 
 = 7.0.3 =
 * Unhack API
