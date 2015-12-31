@@ -73,6 +73,75 @@
 		}
 	);
 
+	wp.ccf.models.FormNotificationAddress = wp.ccf.models.FormNotificationAddress || Backbone.Model.extend(
+		{
+			defaults: {
+				type: 'custom',
+				field: '',
+				email: ''
+			},
+
+			decode: function() {
+				return _modelDecode.call( this, [] );
+			},
+
+			set: _modelSet
+		}
+	);
+
+	wp.ccf.models.FormNotification = wp.ccf.models.FormNotification || Backbone.Model.extend(
+		{
+			defaults: function() {
+				return {
+					title: '',
+					content: '',
+					active: false,
+					addresses: new wp.ccf.collections.FormNotificationAddresses(),
+					fromType: 'default',
+					fromAddress: '',
+					fromField: '',
+					subjectType: 'default',
+					subject: '',
+					subjectField: '',
+					fromNameType: 'custom',
+					fromName: 'WordPress',
+					fromNameField: ''
+				};
+			},
+
+			initialize: function( attributes ) {
+				if ( typeof attributes === 'object' && attributes.addresses ) {
+					var addresses = [];
+
+					_.each( attributes.addresses, function( address ) {
+						var addressModel = new wp.ccf.models.FormNotificationAddress( address );
+						addressModel.decode();
+
+						addresses.push( addressModel );
+					});
+
+					this.set( 'addresses', new wp.ccf.collections.FormNotificationAddresses( addresses ) );
+				}
+			},
+
+			decode: function() {
+				return _modelDecode.call( this, [] );
+			},
+
+			toJSON: function() {
+				var attributes = this.constructor.__super__.toJSON.call( this );
+
+				if ( attributes.addresses ) {
+					attributes.addresses = attributes.addresses.toJSON();
+				}
+
+				return attributes;
+			},
+
+			set: _modelSet
+		}
+	);
+
 	wp.ccf.models.Form = wp.ccf.models.Form || wp.api.models.Post.extend(
 		{
 
@@ -84,7 +153,7 @@
 
 			idAttribute: 'id',
 
-			initialize: function() {
+			initialize: function( attributes ) {
 				this.on( 'sync', this.decode, this );
 			},
 
@@ -98,17 +167,8 @@
 					completionActionType: 'text',
 					completionRedirectUrl: '',
 					completionMessage: '',
-					sendEmailNotifications: false,
-					emailNotificationAddresses: ccfSettings.adminEmail,
-					emailNotificationFromType: 'default',
-					emailNotificationFromAddress: '',
-					emailNotificationFromField: '',
-					emailNotificationSubjectType: 'default',
-					emailNotificationSubject: '',
-					emailNotificationSubjectField: '',
-					emailNotificationFromNameType: 'custom',
-					emailNotificationFromName: 'WordPress',
-					emailNotificationFromNameField: '',
+
+					notifications: new wp.ccf.collections.FormNotifications(),
 					pause: false,
 					pauseMessage: ccfSettings.pauseMessage
 				};
@@ -144,7 +204,9 @@
 			},
 
 			parse: function( response ) {
-				var SELF = this;
+				var SELF = this,
+					i = 0,
+					z = 0;
 
 				if ( response.fields ) {
 
@@ -152,7 +214,7 @@
 
 					if ( fields && fields.length > 0 ) {
 
-						for ( var i = 0; i < response.fields.length; i++ ) {
+						for ( i = 0; i < response.fields.length; i++ ) {
 							var newField = response.fields[i];
 
 							var field = fields.findWhere( { slug: newField.slug } );
@@ -162,7 +224,7 @@
 									var choices = SELF.get( 'choices' );
 
 									if ( choices && choices.length > 0 ) {
-										for ( var z = 0; z < newField.choices; z++ ) {
+										for ( z = 0; z < newField.choices; z++ ) {
 											var choice = choices.at( z );
 											choice.set( newField.choices[z] );
 											choice.decode();
@@ -192,6 +254,52 @@
 					}
 				}
 
+				if ( response.notifications ) {
+
+					var notifications = SELF.get( 'notifications' );
+
+					if ( notifications && notifications.length > 0 ) {
+
+						for ( i = 0; i < response.notifications.length; i++ ) {
+							var newNotification = response.notifications[i];
+
+							var notification = notifications.findWhere( { slug: newNotification.slug } );
+
+							if ( notification ) {
+								if ( typeof newNotification.addresses !== 'undefined' ) {
+									var addresses = SELF.get( 'addresses' );
+
+									if ( addresses && addresses.length > 0 ) {
+										for ( z = 0; z < newNotification.addresses; z++ ) {
+											var address = addresses.at( z );
+											address.set( newNotification.addresses[z] );
+											address.decode();
+										}
+									}
+
+									delete response.notifications[i].addresses;
+								}
+
+								notification.set( newNotification );
+								notification.decode();
+							}
+						}
+
+						delete response.notifications;
+					} else {
+						var newNotifications = [];
+
+						_.each( response.notifications, function( notification ) {
+							var notificationModel = new wp.ccf.models.FormNotification( notification );
+							notificationModel.decode();
+
+							newNotifications.push( notificationModel );
+						});
+
+						response.notifications = new wp.ccf.collections.FormNotifications( newNotifications );
+					}
+				}
+
 				return this.constructor.__super__.parse.call( this, response );
 			},
 
@@ -200,6 +308,10 @@
 
 				if ( attributes.fields ) {
 					attributes.fields = attributes.fields.toJSON();
+				}
+
+				if ( attributes.notifications ) {
+					attributes.notifications = attributes.notifications.toJSON();
 				}
 
 				if ( attributes.author ) {
@@ -375,7 +487,8 @@
 				var defaults = {
 					type: 'date',
 					showDate: true,
-					showTime: true
+					showTime: true,
+					dateFormat: 'mm/dd/yyyy'
 				};
 
 				return _.defaults( defaults, this.constructor.__super__.defaults() );

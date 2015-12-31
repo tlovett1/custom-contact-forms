@@ -68,6 +68,18 @@
 		}
 	);
 
+	wp.ccf.collections.FormNotificationAddresses = wp.ccf.collections.FormNotificationAddresses || Backbone.Collection.extend(
+		{
+			model: wp.ccf.models.FormNotificationAddress
+		}
+	);
+
+	wp.ccf.collections.FormNotifications = wp.ccf.collections.FormNotifications || Backbone.Collection.extend(
+		{
+			model: wp.ccf.models.FormNotification
+		}
+	);
+
 	wp.ccf.collections.Submissions = wp.ccf.collections.Submissions || wp.api.collections.Posts.extend(
 		{
 			model: wp.ccf.models.Submission,

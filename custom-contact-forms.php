@@ -4,7 +4,7 @@
  * Plugin URI: http://www.taylorlovett.com
  * Description: Build beautiful custom forms the WordPress way. View live previews of your forms while you build them.
  * Author: Taylor Lovett
- * Version: 7.0.3
+ * Version: 7.1
  * Author URI: http://www.taylorlovett.com
  */
 
@@ -61,4 +61,21 @@ function ccf_flush_rewrites() {
 	update_option( 'ccf_flush_rewrites', true );
 }
 
+/**
+ * Upgrade CCF DB information
+ *
+ * @since 7.1
+ */
+function ccf_upgrade() {
+	$version = get_option( 'ccf_db_version' );
+
+	if ( empty( $version ) || version_compare( $version, '7.1', '<' ) ) {
+		// Upgrade to 7.1
+		CCF_Upgrader::factory()->notifications_upgrade_71();
+	}
+
+	update_option( 'ccf_db_version', '7.1' );
+}
+
 register_activation_hook( __FILE__, 'ccf_flush_rewrites' );
+register_activation_hook( __FILE__, 'ccf_upgrade' );

@@ -19,6 +19,3 @@ before_script:
 script:
     - phpunit
     - grunt test --verbose --force
-    - ./vendor/wp-cli/wp-cli/bin/wp --require=./vendor/wp-codeception/wp-codeception.php codeception bootstrap
-    - ./vendor/wp-cli/wp-cli/bin/wp --require=./vendor/wp-codeception/wp-codeception.php selenium start
-    - ./vendor/wp-cli/wp-cli/bin/wp --require=./vendor/wp-codeception/wp-codeception.php codeception run

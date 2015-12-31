@@ -587,7 +587,7 @@ class CCF_Form_CPT {
 
 		$args = array(
 			'labels' => $labels,
-			'public' => true,
+			'public' => false,
 			'publicly_queryable' => false,
 			'exclude_from_search' => true,
 			'show_ui' => true,

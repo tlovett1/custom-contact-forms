@@ -59,24 +59,25 @@ Each form has a number of settings that you should understand.
 
   * `Pause Message` - This message will be shown if the form is paused.
 
-### Form Notifications
+#### Form Notifications
 
-* `Send email notifications` - When a form is completed, you can have an email sent with submission information.
+For each of your form you can add email notifications (as many as you want). Email notifications will be sent when a
+form is successfully filled out. Each notification contains the following configurable settings:
 
-  If email notifications are turned on, you can configure the following:
+* `"To" Email Addresses` - You can send each notification to as many emails as you want. Addresses have two types: `custom` and 
+`field`. `custom` allows you to specify a specific email (such as your own). `field` will pull the email address dynamically from a form field.
+* `"From" Email Address Type` - This allows you to set what email address the notification is sent from. `WordPress
+Default` will use the default WordPress email address. `Custom Email` will allow you to manually type in a from
+address. `Form Field` will allow you to choose an email field within the form to dynamically pull a from email
+address.
+* `"From" Name Type` - This allows you to set what name the notification email is sent from. `Custom Name` 
+will allow you to manually type in a from name. `Form Field` will allow you to choose a name field within 
+the form to dynamically pull a from email name.
+* `Email Subject Type` - This allows you to set what subject line is used on the notification email. `Default` 
+will use the CCF default subject. `Custom Subject` will allow you to manually type in an email subject. 
+`Form Field` will allow you to choose a field within the form to dynamically pull a subject line.
 
-  * `"To" Email Addresses` - Enter email addresses here that should receive the notification. Multiple email addresses
-  should be comma separated.
-  * `"From" Email Address Type` - This allows you to set what email address the notification is sent from. `WordPress
-  Default` will use the default WordPress email address. `Custom Email` will allow you to manually type in a from
-  address. `Form Field` will allow you to choose an email field within the form to dynamically pull a from email
-  address.
-  * `"From" Name Type` - This allows you to set what name the notification email is sent from. `Custom Name` 
-  will allow you to manually type in a from name. `Form Field` will allow you to choose a name field within 
-  the form to dynamically pull a from email name.
-  * `Email Subject Type` - This allows you to set what subject line is used on the notification email. `Default` 
-  will use the CCF default subject. `Custom Subject` will allow you to manually type in an email subject. 
-  `Form Field` will allow you to choose a field within the form to dynamically pull a subject line.
+__Note:__ In order for form notification changes to take affect, you will need to save the form.
 
 
 
