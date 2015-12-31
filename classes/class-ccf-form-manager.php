@@ -213,7 +213,7 @@ class CCF_Form_Manager {
 							<input class="widefat form-email-notification-title" id="ccf_form_email_notification_title" name="email-notification-title" value="{{ notification.title }}">
 						</p>
 
-						<label for="ccf_form_email_notification_content"><?php esc_html_e( 'Email content:', 'custom-contact-forms' ); ?></label>
+						<label for="ccf_form_email_notification_content"><?php esc_html_e( 'Email content (HTML):', 'custom-contact-forms' ); ?></label>
 						<textarea id="ccf_form_email_notification_content" class="form-email-notification-content">{{ notification.content }}</textarea><br />
 						<strong><?php esc_html_e( 'Variables:', 'custom-contact-forms' ); ?></strong>  [all_fields]
 

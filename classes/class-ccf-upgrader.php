@@ -349,7 +349,6 @@ class CCF_Upgrader {
 						'fromNameField' => sanitize_text_field( get_post_meta( $form_id, 'ccf_form_email_notification_from_name_field', true ) ),
 					)
 				);
-				var_dump( $notifications );
 
 				update_post_meta( $form_id, 'ccf_form_notifications', $notifications );
 			}

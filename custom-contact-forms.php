@@ -76,5 +76,6 @@ function ccf_upgrade() {
 
 	update_option( 'ccf_db_version', '7.1' );
 }
+
 register_activation_hook( __FILE__, 'ccf_flush_rewrites' );
 register_activation_hook( __FILE__, 'ccf_upgrade' );
