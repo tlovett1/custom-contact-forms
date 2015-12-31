@@ -157,7 +157,7 @@ class CCFTestBase extends WP_UnitTestCase {
 	 * @since 6.0
 	 * @return object
 	 */
-	public function _createForm( $fields = array( array( 'type' => 'single-line-text' ) ) ) {
+	public function _createForm( $fields = array( array( 'type' => 'single-line-text' ) ), $notifications = array() ) {
 
 		$i = 1;
 		foreach ( $fields as &$field ) {
@@ -179,7 +179,7 @@ class CCFTestBase extends WP_UnitTestCase {
 			'title' => array( 'raw' => 'Test Form', ),
 			'description' => 'Test form description',
 			'buttonText' => 'Submit Text',
-			'notifications' => array(),
+			'notifications' => $notifications,
 			'author' => array(),
 			'excerpt' => '',
 			'link' => '',
@@ -233,5 +233,6 @@ class CCFTestBase extends WP_UnitTestCase {
 		wp_set_current_user( $admin_id );
 
 		$this->api = new CCF_API_Form_Controller;
+		$this->notifications = array();
 	}
 }

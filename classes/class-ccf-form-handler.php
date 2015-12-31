@@ -822,7 +822,7 @@ class CCF_Form_Handler {
 						
 						if ( 'custom' === $notification['fromType'] ) {
 							$email = $notification['fromAddress'];
-						} elseif ( 'field' === $email_notification_from_type ) {
+						} elseif ( 'field' === $notification['fromType'] ) {
 							$email_field = $notification['fromField'];
 
 							if ( ! empty( $email_field ) && ! empty( $submission[$email_field] ) ) {
@@ -885,6 +885,7 @@ class CCF_Form_Handler {
 									$subject = apply_filters( 'ccf_email_subject', $subject, $form_id, $email, $form_page, $notification );
 									$notification_content = apply_filters( 'ccf_email_content', $message, $form_id, $email, $form_page, $notification );
 									$notification_headers = apply_filters( 'ccf_email_headers', $headers, $form_id, $email, $form_page, $notification );
+
 									do_action( 'ccf_send_notification', $email, $subject, $notification_content, $notification_headers, $notification );
 
 									wp_mail( $email, $subject, $notification_content, $notification_headers );
