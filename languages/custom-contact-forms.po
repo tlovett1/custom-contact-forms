@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: Custom Contact Forms\n"
 "Report-Msgid-Bugs-To: https://github.com/tlovett1/custom-contact-forms/"
 "issues\n"
-"POT-Creation-Date: 2015-12-31 13:08-0500\n"
-"PO-Revision-Date: 2015-12-31 13:08-0500\n"
+"POT-Creation-Date: 2016-01-03 00:39-0500\n"
+"PO-Revision-Date: 2016-01-03 00:39-0500\n"
 "Last-Translator: Taylor Lovett <tlovett88@gmail.com>\n"
 "Language-Team: \n"
 "Language: en\n"
@@ -132,7 +132,7 @@ msgstr ""
 #: ../classes/class-ccf-field-renderer.php:802
 #: ../classes/class-ccf-form-manager.php:317
 #: ../classes/class-ccf-form-manager.php:1380
-#: ../classes/class-ccf-form-manager.php:1682
+#: ../classes/class-ccf-form-manager.php:1680
 msgid "Email"
 msgstr ""
 
@@ -328,7 +328,7 @@ msgstr ""
 #: ../classes/class-ccf-form-handler.php:376
 #: ../classes/class-ccf-form-handler.php:384
 #: ../classes/class-ccf-form-handler.php:438
-#: ../classes/class-ccf-form-renderer.php:49
+#: ../classes/class-ccf-form-renderer.php:99
 msgid "This field is required."
 msgstr ""
 
@@ -346,7 +346,7 @@ msgid "File contains an invalid extension."
 msgstr ""
 
 #: ../classes/class-ccf-form-handler.php:264
-#: ../classes/class-ccf-form-renderer.php:56
+#: ../classes/class-ccf-form-renderer.php:106
 msgid "Your reCAPTCHA response was incorrect."
 msgstr ""
 
@@ -376,7 +376,7 @@ msgid "This is not a valid email"
 msgstr ""
 
 #: ../classes/class-ccf-form-handler.php:379
-#: ../classes/class-ccf-form-renderer.php:54
+#: ../classes/class-ccf-form-renderer.php:104
 msgid "Emails do not match."
 msgstr ""
 
@@ -389,49 +389,49 @@ msgid "Last name is required."
 msgstr ""
 
 #: ../classes/class-ccf-form-handler.php:441
-#: ../classes/class-ccf-form-renderer.php:66
+#: ../classes/class-ccf-form-renderer.php:116
 msgid "This is not a valid URL. URL's must start with http(s)://"
 msgstr ""
 
 #: ../classes/class-ccf-form-handler.php:469
 #: ../classes/class-ccf-form-handler.php:501
-#: ../classes/class-ccf-form-renderer.php:50
+#: ../classes/class-ccf-form-renderer.php:100
 msgid "Date is required."
 msgstr ""
 
 #: ../classes/class-ccf-form-handler.php:472
 #: ../classes/class-ccf-form-handler.php:504
-#: ../classes/class-ccf-form-renderer.php:61
+#: ../classes/class-ccf-form-renderer.php:111
 msgid "This date is not valid."
 msgstr ""
 
 #: ../classes/class-ccf-form-handler.php:477
 #: ../classes/class-ccf-form-handler.php:509
-#: ../classes/class-ccf-form-renderer.php:51
+#: ../classes/class-ccf-form-renderer.php:101
 msgid "Hour is required."
 msgstr ""
 
 #: ../classes/class-ccf-form-handler.php:480
 #: ../classes/class-ccf-form-handler.php:512
-#: ../classes/class-ccf-form-renderer.php:60
+#: ../classes/class-ccf-form-renderer.php:110
 msgid "This is not a valid hour."
 msgstr ""
 
 #: ../classes/class-ccf-form-handler.php:485
 #: ../classes/class-ccf-form-handler.php:517
-#: ../classes/class-ccf-form-renderer.php:52
+#: ../classes/class-ccf-form-renderer.php:102
 msgid "Minute is required."
 msgstr ""
 
 #: ../classes/class-ccf-form-handler.php:488
 #: ../classes/class-ccf-form-handler.php:520
-#: ../classes/class-ccf-form-renderer.php:62
+#: ../classes/class-ccf-form-renderer.php:112
 msgid "This is not a valid minute."
 msgstr ""
 
 #: ../classes/class-ccf-form-handler.php:493
 #: ../classes/class-ccf-form-handler.php:525
-#: ../classes/class-ccf-form-renderer.php:53
+#: ../classes/class-ccf-form-renderer.php:103
 msgid "AM/PM is required."
 msgstr ""
 
@@ -458,7 +458,7 @@ msgid " to \"%s\""
 msgstr ""
 
 #: ../classes/class-ccf-form-handler.php:907
-#: ../classes/class-ccf-form-renderer.php:134
+#: ../classes/class-ccf-form-renderer.php:188
 msgid "Thank you for your submission."
 msgstr ""
 
@@ -534,7 +534,7 @@ msgid "Delete"
 msgstr ""
 
 #: ../classes/class-ccf-form-manager.php:172
-#: ../classes/class-ccf-form-manager.php:1718
+#: ../classes/class-ccf-form-manager.php:1716
 msgid "Form Submission"
 msgstr ""
 
@@ -596,6 +596,7 @@ msgstr ""
 #: ../classes/class-ccf-form-manager.php:1024
 #: ../classes/class-ccf-form-manager.php:1067
 #: ../classes/class-ccf-form-manager.php:1110
+#: ../classes/class-ccf-settings.php:104
 msgid "No"
 msgstr ""
 
@@ -614,6 +615,7 @@ msgstr ""
 #: ../classes/class-ccf-form-manager.php:1023
 #: ../classes/class-ccf-form-manager.php:1066
 #: ../classes/class-ccf-form-manager.php:1109
+#: ../classes/class-ccf-settings.php:105
 msgid "Yes"
 msgstr ""
 
@@ -1089,113 +1091,155 @@ msgstr ""
 msgid "Add Form"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1667
+#: ../classes/class-ccf-form-manager.php:1665
 msgid "Single Line Text"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1668
+#: ../classes/class-ccf-form-manager.php:1666
 msgid "Dropdown"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1669
+#: ../classes/class-ccf-form-manager.php:1667
 msgid "Checkboxes"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1670
+#: ../classes/class-ccf-form-manager.php:1668
 msgid "Radio Buttons"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1671
+#: ../classes/class-ccf-form-manager.php:1669
 msgid "Paragraph Text"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1672
+#: ../classes/class-ccf-form-manager.php:1670
 msgid "Hidden"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1673
+#: ../classes/class-ccf-form-manager.php:1671
 msgid "File Upload"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1677
+#: ../classes/class-ccf-form-manager.php:1675
 msgid "HTML"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1678
+#: ../classes/class-ccf-form-manager.php:1676
 msgid "Section Header"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1683
+#: ../classes/class-ccf-form-manager.php:1681
 msgid "Name"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1684
+#: ../classes/class-ccf-form-manager.php:1682
 msgid "Date/Time"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1685
+#: ../classes/class-ccf-form-manager.php:1683
 msgid "Website"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1686
+#: ../classes/class-ccf-form-manager.php:1684
 msgid "Address"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1687
+#: ../classes/class-ccf-form-manager.php:1685
 msgid "Phone"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1688
+#: ../classes/class-ccf-form-manager.php:1686
 msgid "reCAPTCHA"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1712
+#: ../classes/class-ccf-form-manager.php:1710
 msgid "You have no email fields"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1713
+#: ../classes/class-ccf-form-manager.php:1711
 msgid "You have no name fields"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1714
+#: ../classes/class-ccf-form-manager.php:1712
 msgid "You have no applicable fields"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1715
+#: ../classes/class-ccf-form-manager.php:1713
 msgid "Invalid date"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1717
+#: ../classes/class-ccf-form-manager.php:1715
 msgid "Field Label"
 msgstr ""
 
-#: ../classes/class-ccf-form-manager.php:1719
-#: ../classes/class-ccf-form-renderer.php:120
+#: ../classes/class-ccf-form-manager.php:1717
+#: ../classes/class-ccf-form-renderer.php:174
 msgid "This form is paused right now. Check back later!"
 msgstr ""
 
-#: ../classes/class-ccf-form-renderer.php:55
+#: ../classes/class-ccf-form-renderer.php:105
 msgid "This is not a valid email address."
 msgstr ""
 
-#: ../classes/class-ccf-form-renderer.php:58
+#: ../classes/class-ccf-form-renderer.php:108
 msgid "This is not a valid phone number."
 msgstr ""
 
-#: ../classes/class-ccf-form-renderer.php:59
+#: ../classes/class-ccf-form-renderer.php:109
 msgid "This phone number is not 10 digits"
 msgstr ""
 
-#: ../classes/class-ccf-form-renderer.php:63
+#: ../classes/class-ccf-form-renderer.php:113
 msgid "This is not an allowed file extension"
 msgstr ""
 
-#: ../classes/class-ccf-form-renderer.php:64
+#: ../classes/class-ccf-form-renderer.php:114
 msgid "This file is bigger than"
 msgstr ""
 
-#: ../classes/class-ccf-form-renderer.php:65
+#: ../classes/class-ccf-form-renderer.php:115
 msgid "An unknown error occured."
+msgstr ""
+
+#: ../classes/class-ccf-settings.php:77
+msgid "Enable Asset Loading Restrictions"
+msgstr ""
+
+#: ../classes/class-ccf-settings.php:78
+msgid "Restrict Asset Loading To"
+msgstr ""
+
+#: ../classes/class-ccf-settings.php:89
+msgid ""
+"By default, Custom Contact Forms loads all it's assets (JavaScript, CSS, "
+"etc.) on every page of your site. The reason for this is that there is no "
+"where to determine where you use forms. Asset Page Control allows you to "
+"specify the URLs or post IDs where your CCF forms will exist. By specifying "
+"where your forms will live, assets will not be unnecessarily loaded on every "
+"page of your site."
+msgstr ""
+
+#: ../classes/class-ccf-settings.php:122 ../classes/class-ccf-settings.php:134
+msgid "URL or post ID"
+msgstr ""
+
+#: ../classes/class-ccf-settings.php:123 ../classes/class-ccf-settings.php:135
+msgid "Restriction type:"
+msgstr ""
+
+#: ../classes/class-ccf-settings.php:125 ../classes/class-ccf-settings.php:137
+msgid "URL"
+msgstr ""
+
+#: ../classes/class-ccf-settings.php:126 ../classes/class-ccf-settings.php:138
+msgid "Post ID"
+msgstr ""
+
+#: ../classes/class-ccf-settings.php:150 ../classes/class-ccf-settings.php:161
+msgid "Custom Contact Forms Settings"
+msgstr ""
+
+#: ../classes/class-ccf-settings.php:150
+msgid "Settings"
 msgstr ""
 
 #: ../classes/class-ccf-submission-cpt.php:41
