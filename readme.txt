@@ -21,8 +21,6 @@ just contact forms.
 
 For detailed install and usage instructions, please visit [Github](http://github.com/tlovett1/custom-contact-forms).
 
-__Software integrity proudly assured by [Dockunit.io](https://dockunit.io).__
-
 == Installation ==
 
 Please refer to [Github](http://github.com/tlovett1/custom-contact-forms) for detailed installation instructions.
