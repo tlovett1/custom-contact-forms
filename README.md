@@ -194,6 +194,10 @@ WordPress importer:
 
 ![Import CCF Forms](https://tlovett1.files.wordpress.com/2015/03/import.png)
 
+### General Settings
+
+Custom Contact Forms has a general settings page. Right now the only thing it contains is asset loading restriction which allows you to choose specific pages that form CSS and JS should be loaded on. This allows you to prevent a ton of unnecessary website bloat.
+
 ## Frequently Asked Questions
 
 * __My form(s) will not save. What's wrong?__
