@@ -1,6 +1,6 @@
 <?php
 
-class CCF_Settings {
+class CCF_Custom_Contact_Forms {
 
 	/**
 	 * Placeholder method
