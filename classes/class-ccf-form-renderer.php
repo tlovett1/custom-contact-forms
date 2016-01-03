@@ -10,6 +10,13 @@ class CCF_Form_Renderer {
 	public function __construct() {}
 
 	/**
+	 * Remember if we arent showing assets
+	 *
+	 * @since 7.2
+	 */
+	public $no_assets = false;
+
+	/**
 	 * Setup shortcode
 	 *
 	 * @since 6.0
@@ -25,10 +32,53 @@ class CCF_Form_Renderer {
 	 * @since 6.0
 	 */
 	public function action_wp_enqueue_scripts() {
-		/**
-		 * Todo: We need away to enqueue all this stuff conditionally. The best idea I
-		 * have is creating a settings page to enter URL's where forms will be added.
-		 */
+		$option = get_option( 'ccf_settings' );
+
+		// Conditionally load assets
+		if ( ! empty( $option ) && ! empty( $option['asset_loading_restriction_enabled'] ) ) {
+			if ( empty( $option['asset_loading_restrictions'] ) ) {
+				return;
+			}
+
+			$post_id = null;
+			$current_path = $_SERVER['REQUEST_URI'];
+
+			$queried_object = get_queried_object();
+			if ( ! empty( $queried_object->ID ) ) {
+				$post_id = $queried_object->ID;
+			}
+
+			$match = false;
+
+			foreach ( $option['asset_loading_restrictions'] as $asset ) {
+				if ( ! empty( $asset['location'] ) ) {
+					if ( 'post_id' === $asset['type'] ) {
+						if ( (int) $asset['location'] === $post_id ) {
+							$match = true;
+							break;
+						}
+					} else {
+						$asset_url_parts = parse_url( $asset['location'] );
+						if ( ! empty( $asset_url_parts['path'] ) ) {
+							$asset_path = trailingslashit( $asset_url_parts['path'] );
+							if ( ! preg_match( '#^/#', $asset_path ) ) {
+								$asset_path = '/' . $asset_path;
+							}
+
+							if ( $asset_path === $current_path ) {
+								$match = true;
+								break;
+							}
+						}
+					}
+				}
+			}
+
+			if ( ! $match ) {
+				$this->no_assets = true;
+				return;
+			}
+		}
 
 		if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
 			$css_form_path = '/build/css/form.css';
@@ -39,10 +89,10 @@ class CCF_Form_Renderer {
 		}
 
 		wp_enqueue_style('ccf-jquery-ui', '//ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/jquery-ui.css');
-		wp_enqueue_script( 'ccf-google-recaptcha', '//www.google.com/recaptcha/api.js?ver=2&onload=ccfRecaptchaOnload&render=explicit', array(), '1.0', true );
-		wp_enqueue_style( 'ccf-form', plugins_url( $css_form_path, dirname( __FILE__ ) ) );
+		wp_enqueue_script( 'ccf-google-recaptcha', '//www.google.com/recaptcha/api.js?ver=2&onload=ccfRecaptchaOnload&render=explicit', array(), CCF_VERSION, true );
+		wp_enqueue_style( 'ccf-form', plugins_url( $css_form_path, dirname( __FILE__ ) ), array(), CCF_VERSION );
 
-		wp_enqueue_script( 'ccf-form', plugins_url( $js_path, dirname( __FILE__ ) ), array( 'jquery-ui-datepicker', 'underscore' ), '1.1', false );
+		wp_enqueue_script( 'ccf-form', plugins_url( $js_path, dirname( __FILE__ ) ), array( 'jquery-ui-datepicker', 'underscore' ), CCF_VERSION, false );
 
 		$localized = array(
 			'ajaxurl' => esc_url_raw( admin_url( 'admin-ajax.php' ) ),
@@ -84,7 +134,11 @@ class CCF_Form_Renderer {
 			return '';
 		}
 
-		return $this->get_rendered_form( $atts['id'] );
+		if ( ! $this->no_assets ) {
+			return $this->get_rendered_form( $atts['id'] );
+		}
+
+		return '';
 	}
 
 	/**

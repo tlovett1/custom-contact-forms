@@ -7,7 +7,8 @@ module.exports = function ( grunt ) {
 					'build/js/form-manager.min.js': ['build/js/form-manager.js'],
 					'build/js/form-mce.min.js': ['js/form-mce.js'],
 					'build/js/form-cpt-preview.min.js': ['js/form-cpt-preview.js'],
-					'build/js/form.min.js': ['js/form.js']
+					'build/js/form.min.js': ['js/form.js'],
+					'build/js/settings.min.js': ['js/settings.js']
 				}
 			}
 		},
@@ -29,7 +30,8 @@ module.exports = function ( grunt ) {
 					'build/css/form.css': 'scss/form.scss',
 					'build/css/admin.css': 'scss/admin.scss',
 					'build/css/form-cpt.css': 'scss/form-cpt.scss',
-					'build/css/form-table.css': 'scss/form-table.scss'
+					'build/css/form-table.css': 'scss/form-table.scss',
+					'build/css/settings.css': 'scss/settings.scss'
 				}
 			}
 		},
