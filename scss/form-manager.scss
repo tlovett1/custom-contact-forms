@@ -914,12 +914,19 @@
 
 		.message {
 			margin: 25px;
-			text-align: center;
 
 			.title {
 				color: #23282d;
 				font-size: 1.3em;
 				margin: 0 0 1em 0;
+			}
+
+			ul {
+				margin-left: 25px;
+			}
+
+			ul li {
+				list-style-type: disc;
 			}
 		}
 	}
