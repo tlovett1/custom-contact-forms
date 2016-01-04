@@ -64,7 +64,14 @@ class CCF_Form_Manager {
 
 					<p>
 						<# if ( 'sync' === messageType ) { #>
-							<?php printf( __( 'There is an issue with synchronizing data. Please try deactivating all other plugins and activating the TwentyFifteen theme. If this fixes the problem, you have a plugin or theme conflict. If it does not, please post in the <a href="%s">support forums</a> or <a href="%s">Github</a>.', 'custom-contact-forms' ), 'https://wordpress.org/support/plugin/custom-contact-forms', 'http://github.com/tlovett1/custom-contact-forms' ); ?>
+							<p><?php esc_html_e( 'There is an issue with synchronizing data. Please try the following:', 'custom-contact-forms' ); ?></p>
+
+							<ul>
+								<li><?php printf( __( 'Go to Settings &gt; <a href="%s">Permalinks</a> and click "Save Changes". This flushes your permalinks. If this fixes your problem, you are good to go!', 'custom-contact-forms' ), esc_url( admin_url( 'options-permalink.php' ) ) ); ?></li>
+								<li><?php _e( 'Deactivate all other plugins and activate the TwentySixteen theme. If this fixes the problem, there is a plugin or theme conflict. Please report on <a href="http://github.com/tlovett1/custom-contact-form">Github</a> or the <a href="https://wordpress.org/support/plugin/custom-contact-forms">support forums</a>.', 'custom-contact-forms' ); ?></li>
+							</ul>
+
+							<p><?php _e( 'If neither of these things fix your problem, please report on <a href="http://github.com/tlovett1/custom-contact-form">Github</a> or the <a href="https://wordpress.org/support/plugin/custom-contact-forms">support forums</a>.', 'custom-contact-forms' ); ?></p>
 						<# } #>
 					</p>
 				</div>
@@ -1692,9 +1699,18 @@ class CCF_Form_Manager {
 				wp_register_script( 'wp-api', plugins_url( '/vendor/wp-api/wp-api/wp-api.js', dirname( __FILE__ ) ), array(), CCF_VERSION );
 			}
 
+			$site_url_parsed = parse_url( site_url() );
+			$home_url_parsed = parse_url( home_url() );
+
+			if ( $site_url_parsed['host'] === $home_url_parsed['host'] ) {
+				$api_root = home_url( 'wp-json' );
+			} else {
+				$api_root = site_url( 'wp-json' );
+			}
+
 			wp_enqueue_script( 'ccf-form-manager', plugins_url( $js_manager_path, dirname( __FILE__ ) ), array( 'json2', 'jquery', 'jquery-ui-core', 'jquery-ui-datepicker', 'underscore', 'backbone', 'jquery-ui-core', 'jquery-ui-draggable', 'jquery-ui-sortable', 'jquery-ui-droppable', 'wp-api', 'moment' ), CCF_VERSION, true );
 			wp_localize_script( 'ccf-form-manager', 'ccfSettings', array(
-				'apiRoot' => site_url( 'wp-json' ),
+				'apiRoot' => $api_root,
 				'nonce' => wp_create_nonce( 'ccf_nonce' ),
 				'downloadSubmissionsNonce' => wp_create_nonce( 'ccf_download_submissions_nonce' ),
 				'adminUrl' => esc_url_raw( admin_url() ),
