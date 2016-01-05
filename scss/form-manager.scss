@@ -520,6 +520,14 @@
 			color: red;
 		}
 
+		.ccf-form-settings .address .add,
+		.ccf-form-settings .address .delete,
+		.ccf-form-settings .field-mapping .add,
+		.ccf-form-settings .field-mapping .delete {
+			color: inherit;
+			vertical-align: middle;
+		}
+
 		.left-sidebar {
 			box-sizing: border-box;
 			background-color: #f3f3f3;

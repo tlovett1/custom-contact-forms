@@ -68,6 +68,12 @@
 		}
 	);
 
+	wp.ccf.collections.PostFieldMappings = wp.ccf.collections.PostFieldMappings || Backbone.Collection.extend(
+		{
+			model: wp.ccf.models.PostFieldMapping
+		}
+	);
+
 	wp.ccf.collections.FormNotificationAddresses = wp.ccf.collections.FormNotificationAddresses || Backbone.Collection.extend(
 		{
 			model: wp.ccf.models.FormNotificationAddress

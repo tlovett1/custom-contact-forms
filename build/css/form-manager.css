@@ -350,6 +350,12 @@
       color: inherit; }
     .ccf-main-modal .ccf-form-pane .ccf-form-settings .delete-notification {
       color: red; }
+    .ccf-main-modal .ccf-form-pane .ccf-form-settings .address .add,
+    .ccf-main-modal .ccf-form-pane .ccf-form-settings .address .delete,
+    .ccf-main-modal .ccf-form-pane .ccf-form-settings .field-mapping .add,
+    .ccf-main-modal .ccf-form-pane .ccf-form-settings .field-mapping .delete {
+      color: inherit;
+      vertical-align: middle; }
     .ccf-main-modal .ccf-form-pane .left-sidebar {
       box-sizing: border-box;
       background-color: #f3f3f3;
