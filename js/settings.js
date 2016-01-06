@@ -13,7 +13,7 @@
 		}
 	} );
 
-	$assetRestrictions.on( 'click', '.add', function() {
+	$assetRestrictions.on( 'click', '.add', function( event ) {
 		var newAsset = event.target.parentNode.cloneNode( true );
 		var location = newAsset.querySelectorAll( '.asset-location' )[0];
 		var type = newAsset.querySelectorAll( '.restriction-type' )[0];
