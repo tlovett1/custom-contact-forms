@@ -446,14 +446,7 @@ class CCF_Form_Manager {
 			</select>
 
 			<select id="ccf_post_field_mapping_post_field" class="field-post-field">
-				<option value=""><?php esc_html_e( 'Choose a Post Field', 'custom-contact-forms' ); ?></option>
-				<option <# if ( 'post_title' === mapping.postField ) { #>selected="selected"<# } #> value="post_title"><?php esc_html_e( 'Post Title', 'custom-contact-forms' ); ?></option>
-				<option <# if ( 'post_content' === mapping.postField ) { #>selected="selected"<# } #> value="post_content"><?php esc_html_e( 'Post Content', 'custom-contact-forms' ); ?></option>
-				<option <# if ( 'post_excerpt' === mapping.postField ) { #>selected="selected"<# } #> value="post_excerpt"><?php esc_html_e( 'Post Excerpt', 'custom-contact-forms' ); ?></option>
-				<option <# if ( 'post_date' === mapping.postField ) { #>selected="selected"<# } #> value="post_date"><?php esc_html_e( 'Post Date', 'custom-contact-forms' ); ?></option>
-				<option <# if ( 'post_category' === mapping.postField ) { #>selected="selected"<# } #> value="post_category"><?php esc_html_e( 'Post Category', 'custom-contact-forms' ); ?></option>
-				<option <# if ( 'post_tag' === mapping.postField ) { #>selected="selected"<# } #> value="post_tag"><?php esc_html_e( 'Post Tag', 'custom-contact-forms' ); ?></option>
-				<option <# if ( 'custom_field' === mapping.postField ) { #>selected="selected"<# } #> value="custom_field"><?php esc_html_e( 'Custom Field', 'custom-contact-forms' ); ?></option>
+				
 			</select>
 			
 			<a aria-hidden="true" data-icon="&#xe605;" class="add"></a>
@@ -1784,6 +1777,20 @@ class CCF_Form_Manager {
 				'thickboxTitle' => esc_html__( 'Form Submission', 'custom-contact-forms' ),
 				'pauseMessage' => esc_html__( 'This form is paused right now. Check back later!', 'custom-contact-forms' ),
 				'skipFields' => apply_filters( 'ccf_no_submission_display_fields', array( 'html', 'section-header', 'recaptcha' ) ),
+				'choosePostField' => esc_html__( 'Choose a Post Field', 'custom-contact-forms' ),
+				'postFields' => array(
+					'single' => array(
+						'post_title' => esc_html__( 'Post Title', 'custom-contact-forms' ),
+						'post_content' => esc_html__( 'Post Content', 'custom-contact-forms' ),
+						'post_excerpt' => esc_html__( 'Post Excerpt', 'custom-contact-forms' ),
+						'post_date' => esc_html__( 'Post Date', 'custom-contact-forms' ),
+					),
+					'repeatable' => array(
+						'post_category' => esc_html__( 'Post Category', 'custom-contact-forms' ),
+						'post_tag' => esc_html__( 'Post Tag', 'custom-contact-forms' ),
+						'custom_field' => esc_html__( 'Custom Field', 'custom-contact-forms' ),
+					),
+				)
 			) );
 
 			wp_enqueue_style( 'ccf-form-manager', plugins_url( $css_path, dirname( __FILE__ ) ), array(), CCF_VERSION );

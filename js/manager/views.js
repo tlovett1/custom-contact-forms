@@ -1344,6 +1344,53 @@
 				}
 			},
 
+			updatePostFields: function() {
+				var dropdown = this.el.querySelectorAll( '.field-post-field' )[0],
+					option;
+
+				option = document.createElement( 'option' );
+				option.value = '';
+				option.innerText = ccfSettings.choosePostField;
+				dropdown.appendChild( option );
+
+				var mappings = this.form.get( 'postFieldMappings' );
+				var usedFields = [];
+
+				mappings.each( function( model ) {
+					if ( model !== this.model ) {
+						usedFields.push( model.get( 'postField' ) );
+					}
+				}, this );
+
+				_.each( ccfSettings.postFields.single, function( field, slug ) {
+					if ( -1 === usedFields.indexOf( slug ) ) {
+						option = document.createElement( 'option' );
+						option.value = slug;
+						option.innerText = field;
+
+						if ( this.model.get( 'postField' ) === slug ) {
+							option.selected = true;
+						}
+
+						dropdown.appendChild( option );
+					}
+				}, this );
+
+				_.each( ccfSettings.postFields.repeatable, function( field, slug ) {
+
+					option = document.createElement( 'option' );
+					option.value = slug;
+					option.innerText = field;
+
+					if ( this.model.get( 'postField' ) === slug ) {
+						option.selected = true;
+					}
+
+					dropdown.appendChild( option );
+
+				}, this );
+			},
+
 			render: function() {
 				var context = {};
 				if ( this.model ) {
@@ -1358,6 +1405,7 @@
 				this.listenTo( fields, 'remove', this.updateFormieldField, this );
 
 				this.updateFormFieldField();
+				this.updatePostFields();
 
 				return this;
 			},
