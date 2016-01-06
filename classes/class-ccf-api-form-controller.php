@@ -364,11 +364,11 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 	 * @since 7.3
 	 */
 	public function _create_and_map_post_field_mappings( $post_field_mappings, $form_id ) {
-		// @Todo: better sanitization
 		$clean_post_field_mappings = array();
-		for ( $index = 0; $index < count( $post_field_mappings ); $index++ ) {
-			foreach ( $post_field_mappings[$index] as $mapping_key => $mapping_value ) {
-				$clean_post_field_mappings[$index][$mapping_key] = sanitize_text_field( $mapping_value );
+		
+		foreach ( $post_field_mappings as $mapping ) {
+			if ( ! empty( $mapping['formField'] ) && ! empty( $mapping['postField'] ) ) {
+				$clean_post_field_mappings[] = array_map( 'sanitize_text_field', $mapping );
 			}
 		}
 

@@ -1314,6 +1314,12 @@
 					option;
 
 				if ( fields.length >= 1 ) {
+					option = document.createElement( 'option' );
+					option.innerHTML = ccfSettings.chooseFormField;
+					option.value = '';
+
+					fieldFormField.appendChild( option );
+
 					fields.each( function( field ) {
 						option = document.createElement( 'option' );
 						option.innerHTML = field.get( 'slug' );

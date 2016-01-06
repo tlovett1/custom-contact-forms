@@ -431,14 +431,14 @@ class CCF_Form_Manager {
 				</select>
 			</p>
 
-			<p class="post-creation-mapping-field">
+			<div class="post-creation-mapping-field post-creation-mapping-wrapper">
 				<label for="ccf_form_post_creation_type"><?php esc_html_e( 'Field Mappings:', 'custom-contact-forms' ); ?></label>
 
 				<div class="post-creation-mapping">
 				</div>
 
 				<span class="explain"><?php esc_html_e( 'You can map as few or as many fields as you like. However, if no form fields are mapped, no post will be created.', 'custom-contact-forms' ); ?></span>
-			</p>
+			</div>
 		</script>
 
 		<script type="text/html" id="ccf-post-field-mapping">
@@ -1777,6 +1777,7 @@ class CCF_Form_Manager {
 				'noAvailableFields' => esc_html__( 'You have no available fields', 'custom-contact-forms' ),
 				'noNameFields' => esc_html__( 'You have no name fields', 'custom-contact-forms' ),
 				'noApplicableFields' => esc_html__( 'You have no applicable fields', 'custom-contact-forms' ),
+				'chooseFormField' => esc_html__( 'Choose a Form Field', 'custom-contact-forms' ),
 				'invalidDate' => esc_html__( 'Invalid date', 'custom-contact-forms' ),
 				'allLabels' => array_merge( $field_labels, $structure_field_labels, $special_field_labels ),
 				'fieldLabel' => esc_html__( 'Field Label', 'custom-contact-forms' ),
