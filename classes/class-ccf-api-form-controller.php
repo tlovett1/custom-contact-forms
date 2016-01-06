@@ -443,6 +443,10 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 				update_post_meta( $result, 'ccf_form_post_creation_type', sanitize_text_field( $data['postCreationType'] ) );
 			}
 
+			if ( isset( $data['postCreationStatus'] ) ) {
+				update_post_meta( $result, 'ccf_form_post_creation_status', sanitize_text_field( $data['postCreationStatus'] ) );
+			}
+
 			if ( isset( $data['pauseMessage'] ) ) {
 				update_post_meta( $result, 'ccf_form_pause_message', sanitize_text_field( $data['pauseMessage'] ) );
 			}
@@ -944,6 +948,7 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 		$data['pause'] = (bool) get_post_meta( $data['id'], 'ccf_form_pause', true );
 		$data['postCreation'] = (bool) get_post_meta( $data['id'], 'ccf_form_post_creation', true );
 		$data['postCreationType'] = esc_html( get_post_meta( $data['id'], 'ccf_form_post_creation_type', true ) );
+		$data['postCreationStatus'] = esc_html( get_post_meta( $data['id'], 'ccf_form_post_creation_status', true ) );
 		$data['pauseMessage'] = esc_html( get_post_meta( $data['id'], 'ccf_form_pause_message', true ) );
 
 		// @Todo: escaping

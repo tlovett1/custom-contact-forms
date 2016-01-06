@@ -431,6 +431,16 @@ class CCF_Form_Manager {
 				</select>
 			</p>
 
+			<p class="post-creation-mapping-field">
+				<label for="ccf_form_post_creation_status"><?php esc_html_e( 'Post Status:', 'custom-contact-forms' ); ?></label>
+
+				<select name="form_post_creation_status" class="form-post-creation-status" id="ccf_form_post_creation_status">
+					<?php $post_statuses = get_post_statuses(); foreach ( $post_statuses as $post_status => $post_status_name ) : ?>
+						<option <# if ( '<?php echo esc_attr( $post_status ); ?>' === form.postCreationStatus ) { #>selected<# } #> value="<?php echo esc_attr( $post_status ); ?>"><?php echo esc_html( $post_status_name ); ?></option>
+					<?php endforeach; ?>
+				</select>
+			</p>
+
 			<div class="post-creation-mapping-field post-creation-mapping-wrapper">
 				<label for="ccf_form_post_creation_type"><?php esc_html_e( 'Field Mappings:', 'custom-contact-forms' ); ?></label>
 
@@ -446,8 +456,11 @@ class CCF_Form_Manager {
 			</select>
 
 			<select id="ccf_post_field_mapping_post_field" class="field-post-field">
-				
 			</select>
+
+			<# if ( 'custom_field' === mapping.postField ) { #>
+				<input class="field-custom-field-key" type="text" placeholder="<?php esc_html_e( 'Custom Field Key', 'custom-contact-forms' ); ?>" value="{{ mapping.customFieldKey }}">
+			<# } #>
 			
 			<a aria-hidden="true" data-icon="&#xe605;" class="add"></a>
 			<a aria-hidden="true" data-icon="&#xe604;" class="delete"></a>
@@ -1786,7 +1799,7 @@ class CCF_Form_Manager {
 						'post_date' => esc_html__( 'Post Date', 'custom-contact-forms' ),
 					),
 					'repeatable' => array(
-						'post_category' => esc_html__( 'Post Category', 'custom-contact-forms' ),
+						'category' => esc_html__( 'Post Category', 'custom-contact-forms' ),
 						'post_tag' => esc_html__( 'Post Tag', 'custom-contact-forms' ),
 						'custom_field' => esc_html__( 'Custom Field', 'custom-contact-forms' ),
 					),

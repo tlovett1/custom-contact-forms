@@ -77,7 +77,8 @@
 		{
 			defaults: {
 				formField: '',
-				postField: ''
+				postField: '',
+				customFieldKey: ''
 			},
 
 			decode: function() {
@@ -183,7 +184,8 @@
 					completionRedirectUrl: '',
 					completionMessage: '',
 					postCreation: false,
-					postType: 'post',
+					postCreationType: 'post',
+					postCreationStatus: 'draft',
 					postFieldMappings: new wp.ccf.collections.PostFieldMappings(),
 					notifications: new wp.ccf.collections.FormNotifications(),
 					pause: false,

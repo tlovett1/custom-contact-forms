@@ -1294,9 +1294,20 @@
 
 				var formField = this.el.querySelectorAll( '.field-form-field' )[0].value;
 				var postField = this.el.querySelectorAll( '.field-post-field' )[0].value;
+				var customFieldKey = this.el.querySelectorAll( '.field-custom-field-key' );
+
+				var oldPostField = this.model.get( 'postField' );
 				
 				this.model.set( 'formField', formField );
 				this.model.set( 'postField', postField );
+
+				if ( customFieldKey.length ) {
+					this.model.set( 'customFieldKey', customFieldKey[0].value );
+				}
+
+				if ( oldPostField !== postField ) {
+					this.render();
+				}
 
 				return this;
 
@@ -1565,6 +1576,9 @@
 
 				var postCreationType = this.el.querySelectorAll( '.form-post-creation-type' )[0].value;
 				this.model.set( 'postCreationType', postCreationType );
+
+				var postCreationStatus = this.el.querySelectorAll( '.form-post-creation-status' )[0].value;
+				this.model.set( 'postCreationStatus', postCreationStatus );
 
 				var pauseMessage = this.el.querySelectorAll( '.form-pause-message' )[0].value;
 				this.model.set( 'pauseMessage', pauseMessage );
