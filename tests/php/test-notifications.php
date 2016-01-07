@@ -62,27 +62,29 @@ class CCFTestNotifications extends CCFTestBase {
 				),
 			),
 			array(
-				array(
-					'title' => '',
-					'content' => '',
-					'active' => true,
-					'addresses' => array(
-						array(
-							'type' => 'custom',
-							'email' => 'test@test.com',
-							'field' => '',
-						)
+				'notifications' => array(
+					array(
+						'title' => '',
+						'content' => '',
+						'active' => true,
+						'addresses' => array(
+							array(
+								'type' => 'custom',
+								'email' => 'test@test.com',
+								'field' => '',
+							)
+						),
+						'fromType' => 'default',
+						'fromAddress' => '',
+						'fromField' => '',
+						'subjectType' => 'default',
+						'subject' => '',
+						'subjectField' => '',
+						'fromNameType' => 'custom',
+						'fromName' => 'WordPress',
+						'fromNameField' => '',
 					),
-					'fromType' => 'default',
-					'fromAddress' => '',
-					'fromField' => '',
-					'subjectType' => 'default',
-					'subject' => '',
-					'subjectField' => '',
-					'fromNameType' => 'custom',
-					'fromName' => 'WordPress',
-					'fromNameField' => '',
-				),
+				)
 			)
 		);
 
@@ -122,47 +124,49 @@ class CCFTestNotifications extends CCFTestBase {
 				),
 			),
 			array(
-				array(
-					'title' => 'one',
-					'content' => '',
-					'active' => true,
-					'addresses' => array(
-						array(
-							'type' => 'custom',
-							'email' => 'test@test.com',
-							'field' => '',
-						)
+				'notifications' => array(
+					array(
+						'title' => 'one',
+						'content' => '',
+						'active' => true,
+						'addresses' => array(
+							array(
+								'type' => 'custom',
+								'email' => 'test@test.com',
+								'field' => '',
+							)
+						),
+						'fromType' => 'default',
+						'fromAddress' => '',
+						'fromField' => '',
+						'subjectType' => 'default',
+						'subject' => '',
+						'subjectField' => '',
+						'fromNameType' => 'custom',
+						'fromName' => 'WordPress',
+						'fromNameField' => '',
 					),
-					'fromType' => 'default',
-					'fromAddress' => '',
-					'fromField' => '',
-					'subjectType' => 'default',
-					'subject' => '',
-					'subjectField' => '',
-					'fromNameType' => 'custom',
-					'fromName' => 'WordPress',
-					'fromNameField' => '',
-				),
-				array(
-					'title' => 'two',
-					'content' => '',
-					'active' => true,
-					'addresses' => array(
-						array(
-							'type' => 'custom',
-							'email' => 'test@test.com',
-							'field' => '',
-						)
+					array(
+						'title' => 'two',
+						'content' => '',
+						'active' => true,
+						'addresses' => array(
+							array(
+								'type' => 'custom',
+								'email' => 'test@test.com',
+								'field' => '',
+							)
+						),
+						'fromType' => 'default',
+						'fromAddress' => '',
+						'fromField' => '',
+						'subjectType' => 'default',
+						'subject' => '',
+						'subjectField' => '',
+						'fromNameType' => 'custom',
+						'fromName' => 'WordPress',
+						'fromNameField' => '',
 					),
-					'fromType' => 'default',
-					'fromAddress' => '',
-					'fromField' => '',
-					'subjectType' => 'default',
-					'subject' => '',
-					'subjectField' => '',
-					'fromNameType' => 'custom',
-					'fromName' => 'WordPress',
-					'fromNameField' => '',
 				),
 			)
 		);
@@ -203,26 +207,28 @@ class CCFTestNotifications extends CCFTestBase {
 				),
 			),
 			array(
-				array(
-					'title' => 'one',
-					'content' => '',
-					'active' => false,
-					'addresses' => array(
-						array(
-							'type' => 'custom',
-							'email' => 'test@test.com',
-							'field' => '',
-						)
+				'notifications' => array(
+					array(
+						'title' => 'one',
+						'content' => '',
+						'active' => false,
+						'addresses' => array(
+							array(
+								'type' => 'custom',
+								'email' => 'test@test.com',
+								'field' => '',
+							)
+						),
+						'fromType' => 'default',
+						'fromAddress' => '',
+						'fromField' => '',
+						'subjectType' => 'default',
+						'subject' => '',
+						'subjectField' => '',
+						'fromNameType' => 'custom',
+						'fromName' => 'WordPress',
+						'fromNameField' => '',
 					),
-					'fromType' => 'default',
-					'fromAddress' => '',
-					'fromField' => '',
-					'subjectType' => 'default',
-					'subject' => '',
-					'subjectField' => '',
-					'fromNameType' => 'custom',
-					'fromName' => 'WordPress',
-					'fromNameField' => '',
 				),
 			)
 		);
@@ -263,20 +269,22 @@ class CCFTestNotifications extends CCFTestBase {
 				),
 			),
 			array(
-				array(
-					'title' => 'one',
-					'content' => '',
-					'active' => true,
-					'addresses' => array(),
-					'fromType' => 'default',
-					'fromAddress' => '',
-					'fromField' => '',
-					'subjectType' => 'default',
-					'subject' => '',
-					'subjectField' => '',
-					'fromNameType' => 'custom',
-					'fromName' => 'WordPress',
-					'fromNameField' => '',
+				'notifications' => array(
+					array(
+						'title' => 'one',
+						'content' => '',
+						'active' => true,
+						'addresses' => array(),
+						'fromType' => 'default',
+						'fromAddress' => '',
+						'fromField' => '',
+						'subjectType' => 'default',
+						'subject' => '',
+						'subjectField' => '',
+						'fromNameType' => 'custom',
+						'fromName' => 'WordPress',
+						'fromNameField' => '',
+					),
 				),
 			)
 		);
@@ -317,26 +325,28 @@ class CCFTestNotifications extends CCFTestBase {
 				),
 			),
 			array(
-				array(
-					'title' => 'one',
-					'content' => '',
-					'active' => true,
-					'addresses' => array(
-						array(
-							'type' => 'custom',
-							'email' => 'test@test.com',
-							'field' => '',
-						)
+				'notifications' => array(
+					array(
+						'title' => 'one',
+						'content' => '',
+						'active' => true,
+						'addresses' => array(
+							array(
+								'type' => 'custom',
+								'email' => 'test@test.com',
+								'field' => '',
+							)
+						),
+						'fromType' => 'default',
+						'fromAddress' => '',
+						'fromField' => '',
+						'subjectType' => 'custom',
+						'subject' => 'test',
+						'subjectField' => '',
+						'fromNameType' => 'custom',
+						'fromName' => 'WordPress',
+						'fromNameField' => '',
 					),
-					'fromType' => 'default',
-					'fromAddress' => '',
-					'fromField' => '',
-					'subjectType' => 'custom',
-					'subject' => 'test',
-					'subjectField' => '',
-					'fromNameType' => 'custom',
-					'fromName' => 'WordPress',
-					'fromNameField' => '',
 				),
 			)
 		);
@@ -377,26 +387,28 @@ class CCFTestNotifications extends CCFTestBase {
 				),
 			),
 			array(
-				array(
-					'title' => 'one',
-					'content' => '',
-					'active' => true,
-					'addresses' => array(
-						array(
-							'type' => 'custom',
-							'email' => 'test@test.com',
-							'field' => '',
-						)
+				'notifications' => array(
+					array(
+						'title' => 'one',
+						'content' => '',
+						'active' => true,
+						'addresses' => array(
+							array(
+								'type' => 'custom',
+								'email' => 'test@test.com',
+								'field' => '',
+							)
+						),
+						'fromType' => 'default',
+						'fromAddress' => '',
+						'fromField' => '',
+						'subjectType' => 'field',
+						'subject' => '',
+						'subjectField' => $slug . '1',
+						'fromNameType' => 'custom',
+						'fromName' => 'WordPress',
+						'fromNameField' => '',
 					),
-					'fromType' => 'default',
-					'fromAddress' => '',
-					'fromField' => '',
-					'subjectType' => 'field',
-					'subject' => '',
-					'subjectField' => $slug . '1',
-					'fromNameType' => 'custom',
-					'fromName' => 'WordPress',
-					'fromNameField' => '',
 				),
 			)
 		);
@@ -437,26 +449,28 @@ class CCFTestNotifications extends CCFTestBase {
 				),
 			),
 			array(
-				array(
-					'title' => 'one',
-					'content' => '',
-					'active' => true,
-					'addresses' => array(
-						array(
-							'type' => 'custom',
-							'email' => 'test@test.com',
-							'field' => '',
-						)
+				'notifications' => array(
+					array(
+						'title' => 'one',
+						'content' => '',
+						'active' => true,
+						'addresses' => array(
+							array(
+								'type' => 'custom',
+								'email' => 'test@test.com',
+								'field' => '',
+							)
+						),
+						'fromType' => 'custom',
+						'fromAddress' => 'test@test.com',
+						'fromField' => '',
+						'subjectType' => 'field',
+						'subject' => '',
+						'subjectField' => '',
+						'fromNameType' => 'custom',
+						'fromName' => 'something',
+						'fromNameField' => '',
 					),
-					'fromType' => 'custom',
-					'fromAddress' => 'test@test.com',
-					'fromField' => '',
-					'subjectType' => 'field',
-					'subject' => '',
-					'subjectField' => '',
-					'fromNameType' => 'custom',
-					'fromName' => 'something',
-					'fromNameField' => '',
 				),
 			)
 		);
@@ -497,26 +511,28 @@ class CCFTestNotifications extends CCFTestBase {
 				),
 			),
 			array(
-				array(
-					'title' => 'one',
-					'content' => '',
-					'active' => true,
-					'addresses' => array(
-						array(
-							'type' => 'custom',
-							'email' => 'test@test.com',
-							'field' => '',
-						)
+				'notifications' => array(
+					array(
+						'title' => 'one',
+						'content' => '',
+						'active' => true,
+						'addresses' => array(
+							array(
+								'type' => 'custom',
+								'email' => 'test@test.com',
+								'field' => '',
+							)
+						),
+						'fromType' => 'default',
+						'fromAddress' => '',
+						'fromField' => '',
+						'subjectType' => 'field',
+						'subject' => '',
+						'subjectField' => '',
+						'fromNameType' => 'custom',
+						'fromName' => 'something',
+						'fromNameField' => '',
 					),
-					'fromType' => 'default',
-					'fromAddress' => '',
-					'fromField' => '',
-					'subjectType' => 'field',
-					'subject' => '',
-					'subjectField' => '',
-					'fromNameType' => 'custom',
-					'fromName' => 'something',
-					'fromNameField' => '',
 				),
 			)
 		);
@@ -557,26 +573,28 @@ class CCFTestNotifications extends CCFTestBase {
 				),
 			),
 			array(
-				array(
-					'title' => 'one',
-					'content' => '',
-					'active' => true,
-					'addresses' => array(
-						array(
-							'type' => 'custom',
-							'email' => 'test@test.com',
-							'field' => '',
-						)
+				'notifications' => array(
+					array(
+						'title' => 'one',
+						'content' => '',
+						'active' => true,
+						'addresses' => array(
+							array(
+								'type' => 'custom',
+								'email' => 'test@test.com',
+								'field' => '',
+							)
+						),
+						'fromType' => 'default',
+						'fromAddress' => '',
+						'fromField' => '',
+						'subjectType' => 'field',
+						'subject' => '',
+						'subjectField' => '',
+						'fromNameType' => 'field',
+						'fromName' => '',
+						'fromNameField' => $slug . '1',
 					),
-					'fromType' => 'default',
-					'fromAddress' => '',
-					'fromField' => '',
-					'subjectType' => 'field',
-					'subject' => '',
-					'subjectField' => '',
-					'fromNameType' => 'field',
-					'fromName' => '',
-					'fromNameField' => $slug . '1',
 				),
 			)
 		);
@@ -618,26 +636,28 @@ class CCFTestNotifications extends CCFTestBase {
 				),
 			),
 			array(
-				array(
-					'title' => 'one',
-					'content' => '',
-					'active' => true,
-					'addresses' => array(
-						array(
-							'type' => 'custom',
-							'email' => 'hello@test.com',
-							'field' => '',
-						)
+				'notifications' => array(
+					array(
+						'title' => 'one',
+						'content' => '',
+						'active' => true,
+						'addresses' => array(
+							array(
+								'type' => 'custom',
+								'email' => 'hello@test.com',
+								'field' => '',
+							)
+						),
+						'fromType' => 'field',
+						'fromAddress' => '',
+						'fromField' => $slug . '1',
+						'subjectType' => 'field',
+						'subject' => '',
+						'subjectField' => '',
+						'fromNameType' => 'custom',
+						'fromName' => 'WordPress',
+						'fromNameField' => '',
 					),
-					'fromType' => 'field',
-					'fromAddress' => '',
-					'fromField' => $slug . '1',
-					'subjectType' => 'field',
-					'subject' => '',
-					'subjectField' => '',
-					'fromNameType' => 'custom',
-					'fromName' => 'WordPress',
-					'fromNameField' => '',
 				),
 			)
 		);
@@ -678,31 +698,33 @@ class CCFTestNotifications extends CCFTestBase {
 				),
 			),
 			array(
-				array(
-					'title' => 'one',
-					'content' => '',
-					'active' => true,
-					'addresses' => array(
-						array(
-							'type' => 'custom',
-							'email' => 'test@test.com',
-							'field' => '',
+				'notifications' => array(
+					array(
+						'title' => 'one',
+						'content' => '',
+						'active' => true,
+						'addresses' => array(
+							array(
+								'type' => 'custom',
+								'email' => 'test@test.com',
+								'field' => '',
+							),
+							array(
+								'type' => 'custom',
+								'email' => 'test1@test.com',
+								'field' => '',
+							)
 						),
-						array(
-							'type' => 'custom',
-							'email' => 'test1@test.com',
-							'field' => '',
-						)
+						'fromType' => 'default',
+						'fromAddress' => '',
+						'fromField' => '',
+						'subjectType' => 'field',
+						'subject' => '',
+						'subjectField' => '',
+						'fromNameType' => 'custom',
+						'fromName' => 'WordPress',
+						'fromNameField' => '',
 					),
-					'fromType' => 'default',
-					'fromAddress' => '',
-					'fromField' => '',
-					'subjectType' => 'field',
-					'subject' => '',
-					'subjectField' => '',
-					'fromNameType' => 'custom',
-					'fromName' => 'WordPress',
-					'fromNameField' => '',
 				),
 			)
 		);

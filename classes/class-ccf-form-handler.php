@@ -706,7 +706,7 @@ class CCF_Form_Handler {
 					$custom_fields = array();
 
 					foreach ( $mappings as $mapping ) {
-						if ( ! empty( $mapping['formField'] ) ) {
+						if ( ! empty( $mapping['formField'] ) && isset( $submission[$mapping['formField']] ) ) {
 							if ( 'post_title' === $mapping['postField'] ) {
 								$args['post_title'] = $this->_flatten_and_concat( $submission[$mapping['formField']] );
 							} elseif ( 'post_content' === $mapping['postField'] ) {
@@ -726,6 +726,10 @@ class CCF_Form_Handler {
 								);
 							}
 						}
+					}
+
+					if ( ! empty( $args['post_title'] ) ) {
+						$args['post_title'] = apply_filters( 'ccf_default_post_creation_title', esc_html__( 'Post created by form', 'custom-contact-forms' ), $args, $form_id, $submission_id, $submission );
 					}
 
 					$post_creation_id = wp_insert_post( apply_filters( 'ccf_post_creation_args', $args, $form_id, $submission_id, $submission ) );

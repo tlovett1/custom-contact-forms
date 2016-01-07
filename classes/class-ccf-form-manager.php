@@ -447,7 +447,7 @@ class CCF_Form_Manager {
 				<div class="post-creation-mapping">
 				</div>
 
-				<span class="explain"><?php esc_html_e( 'You can map as few or as many fields as you like. However, if no form fields are mapped, no post will be created.', 'custom-contact-forms' ); ?></span>
+				<span class="explain"><?php esc_html_e( 'You can map as few or as many fields as you like. However, if no form fields are mapped, no post will be created. Mapping a field to post_title is required.', 'custom-contact-forms' ); ?></span>
 			</div>
 		</script>
 
