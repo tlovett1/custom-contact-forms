@@ -1585,7 +1585,7 @@
 				this.model.set( 'content', emailNotificationContent );
 
 				var emailNotificationActive = this.el.querySelectorAll( '.form-email-notification-active' )[0].value;
-				this.model.set( 'active', ( 'Yes' === emailNotificationActive ) ? true : false );
+				this.model.set( 'active', ( '1' === emailNotificationActive ) ? true : false );
 
 				var emailNotificationFromType = this.el.querySelectorAll( '.form-email-notification-from-type' )[0].value;
 				this.model.set( 'fromType', emailNotificationFromType );
