@@ -38,7 +38,7 @@ class CCFTestPostCreation extends CCFTestBase {
 				'submission_id' => $submission_id,
 				'submission' => $submission,
 			);
-		} );
+		}, 10, 4 );
 
 		CCF_Form_Handler::factory()->submit_listen();
 

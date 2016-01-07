@@ -1,4 +1,4 @@
-Custom Contact Forms [![Build Status](https://travis-ci.org/tlovett1/custom-contact-forms.svg?branch=master)](https://travis-ci.org/tlovett1/custom-contact-forms) [![Dockunit Status](https://dockunit.io/svg/tlovett1/custom-contact-forms?master)](https://dockunit.io/projects/tlovett1/custom-contact-forms#master)
+Custom Contact Forms [![Build Status](https://travis-ci.org/tlovett1/custom-contact-forms.svg?branch=master)](https://travis-ci.org/tlovett1/custom-contact-forms)
 ===============
 
 Build beautiful custom forms the WordPress way.
