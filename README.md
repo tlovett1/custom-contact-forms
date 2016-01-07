@@ -1,4 +1,4 @@
-Custom Contact Forms [![Build Status](https://travis-ci.org/tlovett1/custom-contact-forms.svg?branch=master)](https://travis-ci.org/tlovett1/custom-contact-forms) [![Dockunit Status](https://dockunit.io/svg/tlovett1/custom-contact-forms?master)](https://dockunit.io/projects/tlovett1/custom-contact-forms#master)
+Custom Contact Forms [![Build Status](https://travis-ci.org/tlovett1/custom-contact-forms.svg?branch=master)](https://travis-ci.org/tlovett1/custom-contact-forms)
 ===============
 
 Build beautiful custom forms the WordPress way.
@@ -79,6 +79,21 @@ will use the CCF default subject. `Custom Subject` will allow you to manually ty
 
 __Note:__ In order for form notification changes to take affect, you will need to save the form.
 
+#### Post Creation
+
+For each of your forms, you can have a post (or custom post type) created every time someone submits the form. This is an extremely powerful feature.
+
+* `Enable Post Creation` - Selecting `Yes` will enable post creation. Note that posts won't start creating until you map some fields.
+* `Post Type` - You can choose the type of post type that will be created with each submission. This defaults to `post`.
+* `Post Status` - You can choose the status (publish, draft, etc.) of the post that will be created with each submission. This defaults to `draft`.
+* `Field Mappings` - You will need to map your form fields to the appropriate post fields. The available post fields are as possible:
+
+  * `Post Title` - Selecting this post field will map your form field to the title of the post.
+  * `Post Content` - Selecting this post field will map your form field to the content of the post.
+  * `Post Excerpt` - Selecting this post field will map your form field to the excerpt of the post.
+  * `Post Date` - Selecting this post field will map your form field to the publish date of the post.
+  * `Post Tags` - Selecting this post field will map your form field to the tags of the post.
+  * `Custom Field` - Selecting this post field will map your form field to a custom field of the post. If you use `Custom Field`, you will need to choose a custom field key.
 
 
 ### Fields

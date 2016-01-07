@@ -357,6 +357,25 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 	}
 
 	/**
+	 * Create/update post field mappings
+	 *
+	 * @param array $post_field_mappings
+	 * @param int $form_id
+	 * @since 7.3
+	 */
+	public function _create_and_map_post_field_mappings( $post_field_mappings, $form_id ) {
+		$clean_post_field_mappings = array();
+		
+		foreach ( $post_field_mappings as $mapping ) {
+			if ( ! empty( $mapping['formField'] ) && ! empty( $mapping['postField'] ) ) {
+				$clean_post_field_mappings[] = array_map( 'sanitize_text_field', $mapping );
+			}
+		}
+
+		update_post_meta( $form_id, 'ccf_form_post_field_mappings', $clean_post_field_mappings );
+	}
+
+	/**
 	 * Create/update a form
 	 *
 	 * @param array $data
@@ -386,6 +405,8 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 
 			$this->_create_and_map_notifications( $data['notifications'], $result );
 
+			$this->_create_and_map_post_field_mappings( $data['postFieldMappings'], $result );
+
 			if ( isset( $data['buttonText'] ) ) {
 				update_post_meta( $result, 'ccf_form_buttonText', sanitize_text_field( $data['buttonText'] ) );
 			}
@@ -412,6 +433,18 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 
 			if ( isset( $data['pause'] ) ) {
 				update_post_meta( $result, 'ccf_form_pause', (bool) $data['pause'] );
+			}
+
+			if ( isset( $data['postCreation'] ) ) {
+				update_post_meta( $result, 'ccf_form_post_creation', (bool) $data['postCreation'] );
+			}
+
+			if ( isset( $data['postCreationType'] ) ) {
+				update_post_meta( $result, 'ccf_form_post_creation_type', sanitize_text_field( $data['postCreationType'] ) );
+			}
+
+			if ( isset( $data['postCreationStatus'] ) ) {
+				update_post_meta( $result, 'ccf_form_post_creation_status', sanitize_text_field( $data['postCreationStatus'] ) );
 			}
 
 			if ( isset( $data['pauseMessage'] ) ) {
@@ -913,6 +946,9 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 		$data['completionRedirectUrl'] = esc_url_raw( get_post_meta( $data['id'], 'ccf_form_completion_redirect_url', true ) );
 		$data['completionMessage'] = esc_html( get_post_meta( $data['id'], 'ccf_form_completion_message', true ) );
 		$data['pause'] = (bool) get_post_meta( $data['id'], 'ccf_form_pause', true );
+		$data['postCreation'] = (bool) get_post_meta( $data['id'], 'ccf_form_post_creation', true );
+		$data['postCreationType'] = esc_html( get_post_meta( $data['id'], 'ccf_form_post_creation_type', true ) );
+		$data['postCreationStatus'] = esc_html( get_post_meta( $data['id'], 'ccf_form_post_creation_status', true ) );
 		$data['pauseMessage'] = esc_html( get_post_meta( $data['id'], 'ccf_form_pause_message', true ) );
 
 		// @Todo: escaping
@@ -922,6 +958,14 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 		}
 
 		$data['notifications'] = $notifications;
+
+		// @Todo: escaping
+		$post_field_mappings = get_post_meta( $data['id'], 'ccf_form_post_field_mappings', true );
+		if ( empty( $post_field_mappings ) ) {
+			$post_field_mappings = array();
+		}
+
+		$data['postFieldMappings'] = $post_field_mappings;
 
 		$submissions = get_children( array( 'post_type' => 'ccf_submission', 'post_parent' => $data['id'], 'numberposts' => apply_filters( 'ccf_max_submissions', 5000, $data ) ) );
 

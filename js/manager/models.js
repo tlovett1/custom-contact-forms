@@ -73,6 +73,22 @@
 		}
 	);
 
+	wp.ccf.models.PostFieldMapping = wp.ccf.models.PostFieldMapping || Backbone.Model.extend(
+		{
+			defaults: {
+				formField: '',
+				postField: '',
+				customFieldKey: ''
+			},
+
+			decode: function() {
+				return _modelDecode.call( this, [] );
+			},
+
+			set: _modelSet
+		}
+	);
+
 	wp.ccf.models.FormNotificationAddress = wp.ccf.models.FormNotificationAddress || Backbone.Model.extend(
 		{
 			defaults: {
@@ -167,7 +183,10 @@
 					completionActionType: 'text',
 					completionRedirectUrl: '',
 					completionMessage: '',
-
+					postCreation: false,
+					postCreationType: 'post',
+					postCreationStatus: 'draft',
+					postFieldMappings: new wp.ccf.collections.PostFieldMappings(),
 					notifications: new wp.ccf.collections.FormNotifications(),
 					pause: false,
 					pauseMessage: ccfSettings.pauseMessage
@@ -297,6 +316,38 @@
 						});
 
 						response.notifications = new wp.ccf.collections.FormNotifications( newNotifications );
+					}
+				}
+
+				if ( response.postFieldMappings ) {
+
+					var postFieldMappings = SELF.get( 'postFieldMappings' );
+
+					if ( postFieldMappings && postFieldMappings.length > 0 ) {
+
+						for ( i = 0; i < response.postFieldMappings.length; i++ ) {
+							var newPostFieldMapping = response.postFieldMappings[i];
+
+							var postFieldMapping = postFieldMappings.findWhere( { slug: newPostFieldMapping.slug } );
+
+							if ( postFieldMapping ) {
+								postFieldMapping.set( newPostFieldMapping );
+								postFieldMapping.decode();
+							}
+						}
+
+						delete response.postFieldMappings;
+					} else {
+						var newPostFieldMappings = [];
+
+						_.each( response.postFieldMappings, function( postFieldMapping ) {
+							var postFieldMappingModel = new wp.ccf.models.PostFieldMapping( postFieldMapping );
+							postFieldMappingModel.decode();
+
+							newPostFieldMappings.push( postFieldMappingModel );
+						});
+
+						response.postFieldMappings = new wp.ccf.collections.PostFieldMappings( newPostFieldMappings );
 					}
 				}
 

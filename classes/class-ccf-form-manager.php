@@ -331,7 +331,7 @@ class CCF_Form_Manager {
 		</script>
 
 		<script type="text/html" id="ccf-form-settings-template">
-			<h3>General</h3>
+			<h3><?php esc_html_e( 'General', 'custom-contact-forms' ); ?></h3>
 
 			<p>
 				<label for="ccf_form_title"><?php esc_html_e( 'Form Title:', 'custom-contact-forms' ); ?></label>
@@ -408,6 +408,62 @@ class CCF_Form_Manager {
 					<span class="explain"><?php esc_html_e( 'For notification changes to take affect (updating, adding, deleting, etc.), you will need to save the form.', 'custom-contact-forms' ); ?></span>
 				</p>
 			</div>
+
+			<h3><?php esc_html_e( 'Post Creation', 'custom-contact-forms' ); ?></h3>
+			<p><?php esc_html_e( 'You can have Custom Contact Forms create a post (or custom post type) whenever someone submits your form.', 'custom-contact-forms' ); ?></p>
+
+			<p>
+				<label for="ccf_form_post_creation"><?php esc_html_e( 'Enable Post Creation:', 'custom-contact-forms' ); ?></label>
+
+				<select name="form_post_creation" class="form-post-creation" id="ccf_form_post_creation">
+					<option value="0"><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
+					<option value="1" <# if ( form.postCreation ) { #>selected<# } #>><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
+				</select>
+			</p>
+
+			<p class="post-creation-mapping-field">
+				<label for="ccf_form_post_creation_type"><?php esc_html_e( 'Post Type:', 'custom-contact-forms' ); ?></label>
+
+				<select name="form_post_creation_type" class="form-post-creation-type" id="ccf_form_post_creation_type">
+					<?php $post_types = get_post_types( array(), 'objects' ); foreach ( $post_types as $post_type ) : ?>
+						<option <# if ( '<?php echo esc_attr( $post_type->name ); ?>' === form.postCreationType ) { #>selected<# } #> value="<?php echo esc_attr( $post_type->name ); ?>"><?php echo esc_html( $post_type->name ); ?></option>
+					<?php endforeach; ?>
+				</select>
+			</p>
+
+			<p class="post-creation-mapping-field">
+				<label for="ccf_form_post_creation_status"><?php esc_html_e( 'Post Status:', 'custom-contact-forms' ); ?></label>
+
+				<select name="form_post_creation_status" class="form-post-creation-status" id="ccf_form_post_creation_status">
+					<?php $post_statuses = get_post_statuses(); foreach ( $post_statuses as $post_status => $post_status_name ) : ?>
+						<option <# if ( '<?php echo esc_attr( $post_status ); ?>' === form.postCreationStatus ) { #>selected<# } #> value="<?php echo esc_attr( $post_status ); ?>"><?php echo esc_html( $post_status_name ); ?></option>
+					<?php endforeach; ?>
+				</select>
+			</p>
+
+			<div class="post-creation-mapping-field post-creation-mapping-wrapper">
+				<label for="ccf_form_post_creation_type"><?php esc_html_e( 'Field Mappings:', 'custom-contact-forms' ); ?></label>
+
+				<div class="post-creation-mapping">
+				</div>
+
+				<span class="explain"><?php esc_html_e( 'You can map as few or as many fields as you like. However, if no form fields are mapped, no post will be created. Mapping a field to post_title is required.', 'custom-contact-forms' ); ?></span>
+			</div>
+		</script>
+
+		<script type="text/html" id="ccf-post-field-mapping">
+			<select id="ccf_post_field_mapping_form_field" class="field-form-field">
+			</select>
+
+			<select id="ccf_post_field_mapping_post_field" class="field-post-field">
+			</select>
+
+			<# if ( 'custom_field' === mapping.postField ) { #>
+				<input class="field-custom-field-key" type="text" placeholder="<?php esc_html_e( 'Custom Field Key', 'custom-contact-forms' ); ?>" value="{{ mapping.customFieldKey }}">
+			<# } #>
+			
+			<a aria-hidden="true" data-icon="&#xe605;" class="add"></a>
+			<a aria-hidden="true" data-icon="&#xe604;" class="delete"></a>
 		</script>
 
 		<script type="text/html" id="ccf-existing-form-pane-template">
@@ -1724,14 +1780,29 @@ class CCF_Form_Manager {
 				'specialFieldLabels' => $special_field_labels,
 				'maxFileSize' => floor( wp_max_upload_size() / 1000 / 1000 ),
 				'noEmailFields' => esc_html__( 'You have no email fields', 'custom-contact-forms' ),
+				'noAvailableFields' => esc_html__( 'You have no available fields', 'custom-contact-forms' ),
 				'noNameFields' => esc_html__( 'You have no name fields', 'custom-contact-forms' ),
 				'noApplicableFields' => esc_html__( 'You have no applicable fields', 'custom-contact-forms' ),
+				'chooseFormField' => esc_html__( 'Choose a Form Field', 'custom-contact-forms' ),
 				'invalidDate' => esc_html__( 'Invalid date', 'custom-contact-forms' ),
 				'allLabels' => array_merge( $field_labels, $structure_field_labels, $special_field_labels ),
 				'fieldLabel' => esc_html__( 'Field Label', 'custom-contact-forms' ),
 				'thickboxTitle' => esc_html__( 'Form Submission', 'custom-contact-forms' ),
 				'pauseMessage' => esc_html__( 'This form is paused right now. Check back later!', 'custom-contact-forms' ),
 				'skipFields' => apply_filters( 'ccf_no_submission_display_fields', array( 'html', 'section-header', 'recaptcha' ) ),
+				'choosePostField' => esc_html__( 'Choose a Post Field', 'custom-contact-forms' ),
+				'postFields' => array(
+					'single' => array(
+						'post_title' => esc_html__( 'Post Title', 'custom-contact-forms' ),
+						'post_content' => esc_html__( 'Post Content', 'custom-contact-forms' ),
+						'post_excerpt' => esc_html__( 'Post Excerpt', 'custom-contact-forms' ),
+						'post_date' => esc_html__( 'Post Date', 'custom-contact-forms' ),
+					),
+					'repeatable' => array(
+						'post_tag' => esc_html__( 'Post Tags', 'custom-contact-forms' ),
+						'custom_field' => esc_html__( 'Custom Field', 'custom-contact-forms' ),
+					),
+				)
 			) );
 
 			wp_enqueue_style( 'ccf-form-manager', plugins_url( $css_path, dirname( __FILE__ ) ), array(), CCF_VERSION );
