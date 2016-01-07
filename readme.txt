@@ -38,6 +38,12 @@ For questions, feature requests, and support concerning the Custom Contact Forms
 = 7.3 =
 * Add post creation functionality for when forms are submitted
 
+= 7.2.3 =
+* Fix non-English notification activation
+
+= 7.2.2 =
+* Fix asset restriciton adding bug in Firefox
+
 = 7.2.2 =
 * Fix asset restriciton adding bug in Firefox
 

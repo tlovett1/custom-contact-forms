@@ -1799,8 +1799,7 @@ class CCF_Form_Manager {
 						'post_date' => esc_html__( 'Post Date', 'custom-contact-forms' ),
 					),
 					'repeatable' => array(
-						'category' => esc_html__( 'Post Category', 'custom-contact-forms' ),
-						'post_tag' => esc_html__( 'Post Tag', 'custom-contact-forms' ),
+						'post_tag' => esc_html__( 'Post Tags', 'custom-contact-forms' ),
 						'custom_field' => esc_html__( 'Custom Field', 'custom-contact-forms' ),
 					),
 				)

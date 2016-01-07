@@ -701,34 +701,45 @@ class CCF_Form_Handler {
 						'post_type' => ( ! empty( $post_creation_type ) ) ? $post_creation_type : 'post',
 					);
 
-					$categories = array();
 					$tags = array();
 					$custom_fields = array();
 
 					foreach ( $mappings as $mapping ) {
 						if ( ! empty( $mapping['formField'] ) && isset( $submission[$mapping['formField']] ) ) {
+							$field_id = $field_slug_to_id[$mapping['formField']]['id'];
+							$field_type = get_post_meta( $field_id, 'ccf_field_type', true );
+
+							$submission_value = $submission[$mapping['formField']];
+							if ( is_array( $submission_value ) && isset( $submission_value['email'] ) ) {
+								$submission_value = $submission_value['email'];
+							}
+
 							if ( 'post_title' === $mapping['postField'] ) {
-								$args['post_title'] = $this->_flatten_and_concat( $submission[$mapping['formField']] );
+								$args['post_title'] = $this->_flatten_and_concat( $submission_value );
 							} elseif ( 'post_content' === $mapping['postField'] ) {
-								$args['post_content'] = $this->_flatten_and_concat( $submission[$mapping['formField']] );
+								$args['post_content'] = $this->_flatten_and_concat( $submission_value );
 							} elseif ( 'post_date' === $mapping['postField'] ) {
-								$args['post_date'] = $this->_flatten_and_concat( $submission[$mapping['formField']] );
+								$args['post_date'] = $this->_flatten_and_concat( $submission_value );
 							} elseif ( 'post_excerpt' === $mapping['postField'] ) {
-								$args['post_excerpt'] = $this->_flatten_and_concat( $submission[$mapping['formField']] );
+								$args['post_excerpt'] = $this->_flatten_and_concat( $submission_value );
 							} elseif ( 'post_tag' === $mapping['postField'] ) {
-								$tags[] = $this->_flatten_and_concat( $submission[$mapping['formField']] );
-							} elseif ( 'category' === $mapping['postField'] ) {
-								$categories[] = $this->_flatten_and_concat( $submission[$mapping['formField']] );
+								if ( 'checkboxes' === $field_type ) {
+									$tags = array_merge( $tags, $submission_value );
+								} elseif ( 'dropdown' == $field_type && is_array( $submission_value ) ) {
+									$tags = array_merge( $tags, $submission_value );
+								} else {
+									$tags[] = $this->_flatten_and_concat( $submission[$mapping['formField']] );
+								}
 							} elseif ( 'custom_field' === $mapping['postField'] && ! empty( $mapping['customFieldKey'] ) ) {
 								$custom_fields[] = array(
 									'key' => $mapping['customFieldKey'],
-									'value' => $this->_flatten_and_concat( $submission[$mapping['formField']] ),
+									'value' => $this->_flatten_and_concat( $submission_value ),
 								);
 							}
 						}
 					}
 
-					if ( ! empty( $args['post_title'] ) ) {
+					if ( empty( $args['post_title'] ) ) {
 						$args['post_title'] = apply_filters( 'ccf_default_post_creation_title', esc_html__( 'Post created by form', 'custom-contact-forms' ), $args, $form_id, $submission_id, $submission );
 					}
 
@@ -738,11 +749,7 @@ class CCF_Form_Handler {
 						update_post_meta( $post_creation_id, 'ccf_created_by_form', (int) $form_id );
 
 						if ( ! empty( $tags ) ) {
-							wp_set_object_terms( $post_creation_id, $tags, 'post_tag' );
-						}
-
-						if ( ! empty( $categories ) ) {
-							wp_set_object_terms( $post_creation_id, $categories, 'category' );
+							wp_set_object_terms( $post_creation_id, $tags, 'post_tag', true );
 						}
 
 						if ( ! empty( $custom_fields ) ) {

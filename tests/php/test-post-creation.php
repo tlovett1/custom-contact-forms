@@ -254,9 +254,12 @@ class CCFTestPostCreation extends CCFTestBase {
 		$slugs = array(
 			'single-line-text',
 			'name',
-			'paragraph',
-			'paragraph',
-			'email'
+			'paragraph-text',
+			'paragraph-text',
+			'email',
+			'checkboxes',
+			'radio',
+			'dropdown',
 		);
 
 		$form_response = $this->_createForm(
@@ -273,12 +276,12 @@ class CCFTestPostCreation extends CCFTestBase {
 				),
 				array(
 					'slug' => $slugs[2], 
-					'type' => 'paragraph', 
+					'type' => 'paragraph-text', 
 					'required' => true,
 				),
 				array(
 					'slug' => $slugs[3], 
-					'type' => 'paragraph', 
+					'type' => 'paragraph-text', 
 					'required' => true,
 				),
 				array(
@@ -286,6 +289,52 @@ class CCFTestPostCreation extends CCFTestBase {
 					'type' => 'email', 
 					'required' => true,
 					'confirm' => true,
+				),
+				array(
+					'slug' => $slugs[5], 
+					'type' => 'checkboxes', 
+					'choices' => array(
+						array(
+							'label' => 'tag1',
+							'value' => 'tag1',
+							'selected' => false,
+						),
+						array(
+							'label' => 'tag2',
+							'value' => 'tag2',
+							'selected' => false,
+						),
+						array(
+							'label' => 'tag3',
+							'value' => 'tag3',
+							'selected' => false,
+						),
+					),
+					'required' => true,
+				),
+				array(
+					'slug' => $slugs[6], 
+					'type' => 'radio', 
+					'choices' => array(
+						array(
+							'label' => 'tag4',
+							'value' => 'tag4',
+							'selected' => false,
+						),
+					),
+					'required' => true,
+				),
+				array(
+					'slug' => $slugs[7], 
+					'type' => 'dropdown', 
+					'choices' => array(
+						array(
+							'label' => 'tag5',
+							'value' => 'tag5',
+							'selected' => false,
+						),
+					),
+					'required' => true,
 				),
 			),
 			array(
@@ -318,6 +367,21 @@ class CCFTestPostCreation extends CCFTestBase {
 						'formField' => $slugs[4] . '5',
 						'customFieldKey' => 'email',
 					),
+					array(
+						'postField' => 'post_tag',
+						'formField' => $slugs[5] . '6',
+						'customFieldKey' => '',
+					),
+					array(
+						'postField' => 'post_tag',
+						'formField' => $slugs[6] . '7',
+						'customFieldKey' => '',
+					),
+					array(
+						'postField' => 'post_tag',
+						'formField' => $slugs[7] . '8',
+						'customFieldKey' => '',
+					),
 				),
 			)
 		);
@@ -331,6 +395,9 @@ class CCFTestPostCreation extends CCFTestBase {
 		$_POST['ccf_field_' . $slugs[2] . '3'] = 'content';
 		$_POST['ccf_field_' . $slugs[3] . '4'] = 'excerpt';
 		$_POST['ccf_field_' . $slugs[4] . '5'] = array( 'email' => 'test@test.com', 'confirm' => 'test@test.com' );
+		$_POST['ccf_field_' . $slugs[5] . '6'] = array( 'tag1', 'tag2', 'tag3' );
+		$_POST['ccf_field_' . $slugs[6] . '7'] = 'tag4';
+		$_POST['ccf_field_' . $slugs[7] . '8'] = 'tag5';
 
 		add_action( 'ccf_post_creation', function( $post_creation_id, $form_id, $submission_id, $submission ) {
 			$this->post_creation = array(
@@ -349,5 +416,18 @@ class CCFTestPostCreation extends CCFTestBase {
 
 		$this->assertEquals( 'title', $post->post_title );
 		$this->assertEquals( 'taylor lovett', get_post_meta( $this->post_creation['post_creation_id'], 'name', true ) );
+		$this->assertEquals( 'content', $post->post_content );
+		$this->assertEquals( 'excerpt', $post->post_excerpt );
+		$this->assertEquals( 'test@test.com', get_post_meta( $this->post_creation['post_creation_id'], 'email', true ) );
+
+		$tags = wp_get_post_tags( $this->post_creation['post_creation_id'] );
+		$this->assertEquals( 5, count( $tags ) );
+
+		$i = 1;
+		foreach ( $tags as $tag ) {
+			$this->assertEquals( 'tag' . $i, $tag->name);
+			$i++;
+		}
+
 	}
 }
