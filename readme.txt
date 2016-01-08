@@ -12,12 +12,30 @@ Build beautiful custom forms the WordPress way. View live previews of your forms
 
 == Description ==
 
-__Note: Version 6.0 breaks backwards compatibility. You will need to perform a database update after upgrading from anything pre 6.0. You may also need to reconfigure some of your forms.__
+Custom Contact Forms enables you to build forms and manage submissions the WordPress way. User experience is at the top of the list for this plugin. Build forms in the media manager instead of going to separate areas of your site. Live previews of your forms are generated on the fly making your life much easier. Custom Contact Forms is a legacy name. The plugin is built for much more than just contact forms. Flexibility and extensible functionality allow you and your team to create forms to power subscriptions, payments, events, and more.
 
-Custom Contact Forms enables you to build forms the WordPress way. User experience is at the top of the list for this plugin.
-Build forms in the media manager instead of going to separate areas of your site. Live previews of your forms are generated
-on the fly making your life much easier. Custom Contact Forms is a legacy name. The plugin is built for much more than
-just contact forms.
+**Feature List (not exhaustive):**
+
+* Create text fields, paragraph fields, first/last name fields, email fields (with optional confirmation), US address fields, international address fields, date fields (optional international format), time fields, checkbox fields, dropdown (optional multi-select), radio fields, hidden fields, file upload fields, phone fields (optional international number), website fields, and more.
+* Add HTML and sections to your forms.
+* Add help text, modify labels, mark required, add CSS classes, manage options, etc. for each of your form fields.
+* Forms use AJAX so no page reloads are necessary. Stylish error messages are shown without page reload.
+* All form submissions shown in an easy to view format within the WordPress admin.
+* Export form submissions to CSV.
+* Forms can show customizable completion text or redirect to a URL.
+* Temporarily pause forms with a customizable pause message.
+* Create and manage multiple notifications for each form. Notifications can send emails to one or more administrators or form submittors. Customize notification email subject, from email address, from email name, and email body. Map form fields to email subject, from name, and from email address. Easily activate and deactivate notifications.
+* Create posts or custom post types when forms are submitted. For each form, you can configure the post type and status of the created post. You can also map form fields to post fields (as well as meta and taxonomies).
+* View live previews for your forms. Live previews of your forms are shown in the post content. Make edits to forms and form fields without having to refresh the page in the media modal.
+* Insert your forms in posts, custom post types, widgets, and themes.
+* Customize form titles, submit button text, and form descriptions.
+* Optionally only include CCF JavaScript and CSS on URLs that actually include forms improving page load times.
+* Extensible code with many hooks and filters to allow for developer modifications.
+* Translated in French, Chinese, German, and Danish. More translations on the way.
+* Easily prevent spam with honey pots and [reCAPTCHA](https://www.google.com/recaptcha/intro/index.html).
+* Import and export forms and form submissions with ease.
+* Performant and scabable plugin built for enterprise.
+* More!
 
 For detailed install and usage instructions, please visit [Github](http://github.com/tlovett1/custom-contact-forms).
 
@@ -31,7 +49,7 @@ Please refer to [Github](http://github.com/tlovett1/custom-contact-forms) for de
 
 == Support ==
 
-For questions, feature requests, and support concerning the Custom Contact Forms plugin, please refer to [Github](http://github.com/tlovett1/custom-contact-forms).
+For full documentation, questions, feature requests, and support concerning the Custom Contact Forms plugin, please refer to [Github](http://github.com/tlovett1/custom-contact-forms).
 
 == Changelog ==
 = 7.3 =
