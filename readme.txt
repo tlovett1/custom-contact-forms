@@ -8,7 +8,7 @@ Stable tag: 7.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Build beautiful custom forms the WordPress way. View live previews of your forms while you build them.
+Build beautiful custom forms and manage submissions the WordPress way. View live previews of your forms while you build them. Create powerful and exstensible forms for simple contact inquiries, sign ups, subscriptions, events, payments, etc.
 
 == Description ==
 
