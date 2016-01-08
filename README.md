@@ -1,9 +1,7 @@
 Custom Contact Forms [![Build Status](https://travis-ci.org/tlovett1/custom-contact-forms.svg?branch=master)](https://travis-ci.org/tlovett1/custom-contact-forms)
 ===============
 
-Build beautiful custom forms the WordPress way.
-
-__Note: Version 6.0 breaks backwards compatibility. You will need to perform a database update after upgrading from anything pre 6.0. You may also need to reconfigure some of your forms.__
+Build beautiful custom forms and manage submissions the WordPress way. View live previews of your forms while you build them. Create powerful and exstensible forms for simple contact inquiries, sign ups, subscriptions, events, payments, etc.
 
 ## Purpose
 
