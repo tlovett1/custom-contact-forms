@@ -222,8 +222,11 @@ class CCF_Form_Manager {
 
 						<label for="ccf_form_email_notification_content"><?php esc_html_e( 'Email content (HTML):', 'custom-contact-forms' ); ?></label>
 						<textarea id="ccf_form_email_notification_content" class="form-email-notification-content">{{ notification.content }}</textarea><br />
-						<strong><?php esc_html_e( 'Variables:', 'custom-contact-forms' ); ?></strong>  [all_fields]
+						<p class="variables">
+							<strong><?php esc_html_e( 'Variables:', 'custom-contact-forms' ); ?></strong>  [all_fields] [ip_address] 
+							<span class="field-variables"></span>
 
+						</p>
 						<p class="email-notification-setting">
 							<label for="ccf_form_email_notification_addresses"><?php esc_html_e( '"To" Email Addresses:', 'custom-contact-forms' ); ?></label>
 

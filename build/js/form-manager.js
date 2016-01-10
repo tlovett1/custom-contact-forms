@@ -1423,6 +1423,23 @@
 				this.render();
 			},
 
+			updateFieldVariables: function() {
+				var fieldVariables = this.el.querySelectorAll( '.field-variables' )[0];
+				var variablesText = '';
+				var type;
+				var fields = this.form.get( 'fields' );
+
+				fields.each( function( field ) {
+					type = field.get( 'type' );
+
+					if ( 'html' !== type && 'section-header' !== type && 'recaptcha' !== type ) {
+						variablesText += '[' + field.get( 'slug' ) + '] ';
+					}
+				} );
+
+				fieldVariables.innerText = variablesText;
+			},
+
 			updateFromFieldField: function() {
 				if ( 'edit' !== this.context ) {
 					return;
@@ -1637,6 +1654,7 @@
 				if ( 'edit' === this.context) {
 					this.toggleNotificationFields();
 					this.updateFromFieldField();
+					this.updateFieldVariables();
 
 					var addressesContainer = this.el.querySelectorAll( '.addresses' )[0];
 					var addresses = this.model.get( 'addresses' );
@@ -1657,6 +1675,8 @@
 
 				this.listenTo( fields, 'add', this.updateFromFieldField, this );
 				this.listenTo( fields, 'remove', this.updateFromFieldField, this );
+				this.listenTo( fields, 'add', this.updateFieldVariables, this );
+				this.listenTo( fields, 'remove', this.updateFieldVariables, this );
 
 				return this;
 			},

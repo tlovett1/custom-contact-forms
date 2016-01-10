@@ -884,6 +884,18 @@ class CCF_Form_Handler {
 							$message = str_ireplace( '[all_fields]', $all_fields, $message );
 						}
 
+						if ( false !== stripos( $message, '[ip_address]' ) ) {
+							$message = str_ireplace( '[ip_address]', $_SERVER['REMOTE_ADDR'], $message );
+						}
+
+						foreach ( $fields as $field_id ) {
+							$field_slug = get_post_meta( $field_id, 'ccf_field_slug', true );
+
+							if ( ! empty( $field_slug ) && isset( $submission[$field_slug] ) ) {
+								$message = str_ireplace( '[' . $field_slug . ']', wp_kses_post( $submission[$field_slug] ), $message );
+							}
+						}
+
 						$headers = array( 'MIME-Version: 1.0', 'Content-type: text/html; charset=utf-8' );
 						$name = null;
 						$email = null;

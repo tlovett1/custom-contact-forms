@@ -330,6 +330,8 @@
       margin-top: 2em; }
     .ccf-main-modal .ccf-form-pane .ccf-form-settings .ccf-form-notifications td {
       position: relative; }
+    .ccf-main-modal .ccf-form-pane .ccf-form-settings .variables {
+      margin-top: 0; }
     .ccf-main-modal .ccf-form-pane .ccf-form-settings .ccf-form-notifications .active {
       width: 15%; }
     .ccf-main-modal .ccf-form-pane .ccf-form-settings .ccf-form-notifications .active-indicator {
