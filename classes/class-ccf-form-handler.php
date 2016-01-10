@@ -892,7 +892,12 @@ class CCF_Form_Handler {
 							$field_slug = get_post_meta( $field_id, 'ccf_field_slug', true );
 
 							if ( ! empty( $field_slug ) && isset( $submission[$field_slug] ) ) {
-								$message = str_ireplace( '[' . $field_slug . ']', wp_kses_post( $submission[$field_slug] ), $message );
+								$value = $submission[$field_slug];
+								if ( is_array( $value ) && isset( $value['email'] ) ) {
+									$value = $value['email'];
+								}
+
+								$message = str_ireplace( '[' . $field_slug . ']', wp_kses_post( $this->_flatten_and_concat( $value ) ), $message );
 							}
 						}
 
