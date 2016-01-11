@@ -335,6 +335,10 @@
 			},
 
 			updateFieldVariables: function() {
+				if ( 'edit' !== this.context ) {
+					return;
+				}
+				
 				var fieldVariables = this.el.querySelectorAll( '.field-variables' )[0];
 				var variablesText = '';
 				var type;
