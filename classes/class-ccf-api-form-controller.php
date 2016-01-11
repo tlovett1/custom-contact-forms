@@ -435,6 +435,10 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 				update_post_meta( $result, 'ccf_form_pause', (bool) $data['pause'] );
 			}
 
+			if ( isset( $data['theme'] ) ) {
+				update_post_meta( $result, 'ccf_form_theme', sanitize_text_field( $data['theme'] ) );
+			}
+
 			if ( isset( $data['postCreation'] ) ) {
 				update_post_meta( $result, 'ccf_form_post_creation', (bool) $data['postCreation'] );
 			}
@@ -950,6 +954,7 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 		$data['postCreationType'] = esc_html( get_post_meta( $data['id'], 'ccf_form_post_creation_type', true ) );
 		$data['postCreationStatus'] = esc_html( get_post_meta( $data['id'], 'ccf_form_post_creation_status', true ) );
 		$data['pauseMessage'] = esc_html( get_post_meta( $data['id'], 'ccf_form_pause_message', true ) );
+		$data['theme'] = esc_html( get_post_meta( $data['id'], 'ccf_form_theme', true ) );
 
 		// @Todo: escaping
 		$notifications = get_post_meta( $data['id'], 'ccf_form_notifications', true );

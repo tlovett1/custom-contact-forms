@@ -352,6 +352,16 @@ class CCF_Form_Manager {
 			</p>
 
 			<p>
+				<label for="ccf_form_theme"><?php esc_html_e( 'Form Theme:', 'custom-contact-forms' ); ?></label>
+
+				<select name="theme" class="form-theme" id="ccf_form_theme">
+					<option value="default"><?php esc_html_e( 'Default', 'custom-contact-forms' ); ?></option>
+					<option value="dark" <# if ( 'dark' === form.theme ) { #>selected<# } #>><?php esc_html_e( 'Dark', 'custom-contact-forms' ); ?></option>
+					<option value="bootstrap" <# if ( 'bootstrap' === form.theme ) { #>selected<# } #>><?php esc_html_e( 'Bootstrap (requires Bootstrap based theme)', 'custom-contact-forms' ); ?></option>
+				</select>
+			</p>
+
+			<p>
 				<label for="ccf_form_completion_action_type"><?php esc_html_e( 'On form completion:', 'custom-contact-forms' ); ?></label>
 
 				<select name="completion_action_type" class="form-completion-action-type" id="ccf_form_completion_action_type">
