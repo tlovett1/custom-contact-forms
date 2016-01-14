@@ -55,6 +55,9 @@ For full documentation, questions, feature requests, and support concerning the 
 
 == Changelog ==
 
+= 7.4.1 =
+* Fix form iframe onload bug
+
 = 7.4 =
 * Themes and Bootstrap support
 
