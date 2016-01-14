@@ -41,6 +41,8 @@ if ( function_exists( 'ccf_output_form' ) ) {
 }
 ```
 
+In case you want to use the shortcode, it is: `[ccf_form id="FORMID"]`. You can find the form ID in the existing forms table of the form manager or in the URL when directly editing a form.
+
 ### Form Settings
 
 Each form has a number of settings that you should understand.
