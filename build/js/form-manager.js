@@ -450,7 +450,7 @@
 					notifications: new wp.ccf.collections.FormNotifications(),
 					pause: false,
 					pauseMessage: ccfSettings.pauseMessage,
-					theme: 'default'
+					theme: 'none'
 				};
 
 				defaults = _.defaults( defaults, this.constructor.__super__.defaults );
@@ -1425,6 +1425,10 @@
 			},
 
 			updateFieldVariables: function() {
+				if ( 'edit' !== this.context ) {
+					return;
+				}
+				
 				var fieldVariables = this.el.querySelectorAll( '.field-variables' )[0];
 				var variablesText = '';
 				var type;

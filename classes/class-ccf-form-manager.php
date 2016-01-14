@@ -355,10 +355,12 @@ class CCF_Form_Manager {
 				<label for="ccf_form_theme"><?php esc_html_e( 'Form Theme:', 'custom-contact-forms' ); ?></label>
 
 				<select name="theme" class="form-theme" id="ccf_form_theme">
-					<option value="default"><?php esc_html_e( 'Default', 'custom-contact-forms' ); ?></option>
+					<option value=""><?php esc_html_e( 'None', 'custom-contact-forms' ); ?></option>
+					<option value="light" <# if ( 'light' === form.theme ) { #>selected<# } #>><?php esc_html_e( 'Light', 'custom-contact-forms' ); ?></option>
 					<option value="dark" <# if ( 'dark' === form.theme ) { #>selected<# } #>><?php esc_html_e( 'Dark', 'custom-contact-forms' ); ?></option>
-					<option value="bootstrap" <# if ( 'bootstrap' === form.theme ) { #>selected<# } #>><?php esc_html_e( 'Bootstrap (requires Bootstrap based theme)', 'custom-contact-forms' ); ?></option>
 				</select>
+
+				<span class="explain"><?php esc_html_e( '"None" will have your form inherit styles from your theme.', 'custom-contact-forms' ); ?></span>
 			</p>
 
 			<p>

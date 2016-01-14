@@ -190,7 +190,7 @@
 					notifications: new wp.ccf.collections.FormNotifications(),
 					pause: false,
 					pauseMessage: ccfSettings.pauseMessage,
-					theme: 'default'
+					theme: 'none'
 				};
 
 				defaults = _.defaults( defaults, this.constructor.__super__.defaults );
