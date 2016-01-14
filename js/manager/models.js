@@ -189,7 +189,8 @@
 					postFieldMappings: new wp.ccf.collections.PostFieldMappings(),
 					notifications: new wp.ccf.collections.FormNotifications(),
 					pause: false,
-					pauseMessage: ccfSettings.pauseMessage
+					pauseMessage: ccfSettings.pauseMessage,
+					theme: 'none'
 				};
 
 				defaults = _.defaults( defaults, this.constructor.__super__.defaults );

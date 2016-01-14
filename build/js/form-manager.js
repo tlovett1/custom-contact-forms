@@ -449,7 +449,8 @@
 					postFieldMappings: new wp.ccf.collections.PostFieldMappings(),
 					notifications: new wp.ccf.collections.FormNotifications(),
 					pause: false,
-					pauseMessage: ccfSettings.pauseMessage
+					pauseMessage: ccfSettings.pauseMessage,
+					theme: 'none'
 				};
 
 				defaults = _.defaults( defaults, this.constructor.__super__.defaults );
@@ -2704,6 +2705,9 @@
 
 				var completionActionType = this.el.querySelectorAll( '.form-completion-action-type' )[0].value;
 				this.model.set( 'completionActionType', completionActionType );
+
+				var theme = this.el.querySelectorAll( '.form-theme' )[0].value;
+				this.model.set( 'theme', theme );
 			},
 
 			fullSave: function( $promise ) {

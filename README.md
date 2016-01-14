@@ -59,8 +59,15 @@ Each form has a number of settings that you should understand.
 
 #### Form Notifications
 
-For each of your form you can add email notifications (as many as you want). Email notifications will be sent when a
+For each of your forms you can add email notifications (as many as you want). Email notifications will be sent when a
 form is successfully filled out. Each notification contains the following configurable settings:
+
+* `Notification Title` - This is just an internal name for keeping track of your notification.
+* `Email Content (HTML)` - This is the body of the email that will be sent. The email must be written using HTML. The following variables are support:
+
+  * `[all_fields]` - Shows all your form fields
+  * `[ip_address]` - Shows the IP address of the submitter
+  * `[FIELD_SLUG]` - Each of your form fields can be inserted using the field slug.
 
 * `"To" Email Addresses` - You can send each notification to as many emails as you want. Addresses have two types: `custom` and 
 `field`. `custom` allows you to specify a specific email (such as your own). `field` will pull the email address dynamically from a form field.

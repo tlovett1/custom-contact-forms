@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: contact form, web form, custom contact form, custom forms, captcha form, contact fields, form mailers, forms
 Requires at least: 3.9
 Tested up to: 4.5
-Stable tag: 7.3.2
+Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -22,6 +22,8 @@ Custom Contact Forms enables you to build forms and manage submissions the WordP
 * Forms use AJAX so no page reloads are necessary. Stylish error messages are shown without page reload.
 * All form submissions shown in an easy to view format within the WordPress admin.
 * Export form submissions to CSV.
+* Pre-setup for Twitter Bootstrap
+* Multiple themes to choose from
 * Forms can show customizable completion text or redirect to a URL.
 * Temporarily pause forms with a customizable pause message.
 * Create and manage multiple notifications for each form. Notifications can send emails to one or more administrators or form submittors. Customize notification email subject, from email address, from email name, and email body. Map form fields to email subject, from name, and from email address. Easily activate and deactivate notifications.
@@ -52,6 +54,9 @@ Please refer to [Github](http://github.com/tlovett1/custom-contact-forms) for de
 For full documentation, questions, feature requests, and support concerning the Custom Contact Forms plugin, please refer to [Github](http://github.com/tlovett1/custom-contact-forms).
 
 == Changelog ==
+
+= 7.4 =
+* Themes and Bootstrap support
 
 = 7.3.2 =
 * Fix field delete variable error message

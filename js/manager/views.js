@@ -1615,6 +1615,9 @@
 
 				var completionActionType = this.el.querySelectorAll( '.form-completion-action-type' )[0].value;
 				this.model.set( 'completionActionType', completionActionType );
+
+				var theme = this.el.querySelectorAll( '.form-theme' )[0].value;
+				this.model.set( 'theme', theme );
 			},
 
 			fullSave: function( $promise ) {

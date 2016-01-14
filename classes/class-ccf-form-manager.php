@@ -220,7 +220,7 @@ class CCF_Form_Manager {
 							<input class="widefat form-email-notification-title" id="ccf_form_email_notification_title" name="email-notification-title" value="{{ notification.title }}">
 						</p>
 
-						<label for="ccf_form_email_notification_content"><?php esc_html_e( 'Email content (HTML):', 'custom-contact-forms' ); ?></label>
+						<label for="ccf_form_email_notification_content"><?php esc_html_e( 'Email Content (HTML):', 'custom-contact-forms' ); ?></label>
 						<textarea id="ccf_form_email_notification_content" class="form-email-notification-content">{{ notification.content }}</textarea><br />
 						<p class="variables">
 							<strong><?php esc_html_e( 'Variables:', 'custom-contact-forms' ); ?></strong>  [all_fields] [ip_address] 
@@ -349,6 +349,18 @@ class CCF_Form_Manager {
 			<p>
 				<label for="ccf_form_button_text"><?php esc_html_e( 'Button Text:', 'custom-contact-forms' ); ?></label>
 				<input class="widefat form-button-text" id="ccf_form_button_text" name="text" type="text" value="{{ form.buttonText }}">
+			</p>
+
+			<p>
+				<label for="ccf_form_theme"><?php esc_html_e( 'Form Theme:', 'custom-contact-forms' ); ?></label>
+
+				<select name="theme" class="form-theme" id="ccf_form_theme">
+					<option value=""><?php esc_html_e( 'None', 'custom-contact-forms' ); ?></option>
+					<option value="light" <# if ( 'light' === form.theme ) { #>selected<# } #>><?php esc_html_e( 'Light', 'custom-contact-forms' ); ?></option>
+					<option value="dark" <# if ( 'dark' === form.theme ) { #>selected<# } #>><?php esc_html_e( 'Dark', 'custom-contact-forms' ); ?></option>
+				</select>
+
+				<span class="explain"><?php esc_html_e( '"None" will have your form inherit styles from your theme.', 'custom-contact-forms' ); ?></span>
 			</p>
 
 			<p>
