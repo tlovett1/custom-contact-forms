@@ -67,7 +67,7 @@ form is successfully filled out. Each notification contains the following config
 
   * `[all_fields]` - Shows all your form fields
   * `[ip_address]` - Shows the IP address of the submitter
-  * `[FIELD_SLUG]` - Each of your form fields can be inserted using the field slug.
+  * `[FIELD_SLUG]` - Each of your form fields can be inserted using their field slug.
 
 * `"To" Email Addresses` - You can send each notification to as many emails as you want. Addresses have two types: `custom` and 
 `field`. `custom` allows you to specify a specific email (such as your own). `field` will pull the email address dynamically from a form field.
