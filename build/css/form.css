@@ -90,7 +90,7 @@
       display: inline-block;
       margin-right: 5px; }
       .ccf-form-wrapper .field.field-type-date .hour input, .ccf-form-wrapper .field.field-type-date .minute input {
-        width: 2.5em; }
+        width: 3.5em; }
       .ccf-form-wrapper .field.field-type-date .hour label, .ccf-form-wrapper .field.field-type-date .minute label {
         font-weight: normal; }
     .ccf-form-wrapper .field.field-type-date .am-pm {
