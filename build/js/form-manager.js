@@ -543,7 +543,7 @@
 						for ( i = 0; i < response.notifications.length; i++ ) {
 							var newNotification = response.notifications[i];
 
-							var notification = notifications.findWhere( { slug: newNotification.slug } );
+							var notification = notifications.at( i );
 
 							if ( notification ) {
 								if ( typeof newNotification.addresses !== 'undefined' ) {
@@ -589,7 +589,7 @@
 						for ( i = 0; i < response.postFieldMappings.length; i++ ) {
 							var newPostFieldMapping = response.postFieldMappings[i];
 
-							var postFieldMapping = postFieldMappings.findWhere( { slug: newPostFieldMapping.slug } );
+							var postFieldMapping = postFieldMappings.at( i );
 
 							if ( postFieldMapping ) {
 								postFieldMapping.set( newPostFieldMapping );
