@@ -55,6 +55,11 @@ For full documentation, questions, feature requests, and support concerning the 
 
 == Changelog ==
 
+= 7.4.2 =
+* Fix notification and post field creation overlay issue
+* Fix field, post field, and notification initialization
+* Fix field remove post field update
+
 = 7.4.1 =
 * Fix form iframe onload bug
 
