@@ -2547,7 +2547,7 @@
 				var fields = this.form.get( 'fields' );
 
 				this.listenTo( fields, 'add', this.updateFormFieldField, this );
-				this.listenTo( fields, 'remove', this.updateFormieldField, this );
+				this.listenTo( fields, 'remove', this.updateFormFieldField, this );
 
 				this.updateFormFieldField();
 				this.updatePostFields();
