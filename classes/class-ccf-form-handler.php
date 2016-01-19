@@ -905,6 +905,12 @@ class CCF_Form_Handler {
 						$name = null;
 						$email = null;
 
+						$sitename = strtolower( $_SERVER['SERVER_NAME'] );
+						if ( substr( $sitename, 0, 4 ) === 'www.' ) {
+							$sitename = substr( $sitename, 4 );
+						}
+						$default_from_email = 'wordpress@' . $sitename;
+
 						if ( 'custom' === $notification['fromNameType'] ) {
 							$name = $notification['fromName'];
 						} else {
@@ -935,8 +941,9 @@ class CCF_Form_Handler {
 							$headers[] = 'From: ' . sanitize_text_field( $name ) . ' <' . sanitize_email( $email ) . '>';
 							$headers[] = 'Reply-To: ' . sanitize_email( $email );
 						} elseif ( ! empty( $name ) && empty( $email ) ) {
-							$headers[] = 'From: ' . sanitize_text_field( $name );
+							$headers[] = 'From: ' . sanitize_text_field( $name ) . '<' . sanitize_email( $default_from_email ) . '>';
 						} elseif ( empty( $name ) && ! empty( $email ) ) {
+							// @Todo: investigate how wp_mail handles From: email
 							$headers[] = 'From: ' . sanitize_email( $email );
 							$headers[] = 'Reply-To: ' . sanitize_email( $email );
 						}
@@ -979,6 +986,10 @@ class CCF_Form_Handler {
 								}
 
 								if ( ! empty( $email ) ) {
+									if ( empty( $notification_content ) ) {
+										$notification_content = ' '; // Hack to send email with empty body via PHPMailer
+									}
+
 									$subject = apply_filters( 'ccf_email_subject', $subject, $form_id, $email, $form_page, $notification );
 									$notification_content = apply_filters( 'ccf_email_content', $message, $form_id, $email, $form_page, $notification );
 									$notification_headers = apply_filters( 'ccf_email_headers', $headers, $form_id, $email, $form_page, $notification );

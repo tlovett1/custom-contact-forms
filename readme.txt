@@ -55,6 +55,11 @@ For full documentation, questions, feature requests, and support concerning the 
 
 == Changelog ==
 
+= 7.4.3 =
+* Fix notification email sending bug
+* Allow empty email content notifications
+* Set [all_fields] as default email notification content
+
 = 7.4.2 =
 * Fix notification and post field creation overlay issue
 * Fix field, post field, and notification initialization
