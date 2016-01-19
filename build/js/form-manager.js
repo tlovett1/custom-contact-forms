@@ -370,7 +370,7 @@
 			defaults: function() {
 				return {
 					title: '',
-					content: '',
+					content: '[all_fields]',
 					active: false,
 					addresses: new wp.ccf.collections.FormNotificationAddresses(),
 					fromType: 'default',
