@@ -1773,7 +1773,7 @@ class CCF_Form_Manager {
 			$site_url_parsed = parse_url( site_url() );
 			$home_url_parsed = parse_url( home_url() );
 
-			if ( $site_url_parsed['host'] === $home_url_parsed['host'] ) {
+			if ( $site_url_parsed['host'] === $home_url_parsed['host'] && strtolower( $site_url_parsed['scheme'] ) === strtolower( $home_url_parsed['scheme'] ) ) {
 				$api_root = home_url( 'wp-json' );
 			} else {
 				$api_root = site_url( 'wp-json' );

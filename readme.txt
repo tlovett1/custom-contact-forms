@@ -55,6 +55,10 @@ For full documentation, questions, feature requests, and support concerning the 
 
 == Changelog ==
 
+= 7.4.4 =
+* HTTPS backend API bug fixed
+
+
 = 7.4.3 =
 * Fix notification email sending bug
 * Allow empty email content notifications
