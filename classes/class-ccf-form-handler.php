@@ -611,6 +611,7 @@ class CCF_Form_Handler {
 		$skip_fields = apply_filters( 'ccf_skip_fields', array( 'html', 'section-header' ), $form->ID );
 		$save_skip_fields = apply_filters( 'ccf_save_skip_fields', array( 'recaptcha' ), $form->ID );
 		$file_ids = array();
+		$all_form_fields = array();
 
 		foreach ( $fields as $field_id ) {
 			$field_id = (int) $field_id;
@@ -624,8 +625,7 @@ class CCF_Form_Handler {
 			$slug = null;
 
 			$field_metas = get_post_meta( $field_id );
-
-			$all_form_fields = array();
+			$new_field = array();
 
 			foreach ( $field_metas as $meta_key => $meta_value ) {
 				if ( 0 === stripos( $meta_key, 'ccf_field_' ) ) {
@@ -633,9 +633,11 @@ class CCF_Form_Handler {
 						$slug = $meta_value[0];
 					}
 
-					$all_form_fields[$meta_key] = wp_kses_post( $meta_value[0] );
+					$new_field[$meta_key] = wp_kses_post( $meta_value[0] );
 				}
 			}
+
+			$all_form_fields[$slug] = $new_field;
 
 			// We save this to reference later
 			$field_slug_to_id[$slug] = array( 'id' => $field_id, 'type' => sanitize_text_field( $type ) );
@@ -827,7 +829,7 @@ class CCF_Form_Handler {
 
 										<?php if ( 'date' === $type ) : ?>
 
-											<?php echo esc_html( stripslashes( CCF_Submission_CPT::factory()->get_pretty_field_date( $field ) ) ); ?>
+											<?php echo esc_html( stripslashes( CCF_Submission_CPT::factory()->get_pretty_field_date( $field, $field_id ) ) ); ?>
 
 										<?php elseif ( 'name' === $type ) : ?>
 

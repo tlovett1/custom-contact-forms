@@ -556,6 +556,7 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 		);
 
 		$data['data'] = get_post_meta( $item->ID, 'ccf_submission_data', true );
+		$data['fields'] = get_post_meta( $item->ID, 'ccf_submission_form_fields', true );
 		$data['ip_address'] = esc_html( get_post_meta( $item->ID, 'ccf_submission_ip', true ) );
 
 		return $data;

@@ -114,9 +114,16 @@
 		return '-';
 	};
 
-	wp.ccf.utils.getPrettyFieldDate = function( value ) {
+	wp.ccf.utils.getPrettyFieldDate = function( value, field ) {
 		var dateString = '',
-			output = '';
+			output = '',
+			format = 'HH:mm MM/DD/YY';
+
+		console.log(field);
+
+		if ( field && field.ccf_field_dateFormat && 'dd/mm/yyyy' === field.ccf_field_dateFormat ) {
+			format = 'HH:mm DD/MM/YY';
+		}
 
 		if ( value.hour && value.minute && value['am-pm'] ) {
 			dateString += value.hour + ':' + value.minute + ' ' + value['am-pm'];
@@ -130,7 +137,7 @@
 			return '-';
 		}
 
-		var date = moment.utc( dateString );
+		var date = moment( dateString, format );
 
 		if ( ! date.isValid() ) {
 			return ccfSettings.invalidDate;
@@ -145,7 +152,7 @@
 				output += ' ';
 			}
 
-			output += date.format( 'M/D/YYYY' );
+			output += value.date;
 		}
 
 		return output;
@@ -659,7 +666,8 @@
 		{
 			defaults: {
 				id: null,
-				data: {}
+				data: {},
+				fields: {}
 			},
 
 			sync: _sync,

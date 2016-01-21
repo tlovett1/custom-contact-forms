@@ -65,21 +65,23 @@ class CCF_Submission_CPT {
 	public function get_pretty_field_date( $value ) {
 		$dateString = '';
 
-		if ( ! empty( $value['date'] ) ) {
-			$dateString .= $value['date'];
-		} else {
-			$dateString .= date( 'n/j/Y' );
-		}
-
 		if ( ! empty( $value['hour'] ) && ! empty( $value['minute'] ) && ! empty( $value['am-pm'] ) ) {
 			$dateString .= ' ' . $value['hour'] . ':' . $value['minute'] . ' ' . $value['am-pm'];
+		}
+
+		if ( ! empty( $value['date'] ) ) {
+			if ( ! empty( $dateString ) ) {
+				$dateString .= ' ';
+			}
+
+			$dateString .= $value['date'];
 		}
 
 		if ( empty( $dateString ) ) {
 			return '-';
 		}
 
-		return date( 'n/j/Y h:i a', strtotime( $dateString ) );
+		return $dateString;
 	}
 
 	/**

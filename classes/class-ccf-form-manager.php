@@ -1581,22 +1581,27 @@ class CCF_Form_Manager {
 		</script>
 
 		<script type="text/html" id="ccf-submission-row-template">
-			<# _.each( currentColumns, function( column ) { #>
+			<#
+			if ( ! submission.fields || '' == submission.fields ) {
+				submission.fields = {};
+			}
+
+			_.each( currentColumns, function( column ) { #>
 				<# if ( 'date' === column ) { #>
 					<td colspan="1">{{ utils.getPrettyPostDate( submission.date_gmt ) }}</td>
 				<# } else { #>
 					<td colspan="1">
 						<# if ( submission.data[column] ) { #>
 							<# if ( submission.data[column] instanceof Object ) { var output = '', i = 0; #>
-								<# if ( utils.isFieldDate( submission.data[column] ) ) { #>
-									{{ utils.wordChop( utils.getPrettyFieldDate( submission.data[column] ), 30 ) }}
-								<# } else if ( utils.isFieldName( submission.data[column] ) ) { #>
-									{{ utils.wordChop( utils.getPrettyFieldName( submission.data[column] ), 30 ) }}
-								<# } else if ( utils.isFieldAddress( submission.data[column] ) ) { #>
-									{{ utils.wordChop( utils.getPrettyFieldAddress( submission.data[column] ), 30 ) }}
-								<# } else if ( utils.isFieldEmailConfirm( submission.data[column] ) ) { #>
-									{{ utils.wordChop( utils.getPrettyFieldEmailConfirm( submission.data[column] ), 30 ) }}
-								<# } else if ( utils.isFieldFile( submission.data[column] ) ) { #>
+								<# if ( utils.isFieldDate( submission.data[column], submission.fields[column] ) ) { #>
+									{{ utils.wordChop( utils.getPrettyFieldDate( submission.data[column], submission.fields[column] ), 30 ) }}
+								<# } else if ( utils.isFieldName( submission.data[column], submission.fields[column] ) ) { #>
+									{{ utils.wordChop( utils.getPrettyFieldName( submission.data[column], submission.fields[column] ), 30 ) }}
+								<# } else if ( utils.isFieldAddress( submission.data[column], submission.fields[column] ) ) { #>
+									{{ utils.wordChop( utils.getPrettyFieldAddress( submission.data[column], submission.fields[column] ), 30 ) }}
+								<# } else if ( utils.isFieldEmailConfirm( submission.data[column], submission.fields[column] ) ) { #>
+									{{ utils.wordChop( utils.getPrettyFieldEmailConfirm( submission.data[column], submission.fields[column] ), 30 ) }}
+								<# } else if ( utils.isFieldFile( submission.data[column], submission.fields[column] ) ) { #>
 									<a href="{{ submission.data[column].url }}">{{ submission.data[column].file_name }}</a>
 								<# } else { #>
 									<# for ( var key in submission.data[column] ) { if ( submission.data[column].hasOwnProperty( key ) ) {
@@ -1639,15 +1644,15 @@ class CCF_Form_Manager {
 							<div class="field-content">
 								<# if ( submission.data[column] ) { #>
 									<# if ( submission.data[column] instanceof Object ) { var output = '', i = 0; #>
-										<# if ( utils.isFieldDate( submission.data[column] ) ) { #>
-											{{ utils.getPrettyFieldDate( submission.data[column] ) }}
-										<# } else if ( utils.isFieldName( submission.data[column] ) ) { #>
-											{{ utils.getPrettyFieldName( submission.data[column] ) }}
-										<# } else if ( utils.isFieldAddress( submission.data[column] ) ) { #>
-											{{ utils.getPrettyFieldAddress( submission.data[column] ) }}
-										<# } else if ( utils.isFieldEmailConfirm( submission.data[column] ) ) { #>
-											{{ utils.getPrettyFieldEmailConfirm( submission.data[column] ) }}
-										<# } else if ( utils.isFieldFile( submission.data[column] ) ) { #>
+										<# if ( utils.isFieldDate( submission.data[column], submission.fields[column] ) ) { #>
+											{{ utils.getPrettyFieldDate( submission.data[column], submission.fields[column] ) }}
+										<# } else if ( utils.isFieldName( submission.data[column], submission.fields[column] ) ) { #>
+											{{ utils.getPrettyFieldName( submission.data[column], submission.fields[column] ) }}
+										<# } else if ( utils.isFieldAddress( submission.data[column], submission.fields[column] ) ) { #>
+											{{ utils.getPrettyFieldAddress( submission.data[column], submission.fields[column] ) }}
+										<# } else if ( utils.isFieldEmailConfirm( submission.data[column], submission.fields[column] ) ) { #>
+											{{ utils.getPrettyFieldEmailConfirm( submission.data[column], submission.fields[column] ) }}
+										<# } else if ( utils.isFieldFile( submission.data[column], submission.fields[column] ) ) { #>
 											<a href="{{ submission.data[column].url }}">{{ submission.data[column].file_name }}</a>
 										<# } else { #>
 											<# for ( var key in submission.data[column] ) { if ( submission.data[column].hasOwnProperty( key ) ) {

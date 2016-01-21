@@ -399,7 +399,8 @@
 		{
 			defaults: {
 				id: null,
-				data: {}
+				data: {},
+				fields: {}
 			},
 
 			sync: _sync,
