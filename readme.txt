@@ -57,6 +57,7 @@ For full documentation, questions, feature requests, and support concerning the 
 
 = 7.4.4 =
 * HTTPS backend API bug fixed
+* Fix European dates
 
 
 = 7.4.3 =
