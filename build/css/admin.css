@@ -24,6 +24,14 @@
   background-color: #FCECAD; }
 
 .ccf-subscribe.updated form {
-  margin: 0; }
+  display: inline; }
+
+.ccf-subscribe .ad-wrap {
+  margin: 0.5em 0;
+  padding: 2px; }
+
+.ccf-subscribe input[type=email] {
+  margin-left: 5px;
+  margin-right: 5px; }
 
 /*# sourceMappingURL=admin.css.map */

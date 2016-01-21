@@ -621,7 +621,21 @@ class CCF_Form_Handler {
 				continue;
 			}
 
-			$slug = get_post_meta( $field_id, 'ccf_field_slug', true );
+			$slug = null;
+
+			$field_metas = get_post_meta( $field_id );
+
+			$all_form_fields = array();
+
+			foreach ( $field_metas as $meta_key => $meta_value ) {
+				if ( 0 === stripos( $meta_key, 'ccf_field_' ) ) {
+					if ( 'ccf_field_slug' === $meta_key ) {
+						$slug = $meta_value[0];
+					}
+
+					$all_form_fields[$meta_key] = wp_kses_post( $meta_value[0] );
+				}
+			}
 
 			// We save this to reference later
 			$field_slug_to_id[$slug] = array( 'id' => $field_id, 'type' => sanitize_text_field( $type ) );
@@ -667,6 +681,11 @@ class CCF_Form_Handler {
 				 * @since 6.6
 				 */
 				update_post_meta( $submission_id, 'ccf_submission_data_map', $field_slug_to_id );
+
+				/**
+				 * @since 7.4.4
+				 */
+				update_post_meta( $submission_id, 'ccf_submission_form_fields', $all_form_fields );
 
 				update_post_meta( $submission_id, 'ccf_submission_ip', sanitize_text_field( $_SERVER['REMOTE_ADDR'] ) );
 

@@ -33,6 +33,8 @@ class CCF_Ads {
 			));
 
 			update_option( 'ccf_subscribed', 1 );
+		} elseif ( ! empty( $_POST['ccf_unsubscribe'] ) ) {
+			update_option( 'ccf_subscribed', 1 );
 		}
 	}
 
@@ -72,18 +74,22 @@ class CCF_Ads {
 
 		?>
 		<div class="updated update-nag ccf-subscribe">
-			<form method="post">
-				<p>
-					<?php if ( empty( $_POST['ccf_subscribe'] ) || empty( $_POST['email'] ) ) : ?>
-						WordPress exclusive tutorials, blogging tips, plugins, and more.
+			<div class="ad-wrap">
+				<?php if ( empty( $_POST['ccf_subscribe'] ) || empty( $_POST['ccf_unsubscribe'] ) ) : ?>
+					WordPress exclusive tutorials, blogging tips, themes, plugins, and more.
+					<form method="post">
 						<input type="email" name="email">
 						<input type="hidden" name="ccf_subscribe" value="1">
 						<input type="submit" class="button button-primary" value="Sign Me Up">
-					<?php else : ?>
-						Check your email to confirm your subscription!
-					<?php endif; ?>
-				</p>
-			</form>
+					</form>
+					<form method="post">
+						<input type="hidden" name="ccf_unsubscribe" value="1">
+						<input type="submit" class="button" value="Not Interested">
+					</form>
+				<?php else : ?>
+					Check your email to confirm your subscription!
+				<?php endif; ?>
+			</div>
 		</div>
 		<?php
 	}
