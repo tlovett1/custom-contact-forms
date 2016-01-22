@@ -1822,7 +1822,7 @@ class CCF_Form_Manager {
 						'post_tag' => esc_html__( 'Post Tags', 'custom-contact-forms' ),
 						'custom_field' => esc_html__( 'Custom Field', 'custom-contact-forms' ),
 					),
-				)
+				),
 			) );
 
 			wp_enqueue_style( 'ccf-form-manager', plugins_url( $css_path, dirname( __FILE__ ) ), array(), CCF_VERSION );

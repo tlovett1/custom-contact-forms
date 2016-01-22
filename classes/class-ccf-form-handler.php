@@ -937,9 +937,13 @@ class CCF_Form_Handler {
 						} else {
 							$name_field = $notification['fromNameField'];
 						
-							if ( ! empty( $name_field ) && ! empty( $submission[$name_field] ) && is_array( $submission[$name_field] ) ) {
-								if ( ! empty( $submission[$name_field]['first'] ) || ! empty( $submission[$name_field]['last'] ) ) {
-									$name = $submission[$name_field]['first'] . ' ' . $submission[$name_field]['last'];
+							if ( ! empty( $name_field ) && ! empty( $submission[$name_field] ) {
+								if ( is_array( $submission[$name_field] ) ) {
+									if ( ! empty( $submission[$name_field]['first'] ) || ! empty( $submission[$name_field]['last'] ) ) {
+										$name = $submission[$name_field]['first'] . ' ' . $submission[$name_field]['last'];
+									}
+								} else ( ! empty( $submission[$name_field] ) ) {
+									$name = $submission[$name_field];
 								}
 							}
 						}

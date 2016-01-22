@@ -195,14 +195,14 @@
 				addressFromField.disabled = false;
 
 				var fields = this.form.get( 'fields' ),
-					addressFieldsAdded = 0;
+					fieldsAdded = 0;
 
 				var addressField = this.model.get( 'field' ),
 					option;
 
 				if ( fields.length >= 1 ) {
 					fields.each( function( field ) {
-						if ( 'email' === field.get( 'type' ) ) {
+						if ( 'email' === field.get( 'type' ) || 'dropdown' === field.get( 'type' ) || 'radio' === field.get( 'type' ) || 'single-line-text' === field.get( 'type' ) ) {
 							option = document.createElement( 'option' );
 							option.innerHTML = field.get( 'slug' );
 							option.value = field.get( 'slug' );
@@ -213,14 +213,14 @@
 
 							addressFromField.appendChild( option );
 
-							addressFieldsAdded++;
+							fieldsAdded++;
 						}
 					});
 				}
 
-				if ( 0 === addressFieldsAdded ) {
+				if ( 0 === fieldsAdded ) {
 					option = document.createElement( 'option' );
-					option.innerHTML = ccfSettings.noEmailFields;
+					option.innerHTML = ccfSettings.noApplicableFields;
 					option.value = '';
 					addressFromField.appendChild( option );
 					addressFromField.disabled = true;
@@ -384,7 +384,7 @@
 
 				if ( fields.length >= 1 ) {
 					fields.each( function( field ) {
-						if ( 'email' === field.get( 'type' ) ) {
+						if ( 'email' === field.get( 'type' ) || 'dropdown' === field.get( 'type' ) || 'radio' === field.get( 'type' ) || 'single-line-text' === field.get( 'type' ) ) {
 							option = document.createElement( 'option' );
 							option.innerHTML = field.get( 'slug' );
 							option.value = field.get( 'slug' );
@@ -396,7 +396,7 @@
 							emailNotificationFromField.appendChild( option );
 
 							addressFieldsAdded++;
-						} else if ( 'name' === field.get( 'type' ) ) {
+						} if ( 'name' === field.get( 'type' ) || 'single-line-text' === field.get( 'type' ) || 'radio' === field.get( 'type' ) || 'dropdown' === field.get( 'type' ) ) {
 							option = document.createElement( 'option' );
 							option.innerHTML = field.get( 'slug' );
 							option.value = field.get( 'slug' );
@@ -408,7 +408,7 @@
 							emailNotificationFromNameField.appendChild( option );
 
 							nameFieldsAdded++;
-						}  else if ( 'single-line-text' === field.get( 'type' ) ) {
+						} if ( 'single-line-text' === field.get( 'type' ) || 'radio' === field.get( 'type' ) || 'dropdown' === field.get( 'type' ) ) {
 							// @Todo: add more applicable fields
 
 							option = document.createElement( 'option' );
