@@ -942,7 +942,7 @@ class CCF_Form_Handler {
 									if ( ! empty( $submission[$name_field]['first'] ) || ! empty( $submission[$name_field]['last'] ) ) {
 										$name = $submission[$name_field]['first'] . ' ' . $submission[$name_field]['last'];
 									}
-								} else ( ! empty( $submission[$name_field] ) ) {
+								} else {
 									$name = $submission[$name_field];
 								}
 							}
