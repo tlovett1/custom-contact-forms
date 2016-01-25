@@ -55,6 +55,9 @@ For full documentation, questions, feature requests, and support concerning the 
 
 == Changelog ==
 
+= 7.4.5 =
+* Fix CCF compat with API plugin
+
 = 7.4.4 =
 * HTTPS backend API bug fixed
 * Fix European dates

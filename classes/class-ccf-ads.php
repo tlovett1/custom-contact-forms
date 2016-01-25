@@ -29,6 +29,7 @@ class CCF_Ads {
 				'method' => 'post',
 				'body' => array(
 					'EMAIL' => $_POST['email'],
+					'INTEREST' => $_POST['interest'],
 				)
 			));
 
@@ -76,9 +77,18 @@ class CCF_Ads {
 		<div class="updated update-nag ccf-subscribe">
 			<div class="ad-wrap">
 				<?php if ( empty( $_POST['ccf_subscribe'] ) || empty( $_POST['ccf_unsubscribe'] ) ) : ?>
-					WordPress exclusive tutorials, blogging tips, themes, plugins, and more.
+					Send me tips, offers, and tutorials around
 					<form method="post">
-						<input type="email" name="email">
+						<select name="INTEREST">
+							<option value="">Choose one</option>
+							<option>Themes</option>
+							<option>eCommerce</option>
+							<option>Page Load Time</option>
+							<option>Social Media</option>
+							<option>Fast WP Hosting</option>
+							<option>Marketing</option>
+						</select>
+						<input placeholder="Email" type="email" name="email">
 						<input type="hidden" name="ccf_subscribe" value="1">
 						<input type="submit" class="button button-primary" value="Sign Me Up">
 					</form>

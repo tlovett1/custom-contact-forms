@@ -1743,6 +1743,7 @@
 
 			signup: function( event ) {
 				var email = this.el.querySelectorAll( '.email-signup-field' )[0].value;
+				var interest = this.el.querySelectorAll( '.interest-signup-field' )[0].value;
 				var signupContainer = this.el.querySelectorAll( '.bottom .left.signup' )[0];
 				signupContainer.className = 'left signup';
 
@@ -1752,7 +1753,8 @@
 						method: 'post',
 						dataType: 'jsonp',
 						data: {
-							EMAIL: email
+							EMAIL: email,
+							INTEREST: interest
 						}
 					}).done(function() {
 						signupContainer.className = 'left signup signup-success';

@@ -140,9 +140,18 @@ class CCF_Form_Manager {
 			<div class="right-sidebar ccf-field-sidebar accordion-container"></div>
 
 			<div class="bottom">
-				<?php if ( ! apply_filters( 'ccf_hide_ads', false ) ) : ?>
+				<?php $subscribed = get_option( 'ccf_subscribed', false ); if ( empty( $subscribed ) && ! apply_filters( 'ccf_hide_ads', false ) ) : ?>
 					<div class="left signup">
-						<strong>Want free WP blogging tips, tutorials, and marketing tricks? </strong>
+						<strong>Send me tips, offers, and tutorials around </strong>
+						<select name="interest" class="interest-signup-field">
+							<option value="">Choose one</option>
+							<option>Themes</option>
+							<option>eCommerce</option>
+							<option>Page Load Time</option>
+							<option>Social Media</option>
+							<option>Fast WP Hosting</option>
+							<option>Marketing</option>
+						</select>
 						<input type="email" class="email-signup-field" placeholder="Email">
 						<button type="button" class="button signup-button">Sign me up!</button>
 						<span class="signup-check">✓</span>
