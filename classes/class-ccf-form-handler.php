@@ -966,7 +966,7 @@ class CCF_Form_Handler {
 							$headers[] = 'From: ' . sanitize_text_field( $name ) . ' <' . sanitize_email( $email ) . '>';
 							$headers[] = 'Reply-To: ' . sanitize_email( $email );
 						} elseif ( ! empty( $name ) && empty( $email ) ) {
-							$headers[] = 'From: ' . sanitize_text_field( $name ) . '<' . sanitize_email( $default_from_email ) . '>';
+							$headers[] = 'From: ' . sanitize_text_field( $name ) . ' <' . sanitize_email( $default_from_email ) . '>';
 						} elseif ( empty( $name ) && ! empty( $email ) ) {
 							// @Todo: investigate how wp_mail handles From: email
 							$headers[] = 'From: ' . sanitize_email( $email );

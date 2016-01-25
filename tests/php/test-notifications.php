@@ -554,7 +554,13 @@ class CCFTestNotifications extends CCFTestBase {
 
 		CCF_Form_Handler::factory()->submit_listen();
 
-		$this->assertTrue( in_array( 'From: something', $this->notifications[0]['headers'] ) );
+		$sitename = strtolower( $_SERVER['SERVER_NAME'] );
+		if ( substr( $sitename, 0, 4 ) === 'www.' ) {
+			$sitename = substr( $sitename, 4 );
+		}
+		$default_from_email = 'wordpress@' . $sitename;
+
+		$this->assertTrue( in_array( 'From: something <' . $default_from_email . '>', $this->notifications[0]['headers'] ) );
 	}
 
 	/**
@@ -617,7 +623,13 @@ class CCFTestNotifications extends CCFTestBase {
 
 		CCF_Form_Handler::factory()->submit_listen();
 
-		$this->assertTrue( in_array( 'From: first last', $this->notifications[0]['headers'] ) );
+		$sitename = strtolower( $_SERVER['SERVER_NAME'] );
+		if ( substr( $sitename, 0, 4 ) === 'www.' ) {
+			$sitename = substr( $sitename, 4 );
+		}
+		$default_from_email = 'wordpress@' . $sitename;
+
+		$this->assertTrue( in_array( 'From: first last <' . $default_from_email . '>', $this->notifications[0]['headers'] ) );
 	}
 
 	/**
