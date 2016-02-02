@@ -493,6 +493,10 @@
 								} );
 							}
 
+							if ( 'hide' === conditionalType ) {
+								overallState = ! overallState;
+							}
+
 							if ( overallState ) {
 								// Show field
 								field.className = field.className.replace( /field-hide/i, '' );
@@ -505,9 +509,41 @@
 						_.each( wp.ccf.conditionals[formId][slug].conditions, function( condition ) {
 							var fieldInput = fieldsBySlug[condition.field].querySelectorAll( '.field-input' )[0];
 
-							$( fieldInput ).on( 'change keyup', _.debounce( function( event ) {
+							function adjustConditions( value ) {
 								if ( 'is' === condition.compare ) {
-									if ( event.currentTarget.value === condition.value ) {
+									if ( value === condition.value ) {
+										// one piece of condition is true
+										condition.state = true;
+									} else {
+										// one part of condition is false
+										condition.state = false;
+									}
+								} else if ( 'is-not' === condition.compare ) {
+									if ( value !== condition.value ) {
+										// one piece of condition is true
+										condition.state = true;
+									} else {
+										// one part of condition is false
+										condition.state = false;
+									}
+								} else if ( '>' === condition.compare ) {
+									if ( parseInt( value ) > parseInt( condition.value ) ) {
+										// one piece of condition is true
+										condition.state = true;
+									} else {
+										// one part of condition is false
+										condition.state = false;
+									}
+								} else if ( '<' === condition.compare ) {
+									if ( parseInt( value ) < parseInt( condition.value ) ) {
+										// one piece of condition is true
+										condition.state = true;
+									} else {
+										// one part of condition is false
+										condition.state = false;
+									}
+								} else if ( 'contains' === condition.compare ) {
+									if ( value.match( condition.value ) ) {
 										// one piece of condition is true
 										condition.state = true;
 									} else {
@@ -515,19 +551,15 @@
 										condition.state = false;
 									}
 								}
+							}
+
+							$( fieldInput ).on( 'change keyup', _.debounce( function( event ) {
+								adjustConditions( event.currentTarget.value );
 
 								wp.ccf.conditionals[formId][slug].trigger();
 							}, 250 ) );
 
-							if ( 'is' === condition.compare ) {
-								if ( fieldInput.value === condition.value ) {
-									// one piece of condition is true
-									condition.state = true;
-								} else {
-									// one part of condition is false
-									condition.state = false;
-								}
-							}
+							adjustConditions( fieldInput.value );
 
 							wp.ccf.conditionals[formId][slug].trigger();
 						} );

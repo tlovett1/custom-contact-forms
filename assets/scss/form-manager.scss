@@ -192,6 +192,17 @@
 				font-style: italic;
 			}
 
+			.conditionals-enabled {
+				font-size: 70%;
+				background-color: #ffe6a5;
+				font-weight:bold;
+				padding: 0px 2px;
+				opacity: .5;
+				left: 7px;
+				position: absolute;
+				top: 1.49em;
+			}
+
 			label {
 				font-weight: bold;
 				margin-bottom: 3px;
@@ -199,17 +210,6 @@
 
 				span.required {
 					color: red;
-				}
-
-				span.conditionals-enabled {
-					font-size: 70%;
-					background-color: #ffe6a5;
-					font-weight:bold;
-					padding: 0px 2px;
-					opacity: .5;
-					left: 7px;
-					position: absolute;
-					top: 1.49em;
 				}
 			}
 

@@ -77,8 +77,8 @@
       cursor: inherit; }
       .ccf-form-preview .field label span.required {
         color: red; }
-      .ccf-form-preview .field label span.conditionals-enabled {
-        display: none; }
+    .ccf-form-preview .field .conditionals-enabled {
+      display: none; }
     .ccf-form-preview .field .choice {
       padding-left: 15px; }
       .ccf-form-preview .field .choice label {

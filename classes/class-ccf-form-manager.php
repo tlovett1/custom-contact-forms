@@ -1710,6 +1710,7 @@ class CCF_Form_Manager {
 		</script>
 
 		<script type="text/html" id="ccf-html-preview-template">
+			<# if ( field.conditionalsEnabled ) { #><span class="conditionals-enabled">if</span><# } #>
 			<# if ( typeof mce !== 'undefined' ) { #>
 				{{{ field.html }}}
 			<# } else { #>
