@@ -19,17 +19,17 @@ class CCFTestNotifications extends CCFTestBase {
 		$form_response = $this->_createForm(
 			array(
 				array(
-					'slug' => $slug, 
-					'type' => 'single-line-text', 
+					'slug' => $slug,
+					'type' => 'single-line-text',
 					'required' => true,
-				)
+				),
 			)
 		);
 
 		$_POST['form_id'] = $form_response->data['id'];
 		$_POST['ccf_form'] = true;
 		$_POST['form_nonce'] = wp_create_nonce( 'ccf_form' );
-		$_POST['ccf_field_' . $slug . '1'] = 'value';
+		$_POST[ 'ccf_field_' . $slug . '1' ] = 'value';
 
 		add_action( 'ccf_send_notification', function( $email, $subject, $notification_content, $notification_headers, $notification ) {
 			$this->notifications[] = array(
@@ -56,8 +56,8 @@ class CCFTestNotifications extends CCFTestBase {
 		$form_response = $this->_createForm(
 			array(
 				array(
-					'slug' => $slug, 
-					'type' => 'single-line-text', 
+					'slug' => $slug,
+					'type' => 'single-line-text',
 					'required' => true,
 				),
 			),
@@ -72,7 +72,7 @@ class CCFTestNotifications extends CCFTestBase {
 								'type' => 'custom',
 								'email' => 'test@test.com',
 								'field' => '',
-							)
+							),
 						),
 						'fromType' => 'default',
 						'fromAddress' => '',
@@ -84,14 +84,14 @@ class CCFTestNotifications extends CCFTestBase {
 						'fromName' => 'WordPress',
 						'fromNameField' => '',
 					),
-				)
+				),
 			)
 		);
 
 		$_POST['form_id'] = $form_response->data['id'];
 		$_POST['ccf_form'] = true;
 		$_POST['form_nonce'] = wp_create_nonce( 'ccf_form' );
-		$_POST['ccf_field_' . $slug . '1'] = 'value';
+		$_POST[ 'ccf_field_' . $slug . '1' ] = 'value';
 
 		add_action( 'ccf_send_notification', function( $email, $subject, $notification_content, $notification_headers, $notification ) {
 			$this->notifications[] = array(
@@ -118,8 +118,8 @@ class CCFTestNotifications extends CCFTestBase {
 		$form_response = $this->_createForm(
 			array(
 				array(
-					'slug' => $slug, 
-					'type' => 'single-line-text', 
+					'slug' => $slug,
+					'type' => 'single-line-text',
 					'required' => true,
 				),
 			),
@@ -134,7 +134,7 @@ class CCFTestNotifications extends CCFTestBase {
 								'type' => 'custom',
 								'email' => 'test@test.com',
 								'field' => '',
-							)
+							),
 						),
 						'fromType' => 'default',
 						'fromAddress' => '',
@@ -155,7 +155,7 @@ class CCFTestNotifications extends CCFTestBase {
 								'type' => 'custom',
 								'email' => 'test@test.com',
 								'field' => '',
-							)
+							),
 						),
 						'fromType' => 'default',
 						'fromAddress' => '',
@@ -174,7 +174,7 @@ class CCFTestNotifications extends CCFTestBase {
 		$_POST['form_id'] = $form_response->data['id'];
 		$_POST['ccf_form'] = true;
 		$_POST['form_nonce'] = wp_create_nonce( 'ccf_form' );
-		$_POST['ccf_field_' . $slug . '1'] = 'value';
+		$_POST[ 'ccf_field_' . $slug . '1' ] = 'value';
 
 		add_action( 'ccf_send_notification', function( $email, $subject, $notification_content, $notification_headers, $notification ) {
 			$this->notifications[] = array(
@@ -201,8 +201,8 @@ class CCFTestNotifications extends CCFTestBase {
 		$form_response = $this->_createForm(
 			array(
 				array(
-					'slug' => $slug, 
-					'type' => 'single-line-text', 
+					'slug' => $slug,
+					'type' => 'single-line-text',
 					'required' => true,
 				),
 			),
@@ -217,7 +217,7 @@ class CCFTestNotifications extends CCFTestBase {
 								'type' => 'custom',
 								'email' => 'test@test.com',
 								'field' => '',
-							)
+							),
 						),
 						'fromType' => 'default',
 						'fromAddress' => '',
@@ -236,7 +236,7 @@ class CCFTestNotifications extends CCFTestBase {
 		$_POST['form_id'] = $form_response->data['id'];
 		$_POST['ccf_form'] = true;
 		$_POST['form_nonce'] = wp_create_nonce( 'ccf_form' );
-		$_POST['ccf_field_' . $slug . '1'] = 'value';
+		$_POST[ 'ccf_field_' . $slug . '1' ] = 'value';
 
 		add_action( 'ccf_send_notification', function( $email, $subject, $notification_content, $notification_headers, $notification ) {
 			$this->notifications[] = array(
@@ -263,8 +263,8 @@ class CCFTestNotifications extends CCFTestBase {
 		$form_response = $this->_createForm(
 			array(
 				array(
-					'slug' => $slug, 
-					'type' => 'single-line-text', 
+					'slug' => $slug,
+					'type' => 'single-line-text',
 					'required' => true,
 				),
 			),
@@ -292,7 +292,7 @@ class CCFTestNotifications extends CCFTestBase {
 		$_POST['form_id'] = $form_response->data['id'];
 		$_POST['ccf_form'] = true;
 		$_POST['form_nonce'] = wp_create_nonce( 'ccf_form' );
-		$_POST['ccf_field_' . $slug . '1'] = 'value';
+		$_POST[ 'ccf_field_' . $slug . '1' ] = 'value';
 
 		add_action( 'ccf_send_notification', function( $email, $subject, $notification_content, $notification_headers, $notification ) {
 			$this->notifications[] = array(
@@ -319,8 +319,8 @@ class CCFTestNotifications extends CCFTestBase {
 		$form_response = $this->_createForm(
 			array(
 				array(
-					'slug' => $slug, 
-					'type' => 'single-line-text', 
+					'slug' => $slug,
+					'type' => 'single-line-text',
 					'required' => true,
 				),
 			),
@@ -335,7 +335,7 @@ class CCFTestNotifications extends CCFTestBase {
 								'type' => 'custom',
 								'email' => 'test@test.com',
 								'field' => '',
-							)
+							),
 						),
 						'fromType' => 'default',
 						'fromAddress' => '',
@@ -354,7 +354,7 @@ class CCFTestNotifications extends CCFTestBase {
 		$_POST['form_id'] = $form_response->data['id'];
 		$_POST['ccf_form'] = true;
 		$_POST['form_nonce'] = wp_create_nonce( 'ccf_form' );
-		$_POST['ccf_field_' . $slug . '1'] = 'value';
+		$_POST[ 'ccf_field_' . $slug . '1' ] = 'value';
 
 		add_action( 'ccf_send_notification', function( $email, $subject, $notification_content, $notification_headers, $notification ) {
 			$this->notifications[] = array(
@@ -381,8 +381,8 @@ class CCFTestNotifications extends CCFTestBase {
 		$form_response = $this->_createForm(
 			array(
 				array(
-					'slug' => $slug, 
-					'type' => 'single-line-text', 
+					'slug' => $slug,
+					'type' => 'single-line-text',
 					'required' => true,
 				),
 			),
@@ -397,7 +397,7 @@ class CCFTestNotifications extends CCFTestBase {
 								'type' => 'custom',
 								'email' => 'test@test.com',
 								'field' => '',
-							)
+							),
 						),
 						'fromType' => 'default',
 						'fromAddress' => '',
@@ -416,7 +416,7 @@ class CCFTestNotifications extends CCFTestBase {
 		$_POST['form_id'] = $form_response->data['id'];
 		$_POST['ccf_form'] = true;
 		$_POST['form_nonce'] = wp_create_nonce( 'ccf_form' );
-		$_POST['ccf_field_' . $slug . '1'] = 'value';
+		$_POST[ 'ccf_field_' . $slug . '1' ] = 'value';
 
 		add_action( 'ccf_send_notification', function( $email, $subject, $notification_content, $notification_headers, $notification ) {
 			$this->notifications[] = array(
@@ -443,8 +443,8 @@ class CCFTestNotifications extends CCFTestBase {
 		$form_response = $this->_createForm(
 			array(
 				array(
-					'slug' => $slug, 
-					'type' => 'single-line-text', 
+					'slug' => $slug,
+					'type' => 'single-line-text',
 					'required' => true,
 				),
 			),
@@ -459,7 +459,7 @@ class CCFTestNotifications extends CCFTestBase {
 								'type' => 'custom',
 								'email' => 'test@test.com',
 								'field' => '',
-							)
+							),
 						),
 						'fromType' => 'custom',
 						'fromAddress' => 'test@test.com',
@@ -478,7 +478,7 @@ class CCFTestNotifications extends CCFTestBase {
 		$_POST['form_id'] = $form_response->data['id'];
 		$_POST['ccf_form'] = true;
 		$_POST['form_nonce'] = wp_create_nonce( 'ccf_form' );
-		$_POST['ccf_field_' . $slug . '1'] = 'value';
+		$_POST[ 'ccf_field_' . $slug . '1' ] = 'value';
 
 		add_action( 'ccf_send_notification', function( $email, $subject, $notification_content, $notification_headers, $notification ) {
 			$this->notifications[] = array(
@@ -505,8 +505,8 @@ class CCFTestNotifications extends CCFTestBase {
 		$form_response = $this->_createForm(
 			array(
 				array(
-					'slug' => $slug, 
-					'type' => 'single-line-text', 
+					'slug' => $slug,
+					'type' => 'single-line-text',
 					'required' => true,
 				),
 			),
@@ -521,7 +521,7 @@ class CCFTestNotifications extends CCFTestBase {
 								'type' => 'custom',
 								'email' => 'test@test.com',
 								'field' => '',
-							)
+							),
 						),
 						'fromType' => 'default',
 						'fromAddress' => '',
@@ -540,7 +540,7 @@ class CCFTestNotifications extends CCFTestBase {
 		$_POST['form_id'] = $form_response->data['id'];
 		$_POST['ccf_form'] = true;
 		$_POST['form_nonce'] = wp_create_nonce( 'ccf_form' );
-		$_POST['ccf_field_' . $slug . '1'] = 'value';
+		$_POST[ 'ccf_field_' . $slug . '1' ] = 'value';
 
 		add_action( 'ccf_send_notification', function( $email, $subject, $notification_content, $notification_headers, $notification ) {
 			$this->notifications[] = array(
@@ -573,8 +573,8 @@ class CCFTestNotifications extends CCFTestBase {
 		$form_response = $this->_createForm(
 			array(
 				array(
-					'slug' => $slug, 
-					'type' => 'name', 
+					'slug' => $slug,
+					'type' => 'name',
 					'required' => true,
 				),
 			),
@@ -589,7 +589,7 @@ class CCFTestNotifications extends CCFTestBase {
 								'type' => 'custom',
 								'email' => 'test@test.com',
 								'field' => '',
-							)
+							),
 						),
 						'fromType' => 'default',
 						'fromAddress' => '',
@@ -608,8 +608,8 @@ class CCFTestNotifications extends CCFTestBase {
 		$_POST['form_id'] = $form_response->data['id'];
 		$_POST['ccf_form'] = true;
 		$_POST['form_nonce'] = wp_create_nonce( 'ccf_form' );
-		$_POST['ccf_field_' . $slug . '1']['first'] = 'first';
-		$_POST['ccf_field_' . $slug . '1']['last'] = 'last';
+		$_POST[ 'ccf_field_' . $slug . '1' ]['first'] = 'first';
+		$_POST[ 'ccf_field_' . $slug . '1' ]['last'] = 'last';
 
 		add_action( 'ccf_send_notification', function( $email, $subject, $notification_content, $notification_headers, $notification ) {
 			$this->notifications[] = array(
@@ -642,8 +642,8 @@ class CCFTestNotifications extends CCFTestBase {
 		$form_response = $this->_createForm(
 			array(
 				array(
-					'slug' => $slug, 
-					'type' => 'email', 
+					'slug' => $slug,
+					'type' => 'email',
 					'required' => true,
 				),
 			),
@@ -658,7 +658,7 @@ class CCFTestNotifications extends CCFTestBase {
 								'type' => 'custom',
 								'email' => 'hello@test.com',
 								'field' => '',
-							)
+							),
 						),
 						'fromType' => 'field',
 						'fromAddress' => '',
@@ -677,7 +677,7 @@ class CCFTestNotifications extends CCFTestBase {
 		$_POST['form_id'] = $form_response->data['id'];
 		$_POST['ccf_form'] = true;
 		$_POST['form_nonce'] = wp_create_nonce( 'ccf_form' );
-		$_POST['ccf_field_' . $slug . '1'] = 'test@test.com';
+		$_POST[ 'ccf_field_' . $slug . '1' ] = 'test@test.com';
 
 		add_action( 'ccf_send_notification', function( $email, $subject, $notification_content, $notification_headers, $notification ) {
 			$this->notifications[] = array(
@@ -704,8 +704,8 @@ class CCFTestNotifications extends CCFTestBase {
 		$form_response = $this->_createForm(
 			array(
 				array(
-					'slug' => $slug, 
-					'type' => 'single-line-text', 
+					'slug' => $slug,
+					'type' => 'single-line-text',
 					'required' => true,
 				),
 			),
@@ -725,7 +725,7 @@ class CCFTestNotifications extends CCFTestBase {
 								'type' => 'custom',
 								'email' => 'test1@test.com',
 								'field' => '',
-							)
+							),
 						),
 						'fromType' => 'default',
 						'fromAddress' => '',
@@ -744,7 +744,7 @@ class CCFTestNotifications extends CCFTestBase {
 		$_POST['form_id'] = $form_response->data['id'];
 		$_POST['ccf_form'] = true;
 		$_POST['form_nonce'] = wp_create_nonce( 'ccf_form' );
-		$_POST['ccf_field_' . $slug . '1'] = 'test';
+		$_POST[ 'ccf_field_' . $slug . '1' ] = 'test';
 
 		add_action( 'ccf_send_notification', function( $email, $subject, $notification_content, $notification_headers, $notification ) {
 			$this->notifications[] = array(

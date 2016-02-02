@@ -29,7 +29,7 @@ class CCF_Custom_Contact_Forms {
 	 * Trick API into thinking non publically queryable post types are queryable
 	 *
 	 * @param string $post_type
-	 * @param array $args
+	 * @param array  $args
 	 * @since 6.8.1
 	 */
 	public function make_post_types_public( $post_type, $args ) {
@@ -77,7 +77,7 @@ class CCF_Custom_Contact_Forms {
 	/**
 	 * Add forms and form submissions link to plugin actions
 	 *
-	 * @param array $plugin_actions
+	 * @param array  $plugin_actions
 	 * @param string $plugin_file
 	 * @since 6.1.4
 	 * @return array

@@ -27,11 +27,11 @@ class CCF_Settings {
 	 */
 	public function action_admin_enqueue_scripts() {
 		if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
-			$css_path = '/build/css/settings.css';
-			$js_path = '/js/settings.js';
+			$css_path = '/assets/build/css/settings.css';
+			$js_path = '/assets/js/settings.js';
 		} else {
-			$css_path = '/build/css/settings.min.css';
-			$js_path = '/build/js/settings.min.js';
+			$css_path = '/assets/build/css/settings.min.css';
+			$js_path = '/assets/build/js/settings.min.js';
 		}
 		wp_enqueue_style( 'ccf-settings', plugins_url( $css_path, dirname( __FILE__ ) ), array(), CCF_VERSION );
 		wp_enqueue_script( 'ccf-settings', plugins_url( $js_path, dirname( __FILE__ ) ), array( 'jquery' ), CCF_VERSION, true );
@@ -71,7 +71,6 @@ class CCF_Settings {
 		if ( ! empty( $option['asset_loading_restriction_enabled'] ) ) {
 			$restriction_classes = 'ccf-asset-loading-restrictions-wrap';
 		}
-
 
 		add_settings_section( 'asset-loading-restriction', 'Asset Loading Restriction', array( $this, 'asset_loading_restriction_summary' ), 'custom-contact-forms' );
 		add_settings_field( 'asset-loading-restriction-enable', esc_html__( 'Enable Asset Loading Restrictions', 'custom-contact-forms' ), array( $this, 'asset_loading_restriction_enable' ), 'custom-contact-forms', 'asset-loading-restriction' );
@@ -129,7 +128,8 @@ class CCF_Settings {
 						<span class="add">+</span>
 						<span class="delete">&times;</span>
 					</div>
-				<?php $i++; endforeach; else : ?>
+				<?php $i++;
+endforeach; else : ?>
 					<div class="asset">
 						<input name="ccf_settings[asset_loading_restrictions][0][location]" class="asset-location" type="text" placeholder="<?php esc_attr_e( 'URL or post ID', 'custom-contact-forms' ); ?>"> 
 						<?php esc_html_e( 'Restriction type:', 'custom-contact-forms' ); ?>

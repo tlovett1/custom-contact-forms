@@ -19,17 +19,17 @@ class CCFTestPostCreation extends CCFTestBase {
 		$form_response = $this->_createForm(
 			array(
 				array(
-					'slug' => $slug, 
-					'type' => 'single-line-text', 
+					'slug' => $slug,
+					'type' => 'single-line-text',
 					'required' => true,
-				)
+				),
 			)
 		);
 
 		$_POST['form_id'] = $form_response->data['id'];
 		$_POST['ccf_form'] = true;
 		$_POST['form_nonce'] = wp_create_nonce( 'ccf_form' );
-		$_POST['ccf_field_' . $slug . '1'] = 'value';
+		$_POST[ 'ccf_field_' . $slug . '1' ] = 'value';
 
 		add_action( 'ccf_post_creation', function( $post_creation_id, $form_id, $submission_id, $submission ) {
 			$this->post_creation = array(
@@ -55,8 +55,8 @@ class CCFTestPostCreation extends CCFTestBase {
 		$form_response = $this->_createForm(
 			array(
 				array(
-					'slug' => $slug, 
-					'type' => 'single-line-text', 
+					'slug' => $slug,
+					'type' => 'single-line-text',
 					'required' => true,
 				),
 			),
@@ -69,7 +69,7 @@ class CCFTestPostCreation extends CCFTestBase {
 						'postField' => 'post_title',
 						'formField' => 'single-line-text-1',
 						'customFieldKey' => '',
-					)
+					),
 				),
 			)
 		);
@@ -77,7 +77,7 @@ class CCFTestPostCreation extends CCFTestBase {
 		$_POST['form_id'] = $form_response->data['id'];
 		$_POST['ccf_form'] = true;
 		$_POST['form_nonce'] = wp_create_nonce( 'ccf_form' );
-		$_POST['ccf_field_' . $slug . '1'] = 'value';
+		$_POST[ 'ccf_field_' . $slug . '1' ] = 'value';
 
 		add_action( 'ccf_post_creation', function( $post_creation_id, $form_id, $submission_id, $submission ) {
 			$this->post_creation = array(
@@ -103,8 +103,8 @@ class CCFTestPostCreation extends CCFTestBase {
 		$form_response = $this->_createForm(
 			array(
 				array(
-					'slug' => $slug, 
-					'type' => 'single-line-text', 
+					'slug' => $slug,
+					'type' => 'single-line-text',
 					'required' => true,
 				),
 			),
@@ -117,7 +117,7 @@ class CCFTestPostCreation extends CCFTestBase {
 						'postField' => 'post_title',
 						'formField' => 'single-line-text1',
 						'customFieldKey' => '',
-					)
+					),
 				),
 			)
 		);
@@ -125,7 +125,7 @@ class CCFTestPostCreation extends CCFTestBase {
 		$_POST['form_id'] = $form_response->data['id'];
 		$_POST['ccf_form'] = true;
 		$_POST['form_nonce'] = wp_create_nonce( 'ccf_form' );
-		$_POST['ccf_field_' . $slug . '1'] = 'value';
+		$_POST[ 'ccf_field_' . $slug . '1' ] = 'value';
 
 		add_action( 'ccf_post_creation', function( $post_creation_id, $form_id, $submission_id, $submission ) {
 			$this->post_creation = array(
@@ -152,8 +152,8 @@ class CCFTestPostCreation extends CCFTestBase {
 		$form_response = $this->_createForm(
 			array(
 				array(
-					'slug' => $slug, 
-					'type' => 'single-line-text', 
+					'slug' => $slug,
+					'type' => 'single-line-text',
 					'required' => true,
 				),
 			),
@@ -171,7 +171,7 @@ class CCFTestPostCreation extends CCFTestBase {
 						'postField' => 'post_content',
 						'formField' => 'single-line-text1',
 						'customFieldKey' => '',
-					)
+					),
 				),
 			)
 		);
@@ -179,7 +179,7 @@ class CCFTestPostCreation extends CCFTestBase {
 		$_POST['form_id'] = $form_response->data['id'];
 		$_POST['ccf_form'] = true;
 		$_POST['form_nonce'] = wp_create_nonce( 'ccf_form' );
-		$_POST['ccf_field_' . $slug . '1'] = 'value';
+		$_POST[ 'ccf_field_' . $slug . '1' ] = 'value';
 
 		add_action( 'ccf_post_creation', function( $post_creation_id, $form_id, $submission_id, $submission ) {
 			$this->post_creation = array(
@@ -206,8 +206,8 @@ class CCFTestPostCreation extends CCFTestBase {
 		$form_response = $this->_createForm(
 			array(
 				array(
-					'slug' => $slug, 
-					'type' => 'single-line-text', 
+					'slug' => $slug,
+					'type' => 'single-line-text',
 					'required' => true,
 				),
 			),
@@ -228,7 +228,7 @@ class CCFTestPostCreation extends CCFTestBase {
 		$_POST['form_id'] = $form_response->data['id'];
 		$_POST['ccf_form'] = true;
 		$_POST['form_nonce'] = wp_create_nonce( 'ccf_form' );
-		$_POST['ccf_field_' . $slug . '1'] = 'value';
+		$_POST[ 'ccf_field_' . $slug . '1' ] = 'value';
 
 		add_action( 'ccf_post_creation', function( $post_creation_id, $form_id, $submission_id, $submission ) {
 			$this->post_creation = array(
@@ -265,34 +265,34 @@ class CCFTestPostCreation extends CCFTestBase {
 		$form_response = $this->_createForm(
 			array(
 				array(
-					'slug' => $slugs[0], 
-					'type' => 'single-line-text', 
+					'slug' => $slugs[0],
+					'type' => 'single-line-text',
 					'required' => true,
 				),
 				array(
-					'slug' => $slugs[1], 
-					'type' => 'name', 
+					'slug' => $slugs[1],
+					'type' => 'name',
 					'required' => true,
 				),
 				array(
-					'slug' => $slugs[2], 
-					'type' => 'paragraph-text', 
+					'slug' => $slugs[2],
+					'type' => 'paragraph-text',
 					'required' => true,
 				),
 				array(
-					'slug' => $slugs[3], 
-					'type' => 'paragraph-text', 
+					'slug' => $slugs[3],
+					'type' => 'paragraph-text',
 					'required' => true,
 				),
 				array(
-					'slug' => $slugs[4], 
-					'type' => 'email', 
+					'slug' => $slugs[4],
+					'type' => 'email',
 					'required' => true,
 					'confirm' => true,
 				),
 				array(
-					'slug' => $slugs[5], 
-					'type' => 'checkboxes', 
+					'slug' => $slugs[5],
+					'type' => 'checkboxes',
 					'choices' => array(
 						array(
 							'label' => 'tag1',
@@ -313,8 +313,8 @@ class CCFTestPostCreation extends CCFTestBase {
 					'required' => true,
 				),
 				array(
-					'slug' => $slugs[6], 
-					'type' => 'radio', 
+					'slug' => $slugs[6],
+					'type' => 'radio',
 					'choices' => array(
 						array(
 							'label' => 'tag4',
@@ -325,8 +325,8 @@ class CCFTestPostCreation extends CCFTestBase {
 					'required' => true,
 				),
 				array(
-					'slug' => $slugs[7], 
-					'type' => 'dropdown', 
+					'slug' => $slugs[7],
+					'type' => 'dropdown',
 					'choices' => array(
 						array(
 							'label' => 'tag5',
@@ -390,14 +390,14 @@ class CCFTestPostCreation extends CCFTestBase {
 		$_POST['ccf_form'] = true;
 		$_POST['form_nonce'] = wp_create_nonce( 'ccf_form' );
 
-		$_POST['ccf_field_' . $slugs[0] . '1'] = 'title';
-		$_POST['ccf_field_' . $slugs[1] . '2'] = array( 'first' => 'taylor', 'last' => 'lovett' );
-		$_POST['ccf_field_' . $slugs[2] . '3'] = 'content';
-		$_POST['ccf_field_' . $slugs[3] . '4'] = 'excerpt';
-		$_POST['ccf_field_' . $slugs[4] . '5'] = array( 'email' => 'test@test.com', 'confirm' => 'test@test.com' );
-		$_POST['ccf_field_' . $slugs[5] . '6'] = array( 'tag1', 'tag2', 'tag3' );
-		$_POST['ccf_field_' . $slugs[6] . '7'] = 'tag4';
-		$_POST['ccf_field_' . $slugs[7] . '8'] = 'tag5';
+		$_POST[ 'ccf_field_' . $slugs[0] . '1' ] = 'title';
+		$_POST[ 'ccf_field_' . $slugs[1] . '2' ] = array( 'first' => 'taylor', 'last' => 'lovett' );
+		$_POST[ 'ccf_field_' . $slugs[2] . '3' ] = 'content';
+		$_POST[ 'ccf_field_' . $slugs[3] . '4' ] = 'excerpt';
+		$_POST[ 'ccf_field_' . $slugs[4] . '5' ] = array( 'email' => 'test@test.com', 'confirm' => 'test@test.com' );
+		$_POST[ 'ccf_field_' . $slugs[5] . '6' ] = array( 'tag1', 'tag2', 'tag3' );
+		$_POST[ 'ccf_field_' . $slugs[6] . '7' ] = 'tag4';
+		$_POST[ 'ccf_field_' . $slugs[7] . '8' ] = 'tag5';
 
 		add_action( 'ccf_post_creation', function( $post_creation_id, $form_id, $submission_id, $submission ) {
 			$this->post_creation = array(
@@ -425,7 +425,7 @@ class CCFTestPostCreation extends CCFTestBase {
 
 		$i = 1;
 		foreach ( $tags as $tag ) {
-			$this->assertEquals( 'tag' . $i, $tag->name);
+			$this->assertEquals( 'tag' . $i, $tag->name );
 			$i++;
 		}
 

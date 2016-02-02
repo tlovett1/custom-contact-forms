@@ -444,6 +444,11 @@
         width: 100%;
         display: block;
         margin-top: 5px; }
+      .ccf-main-modal .ccf-form-pane .right-sidebar .hide {
+        display: none; }
+      .ccf-main-modal .ccf-form-pane .right-sidebar .conditionals input[type="text"] {
+        width: 100px;
+        display: inline-block; }
       .ccf-main-modal .ccf-form-pane .right-sidebar input[type="checkbox"] + label {
         display: inline-block;
         vertical-align: middle; }

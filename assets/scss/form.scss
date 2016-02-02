@@ -139,6 +139,10 @@
 			}
 		}
 
+		&.field-hide {
+			display: none;
+		}
+
 		&.field-type-date {
 			.hour, .minute {
 				display: inline-block;

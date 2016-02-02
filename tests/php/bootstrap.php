@@ -10,7 +10,7 @@ $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
 require_once( $_tests_dir . '/includes/functions.php' );
 
 function _manually_load_plugin() {
-	require(dirname(__FILE__) . '/../../custom-contact-forms.php');
+	require( dirname( __FILE__ ) . '/../../custom-contact-forms.php' );
 
 	CCF_Custom_Contact_Forms::factory()->manually_load_api();
 

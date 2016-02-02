@@ -197,7 +197,7 @@ class CCFTestAPI extends CCFTestBase {
 			'type' => 'ccf_form',
 			'status' => 'publish',
 			'id' => null,
-			'title' => array( 'raw' => 'Edit Test Form', ),
+			'title' => array( 'raw' => 'Edit Test Form' ),
 			'description' => 'Edit test form description',
 			'buttonText' => 'Edit Submit Text',
 			'author' => array(),
@@ -238,7 +238,7 @@ class CCFTestAPI extends CCFTestBase {
 
 		$button_text = get_post_meta( $edit_form_result->data['id'], 'ccf_form_buttonText', true );
 
-		$this->assertEquals( 'Edit Submit Text', $button_text  );
+		$this->assertEquals( 'Edit Submit Text', $button_text );
 
 		$attached_fields = get_post_meta( $edit_form_result->data['id'], 'ccf_attached_fields', true );
 

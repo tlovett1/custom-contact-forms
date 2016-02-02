@@ -24,6 +24,7 @@ Custom Contact Forms enables you to build forms and manage submissions the WordP
 * Export form submissions to CSV.
 * Pre-setup for Twitter Bootstrap
 * Multiple themes to choose from
+* No custom database tables
 * Forms can show customizable completion text or redirect to a URL.
 * Temporarily pause forms with a customizable pause message.
 * Create and manage multiple notifications for each form. Notifications can send emails to one or more administrators or form submittors. Customize notification email subject, from email address, from email name, and email body. Map form fields to email subject, from name, and from email address. Easily activate and deactivate notifications.
