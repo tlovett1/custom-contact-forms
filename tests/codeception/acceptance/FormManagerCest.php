@@ -64,5 +64,4 @@ class FormManagerCest {
 
 		$I->see( 'Click on a field to edit it' );
 	}
-
 }

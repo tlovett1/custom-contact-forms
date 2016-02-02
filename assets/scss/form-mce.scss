@@ -107,8 +107,12 @@
 			margin-bottom: 7px;
 			cursor: inherit;
 
-			span {
+			span.required {
 				color: red;
+			}
+
+			span.conditionals-enabled {
+				display: none;
 			}
 		}
 

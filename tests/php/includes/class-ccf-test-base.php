@@ -176,7 +176,7 @@ class CCFTestBase extends WP_UnitTestCase {
 			'type' => 'ccf_form',
 			'status' => 'publish',
 			'ID' => null,
-			'title' => array( 'raw' => 'Test Form', ),
+			'title' => array( 'raw' => 'Test Form' ),
 			'description' => 'Test form description',
 			'buttonText' => 'Submit Text',
 			'notifications' => array(),
@@ -215,7 +215,7 @@ class CCFTestBase extends WP_UnitTestCase {
 	 * @since 6.0
 	 */
 	public function setUp() {
-		set_time_limit(0);
+		set_time_limit( 0 );
 
 		if ( property_exists( 'CCFTestBase', 'hooks_saved' ) && ! self::$hooks_saved ) {
 			$this->_backup_hooks();
@@ -225,7 +225,7 @@ class CCFTestBase extends WP_UnitTestCase {
 		$wpdb->suppress_errors = false;
 		$wpdb->show_errors = true;
 		$wpdb->db_connect();
-		ini_set('display_errors', 1 );
+		ini_set( 'display_errors', 1 );
 		$this->factory = new WP_UnitTest_Factory;
 		$this->clean_up_global_scope();
 		$this->start_transaction();

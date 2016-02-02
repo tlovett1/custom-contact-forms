@@ -23,10 +23,9 @@ class CCF_Form_CPT {
 	 * @since 6.0
 	 */
 	public function setup() {
-		
 
 		add_action( 'init', array( $this, 'setup_cpt' ) );
-		add_filter( 'manage_edit-ccf_form_columns', array( $this, 'filter_columns' ) ) ;
+		add_filter( 'manage_edit-ccf_form_columns', array( $this, 'filter_columns' ) );
 		add_action( 'manage_ccf_form_posts_custom_column', array( $this, 'action_columns' ), 10, 2 );
 		add_action( 'admin_enqueue_scripts', array( $this, 'action_admin_enqueue_scripts' ), 9 );
 		add_action( 'edit_form_after_title', array( $this, 'action_edit_form_after_title' ) );
@@ -53,7 +52,7 @@ class CCF_Form_CPT {
 			return;
 		}
 
-		if ( empty( $_GET['post'] ) || 'ccf_form' !== get_post_type( $_GET['post']) ) {
+		if ( empty( $_GET['post'] ) || 'ccf_form' !== get_post_type( $_GET['post'] ) ) {
 			return;
 		}
 
@@ -75,7 +74,6 @@ class CCF_Form_CPT {
 		) );
 
 		// Todo: Unit tests
-
 		header( 'Content-Type: text/csv' );
 		header( 'Content-Disposition: attachment; filename=form-' . $post_id . '-submission-' . date( 'Y-m-d' ) . '.csv' );
 		header( 'Cache-Control: no-cache, no-store, must-revalidate' );
@@ -83,7 +81,7 @@ class CCF_Form_CPT {
 		header( 'Expires: 0' );
 
 		$output = fopen( 'php://output', 'w' );
-		fwrite($output,chr(0xEF).chr(0xBB).chr(0xBF)); 
+		fwrite( $output,chr( 0xEF ).chr( 0xBB ).chr( 0xBF ) );
 		if ( $submissions->have_posts() ) {
 			$last_submission_id = $submissions->posts[0];
 
@@ -102,18 +100,18 @@ class CCF_Form_CPT {
 					$slug = get_post_meta( $field_id, 'ccf_field_slug', true );
 
 					if ( ! empty( $slug ) ) {
-						$attached_field_slugs[$slug] = $field_id;
+						$attached_field_slugs[ $slug ] = $field_id;
 					}
 				}
 
 				foreach ( $slugs as $slug ) {
-					if ( ! empty( $attached_field_slugs[$slug] ) ) {
-						$fields[$slug] = array( 'id' => $attached_field_slugs[$slug], 'type' => get_post_meta( $attached_field_slugs[$slug], 'ccf_field_type', true ) );
+					if ( ! empty( $attached_field_slugs[ $slug ] ) ) {
+						$fields[ $slug ] = array( 'id' => $attached_field_slugs[ $slug ], 'type' => get_post_meta( $attached_field_slugs[ $slug ], 'ccf_field_type', true ) );
 					}
 				}
 			}
 
-			$headers = array_merge( array( 'date', 'ip', ), array_keys( $fields ) );
+			$headers = array_merge( array( 'date', 'ip' ), array_keys( $fields ) );
 
 			fputcsv( $output, $headers );
 
@@ -129,8 +127,8 @@ class CCF_Form_CPT {
 				foreach ( $fields as $slug => $field_array ) {
 					$type = $field_array['type'];
 
-					if ( ! empty( $submission_data[$slug] ) ) {
-						$field = $submission_data[$slug];
+					if ( ! empty( $submission_data[ $slug ] ) ) {
+						$field = $submission_data[ $slug ];
 
 						if ( 'date' === $type ) {
 
@@ -155,7 +153,6 @@ class CCF_Form_CPT {
 							} else {
 								$row[] = stripslashes( $field );
 							}
-
 						} elseif ( 'dropdown' === $type || 'radio' === $type || 'checkboxes' === $type ) {
 							if ( is_array( $field ) ) {
 								$i = 0;
@@ -178,11 +175,9 @@ class CCF_Form_CPT {
 								} else {
 									$row[] = $outputval;
 								}
-
 							} else {
 								$row[] = stripslashes( $field );
 							}
-
 						} else {
 							$row[] = stripslashes( $field );
 						}
@@ -296,7 +291,7 @@ class CCF_Form_CPT {
 	 * @return string
 	 */
 	public function filter_get_the_excerpt( $excerpt ) {
-		if ('ccf_form' === get_post_type() ) {
+		if ( 'ccf_form' === get_post_type() ) {
 			$excerpt = get_post_meta( get_the_ID(), 'ccf_form_description', true );
 		}
 
@@ -306,7 +301,7 @@ class CCF_Form_CPT {
 	/**
 	 * Modify row actions to fit a form.
 	 *
-	 * @param array $actions
+	 * @param array  $actions
 	 * @param object $post
 	 * @since 6.0
 	 * @return array
@@ -340,11 +335,11 @@ class CCF_Form_CPT {
 		global $pagenow;
 
 		remove_meta_box( 'slugdiv', 'ccf_form', 'normal' );
-		add_meta_box('ccf-at-a-glance', esc_html__( 'At a Glance', 'custom-contact-forms' ), array( $this, 'meta_box_at_a_glance' ), 'ccf_form', 'side', 'core' );
-		add_meta_box('ccf-preview', esc_html__( 'Preview', 'custom-contact-forms' ), array( $this, 'meta_box_preview' ), 'ccf_form', 'normal', 'core' );
+		add_meta_box( 'ccf-at-a-glance', esc_html__( 'At a Glance', 'custom-contact-forms' ), array( $this, 'meta_box_at_a_glance' ), 'ccf_form', 'side', 'core' );
+		add_meta_box( 'ccf-preview', esc_html__( 'Preview', 'custom-contact-forms' ), array( $this, 'meta_box_preview' ), 'ccf_form', 'normal', 'core' );
 
 		if ( 'post-new.php' !== $pagenow ) {
-			add_meta_box('ccf-submissions', esc_html__( 'Submissions', 'custom-contact-forms' ), array( $this, 'meta_box_submissions' ), 'ccf_form', 'normal', 'core' );
+			add_meta_box( 'ccf-submissions', esc_html__( 'Submissions', 'custom-contact-forms' ), array( $this, 'meta_box_submissions' ), 'ccf_form', 'normal', 'core' );
 		}
 
 		remove_meta_box( 'wpseo_meta', 'ccf_form', 'normal' );
@@ -401,7 +396,7 @@ class CCF_Form_CPT {
 				<span id="timestamp" class="has-icon"><?php esc_html_e( 'Created on:', 'custom-contact-forms' ); ?> <strong><?php echo get_the_date( '', $post->ID ); ?></strong></span>
 			</div>
 			<div class="misc-pub-section">
-				<span id="ccf-created-by" class="has-icon"><?php esc_html_e( 'Author:', 'custom-contact-forms' ); ?> <strong><?php printf( '<a href="%s">%s</a>', esc_url( add_query_arg( array( 'post_type' => $post->post_type, 'author' => (int) $user->ID ), 'edit.php' )), esc_attr( $user->user_nicename ) ); ?></strong></span>
+				<span id="ccf-created-by" class="has-icon"><?php esc_html_e( 'Author:', 'custom-contact-forms' ); ?> <strong><?php printf( '<a href="%s">%s</a>', esc_url( add_query_arg( array( 'post_type' => $post->post_type, 'author' => (int) $user->ID ), 'edit.php' ) ), esc_attr( $user->user_nicename ) ); ?></strong></span>
 			</div>
 			<div class="misc-pub-section">
 				<span id="ccf-field-num" class="has-icon"><?php esc_html_e( 'Number of fields:', 'custom-contact-forms' ); ?> <strong><?php echo count( $fields ); ?></strong></span>
@@ -413,7 +408,7 @@ class CCF_Form_CPT {
 
 		<div id="major-publishing-actions">
 			<div id="delete-action">
-				<a class="submitdelete deletion" href="<?php echo get_delete_post_link($post->ID); ?>"><?php esc_html_e( 'Move to Trash', 'custom-contact-forms' ); ?></a>
+				<a class="submitdelete deletion" href="<?php echo get_delete_post_link( $post->ID ); ?>"><?php esc_html_e( 'Move to Trash', 'custom-contact-forms' ); ?></a>
 				<div class="clear"></div>
 			</div>
 
@@ -445,7 +440,7 @@ class CCF_Form_CPT {
 				<span class="ccf-form-cpt-title">
 					<?php if ( ! empty( $title ) ) : ?>
 						<?php echo esc_html( $title ); ?>
-					<?php else: ?>
+					<?php else : ?>
 						<?php esc_html_e( '(No title)', 'custom-contact-forms' ); ?>
 					<?php endif; ?>
 				</span>
@@ -465,19 +460,19 @@ class CCF_Form_CPT {
 	 */
 	public function action_admin_enqueue_scripts() {
 		if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
-			$admin_css_path = '/build/css/admin.css';
-			$form_cpt_css_path = '/build/css/form-cpt.css';
-			$form_table_css_path = '/build/css/form-table.css';
-			$form_cpt_preview_js_path = '/js/form-cpt-preview.js';
-			$mce_css_path = '/build/css/form-mce.css';
+			$admin_css_path = '/assets/build/css/admin.css';
+			$form_cpt_css_path = '/assets/build/css/form-cpt.css';
+			$form_table_css_path = '/assets/build/css/form-table.css';
+			$form_cpt_preview_js_path = '/assets/js/form-cpt-preview.js';
+			$mce_css_path = '/assets/build/css/form-mce.css';
 		} else {
-			$admin_css_path = '/build/css/admin.min.css';
-			$form_cpt_css_path = '/build/css/form-cpt.min.css';
-			$form_table_css_path = '/build/css/form-table.min.css';
-			$form_cpt_preview_js_path = '/build/js/form-cpt-preview.min.js';
-			$mce_css_path = '/build/css/form-mce.min.css';
+			$admin_css_path = '/assets/build/css/admin.min.css';
+			$form_cpt_css_path = '/assets/build/css/form-cpt.min.css';
+			$form_table_css_path = '/assets/build/css/form-table.min.css';
+			$form_cpt_preview_js_path = '/assets/build/js/form-cpt-preview.min.js';
+			$mce_css_path = '/assets/build/css/form-mce.min.css';
 		}
-		wp_enqueue_style( 'ccf-admin', plugins_url( $admin_css_path, dirname( __FILE__ ) ) );
+		wp_enqueue_style( 'ccf-admin', plugins_url( $admin_css_path, dirname( __FILE__ ) ), array(), CCF_VERSION );
 
 		global $pagenow;
 
@@ -486,12 +481,12 @@ class CCF_Form_CPT {
 
 			add_thickbox();
 
-			wp_enqueue_style( 'ccf-form-mce', plugins_url( $mce_css_path, dirname( __FILE__ ) ) );
-			wp_enqueue_style( 'ccf-form-cpt', plugins_url( $form_cpt_css_path, dirname( __FILE__ ) ) );
+			wp_enqueue_style( 'ccf-form-mce', plugins_url( $mce_css_path, dirname( __FILE__ ) ), array(), CCF_VERSION );
+			wp_enqueue_style( 'ccf-form-cpt', plugins_url( $form_cpt_css_path, dirname( __FILE__ ) ), array(), CCF_VERSION );
 
-			wp_enqueue_script( 'ccf-form-cpt-preview', plugins_url( $form_cpt_preview_js_path, dirname( __FILE__ ) ), array( 'jquery', 'backbone', 'ccf-form-manager' ), '1.0', true );
+			wp_enqueue_script( 'ccf-form-cpt-preview', plugins_url( $form_cpt_preview_js_path, dirname( __FILE__ ) ), array( 'jquery', 'backbone', 'ccf-form-manager' ), CCF_VERSION, true );
 		} elseif ( 'edit.php' === $pagenow && 'ccf_form' === get_post_type() ) {
-			wp_enqueue_style( 'ccf-form-table', plugins_url( $form_table_css_path, dirname( __FILE__ ) ) );
+			wp_enqueue_style( 'ccf-form-table', plugins_url( $form_table_css_path, dirname( __FILE__ ) ), array(), CCF_VERSION );
 		}
 	}
 
@@ -510,7 +505,7 @@ class CCF_Form_CPT {
 			'author' => esc_html__( 'Author', 'custom-contact-forms' ),
 			'submissions' => esc_html__( 'Submissions', 'custom-contact-forms' ),
 			'fields' => esc_html__( 'Number of Fields', 'custom-contact-forms' ),
-			'ccf_date' => esc_html__( 'Date', 'custom-contact-forms' )
+			'ccf_date' => esc_html__( 'Date', 'custom-contact-forms' ),
 		);
 
 		return $columns;
@@ -520,7 +515,7 @@ class CCF_Form_CPT {
 	 * Output form columns. We redo the date column to get of inappropriate text such as "Published".
 	 *
 	 * @param string $column
-	 * @param int $post_id
+	 * @param int    $post_id
 	 * @since 6.0
 	 */
 	public function action_columns( $column, $post_id ) {
@@ -551,10 +546,9 @@ class CCF_Form_CPT {
 
 					$time_diff = time() - $time;
 
-					if ( $time_diff > 0 && $time_diff < DAY_IN_SECONDS )
+					if ( $time_diff > 0 && $time_diff < DAY_IN_SECONDS ) {
 						$h_time = sprintf( __( '%s ago' ), human_time_diff( $time ) );
-					else
-						$h_time = mysql2date( __( 'Y/m/d' ), $m_time );
+					} else { 						$h_time = mysql2date( __( 'Y/m/d' ), $m_time ); }
 				}
 
 				echo '<abbr title="' . $t_time . '">' . $h_time . '</abbr>';

@@ -56,7 +56,6 @@ class CCF_Widget extends WP_Widget {
 			'no_found_rows' => true,
 			'post_status' => 'publish',
 			'fields' => 'ids',
-
 		) );
 		?>
 		<p>

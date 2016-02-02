@@ -57,6 +57,22 @@
 		return this;
 	};
 
+	wp.ccf.models.FieldConditional = wp.ccf.models.FieldConditional || Backbone.Model.extend(
+		{
+			defaults: {
+				field: '',
+				compare: 'is',
+				value: ''
+			},
+
+			decode: function() {
+				return _modelDecode.call( this, [] );
+			},
+
+			set: _modelSet
+		}
+	);
+
 	wp.ccf.models.FieldChoice = wp.ccf.models.FieldChoice || Backbone.Model.extend(
 		{
 			defaults: {
@@ -254,6 +270,20 @@
 									delete response.fields[i].choices;
 								}
 
+								if ( typeof newField.conditionals !== 'undefined' ) {
+									var conditionals = SELF.get( 'conditionals' );
+
+									if ( conditionals && conditionals.length > 0 ) {
+										for ( z = 0; z < newField.conditionals; z++ ) {
+											var conditional = conditionals.at( z );
+											conditional.set( newField.conditionals[z] );
+											conditional.decode();
+										}
+									}
+
+									delete response.fields[i].conditionals;
+								}
+
 								field.set( newField );
 								field.decode();
 							}
@@ -413,11 +443,32 @@
 		{
 			idAttribute: 'id',
 
-			defaults: {
-				id: null
+			defaults: function() {
+				return {
+					id: null,
+					conditionalsEnabled: false,
+					conditionalType: 'show',
+					conditionalFieldsRequired: 'all',
+					conditionals: new wp.ccf.collections.FieldConditionals()
+				};
 			},
 
 			set: _modelSet,
+
+			initialize: function( attributes ) {
+				if ( typeof attributes === 'object' && attributes.conditionals ) {
+					var conditionals = [];
+
+					_.each( attributes.conditionals, function( conditional ) {
+						var conditionalModel = new wp.ccf.models.FieldConditional( conditional );
+						conditionalModel.decode();
+
+						conditionals.push( conditionalModel );
+					});
+
+					this.set( 'conditionals', new wp.ccf.collections.FieldConditionals( conditionals ) );
+				}
+			},
 
 			required: function() {
 				return [ 'slug' ];
@@ -460,7 +511,11 @@
 					description: ''
 				};
 
-				return _.defaults( defaults, this.constructor.__super__.defaults );
+				return _.defaults( defaults, this.constructor.__super__.defaults() );
+			},
+
+			initialize: function() {
+				return wp.ccf.models.StandardField.__super__.initialize.apply( this, arguments );
 			}
 		}
 	);
@@ -473,6 +528,10 @@
 				};
 
 				return _.defaults( defaults, this.constructor.__super__.defaults() );
+			},
+
+			initialize: function() {
+				return this.constructor.__super__.initialize.apply( this, arguments );
 			}
 		}
 	);
@@ -487,6 +546,10 @@
 				};
 
 				return _.defaults( defaults, this.constructor.__super__.defaults() );
+			},
+
+			initialize: function() {
+				return this.constructor.__super__.initialize.apply( this, arguments );
 			}
 		}
 	);
@@ -499,6 +562,10 @@
 				};
 
 				return _.defaults( defaults, this.constructor.__super__.defaults() );
+			},
+
+			initialize: function() {
+				return this.constructor.__super__.initialize.apply( this, arguments );
 			}
 		}
 	);
@@ -511,6 +578,10 @@
 				};
 
 				return _.defaults( defaults, this.constructor.__super__.defaults() );
+			},
+
+			initialize: function() {
+				return this.constructor.__super__.initialize.apply( this, arguments );
 			}
 		}
 	);
@@ -524,6 +595,10 @@
 				};
 
 				return _.defaults( defaults, this.constructor.__super__.defaults() );
+			},
+
+			initialize: function() {
+				return this.constructor.__super__.initialize.apply( this, arguments );
 			}
 		}
 	);
@@ -537,6 +612,10 @@
 				};
 
 				return _.defaults( defaults, this.constructor.__super__.defaults() );
+			},
+
+			initialize: function() {
+				return this.constructor.__super__.initialize.apply( this, arguments );
 			}
 		}
 	);
@@ -550,6 +629,10 @@
 				};
 
 				return _.defaults( defaults, this.constructor.__super__.defaults() );
+			},
+
+			initialize: function() {
+				return this.constructor.__super__.initialize.apply( this, arguments );
 			}
 		}
 	);
@@ -565,6 +648,10 @@
 				};
 
 				return _.defaults( defaults, this.constructor.__super__.defaults() );
+			},
+
+			initialize: function() {
+				return this.constructor.__super__.initialize.apply( this, arguments );
 			}
 		}
 	);
@@ -577,6 +664,10 @@
 				};
 
 				return _.defaults( defaults, this.constructor.__super__.defaults() );
+			},
+
+			initialize: function() {
+				return this.constructor.__super__.initialize.apply( this, arguments );
 			}
 		}
 	);
@@ -597,7 +688,11 @@
 				return [ 'siteKey', 'secretKey' ];
 			},
 
-			isImmutable: true
+			isImmutable: true,
+
+			initialize: function() {
+				return this.constructor.__super__.initialize.apply( this, arguments );
+			}
 		}
 	);
 
@@ -610,6 +705,10 @@
 				};
 
 				return _.defaults( defaults, this.constructor.__super__.defaults() );
+			},
+
+			initialize: function() {
+				return this.constructor.__super__.initialize.apply( this, arguments );
 			}
 		}
 	);
@@ -625,14 +724,18 @@
 					className: ''
 				};
 
-				return _.defaults( defaults, this.constructor.__super__.defaults );
+				return _.defaults( defaults, this.constructor.__super__.defaults() );
 			},
 
 			required: function() {
 				return [];
 			},
 
-			isImmutable: true
+			isImmutable: true,
+
+			initialize: function() {
+				return this.constructor.__super__.initialize.apply( this, arguments );
+			}
 		}
 	);
 
@@ -646,14 +749,18 @@
 					className: ''
 				};
 
-				return _.defaults( defaults, this.constructor.__super__.defaults );
+				return _.defaults( defaults, this.constructor.__super__.defaults() );
 			},
 
 			required: function() {
 				return [];
 			},
 
-			isImmutable: true
+			isImmutable: true,
+
+			initialize: function() {
+				return this.constructor.__super__.initialize.apply( this, arguments );
+			}
 		}
 	);
 
@@ -680,6 +787,8 @@
 
 					this.set( 'choices', new wp.ccf.collections.FieldChoices( choices ) );
 				}
+
+				return wp.ccf.models.ChoiceableField.__super__.initialize.apply( this, arguments );
 			}
 		}
 	);
