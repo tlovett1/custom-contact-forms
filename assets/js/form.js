@@ -381,6 +381,7 @@
 				var $button = $( button );
 
 				var fieldsBySlug = {};
+				var fieldSubscriptions = {};
 
 				$frame.on( 'load', function() {
 					var data,
@@ -457,20 +458,134 @@
 					return false;
 				});
 
-				function formSubmit( event ) {
-					var fields = formWrapper.querySelectorAll( '.field' );
+				// Setup conditionals and cache fields
+				var fields = formWrapper.querySelectorAll( '.field' );
 
+				_.each( fields, function( field ) {
+					var slug = field.getAttribute( 'data-field-slug' );
+					// Cache field
+					fieldsBySlug[slug] = field;
+				} );
+
+				_.each( fields, function( field ) {
+					var slug = field.getAttribute( 'data-field-slug' );
+					var type = field.getAttribute( 'data-field-type' );
+
+					if ( wp.ccf.conditionals[formId][slug] && wp.ccf.conditionals[formId][slug].conditions.length ) {
+						var conditionalType = wp.ccf.conditionals[formId][slug].conditionalType;
+						var conditionalFieldsRequired = wp.ccf.conditionals[formId][slug].conditionalFieldsRequired;
+
+						wp.ccf.conditionals[formId][slug].trigger = function() {
+							var overallState;
+
+							if ( 'any' === conditionalFieldsRequired ) {
+								overallState = false;
+
+								_.each( wp.ccf.conditionals[formId][slug].conditions, function( condition ) {
+									if ( condition.state ) {
+										overallState = true;
+									}
+								} );
+							} else {
+								overallState = true;
+
+								_.each( wp.ccf.conditionals[formId][slug].conditions, function( condition ) {
+									overallState = overallState && condition.state;
+								} );
+							}
+
+							if ( 'hide' === conditionalType ) {
+								overallState = ! overallState;
+							}
+
+							if ( overallState ) {
+								// Show field
+								if ( 'section-header' === type ) {
+									$( field ).parents( '.ccf-section' ).removeClass( 'field-hide' );
+								} else {
+									field.className = field.className.replace( /field-hide/i, '' );
+								}
+							} else {
+								// Hide field
+								if ( 'section-header' === type ) {
+									$( field ).parents( '.ccf-section' ).addClass( 'field-hide' );
+								} else {
+									field.className = field.className.replace( /field-hide/i, '' ) + ' field-hide';
+								}
+							}
+						};
+
+						_.each( wp.ccf.conditionals[formId][slug].conditions, function( condition ) {
+
+							var fieldInput = fieldsBySlug[condition.field].querySelectorAll( '.field-input' );
+
+							function adjustConditions( value ) {
+								if ( 'is' === condition.compare ) {
+									if ( value === condition.value ) {
+										// one piece of condition is true
+										condition.state = true;
+									} else {
+										// one part of condition is false
+										condition.state = false;
+									}
+								} else if ( 'is-not' === condition.compare ) {
+									if ( value !== condition.value ) {
+										// one piece of condition is true
+										condition.state = true;
+									} else {
+										// one part of condition is false
+										condition.state = false;
+									}
+								} else if ( 'greater-than' === condition.compare ) {
+									if ( parseInt( value ) > parseInt( condition.value ) ) {
+										// one piece of condition is true
+										condition.state = true;
+									} else {
+										// one part of condition is false
+										condition.state = false;
+									}
+								} else if ( 'less-than' === condition.compare ) {
+									if ( parseInt( value ) < parseInt( condition.value ) ) {
+										// one piece of condition is true
+										condition.state = true;
+									} else {
+										// one part of condition is false
+										condition.state = false;
+									}
+								} else if ( 'contains' === condition.compare ) {
+									if ( value.match( condition.value ) ) {
+										// one piece of condition is true
+										condition.state = true;
+									} else {
+										// one part of condition is false
+										condition.state = false;
+									}
+								}
+							}
+
+							$( fieldInput ).on( 'change keyup', _.debounce( function( event ) {
+								adjustConditions( event.currentTarget.value );
+
+								wp.ccf.conditionals[formId][slug].trigger();
+							}, 250 ) );
+
+							adjustConditions( fieldInput.value );
+
+							wp.ccf.conditionals[formId][slug].trigger();
+						} );
+					}
+				} );
+
+				function formSubmit( event ) {
 					var errors = [];
 
-					_.each( fields, function( field ) {
+					_.each( fieldsBySlug, function( field ) {
 						if ( field.className.match( / skip-field/i ) ) {
 							return;
 						}
 
 						var type = field.getAttribute( 'data-field-type' );
 						var slug = field.getAttribute( 'data-field-slug' );
-
-						fieldsBySlug[slug] = field;
 
 						var validation = new ( wp.ccf.validators[type] )( field, formId );
 

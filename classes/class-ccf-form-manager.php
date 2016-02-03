@@ -33,9 +33,9 @@ class CCF_Form_Manager {
 		}
 
 		if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
-			$css_path = '/build/css/form-mce.css';
+			$css_path = '/assets/build/css/form-mce.css';
 		} else {
-			$css_path = '/build/css/form-mce.min.css';
+			$css_path = '/assets/build/css/form-mce.min.css';
 		}
 
 		$css .= ', ' . plugins_url( $css_path, dirname( __FILE__ ) );
@@ -140,18 +140,9 @@ class CCF_Form_Manager {
 			<div class="right-sidebar ccf-field-sidebar accordion-container"></div>
 
 			<div class="bottom">
-				<?php $subscribed = get_option( 'ccf_subscribed', false ); if ( empty( $subscribed ) && ! apply_filters( 'ccf_hide_ads', false ) ) : ?>
+				<?php if ( ! apply_filters( 'ccf_hide_ads', false ) ) : ?>
 					<div class="left signup">
-						<strong>Send me tips, offers, and tutorials around </strong>
-						<select name="interest" class="interest-signup-field">
-							<option value="">Choose one</option>
-							<option>Themes</option>
-							<option>eCommerce</option>
-							<option>Page Load Time</option>
-							<option>Social Media</option>
-							<option>Fast WP Hosting</option>
-							<option>Marketing</option>
-						</select>
+						<strong>Want free WP blogging tips, tutorials, and marketing tricks? </strong>
 						<input type="email" class="email-signup-field" placeholder="Email">
 						<button type="button" class="button signup-button">Sign me up!</button>
 						<span class="signup-check">✓</span>
@@ -232,7 +223,7 @@ class CCF_Form_Manager {
 						<label for="ccf_form_email_notification_content"><?php esc_html_e( 'Email Content (HTML):', 'custom-contact-forms' ); ?></label>
 						<textarea id="ccf_form_email_notification_content" class="form-email-notification-content">{{ notification.content }}</textarea><br />
 						<p class="variables">
-							<strong><?php esc_html_e( 'Variables:', 'custom-contact-forms' ); ?></strong>  [all_fields] [ip_address] 
+							<strong><?php esc_html_e( 'Variables:', 'custom-contact-forms' ); ?></strong>  [all_fields] [ip_address] [current_date_time] 
 							<span class="field-variables"></span>
 
 						</p>
@@ -545,7 +536,7 @@ class CCF_Form_Manager {
 		</script>
 
 		<script type="text/html" id="ccf-single-line-text-template">
-			<div class="accordion-section expanded">
+			<div class="accordion-section <# if ( 'basic' === startPanel ) { #>expanded<# } #>">
 				<a class="accordion-heading">Basic</a>
 				<div class="section-content">
 					<div>
@@ -573,7 +564,7 @@ class CCF_Form_Manager {
 					</div>
 				</div>
 			</div>
-			<div class="accordion-section">
+			<div class="accordion-section <# if ( 'advanced' === startPanel ) { #>expanded<# } #>">
 				<a class="accordion-heading"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
@@ -584,12 +575,36 @@ class CCF_Form_Manager {
 						<label for="ccf-field-placeholder"><?php esc_html_e( 'Placeholder Text:', 'custom-contact-forms' ); ?></label>
 						<input id="ccf-field-placeholder" class="field-placeholder" type="text" value="{{ field.placeholder }}">
 					</div>
+					<div>
+						<label for="ccf-field-conditionals-enabled"><?php esc_html_e( 'Enable Conditional Logic:', 'custom-contact-forms' ); ?></label>
+						<select id="ccf-field-conditionals-enabled" class="field-conditionals-enabled">
+							<option value="0"><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
+							<option value="1" <# if ( field.conditionalsEnabled ) { #>selected="selected"<# } #>><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
+						</select>
+					</div>
+					<div class="<# if ( ! field.conditionalsEnabled ) { #>hide<# } #>">
+						<select class="field-conditional-type">
+							<option value="hide"><?php esc_html_e( 'Hide', 'custom-contact-forms' ); ?></option>
+							<option <# if ( 'show' === field.conditionalType ) { #>selected="selected"<# } #> value="show"><?php esc_html_e( 'Show', 'custom-contact-forms' ); ?></option>
+						</select>
+
+						<?php esc_html_e( 'this field if', 'custom-contact-forms' ); ?>
+
+						<select class="field-conditional-fields-required">
+							<option value="all"><?php esc_html_e( 'All', 'custom-contact-forms' ); ?></option>
+							<option <# if ( 'any' === field.conditionalFieldsRequired ) { #>selected="selected"<# } #> value="any"><?php esc_html_e( 'Any', 'custom-contact-forms' ); ?></option>
+						</select>
+
+						<?php esc_html_e( 'of these conditions are true:', 'custom-contact-forms' ); ?>
+					</div>
+					<div class="conditionals <# if ( ! field.conditionalsEnabled ) { #>hide<# } #>">
+					</div>
 				</div>
 			</div>
 		</script>
 
 		<script type="text/html" id="ccf-file-template">
-			<div class="accordion-section expanded">
+			<div class="accordion-section <# if ( 'basic' === startPanel ) { #>expanded<# } #>">
 				<a class="accordion-heading">Basic</a>
 				<div class="section-content">
 					<div>
@@ -623,19 +638,43 @@ class CCF_Form_Manager {
 					</div>
 				</div>
 			</div>
-			<div class="accordion-section">
+			<div class="accordion-section <# if ( 'advanced' === startPanel ) { #>expanded<# } #>">
 				<a class="accordion-heading"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
 						<input id="ccf-field-class-name" class="field-class-name" type="text" value="{{ field.className }}">
 					</div>
+					<div>
+						<label for="ccf-field-conditionals-enabled"><?php esc_html_e( 'Enable Conditional Logic:', 'custom-contact-forms' ); ?></label>
+						<select id="ccf-field-conditionals-enabled" class="field-conditionals-enabled">
+							<option value="0"><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
+							<option value="1" <# if ( field.conditionalsEnabled ) { #>selected="selected"<# } #>><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
+						</select>
+					</div>
+					<div class="<# if ( ! field.conditionalsEnabled ) { #>hide<# } #>">
+						<select class="field-conditional-type">
+							<option value="hide"><?php esc_html_e( 'Hide', 'custom-contact-forms' ); ?></option>
+							<option <# if ( 'show' === field.conditionalType ) { #>selected="selected"<# } #> value="show"><?php esc_html_e( 'Show', 'custom-contact-forms' ); ?></option>
+						</select>
+
+						<?php esc_html_e( 'this field if', 'custom-contact-forms' ); ?>
+
+						<select class="field-conditional-fields-required">
+							<option value="all"><?php esc_html_e( 'All', 'custom-contact-forms' ); ?></option>
+							<option <# if ( 'any' === field.conditionalFieldsRequired ) { #>selected="selected"<# } #> value="any"><?php esc_html_e( 'Any', 'custom-contact-forms' ); ?></option>
+						</select>
+
+						<?php esc_html_e( 'of these conditions are true:', 'custom-contact-forms' ); ?>
+					</div>
+					<div class="conditionals <# if ( ! field.conditionalsEnabled ) { #>hide<# } #>">
+					</div>
 				</div>
 			</div>
 		</script>
 
 		<script type="text/html" id="ccf-recaptcha-template">
-			<div class="accordion-section expanded">
+			<div class="accordion-section <# if ( 'basic' === startPanel ) { #>expanded<# } #>">
 				<a class="accordion-heading">Basic</a>
 				<div class="section-content">
 					<p><?php _e( 'reCAPTCHA is a simple captcha service provided by Google. <a target="_blank" href="https://www.google.com/recaptcha/intro/index.html">Learn more</a>', 'custom-contact-forms' ); ?></p>
@@ -659,19 +698,43 @@ class CCF_Form_Manager {
 					</div>
 				</div>
 			</div>
-			<div class="accordion-section">
+			<div class="accordion-section <# if ( 'advanced' === startPanel ) { #>expanded<# } #>">
 				<a class="accordion-heading"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
 						<input id="ccf-field-class-name" class="field-class-name" type="text" value="{{ field.className }}">
 					</div>
+					<div>
+						<label for="ccf-field-conditionals-enabled"><?php esc_html_e( 'Enable Conditional Logic:', 'custom-contact-forms' ); ?></label>
+						<select id="ccf-field-conditionals-enabled" class="field-conditionals-enabled">
+							<option value="0"><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
+							<option value="1" <# if ( field.conditionalsEnabled ) { #>selected="selected"<# } #>><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
+						</select>
+					</div>
+					<div class="<# if ( ! field.conditionalsEnabled ) { #>hide<# } #>">
+						<select class="field-conditional-type">
+							<option value="hide"><?php esc_html_e( 'Hide', 'custom-contact-forms' ); ?></option>
+							<option <# if ( 'show' === field.conditionalType ) { #>selected="selected"<# } #> value="show"><?php esc_html_e( 'Show', 'custom-contact-forms' ); ?></option>
+						</select>
+
+						<?php esc_html_e( 'this field if', 'custom-contact-forms' ); ?>
+
+						<select class="field-conditional-fields-required">
+							<option value="all"><?php esc_html_e( 'All', 'custom-contact-forms' ); ?></option>
+							<option <# if ( 'any' === field.conditionalFieldsRequired ) { #>selected="selected"<# } #> value="any"><?php esc_html_e( 'Any', 'custom-contact-forms' ); ?></option>
+						</select>
+
+						<?php esc_html_e( 'of these conditions are true:', 'custom-contact-forms' ); ?>
+					</div>
+					<div class="conditionals <# if ( ! field.conditionalsEnabled ) { #>hide<# } #>">
+					</div>
 				</div>
 			</div>
 		</script>
 
 		<script type="text/html" id="ccf-website-template">
-			<div class="accordion-section expanded">
+			<div class="accordion-section <# if ( 'basic' === startPanel ) { #>expanded<# } #>">
 				<a class="accordion-heading">Basic</a>
 				<div class="section-content">
 					<div>
@@ -699,7 +762,7 @@ class CCF_Form_Manager {
 					</div>
 				</div>
 			</div>
-			<div class="accordion-section">
+			<div class="accordion-section <# if ( 'advanced' === startPanel ) { #>expanded<# } #>">
 				<a class="accordion-heading"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
@@ -710,12 +773,36 @@ class CCF_Form_Manager {
 						<label for="ccf-field-placeholder"><?php esc_html_e( 'Placeholder Text:', 'custom-contact-forms' ); ?></label>
 						<input id="ccf-field-placeholder" class="field-placeholder" type="text" value="{{ field.placeholder }}">
 					</div>
+					<div>
+						<label for="ccf-field-conditionals-enabled"><?php esc_html_e( 'Enable Conditional Logic:', 'custom-contact-forms' ); ?></label>
+						<select id="ccf-field-conditionals-enabled" class="field-conditionals-enabled">
+							<option value="0"><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
+							<option value="1" <# if ( field.conditionalsEnabled ) { #>selected="selected"<# } #>><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
+						</select>
+					</div>
+					<div class="<# if ( ! field.conditionalsEnabled ) { #>hide<# } #>">
+						<select class="field-conditional-type">
+							<option value="hide"><?php esc_html_e( 'Hide', 'custom-contact-forms' ); ?></option>
+							<option <# if ( 'show' === field.conditionalType ) { #>selected="selected"<# } #> value="show"><?php esc_html_e( 'Show', 'custom-contact-forms' ); ?></option>
+						</select>
+
+						<?php esc_html_e( 'this field if', 'custom-contact-forms' ); ?>
+
+						<select class="field-conditional-fields-required">
+							<option value="all"><?php esc_html_e( 'All', 'custom-contact-forms' ); ?></option>
+							<option <# if ( 'any' === field.conditionalFieldsRequired ) { #>selected="selected"<# } #> value="any"><?php esc_html_e( 'Any', 'custom-contact-forms' ); ?></option>
+						</select>
+
+						<?php esc_html_e( 'of these conditions are true:', 'custom-contact-forms' ); ?>
+					</div>
+					<div class="conditionals <# if ( ! field.conditionalsEnabled ) { #>hide<# } #>">
+					</div>
 				</div>
 			</div>
 		</script>
 
 		<script type="text/html" id="ccf-html-template">
-			<div class="accordion-section expanded">
+			<div class="accordion-section <# if ( 'basic' === startPanel ) { #>expanded<# } #>">
 				<a class="accordion-heading"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
@@ -724,19 +811,43 @@ class CCF_Form_Manager {
 					</div>
 				</div>
 			</div>
-			<div class="accordion-section">
+			<div class="accordion-section <# if ( 'advanced' === startPanel ) { #>expanded<# } #>">
 				<a class="accordion-heading"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
 						<input id="ccf-field-class-name" class="field-class-name" type="text" value="{{ field.className }}">
 					</div>
+					<div>
+						<label for="ccf-field-conditionals-enabled"><?php esc_html_e( 'Enable Conditional Logic:', 'custom-contact-forms' ); ?></label>
+						<select id="ccf-field-conditionals-enabled" class="field-conditionals-enabled">
+							<option value="0"><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
+							<option value="1" <# if ( field.conditionalsEnabled ) { #>selected="selected"<# } #>><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
+						</select>
+					</div>
+					<div class="<# if ( ! field.conditionalsEnabled ) { #>hide<# } #>">
+						<select class="field-conditional-type">
+							<option value="hide"><?php esc_html_e( 'Hide', 'custom-contact-forms' ); ?></option>
+							<option <# if ( 'show' === field.conditionalType ) { #>selected="selected"<# } #> value="show"><?php esc_html_e( 'Show', 'custom-contact-forms' ); ?></option>
+						</select>
+
+						<?php esc_html_e( 'this field if', 'custom-contact-forms' ); ?>
+
+						<select class="field-conditional-fields-required">
+							<option value="all"><?php esc_html_e( 'All', 'custom-contact-forms' ); ?></option>
+							<option <# if ( 'any' === field.conditionalFieldsRequired ) { #>selected="selected"<# } #> value="any"><?php esc_html_e( 'Any', 'custom-contact-forms' ); ?></option>
+						</select>
+
+						<?php esc_html_e( 'of these conditions are true:', 'custom-contact-forms' ); ?>
+					</div>
+					<div class="conditionals <# if ( ! field.conditionalsEnabled ) { #>hide<# } #>">
+					</div>
 				</div>
 			</div>
 		</script>
 
 		<script type="text/html" id="ccf-section-header-template">
-			<div class="accordion-section expanded">
+			<div class="accordion-section <# if ( 'basic' === startPanel ) { #>expanded<# } #>">
 				<a class="accordion-heading"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
@@ -749,19 +860,43 @@ class CCF_Form_Manager {
 					</div>
 				</div>
 			</div>
-			<div class="accordion-section">
+			<div class="accordion-section <# if ( 'advanced' === startPanel ) { #>expanded<# } #>">
 				<a class="accordion-heading"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
 						<input id="ccf-field-class-name" class="field-class-name" type="text" value="{{ field.className }}">
 					</div>
+					<div>
+						<label for="ccf-field-conditionals-enabled"><?php esc_html_e( 'Enable Conditional Logic:', 'custom-contact-forms' ); ?></label>
+						<select id="ccf-field-conditionals-enabled" class="field-conditionals-enabled">
+							<option value="0"><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
+							<option value="1" <# if ( field.conditionalsEnabled ) { #>selected="selected"<# } #>><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
+						</select>
+					</div>
+					<div class="<# if ( ! field.conditionalsEnabled ) { #>hide<# } #>">
+						<select class="field-conditional-type">
+							<option value="hide"><?php esc_html_e( 'Hide', 'custom-contact-forms' ); ?></option>
+							<option <# if ( 'show' === field.conditionalType ) { #>selected="selected"<# } #> value="show"><?php esc_html_e( 'Show', 'custom-contact-forms' ); ?></option>
+						</select>
+
+						<?php esc_html_e( 'this field if', 'custom-contact-forms' ); ?>
+
+						<select class="field-conditional-fields-required">
+							<option value="all"><?php esc_html_e( 'All', 'custom-contact-forms' ); ?></option>
+							<option <# if ( 'any' === field.conditionalFieldsRequired ) { #>selected="selected"<# } #> value="any"><?php esc_html_e( 'Any', 'custom-contact-forms' ); ?></option>
+						</select>
+
+						<?php esc_html_e( 'of these conditions are true:', 'custom-contact-forms' ); ?>
+					</div>
+					<div class="conditionals <# if ( ! field.conditionalsEnabled ) { #>hide<# } #>">
+					</div>
 				</div>
 			</div>
 		</script>
 
 		<script type="text/html" id="ccf-paragraph-text-template">
-			<div class="accordion-section expanded">
+			<div class="accordion-section <# if ( 'basic' === startPanel ) { #>expanded<# } #>">
 				<a class="accordion-heading"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
@@ -789,7 +924,7 @@ class CCF_Form_Manager {
 					</div>
 				</div>
 			</div>
-			<div class="accordion-section">
+			<div class="accordion-section <# if ( 'advanced' === startPanel ) { #>expanded<# } #>">
 				<a class="accordion-heading"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
@@ -800,12 +935,36 @@ class CCF_Form_Manager {
 						<label for="ccf-field-placeholder"><?php esc_html_e( 'Placeholder Text:', 'custom-contact-forms' ); ?></label>
 						<input id="ccf-field-placeholder" class="field-placeholder" type="text" value="{{ field.placeholder }}">
 					</div>
+					<div>
+						<label for="ccf-field-conditionals-enabled"><?php esc_html_e( 'Enable Conditional Logic:', 'custom-contact-forms' ); ?></label>
+						<select id="ccf-field-conditionals-enabled" class="field-conditionals-enabled">
+							<option value="0"><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
+							<option value="1" <# if ( field.conditionalsEnabled ) { #>selected="selected"<# } #>><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
+						</select>
+					</div>
+					<div class="<# if ( ! field.conditionalsEnabled ) { #>hide<# } #>">
+						<select class="field-conditional-type">
+							<option value="hide"><?php esc_html_e( 'Hide', 'custom-contact-forms' ); ?></option>
+							<option <# if ( 'show' === field.conditionalType ) { #>selected="selected"<# } #> value="show"><?php esc_html_e( 'Show', 'custom-contact-forms' ); ?></option>
+						</select>
+
+						<?php esc_html_e( 'this field if', 'custom-contact-forms' ); ?>
+
+						<select class="field-conditional-fields-required">
+							<option value="all"><?php esc_html_e( 'All', 'custom-contact-forms' ); ?></option>
+							<option <# if ( 'any' === field.conditionalFieldsRequired ) { #>selected="selected"<# } #> value="any"><?php esc_html_e( 'Any', 'custom-contact-forms' ); ?></option>
+						</select>
+
+						<?php esc_html_e( 'of these conditions are true:', 'custom-contact-forms' ); ?>
+					</div>
+					<div class="conditionals <# if ( ! field.conditionalsEnabled ) { #>hide<# } #>">
+					</div>
 				</div>
 			</div>
 		</script>
 
 		<script type="text/html" id="ccf-hidden-template">
-			<div class="accordion-section expanded">
+			<div class="accordion-section <# if ( 'basic' === startPanel ) { #>expanded<# } #>">
 				<a class="accordion-heading"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
@@ -818,19 +977,43 @@ class CCF_Form_Manager {
 					</div>
 				</div>
 			</div>
-			<div class="accordion-section">
+			<div class="accordion-section <# if ( 'advanced' === startPanel ) { #>expanded<# } #>">
 				<a class="accordion-heading"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
 						<input id="ccf-field-class-name" class="field-class-name" type="text" value="{{ field.className }}">
 					</div>
+					<div>
+						<label for="ccf-field-conditionals-enabled"><?php esc_html_e( 'Enable Conditional Logic:', 'custom-contact-forms' ); ?></label>
+						<select id="ccf-field-conditionals-enabled" class="field-conditionals-enabled">
+							<option value="0"><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
+							<option value="1" <# if ( field.conditionalsEnabled ) { #>selected="selected"<# } #>><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
+						</select>
+					</div>
+					<div class="<# if ( ! field.conditionalsEnabled ) { #>hide<# } #>">
+						<select class="field-conditional-type">
+							<option value="hide"><?php esc_html_e( 'Hide', 'custom-contact-forms' ); ?></option>
+							<option <# if ( 'show' === field.conditionalType ) { #>selected="selected"<# } #> value="show"><?php esc_html_e( 'Show', 'custom-contact-forms' ); ?></option>
+						</select>
+
+						<?php esc_html_e( 'this field if', 'custom-contact-forms' ); ?>
+
+						<select class="field-conditional-fields-required">
+							<option value="all"><?php esc_html_e( 'All', 'custom-contact-forms' ); ?></option>
+							<option <# if ( 'any' === field.conditionalFieldsRequired ) { #>selected="selected"<# } #> value="any"><?php esc_html_e( 'Any', 'custom-contact-forms' ); ?></option>
+						</select>
+
+						<?php esc_html_e( 'of these conditions are true:', 'custom-contact-forms' ); ?>
+					</div>
+					<div class="conditionals <# if ( ! field.conditionalsEnabled ) { #>hide<# } #>">
+					</div>
 				</div>
 			</div>
 		</script>
 
 		<script type="text/html" id="ccf-name-template">
-			<div class="accordion-section expanded">
+			<div class="accordion-section <# if ( 'basic' === startPanel ) { #>expanded<# } #>">
 				<a class="accordion-heading"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
@@ -854,19 +1037,43 @@ class CCF_Form_Manager {
 					</div>
 				</div>
 			</div>
-			<div class="accordion-section">
+			<div class="accordion-section <# if ( 'advanced' === startPanel ) { #>expanded<# } #>">
 				<a class="accordion-heading"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
 						<input id="ccf-field-class-name" class="field-class-name" type="text" value="{{ field.className }}">
 					</div>
+					<div>
+						<label for="ccf-field-conditionals-enabled"><?php esc_html_e( 'Enable Conditional Logic:', 'custom-contact-forms' ); ?></label>
+						<select id="ccf-field-conditionals-enabled" class="field-conditionals-enabled">
+							<option value="0"><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
+							<option value="1" <# if ( field.conditionalsEnabled ) { #>selected="selected"<# } #>><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
+						</select>
+					</div>
+					<div class="<# if ( ! field.conditionalsEnabled ) { #>hide<# } #>">
+						<select class="field-conditional-type">
+							<option value="hide"><?php esc_html_e( 'Hide', 'custom-contact-forms' ); ?></option>
+							<option <# if ( 'show' === field.conditionalType ) { #>selected="selected"<# } #> value="show"><?php esc_html_e( 'Show', 'custom-contact-forms' ); ?></option>
+						</select>
+
+						<?php esc_html_e( 'this field if', 'custom-contact-forms' ); ?>
+
+						<select class="field-conditional-fields-required">
+							<option value="all"><?php esc_html_e( 'All', 'custom-contact-forms' ); ?></option>
+							<option <# if ( 'any' === field.conditionalFieldsRequired ) { #>selected="selected"<# } #> value="any"><?php esc_html_e( 'Any', 'custom-contact-forms' ); ?></option>
+						</select>
+
+						<?php esc_html_e( 'of these conditions are true:', 'custom-contact-forms' ); ?>
+					</div>
+					<div class="conditionals <# if ( ! field.conditionalsEnabled ) { #>hide<# } #>">
+					</div>
 				</div>
 			</div>
 		</script>
 
 		<script type="text/html" id="ccf-date-template">
-			<div class="accordion-section expanded">
+			<div class="accordion-section <# if ( 'basic' === startPanel ) { #>expanded<# } #>">
 				<a class="accordion-heading"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
@@ -913,7 +1120,7 @@ class CCF_Form_Manager {
 					<# } #>
 				</div>
 			</div>
-			<div class="accordion-section">
+			<div class="accordion-section <# if ( 'advanced' === startPanel ) { #>expanded<# } #>">
 				<a class="accordion-heading"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
@@ -926,12 +1133,36 @@ class CCF_Form_Manager {
 							<input id="ccf-field-placeholder" class="field-placeholder" type="text" value="{{ field.placeholder }}">
 						</div>
 					<# } #>
+					<div>
+						<label for="ccf-field-conditionals-enabled"><?php esc_html_e( 'Enable Conditional Logic:', 'custom-contact-forms' ); ?></label>
+						<select id="ccf-field-conditionals-enabled" class="field-conditionals-enabled">
+							<option value="0"><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
+							<option value="1" <# if ( field.conditionalsEnabled ) { #>selected="selected"<# } #>><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
+						</select>
+					</div>
+					<div class="<# if ( ! field.conditionalsEnabled ) { #>hide<# } #>">
+						<select class="field-conditional-type">
+							<option value="hide"><?php esc_html_e( 'Hide', 'custom-contact-forms' ); ?></option>
+							<option <# if ( 'show' === field.conditionalType ) { #>selected="selected"<# } #> value="show"><?php esc_html_e( 'Show', 'custom-contact-forms' ); ?></option>
+						</select>
+
+						<?php esc_html_e( 'this field if', 'custom-contact-forms' ); ?>
+
+						<select class="field-conditional-fields-required">
+							<option value="all"><?php esc_html_e( 'All', 'custom-contact-forms' ); ?></option>
+							<option <# if ( 'any' === field.conditionalFieldsRequired ) { #>selected="selected"<# } #> value="any"><?php esc_html_e( 'Any', 'custom-contact-forms' ); ?></option>
+						</select>
+
+						<?php esc_html_e( 'of these conditions are true:', 'custom-contact-forms' ); ?>
+					</div>
+					<div class="conditionals <# if ( ! field.conditionalsEnabled ) { #>hide<# } #>">
+					</div>
 				</div>
 			</div>
 		</script>
 
 		<script type="text/html" id="ccf-phone-template">
-			<div class="accordion-section expanded">
+			<div class="accordion-section <# if ( 'basic' === startPanel ) { #>expanded<# } #>">
 				<a class="accordion-heading"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
@@ -966,7 +1197,7 @@ class CCF_Form_Manager {
 					</div>
 				</div>
 			</div>
-			<div class="accordion-section">
+			<div class="accordion-section <# if ( 'advanced' === startPanel ) { #>expanded<# } #>">
 				<a class="accordion-heading"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
@@ -977,12 +1208,36 @@ class CCF_Form_Manager {
 						<label for="ccf-field-placeholder"><?php esc_html_e( 'Placeholder Text:', 'custom-contact-forms' ); ?></label>
 						<input id="ccf-field-placeholder" class="field-placeholder" type="text" value="{{ field.placeholder }}">
 					</div>
+					<div>
+						<label for="ccf-field-conditionals-enabled"><?php esc_html_e( 'Enable Conditional Logic:', 'custom-contact-forms' ); ?></label>
+						<select id="ccf-field-conditionals-enabled" class="field-conditionals-enabled">
+							<option value="0"><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
+							<option value="1" <# if ( field.conditionalsEnabled ) { #>selected="selected"<# } #>><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
+						</select>
+					</div>
+					<div class="<# if ( ! field.conditionalsEnabled ) { #>hide<# } #>">
+						<select class="field-conditional-type">
+							<option value="hide"><?php esc_html_e( 'Hide', 'custom-contact-forms' ); ?></option>
+							<option <# if ( 'show' === field.conditionalType ) { #>selected="selected"<# } #> value="show"><?php esc_html_e( 'Show', 'custom-contact-forms' ); ?></option>
+						</select>
+
+						<?php esc_html_e( 'this field if', 'custom-contact-forms' ); ?>
+
+						<select class="field-conditional-fields-required">
+							<option value="all"><?php esc_html_e( 'All', 'custom-contact-forms' ); ?></option>
+							<option <# if ( 'any' === field.conditionalFieldsRequired ) { #>selected="selected"<# } #> value="any"><?php esc_html_e( 'Any', 'custom-contact-forms' ); ?></option>
+						</select>
+
+						<?php esc_html_e( 'of these conditions are true:', 'custom-contact-forms' ); ?>
+					</div>
+					<div class="conditionals <# if ( ! field.conditionalsEnabled ) { #>hide<# } #>">
+					</div>
 				</div>
 			</div>
 		</script>
 
 		<script type="text/html" id="ccf-address-template">
-			<div class="accordion-section expanded">
+			<div class="accordion-section <# if ( 'basic' === startPanel ) { #>expanded<# } #>">
 				<a class="accordion-heading"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
@@ -1013,19 +1268,43 @@ class CCF_Form_Manager {
 					</div>
 				</div>
 			</div>
-			<div class="accordion-section">
+			<div class="accordion-section <# if ( 'advanced' === startPanel ) { #>expanded<# } #>">
 				<a class="accordion-heading"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
 						<input id="ccf-field-class-name" class="field-class-name" type="text" value="{{ field.className }}">
 					</div>
+					<div>
+						<label for="ccf-field-conditionals-enabled"><?php esc_html_e( 'Enable Conditional Logic:', 'custom-contact-forms' ); ?></label>
+						<select id="ccf-field-conditionals-enabled" class="field-conditionals-enabled">
+							<option value="0"><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
+							<option value="1" <# if ( field.conditionalsEnabled ) { #>selected="selected"<# } #>><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
+						</select>
+					</div>
+					<div class="<# if ( ! field.conditionalsEnabled ) { #>hide<# } #>">
+						<select class="field-conditional-type">
+							<option value="hide"><?php esc_html_e( 'Hide', 'custom-contact-forms' ); ?></option>
+							<option <# if ( 'show' === field.conditionalType ) { #>selected="selected"<# } #> value="show"><?php esc_html_e( 'Show', 'custom-contact-forms' ); ?></option>
+						</select>
+
+						<?php esc_html_e( 'this field if', 'custom-contact-forms' ); ?>
+
+						<select class="field-conditional-fields-required">
+							<option value="all"><?php esc_html_e( 'All', 'custom-contact-forms' ); ?></option>
+							<option <# if ( 'any' === field.conditionalFieldsRequired ) { #>selected="selected"<# } #> value="any"><?php esc_html_e( 'Any', 'custom-contact-forms' ); ?></option>
+						</select>
+
+						<?php esc_html_e( 'of these conditions are true:', 'custom-contact-forms' ); ?>
+					</div>
+					<div class="conditionals <# if ( ! field.conditionalsEnabled ) { #>hide<# } #>">
+					</div>
 				</div>
 			</div>
 		</script>
 
 		<script type="text/html" id="ccf-email-template">
-			<div class="accordion-section expanded">
+			<div class="accordion-section <# if ( 'basic' === startPanel ) { #>expanded<# } #>">
 				<a class="accordion-heading"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
@@ -1062,7 +1341,7 @@ class CCF_Form_Manager {
 					</div>
 				</div>
 			</div>
-			<div class="accordion-section">
+			<div class="accordion-section <# if ( 'advanced' === startPanel ) { #>expanded<# } #>">
 				<a class="accordion-heading"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
@@ -1075,6 +1354,30 @@ class CCF_Form_Manager {
 							<input id="ccf-field-placeholder" class="field-placeholder" type="text" value="{{ field.placeholder }}">
 						</div>
 					<# } #>
+					<div>
+						<label for="ccf-field-conditionals-enabled"><?php esc_html_e( 'Enable Conditional Logic:', 'custom-contact-forms' ); ?></label>
+						<select id="ccf-field-conditionals-enabled" class="field-conditionals-enabled">
+							<option value="0"><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
+							<option value="1" <# if ( field.conditionalsEnabled ) { #>selected="selected"<# } #>><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
+						</select>
+					</div>
+					<div class="<# if ( ! field.conditionalsEnabled ) { #>hide<# } #>">
+						<select class="field-conditional-type">
+							<option value="hide"><?php esc_html_e( 'Hide', 'custom-contact-forms' ); ?></option>
+							<option <# if ( 'show' === field.conditionalType ) { #>selected="selected"<# } #> value="show"><?php esc_html_e( 'Show', 'custom-contact-forms' ); ?></option>
+						</select>
+
+						<?php esc_html_e( 'this field if', 'custom-contact-forms' ); ?>
+
+						<select class="field-conditional-fields-required">
+							<option value="all"><?php esc_html_e( 'All', 'custom-contact-forms' ); ?></option>
+							<option <# if ( 'any' === field.conditionalFieldsRequired ) { #>selected="selected"<# } #> value="any"><?php esc_html_e( 'Any', 'custom-contact-forms' ); ?></option>
+						</select>
+
+						<?php esc_html_e( 'of these conditions are true:', 'custom-contact-forms' ); ?>
+					</div>
+					<div class="conditionals <# if ( ! field.conditionalsEnabled ) { #>hide<# } #>">
+					</div>
 				</div>
 			</div>
 		</script>
@@ -1088,8 +1391,25 @@ class CCF_Form_Manager {
 			<a aria-hidden="true" data-icon="&#xe604;" class="delete"></a>
 		</script>
 
+		<script type="text/html" id="ccf-field-conditional-template">
+			<a aria-hidden="true" data-icon="&#xe605;" class="add"></a>
+			<a aria-hidden="true" data-icon="&#xe604;" class="delete"></a>
+
+			<select class="conditional-field">
+			</select>
+
+			<select class="conditional-compare">
+				<option <# if ( 'is' === conditional.compare ) { #>selected<# } #> value="is"><?php esc_html_e( 'is', 'custom-contact-forms' ); ?></option>
+				<option <# if ( 'is-not' === conditional.compare ) { #>selected<# } #> value="is-not"><?php esc_html_e( 'is not', 'custom-contact-forms' ); ?></option>
+				<option <# if ( 'greater-than' === conditional.compare ) { #>selected<# } #> value="greater-than"><?php esc_html_e( '>', 'custom-contact-forms' ); ?></option>
+				<option <# if ( 'less-than' === conditional.compare ) { #>selected<# } #> value="less-than"><?php esc_html_e( '<', 'custom-contact-forms' ); ?></option>
+				<option <# if ( 'contains' === conditional.compare ) { #>selected<# } #> value="contains"><?php esc_html_e( 'contains', 'custom-contact-forms' ); ?></option>
+			</select>
+			<input class="conditional-value" placeholder="<?php esc_attr_e( 'Field value', 'custom-contact-forms' ); ?>" type="text" value="{{ conditional.value }}">
+		</script>
+
 		<script type="text/html" id="ccf-dropdown-template">
-			<div class="accordion-section expanded">
+			<div class="accordion-section <# if ( 'basic' === startPanel ) { #>expanded<# } #>">
 				<a class="accordion-heading"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
@@ -1120,19 +1440,43 @@ class CCF_Form_Manager {
 					</div>
 				</div>
 			</div>
-			<div class="accordion-section">
+			<div class="accordion-section <# if ( 'advanced' === startPanel ) { #>expanded<# } #>">
 				<a class="accordion-heading"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
 						<input id="ccf-field-class-name" class="field-class-name" type="text" value="{{ field.className }}">
+					</div>
+					<div>
+						<label for="ccf-field-conditionals-enabled"><?php esc_html_e( 'Enable Conditional Logic:', 'custom-contact-forms' ); ?></label>
+						<select id="ccf-field-conditionals-enabled" class="field-conditionals-enabled">
+							<option value="0"><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
+							<option value="1" <# if ( field.conditionalsEnabled ) { #>selected="selected"<# } #>><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
+						</select>
+					</div>
+					<div class="<# if ( ! field.conditionalsEnabled ) { #>hide<# } #>">
+						<select class="field-conditional-type">
+							<option value="hide"><?php esc_html_e( 'Hide', 'custom-contact-forms' ); ?></option>
+							<option <# if ( 'show' === field.conditionalType ) { #>selected="selected"<# } #> value="show"><?php esc_html_e( 'Show', 'custom-contact-forms' ); ?></option>
+						</select>
+
+						<?php esc_html_e( 'this field if', 'custom-contact-forms' ); ?>
+
+						<select class="field-conditional-fields-required">
+							<option value="all"><?php esc_html_e( 'All', 'custom-contact-forms' ); ?></option>
+							<option <# if ( 'any' === field.conditionalFieldsRequired ) { #>selected="selected"<# } #> value="any"><?php esc_html_e( 'Any', 'custom-contact-forms' ); ?></option>
+						</select>
+
+						<?php esc_html_e( 'of these conditions are true:', 'custom-contact-forms' ); ?>
+					</div>
+					<div class="conditionals <# if ( ! field.conditionalsEnabled ) { #>hide<# } #>">
 					</div>
 				</div>
 			</div>
 		</script>
 
 		<script type="text/html" id="ccf-radio-template">
-			<div class="accordion-section expanded">
+			<div class="accordion-section <# if ( 'basic' === startPanel ) { #>expanded<# } #>">
 				<a class="accordion-heading"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
@@ -1163,19 +1507,43 @@ class CCF_Form_Manager {
 					</div>
 				</div>
 			</div>
-			<div class="accordion-section">
+			<div class="accordion-section <# if ( 'advanced' === startPanel ) { #>expanded<# } #>">
 				<a class="accordion-heading"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
 						<input id="ccf-field-class-name" class="field-class-name" type="text" value="{{ field.className }}">
+					</div>
+					<div>
+						<label for="ccf-field-conditionals-enabled"><?php esc_html_e( 'Enable Conditional Logic:', 'custom-contact-forms' ); ?></label>
+						<select id="ccf-field-conditionals-enabled" class="field-conditionals-enabled">
+							<option value="0"><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
+							<option value="1" <# if ( field.conditionalsEnabled ) { #>selected="selected"<# } #>><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
+						</select>
+					</div>
+					<div class="<# if ( ! field.conditionalsEnabled ) { #>hide<# } #>">
+						<select class="field-conditional-type">
+							<option value="hide"><?php esc_html_e( 'Hide', 'custom-contact-forms' ); ?></option>
+							<option <# if ( 'show' === field.conditionalType ) { #>selected="selected"<# } #> value="show"><?php esc_html_e( 'Show', 'custom-contact-forms' ); ?></option>
+						</select>
+
+						<?php esc_html_e( 'this field if', 'custom-contact-forms' ); ?>
+
+						<select class="field-conditional-fields-required">
+							<option value="all"><?php esc_html_e( 'All', 'custom-contact-forms' ); ?></option>
+							<option <# if ( 'any' === field.conditionalFieldsRequired ) { #>selected="selected"<# } #> value="any"><?php esc_html_e( 'Any', 'custom-contact-forms' ); ?></option>
+						</select>
+
+						<?php esc_html_e( 'of these conditions are true:', 'custom-contact-forms' ); ?>
+					</div>
+					<div class="conditionals <# if ( ! field.conditionalsEnabled ) { #>hide<# } #>">
 					</div>
 				</div>
 			</div>
 		</script>
 
 		<script type="text/html" id="ccf-checkboxes-template">
-			<div class="accordion-section expanded">
+			<div class="accordion-section <# if ( 'basic' === startPanel ) { #>expanded<# } #>">
 				<a class="accordion-heading"><?php esc_html_e( 'Basic', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
@@ -1206,12 +1574,36 @@ class CCF_Form_Manager {
 					</div>
 				</div>
 			</div>
-			<div class="accordion-section">
+			<div class="accordion-section <# if ( 'advanced' === startPanel ) { #>expanded<# } #>">
 				<a class="accordion-heading"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></a>
 				<div class="section-content">
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
 						<input id="ccf-field-class-name" class="field-class-name" type="text" value="{{ field.className }}">
+					</div>
+					<div>
+						<label for="ccf-field-conditionals-enabled"><?php esc_html_e( 'Enable Conditional Logic:', 'custom-contact-forms' ); ?></label>
+						<select id="ccf-field-conditionals-enabled" class="field-conditionals-enabled">
+							<option value="0"><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
+							<option value="1" <# if ( field.conditionalsEnabled ) { #>selected="selected"<# } #>><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
+						</select>
+					</div>
+					<div class="<# if ( ! field.conditionalsEnabled ) { #>hide<# } #>">
+						<select class="field-conditional-type">
+							<option value="hide"><?php esc_html_e( 'Hide', 'custom-contact-forms' ); ?></option>
+							<option <# if ( 'show' === field.conditionalType ) { #>selected="selected"<# } #> value="show"><?php esc_html_e( 'Show', 'custom-contact-forms' ); ?></option>
+						</select>
+
+						<?php esc_html_e( 'this field if', 'custom-contact-forms' ); ?>
+
+						<select class="field-conditional-fields-required">
+							<option value="all"><?php esc_html_e( 'All', 'custom-contact-forms' ); ?></option>
+							<option <# if ( 'any' === field.conditionalFieldsRequired ) { #>selected="selected"<# } #> value="any"><?php esc_html_e( 'Any', 'custom-contact-forms' ); ?></option>
+						</select>
+
+						<?php esc_html_e( 'of these conditions are true:', 'custom-contact-forms' ); ?>
+					</div>
+					<div class="conditionals <# if ( ! field.conditionalsEnabled ) { #>hide<# } #>">
 					</div>
 				</div>
 			</div>
@@ -1224,7 +1616,7 @@ class CCF_Form_Manager {
 		</script>
 
 		<script type="text/html" id="ccf-single-line-text-preview-template">
-			<label>{{ field.label }} <# if ( field.required ) { #><span>*</span><# } #></label>
+			<label>{{ field.label }} <# if ( field.required ) { #><span class="required">*</span><# } #> <# if ( field.conditionalsEnabled ) { #><span class="conditionals-enabled">if</span><# } #></label>
 			<input disabled type="text" placeholder="{{ field.placeholder }}" value="{{ field.value }}">
 			<# if ( field.description ) { #>
 				<div class="field-description">{{ field.description }}</div>
@@ -1232,7 +1624,7 @@ class CCF_Form_Manager {
 		</script>
 
 		<script type="text/html" id="ccf-file-preview-template">
-			<label>{{ field.label }} <# if ( field.required ) { #><span>*</span><# } #></label>
+			<label>{{ field.label }} <# if ( field.required ) { #><span class="required">*</span><# } #> <# if ( field.conditionalsEnabled ) { #><span class="conditionals-enabled">if</span><# } #></label>
 			<input disabled type="file" placeholder="{{ field.placeholder }}" value="{{ field.value }}">
 			<div class="field-description">
 				<# if ( field.fileExtensions ) {
@@ -1250,15 +1642,15 @@ class CCF_Form_Manager {
 		</script>
 
 		<script type="text/html" id="ccf-recaptcha-preview-template">
-			<label>{{ field.label }} <# if ( field.required ) { #><span>*</span><# } #></label>
-			<img class="recaptcha-preview-img" src="<?php echo plugins_url( 'img/recaptcha.png', dirname( __FILE__ )); ?>">
+			<label>{{ field.label }} <# if ( field.required ) { #><span class="required">*</span><# } #> <# if ( field.conditionalsEnabled ) { #><span class="conditionals-enabled">if</span><# } #></label>
+			<img class="recaptcha-preview-img" src="<?php echo plugins_url( 'img/recaptcha.png', dirname( __FILE__ ) ); ?>">
 			<# if ( field.description ) { #>
 				<div class="field-description">{{ field.description }}</div>
 			<# } #>
 		</script>
 
 		<script type="text/html" id="ccf-paragraph-text-preview-template">
-			<label>{{ field.label }} <# if ( field.required ) { #><span>*</span><# } #></label>
+			<label>{{ field.label }} <# if ( field.required ) { #><span class="required">*</span><# } #> <# if ( field.conditionalsEnabled ) { #><span class="conditionals-enabled">if</span><# } #></label>
 			<textarea placeholder="{{ field.placeholder }}" disabled>{{ field.value }}</textarea>
 			<# if ( field.description ) { #>
 				<div class="field-description">{{ field.description }}</div>
@@ -1266,7 +1658,7 @@ class CCF_Form_Manager {
 		</script>
 
 		<script type="text/html" id="ccf-dropdown-preview-template">
-			<label>{{ field.label }} <# if ( field.required ) { #><span>*</span><# } #></label>
+			<label>{{ field.label }} <# if ( field.required ) { #><span class="required">*</span><# } #> <# if ( field.conditionalsEnabled ) { #><span class="conditionals-enabled">if</span><# } #></label>
 			<select>
 				<# if ( field.choices.length === 0 || ( field.choices.length === 1 && ! field.choices.at( 0 ).get( 'label' ) && ! field.choices.at( 0 ).get( 'value' ) ) ) { #>
 					<option><?php esc_html_e( 'An example choice', 'custom-contact-forms' ); ?></option>
@@ -1282,7 +1674,7 @@ class CCF_Form_Manager {
 		</script>
 
 		<script type="text/html" id="ccf-radio-preview-template">
-			<label>{{ field.label }} <# if ( field.required ) { #><span>*</span><# } #></label>
+			<label>{{ field.label }} <# if ( field.required ) { #><span class="required">*</span><# } #> <# if ( field.conditionalsEnabled ) { #><span class="conditionals-enabled">if</span><# } #></label>
 			<# if ( field.choices.length === 0 || ( field.choices.length === 1 && ! field.choices.at( 0 ).get( 'label' ) && ! field.choices.at( 0 ).get( 'value' ) ) ) { #>
 				<div>
 					<input type="radio" value="1" checked="checked"> <label><?php esc_html_e( 'An example choice', 'custom-contact-forms' ); ?></label>
@@ -1300,7 +1692,7 @@ class CCF_Form_Manager {
 		</script>
 
 		<script type="text/html" id="ccf-checkboxes-preview-template">
-			<label>{{ field.label }} <# if ( field.required ) { #><span>*</span><# } #></label>
+			<label>{{ field.label }} <# if ( field.required ) { #><span class="required">*</span><# } #> <# if ( field.conditionalsEnabled ) { #><span class="conditionals-enabled">if</span><# } #></label>
 			<# if ( field.choices.length === 0 || ( field.choices.length === 1 && ! field.choices.at( 0 ).get( 'label' ) && ! field.choices.at( 0 ).get( 'value' ) ) ) { #>
 				<div>
 					<input type="checkbox" value="1" checked="checked"> <label><?php esc_html_e( 'An example choice', 'custom-contact-forms' ); ?></label>
@@ -1318,6 +1710,7 @@ class CCF_Form_Manager {
 		</script>
 
 		<script type="text/html" id="ccf-html-preview-template">
+			<# if ( field.conditionalsEnabled ) { #><span class="conditionals-enabled">if</span><# } #>
 			<# if ( typeof mce !== 'undefined' ) { #>
 				{{{ field.html }}}
 			<# } else { #>
@@ -1326,6 +1719,7 @@ class CCF_Form_Manager {
 		</script>
 
 		<script type="text/html" id="ccf-section-header-preview-template">
+			<# if ( field.conditionalsEnabled ) { #><span class="conditionals-enabled">if</span><# } #>
 			<div class="heading">
 				<# if ( field.heading ) { #>{{ field.heading }}<# } else { #><?php esc_html_e( 'Section Heading', 'custom-contact-forms' ); ?><# } #>
 			</div>
@@ -1333,7 +1727,7 @@ class CCF_Form_Manager {
 		</script>
 
 		<script type="text/html" id="ccf-name-preview-template">
-			<label>{{ field.label }} <# if ( field.required ) { #><span>*</span><# } #></label>
+			<label>{{ field.label }} <# if ( field.required ) { #><span class="required">*</span><# } #> <# if ( field.conditionalsEnabled ) { #><span class="conditionals-enabled">if</span><# } #></label>
 			<div class="left">
 				<input type="text">
 				<label class="sub-label"><?php esc_html_e( 'First', 'custom-contact-forms' ); ?></label>
@@ -1348,7 +1742,7 @@ class CCF_Form_Manager {
 		</script>
 
 		<script type="text/html" id="ccf-date-preview-template">
-			<label>{{ field.label }} <# if ( field.required ) { #><span>*</span><# } #></label>
+			<label>{{ field.label }} <# if ( field.required ) { #><span class="required">*</span><# } #> <# if ( field.conditionalsEnabled ) { #><span class="conditionals-enabled">if</span><# } #></label>
 			<# if ( field.showDate && ! field.showTime ) { #>
 				<input value="{{ field.value }}" class="ccf-datepicker" disabled type="text">
 			<# } else if ( ! field.showDate && field.showTime ) { #>
@@ -1396,7 +1790,7 @@ class CCF_Form_Manager {
 		</script>
 
 		<script type="text/html" id="ccf-address-preview-template">
-			<label>{{ field.label }} <# if ( field.required ) { #><span>*</span><# } #></label>
+			<label>{{ field.label }} <# if ( field.required ) { #><span class="required">*</span><# } #> <# if ( field.conditionalsEnabled ) { #><span class="conditionals-enabled">if</span><# } #></label>
 			<# if ( field.addressType === 'us' ) { #>
 				<div class="full">
 					<input type="text">
@@ -1458,7 +1852,7 @@ class CCF_Form_Manager {
 		</script>
 
 		<script type="text/html" id="ccf-email-preview-template">
-			<label>{{ field.label }} <# if ( field.required ) { #><span>*</span><# } #></label>
+			<label>{{ field.label }} <# if ( field.required ) { #><span class="required">*</span><# } #> <# if ( field.conditionalsEnabled ) { #><span class="conditionals-enabled">if</span><# } #></label>
 			<# if ( ! field.emailConfirmation ) { #>
 				<input placeholder="<# if ( field.placeholder ) { #>{{ field.placeholder }}<# } else { #><?php esc_html_e( 'email@example.com', 'custom-contact-forms' ); ?><# } #>" disabled type="text" value="{{ field.value }}">
 			<# } else { #>
@@ -1477,7 +1871,7 @@ class CCF_Form_Manager {
 		</script>
 
 		<script type="text/html" id="ccf-website-preview-template">
-			<label>{{ field.label }} <# if ( field.required ) { #><span>*</span><# } #></label>
+			<label>{{ field.label }} <# if ( field.required ) { #><span class="required">*</span><# } #> <# if ( field.conditionalsEnabled ) { #><span class="conditionals-enabled">if</span><# } #></label>
 			<input placeholder="<# if ( field.placeholder ) { #>{{ field.placeholder }}<# } else { #>http://<# } #>" disabled type="text" value="{{ field.value }}">
 			<# if ( field.description ) { #>
 				<div class="field-description">{{ field.description }}</div>
@@ -1485,7 +1879,7 @@ class CCF_Form_Manager {
 		</script>
 
 		<script type="text/html" id="ccf-phone-preview-template">
-			<label>{{ field.label }} <# if ( field.required ) { #><span>*</span><# } #></label>
+			<label>{{ field.label }} <# if ( field.required ) { #><span class="required">*</span><# } #> <# if ( field.conditionalsEnabled ) { #><span class="conditionals-enabled">if</span><# } #></label>
 			<input placeholder="<# if ( field.placeholder ) { #>{{ field.placeholder }}<# } else if ( 'us' === field.phoneFormat ) { #>(301) 101-8976<# } #>" disabled type="text" value="{{ field.value }}">
 			<# if ( field.description ) { #>
 				<div class="field-description">{{ field.description }}</div>
@@ -1744,13 +2138,13 @@ class CCF_Form_Manager {
 
 		if ( 'post.php' == $pagenow || 'post-new.php' == $pagenow ) {
 			if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
-				$js_manager_path = '/build/js/form-manager.js';
-				$js_mce_path = '/js/form-mce.js';
-				$css_path = '/build/css/form-manager.css';
+				$js_manager_path = '/assets/build/js/form-manager.js';
+				$js_mce_path = '/assets/js/form-mce.js';
+				$css_path = '/assets/build/css/form-manager.css';
 			} else {
-				$js_manager_path = '/build/js/form-manager.min.js';
-				$js_mce_path = '/build/js/form-mce.min.js';
-				$css_path = '/build/css/form-manager.min.css';
+				$js_manager_path = '/assets/build/js/form-manager.min.js';
+				$js_mce_path = '/assets/build/js/form-mce.min.js';
+				$css_path = '/assets/build/css/form-manager.min.css';
 			}
 
 			$field_labels = apply_filters( 'ccf_field_labels', array(
@@ -1765,7 +2159,7 @@ class CCF_Form_Manager {
 
 			$structure_field_labels = apply_filters( 'ccf_structure_field_labels', array(
 				'html' => __( 'HTML', 'custom-contact-forms' ),
-				'section-header' => __( 'Section Header', 'custom-contact-forms' ),
+				'section-header' => __( 'Section', 'custom-contact-forms' ),
 			));
 
 			$special_field_labels = apply_filters( 'ccf_special_field_labels', array(
@@ -1781,7 +2175,7 @@ class CCF_Form_Manager {
 			wp_register_script( 'moment', plugins_url( '/bower_components/moment/moment.js', dirname( __FILE__ ) ), array(), CCF_VERSION );
 
 			if ( ! wp_script_is( 'wp-api', 'registered' ) ) {
-				wp_register_script( 'wp-api', plugins_url( '/vendor/wp-api/wp-api/wp-api.js', dirname( __FILE__ ) ), array(), CCF_VERSION );
+				wp_register_script( 'wp-api', plugins_url( '/wp-api/wp-api.js', dirname( __FILE__ ) ), array(), CCF_VERSION );
 			}
 
 			$site_url_parsed = parse_url( site_url() );
@@ -1809,7 +2203,7 @@ class CCF_Form_Manager {
 				'specialFieldLabels' => $special_field_labels,
 				'maxFileSize' => floor( wp_max_upload_size() / 1000 / 1000 ),
 				'noEmailFields' => esc_html__( 'You have no email fields', 'custom-contact-forms' ),
-				'noAvailableFields' => esc_html__( 'You have no available fields', 'custom-contact-forms' ),
+				'noAvailableFields' => esc_html__( 'No available fields', 'custom-contact-forms' ),
 				'noNameFields' => esc_html__( 'You have no name fields', 'custom-contact-forms' ),
 				'noApplicableFields' => esc_html__( 'You have no applicable fields', 'custom-contact-forms' ),
 				'chooseFormField' => esc_html__( 'Choose a Form Field', 'custom-contact-forms' ),

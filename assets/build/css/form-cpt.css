@@ -1,0 +1,141 @@
+#titlediv {
+  display: none; }
+
+#submitdiv {
+  display: none; }
+
+#wp-admin-bar-view {
+  display: none; }
+
+.ccf-title h1 {
+  margin: 0; }
+  .ccf-title h1 .button {
+    vertical-align: middle;
+    top: -2px;
+    position: relative;
+    margin-left: 8px; }
+
+#post-body-content .ccf-open-form-manager {
+  display: none; }
+
+.add-new-h2 {
+  display: none; }
+
+#ccf-at-a-glance .inside {
+  margin: 0;
+  padding: 0; }
+  #ccf-at-a-glance .inside .line {
+    display: block; }
+  #ccf-at-a-glance .inside .has-icon {
+    display: block; }
+    #ccf-at-a-glance .inside .has-icon:before {
+      font: normal 20px/1 'dashicons';
+      speak: none;
+      display: inline-block;
+      padding: 0 5px 0 0;
+      left: -1px;
+      position: relative;
+      vertical-align: top;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-decoration: none !important;
+      top: -1px;
+      color: #888; }
+  #ccf-at-a-glance .inside #ccf-created-by:before {
+    content: "\f110"; }
+  #ccf-at-a-glance .inside #ccf-submission-num:before {
+    content: "\f226"; }
+  #ccf-at-a-glance .inside #ccf-field-num:before {
+    content: "\f175"; }
+  #ccf-at-a-glance .inside #major-publishing-actions {
+    overflow: auto; }
+    #ccf-at-a-glance .inside #major-publishing-actions .submitdelete {
+      color: #a00;
+      text-decoration: none;
+      padding: 1px 2px; }
+    #ccf-at-a-glance .inside #major-publishing-actions .export-button {
+      float: right; }
+
+.ccf-form-cpt-preview .ccf-form-preview {
+  border: 0;
+  padding: 0;
+  background-color: inherit; }
+.ccf-form-cpt-preview .spinner {
+  display: block;
+  float: none; }
+
+.ccf-submission-column-controller .spinner {
+  display: block;
+  float: none; }
+
+#ccf-submissions [data-icon]:before {
+  font-family: 'form-manager';
+  content: attr(data-icon);
+  speak: none;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  cursor: pointer;
+  -webkit-font-smoothing: antialiased; }
+#ccf-submissions .ccf-submission-icon {
+  font: normal 20px/1;
+  speak: none;
+  display: inline-block;
+  padding: 12px 0px 4px 10px;
+  top: 0;
+  position: relative;
+  float: right;
+  width: 23px;
+  height: 30px;
+  cursor: pointer;
+  color: inherit; }
+#ccf-submissions .inside {
+  padding: 0;
+  margin: 0; }
+  #ccf-submissions .inside table {
+    border: 0;
+    border-collapse: collapse;
+    table-layout: auto;
+    width: 100%; }
+    #ccf-submissions .inside table td, #ccf-submissions .inside table th {
+      padding: 8px 10px; }
+    #ccf-submissions .inside table th input {
+      margin: 0; }
+    #ccf-submissions .inside table tbody tr {
+      background-color: #f9f9f9; }
+      #ccf-submissions .inside table tbody tr td {
+        width: auto; }
+      #ccf-submissions .inside table tbody tr .spinner {
+        float: none;
+        display: block; }
+      #ccf-submissions .inside table tbody tr .actions {
+        text-align: right; }
+        #ccf-submissions .inside table tbody tr .actions a {
+          cursor: pointer;
+          color: inherit;
+          padding-left: 4px; }
+      #ccf-submissions .inside table tbody tr .submission-wrapper {
+        display: none; }
+      #ccf-submissions .inside table tbody tr:nth-child(2n-1) {
+        background-color: #fff; }
+      #ccf-submissions .inside table tbody tr td.no-submissions {
+        text-align: center;
+        width: auto;
+        padding-bottom: 8px; }
+  #ccf-submissions .inside .ccf-pagination {
+    border-top: 1px solid #eee;
+    margin-top: 0;
+    padding: 8px; }
+
+.ccf-submission-content .field-slug {
+  font-weight: bold;
+  font-size: 15px;
+  padding: 7px; }
+.ccf-submission-content .field-content {
+  padding: 7px;
+  background-color: #f9f9f9; }
+  .ccf-submission-content .field-content span {
+    font-style: italic; }
+
+/*# sourceMappingURL=form-cpt.css.map */

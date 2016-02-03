@@ -45,11 +45,12 @@ class FormManagerManageFieldCest {
 		$I->click( 'Add Form' );
 
 		$I->wantTo( 'Create one of each field' );
-		
+
 		$I->dragAndDrop( '.single-line-text.ui-draggable', '.form-content' );
 		$I->see( '.form-content .single-line-text' );
 
-		/*$I->dragAndDrop( '.left-sidebar .dropdown', '.form-content' );
+		/*
+		$I->dragAndDrop( '.left-sidebar .dropdown', '.form-content' );
 		$I->see( '.form-content .single-line-text' );
 		$I->see( '.form-content .dropdown' );
 

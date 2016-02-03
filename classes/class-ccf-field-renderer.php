@@ -10,6 +10,11 @@ class CCF_Field_Renderer {
 	public function __construct() {}
 
 	/**
+	 * Keep track of sections
+	 */
+	public $section_open = false;
+
+	/**
 	 * Get single-line-text field HTML, including any errors from the last form submission. if there is an
 	 * error the field will remember it's last submitted value.
 	 *
@@ -32,8 +37,8 @@ class CCF_Field_Renderer {
 
 		if ( ! empty( $all_errors ) ) {
 			if ( apply_filters( 'ccf_show_last_field_value', true, $field_id ) ) {
-				if ( ! empty( $_POST['ccf_field_' . $slug] ) ) {
-					$post_value = $_POST['ccf_field_' . $slug];
+				if ( ! empty( $_POST[ 'ccf_field_' . $slug ] ) ) {
+					$post_value = $_POST[ 'ccf_field_' . $slug ];
 				}
 			}
 		}
@@ -46,7 +51,8 @@ class CCF_Field_Renderer {
 				<?php if ( ! empty( $required ) ) : ?><span class="required">*</span><?php endif; ?>
 				<?php echo esc_html( $label ); ?>
 			</label>
-			<input class="form-control <?php if ( ! empty( $errors ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> type="text" name="ccf_field_<?php echo esc_attr( $slug ); ?>" id="ccf_field_<?php echo esc_attr( $slug ); ?>" placeholder="<?php echo esc_attr( $placeholder ); ?>" value="<?php if ( ! empty( $post_value ) ) { echo esc_attr( $post_value ); } else { echo esc_attr( $value ); } ?>">
+			<input class="form-control <?php if ( ! empty( $errors ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> type="text" name="ccf_field_<?php echo esc_attr( $slug ); ?>" id="ccf_field_<?php echo esc_attr( $slug ); ?>" placeholder="<?php echo esc_attr( $placeholder ); ?>" value="<?php if ( ! empty( $post_value ) ) { echo esc_attr( $post_value );
+} else { echo esc_attr( $value ); } ?>">
 
 			<?php if ( ! empty( $description ) ) : ?>
 				<div class="field-description help-block text-muted">
@@ -88,8 +94,8 @@ class CCF_Field_Renderer {
 
 		if ( ! empty( $all_errors ) ) {
 			if ( apply_filters( 'ccf_show_last_field_value', true, $field_id ) ) {
-				if ( ! empty( $_POST['ccf_field_' . $slug] ) ) {
-					$post_value = $_POST['ccf_field_' . $slug];
+				if ( ! empty( $_POST[ 'ccf_field_' . $slug ] ) ) {
+					$post_value = $_POST[ 'ccf_field_' . $slug ];
 				}
 			}
 		}
@@ -114,7 +120,8 @@ class CCF_Field_Renderer {
 				<?php echo esc_html( $label ); ?>
 			</label>
 
-			<input class="form-control <?php if ( ! empty( $errors ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> type="file" name="ccf_field_<?php echo esc_attr( $slug ); ?>" id="ccf_field_<?php echo esc_attr( $slug ); ?>" placeholder="<?php echo esc_attr( $placeholder ); ?>" value="<?php if ( ! empty( $post_value ) ) { echo esc_attr( $post_value ); } else { echo esc_attr( $value ); } ?>" accept="<?php echo esc_attr( preg_replace( '/([^,\s]+)/', '.$1', $file_extensions ) ); ?>">
+			<input class="form-control <?php if ( ! empty( $errors ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> type="file" name="ccf_field_<?php echo esc_attr( $slug ); ?>" id="ccf_field_<?php echo esc_attr( $slug ); ?>" placeholder="<?php echo esc_attr( $placeholder ); ?>" value="<?php if ( ! empty( $post_value ) ) { echo esc_attr( $post_value );
+} else { echo esc_attr( $value ); } ?>" accept="<?php echo esc_attr( preg_replace( '/([^,\s]+)/', '.$1', $file_extensions ) ); ?>">
 
 			<div class="field-description help-block text-muted">
 				<?php if ( ! empty( $file_extensions ) ) : ?>
@@ -192,18 +199,29 @@ class CCF_Field_Renderer {
 		$class_name = get_post_meta( $field_id, 'ccf_field_className', true );
 
 		ob_start();
+
+		if ( $this->section_open ) {
+			echo '</div>';
+		}
+
 		?>
 
-		<div class="field skip-field <?php echo esc_attr( $slug ); ?> field-type-section-header field-<?php echo (int) $field_id; ?> <?php echo esc_attr( $class_name ); ?>">
-			<div class="heading">
-				<?php echo esc_html( $heading ); ?>
+		<div class="ccf-section">
+
+			<div data-field-type="section-header" data-field-slug="<?php echo esc_attr( $slug ); ?>" class="field skip-field <?php echo esc_attr( $slug ); ?> field-type-section-header field-<?php echo (int) $field_id; ?> <?php echo esc_attr( $class_name ); ?>">
+				<div class="heading">
+					<?php echo esc_html( $heading ); ?>
+				</div>
+				<div class="subheading">
+					<?php echo esc_html( $subheading ); ?>
+				</div>
 			</div>
-			<div class="subheading">
-				<?php echo esc_html( $subheading ); ?>
-			</div>
-		</div>
 
 		<?php
+
+		$this->section_open = true;
+
+
 		return ob_get_clean();
 	}
 
@@ -223,7 +241,7 @@ class CCF_Field_Renderer {
 		ob_start();
 		?>
 
-		<div class="field skip-field <?php echo esc_attr( $slug ); ?> field-type-html field-<?php echo (int) $field_id; ?> <?php echo esc_attr( $class_name ); ?>">
+		<div data-field-type="html" data-field-slug="<?php echo esc_attr( $slug ); ?>" class="field skip-field <?php echo esc_attr( $slug ); ?> field-type-html field-<?php echo (int) $field_id; ?> <?php echo esc_attr( $class_name ); ?>">
 			<?php echo wp_kses_post( $html ); ?>
 		</div>
 
@@ -264,9 +282,9 @@ class CCF_Field_Renderer {
 		$selected = 0;
 		if ( ! empty( $choice_ids ) ) {
 			foreach ( $choice_ids as $choice_id ) {
-				$choices[$choice_id] = $this->get_choice( $choice_id );
+				$choices[ $choice_id ] = $this->get_choice( $choice_id );
 
-				if ( ! empty( $choices[$choice_id]['selected'] ) ) {
+				if ( ! empty( $choices[ $choice_id ]['selected'] ) ) {
 					$selected++;
 				}
 			}
@@ -283,8 +301,8 @@ class CCF_Field_Renderer {
 
 		if ( ! empty( $all_errors ) ) {
 			if ( apply_filters( 'ccf_show_last_field_value', true, $field_id ) ) {
-				if ( ! empty( $_POST['ccf_field_' . $slug] ) ) {
-					$post_value = $_POST['ccf_field_' . $slug];
+				if ( ! empty( $_POST[ 'ccf_field_' . $slug ] ) ) {
+					$post_value = $_POST[ 'ccf_field_' . $slug ];
 				}
 			}
 		}
@@ -345,16 +363,17 @@ class CCF_Field_Renderer {
 		$selected = 0;
 		if ( ! empty( $choice_ids ) ) {
 			foreach ( $choice_ids as $choice_id ) {
-				$choices[$choice_id] = $this->get_choice( $choice_id );
+				$choices[ $choice_id ] = $this->get_choice( $choice_id );
 
-				if ( ! empty( $choices[$choice_id]['selected'] ) ) {
+				if ( ! empty( $choices[ $choice_id ]['selected'] ) ) {
 					$selected++;
 				}
 			}
 		}
 
 		$slug = get_post_meta( $field_id, 'ccf_field_slug', true );
-		$label = get_post_meta( $field_id, 'ccf_field_label', true );;
+		$label = get_post_meta( $field_id, 'ccf_field_label', true );
+		;
 		$required = get_post_meta( $field_id, 'ccf_field_required', true );
 		$class_name = get_post_meta( $field_id, 'ccf_field_className', true );
 		$description = get_post_meta( $field_id, 'ccf_field_description', true );
@@ -364,8 +383,8 @@ class CCF_Field_Renderer {
 
 		if ( ! empty( $all_errors ) ) {
 			if ( apply_filters( 'ccf_show_last_field_value', true, $field_id ) ) {
-				if ( ! empty( $_POST['ccf_field_' . $slug] ) ) {
-					$post_value = $_POST['ccf_field_' . $slug];
+				if ( ! empty( $_POST[ 'ccf_field_' . $slug ] ) ) {
+					$post_value = $_POST[ 'ccf_field_' . $slug ];
 				}
 			}
 		}
@@ -426,16 +445,17 @@ class CCF_Field_Renderer {
 		$selected = 0;
 		if ( ! empty( $choice_ids ) ) {
 			foreach ( $choice_ids as $choice_id ) {
-				$choices[$choice_id] = $this->get_choice( $choice_id );
+				$choices[ $choice_id ] = $this->get_choice( $choice_id );
 
-				if ( ! empty( $choices[$choice_id]['selected'] ) ) {
+				if ( ! empty( $choices[ $choice_id ]['selected'] ) ) {
 					$selected++;
 				}
 			}
 		}
 
 		$slug = get_post_meta( $field_id, 'ccf_field_slug', true );
-		$label = get_post_meta( $field_id, 'ccf_field_label', true );;
+		$label = get_post_meta( $field_id, 'ccf_field_label', true );
+		;
 		$required = get_post_meta( $field_id, 'ccf_field_required', true );
 		$class_name = get_post_meta( $field_id, 'ccf_field_className', true );
 		$description = get_post_meta( $field_id, 'ccf_field_description', true );
@@ -445,8 +465,8 @@ class CCF_Field_Renderer {
 
 		if ( ! empty( $all_errors ) ) {
 			if ( apply_filters( 'ccf_show_last_field_value', true, $field_id ) ) {
-				if ( ! empty( $_POST['ccf_field_' . $slug] ) ) {
-					$post_value = $_POST['ccf_field_' . $slug];
+				if ( ! empty( $_POST[ 'ccf_field_' . $slug ] ) ) {
+					$post_value = $_POST[ 'ccf_field_' . $slug ];
 				}
 			}
 		}
@@ -513,28 +533,28 @@ class CCF_Field_Renderer {
 
 		if ( ! empty( $all_errors ) ) {
 			if ( apply_filters( 'ccf_show_last_field_value', true, $field_id ) ) {
-				if ( ! empty( $_POST['ccf_field_' . $slug]['street'] ) ) {
-					$street_post_value = $_POST['ccf_field_' . $slug]['street'];
+				if ( ! empty( $_POST[ 'ccf_field_' . $slug ]['street'] ) ) {
+					$street_post_value = $_POST[ 'ccf_field_' . $slug ]['street'];
 				}
 
-				if ( ! empty( $_POST['ccf_field_' . $slug]['line_two'] ) ) {
-					$line_two_post_value = $_POST['ccf_field_' . $slug]['line_two'];
+				if ( ! empty( $_POST[ 'ccf_field_' . $slug ]['line_two'] ) ) {
+					$line_two_post_value = $_POST[ 'ccf_field_' . $slug ]['line_two'];
 				}
 
-				if ( ! empty( $_POST['ccf_field_' . $slug]['city'] ) ) {
-					$city_post_value = $_POST['ccf_field_' . $slug]['city'];
+				if ( ! empty( $_POST[ 'ccf_field_' . $slug ]['city'] ) ) {
+					$city_post_value = $_POST[ 'ccf_field_' . $slug ]['city'];
 				}
 
-				if ( ! empty( $_POST['ccf_field_' . $slug]['state'] ) ) {
-					$state_post_value = $_POST['ccf_field_' . $slug]['state'];
+				if ( ! empty( $_POST[ 'ccf_field_' . $slug ]['state'] ) ) {
+					$state_post_value = $_POST[ 'ccf_field_' . $slug ]['state'];
 				}
 
-				if ( ! empty( $_POST['ccf_field_' . $slug]['country'] ) ) {
-					$country_post_value = $_POST['ccf_field_' . $slug]['country'];
+				if ( ! empty( $_POST[ 'ccf_field_' . $slug ]['country'] ) ) {
+					$country_post_value = $_POST[ 'ccf_field_' . $slug ]['country'];
 				}
 
-				if ( ! empty( $_POST['ccf_field_' . $slug]['zipcode'] ) ) {
-					$zipcode_post_value = $_POST['ccf_field_' . $slug]['zipcode'];
+				if ( ! empty( $_POST[ 'ccf_field_' . $slug ]['zipcode'] ) ) {
+					$zipcode_post_value = $_POST[ 'ccf_field_' . $slug ]['zipcode'];
 				}
 			}
 		}
@@ -548,18 +568,18 @@ class CCF_Field_Renderer {
 				<?php echo esc_html( $label ); ?>
 			</label>
 			<div class="full">
-				<input value="<?php if ( ! empty( $street_post_value ) ) echo esc_attr( $street_post_value ); ?>" class="form-control <?php if ( ! empty( $errors['street_required'] ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> id="ccf_field_<?php echo esc_attr( $slug ); ?>-street" type="text" name="ccf_field_<?php echo esc_attr( $slug ); ?>[street]">
+				<input value="<?php if ( ! empty( $street_post_value ) ) { echo esc_attr( $street_post_value ); } ?>" class="form-control <?php if ( ! empty( $errors['street_required'] ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> id="ccf_field_<?php echo esc_attr( $slug ); ?>-street" type="text" name="ccf_field_<?php echo esc_attr( $slug ); ?>[street]">
 				<?php if ( ! empty( $errors['street_required'] ) ) : ?>
 					<div class="error"><?php echo esc_html( $errors['street_required'] ); ?></div>
 				<?php endif; ?>
 				<label for="ccf_field_<?php echo esc_attr( $slug ); ?>-street" class="sub-label help-block text-muted"><?php esc_html_e( 'Street Address', 'custom-contact-forms' ); ?></label>
 			</div>
 			<div class="full">
-				<input value="<?php if ( ! empty( $line_two_post_value ) ) echo esc_attr( $line_two_post_value ); ?>" class="form-control  field-input" id="ccf_field_<?php echo esc_attr( $slug ); ?>-line_two" type="text" name="ccf_field_<?php echo esc_attr( $slug ); ?>[line_two]">
+				<input value="<?php if ( ! empty( $line_two_post_value ) ) { echo esc_attr( $line_two_post_value ); } ?>" class="form-control  field-input" id="ccf_field_<?php echo esc_attr( $slug ); ?>-line_two" type="text" name="ccf_field_<?php echo esc_attr( $slug ); ?>[line_two]">
 				<label for="ccf_field_<?php echo esc_attr( $slug ); ?>-line_two" class="sub-label help-block text-muted"><?php esc_html_e( 'Address Line 2', 'custom-contact-forms' ); ?></label>
 			</div>
 			<div class="left">
-				<input value="<?php if ( ! empty( $city_post_value ) ) echo esc_attr( $city_post_value ); ?>" class="form-control <?php if ( ! empty( $errors['city_required'] ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> type="text" name="ccf_field_<?php echo esc_attr( $slug ); ?>[city]" id="ccf_field_<?php echo esc_attr( $slug ); ?>-city">
+				<input value="<?php if ( ! empty( $city_post_value ) ) { echo esc_attr( $city_post_value ); } ?>" class="form-control <?php if ( ! empty( $errors['city_required'] ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> type="text" name="ccf_field_<?php echo esc_attr( $slug ); ?>[city]" id="ccf_field_<?php echo esc_attr( $slug ); ?>-city">
 				<?php if ( ! empty( $errors['city_required'] ) ) : ?>
 					<div class="error"><?php echo esc_html( $errors['city_required'] ); ?></div>
 				<?php endif; ?>
@@ -570,7 +590,7 @@ class CCF_Field_Renderer {
 				<div class="right">
 					<select class="<?php if ( ! empty( $errors['state_required'] ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> name="ccf_field_<?php echo esc_attr( $slug ); ?>[state]" id="ccf_field_<?php echo esc_attr( $slug ); ?>-state">
 						<?php foreach ( CCF_Constants::factory()->get_us_states() as $state ) : ?>
-							<option <?php if ( ! empty( $street_post_value ) ) selected( $street_post_value, $state ); ?>><?php echo $state; ?></option>
+							<option <?php if ( ! empty( $street_post_value ) ) { selected( $street_post_value, $state ); } ?>><?php echo $state; ?></option>
 						<?php endforeach; ?>
 					</select>
 					<?php if ( ! empty( $errors['state_required'] ) ) : ?>
@@ -580,7 +600,7 @@ class CCF_Field_Renderer {
 
 				</div>
 				<div class="left">
-					<input value="<?php if ( ! empty( $zipcode_post_value ) ) echo esc_attr( $zipcode_post_value ); ?>" class="form-control <?php if ( ! empty( $errors['zipcode_required'] ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> type="text" name="ccf_field_<?php echo esc_attr( $slug ); ?>[zipcode]" id="ccf_field_<?php echo esc_attr( $slug ); ?>-zipcode">
+					<input value="<?php if ( ! empty( $zipcode_post_value ) ) { echo esc_attr( $zipcode_post_value ); } ?>" class="form-control <?php if ( ! empty( $errors['zipcode_required'] ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> type="text" name="ccf_field_<?php echo esc_attr( $slug ); ?>[zipcode]" id="ccf_field_<?php echo esc_attr( $slug ); ?>-zipcode">
 					<?php if ( ! empty( $errors['zipcode_required'] ) ) : ?>
 						<div class="error"><?php echo esc_html( $errors['zipcode_required'] ); ?></div>
 					<?php endif; ?>
@@ -590,7 +610,7 @@ class CCF_Field_Renderer {
 				<div class="ccf-clear"></div>
 			<?php } else if ( $address_type === 'international' ) { ?>
 				<div class="right">
-					<input value="<?php if ( ! empty( $state_post_value ) ) echo esc_attr( $state_post_value ); ?>" class="form-control <?php if ( ! empty( $errors['state_required'] ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> type="text" name="ccf_field_<?php echo esc_attr( $slug ); ?>[state]" id="ccf_field_<?php echo esc_attr( $slug ); ?>-state">
+					<input value="<?php if ( ! empty( $state_post_value ) ) { echo esc_attr( $state_post_value ); } ?>" class="form-control <?php if ( ! empty( $errors['state_required'] ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> type="text" name="ccf_field_<?php echo esc_attr( $slug ); ?>[state]" id="ccf_field_<?php echo esc_attr( $slug ); ?>-state">
 					<?php if ( ! empty( $errors['state_required'] ) ) : ?>
 						<div class="error"><?php echo esc_html( $errors['state_required'] ); ?></div>
 					<?php endif; ?>
@@ -598,7 +618,7 @@ class CCF_Field_Renderer {
 
 				</div>
 				<div class="left">
-					<input value="<?php if ( ! empty( $zipcode_post_value ) ) echo esc_attr( $zipcode_post_value ); ?>" class="form-control <?php if ( ! empty( $errors['zipcode_required'] ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> type="text" name="ccf_field_<?php echo esc_attr( $slug ); ?>[zipcode]" id="ccf_field_<?php echo esc_attr( $slug ); ?>-zipcode">
+					<input value="<?php if ( ! empty( $zipcode_post_value ) ) { echo esc_attr( $zipcode_post_value ); } ?>" class="form-control <?php if ( ! empty( $errors['zipcode_required'] ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> type="text" name="ccf_field_<?php echo esc_attr( $slug ); ?>[zipcode]" id="ccf_field_<?php echo esc_attr( $slug ); ?>-zipcode">
 					<?php if ( ! empty( $errors['zipcode_required'] ) ) : ?>
 						<div class="error"><?php echo esc_html( $errors['zipcode_required'] ); ?></div>
 					<?php endif; ?>
@@ -608,7 +628,7 @@ class CCF_Field_Renderer {
 				<div class="right">
 					<select class="<?php if ( ! empty( $errors['country_required'] ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> name="ccf_field_<?php echo esc_attr( $slug ); ?>[country]" id="ccf_field_<?php echo esc_attr( $slug ); ?>-country">
 						<?php foreach ( CCF_Constants::factory()->get_countries() as $country ) : ?>
-							<option <?php if ( ! empty( $country_post_value ) ) selected( $country_post_value, $country ); ?>><?php echo $country; ?></option>
+							<option <?php if ( ! empty( $country_post_value ) ) { selected( $country_post_value, $country ); } ?>><?php echo $country; ?></option>
 						<?php endforeach; ?>
 					</select>
 					<?php if ( ! empty( $errors['country_required'] ) ) : ?>
@@ -655,8 +675,8 @@ class CCF_Field_Renderer {
 
 		if ( ! empty( $all_errors ) ) {
 			if ( apply_filters( 'ccf_show_last_field_value', true, $field_id ) ) {
-				if ( ! empty( $_POST['ccf_field_' . $slug] ) ) {
-					$post_value = $_POST['ccf_field_' . $slug];
+				if ( ! empty( $_POST[ 'ccf_field_' . $slug ] ) ) {
+					$post_value = $_POST[ 'ccf_field_' . $slug ];
 				}
 			}
 		}
@@ -669,7 +689,8 @@ class CCF_Field_Renderer {
 				<?php if ( ! empty( $required ) ) : ?><span class="required">*</span><?php endif; ?>
 				<?php echo esc_html( $label ); ?>
 			</label>
-			<input class="form-control <?php if ( ! empty( $errors ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> type="text" name="ccf_field_<?php echo esc_attr( $slug ); ?>" id="ccf_field_<?php echo esc_attr( $slug ); ?>" placeholder="<?php echo esc_attr( $placeholder ); ?>" value="<?php if ( ! empty( $post_value ) ) { echo esc_attr( $post_value ); } else { echo esc_attr( $value ); } ?>">
+			<input class="form-control <?php if ( ! empty( $errors ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> type="text" name="ccf_field_<?php echo esc_attr( $slug ); ?>" id="ccf_field_<?php echo esc_attr( $slug ); ?>" placeholder="<?php echo esc_attr( $placeholder ); ?>" value="<?php if ( ! empty( $post_value ) ) { echo esc_attr( $post_value );
+} else { echo esc_attr( $value ); } ?>">
 
 			<?php if ( ! empty( $description ) ) : ?>
 				<div class="field-description help-block text-muted">
@@ -711,8 +732,8 @@ class CCF_Field_Renderer {
 
 		if ( ! empty( $all_errors ) ) {
 			if ( apply_filters( 'ccf_show_last_field_value', true, $field_id ) ) {
-				if ( ! empty( $_POST['ccf_field_' . $slug] ) ) {
-					$post_value = $_POST['ccf_field_' . $slug];
+				if ( ! empty( $_POST[ 'ccf_field_' . $slug ] ) ) {
+					$post_value = $_POST[ 'ccf_field_' . $slug ];
 				}
 			}
 		}
@@ -725,7 +746,8 @@ class CCF_Field_Renderer {
 				<?php if ( ! empty( $required ) ) : ?><span class="required">*</span><?php endif; ?>
 				<?php echo esc_html( $label ); ?>
 			</label>
-			<input class="form-control <?php if ( ! empty( $errors ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> type="text" name="ccf_field_<?php echo esc_attr( $slug ); ?>" id="ccf_field_<?php echo esc_attr( $slug ); ?>" placeholder="<?php echo esc_attr( $placeholder ); ?>" value="<?php if ( ! empty( $post_value ) ) { echo esc_attr( $post_value ); } else { echo esc_attr( $value ); } ?>">
+			<input class="form-control <?php if ( ! empty( $errors ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> type="text" name="ccf_field_<?php echo esc_attr( $slug ); ?>" id="ccf_field_<?php echo esc_attr( $slug ); ?>" placeholder="<?php echo esc_attr( $placeholder ); ?>" value="<?php if ( ! empty( $post_value ) ) { echo esc_attr( $post_value );
+} else { echo esc_attr( $value ); } ?>">
 
 			<?php if ( ! empty( $description ) ) : ?>
 				<div class="field-description help-block text-muted">
@@ -735,7 +757,8 @@ class CCF_Field_Renderer {
 
 			<?php if ( ! empty( $errors ) ) : foreach ( $errors as $error ) : ?>
 				<div class="error"><?php echo esc_html( $error ); ?></div>
-			<?php endforeach; endif; ?>
+			<?php endforeach;
+endif; ?>
 		</div>
 
 		<?php
@@ -767,15 +790,15 @@ class CCF_Field_Renderer {
 		if ( ! empty( $all_errors ) ) {
 			if ( apply_filters( 'ccf_show_last_field_value', true, $field_id ) ) {
 				if ( ! empty( $email_confirmation ) ) {
-					if ( ! empty( $_POST['ccf_field_' . $slug]['email'] ) ) {
-						$email_post_value = $_POST['ccf_field_' . $slug]['email'];
+					if ( ! empty( $_POST[ 'ccf_field_' . $slug ]['email'] ) ) {
+						$email_post_value = $_POST[ 'ccf_field_' . $slug ]['email'];
 					}
 
-					if ( ! empty( $_POST['ccf_field_' . $slug]['confirm'] ) ) {
-						$confirm_post_value = $_POST['ccf_field_' . $slug]['confirm'];
+					if ( ! empty( $_POST[ 'ccf_field_' . $slug ]['confirm'] ) ) {
+						$confirm_post_value = $_POST[ 'ccf_field_' . $slug ]['confirm'];
 					}
 				} else {
-					$email_post_value = $_POST['ccf_field_' . $slug];
+					$email_post_value = $_POST[ 'ccf_field_' . $slug ];
 				}
 			}
 		}
@@ -789,10 +812,12 @@ class CCF_Field_Renderer {
 				<?php echo esc_html( $label ); ?>
 			</label>
 			<?php if ( empty( $email_confirmation ) ) { ?>
-				<input class="form-control <?php if ( ! empty( $errors ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> name="ccf_field_<?php echo esc_attr( $slug ); ?>" id="ccf_field_<?php echo esc_attr( $slug ); ?>"  placeholder="<?php if ( ! empty( $placeholder ) ) { ?><?php echo esc_attr( $placeholder ) ?><?php } else { ?><?php esc_html_e( 'email@example.com', 'custom-contact-forms' ); ?><?php } ?>" type="text" value="<?php if ( ! empty( $email_post_value ) ) { echo esc_attr( $email_post_value ); } else { echo esc_attr( $value ); } ?>">
+				<input class="form-control <?php if ( ! empty( $errors ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> name="ccf_field_<?php echo esc_attr( $slug ); ?>" id="ccf_field_<?php echo esc_attr( $slug ); ?>"  placeholder="<?php if ( ! empty( $placeholder ) ) { ?><?php echo esc_attr( $placeholder ) ?><?php } else { ?><?php esc_html_e( 'email@example.com', 'custom-contact-forms' ); ?><?php } ?>" type="text" value="<?php if ( ! empty( $email_post_value ) ) { echo esc_attr( $email_post_value );
+} else { echo esc_attr( $value ); } ?>">
 				<?php if ( ! empty( $errors ) ) : foreach ( $errors as $error ) : ?>
 					<div class="error"><?php echo esc_html( $error ); ?></div>
-				<?php endforeach; endif; ?>
+				<?php endforeach;
+endif; ?>
 			<?php } else { ?>
 				<div class="left">
 					<input class="form-control field-input <?php if ( ! empty( $errors['email_required'] ) || ! empty( $errors['match'] ) || ! empty( $errors['email'] ) ) : ?>field-error-input<?php endif; ?>" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> name="ccf_field_<?php echo esc_attr( $slug ); ?>[email]" id="ccf_field_<?php echo esc_attr( $slug ); ?>" value="<?php if ( ! empty( $email_post_value ) ) { echo esc_attr( $email_post_value ); }?>" type="text">
@@ -849,12 +874,12 @@ class CCF_Field_Renderer {
 
 		if ( ! empty( $all_errors ) ) {
 			if ( apply_filters( 'ccf_show_last_field_value', true, $field_id ) ) {
-				if ( ! empty( $_POST['ccf_field_' . $slug]['first'] ) ) {
-					$first_post_value = $_POST['ccf_field_' . $slug]['first'];
+				if ( ! empty( $_POST[ 'ccf_field_' . $slug ]['first'] ) ) {
+					$first_post_value = $_POST[ 'ccf_field_' . $slug ]['first'];
 				}
 
-				if ( ! empty( $_POST['ccf_field_' . $slug]['last'] ) ) {
-					$last_post_value = $_POST['ccf_field_' . $slug]['last'];
+				if ( ! empty( $_POST[ 'ccf_field_' . $slug ]['last'] ) ) {
+					$last_post_value = $_POST[ 'ccf_field_' . $slug ]['last'];
 				}
 			}
 		}
@@ -868,14 +893,14 @@ class CCF_Field_Renderer {
 				<?php echo esc_html( $label ); ?>
 			</label>
 			<div class="left">
-				<input value="<?php if ( ! empty( $first_post_value ) ) echo esc_attr( $first_post_value ); ?>" class="form-control <?php if ( ! empty( $errors['first_required'] ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> type="text" name="ccf_field_<?php echo esc_attr( $slug ); ?>[first]" id="ccf_field_<?php echo esc_attr( $slug ); ?>-first">
+				<input value="<?php if ( ! empty( $first_post_value ) ) { echo esc_attr( $first_post_value ); } ?>" class="form-control <?php if ( ! empty( $errors['first_required'] ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> type="text" name="ccf_field_<?php echo esc_attr( $slug ); ?>[first]" id="ccf_field_<?php echo esc_attr( $slug ); ?>-first">
 				<?php if ( ! empty( $errors['first_required'] ) ) : ?>
 					<div class="error"><?php echo esc_html( $errors['first_required'] ); ?></div>
 				<?php endif; ?>
 				<label for="ccf_field_<?php echo esc_attr( $slug ); ?>-first" class="sub-label help-block text-muted"><?php esc_html_e( 'First', 'custom-contact-forms' ); ?></label>
 			</div>
 			<div class="right">
-				<input value="<?php if ( ! empty( $last_post_value ) ) echo esc_attr( $last_post_value ); ?>" class="form-control <?php if ( ! empty( $errors['last_required'] ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> type="text" name="ccf_field_<?php echo esc_attr( $slug ); ?>[last]" id="ccf_field_<?php echo esc_attr( $slug ); ?>-last">
+				<input value="<?php if ( ! empty( $last_post_value ) ) { echo esc_attr( $last_post_value ); } ?>" class="form-control <?php if ( ! empty( $errors['last_required'] ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> type="text" name="ccf_field_<?php echo esc_attr( $slug ); ?>[last]" id="ccf_field_<?php echo esc_attr( $slug ); ?>-last">
 				<?php if ( ! empty( $errors['last_required'] ) ) : ?>
 					<div class="error"><?php echo esc_html( $errors['last_required'] ); ?></div>
 				<?php endif; ?>
@@ -921,20 +946,20 @@ class CCF_Field_Renderer {
 
 		if ( ! empty( $all_errors ) ) {
 			if ( apply_filters( 'ccf_show_last_field_value', true, $field_id ) ) {
-				if ( ! empty( $_POST['ccf_field_' . $slug]['date'] ) ) {
-					$date_post_value = $_POST['ccf_field_' . $slug]['date'];
+				if ( ! empty( $_POST[ 'ccf_field_' . $slug ]['date'] ) ) {
+					$date_post_value = $_POST[ 'ccf_field_' . $slug ]['date'];
 				}
 
-				if ( ! empty( $_POST['ccf_field_' . $slug]['hour'] ) ) {
-					$hour_post_value = $_POST['ccf_field_' . $slug]['hour'];
+				if ( ! empty( $_POST[ 'ccf_field_' . $slug ]['hour'] ) ) {
+					$hour_post_value = $_POST[ 'ccf_field_' . $slug ]['hour'];
 				}
 
-				if ( ! empty( $_POST['ccf_field_' . $slug]['minute'] ) ) {
-					$minute_post_value = $_POST['ccf_field_' . $slug]['minute'];
+				if ( ! empty( $_POST[ 'ccf_field_' . $slug ]['minute'] ) ) {
+					$minute_post_value = $_POST[ 'ccf_field_' . $slug ]['minute'];
 				}
 
-				if ( ! empty( $_POST['ccf_field_' . $slug]['am-pm'] ) ) {
-					$am_pm_post_value = $_POST['ccf_field_' . $slug]['am-pm'];
+				if ( ! empty( $_POST[ 'ccf_field_' . $slug ]['am-pm'] ) ) {
+					$am_pm_post_value = $_POST[ 'ccf_field_' . $slug ]['am-pm'];
 				}
 			}
 		}
@@ -948,7 +973,8 @@ class CCF_Field_Renderer {
 				<?php echo esc_html( $label ); ?>
 			</label>
 			<?php if ( ! empty( $show_date ) && empty( $show_time ) ) { ?>
-				<input data-date-format="<?php echo esc_attr( $date_format ); ?>" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> name="ccf_field_<?php echo esc_attr( $slug ); ?>[date]" value="<?php if ( ! empty( $date_post_value ) ) { echo esc_attr( $date_post_value ); } else { echo esc_attr( $value ); } ?>" class="form-control <?php if ( ! empty( $errors ) ) : ?>field-error-input<?php endif; ?> ccf-datepicker field-input" id="ccf_field_<?php echo esc_attr( $slug ); ?>" type="text">
+				<input data-date-format="<?php echo esc_attr( $date_format ); ?>" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> name="ccf_field_<?php echo esc_attr( $slug ); ?>[date]" value="<?php if ( ! empty( $date_post_value ) ) { echo esc_attr( $date_post_value );
+} else { echo esc_attr( $value ); } ?>" class="form-control <?php if ( ! empty( $errors ) ) : ?>field-error-input<?php endif; ?> ccf-datepicker field-input" id="ccf_field_<?php echo esc_attr( $slug ); ?>" type="text">
 			<?php } else if ( empty( $show_date ) && ! empty( $show_time ) ) { ?>
 				<div class="hour">
 					<input maxlength="2" class="form-control <?php if ( ! empty( $errors['hour_required'] ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> name="ccf_field_<?php echo esc_attr( $slug ); ?>[hour]" value="<?php if ( ! empty( $hour_post_value ) ) { echo esc_attr( $hour_post_value ); } ?>" id="ccf_field_<?php echo esc_attr( $slug ); ?>-hour" type="text">
@@ -997,7 +1023,8 @@ class CCF_Field_Renderer {
 
 			<?php if ( ! empty( $errors ) ) : foreach ( $errors as $error ) : ?>
 				<div class="error"><?php echo esc_html( $error ); ?></div>
-			<?php endforeach; endif; ?>
+			<?php endforeach;
+endif; ?>
 		</div>
 
 		<?php
@@ -1027,8 +1054,8 @@ class CCF_Field_Renderer {
 
 		if ( ! empty( $all_errors ) ) {
 			if ( apply_filters( 'ccf_show_last_field_value', true, $field_id ) ) {
-				if ( ! empty( $_POST['ccf_field_' . $slug] ) ) {
-					$post_value = $_POST['ccf_field_' . $slug];
+				if ( ! empty( $_POST[ 'ccf_field_' . $slug ] ) ) {
+					$post_value = $_POST[ 'ccf_field_' . $slug ];
 				}
 			}
 		}
@@ -1041,7 +1068,8 @@ class CCF_Field_Renderer {
 				<?php if ( ! empty( $required ) ) : ?><span class="required">*</span><?php endif; ?>
 				<?php echo esc_html( $label ); ?>
 			</label>
-			<textarea class="form-control <?php if ( ! empty( $errors ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> name="ccf_field_<?php echo esc_attr( $slug ); ?>" id="ccf_field_<?php echo esc_attr( $slug ); ?>" placeholder="<?php echo esc_attr( $placeholder ); ?>"><?php if ( ! empty( $post_value ) ) { echo esc_attr( $post_value ); } else { echo esc_attr( $value ); } ?></textarea>
+			<textarea class="form-control <?php if ( ! empty( $errors ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> name="ccf_field_<?php echo esc_attr( $slug ); ?>" id="ccf_field_<?php echo esc_attr( $slug ); ?>" placeholder="<?php echo esc_attr( $placeholder ); ?>"><?php if ( ! empty( $post_value ) ) { echo esc_attr( $post_value );
+} else { echo esc_attr( $value ); } ?></textarea>
 
 			<?php if ( ! empty( $description ) ) : ?>
 				<div class="field-description help-block text-muted">
@@ -1083,8 +1111,8 @@ class CCF_Field_Renderer {
 	 * Route field rendering requests to field specific method and return html for given field
 	 *
 	 * @param string $type
-	 * @param int $field_id
-	 * @param int $form_id
+	 * @param int    $field_id
+	 * @param int    $form_id
 	 * @since 6.0
 	 * @return string
 	 */
