@@ -54,6 +54,10 @@
 		}
 	}
 
+	.field-hide {
+		display: none;
+	}
+
 	.field {
 		margin-bottom: 24px;
 		clear: both;
@@ -137,10 +141,6 @@
 				font-size: 85%;
 				font-style: italic;
 			}
-		}
-
-		&.field-hide {
-			display: none;
 		}
 
 		&.field-type-date {

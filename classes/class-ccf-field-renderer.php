@@ -10,6 +10,11 @@ class CCF_Field_Renderer {
 	public function __construct() {}
 
 	/**
+	 * Keep track of sections
+	 */
+	public $section_open = false;
+
+	/**
 	 * Get single-line-text field HTML, including any errors from the last form submission. if there is an
 	 * error the field will remember it's last submitted value.
 	 *
@@ -194,18 +199,29 @@ class CCF_Field_Renderer {
 		$class_name = get_post_meta( $field_id, 'ccf_field_className', true );
 
 		ob_start();
+
+		if ( $this->section_open ) {
+			echo '</div>';
+		}
+
 		?>
 
-		<div class="field skip-field <?php echo esc_attr( $slug ); ?> field-type-section-header field-<?php echo (int) $field_id; ?> <?php echo esc_attr( $class_name ); ?>">
-			<div class="heading">
-				<?php echo esc_html( $heading ); ?>
+		<div class="ccf-section">
+
+			<div data-field-type="section-header" data-field-slug="<?php echo esc_attr( $slug ); ?>" class="field skip-field <?php echo esc_attr( $slug ); ?> field-type-section-header field-<?php echo (int) $field_id; ?> <?php echo esc_attr( $class_name ); ?>">
+				<div class="heading">
+					<?php echo esc_html( $heading ); ?>
+				</div>
+				<div class="subheading">
+					<?php echo esc_html( $subheading ); ?>
+				</div>
 			</div>
-			<div class="subheading">
-				<?php echo esc_html( $subheading ); ?>
-			</div>
-		</div>
 
 		<?php
+
+		$this->section_open = true;
+
+
 		return ob_get_clean();
 	}
 
@@ -225,7 +241,7 @@ class CCF_Field_Renderer {
 		ob_start();
 		?>
 
-		<div class="field skip-field <?php echo esc_attr( $slug ); ?> field-type-html field-<?php echo (int) $field_id; ?> <?php echo esc_attr( $class_name ); ?>">
+		<div data-field-type="html" data-field-slug="<?php echo esc_attr( $slug ); ?>" class="field skip-field <?php echo esc_attr( $slug ); ?> field-type-html field-<?php echo (int) $field_id; ?> <?php echo esc_attr( $class_name ); ?>">
 			<?php echo wp_kses_post( $html ); ?>
 		</div>
 

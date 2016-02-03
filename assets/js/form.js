@@ -469,6 +469,7 @@
 
 				_.each( fields, function( field ) {
 					var slug = field.getAttribute( 'data-field-slug' );
+					var type = field.getAttribute( 'data-field-type' );
 
 					if ( wp.ccf.conditionals[formId][slug] && wp.ccf.conditionals[formId][slug].conditions.length ) {
 						var conditionalType = wp.ccf.conditionals[formId][slug].conditionalType;
@@ -499,14 +500,23 @@
 
 							if ( overallState ) {
 								// Show field
-								field.className = field.className.replace( /field-hide/i, '' );
+								if ( 'section-header' === type ) {
+									$( field ).parents( '.ccf-section' ).removeClass( 'field-hide' );
+								} else {
+									field.className = field.className.replace( /field-hide/i, '' );
+								}
 							} else {
 								// Hide field
-								field.className = field.className.replace( /field-hide/i, '' ) + ' field-hide';
+								if ( 'section-header' === type ) {
+									$( field ).parents( '.ccf-section' ).addClass( 'field-hide' );
+								} else {
+									field.className = field.className.replace( /field-hide/i, '' ) + ' field-hide';
+								}
 							}
 						};
 
 						_.each( wp.ccf.conditionals[formId][slug].conditions, function( condition ) {
+
 							var fieldInput = fieldsBySlug[condition.field].querySelectorAll( '.field-input' )[0];
 
 							function adjustConditions( value ) {
@@ -526,7 +536,7 @@
 										// one part of condition is false
 										condition.state = false;
 									}
-								} else if ( '>' === condition.compare ) {
+								} else if ( 'greater-than' === condition.compare ) {
 									if ( parseInt( value ) > parseInt( condition.value ) ) {
 										// one piece of condition is true
 										condition.state = true;
@@ -534,7 +544,7 @@
 										// one part of condition is false
 										condition.state = false;
 									}
-								} else if ( '<' === condition.compare ) {
+								} else if ( 'less-than' === condition.compare ) {
 									if ( parseInt( value ) < parseInt( condition.value ) ) {
 										// one piece of condition is true
 										condition.state = true;

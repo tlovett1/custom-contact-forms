@@ -33,6 +33,8 @@
       float: none; }
     .ccf-form-wrapper .error.right-error {
       float: right; }
+  .ccf-form-wrapper .field-hide {
+    display: none; }
   .ccf-form-wrapper .field {
     margin-bottom: 24px;
     clear: both; }
@@ -86,8 +88,6 @@
       margin-top: 10px;
       font-size: 85%;
       font-style: italic; }
-    .ccf-form-wrapper .field.field-hide {
-      display: none; }
     .ccf-form-wrapper .field.field-type-date .hour, .ccf-form-wrapper .field.field-type-date .minute {
       display: inline-block;
       margin-right: 5px; }

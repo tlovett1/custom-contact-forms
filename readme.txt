@@ -18,6 +18,7 @@ Custom Contact Forms enables you to build forms and manage submissions the WordP
 
 * Create text fields, paragraph fields, first/last name fields, email fields (with optional confirmation), US address fields, international address fields, date fields (optional international format), time fields, checkbox fields, dropdown (optional multi-select), radio fields, hidden fields, file upload fields, phone fields (optional international number), website fields, and more.
 * Add HTML and sections to your forms.
+* Conditional fields and form sections
 * Add help text, modify labels, mark required, add CSS classes, manage options, etc. for each of your form fields.
 * Forms use AJAX so no page reloads are necessary. Stylish error messages are shown without page reload.
 * All form submissions shown in an easy to view format within the WordPress admin.
@@ -55,6 +56,10 @@ Please refer to [Github](http://github.com/tlovett1/custom-contact-forms) for de
 For full documentation, questions, feature requests, and support concerning the Custom Contact Forms plugin, please refer to [Github](http://github.com/tlovett1/custom-contact-forms).
 
 == Changelog ==
+
+= 7.5 =
+* Conditional fields and sections
+* [current_date_time] notification variable
 
 = 7.4.5 =
 * Fix CCF compat with API plugin

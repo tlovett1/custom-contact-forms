@@ -907,6 +907,10 @@ class CCF_Form_Handler {
 							$message = str_ireplace( '[ip_address]', $_SERVER['REMOTE_ADDR'], $message );
 						}
 
+						if ( false !== stripos( $message, '[current_date_time]' ) ) {
+							$message = str_ireplace( '[current_date_time]', date( 'F j, Y, g:i a' ), $message );
+						}
+
 						foreach ( $fields as $field_id ) {
 							$field_slug = get_post_meta( $field_id, 'ccf_field_slug', true );
 

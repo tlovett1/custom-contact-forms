@@ -223,7 +223,7 @@ class CCF_Form_Manager {
 						<label for="ccf_form_email_notification_content"><?php esc_html_e( 'Email Content (HTML):', 'custom-contact-forms' ); ?></label>
 						<textarea id="ccf_form_email_notification_content" class="form-email-notification-content">{{ notification.content }}</textarea><br />
 						<p class="variables">
-							<strong><?php esc_html_e( 'Variables:', 'custom-contact-forms' ); ?></strong>  [all_fields] [ip_address] 
+							<strong><?php esc_html_e( 'Variables:', 'custom-contact-forms' ); ?></strong>  [all_fields] [ip_address] [current_date_time] 
 							<span class="field-variables"></span>
 
 						</p>
@@ -1401,8 +1401,8 @@ class CCF_Form_Manager {
 			<select class="conditional-compare">
 				<option <# if ( 'is' === conditional.compare ) { #>selected<# } #> value="is"><?php esc_html_e( 'is', 'custom-contact-forms' ); ?></option>
 				<option <# if ( 'is-not' === conditional.compare ) { #>selected<# } #> value="is-not"><?php esc_html_e( 'is not', 'custom-contact-forms' ); ?></option>
-				<option <# if ( '>' === conditional.compare ) { #>selected<# } #> value=">"><?php esc_html_e( '>', 'custom-contact-forms' ); ?></option>
-				<option <# if ( '<' === conditional.compare ) { #>selected<# } #> value="<"><?php esc_html_e( '<', 'custom-contact-forms' ); ?></option>
+				<option <# if ( 'greater-than' === conditional.compare ) { #>selected<# } #> value="greater-than"><?php esc_html_e( '>', 'custom-contact-forms' ); ?></option>
+				<option <# if ( 'less-than' === conditional.compare ) { #>selected<# } #> value="less-than"><?php esc_html_e( '<', 'custom-contact-forms' ); ?></option>
 				<option <# if ( 'contains' === conditional.compare ) { #>selected<# } #> value="contains"><?php esc_html_e( 'contains', 'custom-contact-forms' ); ?></option>
 			</select>
 			<input class="conditional-value" placeholder="<?php esc_attr_e( 'Field value', 'custom-contact-forms' ); ?>" type="text" value="{{ conditional.value }}">
@@ -2158,7 +2158,7 @@ class CCF_Form_Manager {
 
 			$structure_field_labels = apply_filters( 'ccf_structure_field_labels', array(
 				'html' => __( 'HTML', 'custom-contact-forms' ),
-				'section-header' => __( 'Section Header', 'custom-contact-forms' ),
+				'section-header' => __( 'Section', 'custom-contact-forms' ),
 			));
 
 			$special_field_labels = apply_filters( 'ccf_special_field_labels', array(

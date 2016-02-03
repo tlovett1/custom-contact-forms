@@ -228,6 +228,10 @@ class CCF_Form_Renderer {
 				$fields_html .= apply_filters( 'ccf_field_html', CCF_Field_Renderer::factory()->render_router( $type, $field_id, $form_id ), $type, $field_id );
 			}
 
+			if ( CCF_Field_Renderer::factory()->section_open ) {
+				$fields_html .= '</div>';
+			}
+
 			$theme = get_post_meta( $form_id, 'ccf_form_theme', true );
 			if ( empty( $theme ) ) {
 				$theme = 'default';
