@@ -1719,8 +1719,9 @@ class CCF_Form_Manager {
 		</script>
 
 		<script type="text/html" id="ccf-section-header-preview-template">
+			<# if ( field.conditionalsEnabled ) { #><span class="conditionals-enabled">if</span><# } #>
 			<div class="heading">
-				<# if ( field.heading ) { #>{{ field.heading }}<# } else { #><?php esc_html_e( 'Section Heading', 'custom-contact-forms' ); ?><# } #> <# if ( field.conditionalsEnabled ) { #><span class="conditionals-enabled">if</span><# } #>
+				<# if ( field.heading ) { #>{{ field.heading }}<# } else { #><?php esc_html_e( 'Section Heading', 'custom-contact-forms' ); ?><# } #>
 			</div>
 			<div class="subheading"><# if ( field.subheading ) { #>{{ field.subheading }}<# } else { #><?php esc_html_e( 'This is the sub-heading text.', 'custom-contact-forms' ); ?><# } #></div>
 		</script>
