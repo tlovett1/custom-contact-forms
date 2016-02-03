@@ -517,7 +517,7 @@
 
 						_.each( wp.ccf.conditionals[formId][slug].conditions, function( condition ) {
 
-							var fieldInput = fieldsBySlug[condition.field].querySelectorAll( '.field-input' )[0];
+							var fieldInput = fieldsBySlug[condition.field].querySelectorAll( '.field-input' );
 
 							function adjustConditions( value ) {
 								if ( 'is' === condition.compare ) {
