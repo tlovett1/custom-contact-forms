@@ -179,6 +179,7 @@ class CCFTestBase extends WP_UnitTestCase {
 			'title' => array( 'raw' => 'Test Form' ),
 			'description' => 'Test form description',
 			'buttonText' => 'Submit Text',
+			'buttonClass' => '',
 			'notifications' => array(),
 			'postCreation' => false,
 			'postCreationType' => 'post',

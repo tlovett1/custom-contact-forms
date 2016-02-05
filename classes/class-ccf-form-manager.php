@@ -352,6 +352,11 @@ class CCF_Form_Manager {
 			</p>
 
 			<p>
+				<label for="ccf_form_button_class"><?php esc_html_e( 'Button Class:', 'custom-contact-forms' ); ?></label>
+				<input class="widefat form-button-class" id="ccf_form_button_class" name="class" type="text" value="{{ form.buttonClass }}">
+			</p>
+
+			<p>
 				<label for="ccf_form_theme"><?php esc_html_e( 'Form Theme:', 'custom-contact-forms' ); ?></label>
 
 				<select name="theme" class="form-theme" id="ccf_form_theme">

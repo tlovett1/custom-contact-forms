@@ -196,6 +196,7 @@
 					status: 'publish',
 					description: '',
 					buttonText: 'Submit Form',
+					buttonClass: '',
 					completionActionType: 'text',
 					completionRedirectUrl: '',
 					completionMessage: '',
