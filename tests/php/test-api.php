@@ -200,6 +200,7 @@ class CCFTestAPI extends CCFTestBase {
 			'title' => array( 'raw' => 'Edit Test Form' ),
 			'description' => 'Edit test form description',
 			'buttonText' => 'Edit Submit Text',
+			'buttonClass' => '',
 			'author' => array(),
 			'excerpt' => '',
 			'link' => '',

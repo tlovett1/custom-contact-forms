@@ -448,6 +448,10 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 				update_post_meta( $result, 'ccf_form_buttonText', sanitize_text_field( $data['buttonText'] ) );
 			}
 
+			if ( isset( $data['buttonText'] ) ) {
+				update_post_meta( $result, 'ccf_form_buttonClass', sanitize_text_field( $data['buttonClass'] ) );
+			}
+
 			if ( isset( $data['description'] ) ) {
 				update_post_meta( $result, 'ccf_form_description', sanitize_text_field( $data['description'] ) );
 			}
@@ -999,6 +1003,7 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 		$data['fields'] = $this->_get_fields( $data['id'] );
 
 		$data['buttonText'] = esc_attr( get_post_meta( $data['id'], 'ccf_form_buttonText', true ) );
+		$data['buttonClass'] = esc_attr( get_post_meta( $data['id'], 'ccf_form_buttonClass', true ) );
 		$data['description'] = esc_html( get_post_meta( $data['id'], 'ccf_form_description', true ) );
 		$data['completionActionType'] = esc_attr( get_post_meta( $data['id'], 'ccf_form_completion_action_type', true ) );
 		$data['completionRedirectUrl'] = esc_url_raw( get_post_meta( $data['id'], 'ccf_form_completion_redirect_url', true ) );

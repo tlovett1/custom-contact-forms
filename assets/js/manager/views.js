@@ -1791,6 +1791,9 @@
 				var buttonText = this.el.querySelectorAll( '.form-button-text' )[0].value;
 				this.model.set( 'buttonText', buttonText );
 
+				var buttonClass = this.el.querySelectorAll( '.form-button-class' )[0].value;
+				this.model.set( 'buttonClass', buttonClass );
+
 				var pause = this.el.querySelectorAll( '.form-pause' )[0].value;
 				this.model.set( 'pause', ( parseInt( pause ) ) ? true : false );
 

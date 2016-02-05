@@ -255,7 +255,7 @@ class CCF_Form_Renderer {
 
 					<?php echo $fields_html; ?>
 
-					<div class="form-submit">
+					<div class="form-submit <?php echo esc_attr( get_post_meta( $form_id, 'ccf_form_buttonClass', true ) ); ?>">
 						<input type="submit" class="btn btn-primary ccf-submit-button" value="<?php echo esc_attr( get_post_meta( $form_id, 'ccf_form_buttonText', true ) ); ?>">
 						<img class="loading-img" src="<?php echo esc_url( site_url( '/wp-admin/images/wpspin_light.gif' ) ); ?>">
 					</div>
