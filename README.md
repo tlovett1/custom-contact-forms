@@ -1,15 +1,9 @@
 Custom Contact Forms [![Build Status](https://travis-ci.org/tlovett1/custom-contact-forms.svg?branch=master)](https://travis-ci.org/tlovett1/custom-contact-forms)
 ===============
 
-Build beautiful custom forms and manage submissions the WordPress way. View live previews of your forms while you build them. Create powerful and exstensible forms for simple contact inquiries, sign ups, subscriptions, events, payments, etc.
+## BookBub
 
-## Purpose
-
-The problem of form creation in WordPress has been tackled many different ways. Custom Contact forms handles forms the
-WordPress way. The plugin provides a seamless user experience for managing your forms through the comfort of the
-WordPress media manager modal. CCF does not have as many features as some of it's competitors but instead provides
-you with just what you need. Custom Contact Forms is a legacy plugin name. The plugin can handle all types of forms not
-just contact forms.
+This is the bookbub fork of [custom contact forms](https://github.com/tlovett1/custom-contact-forms).
 
 ## Requirements
 
