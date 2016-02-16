@@ -1172,6 +1172,14 @@ endif; ?>
 
 		return $field_html;
 	}
+	
+	/**
+	 * Resets the instance defaults
+	 */
+	public function reset() {
+		$this->section_open = false;
+	}
+	
 	/**
 	 * Return singleton instance of class
 	 *
