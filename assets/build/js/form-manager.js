@@ -3444,6 +3444,7 @@
 			events: {
 				'click .edit': 'triggerMainViewChange',
 				'click .delete': 'triggerDelete',
+				'click .duplicate': 'triggerDuplicate',
 				'click .insert-form-button': 'insertForm'
 			},
 
@@ -3477,6 +3478,22 @@
 						SELF.parent.renderPagination();
 					});
 				});
+			},
+
+			triggerDuplicate: function() {
+				var SELF = this,
+					currentPage = SELF.parent.collection.state.currentPage;
+
+				SELF.model
+					.clone()
+					.set( 'title', { raw: SELF.model.get( 'title' ).raw + ' (Duplicate)' } )
+					.unset( 'id' )
+					.save()
+					.done( function() {
+						SELF.parent.showPage( currentPage ).done( function() {
+							SELF.parent.renderPagination();
+						});
+					});
 			},
 
 			render: function() {
