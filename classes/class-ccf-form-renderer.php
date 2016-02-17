@@ -281,6 +281,8 @@ class CCF_Form_Renderer {
 		}
 
 		$form_html = ob_get_clean();
+		
+		CCF_Field_Renderer::factory()->reset();
 
 		return $form_html;
 	}
