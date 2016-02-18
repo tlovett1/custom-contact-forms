@@ -78,6 +78,10 @@
 				color: #a00;
 				text-decoration: none;
 				padding: 1px 2px;
+
+				&.duplicate {
+					color: #0073aa;
+				}
 			}
 
 			.export-button {

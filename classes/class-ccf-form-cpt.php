@@ -408,7 +408,8 @@ class CCF_Form_CPT {
 
 		<div id="major-publishing-actions">
 			<div id="delete-action">
-				<a class="submitdelete deletion" href="<?php echo get_delete_post_link( $post->ID ); ?>"><?php esc_html_e( 'Move to Trash', 'custom-contact-forms' ); ?></a>
+				<a class="submitdelete deletion" href="<?php echo get_delete_post_link( $post->ID ); ?>"><?php esc_html_e( 'Move to Trash', 'custom-contact-forms' ); ?></a><br>
+				<a class="submitdelete duplicate" href=""><?php esc_html_e( 'Duplicate', 'custom-contact-forms' ); ?></a>
 				<div class="clear"></div>
 			</div>
 

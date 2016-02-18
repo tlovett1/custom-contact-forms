@@ -1899,6 +1899,7 @@ class CCF_Form_Manager {
 				<div class="actions">
 					<a class="edit edit-form" data-view="form-pane" data-form-id="{{ form.id }}" href="#form-pane-{{ form.id }}"><?php esc_html_e( 'Edit', 'custom-contact-forms' ); ?></a> |
 					<a class="insert-form-button"><?php esc_html_e( 'Insert into post', 'custom-contact-forms' ); ?></a> |
+					<a class="duplicate"><?php esc_html_e( 'Duplicate form', 'custom-contact-forms' ); ?></a> |
 					<a class="delete"><?php esc_html_e( 'Trash', 'custom-contact-forms' ); ?></a>
 				</div>
 			</td>

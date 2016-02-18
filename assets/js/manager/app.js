@@ -189,6 +189,27 @@
 							metabox.insertBefore( download, metabox.firstChild.nextSibling.nextSibling );
 
 							wp.ccf.createSubmissionsTable( container );
+
+							var duplicateButton = document.querySelectorAll( '#major-publishing-actions .duplicate')[0];
+
+							var duplicateClick = function( evnt ) {
+								evnt = evnt || window.event;
+								evnt.preventDefault();
+
+								SELF.currentForm.clone()
+									.set( 'title', { raw: SELF.currentForm.get( 'title' ).raw + ' (duplicate)' } )
+									.unset( 'id' )
+									.save()
+									.done( function( newForm ) {
+										document.location = ccfSettings.adminUrl + '/post.php?action=edit&post=' + newForm.id;
+									});
+							};
+
+							if ( duplicateButton.addEventListener ) {
+								duplicateButton.addEventListener( 'click', duplicateClick, false );
+							} else {
+								duplicateButton.attachEvent( 'onclick', duplicateClick );
+							}
 						}
 					});
 				} else {

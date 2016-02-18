@@ -26,6 +26,7 @@ Custom Contact Forms enables you to build forms and manage submissions the WordP
 * Pre-setup for Twitter Bootstrap
 * Multiple themes to choose from
 * No custom database tables
+* Easy form duplication
 * Forms can show customizable completion text or redirect to a URL.
 * Temporarily pause forms with a customizable pause message.
 * Create and manage multiple notifications for each form. Notifications can send emails to one or more administrators or form submittors. Customize notification email subject, from email address, from email name, and email body. Map form fields to email subject, from name, and from email address. Easily activate and deactivate notifications.
@@ -56,6 +57,10 @@ Please refer to [Github](http://github.com/tlovett1/custom-contact-forms) for de
 For full documentation, questions, feature requests, and support concerning the Custom Contact Forms plugin, please refer to [Github](http://github.com/tlovett1/custom-contact-forms).
 
 == Changelog ==
+
+= 7.6 =
+* Form duplication
+* Fix multiple section header bug
 
 = 7.5 =
 * Conditional fields and sections
