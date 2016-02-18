@@ -61,6 +61,7 @@ For full documentation, questions, feature requests, and support concerning the 
 = 7.6 =
 * Form duplication
 * Fix multiple section header bug
+* Button class field
 
 = 7.5 =
 * Conditional fields and sections
