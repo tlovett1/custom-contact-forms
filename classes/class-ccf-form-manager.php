@@ -223,7 +223,7 @@ class CCF_Form_Manager {
 						<label for="ccf_form_email_notification_content"><?php esc_html_e( 'Email Content (HTML):', 'custom-contact-forms' ); ?></label>
 						<textarea id="ccf_form_email_notification_content" class="form-email-notification-content">{{ notification.content }}</textarea><br />
 						<p class="variables">
-							<strong><?php esc_html_e( 'Variables:', 'custom-contact-forms' ); ?></strong>  [all_fields] [ip_address] [current_date_time] 
+							<strong><?php esc_html_e( 'Variables:', 'custom-contact-forms' ); ?></strong>  [all_fields] [ip_address] [current_date_time] [form_page_url]
 							<span class="field-variables"></span>
 
 						</p>
@@ -2095,6 +2095,14 @@ class CCF_Form_Manager {
 						<div class="field-content">
 							{{ submission.ip_address }}
 						</div>
+						<# if ( submission.form_page_url ) { #>
+							<div class="field-slug">
+								<?php esc_html_e( 'Form Page URL', 'custom-contact-forms' ); ?>
+							</div>
+							<div class="field-content">
+								{{ submission.form_page_url }}
+							</div>
+						<# } #>
 					</div>
 				</div>
 			</td>

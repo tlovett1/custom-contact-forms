@@ -691,6 +691,16 @@ class CCF_Form_Handler {
 
 				update_post_meta( $submission_id, 'ccf_submission_ip', sanitize_text_field( $_SERVER['REMOTE_ADDR'] ) );
 
+				/**
+				 * @since  7.7
+				 */
+				if ( ! empty( $_POST['form_page'] ) ) {
+					$form_page = $_POST['form_page'];
+					update_post_meta( $submission_id, 'ccf_submission_form_page', esc_url_raw( $form_page ) );
+				} else {
+					$form_page = null;
+				}
+
 				foreach ( $file_ids as $file_id ) {
 					wp_update_post( array(
 						'ID' => $file_id,
@@ -790,8 +800,6 @@ class CCF_Form_Handler {
 			);
 
 			$notifications = get_post_meta( $form_id, 'ccf_form_notifications', true );
-
-			$form_page = ( ! empty( $_POST['form_page'] ) ) ? $_POST['form_page'] : null;
 
 			if ( ! empty( $notifications ) ) {
 				foreach ( $notifications as $notification ) {
@@ -909,6 +917,10 @@ class CCF_Form_Handler {
 
 						if ( false !== stripos( $message, '[current_date_time]' ) ) {
 							$message = str_ireplace( '[current_date_time]', date( 'F j, Y, g:i a' ), $message );
+						}
+
+						if ( false !== stripos( $message, '[form_page_url]' ) ) {
+							$message = str_ireplace( '[form_page_url]', esc_url_raw( $form_page ), $message );
 						}
 
 						foreach ( $fields as $field_id ) {
