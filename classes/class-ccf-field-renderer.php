@@ -527,6 +527,7 @@ class CCF_Field_Renderer {
 		$required = get_post_meta( $field_id, 'ccf_field_required', true );
 		$class_name = get_post_meta( $field_id, 'ccf_field_className', true );
 		$description = get_post_meta( $field_id, 'ccf_field_description', true );
+		$default_country = get_post_meta( $field_id, 'ccf_field_defaultCountry', true );
 
 		$errors = CCF_Form_Handler::factory()->get_errors( $form_id, $slug );
 		$all_errors = CCF_Form_Handler::factory()->get_errors( $form_id );
@@ -628,7 +629,7 @@ class CCF_Field_Renderer {
 				<div class="right">
 					<select class="<?php if ( ! empty( $errors['country_required'] ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> name="ccf_field_<?php echo esc_attr( $slug ); ?>[country]" id="ccf_field_<?php echo esc_attr( $slug ); ?>-country">
 						<?php foreach ( CCF_Constants::factory()->get_countries() as $country ) : ?>
-							<option <?php if ( ! empty( $country_post_value ) ) { selected( $country_post_value, $country ); } ?>><?php echo $country; ?></option>
+							<option <?php if ( $country === $default_country ) : ?>selected<?php endif; ?> <?php if ( ! empty( $country_post_value ) ) { selected( $country_post_value, $country ); } ?>><?php echo $country; ?></option>
 						<?php endforeach; ?>
 					</select>
 					<?php if ( ! empty( $errors['country_required'] ) ) : ?>

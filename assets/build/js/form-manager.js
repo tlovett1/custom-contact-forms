@@ -2358,9 +2358,22 @@
 				this.model.set( 'slug', this.el.querySelectorAll( '.field-slug' )[0].value );
 				this.model.set( 'label', this.el.querySelectorAll( '.field-label' )[0].value );
 				this.model.set( 'description', this.el.querySelectorAll( '.field-description' )[0].value );
+
+				var oldType = this.model.get( 'addressType' );
+
 				this.model.set( 'addressType', this.el.querySelectorAll( '.field-address-type' )[0].value );
+
+				var defaultCountry = this.el.querySelectorAll( '.field-default-country' );
+				if ( defaultCountry.length ) {
+					this.model.set( 'defaultCountry', defaultCountry[0].value );
+				}
+
 				this.model.set( 'className', this.el.querySelectorAll( '.field-class-name' )[0].value );
 				this.model.set( 'required', ( this.el.querySelectorAll( '.field-required' )[0].value == 1 ) ? true : false  );
+
+				if ( oldType !== this.model.get( 'addressType' ) ) {
+					this.render();
+				}
 
 				this.constructor.__super__.saveField.apply( this, arguments );
 

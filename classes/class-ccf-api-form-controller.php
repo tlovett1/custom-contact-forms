@@ -65,6 +65,18 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 				'sanitize' => 'esc_attr',
 				'escape' => 'esc_attr',
 			),
+			'defaultCountry' => array(
+				'sanitize' => 'esc_attr',
+				'escape' => 'esc_attr',
+			),
+			'defaultState' => array(
+				'sanitize' => 'esc_attr',
+				'escape' => 'esc_attr',
+			),
+			'defaultCountry' => array(
+				'sanitize' => 'esc_attr',
+				'escape' => 'esc_attr',
+			),
 			'siteKey' => array(
 				'sanitize' => 'esc_attr',
 				'escape' => 'esc_attr',

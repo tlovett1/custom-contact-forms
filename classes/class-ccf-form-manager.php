@@ -1264,6 +1264,16 @@ class CCF_Form_Manager {
 							<option value="international" <# if ( 'international' === field.addressType ) { #>selected="selected"<# } #>><?php esc_html_e( 'International', 'custom-contact-forms' ); ?></option>
 						</select>
 					</div>
+					<# if ( 'international' === field.addressType ) { #>
+						<div>
+							<label for="ccf-field-default-country"><?php esc_html_e( 'Default Country:', 'custom-contact-forms' ); ?></label>
+							<select id="ccf-field-default-country" class="field-default-country">
+								<?php foreach ( CCF_Constants::factory()->get_countries() as $country ) : ?>
+									<option <# if ( "<?php echo $country; ?>" === field.defaultCountry ) { #>selected<# } #>><?php echo $country; ?></option>
+								<?php endforeach; ?>
+							</select>
+						</div>
+					<# } #>
 					<div>
 						<label for="ccf-field-required"><?php esc_html_e( 'Required:', 'custom-contact-forms' ); ?></label>
 						<select id="ccf-field-required" class="field-required">
@@ -1845,7 +1855,7 @@ class CCF_Form_Manager {
 				<div class="right">
 					<select>
 						<?php foreach ( CCF_Constants::factory()->get_countries() as $country ) : ?>
-							<option><?php echo $country; ?></option>
+							<option <# if ( "<?php echo $country; ?>" === field.defaultCountry ) { #>selected<# } #>><?php echo $country; ?></option>
 						<?php endforeach; ?>
 					</select>
 					<label class="sub-label"><?php esc_html_e( 'Country', 'custom-contact-forms' ); ?></label>
