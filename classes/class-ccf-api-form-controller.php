@@ -255,7 +255,7 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 		$new_choices = array();
 
 		foreach ( $choices as $choice ) {
-			if ( ! empty( $choice['label'] ) ) {
+			if ( ! empty( $choice['label'] ) || $choice['label'] === '0' ) {
 				if ( empty( $choice['ID'] ) ) {
 					$args = array(
 						'post_title' => $choice['label'] . '-' . (int) $field_id,
