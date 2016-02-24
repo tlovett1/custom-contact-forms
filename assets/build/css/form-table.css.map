@@ -1,6 +1,6 @@
 {
 "version": 3,
-"mappings": "AAAA,YAAa;EACZ,OAAO,EAAE,IAAI",
+"mappings": "AAAA,YAAa;EACZ,OAAO,EAAE,IAAI;;AAGd,mBAAoB;EACnB,KAAK,EAAE,GAAG",
 "sources": ["../../scss/form-table.scss"],
 "names": [],
 "file": "form-table.css"

@@ -502,6 +502,7 @@ class CCF_Form_CPT {
 
 		$columns = array(
 			'cb' => '<input type="checkbox" />',
+			'ccf_form_id' => esc_html__( 'Form ID', 'custom-contact-forms' ),
 			'title' => esc_html__( 'Form Title', 'custom-contact-forms' ),
 			'author' => esc_html__( 'Author', 'custom-contact-forms' ),
 			'submissions' => esc_html__( 'Submissions', 'custom-contact-forms' ),
@@ -535,6 +536,10 @@ class CCF_Form_CPT {
 				} else {
 					echo count( $fields );
 				}
+
+				break;
+			case 'ccf_form_id':
+				echo (int) $post->ID;
 
 				break;
 			case 'ccf_date':
