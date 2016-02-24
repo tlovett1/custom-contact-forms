@@ -228,7 +228,7 @@ class CCF_Form_Handler {
 
 		if ( $required ) {
 			if ( ! is_array( $value ) ) {
-				if ( empty( $value ) ) {
+				if ( empty( $value ) && $value !== '0' ) {
 					$error = true;
 				}
 			} else {
@@ -831,7 +831,7 @@ class CCF_Form_Handler {
 									<?php endif; ?>
 								</div>
 								<div style="margin-bottom: 10px;">
-									<?php if ( ! empty( $field ) ) : ?>
+									<?php if ( ! empty( $field ) || $field === '0') : ?>
 
 										<?php if ( 'date' === $type ) : ?>
 
