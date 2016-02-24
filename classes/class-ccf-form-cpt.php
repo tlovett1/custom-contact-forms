@@ -502,11 +502,11 @@ class CCF_Form_CPT {
 
 		$columns = array(
 			'cb' => '<input type="checkbox" />',
-			'ccf_form_id' => esc_html__( 'Form ID', 'custom-contact-forms' ),
 			'title' => esc_html__( 'Form Title', 'custom-contact-forms' ),
 			'author' => esc_html__( 'Author', 'custom-contact-forms' ),
 			'submissions' => esc_html__( 'Submissions', 'custom-contact-forms' ),
 			'fields' => esc_html__( 'Number of Fields', 'custom-contact-forms' ),
+			'ccf_form_id' => esc_html__( 'Form ID', 'custom-contact-forms' ),
 			'ccf_date' => esc_html__( 'Date', 'custom-contact-forms' ),
 		);
 
