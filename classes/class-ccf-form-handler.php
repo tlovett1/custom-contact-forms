@@ -1032,7 +1032,7 @@ class CCF_Form_Handler {
 			}
 
 			if ( 'redirect' === $output['action_type'] ) {
-				$output['completion_redirect_url'] = apply_filters( 'ccf_form_completion_redirect_url', get_post_meta( $form_id, 'ccf_form_completion_redirect_url', true ) );
+				$output['completion_redirect_url'] = apply_filters( 'ccf_form_completion_redirect_url', get_post_meta( $form_id, 'ccf_form_completion_redirect_url', true ), $form_id );
 			} else {
 				$output['completion_message'] = get_post_meta( $form_id, 'ccf_form_completion_message', true );
 
