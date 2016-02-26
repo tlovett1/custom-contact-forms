@@ -3,3 +3,4 @@ node_modules
 tests/codeception/_output/*
 tests/codeception/acceptance/AcceptanceTester.php
 vendor
+.DS_Store
