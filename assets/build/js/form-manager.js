@@ -3658,7 +3658,7 @@
 			},
 
 			menuClick: function( event ) {
-				var view = event.target.getAttribute( 'data-view' );
+				var view = event.currentTarget.getAttribute( 'data-view' );
 
 				if ( 'form-pane' === view ) {
 					wp.ccf.currentForm = null;
