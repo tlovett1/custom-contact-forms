@@ -1658,7 +1658,7 @@ class CCF_Form_Manager {
 
 		<script type="text/html" id="ccf-recaptcha-preview-template">
 			<label>{{ field.label }} <# if ( field.required ) { #><span class="required">*</span><# } #> <# if ( field.conditionalsEnabled ) { #><span class="conditionals-enabled">if</span><# } #></label>
-			<img class="recaptcha-preview-img" src="<?php echo plugins_url( 'img/recaptcha.png', dirname( __FILE__ ) ); ?>">
+			<img class="recaptcha-preview-img" src="<?php echo plugins_url( 'assets/img/recaptcha.png', dirname( __FILE__ ) ); ?>">
 			<# if ( field.description ) { #>
 				<div class="field-description">{{ field.description }}</div>
 			<# } #>
