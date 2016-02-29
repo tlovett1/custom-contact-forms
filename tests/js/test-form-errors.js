@@ -39,7 +39,7 @@
 		$( qunit ).load( 'forms/simple-form-1.html', function() {
 			wp.ccf.setupDOM();
 
-			var $form = $('.ccf-form' );
+			var $form = $( '.ccf-form' );
 
 			$form.on( 'ccfFormError', function( event ) {
 				equal( arguments.length, 3, 'Form submitted with two errors' );
@@ -47,7 +47,7 @@
 			});
 
 			// Submit form
-			$form.find( '.ccf-submit-button').click();
+			$form.find( '.ccf-submit-button' ).click();
 		});
 	});
 
@@ -59,9 +59,9 @@
 		$( qunit ).load( 'forms/simple-form-1.html', function() {
 			wp.ccf.setupDOM();
 
-			var $form = $('.ccf-form' );
+			var $form = $( '.ccf-form' );
 
-			$form.find( '.field-required .field-input')
+			$form.find( '.field-required .field-input' )
 				.first()
 				.val( 'Test' );
 
@@ -83,9 +83,9 @@
 		$( qunit ).load( 'forms/simple-name-1.html', function() {
 			wp.ccf.setupDOM();
 
-			var $form = $('.ccf-form' );
+			var $form = $( '.ccf-form' );
 
-			$form.find( '.field-required .field-input')
+			$form.find( '.field-required .field-input' )
 				.val( 'Test' );
 
 			$form.on( 'ccfFormSuccess', function() {
@@ -106,10 +106,10 @@
 		$( qunit ).load( 'forms/simple-name-1.html', function() {
 			wp.ccf.setupDOM();
 
-			var $form = $('.ccf-form' );
+			var $form = $( '.ccf-form' );
 
 			// Only provide first name
-			$form.find( '.field-required .field-input')
+			$form.find( '.field-required .field-input' )
 				.first()
 				.val( 'Test' );
 
@@ -131,9 +131,9 @@
 		$( qunit ).load( 'forms/simple-phone-1.html', function() {
 			wp.ccf.setupDOM();
 
-			var $form = $('.ccf-form' );
+			var $form = $( '.ccf-form' );
 
-			$form.find( '.field-required .field-input')
+			$form.find( '.field-required .field-input' )
 				.val( '3011111234' );
 
 			$form.on( 'ccfFormSuccess', function() {
@@ -154,7 +154,7 @@
 		$( qunit ).load( 'forms/simple-phone-1.html', function() {
 			wp.ccf.setupDOM();
 
-			var $form = $('.ccf-form' );
+			var $form = $( '.ccf-form' );
 
 			$form.on( 'ccfFormError', function() {
 				equal( 2, arguments.length, 'Form has one error' );
@@ -180,9 +180,9 @@
 		$( qunit ).load( 'forms/simple-phone-1.html', function() {
 			wp.ccf.setupDOM();
 
-			var $form = $('.ccf-form' );
+			var $form = $( '.ccf-form' );
 
-			$form.find( '.field-required .field-input')
+			$form.find( '.field-required .field-input' )
 				.val( 'badphone' );
 
 			$form.on( 'ccfFormError', function() {
@@ -202,7 +202,6 @@
 	});
 
 	// @Todo: test international phone number
-
 	QUnit.test( 'Test simple successful US address field', function( assert ) {
 		var done = assert.async();
 
@@ -211,13 +210,13 @@
 		$( qunit ).load( 'forms/simple-us-address-1.html', function() {
 			wp.ccf.setupDOM();
 
-			var $form = $('.ccf-form' );
+			var $form = $( '.ccf-form' );
 
-			var $requiredFields = $form.find( '.field-required .field-input');
+			var $requiredFields = $form.find( '.field-required .field-input' );
 			$requiredFields.each( function() {
 				// make sure we skip state field
 				if ( 'text' === $( this ).attr( 'type' ) ) {
-					$( this).val( 'Test' );
+					$( this ).val( 'Test' );
 				}
 			});
 
@@ -239,17 +238,16 @@
 		$( qunit ).load( 'forms/simple-us-address-1.html', function() {
 			wp.ccf.setupDOM();
 
-			var $form = $('.ccf-form' );
+			var $form = $( '.ccf-form' );
 
-			var $requiredFields = $form.find( '.field-input'),
+			var $requiredFields = $form.find( '.field-input' ),
 				i = 0;
 			$requiredFields.each( function() {
 				if ( i > 1 ) {
 					return false;
 				}
 
-				$( this).val( 'Test' );
-
+				$( this ).val( 'Test' );
 				i++;
 			});
 
@@ -283,7 +281,7 @@
 		$( qunit ).load( 'forms/simple-us-address-1.html', function() {
 			wp.ccf.setupDOM();
 
-			var $form = $('.ccf-form' );
+			var $form = $( '.ccf-form' );
 
 			$form.on( 'ccfFormError', function() {
 				equal( arguments.length, 2, 'Form submitted with one error field' );
@@ -308,7 +306,6 @@
 	});
 
 	// Todo: Test international address
-
 	QUnit.test( 'Test simple unsuccessful incomplete US address field', function( assert ) {
 		var done = assert.async();
 
@@ -317,7 +314,7 @@
 		$( qunit ).load( 'forms/simple-us-address-1.html', function() {
 			wp.ccf.setupDOM();
 
-			var $form = $('.ccf-form' );
+			var $form = $( '.ccf-form' );
 
 			$form.on( 'ccfFormError', function() {
 				equal( arguments.length, 2, 'Form submitted with one error field' );
@@ -349,12 +346,12 @@
 		$( qunit ).load( 'forms/simple-checkboxes-1.html', function() {
 			wp.ccf.setupDOM();
 
-			var $form = $('.ccf-form' );
+			var $form = $( '.ccf-form' );
 
-			var $requiredFields = $form.find( '.field-required .field-input');
+			var $requiredFields = $form.find( '.field-required .field-input' );
 			$requiredFields.each( function() {
 				// make sure we skip state field
-				$( this).attr( 'checked', 'checked' );
+				$( this ).attr( 'checked', 'checked' );
 			});
 
 			$form.on( 'ccfFormSuccess', function() {
@@ -375,7 +372,7 @@
 		$( qunit ).load( 'forms/simple-checkboxes-1.html', function() {
 			wp.ccf.setupDOM();
 
-			var $form = $('.ccf-form' );
+			var $form = $( '.ccf-form' );
 
 			$form.on( 'ccfFormError', function() {
 				equal( arguments.length, 2, 'Form submitted with one error field' );
@@ -400,9 +397,9 @@
 		$( qunit ).load( 'forms/simple-checkboxes-1.html', function() {
 			wp.ccf.setupDOM();
 
-			var $form = $('.ccf-form' );
+			var $form = $( '.ccf-form' );
 
-			var $requiredFields = $form.find( '.field-input'),
+			var $requiredFields = $form.find( '.field-input' ),
 				i = 0;
 			$requiredFields.each( function() {
 				if ( i > 0 ) {
@@ -410,7 +407,6 @@
 				}
 
 				$( this ).attr( 'checked', 'checked' );
-
 				i++;
 			});
 
@@ -430,7 +426,6 @@
 	});
 
 	// @Todo: Test confirm email field
-
 	QUnit.test( 'Test simple successful email field', function( assert ) {
 		var done = assert.async();
 
@@ -439,9 +434,9 @@
 		$( qunit ).load( 'forms/simple-email-1.html', function() {
 			wp.ccf.setupDOM();
 
-			var $form = $('.ccf-form' );
+			var $form = $( '.ccf-form' );
 
-			$form.find( '.field-required .field-input')
+			$form.find( '.field-required .field-input' )
 				.val( 'test@test.com' );
 
 			$form.on( 'ccfFormSuccess', function() {
@@ -462,7 +457,7 @@
 		$( qunit ).load( 'forms/simple-email-1.html', function() {
 			wp.ccf.setupDOM();
 
-			var $form = $('.ccf-form' );
+			var $form = $( '.ccf-form' );
 
 			$form.on( 'ccfFormError', function() {
 				equal( arguments.length, 2, 'Form submitted with one error field' );
@@ -487,9 +482,9 @@
 		$( qunit ).load( 'forms/simple-email-1.html', function() {
 			wp.ccf.setupDOM();
 
-			var $form = $('.ccf-form' );
+			var $form = $( '.ccf-form' );
 
-			$form.find( '.field-required .field-input')
+			$form.find( '.field-required .field-input' )
 				.val( 'testsd' );
 
 			$form.on( 'ccfFormError', function() {
@@ -508,19 +503,12 @@
 	});
 
 	// Todo: Test dropdown
-
 	// Todo: Test radio
-
 	// Todo: Test date
-
 	// Todo: Test hidden
-
 	// Todo: Test reCAPTCHA
-
 	// Todo: Test paragraph text
-
 	// Todo: Test file
-
 	QUnit.test( 'Test simple successful website field', function( assert ) {
 		var done = assert.async();
 
@@ -529,9 +517,9 @@
 		$( qunit ).load( 'forms/simple-website-1.html', function() {
 			wp.ccf.setupDOM();
 
-			var $form = $('.ccf-form' );
+			var $form = $( '.ccf-form' );
 
-			$form.find( '.field-required .field-input')
+			$form.find( '.field-required .field-input' )
 				.val( 'http://google.com' );
 
 			$form.on( 'ccfFormSuccess', function() {
@@ -552,7 +540,7 @@
 		$( qunit ).load( 'forms/simple-website-1.html', function() {
 			wp.ccf.setupDOM();
 
-			var $form = $('.ccf-form' );
+			var $form = $( '.ccf-form' );
 
 			$form.on( 'ccfFormError', function() {
 				equal( 2, arguments.length, 'Form has one error' );
@@ -578,9 +566,9 @@
 		$( qunit ).load( 'forms/simple-website-1.html', function() {
 			wp.ccf.setupDOM();
 
-			var $form = $('.ccf-form' );
+			var $form = $( '.ccf-form' );
 
-			$form.find( '.field-required .field-input')
+			$form.find( '.field-required .field-input' )
 				.val( 'something' );
 
 			$form.on( 'ccfFormError', function() {

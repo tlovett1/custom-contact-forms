@@ -1,9 +1,7 @@
-Custom Contact Forms [![Build Status](https://travis-ci.org/tlovett1/custom-contact-forms.svg?branch=master)](https://travis-ci.org/tlovett1/custom-contact-forms) [![Dockunit Status](https://dockunit.io/svg/tlovett1/custom-contact-forms?master)](https://dockunit.io/projects/tlovett1/custom-contact-forms#master)
+Custom Contact Forms [![Build Status](https://travis-ci.org/tlovett1/custom-contact-forms.svg?branch=master)](https://travis-ci.org/tlovett1/custom-contact-forms)
 ===============
 
-Build beautiful custom forms the WordPress way.
-
-__Note: Version 6.0 breaks backwards compatibility. You will need to perform a database update after upgrading from anything pre 6.0. You may also need to reconfigure some of your forms.__
+Build beautiful custom forms and manage submissions the WordPress way. View live previews of your forms while you build them. Create powerful and exstensible forms for simple contact inquiries, sign ups, subscriptions, events, payments, etc.
 
 ## Purpose
 
@@ -43,6 +41,8 @@ if ( function_exists( 'ccf_output_form' ) ) {
 }
 ```
 
+In case you want to use the shortcode, it is: `[ccf_form id="FORMID"]`. You can find the form ID in the existing forms table of the form manager or in the URL when directly editing a form.
+
 ### Form Settings
 
 Each form has a number of settings that you should understand.
@@ -59,25 +59,48 @@ Each form has a number of settings that you should understand.
 
   * `Pause Message` - This message will be shown if the form is paused.
 
-### Form Notifications
+#### Form Notifications
 
-* `Send email notifications` - When a form is completed, you can have an email sent with submission information.
+For each of your forms you can add email notifications (as many as you want). Email notifications will be sent when a
+form is successfully filled out. Each notification contains the following configurable settings:
 
-  If email notifications are turned on, you can configure the following:
+* `Notification Title` - This is just an internal name for keeping track of your notification.
+* `Email Content (HTML)` - This is the body of the email that will be sent. The email must be written using HTML. The following variables are support:
 
-  * `"To" Email Addresses` - Enter email addresses here that should receive the notification. Multiple email addresses
-  should be comma separated.
-  * `"From" Email Address Type` - This allows you to set what email address the notification is sent from. `WordPress
-  Default` will use the default WordPress email address. `Custom Email` will allow you to manually type in a from
-  address. `Form Field` will allow you to choose an email field within the form to dynamically pull a from email
-  address.
-  * `"From" Name Type` - This allows you to set what name the notification email is sent from. `Custom Name` 
-  will allow you to manually type in a from name. `Form Field` will allow you to choose a name field within 
-  the form to dynamically pull a from email name.
-  * `Email Subject Type` - This allows you to set what subject line is used on the notification email. `Default` 
-  will use the CCF default subject. `Custom Subject` will allow you to manually type in an email subject. 
-  `Form Field` will allow you to choose a field within the form to dynamically pull a subject line.
+  * `[all_fields]` - Shows all your form fields
+  * `[ip_address]` - Shows the IP address of the submitter
+  * `[FIELD_SLUG]` - Each of your form fields can be inserted using their field slug.
 
+* `"To" Email Addresses` - You can send each notification to as many emails as you want. Addresses have two types: `custom` and 
+`field`. `custom` allows you to specify a specific email (such as your own). `field` will pull the email address dynamically from a form field.
+* `"From" Email Address Type` - This allows you to set what email address the notification is sent from. `WordPress
+Default` will use the default WordPress email address. `Custom Email` will allow you to manually type in a from
+address. `Form Field` will allow you to choose an email field within the form to dynamically pull a from email
+address.
+* `"From" Name Type` - This allows you to set what name the notification email is sent from. `Custom Name` 
+will allow you to manually type in a from name. `Form Field` will allow you to choose a name field within 
+the form to dynamically pull a from email name.
+* `Email Subject Type` - This allows you to set what subject line is used on the notification email. `Default` 
+will use the CCF default subject. `Custom Subject` will allow you to manually type in an email subject. 
+`Form Field` will allow you to choose a field within the form to dynamically pull a subject line.
+
+__Note:__ In order for form notification changes to take affect, you will need to save the form.
+
+#### Post Creation
+
+For each of your forms, you can have a post (or custom post type) created every time someone submits the form. This is an extremely powerful feature.
+
+* `Enable Post Creation` - Selecting `Yes` will enable post creation. Note that posts won't start creating until you map some fields.
+* `Post Type` - You can choose the type of post type that will be created with each submission. This defaults to `post`.
+* `Post Status` - You can choose the status (publish, draft, etc.) of the post that will be created with each submission. This defaults to `draft`.
+* `Field Mappings` - You will need to map your form fields to the appropriate post fields. The available post fields are as possible:
+
+  * `Post Title` - Selecting this post field will map your form field to the title of the post.
+  * `Post Content` - Selecting this post field will map your form field to the content of the post.
+  * `Post Excerpt` - Selecting this post field will map your form field to the excerpt of the post.
+  * `Post Date` - Selecting this post field will map your form field to the publish date of the post.
+  * `Post Tags` - Selecting this post field will map your form field to the tags of the post.
+  * `Custom Field` - Selecting this post field will map your form field to a custom field of the post. If you use `Custom Field`, you will need to choose a custom field key.
 
 
 ### Fields
@@ -192,6 +215,10 @@ Both export methods will produce a standard WordPress WXR file. You can import y
 WordPress importer:
 
 ![Import CCF Forms](https://tlovett1.files.wordpress.com/2015/03/import.png)
+
+### General Settings
+
+Custom Contact Forms has a general settings page. Right now the only thing it contains is asset loading restriction which allows you to choose specific pages that form CSS and JS should be loaded on. This allows you to prevent a ton of unnecessary website bloat.
 
 ## Frequently Asked Questions
 

@@ -4,32 +4,34 @@ module.exports = function ( grunt ) {
 		uglify: {
 			js: {
 				files: {
-					'build/js/form-manager.min.js': ['build/js/form-manager.js'],
-					'build/js/form-mce.min.js': ['js/form-mce.js'],
-					'build/js/form-cpt-preview.min.js': ['js/form-cpt-preview.js'],
-					'build/js/form.min.js': ['js/form.js']
+					'assets/build/js/form-manager.min.js': ['assets/build/js/form-manager.js'],
+					'assets/build/js/form-mce.min.js': ['assets/js/form-mce.js'],
+					'assets/build/js/form-cpt-preview.min.js': ['assets/js/form-cpt-preview.js'],
+					'assets/build/js/form.min.js': ['assets/js/form.js'],
+					'assets/build/js/settings.min.js': ['assets/js/settings.js']
 				}
 			}
 		},
 		concat: {
 			dist: {
-				src: ['js/manager/utils.js', 'js/manager/mixins.js', 'js/manager/models.js', 'js/manager/collections.js', 'js/manager/views.js', 'js/manager/router.js', 'js/manager/app.js'],
-				dest: 'build/js/form-manager.js'
+				src: ['assets/js/manager/utils.js', 'assets/js/manager/mixins.js', 'assets/js/manager/models.js', 'assets/js/manager/collections.js', 'assets/js/manager/views.js', 'assets/js/manager/router.js', 'assets/js/manager/app.js'],
+				dest: 'assets/build/js/form-manager.js'
 			}
 		},
 		jshint: {
 			options: grunt.file.readJSON( '.jshintrc' ),
-			all: ['js/*', 'js/manager/*']
+			all: ['assets/js/*', 'assets/js/manager/*']
 		},
 		sass: {
 			dist: {
 				files: {
-					'build/css/form-manager.css': 'scss/form-manager.scss',
-					'build/css/form-mce.css': 'scss/form-mce.scss',
-					'build/css/form.css': 'scss/form.scss',
-					'build/css/admin.css': 'scss/admin.scss',
-					'build/css/form-cpt.css': 'scss/form-cpt.scss',
-					'build/css/form-table.css': 'scss/form-table.scss'
+					'assets/build/css/form-manager.css': 'assets/scss/form-manager.scss',
+					'assets/build/css/form-mce.css': 'assets/scss/form-mce.scss',
+					'assets/build/css/form.css': 'assets/scss/form.scss',
+					'assets/build/css/admin.css': 'assets/scss/admin.scss',
+					'assets/build/css/form-cpt.css': 'assets/scss/form-cpt.scss',
+					'assets/build/css/form-table.css': 'assets/scss/form-table.scss',
+					'assets/build/css/settings.css': 'assets/scss/settings.scss'
 				}
 			}
 		},
@@ -37,9 +39,9 @@ module.exports = function ( grunt ) {
 			dist: {
 				files: [{
 					expand: true,
-					cwd: 'build/css/',
+					cwd: 'assets/build/css/',
 					src: ['*.css', '!*.min.css'],
-					dest: 'build/css/',
+					dest: 'assets/build/css/',
 					ext: '.min.css'
 				}]
 			}
@@ -49,9 +51,9 @@ module.exports = function ( grunt ) {
 		},
 		watch: {
 			files: [
-				'js/*',
-				'js/manager/*',
-				'scss/*'
+				'assets/js/*',
+				'assets/js/manager/*',
+				'assets/scss/*'
 			],
 			tasks: ['concat:dist', 'uglify', 'sass', 'cssmin:dist']
 		}

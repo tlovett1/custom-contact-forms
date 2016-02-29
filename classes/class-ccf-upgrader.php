@@ -140,13 +140,13 @@ class CCF_Upgrader {
 			if ( ! empty( $fields ) ) {
 				$form_fields = array();
 
-				foreach( $fields as $field_id ) {
+				foreach ( $fields as $field_id ) {
 					$field = $wpdb->get_row( sprintf( "SELECT * FROM {$wpdb->prefix}customcontactforms_fields WHERE ID='%d'", (int) $field_id ) );
 
 					$type = $field->field_type;
 
-					if ( ! empty( $type_mapping[$type] ) ) {
-						$type = $type_mapping[$type];
+					if ( ! empty( $type_mapping[ $type ] ) ) {
+						$type = $type_mapping[ $type ];
 					} else {
 						continue;
 					}
@@ -228,17 +228,17 @@ class CCF_Upgrader {
 				 * Terrible hack for unserializing weird data form
 				 */
 				while ( ! empty( $data ) ) {
-					$key_length = $this->strstrb($data, ':"');
-					$key_length = str_replace('s:', '', $key_length);
-					$piece_length = 6 + strlen($key_length) + (int) $key_length;
-					$key = substr($data, (4 + strlen($key_length)), (int) $key_length);
-					$data = substr($data, $piece_length);
-					$value_length = $this->strstrb($data, ':"');
-					$value_length = str_replace('s:', '', $value_length);
-					$piece_length = 6 + strlen($value_length) + (int) $value_length;
-					$value = substr($data, (4 + strlen($value_length)), (int) $value_length);
-					$data = substr($data, $piece_length);
-					$data_array[$key] = $value;
+					$key_length = $this->strstrb( $data, ':"' );
+					$key_length = str_replace( 's:', '', $key_length );
+					$piece_length = 6 + strlen( $key_length ) + (int) $key_length;
+					$key = substr( $data, (4 + strlen( $key_length )), (int) $key_length );
+					$data = substr( $data, $piece_length );
+					$value_length = $this->strstrb( $data, ':"' );
+					$value_length = str_replace( 's:', '', $value_length );
+					$piece_length = 6 + strlen( $value_length ) + (int) $value_length;
+					$value = substr( $data, (4 + strlen( $value_length )), (int) $value_length );
+					$data = substr( $data, $piece_length );
+					$data_array[ $key ] = $value;
 				}
 
 				if ( ! is_wp_error( $submission_id ) ) {
@@ -247,7 +247,7 @@ class CCF_Upgrader {
 			}
 
 			$upgraded_forms[] = (int) $form->id;
-			$new_upgraded_forms[(int) $form->id] = $form_id;
+			$new_upgraded_forms[ (int) $form->id ] = $form_id;
 
 			update_option( 'ccf_upgraded_forms', $upgraded_forms );
 		}
@@ -296,8 +296,63 @@ class CCF_Upgrader {
 	 * @since 6.1
 	 * @return mixed
 	 */
-	function strstrb( $h, $n ){
+	public function strstrb( $h, $n ) {
 		return array_shift( explode( $n, $h, 2 ) );
+	}
+
+	/**
+	 * Upgrade notifications for 7.1
+	 *
+	 * @since 7.1
+	 */
+	public function notifications_upgrade_71() {
+		$forms = new WP_Query( array(
+			'post_type' => 'ccf_form',
+			'post_per_page' => 1000,
+			'no_found_rows' => true,
+			'fields' => 'ids',
+		) );
+
+		if ( ! empty( $forms->posts ) ) {
+			foreach ( $forms->posts as $form_id ) {
+				$send_notifications = get_post_meta( $form_id, 'ccf_form_send_email_notifications', true );
+
+				$addresses = get_post_meta( $form_id, 'ccf_form_email_notification_addresses', true );
+				$formatted_addresses = array();
+
+				if ( ! empty( $addresses ) ) {
+					$addresses = explode( ',', $addresses );
+
+					foreach ( $addresses as $address ) {
+						$formatted_addresses[] = array(
+							'type' => 'custom',
+							'email' => sanitize_text_field( $address ),
+							'field' => '',
+						);
+					}
+				}
+
+				$notifications = array(
+					array(
+						'title' => '',
+						'content' => '[all_fields]',
+						'active' => ( ! empty( $send_notifications ) ) ? true : false,
+						'addresses' => $formatted_addresses,
+						'fromType' => sanitize_text_field( get_post_meta( $form_id, 'ccf_form_email_notification_from_type', true ) ),
+						'fromAddress' => sanitize_text_field( get_post_meta( $form_id, 'ccf_form_email_notification_from_address', true ) ),
+						'fromField' => sanitize_text_field( get_post_meta( $form_id, 'ccf_form_email_notification_from_field', true ) ),
+						'subjectType' => sanitize_text_field( get_post_meta( $form_id, 'ccf_form_email_notification_subject_type', true ) ),
+						'subject' => sanitize_text_field( get_post_meta( $form_id, 'ccf_form_email_notification_subject', true ) ),
+						'subjectField' => sanitize_text_field( get_post_meta( $form_id, 'ccf_form_email_notification_subject_field', true ) ),
+						'fromNameType' => sanitize_text_field( get_post_meta( $form_id, 'ccf_form_email_notification_from_name_type', true ) ),
+						'fromName' => sanitize_text_field( get_post_meta( $form_id, 'ccf_form_email_notification_from_name', true ) ),
+						'fromNameField' => sanitize_text_field( get_post_meta( $form_id, 'ccf_form_email_notification_from_name_field', true ) ),
+					),
+				);
+
+				update_post_meta( $form_id, 'ccf_form_notifications', $notifications );
+			}
+		}
 	}
 
 	/**

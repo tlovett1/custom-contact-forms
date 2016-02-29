@@ -6,4 +6,14 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'phpDocumentor' => array($vendorDir . '/phpdocumentor/reflection-docblock/src'),
+    'cli' => array($vendorDir . '/wp-cli/php-cli-tools/lib'),
+    'WP_CLI' => array($vendorDir . '/wp-cli/wp-cli/php'),
+    'WPCC' => array($vendorDir . '/wp-codeception/classes'),
+    'Requests' => array($vendorDir . '/rmccue/requests/library'),
+    'Prophecy\\' => array($vendorDir . '/phpspec/prophecy/src'),
+    'Oxymel' => array($vendorDir . '/nb/oxymel'),
+    'Mustache' => array($vendorDir . '/mustache/mustache/src'),
+    'Composer\\Installers\\' => array($vendorDir . '/composer/installers/src'),
+    'Codeception' => array($vendorDir . '/codeception/codeception/src'),
 );

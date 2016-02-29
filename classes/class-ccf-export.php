@@ -49,12 +49,12 @@ class CCF_Export {
 
 			foreach ( $wp_post_types as $slug => $post_type ) {
 				if ( in_array( $slug, $ccf_post_types ) ) {
-					$this->old_post_types[$slug] = clone $post_type;
+					$this->old_post_types[ $slug ] = clone $post_type;
 					$post_type->can_export = false;
 				}
 
 				if ( 'ccf_form' === $slug ) {
-					$this->old_post_types[$slug] = clone $post_type;
+					$this->old_post_types[ $slug ] = clone $post_type;
 					$post_type->label = esc_html__( 'Forms and Submissions', 'cutom-contact-forms' );
 				}
 			}
@@ -102,7 +102,6 @@ class CCF_Export {
 
 		if ( in_array( get_post_type( $post_id ), $types ) ) {
 			// Mark post for cleanup later
-
 			update_post_meta( $post_id, 'ccf_import_cleanup', true );
 		}
 	}
@@ -264,7 +263,7 @@ class CCF_Export {
 
 			foreach ( $wp_post_types as $slug => $post_type ) {
 				if ( ! in_array( $slug, $ccf_post_types ) ) {
-					$this->old_post_types[$slug] = clone $post_type;
+					$this->old_post_types[ $slug ] = clone $post_type;
 					$post_type->can_export = false;
 				}
 			}

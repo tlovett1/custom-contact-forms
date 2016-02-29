@@ -10,6 +10,13 @@ class CCF_Form_Renderer {
 	public function __construct() {}
 
 	/**
+	 * Remember if we arent showing assets
+	 *
+	 * @since 7.2
+	 */
+	public $no_assets = false;
+
+	/**
 	 * Setup shortcode
 	 *
 	 * @since 6.0
@@ -25,24 +32,67 @@ class CCF_Form_Renderer {
 	 * @since 6.0
 	 */
 	public function action_wp_enqueue_scripts() {
-		/**
-		 * Todo: We need away to enqueue all this stuff conditionally. The best idea I
-		 * have is creating a settings page to enter URL's where forms will be added.
-		 */
+		$option = get_option( 'ccf_settings' );
 
-		if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
-			$css_form_path = '/build/css/form.css';
-			$js_path = '/js/form.js';
-		} else {
-			$css_form_path = '/build/css/form.min.css';
-			$js_path = '/build/js/form.min.js';
+		// Conditionally load assets
+		if ( ! empty( $option ) && ! empty( $option['asset_loading_restriction_enabled'] ) ) {
+			if ( empty( $option['asset_loading_restrictions'] ) ) {
+				return;
+			}
+
+			$post_id = null;
+			$current_path = $_SERVER['REQUEST_URI'];
+
+			$queried_object = get_queried_object();
+			if ( ! empty( $queried_object->ID ) ) {
+				$post_id = $queried_object->ID;
+			}
+
+			$match = false;
+
+			foreach ( $option['asset_loading_restrictions'] as $asset ) {
+				if ( ! empty( $asset['location'] ) ) {
+					if ( 'post_id' === $asset['type'] ) {
+						if ( (int) $asset['location'] === $post_id ) {
+							$match = true;
+							break;
+						}
+					} else {
+						$asset_url_parts = parse_url( $asset['location'] );
+						if ( ! empty( $asset_url_parts['path'] ) ) {
+							$asset_path = trailingslashit( $asset_url_parts['path'] );
+							if ( ! preg_match( '#^/#', $asset_path ) ) {
+								$asset_path = '/' . $asset_path;
+							}
+
+							if ( $asset_path === $current_path ) {
+								$match = true;
+								break;
+							}
+						}
+					}
+				}
+			}
+
+			if ( ! $match ) {
+				$this->no_assets = true;
+				return;
+			}
 		}
 
-		wp_enqueue_style('ccf-jquery-ui', '//ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/jquery-ui.css');
-		wp_enqueue_script( 'ccf-google-recaptcha', '//www.google.com/recaptcha/api.js?ver=2&onload=ccfRecaptchaOnload&render=explicit', array(), '1.0', true );
-		wp_enqueue_style( 'ccf-form', plugins_url( $css_form_path, dirname( __FILE__ ) ) );
+		if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
+			$css_form_path = '/assets/build/css/form.css';
+			$js_path = '/assets/js/form.js';
+		} else {
+			$css_form_path = '/assets/build/css/form.min.css';
+			$js_path = '/assets/build/js/form.min.js';
+		}
 
-		wp_enqueue_script( 'ccf-form', plugins_url( $js_path, dirname( __FILE__ ) ), array( 'jquery-ui-datepicker', 'underscore' ), '1.1', false );
+		wp_enqueue_style( 'ccf-jquery-ui', '//ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/jquery-ui.css' );
+		wp_enqueue_script( 'ccf-google-recaptcha', '//www.google.com/recaptcha/api.js?ver=2&onload=ccfRecaptchaOnload&render=explicit', array(), CCF_VERSION, true );
+		wp_enqueue_style( 'ccf-form', plugins_url( $css_form_path, dirname( __FILE__ ) ), array(), CCF_VERSION );
+
+		wp_enqueue_script( 'ccf-form', plugins_url( $js_path, dirname( __FILE__ ) ), array( 'jquery-ui-datepicker', 'underscore' ), CCF_VERSION, false );
 
 		$localized = array(
 			'ajaxurl' => esc_url_raw( admin_url( 'admin-ajax.php' ) ),
@@ -84,7 +134,11 @@ class CCF_Form_Renderer {
 			return '';
 		}
 
-		return $this->get_rendered_form( $atts['id'] );
+		if ( ! $this->no_assets ) {
+			return $this->get_rendered_form( $atts['id'] );
+		}
+
+		return '';
 	}
 
 	/**
@@ -124,7 +178,7 @@ class CCF_Form_Renderer {
 			</div>
 
 			<?php
-		} elseif ( ! empty( $_POST['ccf_form'] ) && ! empty( $_POST['form_id'] ) && $_POST['form_id'] == $form_id && empty( CCF_Form_Handler::factory()->errors_by_form[$form_id] ) ) {
+		} elseif ( ! empty( $_POST['ccf_form'] ) && ! empty( $_POST['form_id'] ) && $_POST['form_id'] == $form_id && empty( CCF_Form_Handler::factory()->errors_by_form[ $form_id ] ) ) {
 
 			$completion_message = get_post_meta( $form_id, 'ccf_form_completion_message', true );
 			?>
@@ -143,10 +197,29 @@ class CCF_Form_Renderer {
 
 			$fields_html = '';
 
+			$conditionals = array();
+
 			foreach ( $fields as $field_id ) {
 				$field_id = (int) $field_id;
 
 				$type = esc_attr( get_post_meta( $field_id, 'ccf_field_type', true ) );
+				$slug = get_post_meta( $field_id, 'ccf_field_slug', true );
+				$conditionals_enabled = get_post_meta( $field_id, 'ccf_field_conditionalsEnabled', true );
+
+				if ( ! empty( $conditionals_enabled ) ) {
+					// Todo: escaping?
+					$field_conditionals = get_post_meta( $field_id, 'ccf_attached_conditionals', true );
+
+					if ( ! empty( $field_conditionals ) ) {
+						$new_conditionals = array(
+							'conditions' => $field_conditionals,
+							'conditionalType' => get_post_meta( $field_id, 'ccf_field_conditionalType', true ),
+							'conditionalFieldsRequired' => get_post_meta( $field_id, 'ccf_field_conditionalFieldsRequired', true ),
+						);
+
+						$conditionals[$slug] = $new_conditionals;
+					}
+				}
 
 				if ( 'file' === $type ) {
 					$contains_file = true;
@@ -154,10 +227,19 @@ class CCF_Form_Renderer {
 
 				$fields_html .= apply_filters( 'ccf_field_html', CCF_Field_Renderer::factory()->render_router( $type, $field_id, $form_id ), $type, $field_id );
 			}
+
+			if ( CCF_Field_Renderer::factory()->section_open ) {
+				$fields_html .= '</div>';
+			}
+
+			$theme = get_post_meta( $form_id, 'ccf_form_theme', true );
+			if ( empty( $theme ) ) {
+				$theme = 'default';
+			}
 			?>
 
 			<div class="ccf-form-wrapper form-id-<?php echo (int) $form_id; ?>" data-form-id="<?php echo (int) $form_id; ?>">
-				<form <?php if ( $contains_file ) : ?>enctype="multipart/form-data"<?php endif; ?> class="ccf-form" method="post" action="" data-form-id="<?php echo (int) $form_id; ?>">
+				<form <?php if ( $contains_file ) : ?>enctype="multipart/form-data"<?php endif; ?> class="ccf-form ccf-theme-<?php echo esc_attr( $theme ); ?>" method="post" action="" data-form-id="<?php echo (int) $form_id; ?>">
 
 					<?php $title = get_the_title( $form_id ); if ( ! empty( $title ) && apply_filters( 'ccf_show_form_title', true, $form_id ) ) : ?>
 						<div class="form-title">
@@ -173,10 +255,17 @@ class CCF_Form_Renderer {
 
 					<?php echo $fields_html; ?>
 
-					<div class="form-submit">
-						<input type="submit" class="ccf-submit-button" value="<?php echo esc_attr( get_post_meta( $form_id, 'ccf_form_buttonText', true ) ); ?>">
+					<div class="form-submit <?php echo esc_attr( get_post_meta( $form_id, 'ccf_form_buttonClass', true ) ); ?>">
+						<input type="submit" class="btn btn-primary ccf-submit-button" value="<?php echo esc_attr( get_post_meta( $form_id, 'ccf_form_buttonText', true ) ); ?>">
 						<img class="loading-img" src="<?php echo esc_url( site_url( '/wp-admin/images/wpspin_light.gif' ) ); ?>">
 					</div>
+
+					<script type="text/javascript">
+					window.wp = window.wp || {};
+					wp.ccf = wp.ccf || {};
+					wp.ccf.conditionals = wp.ccf.conditionals || [];
+					wp.ccf.conditionals[<?php echo (int) $form_id; ?>] = <?php echo wp_json_encode( $conditionals ); ?>;
+					</script>
 
 					<input type="hidden" name="form_id" value="<?php echo (int) $form_id; ?>">
 					<input type="hidden" name="form_page" value="<?php echo esc_url( untrailingslashit( site_url() ) . $_SERVER['REQUEST_URI'] ); ?>">
@@ -185,13 +274,15 @@ class CCF_Form_Renderer {
 					<input type="hidden" name="form_nonce" value="<?php echo wp_create_nonce( 'ccf_form' ); ?>">
 				</form>
 
-				<iframe onload="wp.ccf.iframeOnload( <?php echo (int) $form_id; ?> );" class="ccf-form-frame" id="ccf_form_frame_<?php echo (int) $form_id; ?>" name="ccf_form_frame_<?php echo (int) $form_id; ?>"></iframe>
+				<iframe class="ccf-form-frame" id="ccf_form_frame_<?php echo (int) $form_id; ?>" name="ccf_form_frame_<?php echo (int) $form_id; ?>"></iframe>
 			</div>
 
 			<?php
 		}
 
 		$form_html = ob_get_clean();
+		
+		CCF_Field_Renderer::factory()->reset();
 
 		return $form_html;
 	}

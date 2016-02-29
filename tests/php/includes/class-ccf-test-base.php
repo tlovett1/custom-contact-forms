@@ -157,7 +157,7 @@ class CCFTestBase extends WP_UnitTestCase {
 	 * @since 6.0
 	 * @return object
 	 */
-	public function _createForm( $fields = array( array( 'type' => 'single-line-text' ) ) ) {
+	public function _createForm( $fields = array( array( 'type' => 'single-line-text' ) ), $settings = array() ) {
 
 		$i = 1;
 		foreach ( $fields as &$field ) {
@@ -171,14 +171,20 @@ class CCFTestBase extends WP_UnitTestCase {
 			$i++;
 		}
 
-		$data = array(
+		$data = wp_parse_args( $settings, array(
 			'fields' => $fields,
 			'type' => 'ccf_form',
 			'status' => 'publish',
 			'ID' => null,
-			'title' => 'Test Form',
+			'title' => array( 'raw' => 'Test Form' ),
 			'description' => 'Test form description',
 			'buttonText' => 'Submit Text',
+			'buttonClass' => '',
+			'notifications' => array(),
+			'postCreation' => false,
+			'postCreationType' => 'post',
+			'postCreationStatus' => 'draft',
+			'postFieldMappings' => array(),
 			'author' => array(),
 			'excerpt' => '',
 			'link' => '',
@@ -196,9 +202,12 @@ class CCFTestBase extends WP_UnitTestCase {
 			),
 			'ping_status' => false,
 			'featured_image' => null,
-		);
+		) );
 
-		return $this->api->create_form( $data );
+		$request = new WP_REST_Request();
+		$request->set_body( json_encode( $data ) );
+
+		return $this->api->create_item( $request );
 	}
 
 	/**
@@ -207,9 +216,9 @@ class CCFTestBase extends WP_UnitTestCase {
 	 * @since 6.0
 	 */
 	public function setUp() {
-		set_time_limit(0);
+		set_time_limit( 0 );
 
-		if ( ! self::$hooks_saved ) {
+		if ( property_exists( 'CCFTestBase', 'hooks_saved' ) && ! self::$hooks_saved ) {
 			$this->_backup_hooks();
 		}
 
@@ -217,7 +226,7 @@ class CCFTestBase extends WP_UnitTestCase {
 		$wpdb->suppress_errors = false;
 		$wpdb->show_errors = true;
 		$wpdb->db_connect();
-		ini_set('display_errors', 1 );
+		ini_set( 'display_errors', 1 );
 		$this->factory = new WP_UnitTest_Factory;
 		$this->clean_up_global_scope();
 		$this->start_transaction();
@@ -228,7 +237,8 @@ class CCFTestBase extends WP_UnitTestCase {
 
 		wp_set_current_user( $admin_id );
 
-		$wp_json_server = new WP_JSON_Server;
-		$this->api = new CCF_API( $wp_json_server );
+		$this->api = new CCF_API_Form_Controller;
+		$this->notifications = array();
+		$this->post_creation = false;
 	}
 }

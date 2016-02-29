@@ -1,0 +1,224 @@
+#titlediv {
+	display: none;
+}
+
+#submitdiv {
+	display: none;
+}
+
+#wp-admin-bar-view {
+	display: none;
+}
+
+.ccf-title {
+	h1 {
+		margin: 0;
+
+		.button {
+			vertical-align: middle;
+			top: -2px;
+			position: relative;
+			margin-left: 8px;
+		}
+	}
+}
+
+#post-body-content .ccf-open-form-manager {
+	display: none;
+}
+
+.add-new-h2 {
+	display: none;
+}
+
+#ccf-at-a-glance {
+	.inside {
+		margin: 0;
+		padding: 0;
+
+		.line {
+			display: block;
+		}
+
+		.has-icon {
+			display: block;
+
+			&:before {
+				font: normal 20px/1 'dashicons';
+				speak: none;
+				display: inline-block;
+				padding: 0 5px 0 0;
+				left: -1px;
+				position: relative;
+				vertical-align: top;
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+				text-decoration: none !important;
+				top: -1px;
+				color: #888;
+			}
+		}
+
+		#ccf-created-by:before {
+			content: "\f110";
+		}
+
+		#ccf-submission-num:before {
+			content: "\f226";
+		}
+
+		#ccf-field-num:before {
+			content: "\f175";
+		}
+
+		#major-publishing-actions {
+			overflow: auto;
+
+			.submitdelete {
+				color: #a00;
+				text-decoration: none;
+				padding: 1px 2px;
+
+				&.duplicate {
+					color: #0073aa;
+				}
+			}
+
+			.export-button {
+				float: right;
+			}
+		}
+	}
+}
+
+.ccf-form-cpt-preview {
+	.ccf-form-preview {
+		border: 0;
+		padding: 0;
+		background-color: inherit;
+	}
+
+	.spinner {
+		display: block;
+		float: none;
+	}
+}
+
+.ccf-submission-column-controller {
+	.spinner {
+		display: block;
+		float: none;
+	}
+}
+
+#ccf-submissions {
+	[data-icon]:before {
+		font-family: 'form-manager';
+		content: attr(data-icon);
+		speak: none;
+		font-weight: normal;
+		font-variant: normal;
+		text-transform: none;
+		line-height: 1;
+		cursor: pointer;
+		-webkit-font-smoothing: antialiased;
+	}
+
+	.ccf-submission-icon {
+		font: normal 20px/1;
+		speak: none;
+		display: inline-block;
+		padding: 12px 0px 4px 10px;
+		top: 0;
+		position: relative;
+		float: right;
+		width: 23px;
+		height: 30px;
+		cursor: pointer;
+		color: inherit;
+	}
+
+	.inside {
+		padding: 0;
+		margin: 0;
+
+
+
+		table {
+			border: 0;
+			border-collapse: collapse;
+			table-layout: auto;
+			width: 100%;
+
+			td, th {
+				padding: 8px 10px;
+			}
+
+			th input {
+				margin: 0;
+			}
+
+			tbody {
+				tr {
+					background-color: #f9f9f9;
+
+					td {
+						width: auto;
+					}
+
+					.spinner {
+						float: none;
+						display: block;
+					}
+
+					.actions {
+						text-align: right;
+
+						a {
+							cursor: pointer;
+							color: inherit;
+							padding-left: 4px;
+						}
+					}
+
+					.submission-wrapper {
+						display: none;
+					}
+
+					&:nth-child(2n-1) {
+						background-color: #fff;
+					}
+
+					td.no-submissions {
+						text-align: center;
+						width: auto;
+						padding-bottom: 8px;
+					}
+				}
+			}
+		}
+
+		.ccf-pagination {
+			border-top: 1px solid #eee;
+			margin-top: 0;
+			padding: 8px;
+		}
+	}
+}
+
+.ccf-submission-content {
+	.field-slug {
+		font-weight: bold;
+		font-size: 15px;
+		padding: 7px;
+	}
+
+	.field-content {
+		padding: 7px;
+		background-color: #f9f9f9;
+
+		span {
+			font-style: italic;
+		}
+	}
+}

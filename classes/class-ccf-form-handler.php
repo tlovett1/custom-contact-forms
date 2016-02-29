@@ -86,11 +86,14 @@ class CCF_Form_Handler {
 	 * Upload file and return relevant attachment info
 	 *
 	 * @param string $value
-	 * @param int $field_id
+	 * @param int    $field_id
 	 * @since 6.4
 	 * @return array|int
 	 */
 	public function handle_file( $value, $field_id ) {
+		require_once( trailingslashit( ABSPATH ) . 'wp-admin/includes/file.php' );
+		require_once( trailingslashit( ABSPATH ) . 'wp-admin/includes/image.php' );
+		require_once( trailingslashit( ABSPATH ) . 'wp-admin/includes/media.php' );
 
 		$slug = get_post_meta( $field_id, 'ccf_field_slug', true );
 
@@ -123,26 +126,26 @@ class CCF_Form_Handler {
 		$errors = array();
 
 		if ( $required ) {
-			if ( empty( $_FILES['ccf_field_' . $slug] ) || 4 === $_FILES['ccf_field_' . $slug]['error'] ) {
+			if ( empty( $_FILES[ 'ccf_field_' . $slug ] ) || 4 === $_FILES[ 'ccf_field_' . $slug ]['error'] ) {
 				return array( 'required' => esc_html__( 'This field is required.', 'custom-contact-forms' ) );
 			}
 		} else {
-			if ( ! empty( $_FILES['ccf_field_' . $slug] ) && 4 === $_FILES['ccf_field_' . $slug]['error'] ) {
+			if ( ! empty( $_FILES[ 'ccf_field_' . $slug ] ) && 4 === $_FILES[ 'ccf_field_' . $slug ]['error'] ) {
 				return true;
 			}
 		}
 
 		$max_file_size = get_post_meta( $field_id, 'ccf_field_maxFileSize', true );
 
-		if ( ! empty( $max_file_size ) && $_FILES['ccf_field_' . $slug]['size'] > ( $max_file_size * 1000 * 1000 ) || 1 === $_FILES['ccf_field_' . $slug]['error'] ) {
+		if ( ! empty( $max_file_size ) && $_FILES[ 'ccf_field_' . $slug ]['size'] > ( $max_file_size * 1000 * 1000 ) || 1 === $_FILES[ 'ccf_field_' . $slug ]['error'] ) {
 			$errors['file_size'] = sprintf( esc_html__( 'This file is too big (%d MB max)', 'custom-contact-forms' ), (int) $max_file_size );
 		}
 
-		if ( ! empty( $_FILES['ccf_field_' . $slug]['error'] ) || empty( $_FILES['ccf_field_' . $slug]['size'] ) ) {
+		if ( ! empty( $_FILES[ 'ccf_field_' . $slug ]['error'] ) || empty( $_FILES[ 'ccf_field_' . $slug ]['size'] ) ) {
 			return array( 'file_upload' => esc_html__( 'An upload error occurred.', 'custom-contact-forms' ) );
 		}
 
-		$extension = strtolower( pathinfo( $_FILES['ccf_field_' . $slug]['name'], PATHINFO_EXTENSION ) );
+		$extension = strtolower( pathinfo( $_FILES[ 'ccf_field_' . $slug ]['name'], PATHINFO_EXTENSION ) );
 
 		$valid_extensions = get_post_meta( $field_id, 'ccf_field_fileExtensions', true );
 
@@ -154,9 +157,9 @@ class CCF_Form_Handler {
 				$ext = trim( $ext );
 
 				if ( empty( $ext ) ) {
-					unset( $valid_extensions[$key] );
+					unset( $valid_extensions[ $key ] );
 				} else {
-					$valid_extensions[$key] = $ext;
+					$valid_extensions[ $key ] = $ext;
 				}
 			}
 
@@ -175,19 +178,19 @@ class CCF_Form_Handler {
 	/**
 	 * Get errors for a form. Optional slug allows you to get errors from a specific field within a form
 	 *
-	 * @param int $form_id
+	 * @param int    $form_id
 	 * @param string $slug
 	 * @since 6.0
 	 * @return bool
 	 */
 	public function get_errors( $form_id, $slug = null ) {
-		if ( ! empty( $this->errors_by_form[$form_id] ) && is_array( $this->errors_by_form[$form_id] ) ) {
+		if ( ! empty( $this->errors_by_form[ $form_id ] ) && is_array( $this->errors_by_form[ $form_id ] ) ) {
 			if ( ! empty( $slug ) ) {
-				if ( ! empty( $this->errors_by_form[$form_id][$slug] ) ) {
-					return $this->errors_by_form[$form_id][$slug];
+				if ( ! empty( $this->errors_by_form[ $form_id ][ $slug ] ) ) {
+					return $this->errors_by_form[ $form_id ][ $slug ];
 				}
 			} else {
-				return $this->errors_by_form[$form_id];
+				return $this->errors_by_form[ $form_id ];
 			}
 		}
 
@@ -198,8 +201,8 @@ class CCF_Form_Handler {
 	 * Simple callback to determine if a field is empty.
 	 *
 	 * @param mixed $value
-	 * @param int $field_id
-	 * @param bool $required
+	 * @param int   $field_id
+	 * @param bool  $required
 	 * @since 6.0
 	 * @return array|bool
 	 */
@@ -215,8 +218,8 @@ class CCF_Form_Handler {
 	 * Simple callback to determine if a choiceable is "empty"
 	 *
 	 * @param mixed $value
-	 * @param int $field_id
-	 * @param bool $required
+	 * @param int   $field_id
+	 * @param bool  $required
 	 * @since 6.4
 	 * @return array|bool
 	 */
@@ -233,7 +236,7 @@ class CCF_Form_Handler {
 
 				if ( ! empty( $value ) ) {
 					foreach ( $value as $something ) {
-						if ( ! empty ( $something ) ) {
+						if ( ! empty( $something ) ) {
 							$error = false;
 						}
 					}
@@ -268,8 +271,8 @@ class CCF_Form_Handler {
 	 * Simple callback to determine if a phone number is valid
 	 *
 	 * @param mixed $value
-	 * @param int $field_id
-	 * @param bool $required
+	 * @param int   $field_id
+	 * @param bool  $required
 	 * @since 6.0
 	 * @return array|bool
 	 */
@@ -309,8 +312,8 @@ class CCF_Form_Handler {
 	 * Simple callback to determine if an address is valid
 	 *
 	 * @param mixed $value
-	 * @param int $field_id
-	 * @param bool $required
+	 * @param int   $field_id
+	 * @param bool  $required
 	 * @since 6.0
 	 * @return array|bool
 	 */
@@ -352,8 +355,8 @@ class CCF_Form_Handler {
 	 * Simple callback to determine if an email is valid
 	 *
 	 * @param mixed $value
-	 * @param int $field_id
-	 * @param bool $required
+	 * @param int   $field_id
+	 * @param bool  $required
 	 * @since 6.0
 	 * @return array|bool
 	 */
@@ -397,8 +400,8 @@ class CCF_Form_Handler {
 	 * Simple callback to determine if a name is valid
 	 *
 	 * @param mixed $value
-	 * @param int $field_id
-	 * @param bool $required
+	 * @param int   $field_id
+	 * @param bool  $required
 	 * @since 6.0
 	 * @return array|bool
 	 */
@@ -424,8 +427,8 @@ class CCF_Form_Handler {
 	 * Simple callback to determine if a website is valid
 	 *
 	 * @param mixed $value
-	 * @param int $field_id
-	 * @param bool $required
+	 * @param int   $field_id
+	 * @param bool  $required
 	 * @since 6.0
 	 * @return array|bool
 	 */
@@ -450,8 +453,8 @@ class CCF_Form_Handler {
 	 * Simple callback to determine if a date is valid
 	 *
 	 * @param mixed $value
-	 * @param int $field_id
-	 * @param bool $required
+	 * @param int   $field_id
+	 * @param bool  $required
 	 * @since 6.0
 	 * @return array|bool
 	 */
@@ -534,7 +537,7 @@ class CCF_Form_Handler {
 	 * Simple callback to sanitize a phone number
 	 *
 	 * @param mixed $value
-	 * @param int $field_id
+	 * @param int   $field_id
 	 * @since 6.0
 	 * @return string
 	 */
@@ -583,11 +586,11 @@ class CCF_Form_Handler {
 	function process_submission() {
 		if ( ! empty( $_POST['my_information'] ) ) {
 			// Honeypot
-			return array( 'error' => 'honeypot', 'success' => false, );
+			return array( 'error' => 'honeypot', 'success' => false );
 		}
 
 		if ( empty( $_POST['form_nonce'] ) || ! wp_verify_nonce( $_POST['form_nonce'], 'ccf_form' ) ) {
-			return array( 'error' => 'nonce', 'success' => false, );
+			return array( 'error' => 'nonce', 'success' => false );
 		}
 
 		$form_id = (int) $_POST['form_id'];
@@ -595,7 +598,7 @@ class CCF_Form_Handler {
 		$form = get_post( $form_id );
 
 		if ( empty( $form ) ) {
-			return array( 'error' => 'missing_form', 'success' => false, );
+			return array( 'error' => 'missing_form', 'success' => false );
 		}
 
 		$fields = get_post_meta( $form->ID, 'ccf_attached_fields', true );
@@ -608,6 +611,7 @@ class CCF_Form_Handler {
 		$skip_fields = apply_filters( 'ccf_skip_fields', array( 'html', 'section-header' ), $form->ID );
 		$save_skip_fields = apply_filters( 'ccf_save_skip_fields', array( 'recaptcha' ), $form->ID );
 		$file_ids = array();
+		$all_form_fields = array();
 
 		foreach ( $fields as $field_id ) {
 			$field_id = (int) $field_id;
@@ -618,37 +622,52 @@ class CCF_Form_Handler {
 				continue;
 			}
 
-			$slug = get_post_meta( $field_id, 'ccf_field_slug', true );
+			$slug = null;
+
+			$field_metas = get_post_meta( $field_id );
+			$new_field = array();
+
+			foreach ( $field_metas as $meta_key => $meta_value ) {
+				if ( 0 === stripos( $meta_key, 'ccf_field_' ) ) {
+					if ( 'ccf_field_slug' === $meta_key ) {
+						$slug = $meta_value[0];
+					}
+
+					$new_field[ $meta_key ] = wp_kses_post( $meta_value[0] );
+				}
+			}
+
+			$all_form_fields[ $slug ] = $new_field;
 
 			// We save this to reference later
-			$field_slug_to_id[$slug] = array( 'id' => $field_id, 'type' => sanitize_text_field( $type ) );
+			$field_slug_to_id[ $slug ] = array( 'id' => $field_id, 'type' => sanitize_text_field( $type ) );
 
 			$custom_value_mapping = array( 'recaptcha' => 'g-recaptcha-response' );
 
 			if ( in_array( $type, array_keys( $custom_value_mapping ) ) ) {
-				$value = ( isset( $_POST[$custom_value_mapping[$type]] ) ) ? $_POST[$custom_value_mapping[$type]] : '';
+				$value = ( isset( $_POST[ $custom_value_mapping[ $type ] ] ) ) ? $_POST[ $custom_value_mapping[ $type ] ] : '';
 			} else {
-				$value = ( isset( $_POST['ccf_field_' . $slug] ) ) ? $_POST['ccf_field_' . $slug] : '';
+				$value = ( isset( $_POST[ 'ccf_field_' . $slug ] ) ) ? $_POST[ 'ccf_field_' . $slug ] : '';
 			}
 
 			$validation = $this->process_field( $field_id, $value );
 
 			if ( $validation['error'] !== null ) {
-				$errors[$slug] = $validation['error'];
+				$errors[ $slug ] = $validation['error'];
 			} else {
 				if ( ! in_array( $type, $save_skip_fields ) ) {
-					$submission[$slug] = $validation['sanitized_value'];
+					$submission[ $slug ] = $validation['sanitized_value'];
 
 					if ( 'file' === $type ) {
-						$file_ids[] = $submission[$slug]['id'];
+						$file_ids[] = $submission[ $slug ]['id'];
 					}
 				}
 			}
 		}
 
 		if ( ! empty( $errors ) ) {
-			$this->errors_by_form[$form_id] = $errors;
-			return array( 'error' => 'invalid_fields', 'field_errors' => $errors, 'success' => false, );
+			$this->errors_by_form[ $form_id ] = $errors;
+			return array( 'error' => 'invalid_fields', 'field_errors' => $errors, 'success' => false );
 		} else {
 			$submission_id = wp_insert_post( array(
 				'post_status' => 'publish',
@@ -665,7 +684,22 @@ class CCF_Form_Handler {
 				 */
 				update_post_meta( $submission_id, 'ccf_submission_data_map', $field_slug_to_id );
 
+				/**
+				 * @since 7.4.4
+				 */
+				update_post_meta( $submission_id, 'ccf_submission_form_fields', $all_form_fields );
+
 				update_post_meta( $submission_id, 'ccf_submission_ip', sanitize_text_field( $_SERVER['REMOTE_ADDR'] ) );
+
+				/**
+				 * @since  7.7
+				 */
+				if ( ! empty( $_POST['form_page'] ) ) {
+					$form_page = $_POST['form_page'];
+					update_post_meta( $submission_id, 'ccf_submission_form_page', esc_url_raw( $form_page ) );
+				} else {
+					$form_page = null;
+				}
 
 				foreach ( $file_ids as $file_id ) {
 					wp_update_post( array(
@@ -678,7 +712,86 @@ class CCF_Form_Handler {
 			} else {
 				do_action( 'ccf_unsuccessful_submission', $form_id );
 
-				return array( 'error' => 'could_not_create_submission', 'success' => false, );
+				return array( 'error' => 'could_not_create_submission', 'success' => false );
+			}
+
+			// Post creation
+			$post_creation = get_post_meta( $form_id, 'ccf_form_post_creation', true );
+
+			if ( ! empty( $post_creation ) ) {
+				$post_creation_type = get_post_meta( $form_id, 'ccf_form_post_creation_type', true );
+				$post_creation_status = get_post_meta( $form_id, 'ccf_form_post_creation_status', true );
+
+				$mappings = get_post_meta( $form_id, 'ccf_form_post_field_mappings', true );
+
+				if ( ! empty( $mappings ) ) {
+
+					$args = array(
+						'post_status' => ( ! empty( $post_creation_status ) ) ? $post_creation_status : 'draft',
+						'post_type' => ( ! empty( $post_creation_type ) ) ? $post_creation_type : 'post',
+					);
+
+					$tags = array();
+					$custom_fields = array();
+
+					foreach ( $mappings as $mapping ) {
+						if ( ! empty( $mapping['formField'] ) && isset( $submission[ $mapping['formField'] ] ) ) {
+							$field_id = $field_slug_to_id[ $mapping['formField'] ]['id'];
+							$field_type = get_post_meta( $field_id, 'ccf_field_type', true );
+
+							$submission_value = $submission[ $mapping['formField'] ];
+							if ( is_array( $submission_value ) && isset( $submission_value['email'] ) ) {
+								$submission_value = $submission_value['email'];
+							}
+
+							if ( 'post_title' === $mapping['postField'] ) {
+								$args['post_title'] = $this->_flatten_and_concat( $submission_value );
+							} elseif ( 'post_content' === $mapping['postField'] ) {
+								$args['post_content'] = $this->_flatten_and_concat( $submission_value );
+							} elseif ( 'post_date' === $mapping['postField'] ) {
+								$args['post_date'] = $this->_flatten_and_concat( $submission_value );
+							} elseif ( 'post_excerpt' === $mapping['postField'] ) {
+								$args['post_excerpt'] = $this->_flatten_and_concat( $submission_value );
+							} elseif ( 'post_tag' === $mapping['postField'] ) {
+								if ( 'checkboxes' === $field_type ) {
+									$tags = array_merge( $tags, $submission_value );
+								} elseif ( 'dropdown' == $field_type && is_array( $submission_value ) ) {
+									$tags = array_merge( $tags, $submission_value );
+								} else {
+									$tags[] = $this->_flatten_and_concat( $submission[ $mapping['formField'] ] );
+								}
+							} elseif ( 'custom_field' === $mapping['postField'] && ! empty( $mapping['customFieldKey'] ) ) {
+								$custom_fields[] = array(
+									'key' => $mapping['customFieldKey'],
+									'value' => $this->_flatten_and_concat( $submission_value ),
+								);
+							}
+						}
+					}
+
+					if ( empty( $args['post_title'] ) ) {
+						$args['post_title'] = apply_filters( 'ccf_default_post_creation_title', esc_html__( 'Post created by form', 'custom-contact-forms' ), $args, $form_id, $submission_id, $submission );
+					}
+
+					$post_creation_id = wp_insert_post( apply_filters( 'ccf_post_creation_args', $args, $form_id, $submission_id, $submission ) );
+
+					if ( ! is_wp_error( $post_creation_id ) ) {
+						update_post_meta( $post_creation_id, 'ccf_created_by_form', (int) $form_id );
+
+						if ( ! empty( $tags ) ) {
+							wp_set_object_terms( $post_creation_id, $tags, 'post_tag', true );
+						}
+
+						if ( ! empty( $custom_fields ) ) {
+							foreach ( $custom_fields as $custom_field ) {
+								// Todo: sanitization?
+								add_post_meta( $post_creation_id, $custom_field['key'], $custom_field['value'] );
+							}
+						}
+					}
+
+					do_action( 'ccf_post_creation', $post_creation_id, $form_id, $submission_id, $submission );
+				}
 			}
 
 			$output = array(
@@ -686,188 +799,252 @@ class CCF_Form_Handler {
 				'action_type' => get_post_meta( $form_id, 'ccf_form_completion_action_type', true ),
 			);
 
-			$send_email_notifications = get_post_meta( $form_id, 'ccf_form_send_email_notifications', true );
-			$email_addresses_field = get_post_meta( $form_id, 'ccf_form_email_notification_addresses', true );
+			$notifications = get_post_meta( $form_id, 'ccf_form_notifications', true );
 
-			if ( ! empty( $send_email_notifications ) && ! empty( $email_addresses_field ) ) {
-				$email_addresses_field = str_replace( ';', ',', $email_addresses_field );
-				$email_addresses = explode( ',', $email_addresses_field );
-				$email_addresses = array_map( 'trim', $email_addresses );
+			if ( ! empty( $notifications ) ) {
+				foreach ( $notifications as $notification ) {
+					if ( ! empty( $notification['active'] ) && ! empty( $notification['addresses'] ) ) {
 
-				if ( ! empty( $email_addresses ) ) {
-					$message = '';
+						$message = $notification['content'];
 
-					ob_start();
+						// Variables
+						if ( false !== stripos( $message, '[all_fields]' ) ) {
+							$all_fields = '';
 
-					foreach ( $submission as $slug => $field ) {
-						$field_id = $field_slug_to_id[$slug]['id'];
-						$label = get_post_meta( $field_id, 'ccf_field_label', true );
-						$type = get_post_meta( $field_id, 'ccf_field_type', true );
+							ob_start();
 
-						if ( 'hidden' === $type ) {
-							$label = esc_html__( '*Hidden Field*', 'custom-contact-forms' );
-						}
-						?>
+							foreach ( $submission as $slug => $field ) {
+								$field_id = $field_slug_to_id[ $slug ]['id'];
+								$label = get_post_meta( $field_id, 'ccf_field_label', true );
+								$type = get_post_meta( $field_id, 'ccf_field_type', true );
 
-						<div>
-							<?php if ( ! empty( $label ) ) : ?>
-								<b><?php echo esc_html( $label ); ?> <?php if ( apply_filters( 'ccf_show_slug_in_submission_email', false, $submission_id, $form_id ) ) : ?>(<?php echo esc_html( $slug ); ?>)<?php endif; ?>:</b>
-							<?php else : ?>
-								<b><?php echo esc_html( $slug ); ?>:</b>
-							<?php endif; ?>
-						</div>
-						<div style="margin-bottom: 10px;">
-							<?php if ( ! empty( $field ) ) : ?>
+								if ( 'hidden' === $type ) {
+									$label = esc_html__( '*Hidden Field*', 'custom-contact-forms' );
+								}
+								?>
 
-								<?php if ( 'date' === $type ) : ?>
-
-									<?php echo esc_html( stripslashes( CCF_Submission_CPT::factory()->get_pretty_field_date( $field ) ) ); ?>
-
-								<?php elseif ( 'name' === $type ) : ?>
-
-									<?php echo esc_html( stripslashes( CCF_Submission_CPT::factory()->get_pretty_field_name( $field ) ) ); ?>
-
-								<?php elseif ( 'file' === $type ) : ?>
-
-									<a href="<?php echo esc_url( $field['url'] ); ?>"><?php echo esc_html( stripslashes( $field['file_name'] ) ); ?></a>
-
-								<?php elseif ( 'address' === $type ) : ?>
-
-									<?php echo esc_html( stripslashes( CCF_Submission_CPT::factory()->get_pretty_field_address( $field ) ) ); ?>
-
-								<?php elseif ( 'email' === $type ) : ?>
-
-									<?php if ( is_array( $field ) ) : ?>
-										<?php echo esc_html( stripslashes( $field['email'] ) ); ?>
+								<div>
+									<?php if ( ! empty( $label ) ) : ?>
+										<b><?php echo esc_html( $label ); ?> <?php if ( apply_filters( 'ccf_show_slug_in_submission_email', false, $submission_id, $form_id ) ) : ?>(<?php echo esc_html( $slug ); ?>)<?php endif; ?>:</b>
 									<?php else : ?>
-										<?php echo esc_html( stripslashes( $field ) ); ?>
+										<b><?php echo esc_html( $slug ); ?>:</b>
 									<?php endif; ?>
+								</div>
+								<div style="margin-bottom: 10px;">
+									<?php if ( ! empty( $field ) ) : ?>
 
-								<?php elseif ( 'dropdown' === $type || 'radio' === $type || 'checkboxes' === $type ) : ?>
+										<?php if ( 'date' === $type ) : ?>
 
-									<?php if ( is_array( $field ) ) : ?>
+											<?php echo esc_html( stripslashes( CCF_Submission_CPT::factory()->get_pretty_field_date( $field, $field_id ) ) ); ?>
 
-										<?php $i = 0; foreach ( $field as $value ) : ?>
-											<?php if ( ! empty( $value ) ) : ?>
-												<?php if ( $i !== 0 ) : ?><br><?php endif; ?>
-												<?php echo esc_html( stripslashes( $value ) ); ?>
-												<?php $i++; ?>
+										<?php elseif ( 'name' === $type ) : ?>
+
+											<?php echo esc_html( stripslashes( CCF_Submission_CPT::factory()->get_pretty_field_name( $field ) ) ); ?>
+
+										<?php elseif ( 'file' === $type ) : ?>
+
+											<a href="<?php echo esc_url( $field['url'] ); ?>"><?php echo esc_html( stripslashes( $field['file_name'] ) ); ?></a>
+
+										<?php elseif ( 'address' === $type ) : ?>
+
+											<?php echo esc_html( stripslashes( CCF_Submission_CPT::factory()->get_pretty_field_address( $field ) ) ); ?>
+
+										<?php elseif ( 'email' === $type ) : ?>
+
+											<?php if ( is_array( $field ) ) : ?>
+												<?php echo esc_html( stripslashes( $field['email'] ) ); ?>
+											<?php else : ?>
+												<?php echo esc_html( stripslashes( $field ) ); ?>
 											<?php endif; ?>
-										<?php endforeach; ?>
 
-										<?php if ( 0 === $i ) : ?>
-											<span>-</span>
+										<?php elseif ( 'dropdown' === $type || 'radio' === $type || 'checkboxes' === $type ) : ?>
+
+											<?php if ( is_array( $field ) ) : ?>
+
+												<?php $i = 0; foreach ( $field as $value ) : ?>
+													<?php if ( ! empty( $value ) ) : ?>
+														<?php if ( $i !== 0 ) : ?><br><?php endif; ?>
+														<?php echo esc_html( stripslashes( $value ) ); ?>
+														<?php $i++; ?>
+													<?php endif; ?>
+												<?php endforeach; ?>
+
+												<?php if ( 0 === $i ) : ?>
+													<span>-</span>
+												<?php endif; ?>
+
+											<?php else : ?>
+												<?php echo esc_html( stripslashes( $field ) ); ?>
+											<?php endif; ?>
+
+										<?php else : ?>
+											<?php echo esc_html( stripslashes( $field ) ); ?>
 										<?php endif; ?>
-
 									<?php else : ?>
-										<?php echo esc_html( stripslashes( $field ) ); ?>
+										<span>-</span>
 									<?php endif; ?>
+								</div>
 
-								<?php else : ?>
-									<?php echo esc_html( stripslashes( $field ) ); ?>
-								<?php endif; ?>
-							<?php else : ?>
-								<span>-</span>
-							<?php endif; ?>
-						</div>
+							<?php
+							}
 
-					<?php
-					}
+							if ( ! empty( $form_page ) ) {
+								?>
+								<div>
+									<?php esc_html_e( 'Form submitted from', 'custom-contact-forms' ); ?>:
+									<?php echo esc_url( $form_page ); ?>
+								</div>
+							<?php
+							}
 
-					$form_page = null;
-					if ( ! empty( $_POST['form_page'] ) ) {
-						$form_page = $_POST['form_page'];
-						?>
-						<div>
-							<?php esc_html_e( 'Form submitted from', 'custom-contact-forms' ); ?>:
-							<?php echo esc_url( $_POST['form_page'] ); ?>
-						</div>
-					<?php
-					}
+							if ( apply_filters( 'ccf_show_ip_in_submission_email', true, $submission_id, $form_id ) ) {
+								?>
+								<div>
+									<?php esc_html_e( 'Form submitter IP', 'custom-contact-forms' ); ?>:
+									<?php echo esc_html( $_SERVER['REMOTE_ADDR'] ); ?>
+								</div>
+								<?php
+							}
 
-					if ( apply_filters( 'ccf_show_ip_in_submission_email', true, $submission_id, $form_id ) ) {
-						?>
-						<div>
-							<?php esc_html_e( 'Form submitter IP', 'custom-contact-forms' ); ?>:
-							<?php echo esc_html( $_SERVER['REMOTE_ADDR'] ); ?>
-						</div>
-						<?php
-					}
+							$all_fields .= ob_get_clean();
 
-					$message .= ob_get_clean();
+							$message = str_ireplace( '[all_fields]', $all_fields, $message );
+						}
 
-					$headers = array( 'MIME-Version: 1.0', 'Content-type: text/html; charset=utf-8' );
+						if ( false !== stripos( $message, '[ip_address]' ) ) {
+							$message = str_ireplace( '[ip_address]', $_SERVER['REMOTE_ADDR'], $message );
+						}
 
-					$email_notification_from_type = get_post_meta( $form_id, 'ccf_form_email_notification_from_type', true );
+						if ( false !== stripos( $message, '[current_date_time]' ) ) {
+							$message = str_ireplace( '[current_date_time]', date( 'F j, Y, g:i a' ), $message );
+						}
 
-					$email_notification_from_name_type = get_post_meta( $form_id, 'ccf_form_email_notification_from_name_type', true );
-					$email_notification_from_name = get_post_meta( $form_id, 'ccf_form_email_notification_from_name', true );
-					
-					$name = null;
-					$email = null;
+						if ( false !== stripos( $message, '[form_page_url]' ) ) {
+							$message = str_ireplace( '[form_page_url]', esc_url_raw( $form_page ), $message );
+						}
 
-					if ( 'custom' === $email_notification_from_type ) {
-						$name = $email_notification_from_name;
-					} else {
-						$name_field = get_post_meta( $form_id, 'ccf_form_email_notification_from_name_field', true );
-					
-						if ( ! empty( $name_field ) && ! empty( $submission[$name_field] ) && is_array( $submission[$name_field] ) ) {
-							if ( ! empty( $submission[$name_field]['first'] ) || ! empty( $submission[$name_field]['last'] ) ) {
-								$name = $submission[$name_field]['first'] . ' ' . $submission[$name_field]['last'];
+						foreach ( $fields as $field_id ) {
+							$field_slug = get_post_meta( $field_id, 'ccf_field_slug', true );
+
+							if ( ! empty( $field_slug ) && isset( $submission[ $field_slug ] ) ) {
+								$value = $submission[ $field_slug ];
+								if ( is_array( $value ) && isset( $value['email'] ) ) {
+									$value = $value['email'];
+								}
+
+								$message = str_ireplace( '[' . $field_slug . ']', wp_kses_post( $this->_flatten_and_concat( $value ) ), $message );
 							}
 						}
-					}
-					
-					if ( 'custom' === $email_notification_from_type ) {
-						$email = get_post_meta( $form_id, 'ccf_form_email_notification_from_address', true );
-					} elseif ( 'field' === $email_notification_from_type ) {
-						$email_field = get_post_meta( $form_id, 'ccf_form_email_notification_from_field', true );
 
-						if ( ! empty( $email_field ) && ! empty( $submission[$email_field] ) ) {
-							if ( is_array( $submission[$email_field] ) && ! empty( $submission[$email_field]['confirm'] ) ) {
-								$email = $submission[$email_field]['confirm'];
-							} else {
-								$email = $submission[$email_field];
+						$headers = array( 'MIME-Version: 1.0', 'Content-type: text/html; charset=utf-8' );
+						$name = null;
+						$email = null;
+
+						$sitename = strtolower( $_SERVER['SERVER_NAME'] );
+						if ( substr( $sitename, 0, 4 ) === 'www.' ) {
+							$sitename = substr( $sitename, 4 );
+						}
+						$default_from_email = 'wordpress@' . $sitename;
+
+						if ( 'custom' === $notification['fromNameType'] ) {
+							$name = $notification['fromName'];
+						} else {
+							$name_field = $notification['fromNameField'];
+
+							if ( ! empty( $name_field ) && ! empty( $submission[ $name_field ] ) ) {
+								if ( is_array( $submission[ $name_field ] ) ) {
+									if ( ! empty( $submission[ $name_field ]['first'] ) || ! empty( $submission[ $name_field ]['last'] ) ) {
+										$name = $submission[ $name_field ]['first'] . ' ' . $submission[ $name_field ]['last'];
+									}
+								} else {
+									$name = $submission[ $name_field ];
+								}
 							}
 						}
-					}
 
-					if ( ! empty( $name ) && ! empty( $email ) ) {
-						$headers[] = 'From: ' . sanitize_text_field( $name ) . ' <' . sanitize_email( $email ) . '>';
-						$headers[] = 'Reply-To: ' . sanitize_email( $email );
-					} elseif ( ! empty( $name ) && empty( $email ) ) {
-						$headers[] = 'From: ' . sanitize_text_field( $name );
-					} elseif ( empty( $name ) && ! empty( $email ) ) {
-						$headers[] = 'From: ' . sanitize_email( $email );
-						$headers[] = 'Reply-To: ' . sanitize_email( $email );
-					}
+						if ( 'custom' === $notification['fromType'] ) {
+							$email = $notification['fromAddress'];
+						} elseif ( 'field' === $notification['fromType'] ) {
+							$email_field = $notification['fromField'];
 
-					$email_notification_subject_type = get_post_meta( $form_id, 'ccf_form_email_notification_subject_type', true );
-
-					$subject = sprintf( __( '%s: Form Submission', 'custom-contact-forms' ), wp_specialchars_decode( get_bloginfo( 'name' ) ) );
-					if ( ! empty( $form->post_title ) ) {
-						$subject .= sprintf( __( ' to "%s"', 'custom-contact-forms' ), wp_specialchars_decode( $form->post_title ) );
-					}
-
-					if ( 'custom' === $email_notification_subject_type ) {
-						$subject = get_post_meta( $form_id, 'ccf_form_email_notification_subject', true );
-					} elseif ( 'field' === $email_notification_subject_type ) {
-						$subject_field = get_post_meta( $form_id, 'ccf_form_email_notification_subject_field', true );
-					
-						if ( ! empty( $subject_field ) && ! empty( $submission[$subject_field] ) ) {
-							$subject = $submission[$subject_field];
+							if ( ! empty( $email_field ) && ! empty( $submission[ $email_field ] ) ) {
+								if ( is_array( $submission[ $email_field ] ) && ! empty( $submission[ $email_field ]['confirm'] ) ) {
+									$email = $submission[ $email_field ]['confirm'];
+								} else {
+									$email = $submission[ $email_field ];
+								}
+							}
 						}
-					}
 
-					foreach ( $email_addresses as $email ) {
-						$subject = apply_filters( 'ccf_email_subject', $subject, $form_id, $email, $form_page );
-						wp_mail( $email, $subject, apply_filters( 'ccf_email_content', $message, $form_id, $email, $form_page ), apply_filters( 'ccf_email_headers', $headers, $form_id, $email, $form_page ) );
+						if ( ! empty( $name ) && ! empty( $email ) ) {
+							$headers[] = 'From: ' . sanitize_text_field( $name ) . ' <' . sanitize_email( $email ) . '>';
+							$headers[] = 'Reply-To: ' . sanitize_email( $email );
+						} elseif ( ! empty( $name ) && empty( $email ) ) {
+							$headers[] = 'From: ' . sanitize_text_field( $name ) . ' <' . sanitize_email( $default_from_email ) . '>';
+						} elseif ( empty( $name ) && ! empty( $email ) ) {
+							// @Todo: investigate how wp_mail handles From: email
+							$headers[] = 'From: ' . sanitize_email( $email );
+							$headers[] = 'Reply-To: ' . sanitize_email( $email );
+						}
+
+						$email_notification_subject_type = $notification['subjectType'];
+
+						$subject = sprintf( __( '%s: Form Submission', 'custom-contact-forms' ), wp_specialchars_decode( get_bloginfo( 'name' ) ) );
+						if ( ! empty( $form->post_title ) ) {
+							$subject .= sprintf( __( ' to "%s"', 'custom-contact-forms' ), wp_specialchars_decode( $form->post_title ) );
+						}
+
+						if ( 'custom' === $email_notification_subject_type ) {
+							$subject = $notification['subject'];
+						} elseif ( 'field' === $email_notification_subject_type ) {
+							$subject_field = $notification['subjectField'];
+
+							if ( ! empty( $subject_field ) && ! empty( $submission[ $subject_field ] ) ) {
+								$subject = $submission[ $subject_field ];
+							}
+						}
+
+						foreach ( $notification['addresses'] as $address ) {
+
+							if ( ! empty( $address['email'] ) || ! empty( $address['field'] ) ) {
+
+								$email = '';
+
+								if ( 'custom' === $address['type'] ) {
+									$email = $address['email'];
+								} else {
+									$email_field = $address['field'];
+
+									if ( ! empty( $email_field ) && ! empty( $submission[ $email_field ] ) ) {
+										if ( is_array( $submission[ $email_field ] ) && ! empty( $submission[ $email_field ]['confirm'] ) ) {
+											$email = $submission[ $email_field ]['confirm'];
+										} else {
+											$email = $submission[ $email_field ];
+										}
+									}
+								}
+
+								if ( ! empty( $email ) ) {
+									if ( empty( $notification_content ) ) {
+										$notification_content = ' '; // Hack to send email with empty body via PHPMailer
+									}
+
+									$subject = apply_filters( 'ccf_email_subject', $subject, $form_id, $email, $form_page, $notification );
+									$notification_content = apply_filters( 'ccf_email_content', $message, $form_id, $email, $form_page, $notification );
+									$notification_headers = apply_filters( 'ccf_email_headers', $headers, $form_id, $email, $form_page, $notification );
+
+									do_action( 'ccf_send_notification', $email, $subject, $notification_content, $notification_headers, $notification );
+
+									wp_mail( $email, $subject, $notification_content, $notification_headers );
+								}
+							}
+						}
 					}
 				}
 			}
 
 			if ( 'redirect' === $output['action_type'] ) {
-				$output['completion_redirect_url'] = get_post_meta( $form_id, 'ccf_form_completion_redirect_url', true );
+				$output['completion_redirect_url'] = apply_filters( 'ccf_form_completion_redirect_url', get_post_meta( $form_id, 'ccf_form_completion_redirect_url', true ), $form_id );
 			} else {
 				$output['completion_message'] = get_post_meta( $form_id, 'ccf_form_completion_message', true );
 
@@ -883,7 +1060,7 @@ class CCF_Form_Handler {
 	/**
 	 * Process a field. Either return errors or sanitized form submission value.
 	 *
-	 * @param int $field_id
+	 * @param int    $field_id
 	 * @param string $value
 	 * @since 6.0
 	 * @return array
@@ -897,7 +1074,7 @@ class CCF_Form_Handler {
 		$type = get_post_meta( $field_id, 'ccf_field_type', true );
 		$required = get_post_meta( $field_id, 'ccf_field_required', true );
 
-		$callback = ( ! empty( $this->field_callbacks[$type]['validator'] ) ) ? $this->field_callbacks[$type]['validator'] : null;
+		$callback = ( ! empty( $this->field_callbacks[ $type ]['validator'] ) ) ? $this->field_callbacks[ $type ]['validator'] : null;
 		$validator = apply_filters( 'ccf_field_validator', $callback, $value, $field_id, $type );
 
 		$is_valid = true;
@@ -912,18 +1089,43 @@ class CCF_Form_Handler {
 				$return['sanitized_value'] = array();
 
 				foreach ( $value as $key => $single_value ) {
-					if ( ! empty( $this->field_callbacks[$type]['sanitizer'] ) ) {
-						$return['sanitized_value'][$key] = call_user_func( apply_filters( 'ccf_field_sanitizer', $this->field_callbacks[$type]['sanitizer'], $single_value, $field_id, $type ), $single_value, $field_id );
+					if ( ! empty( $this->field_callbacks[ $type ]['sanitizer'] ) ) {
+						$return['sanitized_value'][ $key ] = call_user_func( apply_filters( 'ccf_field_sanitizer', $this->field_callbacks[ $type ]['sanitizer'], $single_value, $field_id, $type ), $single_value, $field_id );
 					}
 				}
 			} else {
-				if ( ! empty( $this->field_callbacks[$type]['sanitizer'] ) ) {
-					$return['sanitized_value'] = call_user_func( apply_filters( 'ccf_field_sanitizer', $this->field_callbacks[$type]['sanitizer'], $value, $field_id, $type ), $value, $field_id );
+				if ( ! empty( $this->field_callbacks[ $type ]['sanitizer'] ) ) {
+					$return['sanitized_value'] = call_user_func( apply_filters( 'ccf_field_sanitizer', $this->field_callbacks[ $type ]['sanitizer'], $value, $field_id, $type ), $value, $field_id );
 				}
 			}
 		}
 
 		return $return;
+	}
+
+	/**
+	 * Flatten and concatentate potential array
+	 *
+	 * @since 7.3
+	 */
+	public function _flatten_and_concat( $value, $delim = ' ' ) {
+		if ( is_string( $value ) ) {
+			return $value;
+		}
+
+		$output = '';
+
+		if ( is_array( $value ) ) {
+			foreach ( $value as $v ) {
+				if ( '' !== $output ) {
+					$output .= $delim;
+				}
+
+				$output .= $v;
+			}
+		}
+
+		return $output;
 	}
 
 	/**

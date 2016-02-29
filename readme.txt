@@ -3,25 +3,46 @@ Contributors: tlovett1
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HR34W94MM53RQ
 Tags: contact form, web form, custom contact form, custom forms, captcha form, contact fields, form mailers, forms
 Requires at least: 3.9
-Tested up to: 4.4
-Stable tag: 6.9.0
+Tested up to: 4.5
+Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Build beautiful custom forms the WordPress way. View live previews of your forms while you build them.
+Build beautiful custom forms and manage submissions the WordPress way. View live previews of your forms while you build them. Create powerful and exstensible forms for simple contact inquiries, sign ups, subscriptions, events, payments, etc.
 
 == Description ==
 
-__Note: Version 6.0 breaks backwards compatibility. You will need to perform a database update after upgrading from anything pre 6.0. You may also need to reconfigure some of your forms.__
+Custom Contact Forms enables you to build forms and manage submissions the WordPress way. User experience is at the top of the list for this plugin. Build forms in the media manager instead of going to separate areas of your site. Live previews of your forms are generated on the fly making your life much easier. Custom Contact Forms is a legacy name. The plugin is built for much more than just contact forms. Flexibility and extensible functionality allow you and your team to create forms to power subscriptions, payments, events, and more.
 
-Custom Contact Forms enables you to build forms the WordPress way. User experience is at the top of the list for this plugin.
-Build forms in the media manager instead of going to separate areas of your site. Live previews of your forms are generated
-on the fly making your life much easier. Custom Contact Forms is a legacy name. The plugin is built for much more than
-just contact forms.
+**Feature List (not exhaustive):**
+
+* Create text fields, paragraph fields, first/last name fields, email fields (with optional confirmation), US address fields, international address fields, date fields (optional international format), time fields, checkbox fields, dropdown (optional multi-select), radio fields, hidden fields, file upload fields, phone fields (optional international number), website fields, and more.
+* Add HTML and sections to your forms.
+* Conditional fields and form sections
+* Add help text, modify labels, mark required, add CSS classes, manage options, etc. for each of your form fields.
+* Forms use AJAX so no page reloads are necessary. Stylish error messages are shown without page reload.
+* All form submissions shown in an easy to view format within the WordPress admin.
+* Export form submissions to CSV.
+* Pre-setup for Twitter Bootstrap
+* Multiple themes to choose from
+* No custom database tables
+* Easy form duplication
+* Forms can show customizable completion text or redirect to a URL.
+* Temporarily pause forms with a customizable pause message.
+* Create and manage multiple notifications for each form. Notifications can send emails to one or more administrators or form submittors. Customize notification email subject, from email address, from email name, and email body. Map form fields to email subject, from name, and from email address. Easily activate and deactivate notifications.
+* Create posts or custom post types when forms are submitted. For each form, you can configure the post type and status of the created post. You can also map form fields to post fields (as well as meta and taxonomies).
+* View live previews for your forms. Live previews of your forms are shown in the post content. Make edits to forms and form fields without having to refresh the page in the media modal.
+* Insert your forms in posts, custom post types, widgets, and themes.
+* Customize form titles, submit button text, and form descriptions.
+* Optionally only include CCF JavaScript and CSS on URLs that actually include forms improving page load times.
+* Extensible code with many hooks and filters to allow for developer modifications.
+* Translated in French, Chinese, German, and Danish. More translations on the way.
+* Easily prevent spam with honey pots and [reCAPTCHA](https://www.google.com/recaptcha/intro/index.html).
+* Import and export forms and form submissions with ease.
+* Performant and scabable plugin built for enterprise.
+* More!
 
 For detailed install and usage instructions, please visit [Github](http://github.com/tlovett1/custom-contact-forms).
-
-__Software integrity proudly assured by [Dockunit.io](https://dockunit.io).__
 
 == Installation ==
 
@@ -33,9 +54,94 @@ Please refer to [Github](http://github.com/tlovett1/custom-contact-forms) for de
 
 == Support ==
 
-For questions, feature requests, and support concerning the Custom Contact Forms plugin, please refer to [Github](http://github.com/tlovett1/custom-contact-forms).
+For full documentation, questions, feature requests, and support concerning the Custom Contact Forms plugin, please refer to [Github](http://github.com/tlovett1/custom-contact-forms).
 
 == Changelog ==
+
+= 7.6 =
+* Form duplication
+* Fix multiple section header bug
+* Button class field
+
+= 7.5 =
+* Conditional fields and sections
+* [current_date_time] notification variable
+
+= 7.4.5 =
+* Fix CCF compat with API plugin
+
+= 7.4.4 =
+* HTTPS backend API bug fixed
+* Fix European dates
+
+
+= 7.4.3 =
+* Fix notification email sending bug
+* Allow empty email content notifications
+* Set [all_fields] as default email notification content
+
+= 7.4.2 =
+* Fix notification and post field creation overlay issue
+* Fix field, post field, and notification initialization
+* Fix field remove post field update
+
+= 7.4.1 =
+* Fix form iframe onload bug
+
+= 7.4 =
+* Themes and Bootstrap support
+
+= 7.3.2 =
+* Fix field delete variable error message
+
+= 7.3.1 =
+* Add missing notification variables
+
+= 7.3 =
+* Add post creation functionality for when forms are submitted
+
+= 7.2.3 =
+* Fix non-English notification activation
+
+= 7.2.2 =
+* Fix asset restriciton adding bug in Firefox
+
+= 7.2.2 =
+* Fix asset restriciton adding bug in Firefox
+
+= 7.2.1 =
+* Fix API json url bug
+* Update notification dialog
+
+= 7.2 =
+* Conditional asset loading
+
+= 7.1 =
+* Enable non-American date formats
+* Make submissions and forms private so they don't show in sitemaps
+* Redo form email notifications and settings UI
+
+= 7.0.3 =
+* Unhack API
+* Use site_url() for API endpoints
+
+= 7.0.2 =
+* Bust script/style cache
+
+= 7.0.1 =
+* Fix CORS issue
+* Add Chinese [davidabm](https://github.com/davidabm)
+
+= 7.0 =
+* Redo API integration for WordPress 4.4 improving stability
+* Add `accept` attribute to file upload input. Props [tuamo](http://github.com/tuamo)
+* Fix Chinese exporting. Props [davidabm](http://github.com/davidabm)
+
+= 6.9.4 =
+* WordPress list signup
+
+= 6.9.3 =
+* Ad removal
 
 = 6.9.0 =
 * Add Danish translation. Props [KasperLK](https://github.com/KasperLK)

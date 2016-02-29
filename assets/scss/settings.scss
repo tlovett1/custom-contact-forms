@@ -1,0 +1,17 @@
+.ccf-asset-restrictions .add,
+.ccf-asset-restrictions .delete
+{
+	font-weight: bold;
+	cursor: pointer;
+	vertical-align: middle;
+	font-size: 200%;
+}
+
+.ccf-asset-restrictions input,
+.ccf-asset-restrictions select {
+	margin-right: 1em;
+}
+
+.ccf-hide-field {
+	display: none;
+}

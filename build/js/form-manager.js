@@ -26,13 +26,13 @@
 	});
 
 	wp.ccf.utils.insertFormShortcode = function( form ) {
-		var existingForm = wp.ccf.forms.findWhere( { ID: form.get( 'ID' ) } );
+		var existingForm = wp.ccf.forms.findWhere( { id: form.get( 'id' ) } );
 		if ( ! existingForm ) {
 			wp.ccf.forms.add( form );
 		}
 
 		var editor = tinymce.get( wpActiveEditor );
-		var shortcode = '[ccf_form id="' + form.get( 'ID' ) + '"]';
+		var shortcode = '[ccf_form id="' + form.get( 'id' ) + '"]';
 
 		if ( editor && ! editor.isHidden() ) {
 			tinymce.activeEditor.execCommand( 'mceInsertContent', false, shortcode );
@@ -114,9 +114,14 @@
 		return '-';
 	};
 
-	wp.ccf.utils.getPrettyFieldDate = function( value ) {
+	wp.ccf.utils.getPrettyFieldDate = function( value, field ) {
 		var dateString = '',
-			output = '';
+			output = '',
+			format = 'HH:mm MM/DD/YY';
+
+		if ( field && field.ccf_field_dateFormat && 'dd/mm/yyyy' === field.ccf_field_dateFormat ) {
+			format = 'HH:mm DD/MM/YY';
+		}
 
 		if ( value.hour && value.minute && value['am-pm'] ) {
 			dateString += value.hour + ':' + value.minute + ' ' + value['am-pm'];
@@ -130,7 +135,7 @@
 			return '-';
 		}
 
-		var date = moment.utc( dateString );
+		var date = moment( dateString, format );
 
 		if ( ! date.isValid() ) {
 			return ccfSettings.invalidDate;
@@ -145,7 +150,7 @@
 				output += ' ';
 			}
 
-			output += date.format( 'M/D/YYYY' );
+			output += value.date;
 		}
 
 		return output;
@@ -258,7 +263,7 @@
 		}
 	};
 })( jQuery, Backbone, _, ccfSettings );
-( function( $, Backbone, _, ccfSettings, WP_API_Settings ) {
+( function( $, Backbone, _, ccfSettings ) {
 	'use strict';
 
 	wp.ccf.models = wp.ccf.models || {};
@@ -317,6 +322,22 @@
 		return this;
 	};
 
+	wp.ccf.models.FieldConditional = wp.ccf.models.FieldConditional || Backbone.Model.extend(
+		{
+			defaults: {
+				field: '',
+				compare: 'is',
+				value: ''
+			},
+
+			decode: function() {
+				return _modelDecode.call( this, [] );
+			},
+
+			set: _modelSet
+		}
+	);
+
 	wp.ccf.models.FieldChoice = wp.ccf.models.FieldChoice || Backbone.Model.extend(
 		{
 			defaults: {
@@ -333,16 +354,103 @@
 		}
 	);
 
+	wp.ccf.models.PostFieldMapping = wp.ccf.models.PostFieldMapping || Backbone.Model.extend(
+		{
+			defaults: {
+				formField: '',
+				postField: '',
+				customFieldKey: ''
+			},
+
+			decode: function() {
+				return _modelDecode.call( this, [] );
+			},
+
+			set: _modelSet
+		}
+	);
+
+	wp.ccf.models.FormNotificationAddress = wp.ccf.models.FormNotificationAddress || Backbone.Model.extend(
+		{
+			defaults: {
+				type: 'custom',
+				field: '',
+				email: ''
+			},
+
+			decode: function() {
+				return _modelDecode.call( this, [] );
+			},
+
+			set: _modelSet
+		}
+	);
+
+	wp.ccf.models.FormNotification = wp.ccf.models.FormNotification || Backbone.Model.extend(
+		{
+			defaults: function() {
+				return {
+					title: '',
+					content: '[all_fields]',
+					active: false,
+					addresses: new wp.ccf.collections.FormNotificationAddresses(),
+					fromType: 'default',
+					fromAddress: '',
+					fromField: '',
+					subjectType: 'default',
+					subject: '',
+					subjectField: '',
+					fromNameType: 'custom',
+					fromName: 'WordPress',
+					fromNameField: ''
+				};
+			},
+
+			initialize: function( attributes ) {
+				if ( typeof attributes === 'object' && attributes.addresses ) {
+					var addresses = [];
+
+					_.each( attributes.addresses, function( address ) {
+						var addressModel = new wp.ccf.models.FormNotificationAddress( address );
+						addressModel.decode();
+
+						addresses.push( addressModel );
+					});
+
+					this.set( 'addresses', new wp.ccf.collections.FormNotificationAddresses( addresses ) );
+				}
+			},
+
+			decode: function() {
+				return _modelDecode.call( this, [] );
+			},
+
+			toJSON: function() {
+				var attributes = this.constructor.__super__.toJSON.call( this );
+
+				if ( attributes.addresses ) {
+					attributes.addresses = attributes.addresses.toJSON();
+				}
+
+				return attributes;
+			},
+
+			set: _modelSet
+		}
+	);
+
 	wp.ccf.models.Form = wp.ccf.models.Form || wp.api.models.Post.extend(
 		{
 
-			urlRoot: WP_API_Settings.root + '/ccf/forms',
+			urlRoot: ccfSettings.apiRoot.replace( /\/$/, '' ) + '/ccf/v1/forms',
 
 			set: _modelSet,
 
 			sync: _sync,
 
-			initialize: function() {
+			idAttribute: 'id',
+
+			initialize: function( attributes ) {
 				this.on( 'sync', this.decode, this );
 			},
 
@@ -353,22 +461,18 @@
 					status: 'publish',
 					description: '',
 					buttonText: 'Submit Form',
+					buttonClass: '',
 					completionActionType: 'text',
 					completionRedirectUrl: '',
 					completionMessage: '',
-					sendEmailNotifications: false,
-					emailNotificationAddresses: ccfSettings.adminEmail,
-					emailNotificationFromType: 'default',
-					emailNotificationFromAddress: '',
-					emailNotificationFromField: '',
-					emailNotificationSubjectType: 'default',
-					emailNotificationSubject: '',
-					emailNotificationSubjectField: '',
-					emailNotificationFromNameType: 'custom',
-					emailNotificationFromName: 'WordPress',
-					emailNotificationFromNameField: '',
+					postCreation: false,
+					postCreationType: 'post',
+					postCreationStatus: 'draft',
+					postFieldMappings: new wp.ccf.collections.PostFieldMappings(),
+					notifications: new wp.ccf.collections.FormNotifications(),
 					pause: false,
-					pauseMessage: ccfSettings.pauseMessage
+					pauseMessage: ccfSettings.pauseMessage,
+					theme: 'none'
 				};
 
 				defaults = _.defaults( defaults, this.constructor.__super__.defaults );
@@ -402,7 +506,9 @@
 			},
 
 			parse: function( response ) {
-				var SELF = this;
+				var SELF = this,
+					i = 0,
+					z = 0;
 
 				if ( response.fields ) {
 
@@ -410,7 +516,7 @@
 
 					if ( fields && fields.length > 0 ) {
 
-						for ( var i = 0; i < response.fields.length; i++ ) {
+						for ( i = 0; i < response.fields.length; i++ ) {
 							var newField = response.fields[i];
 
 							var field = fields.findWhere( { slug: newField.slug } );
@@ -420,7 +526,7 @@
 									var choices = SELF.get( 'choices' );
 
 									if ( choices && choices.length > 0 ) {
-										for ( var z = 0; z < newField.choices; z++ ) {
+										for ( z = 0; z < newField.choices; z++ ) {
 											var choice = choices.at( z );
 											choice.set( newField.choices[z] );
 											choice.decode();
@@ -428,6 +534,20 @@
 									}
 
 									delete response.fields[i].choices;
+								}
+
+								if ( typeof newField.conditionals !== 'undefined' ) {
+									var conditionals = SELF.get( 'conditionals' );
+
+									if ( conditionals && conditionals.length > 0 ) {
+										for ( z = 0; z < newField.conditionals; z++ ) {
+											var conditional = conditionals.at( z );
+											conditional.set( newField.conditionals[z] );
+											conditional.decode();
+										}
+									}
+
+									delete response.fields[i].conditionals;
 								}
 
 								field.set( newField );
@@ -446,7 +566,101 @@
 							newFields.push( fieldModel );
 						});
 
-						response.fields = new wp.ccf.collections.Fields( newFields, { formId: response.ID } );
+						response.fields = new wp.ccf.collections.Fields( newFields, { formId: response.id } );
+						if ( ! fields ) {
+							response.fields = new wp.ccf.collections.Fields( newFields, { formId: response.id } );
+						} else {
+							fields.add( newFields );
+							delete response.fields;
+						}
+					}
+				}
+
+				if ( response.notifications ) {
+
+					var notifications = SELF.get( 'notifications' );
+
+					if ( notifications && notifications.length > 0 ) {
+
+						for ( i = 0; i < response.notifications.length; i++ ) {
+							var newNotification = response.notifications[i];
+
+							var notification = notifications.at( i );
+
+							if ( notification ) {
+								if ( typeof newNotification.addresses !== 'undefined' ) {
+									var addresses = notification.get( 'addresses' );
+
+									if ( addresses && addresses.length > 0 ) {
+										for ( z = 0; z < newNotification.addresses; z++ ) {
+											var address = addresses.at( z );
+											address.set( newNotification.addresses[z] );
+											address.decode();
+										}
+									}
+
+									delete response.notifications[i].addresses;
+								}
+
+								notification.set( newNotification );
+								notification.decode();
+							}
+						}
+
+						delete response.notifications;
+					} else {
+						var newNotifications = [];
+
+						_.each( response.notifications, function( notification ) {
+							var notificationModel = new wp.ccf.models.FormNotification( notification );
+							notificationModel.decode();
+
+							newNotifications.push( notificationModel );
+						});
+
+						if ( ! notifications ) {
+							response.notifications = new wp.ccf.collections.FormNotifications( newNotifications );
+						} else {
+							notifications.add( newNotifications );
+							delete response.notifications;
+						}
+					}
+				}
+
+				if ( response.postFieldMappings ) {
+
+					var postFieldMappings = SELF.get( 'postFieldMappings' );
+
+					if ( postFieldMappings && postFieldMappings.length > 0 ) {
+
+						for ( i = 0; i < response.postFieldMappings.length; i++ ) {
+							var newPostFieldMapping = response.postFieldMappings[i];
+
+							var postFieldMapping = postFieldMappings.at( i );
+
+							if ( postFieldMapping ) {
+								postFieldMapping.set( newPostFieldMapping );
+								postFieldMapping.decode();
+							}
+						}
+
+						delete response.postFieldMappings;
+					} else {
+						var newPostFieldMappings = [];
+
+						_.each( response.postFieldMappings, function( postFieldMapping ) {
+							var postFieldMappingModel = new wp.ccf.models.PostFieldMapping( postFieldMapping );
+							postFieldMappingModel.decode();
+
+							newPostFieldMappings.push( postFieldMappingModel );
+						});
+
+						if ( ! postFieldMappings ) {
+							response.postFieldMappings = new wp.ccf.collections.PostFieldMappings( newPostFieldMappings );
+						} else {
+							postFieldMappings.add( newPostFieldMappings );
+							response.postFieldMappings = postFieldMappings;
+						}
 					}
 				}
 
@@ -460,6 +674,14 @@
 					attributes.fields = attributes.fields.toJSON();
 				}
 
+				if ( attributes.notifications ) {
+					attributes.notifications = attributes.notifications.toJSON();
+				}
+
+				if ( attributes.postFieldMappings ) {
+					attributes.postFieldMappings = attributes.postFieldMappings.toJSON();
+				}
+
 				if ( attributes.author ) {
 					attributes.author = attributes.author.toJSON();
 				}
@@ -471,26 +693,48 @@
 
 	wp.ccf.models.Submission = wp.api.models.Submission || wp.api.models.Post.extend(
 		{
-			idAttribute: 'ID',
-
 			defaults: {
-				ID: null,
-				data: {}
+				id: null,
+				data: {},
+				fields: {}
 			},
 
-			sync: _sync
+			sync: _sync,
+
+			urlRoot: ccfSettings.apiRoot.replace( /\/$/, '' ) + '/ccf/v1/submissions'
 		}
 	);
 
 	wp.ccf.models.Field = wp.api.models.Field || wp.api.models.Post.extend(
 		{
-			idAttribute: 'ID',
+			idAttribute: 'id',
 
-			defaults: {
-				ID: null
+			defaults: function() {
+				return {
+					id: null,
+					conditionalsEnabled: false,
+					conditionalType: 'show',
+					conditionalFieldsRequired: 'all',
+					conditionals: new wp.ccf.collections.FieldConditionals()
+				};
 			},
 
 			set: _modelSet,
+
+			initialize: function( attributes ) {
+				if ( typeof attributes === 'object' && attributes.conditionals ) {
+					var conditionals = [];
+
+					_.each( attributes.conditionals, function( conditional ) {
+						var conditionalModel = new wp.ccf.models.FieldConditional( conditional );
+						conditionalModel.decode();
+
+						conditionals.push( conditionalModel );
+					});
+
+					this.set( 'conditionals', new wp.ccf.collections.FieldConditionals( conditionals ) );
+				}
+			},
 
 			required: function() {
 				return [ 'slug' ];
@@ -519,7 +763,7 @@
 
 	wp.ccf.models.StandardField = wp.ccf.models.StandardField || wp.ccf.models.Field.extend(
 		{
-			idAttribute: 'ID',
+			idAttribute: 'id',
 
 			defaults: function() {
 				var defaults = {
@@ -533,7 +777,11 @@
 					description: ''
 				};
 
-				return _.defaults( defaults, this.constructor.__super__.defaults );
+				return _.defaults( defaults, this.constructor.__super__.defaults() );
+			},
+
+			initialize: function() {
+				return wp.ccf.models.StandardField.__super__.initialize.apply( this, arguments );
 			}
 		}
 	);
@@ -546,6 +794,10 @@
 				};
 
 				return _.defaults( defaults, this.constructor.__super__.defaults() );
+			},
+
+			initialize: function() {
+				return this.constructor.__super__.initialize.apply( this, arguments );
 			}
 		}
 	);
@@ -560,6 +812,10 @@
 				};
 
 				return _.defaults( defaults, this.constructor.__super__.defaults() );
+			},
+
+			initialize: function() {
+				return this.constructor.__super__.initialize.apply( this, arguments );
 			}
 		}
 	);
@@ -572,6 +828,10 @@
 				};
 
 				return _.defaults( defaults, this.constructor.__super__.defaults() );
+			},
+
+			initialize: function() {
+				return this.constructor.__super__.initialize.apply( this, arguments );
 			}
 		}
 	);
@@ -584,6 +844,10 @@
 				};
 
 				return _.defaults( defaults, this.constructor.__super__.defaults() );
+			},
+
+			initialize: function() {
+				return this.constructor.__super__.initialize.apply( this, arguments );
 			}
 		}
 	);
@@ -597,6 +861,10 @@
 				};
 
 				return _.defaults( defaults, this.constructor.__super__.defaults() );
+			},
+
+			initialize: function() {
+				return this.constructor.__super__.initialize.apply( this, arguments );
 			}
 		}
 	);
@@ -610,6 +878,10 @@
 				};
 
 				return _.defaults( defaults, this.constructor.__super__.defaults() );
+			},
+
+			initialize: function() {
+				return this.constructor.__super__.initialize.apply( this, arguments );
 			}
 		}
 	);
@@ -623,6 +895,10 @@
 				};
 
 				return _.defaults( defaults, this.constructor.__super__.defaults() );
+			},
+
+			initialize: function() {
+				return this.constructor.__super__.initialize.apply( this, arguments );
 			}
 		}
 	);
@@ -633,10 +909,15 @@
 				var defaults = {
 					type: 'date',
 					showDate: true,
-					showTime: true
+					showTime: true,
+					dateFormat: 'mm/dd/yyyy'
 				};
 
 				return _.defaults( defaults, this.constructor.__super__.defaults() );
+			},
+
+			initialize: function() {
+				return this.constructor.__super__.initialize.apply( this, arguments );
 			}
 		}
 	);
@@ -649,6 +930,10 @@
 				};
 
 				return _.defaults( defaults, this.constructor.__super__.defaults() );
+			},
+
+			initialize: function() {
+				return this.constructor.__super__.initialize.apply( this, arguments );
 			}
 		}
 	);
@@ -669,7 +954,11 @@
 				return [ 'siteKey', 'secretKey' ];
 			},
 
-			isImmutable: true
+			isImmutable: true,
+
+			initialize: function() {
+				return this.constructor.__super__.initialize.apply( this, arguments );
+			}
 		}
 	);
 
@@ -682,6 +971,10 @@
 				};
 
 				return _.defaults( defaults, this.constructor.__super__.defaults() );
+			},
+
+			initialize: function() {
+				return this.constructor.__super__.initialize.apply( this, arguments );
 			}
 		}
 	);
@@ -697,14 +990,18 @@
 					className: ''
 				};
 
-				return _.defaults( defaults, this.constructor.__super__.defaults );
+				return _.defaults( defaults, this.constructor.__super__.defaults() );
 			},
 
 			required: function() {
 				return [];
 			},
 
-			isImmutable: true
+			isImmutable: true,
+
+			initialize: function() {
+				return this.constructor.__super__.initialize.apply( this, arguments );
+			}
 		}
 	);
 
@@ -718,14 +1015,18 @@
 					className: ''
 				};
 
-				return _.defaults( defaults, this.constructor.__super__.defaults );
+				return _.defaults( defaults, this.constructor.__super__.defaults() );
 			},
 
 			required: function() {
 				return [];
 			},
 
-			isImmutable: true
+			isImmutable: true,
+
+			initialize: function() {
+				return this.constructor.__super__.initialize.apply( this, arguments );
+			}
 		}
 	);
 
@@ -752,6 +1053,8 @@
 
 					this.set( 'choices', new wp.ccf.collections.FieldChoices( choices ) );
 				}
+
+				return wp.ccf.models.ChoiceableField.__super__.initialize.apply( this, arguments );
 			}
 		}
 	);
@@ -803,7 +1106,8 @@
 			}
 		}
 	);
-})( jQuery, Backbone, _, ccfSettings, WP_API_Settings );
+})( jQuery, Backbone, _, ccfSettings );
+
 ( function( $, Backbone, _, ccfSettings ) {
 	'use strict';
 
@@ -824,7 +1128,7 @@
 		{
 			model: wp.ccf.models.Form,
 
-			url: WP_API_Settings.root + '/ccf/forms',
+			url: ccfSettings.apiRoot.replace( /\/$/, '' ) + '/ccf/v1/forms',
 
 			formsFetching: {},
 
@@ -861,7 +1165,7 @@
 			model: wp.ccf.models.Field,
 
 			url: function() {
-				return WP_API_Settings.root + '/ccf/forms/' + this.formId + '/fields';
+				return ccfSettings.apiRoot + '/ccf/forms/' + this.formId + '/fields';
 			},
 
 			initialize: function( models, options ) {
@@ -874,12 +1178,30 @@
 		}
 	);
 
+	wp.ccf.collections.PostFieldMappings = wp.ccf.collections.PostFieldMappings || Backbone.Collection.extend(
+		{
+			model: wp.ccf.models.PostFieldMapping
+		}
+	);
+
+	wp.ccf.collections.FormNotificationAddresses = wp.ccf.collections.FormNotificationAddresses || Backbone.Collection.extend(
+		{
+			model: wp.ccf.models.FormNotificationAddress
+		}
+	);
+
+	wp.ccf.collections.FormNotifications = wp.ccf.collections.FormNotifications || Backbone.Collection.extend(
+		{
+			model: wp.ccf.models.FormNotification
+		}
+	);
+
 	wp.ccf.collections.Submissions = wp.ccf.collections.Submissions || wp.api.collections.Posts.extend(
 		{
 			model: wp.ccf.models.Submission,
 
 			url: function() {
-				return WP_API_Settings.root + '/ccf/forms/' + this.formId + '/submissions';
+				return ccfSettings.apiRoot.replace( /\/$/, '' ) + '/ccf/v1/forms/' + this.formId + '/submissions';
 			},
 
 			initialize: function( models, options ) {
@@ -900,7 +1222,14 @@
 		}
 	);
 
+	wp.ccf.collections.FieldConditionals = wp.ccf.collections.FieldConditionals || Backbone.Collection.extend(
+		{
+			model: wp.ccf.models.FieldConditional
+		}
+	);
+
 })( jQuery, Backbone, _, ccfSettings );
+
 ( function( $, Backbone, _, ccfSettings ) {
 	'use strict';
 
@@ -915,7 +1244,6 @@
 			events: {
 				'click .add': 'triggerAdd',
 				'click .delete': 'triggerDelete',
-				'blur input': 'saveChoice',
 				'saveChoice': 'saveChoice',
 				'sorted': 'triggerUpdateSort'
 			},
@@ -993,6 +1321,647 @@
 		}
 	);
 
+	wp.ccf.views.FieldConditional = Backbone.View.extend(
+		{
+			template: wp.ccf.utils.template( 'ccf-field-conditional-template' ),
+			className: 'conditional',
+
+			events: {
+				'click .add': 'triggerAdd',
+				'click .delete': 'triggerDelete',
+				'saveConditional': 'saveConditional'
+			},
+
+			initialize: function( options ) {
+				this.field = options.field;
+				this.fieldCollection = options.fieldCollection;
+			},
+
+			destroy: function() {
+				wp.ccf.dispatcher.off( 'mainViewChange', this.saveConditional );
+				this.unbind();
+			},
+
+			saveConditional: function() {
+				// @todo: fix this ie8 hack
+				if ( this.el.innerHTML === '' ) {
+					return;
+				}
+
+				var field = this.el.querySelectorAll( '.conditional-field' )[0].value;
+				var value = this.el.querySelectorAll( '.conditional-value' )[0].value;
+				var compare = this.el.querySelectorAll( '.conditional-compare' )[0].value;
+
+				this.model.set( 'field', field );
+				this.model.set( 'value', value );
+				this.model.set( 'compare', compare );
+
+				return this;
+
+			},
+
+			updateFields: function() {
+				var conditionalFields = this.el.querySelectorAll( '.conditional-field' )[0];
+				conditionalFields.innerHTML = '';
+				conditionalFields.disabled = false;
+
+				var fieldsAdded = 0;
+
+				var conditionalField = this.model.get( 'field' ),
+					option;
+
+				if ( this.fieldCollection.length >= 1 ) {
+					option = document.createElement( 'option' );
+					option.innerHTML = ccfSettings.chooseFormField;
+					option.value = '';
+
+					conditionalFields.appendChild( option );
+
+					this.fieldCollection.each( function( field ) {
+						if ( this.field.get( 'slug' ) !== field.get( 'slug' ) ) {
+							var type = field.get( 'type' );
+
+							if ( 'address' !== type && 'date' !== type && 'name' !== type && 'file' !== type && 'recaptcha' !== type && 'section-header' !== type && 'html' !== type ) {
+								option = document.createElement( 'option' );
+								option.innerHTML = field.get( 'slug' );
+								option.value = field.get( 'slug' );
+
+								if ( field.get( 'slug' ) === conditionalField ) {
+									option.selected = true;
+								}
+
+								conditionalFields.appendChild( option );
+
+								fieldsAdded++;
+							}
+						}
+					}, this );
+				}
+
+				if ( 0 === fieldsAdded ) {
+					conditionalFields.innerHTML = '';
+					option = document.createElement( 'option' );
+					option.innerHTML = ccfSettings.noAvailableFields;
+					option.value = '';
+					conditionalFields.appendChild( option );
+					conditionalFields.disabled = true;
+				}
+			},
+
+			render: function() {
+				var context = {};
+				if ( this.model ) {
+					context.conditional = this.model.toJSON();
+				}
+
+				this.el.innerHTML = this.template( context );
+
+				wp.ccf.dispatcher.on( 'mainViewChange', this.saveConditional, this );
+
+				this.listenTo( this.fieldCollection, 'add', this.updateFields, this );
+				this.listenTo( this.fieldCollection, 'remove', this.updateFields, this );
+
+				this.updateFields();
+
+				return this;
+			},
+
+			triggerAdd: function() {
+				this.field.get( 'conditionals' ).add( new wp.ccf.models.FieldConditional() );
+			},
+
+			triggerDelete: function() {
+				var conditionals = this.field.get( 'conditionals' );
+				if ( conditionals.length > 1 ) {
+					conditionals.remove( this.model );
+					this.destroy();
+					this.remove();
+				} else {
+					var value  = this.el.querySelectorAll( '.conditional-value' )[0];
+					var field = this.el.querySelectorAll( '.conditional-field' )[0];
+
+					value.value = '';
+
+					for ( var i = 0; i < field.childNodes.length; i++ ) {
+						field.childNodes[i].selected = false;
+					}
+				}
+			}
+		}
+	);
+
+	wp.ccf.views.EmptyFormNotificationTableRow = wp.ccf.views.EmptyFormNotificationTableRow || Backbone.View.extend(
+		{
+			tagName: 'tr',
+			template: wp.ccf.utils.template( 'ccf-empty-form-notification-row-template'),
+
+			events: {
+				'click .add': 'triggerAdd'
+			},
+
+			initialize: function( options ) {
+				this.form = options.form;
+			},
+
+			destroy: function() {
+				this.unbind();
+			},
+
+			render: function() {
+				this.$el.html( this.template() );
+				return this;
+			},
+
+			triggerAdd: function() {
+				var notifications = this.form.get( 'notifications' );
+
+				this.destroy();
+
+				notifications.add( new wp.ccf.models.FormNotification() );
+			}
+		}
+	);
+
+	wp.ccf.views.EmptyFormTableRow = wp.ccf.views.EmptyFormTableRow || Backbone.View.extend(
+		{
+			tagName: 'tr',
+			template: wp.ccf.utils.template( 'ccf-empty-form-table-row-template'),
+
+			render: function() {
+				this.$el.html( this.template() );
+				return this;
+			}
+		}
+	);
+
+	wp.ccf.views.FormNotificationAddress = Backbone.View.extend(
+		{
+			template: wp.ccf.utils.template( 'ccf-form-notification-address-template' ),
+			className: 'address',
+
+			events: {
+				'click .add': 'triggerAdd',
+				'click .delete': 'triggerDelete',
+				'blur input': 'save',
+				'change select': 'save'
+			},
+
+			initialize: function( options ) {
+				this.notification = options.notification;
+				this.parent = options.parent;
+				this.form = options.form;
+			},
+
+			destroy: function() {
+				this.unbind();
+			},
+
+			save: function() {
+				// @todo: fix this ie8 hack
+				if ( this.el.innerHTML === '' ) {
+					return;
+				}
+
+				var type = this.el.querySelectorAll( '.form-notification-address-type' )[0].value;
+				var email = this.el.querySelectorAll( '.form-notification-address-email' );
+				var field = this.el.querySelectorAll( '.form-notification-address-field' );
+				var oldType = this.model.get( 'type' );
+
+				if ( email.length ) {
+					this.model.set( 'email', email[0].value );
+				}
+
+				if ( field.length ) {
+					this.model.set( 'field', field[0].value );
+				}
+
+				this.model.set( 'type', type );
+
+				if ( oldType !== type ) {
+					this.render();
+				}
+
+				return this;
+
+			},
+
+			updateFromFieldField: function() {
+				if ( 'edit' !== this.parent.context || 'field' !== this.model.get( 'type' ) ) {
+					return;
+				}
+
+				var addressFromField = this.el.querySelectorAll( '.form-notification-address-field' )[0];
+				addressFromField.innerHTML = '';
+				addressFromField.disabled = false;
+
+				var fields = this.form.get( 'fields' ),
+					fieldsAdded = 0;
+
+				var addressField = this.model.get( 'field' ),
+					option;
+
+				if ( fields.length >= 1 ) {
+					fields.each( function( field ) {
+						if ( 'email' === field.get( 'type' ) || 'dropdown' === field.get( 'type' ) || 'radio' === field.get( 'type' ) || 'single-line-text' === field.get( 'type' ) ) {
+							option = document.createElement( 'option' );
+							option.innerHTML = field.get( 'slug' );
+							option.value = field.get( 'slug' );
+
+							if ( field.get( 'slug' ) === addressField ) {
+								option.selected = true;
+							}
+
+							addressFromField.appendChild( option );
+
+							fieldsAdded++;
+						}
+					});
+				}
+
+				if ( 0 === fieldsAdded ) {
+					option = document.createElement( 'option' );
+					option.innerHTML = ccfSettings.noApplicableFields;
+					option.value = '';
+					addressFromField.appendChild( option );
+					addressFromField.disabled = true;
+				}
+			},
+
+			render: function() {
+				var context = {};
+				if ( this.model ) {
+					context.address = this.model.toJSON();
+				}
+
+				this.el.innerHTML = this.template( context );
+
+				var fields = this.form.get( 'fields' );
+
+				this.listenTo( fields, 'add', this.updateFromFieldField, this );
+				this.listenTo( fields, 'remove', this.updateFromFieldField, this );
+
+				if ( 'field' === this.model.get( 'type' ) ) {
+					this.updateFromFieldField();
+				}
+
+				return this;
+			},
+
+			triggerAdd: function() {
+				this.notification.get( 'addresses' ).add( new wp.ccf.models.FormNotificationAddress() );
+			},
+
+			triggerDelete: function() {
+				var addresses = this.notification.get( 'addresses' );
+
+				if ( addresses.length > 1 ) {
+					this.parent.deleteAddress( this );
+				} else {
+					this.model.clear().set( wp.ccf.models.FormNotificationAddress.prototype.defaults );
+					this.destroy();
+					this.render();
+				}
+			}
+		}
+	);
+
+	wp.ccf.views.ExistingFormNotificationRow = Backbone.View.extend(
+		{
+			template: wp.ccf.utils.template( 'ccf-existing-form-notification-table-row-template' ),
+			tagName: 'tr',
+
+			events: {
+				'change select.form-email-notification-from-type': 'toggleNotificationFields',
+				'change select.form-email-notification-from-name-type': 'toggleNotificationFields',
+				'change select.form-email-notification-subject-type': 'toggleNotificationFields',
+				'click .close-notification': 'changeContext',
+				'click .edit-notification': 'changeContext',
+				'click .delete-notification': 'triggerDelete',
+				'blur input': 'save',
+				'change select': 'save'
+			},
+
+			addressViews: [],
+
+			initialize: function( options ) {
+				this.form = options.form;
+				this.addressViews = [];
+				this.parent = options.parent;
+				this.context = ( 'undefined' !== typeof options.context ) ? options.context : 'view';
+
+				var addresses = this.model.get( 'addresses' );
+				this.listenTo( addresses, 'add', this.addAddress );
+			},
+
+			deleteAddress: function( view ) {
+				_.each( this.addressViews, function( currentView ) {
+					if ( view.cid === currentView.cid ) {
+						var index = _.indexOf( this.addressViews, currentView );
+						this.model.get( 'addresses' ).remove( view.model );
+						this.addressViews[index].remove();
+						this.addressViews.splice( index, 1 );
+					}
+				}, this );
+			},
+
+			addAddress: function( model ) {
+				var addressesContainer = this.el.querySelectorAll( '.addresses' )[0];
+				var view = new wp.ccf.views.FormNotificationAddress( { model: model, parent: this, notification: this.model, form: this.form } );
+				this.addressViews.push( view );
+				addressesContainer.appendChild( view.render().el );
+			},
+
+			destroy: function() {
+				this.unbind();
+			},
+
+			changeContext: function( event, forceContext ) {
+				if ( 'edit' === this.context ) {
+					this.save();
+				}
+
+				if ( forceContext ) {
+					this.context = forceContext;
+				} else {
+					if ( 'view' === this.context ) {
+						this.parent.closeAllNotifications();
+					}
+
+					this.context = ( 'edit' === this.context ) ? 'view' : 'edit';
+				}
+
+				this.destroy();
+				this.render();
+			},
+
+			updateFieldVariables: function() {
+				if ( 'edit' !== this.context ) {
+					return;
+				}
+				
+				var fieldVariables = this.el.querySelectorAll( '.field-variables' )[0];
+				var variablesText = '';
+				var type;
+				var fields = this.form.get( 'fields' );
+
+				fields.each( function( field ) {
+					type = field.get( 'type' );
+
+					if ( 'html' !== type && 'section-header' !== type && 'recaptcha' !== type ) {
+						variablesText += '[' + field.get( 'slug' ) + '] ';
+					}
+				} );
+
+				fieldVariables.innerText = variablesText;
+			},
+
+			updateFromFieldField: function() {
+				if ( 'edit' !== this.context ) {
+					return;
+				}
+
+				var emailNotificationFromField = this.el.querySelectorAll( '.form-email-notification-from-field' )[0];
+				emailNotificationFromField.innerHTML = '';
+				emailNotificationFromField.disabled = false;
+
+				var emailNotificationSubjectField = this.el.querySelectorAll( '.form-email-notification-subject-field' )[0];
+				emailNotificationSubjectField.innerHTML = '';
+				emailNotificationSubjectField.disabled = false;
+
+				var emailNotificationFromNameField = this.el.querySelectorAll( '.form-email-notification-from-name-field' )[0];
+				emailNotificationFromNameField.innerHTML = '';
+				emailNotificationFromNameField.disabled = false;
+
+				var fields = this.form.get( 'fields' ),
+					addressFieldsAdded = 0,
+					nameFieldsAdded = 0,
+					subjectFieldsAdded = 0;
+
+				var addressField = this.model.get( 'emailNotificationFromField' );
+				var subjectField = this.model.get( 'emailNotificationSubjectField' );
+				var nameField = this.model.get( 'emailNotificationFromNameField' ),
+					option;
+
+				if ( fields.length >= 1 ) {
+					fields.each( function( field ) {
+						if ( 'email' === field.get( 'type' ) || 'dropdown' === field.get( 'type' ) || 'radio' === field.get( 'type' ) || 'single-line-text' === field.get( 'type' ) ) {
+							option = document.createElement( 'option' );
+							option.innerHTML = field.get( 'slug' );
+							option.value = field.get( 'slug' );
+
+							if ( field.get( 'slug' ) === addressField ) {
+								option.selected = true;
+							}
+
+							emailNotificationFromField.appendChild( option );
+
+							addressFieldsAdded++;
+						} if ( 'name' === field.get( 'type' ) || 'single-line-text' === field.get( 'type' ) || 'radio' === field.get( 'type' ) || 'dropdown' === field.get( 'type' ) ) {
+							option = document.createElement( 'option' );
+							option.innerHTML = field.get( 'slug' );
+							option.value = field.get( 'slug' );
+
+							if ( field.get( 'slug' ) === nameField ) {
+								option.selected = true;
+							}
+
+							emailNotificationFromNameField.appendChild( option );
+
+							nameFieldsAdded++;
+						} if ( 'single-line-text' === field.get( 'type' ) || 'radio' === field.get( 'type' ) || 'dropdown' === field.get( 'type' ) ) {
+							// @Todo: add more applicable fields
+
+							option = document.createElement( 'option' );
+							option.innerHTML = field.get( 'slug' );
+							option.value = field.get( 'slug' );
+
+							if ( field.get( 'slug' ) === subjectField ) {
+								option.selected = true;
+							}
+
+							emailNotificationSubjectField.appendChild( option );
+
+							subjectFieldsAdded++;
+						}
+					});
+				}
+
+				if ( 0 === addressFieldsAdded ) {
+					option = document.createElement( 'option' );
+					option.innerHTML = ccfSettings.noEmailFields;
+					option.value = '';
+					emailNotificationFromField.appendChild( option );
+					emailNotificationFromField.disabled = true;
+				}
+
+				if ( 0 === nameFieldsAdded ) {
+					option = document.createElement( 'option' );
+					option.innerHTML = ccfSettings.noNameFields;
+					option.value = '';
+					emailNotificationFromNameField.appendChild( option );
+					emailNotificationFromNameField.disabled = true;
+				}
+
+				if ( 0 === subjectFieldsAdded ) {
+					option = document.createElement( 'option' );
+					option.innerHTML = ccfSettings.noApplicableFields;
+					option.value = '';
+					emailNotificationSubjectField.appendChild( option );
+					emailNotificationSubjectField.disabled = true;
+				}
+			},
+
+			toggleNotificationFields: function() {
+				var i;
+
+				var emailNotificationFromAddress = this.el.querySelectorAll( '.email-notification-from-address' )[0];
+
+				var emailNotificationFromField = this.el.querySelectorAll( '.email-notification-from-field' )[0];
+
+				var emailNotificationFromType = this.el.querySelectorAll( '.form-email-notification-from-type' )[0];
+
+				var emailNotificationSubject = this.el.querySelectorAll( '.email-notification-subject' )[0];
+
+				var emailNotificationSubjectField = this.el.querySelectorAll( '.email-notification-subject-field' )[0];
+
+				var emailNotificationSubjectType = this.el.querySelectorAll( '.form-email-notification-subject-type' )[0];
+
+				var emailNotificationFromName = this.el.querySelectorAll( '.email-notification-from-name' )[0];
+
+				var emailNotificationFromNameField = this.el.querySelectorAll( '.email-notification-from-name-field' )[0];
+
+				var emailNotificationFromNameType = this.el.querySelectorAll( '.form-email-notification-from-name-type' )[0];
+
+				emailNotificationFromAddress.style.display = 'none';
+				emailNotificationFromField.style.display = 'none';
+
+				if ( 'custom' === emailNotificationFromType.value ) {
+					emailNotificationFromAddress.style.display = 'block';
+				} else if ( 'field' === emailNotificationFromType.value ) {
+					emailNotificationFromField.style.display = 'block';
+				}
+
+				emailNotificationSubject.style.display = 'none';
+				emailNotificationSubjectField.style.display = 'none';
+
+				if ( 'custom' === emailNotificationSubjectType.value ) {
+					emailNotificationSubject.style.display = 'block';
+				} else if ( 'field' === emailNotificationSubjectType.value ) {
+					emailNotificationSubjectField.style.display = 'block';
+				}
+
+				emailNotificationFromName.style.display = 'none';
+				emailNotificationFromNameField.style.display = 'none';
+
+				if ( 'custom' === emailNotificationFromNameType.value ) {
+					emailNotificationFromName.style.display = 'block';
+				} else if ( 'field' === emailNotificationFromNameType.value ) {
+					emailNotificationFromNameField.style.display = 'block';
+				}
+			},
+
+			save: function() {
+				// @todo: fix this ie8 hack
+				if ( this.el.innerHTML === '' ) {
+					return;
+				}
+
+				if ( 'edit' !== this.context ) {
+					return;
+				}
+
+				var emailNotificationTitle = this.el.querySelectorAll( '.form-email-notification-title' )[0].value;
+				this.model.set( 'title', emailNotificationTitle );
+
+				var emailNotificationContent = this.el.querySelectorAll( '.form-email-notification-content' )[0].value;
+				this.model.set( 'content', emailNotificationContent );
+
+				var emailNotificationActive = this.el.querySelectorAll( '.form-email-notification-active' )[0].value;
+				this.model.set( 'active', ( '1' === emailNotificationActive ) ? true : false );
+
+				var emailNotificationFromType = this.el.querySelectorAll( '.form-email-notification-from-type' )[0].value;
+				this.model.set( 'fromType', emailNotificationFromType );
+
+				var emailNotificationFromAddress = this.el.querySelectorAll( '.form-email-notification-from-address' )[0].value;
+				this.model.set( 'fromAddress', emailNotificationFromAddress );
+
+				var emailNotificationFromField = this.el.querySelectorAll( '.form-email-notification-from-field' )[0].value;
+				this.model.set( 'fromField', emailNotificationFromField );
+
+				var emailNotificationFromNameType = this.el.querySelectorAll( '.form-email-notification-from-name-type' )[0].value;
+				this.model.set( 'fromNameType', emailNotificationFromNameType );
+
+				var emailNotificationFromName = this.el.querySelectorAll( '.form-email-notification-from-name' )[0].value;
+				this.model.set( 'fromName', emailNotificationFromName );
+
+				var emailNotificationFromNameField = this.el.querySelectorAll( '.form-email-notification-from-name-field' )[0].value;
+				this.model.set( 'fromNameField', emailNotificationFromNameField );
+
+				var emailNotificationSubjectType = this.el.querySelectorAll( '.form-email-notification-subject-type' )[0].value;
+				this.model.set( 'subjectType', emailNotificationSubjectType );
+
+				var emailNotificationSubject = this.el.querySelectorAll( '.form-email-notification-subject' )[0].value;
+				this.model.set( 'subject', emailNotificationSubject );
+
+				var emailNotificationSubjectField = this.el.querySelectorAll( '.form-email-notification-subject-field' )[0].value;
+				this.model.set( 'subjectField', emailNotificationSubjectField );
+
+				for ( var i = 0; i < this.addressViews.length; i++ ) {
+					this.addressViews[i].save();
+				}
+
+				return this;
+
+			},
+
+			render: function() {
+				var context = {
+					context: this.context,
+					form: this.form.toJSON()
+				};
+
+				if ( this.model ) {
+					context.notification = this.model.toJSON();
+				}
+
+				this.el.innerHTML = this.template( context );
+
+				if ( 'edit' === this.context) {
+					this.toggleNotificationFields();
+					this.updateFromFieldField();
+					this.updateFieldVariables();
+
+					var addressesContainer = this.el.querySelectorAll( '.addresses' )[0];
+					var addresses = this.model.get( 'addresses' );
+
+					if ( addresses.length >= 1 ) {
+						addresses.each( function( model ) {
+							var address = new wp.ccf.views.FormNotificationAddress( { model: model, parent: this, notification: this.model, form: this.form } ).render();
+							addressesContainer.appendChild( address.el );
+							this.addressViews.push( address );
+						}, this );
+					} else {
+						var newAddress = new wp.ccf.models.FormNotificationAddress();
+						addresses.add( newAddress );
+					}
+				}
+
+				var fields = this.form.get( 'fields' );
+
+				this.listenTo( fields, 'add', this.updateFromFieldField, this );
+				this.listenTo( fields, 'remove', this.updateFromFieldField, this );
+				this.listenTo( fields, 'add', this.updateFieldVariables, this );
+				this.listenTo( fields, 'remove', this.updateFieldVariables, this );
+
+				return this;
+			},
+
+			triggerDelete: function() {
+				this.parent.deleteNotification( this );
+			}
+		}
+	);
+
 	wp.ccf.views.FieldBase = wp.ccf.views.FieldBase || Backbone.View.extend(
 		{
 			events: {
@@ -1001,6 +1970,18 @@
 				'blur textarea': 'saveField',
 				'change select': 'saveField',
 				'change input[type="checkbox"]': 'saveField'
+			},
+
+			initialize: function() {
+				var conditionals = this.model.get( 'conditionals' );
+				this.listenTo( conditionals, 'add', this.addConditional );
+			},
+
+			addConditional: function( model ) {
+				var view = new wp.ccf.views.FieldConditional( { model: model, field: this.model, fieldCollection: this.collection } ).render();
+				var conditionals = this.el.querySelectorAll( '.conditionals' )[0];
+
+				conditionals.appendChild( view.el );
 			},
 
 			checkSlug: function() {
@@ -1039,10 +2020,45 @@
 				this.unbind();
 			},
 
-			render: function() {
-				this.el.innerHTML = this.template( { field: this.model.toJSON() } );
+			saveField: function() {
+				var conditionals = this.el.querySelectorAll( '.conditionals' )[0].querySelectorAll( '.conditional' );
+
+				_.each( conditionals, function( conditional ) {
+					$( conditional ).trigger( 'saveConditional' );
+				});
+
+				this.model.set( 'conditionalType', this.el.querySelectorAll( '.field-conditional-type' )[0].value );
+				this.model.set( 'conditionalFieldsRequired', this.el.querySelectorAll( '.field-conditional-fields-required' )[0].value );
+
+				var oldConditionals = this.model.get( 'conditionalsEnabled' );
+				this.model.set( 'conditionalsEnabled', ( this.el.querySelectorAll( '.field-conditionals-enabled' )[0].value == 1 ) ? true : false );
+
+				if ( oldConditionals !== this.model.get( 'conditionalsEnabled' ) ) {
+					this.render( 'advanced' );
+				}
+			},
+
+			render: function( startPanel ) {
+				startPanel = ( startPanel ) ? startPanel : 'basic';
+
+				this.el.innerHTML = this.template( { field: this.model.toJSON(), startPanel: startPanel } );
 
 				this.checkSlug();
+
+				var conditionalsCollection = this.model.get( 'conditionals' );
+
+				var conditionals = this.el.querySelectorAll( '.conditionals' )[0];
+
+				if ( conditionalsCollection.length >= 1 ) {
+
+					conditionalsCollection.each( function( model ) {
+						var view = new wp.ccf.views.FieldConditional( { model: model, field: this.model, fieldCollection: this.collection } ).render();
+						conditionals.appendChild( view.el );
+					}, this );
+				} else {
+					var conditional = new wp.ccf.models.FieldConditional();
+					conditionalsCollection.add( conditional );
+				}
 
 				return this;
 			}
@@ -1052,10 +2068,6 @@
 	wp.ccf.views.Fields['single-line-text'] = wp.ccf.views.Fields['single-line-text'] || wp.ccf.views.FieldBase.extend(
 		{
 			template: wp.ccf.utils.template( 'ccf-single-line-text-template' ),
-
-			initialize: function() {
-
-			},
 
 			saveField: function() {
 				// @todo: fix this ie8 hack
@@ -1071,6 +2083,8 @@
 				this.model.set( 'className', this.el.querySelectorAll( '.field-class-name' )[0].value );
 				this.model.set( 'required', ( this.el.querySelectorAll( '.field-required' )[0].value == 1 ) ? true : false  );
 
+				this.constructor.__super__.saveField.apply( this, arguments );
+
 				return this;
 			}
 		}
@@ -1079,10 +2093,6 @@
 	wp.ccf.views.Fields.file = wp.ccf.views.Fields.file || wp.ccf.views.FieldBase.extend(
 		{
 			template: wp.ccf.utils.template( 'ccf-file-template' ),
-
-			initialize: function() {
-
-			},
 
 			saveField: function() {
 				// @todo: fix this ie8 hack
@@ -1098,6 +2108,8 @@
 				this.model.set( 'fileExtensions', this.el.querySelectorAll( '.field-file-extensions' )[0].value );
 				this.model.set( 'maxFileSize', this.el.querySelectorAll( '.field-max-file-size' )[0].value );
 
+				this.constructor.__super__.saveField.apply( this, arguments );
+
 				return this;
 			}
 		}
@@ -1106,10 +2118,6 @@
 	wp.ccf.views.Fields.recaptcha = wp.ccf.views.Fields.recaptcha || wp.ccf.views.FieldBase.extend(
 		{
 			template: wp.ccf.utils.template( 'ccf-recaptcha-template' ),
-
-			initialize: function() {
-
-			},
 
 			saveField: function() {
 				// @todo: fix this ie8 hack
@@ -1123,6 +2131,8 @@
 				this.model.set( 'secretKey', this.el.querySelectorAll( '.field-secret-key' )[0].value );
 				this.model.set( 'className', this.el.querySelectorAll( '.field-class-name' )[0].value );
 
+				this.constructor.__super__.saveField.apply( this, arguments );
+
 				return this;
 			}
 		}
@@ -1131,10 +2141,6 @@
 	wp.ccf.views.Fields['section-header'] = wp.ccf.views.Fields['section-header'] || wp.ccf.views.FieldBase.extend(
 		{
 			template: wp.ccf.utils.template( 'ccf-section-header-template' ),
-
-			initialize: function() {
-
-			},
 
 			saveField: function() {
 				// @todo: fix this ie8 hack
@@ -1146,6 +2152,8 @@
 				this.model.set( 'subheading', this.el.querySelectorAll( '.field-subheading' )[0].value );
 				this.model.set( 'className', this.el.querySelectorAll( '.field-class-name' )[0].value );
 
+				this.constructor.__super__.saveField.apply( this, arguments );
+
 				return this;
 			}
 		}
@@ -1155,10 +2163,6 @@
 		{
 			template: wp.ccf.utils.template( 'ccf-html-template' ),
 
-			initialize: function() {
-
-			},
-
 			saveField: function() {
 				// @todo: fix this ie8 hack
 				if ( this.el.innerHTML === '' ) {
@@ -1167,6 +2171,8 @@
 
 				this.model.set( 'html', this.el.querySelectorAll( '.field-html' )[0].value );
 				this.model.set( 'className', this.el.querySelectorAll( '.field-class-name' )[0].value );
+
+				this.constructor.__super__.saveField.apply( this, arguments );
 
 				return this;
 			}
@@ -1191,6 +2197,8 @@
 				this.model.set( 'className', this.el.querySelectorAll( '.field-class-name' )[0].value );
 				this.model.set( 'required', ( this.el.querySelectorAll( '.field-required' )[0].value == 1 ) ? true : false  );
 
+				this.constructor.__super__.saveField.apply( this, arguments );
+
 				return this;
 			}
 		}
@@ -1209,6 +2217,8 @@
 				this.model.set( 'slug', this.el.querySelectorAll( '.field-slug' )[0].value );
 				this.model.set( 'value', this.el.querySelectorAll( '.field-value' )[0].value );
 				this.model.set( 'className', this.el.querySelectorAll( '.field-class-name' )[0].value );
+
+				this.constructor.__super__.saveField.apply( this, arguments );
 
 				return this;
 			}
@@ -1229,13 +2239,22 @@
 				this.model.set( 'label', this.el.querySelectorAll( '.field-label' )[0].value );
 				this.model.set( 'description', this.el.querySelectorAll( '.field-description' )[0].value );
 
+				this.constructor.__super__.saveField.apply( this, arguments );
+
 				var value = this.el.querySelectorAll( '.field-value' );
 				if ( value.length > 0 ) {
 					this.model.set( 'value', value[0].value );
 				}
 
+				var dateFormat = this.el.querySelectorAll( '.field-date-format' );
+				if ( dateFormat.length ) {
+					this.model.set( 'dateFormat', dateFormat[0].value );
+				}
+
+				var oldShowDate = this.model.get( 'showDate' );
+				var showDate = ( this.el.querySelectorAll( '.field-show-date' )[0].checked ) ? true : false;
 				this.model.set( 'className', this.el.querySelectorAll( '.field-class-name' )[0].value );
-				this.model.set( 'showDate', ( this.el.querySelectorAll( '.field-show-date' )[0].checked ) ? true : false );
+				this.model.set( 'showDate', showDate );
 
 				var oldShowTime = this.model.get( 'showTime' );
 				var showTime = ( this.el.querySelectorAll( '.field-show-time' )[0].checked ) ? true : false;
@@ -1243,7 +2262,7 @@
 				this.model.set( 'showTime', showTime );
 				this.model.set( 'required', ( this.el.querySelectorAll( '.field-required' )[0].value == 1 ) ? true : false  );
 
-				if ( showTime != oldShowTime ) {
+				if ( showTime != oldShowTime || showDate != oldShowDate ) {
 					this.render();
 				}
 
@@ -1268,6 +2287,8 @@
 				this.model.set( 'className', this.el.querySelectorAll( '.field-class-name' )[0].value );
 				this.model.set( 'required', ( this.el.querySelectorAll( '.field-required' )[0].value == 1 ) ? true : false  );
 
+				this.constructor.__super__.saveField.apply( this, arguments );
+
 				return this;
 			}
 		}
@@ -1290,6 +2311,8 @@
 				this.model.set( 'placeholder', this.el.querySelectorAll( '.field-placeholder' )[0].value );
 				this.model.set( 'className', this.el.querySelectorAll( '.field-class-name' )[0].value );
 				this.model.set( 'required', ( this.el.querySelectorAll( '.field-required' )[0].value == 1 ) ? true : false  );
+
+				this.constructor.__super__.saveField.apply( this, arguments );
 
 				return this;
 			}
@@ -1315,6 +2338,8 @@
 				this.model.set( 'className', this.el.querySelectorAll( '.field-class-name' )[0].value );
 				this.model.set( 'required', ( this.el.querySelectorAll( '.field-required' )[0].value == 1 ) ? true : false  );
 
+				this.constructor.__super__.saveField.apply( this, arguments );
+
 				return this;
 			}
 		}
@@ -1337,6 +2362,8 @@
 				this.model.set( 'className', this.el.querySelectorAll( '.field-class-name' )[0].value );
 				this.model.set( 'required', ( this.el.querySelectorAll( '.field-required' )[0].value == 1 ) ? true : false  );
 
+				this.constructor.__super__.saveField.apply( this, arguments );
+
 				return this;
 			}
 		}
@@ -1355,6 +2382,8 @@
 				this.model.set( 'slug', this.el.querySelectorAll( '.field-slug' )[0].value );
 				this.model.set( 'label', this.el.querySelectorAll( '.field-label' )[0].value );
 				this.model.set( 'description', this.el.querySelectorAll( '.field-description' )[0].value );
+
+				this.constructor.__super__.saveField.apply( this, arguments );
 
 				var value = this.el.querySelectorAll( '.field-value' );
 				if ( value.length ) {
@@ -1411,6 +2440,7 @@
 				this.model.set( 'className', this.el.querySelectorAll( '.field-class-name' )[0].value );
 				this.model.set( 'required', ( this.el.querySelectorAll( '.field-required' )[0].value == 1 ) ? true : false  );
 
+				wp.ccf.views.ChoiceableField.__super__.saveField.apply( this, arguments );
 
 				var choices = this.el.querySelectorAll( '.repeatable-choices' )[0].querySelectorAll( '.choice' );
 
@@ -1422,10 +2452,12 @@
 
 			},
 
-			render: function() {
+			render: function( startPanel ) {
 				var SELF = this;
 
-				SELF.el.innerHTML = SELF.template( { field: SELF.model.toJSON() } );
+				startPanel = ( startPanel ) ? startPanel : 'basic';
+
+				SELF.el.innerHTML = SELF.template( { field: SELF.model.toJSON(), startPanel: startPanel } );
 
 				SELF.checkSlug();
 
@@ -1453,6 +2485,21 @@
 						$ui.item.trigger( 'sorted', $ui.item.index() );
 					}
 				});
+
+				var conditionalsCollection = this.model.get( 'conditionals' );
+
+				var conditionals = this.el.querySelectorAll( '.conditionals' )[0];
+
+				if ( conditionalsCollection.length >= 1 ) {
+
+					conditionalsCollection.each( function( model ) {
+						var view = new wp.ccf.views.FieldConditional( { model: model, field: this.model, fieldCollection: this.collection } ).render();
+						conditionals.appendChild( view.el );
+					}, this );
+				} else {
+					var conditional = new wp.ccf.models.FieldConditional();
+					conditionalsCollection.add( conditional );
+				}
 
 				return SELF;
 			}
@@ -1673,6 +2720,180 @@
 		}
 	);
 
+	wp.ccf.views.PostFieldMapping = Backbone.View.extend(
+		{
+			template: wp.ccf.utils.template( 'ccf-post-field-mapping' ),
+			className: 'field-mapping',
+
+			events: {
+				'click .add': 'triggerAdd',
+				'click .delete': 'triggerDelete',
+				'blur input': 'save',
+				'change select': 'save'
+			},
+
+			initialize: function( options ) {
+				this.parent = options.parent;
+				this.form = options.form;
+			},
+
+			destroy: function() {
+				this.unbind();
+			},
+
+			save: function() {
+				// @todo: fix this ie8 hack
+				if ( this.el.innerHTML === '' ) {
+					return;
+				}
+
+				var formField = this.el.querySelectorAll( '.field-form-field' )[0].value;
+				var postField = this.el.querySelectorAll( '.field-post-field' )[0].value;
+				var customFieldKey = this.el.querySelectorAll( '.field-custom-field-key' );
+
+				var oldPostField = this.model.get( 'postField' );
+				
+				this.model.set( 'formField', formField );
+				this.model.set( 'postField', postField );
+
+				if ( customFieldKey.length ) {
+					this.model.set( 'customFieldKey', customFieldKey[0].value );
+				}
+
+				if ( oldPostField !== postField ) {
+					this.render();
+				}
+
+				return this;
+
+			},
+
+			updateFormFieldField: function() {
+				var fieldFormField = this.el.querySelectorAll( '.field-form-field' )[0];
+				fieldFormField.innerHTML = '';
+				fieldFormField.disabled = false;
+
+				var fields = this.form.get( 'fields' ),
+					fieldsAdded = 0;
+
+				var formField = this.model.get( 'formField' ),
+					option;
+
+				if ( fields.length >= 1 ) {
+					option = document.createElement( 'option' );
+					option.innerHTML = ccfSettings.chooseFormField;
+					option.value = '';
+
+					fieldFormField.appendChild( option );
+
+					fields.each( function( field ) {
+						option = document.createElement( 'option' );
+						option.innerHTML = field.get( 'slug' );
+						option.value = field.get( 'slug' );
+
+						if ( field.get( 'slug' ) === formField ) {
+							option.selected = true;
+						}
+
+						fieldFormField.appendChild( option );
+
+						fieldsAdded++;
+					});
+				}
+
+				if ( 0 === fieldsAdded ) {
+					option = document.createElement( 'option' );
+					option.innerHTML = ccfSettings.noAvailableFields;
+					option.value = '';
+					fieldFormField.appendChild( option );
+					fieldFormField.disabled = true;
+				}
+			},
+
+			updatePostFields: function() {
+				var dropdown = this.el.querySelectorAll( '.field-post-field' )[0],
+					option;
+
+				option = document.createElement( 'option' );
+				option.value = '';
+				option.innerText = ccfSettings.choosePostField;
+				dropdown.appendChild( option );
+
+				var mappings = this.form.get( 'postFieldMappings' );
+				var usedFields = [];
+
+				mappings.each( function( model ) {
+					if ( model !== this.model ) {
+						usedFields.push( model.get( 'postField' ) );
+					}
+				}, this );
+
+				_.each( ccfSettings.postFields.single, function( field, slug ) {
+					if ( -1 === usedFields.indexOf( slug ) ) {
+						option = document.createElement( 'option' );
+						option.value = slug;
+						option.innerText = field;
+
+						if ( this.model.get( 'postField' ) === slug ) {
+							option.selected = true;
+						}
+
+						dropdown.appendChild( option );
+					}
+				}, this );
+
+				_.each( ccfSettings.postFields.repeatable, function( field, slug ) {
+
+					option = document.createElement( 'option' );
+					option.value = slug;
+					option.innerText = field;
+
+					if ( this.model.get( 'postField' ) === slug ) {
+						option.selected = true;
+					}
+
+					dropdown.appendChild( option );
+
+				}, this );
+			},
+
+			render: function() {
+				var context = {};
+				if ( this.model ) {
+					context.mapping = this.model.toJSON();
+				}
+
+				this.el.innerHTML = this.template( context );
+
+				var fields = this.form.get( 'fields' );
+
+				this.listenTo( fields, 'add', this.updateFormFieldField, this );
+				this.listenTo( fields, 'remove', this.updateFormFieldField, this );
+
+				this.updateFormFieldField();
+				this.updatePostFields();
+
+				return this;
+			},
+
+			triggerAdd: function() {
+				this.form.get( 'postFieldMappings' ).add( new wp.ccf.models.PostFieldMapping() );
+			},
+
+			triggerDelete: function() {
+				var mappings = this.form.get( 'postFieldMappings' );
+
+				if ( mappings.length > 1 ) {
+					this.parent.deletePostFieldMapping( this );
+				} else {
+					this.model.clear().set( wp.ccf.models.PostFieldMapping.prototype.defaults );
+					this.destroy();
+					this.render();
+				}
+			}
+		}
+	);
+
 	wp.ccf.views.FormSettings = wp.ccf.views.FormSettings || Backbone.View.extend(
 		{
 			template: wp.ccf.utils.template( 'ccf-form-settings-template' ),
@@ -1682,16 +2903,70 @@
 				'change select': 'save',
 				'change select.form-completion-action-type': 'toggleCompletionFields',
 				'change select.form-pause': 'togglePauseFields',
-				'change select.form-send-email-notifications': 'toggleNotificationFields'
+				'change select.form-post-creation': 'togglePostCreationFields',
+				'click .add-notification': 'triggerAddNotification'
 			},
+
+			notificationViews: [],
+			mappingViews: [],
 
 			initialize: function( options ) {
 				this.model = options.form;
+				this.notificationViews = [];
+				this.mappingViews = [];
+
+				var notifications = this.model.get( 'notifications' );
+				this.listenTo( notifications, 'add', this.addNotification );
+
+				var mappings = this.model.get( 'postFieldMappings' );
+				this.listenTo( mappings, 'add', this.addPostFieldMapping );
 			},
 
-			destroy: function() {
-				wp.ccf.dispatcher.off( 'saveFormSettings', this.save );
-				wp.ccf.dispatcher.off( 'mainViewChange', this.save );
+			deletePostFieldMapping: function( view ) {
+				_.each( this.mappingViews, function( currentView ) {
+					if ( view.cid === currentView.cid ) {
+						var index = _.indexOf( this.mappingViews, currentView );
+						this.model.get( 'postFieldMappings' ).remove( view.model );
+						this.mappingViews[index].remove();
+						this.mappingViews.splice( index, 1 );
+					}
+				}, this );
+			},
+
+			addPostFieldMapping: function( model ) {
+				var mappingContainer = this.el.querySelectorAll( '.post-creation-mapping' )[0];
+				var view = new wp.ccf.views.PostFieldMapping( { model: model, parent: this, form: this.model } );
+				this.mappingViews.push( view );
+				mappingContainer.appendChild( view.render().el );
+			},
+
+			triggerAddNotification: function() {
+				var notifications = this.model.get( 'notifications' );
+
+				notifications.add( new wp.ccf.models.FormNotification() );
+			},
+
+			closeAllNotifications: function() {
+				_.each( this.notificationViews, function( view ) {
+					view.changeContext( null, 'view' );
+				} );
+			},
+
+			addNotification: function( model ) {
+				var view = new wp.ccf.views.ExistingFormNotificationRow( { model: model, form: this.model, context: 'edit', parent: this } ).render();
+				var rowContainer = this.el.querySelectorAll( '.ccf-form-notifications .rows' )[0];
+
+				if ( rowContainer.querySelectorAll( '.no-notifications' ).length > 0 ) {
+					rowContainer.removeChild( rowContainer.firstChild );
+				}
+
+				_.each( this.notificationViews, function( view ) {
+					view.changeContext( null, 'view' );
+				} );
+
+				this.notificationViews.push( view );
+
+				rowContainer.appendChild( view.el );
 			},
 
 			toggleCompletionFields: function() {
@@ -1721,16 +2996,26 @@
 				}
 			},
 
-			save: function( $promise ) {
-				var SELF = this;
+			togglePostCreationFields: function() {
 
+				var postCreation = this.el.querySelectorAll( '.form-post-creation' )[0].value;
+				var $postCreationMappingFields = $( this.el.querySelectorAll( '.post-creation-mapping-field' ) );
+
+				if ( parseInt( postCreation ) ) {
+					$postCreationMappingFields.show();
+				} else {
+					$postCreationMappingFields.hide();
+				}
+			},
+
+			save: function() {
 				if ( this.el.innerHTML === '' ) {
 					// @todo: for some reason this is needed for IE8
 					return;
 				}
 
 				var title = this.el.querySelectorAll( '.form-title' )[0].value;
-				this.model.set( 'title', title );
+				this.model.set( 'title', { raw: title } );
 
 				var description = this.el.querySelectorAll( '.form-description' )[0].value;
 				this.model.set( 'description', description );
@@ -1738,8 +3023,20 @@
 				var buttonText = this.el.querySelectorAll( '.form-button-text' )[0].value;
 				this.model.set( 'buttonText', buttonText );
 
+				var buttonClass = this.el.querySelectorAll( '.form-button-class' )[0].value;
+				this.model.set( 'buttonClass', buttonClass );
+
 				var pause = this.el.querySelectorAll( '.form-pause' )[0].value;
 				this.model.set( 'pause', ( parseInt( pause ) ) ? true : false );
+
+				var postCreation = this.el.querySelectorAll( '.form-post-creation' )[0].value;
+				this.model.set( 'postCreation', ( parseInt( postCreation ) ) ? true : false );
+
+				var postCreationType = this.el.querySelectorAll( '.form-post-creation-type' )[0].value;
+				this.model.set( 'postCreationType', postCreationType );
+
+				var postCreationStatus = this.el.querySelectorAll( '.form-post-creation-status' )[0].value;
+				this.model.set( 'postCreationStatus', postCreationStatus );
 
 				var pauseMessage = this.el.querySelectorAll( '.form-pause-message' )[0].value;
 				this.model.set( 'pauseMessage', pauseMessage );
@@ -1753,258 +3050,49 @@
 				var completionActionType = this.el.querySelectorAll( '.form-completion-action-type' )[0].value;
 				this.model.set( 'completionActionType', completionActionType );
 
-				if ( typeof $promise !== 'undefined' && typeof $promise.promise !== 'undefined' ) {
-					$promise.resolve();
-				}
+				var theme = this.el.querySelectorAll( '.form-theme' )[0].value;
+				this.model.set( 'theme', theme );
 			},
 
-			render: function() {
-				var context = {
-					form: this.model.toJSON()
-				};
-
-				this.el.innerHTML = this.template( context );
-
-				this.toggleCompletionFields();
-
-				this.togglePauseFields();
-
-				wp.ccf.dispatcher.on( 'saveFormSettings', this.save, this );
-				wp.ccf.dispatcher.on( 'mainViewChange', this.save, this );
-
-				return this;
-			}
-		}
-	);
-
-	wp.ccf.views.FormNotifications = wp.ccf.views.FormNotifications || Backbone.View.extend(
-		{
-			template: wp.ccf.utils.template( 'ccf-form-notifications-template' ),
-
-			events: {
-				'blur input': 'save',
-				'change select': 'save',
-				'change select.form-send-email-notifications': 'toggleNotificationFields',
-				'change select.form-email-notification-from-type': 'toggleNotificationFields',
-				'change select.form-email-notification-from-name-type': 'toggleNotificationFields',
-				'change select.form-email-notification-subject-type': 'toggleNotificationFields'
-			},
-
-			initialize: function( options ) {
-				this.model = options.form;
-			},
-
-			destroy: function() {
-				wp.ccf.dispatcher.off( 'saveFormNotifications', this.save );
-				wp.ccf.dispatcher.off( 'mainViewChange', this.save );
-				this.undelegateEvents();
-				this.unbind();
-			},
-
-			updateFromFieldField: function() {
-				var emailNotificationFromField = this.el.querySelectorAll( '.form-email-notification-from-field' )[0];
-				emailNotificationFromField.innerHTML = '';
-				emailNotificationFromField.disabled = false;
-
-				var emailNotificationSubjectField = this.el.querySelectorAll( '.form-email-notification-subject-field' )[0];
-				emailNotificationSubjectField.innerHTML = '';
-				emailNotificationSubjectField.disabled = false;
-
-				var emailNotificationFromNameField = this.el.querySelectorAll( '.form-email-notification-from-name-field' )[0];
-				emailNotificationFromNameField.innerHTML = '';
-				emailNotificationFromNameField.disabled = false;
-
-				var fields = this.model.get( 'fields' ),
-					addressFieldsAdded = 0,
-					nameFieldsAdded = 0,
-					subjectFieldsAdded = 0;
-
-				var addressField = this.model.get( 'emailNotificationFromField' );
-				var subjectField = this.model.get( 'emailNotificationSubjectField' );
-				var nameField = this.model.get( 'emailNotificationFromNameField' ),
-					option;
-
-				if ( fields.length >= 1 ) {
-					fields.each( function( field ) {
-						if ( 'email' === field.get( 'type' ) ) {
-							option = document.createElement( 'option' );
-							option.innerHTML = field.get( 'slug' );
-							option.value = field.get( 'slug' );
-
-							if ( field.get( 'slug' ) === addressField ) {
-								option.selected = true;
-							}
-
-							emailNotificationFromField.appendChild( option );
-
-							addressFieldsAdded++;
-						} else if ( 'name' === field.get( 'type' ) ) {
-							option = document.createElement( 'option' );
-							option.innerHTML = field.get( 'slug' );
-							option.value = field.get( 'slug' );
-
-							if ( field.get( 'slug' ) === nameField ) {
-								option.selected = true;
-							}
-
-							emailNotificationFromNameField.appendChild( option );
-
-							nameFieldsAdded++;
-						}  else if ( 'single-line-text' === field.get( 'type' ) ) {
-							// @Todo: add more applicable fields
-
-							option = document.createElement( 'option' );
-							option.innerHTML = field.get( 'slug' );
-							option.value = field.get( 'slug' );
-
-							if ( field.get( 'slug' ) === subjectField ) {
-								option.selected = true;
-							}
-
-							emailNotificationSubjectField.appendChild( option );
-
-							subjectFieldsAdded++;
-						}
-					});
-				}
-
-				if ( 0 === addressFieldsAdded ) {
-					option = document.createElement( 'option' );
-					option.innerHTML = ccfSettings.noEmailFields;
-					emailNotificationFromField.appendChild( option );
-					emailNotificationFromField.disabled = true;
-				}
-
-				if ( 0 === nameFieldsAdded ) {
-					option = document.createElement( 'option' );
-					option.innerHTML = ccfSettings.noNameFields;
-					emailNotificationFromNameField.appendChild( option );
-					emailNotificationFromNameField.disabled = true;
-				}
-
-				if ( 0 === subjectFieldsAdded ) {
-					option = document.createElement( 'option' );
-					option.innerHTML = ccfSettings.noApplicableFields;
-					emailNotificationSubjectField.appendChild( option );
-					emailNotificationSubjectField.disabled = true;
-				}
-			},
-
-			toggleNotificationFields: function() {
-				var i;
-
-				var sendEmailNotifications = this.el.querySelectorAll( '.form-send-email-notifications' )[0].value;
-
-				var emailNotificationSettings = this.el.querySelectorAll( '.email-notification-setting' );
-
-				var emailNotificationFromAddress = this.el.querySelectorAll( '.email-notification-from-address' )[0];
-
-				var emailNotificationFromField = this.el.querySelectorAll( '.email-notification-from-field' )[0];
-
-				var emailNotificationFromType = this.el.querySelectorAll( '.form-email-notification-from-type' )[0];
-
-				var emailNotificationSubject = this.el.querySelectorAll( '.email-notification-subject' )[0];
-
-				var emailNotificationSubjectField = this.el.querySelectorAll( '.email-notification-subject-field' )[0];
-
-				var emailNotificationSubjectType = this.el.querySelectorAll( '.form-email-notification-subject-type' )[0];
-
-				var emailNotificationFromName = this.el.querySelectorAll( '.email-notification-from-name' )[0];
-
-				var emailNotificationFromNameField = this.el.querySelectorAll( '.email-notification-from-name-field' )[0];
-
-				var emailNotificationFromNameType = this.el.querySelectorAll( '.form-email-notification-from-name-type' )[0];
-
-				if ( parseInt( sendEmailNotifications ) ) {
-					for ( i = 0; i < emailNotificationSettings.length; i++ ) {
-						emailNotificationSettings[i].style.display = 'block';
-					}
-
-					emailNotificationFromAddress.style.display = 'none';
-					emailNotificationFromField.style.display = 'none';
-
-					if ( 'custom' === emailNotificationFromType.value ) {
-						emailNotificationFromAddress.style.display = 'block';
-					} else if ( 'field' === emailNotificationFromType.value ) {
-						emailNotificationFromField.style.display = 'block';
-					}
-
-					emailNotificationSubject.style.display = 'none';
-					emailNotificationSubjectField.style.display = 'none';
-
-					if ( 'custom' === emailNotificationSubjectType.value ) {
-						emailNotificationSubject.style.display = 'block';
-					} else if ( 'field' === emailNotificationSubjectType.value ) {
-						emailNotificationSubjectField.style.display = 'block';
-					}
-
-					emailNotificationFromName.style.display = 'none';
-					emailNotificationFromNameField.style.display = 'none';
-
-					if ( 'custom' === emailNotificationFromNameType.value ) {
-						emailNotificationFromName.style.display = 'block';
-					} else if ( 'field' === emailNotificationFromNameType.value ) {
-						emailNotificationFromNameField.style.display = 'block';
-					}
-				} else {
-					for ( i = 0; i < emailNotificationSettings.length; i++ ) {
-						emailNotificationSettings[i].style.display = 'none';
-					}
-
-					emailNotificationFromAddress.style.display = 'none';
-					emailNotificationFromField.style.display = 'none';
-
-					emailNotificationSubject.style.display = 'none';
-					emailNotificationSubjectField.style.display = 'none';
-
-					emailNotificationFromName.style.display = 'none';
-					emailNotificationFromNameField.style.display = 'none';
-				}
-			},
-
-			save: function( $promise ) {
-				var SELF = this;
-
+			fullSave: function( $promise ) {
 				if ( this.el.innerHTML === '' ) {
 					// @todo: for some reason this is needed for IE8
 					return;
 				}
 
-				var sendEmailNotifications = this.el.querySelectorAll( '.form-send-email-notifications' )[0].value;
-				this.model.set( 'sendEmailNotifications', ( parseInt( sendEmailNotifications ) ) ? true : false );
+				this.save();
 
-				var emailNotificationAddresses = this.el.querySelectorAll( '.form-email-notification-addresses' )[0].value;
-				this.model.set( 'emailNotificationAddresses', emailNotificationAddresses );
+				_.each( this.notificationViews, function( view ) {
+					view.save();
+				} );
 
-				var emailNotificationFromType = this.el.querySelectorAll( '.form-email-notification-from-type' )[0].value;
-				this.model.set( 'emailNotificationFromType', emailNotificationFromType );
-
-				var emailNotificationFromAddress = this.el.querySelectorAll( '.form-email-notification-from-address' )[0].value;
-				this.model.set( 'emailNotificationFromAddress', emailNotificationFromAddress );
-
-				var emailNotificationFromField = this.el.querySelectorAll( '.form-email-notification-from-field' )[0].value;
-				this.model.set( 'emailNotificationFromField', emailNotificationFromField );
-
-				var emailNotificationFromNameType = this.el.querySelectorAll( '.form-email-notification-from-name-type' )[0].value;
-				this.model.set( 'emailNotificationFromNameType', emailNotificationFromNameType );
-
-				var emailNotificationFromName = this.el.querySelectorAll( '.form-email-notification-from-name' )[0].value;
-				this.model.set( 'emailNotificationFromName', emailNotificationFromName );
-
-				var emailNotificationFromNameField = this.el.querySelectorAll( '.form-email-notification-from-name-field' )[0].value;
-				this.model.set( 'emailNotificationFromNameField', emailNotificationFromNameField );
-
-				var emailNotificationSubjectType = this.el.querySelectorAll( '.form-email-notification-subject-type' )[0].value;
-				this.model.set( 'emailNotificationSubjectType', emailNotificationSubjectType );
-
-				var emailNotificationSubject = this.el.querySelectorAll( '.form-email-notification-subject' )[0].value;
-				this.model.set( 'emailNotificationSubject', emailNotificationSubject );
-
-				var emailNotificationSubjectField = this.el.querySelectorAll( '.form-email-notification-subject-field' )[0].value;
-				this.model.set( 'emailNotificationSubjectField', emailNotificationSubjectField );
+				_.each( this.mappingViews, function( view ) {
+					view.save();
+				} );
 
 				if ( typeof $promise !== 'undefined' && typeof $promise.promise !== 'undefined' ) {
 					$promise.resolve();
+				}
+			},
+
+			destroy: function() {
+				wp.ccf.dispatcher.off( 'saveFormSettings', this.fullSave );
+				wp.ccf.dispatcher.off( 'mainViewChange', this.fullSave );
+			},
+
+			deleteNotification: function( view ) {
+				_.each( this.notificationViews, function( currentView ) {
+					if ( view.cid === currentView.cid ) {
+						var index = _.indexOf( this.notificationViews, currentView );
+						this.model.get( 'notifications' ).remove( view.model );
+						this.notificationViews[index].remove();
+						this.notificationViews.splice( index, 1 );
+					}
+				}, this );
+
+				if ( ! this.notificationViews.length ) {
+					var rowContainer = this.el.querySelectorAll( '.ccf-form-notifications .rows' )[0];
+					rowContainer.appendChild( new wp.ccf.views.EmptyFormNotificationTableRow( { form: this.model } ).render().el );
 				}
 			},
 
@@ -2014,16 +3102,47 @@
 				};
 
 				var fields = this.model.get( 'fields' );
+				var notifications = this.model.get( 'notifications' );
 
 				this.el.innerHTML = this.template( context );
 
-				this.toggleNotificationFields();
-				this.updateFromFieldField();
+				this.toggleCompletionFields();
+				this.togglePostCreationFields();
+				this.togglePauseFields();
 
-				wp.ccf.dispatcher.on( 'saveFormNotifications', this.save, this );
-				wp.ccf.dispatcher.on( 'mainViewChange', this.save, this );
-				this.listenTo( fields, 'add', this.updateFromFieldField, this );
-				this.listenTo( fields, 'remove', this.updateFromFieldField, this );
+				var rowContainer = this.el.querySelectorAll( '.ccf-form-notifications .rows' )[0];
+				var newRowContainer = document.createElement( 'tbody');
+
+				newRowContainer.className = 'rows';
+
+				if ( notifications.length >= 1 ) {
+					notifications.each( function( model ) {
+						var row = new wp.ccf.views.ExistingFormNotificationRow( { model: model, form: this.model, parent: this } ).render();
+						newRowContainer.appendChild( row.el );
+						this.notificationViews.push( row );
+					}, this );
+				} else {
+					newRowContainer.appendChild( new wp.ccf.views.EmptyFormNotificationTableRow( { form: this.model } ).render().el );
+				}
+
+				rowContainer.parentNode.replaceChild( newRowContainer, rowContainer );
+
+				var mappingsContainer = this.el.querySelectorAll( '.post-creation-mapping' )[0];
+				var mappings = this.model.get( 'postFieldMappings' );
+
+				if ( mappings.length >= 1 ) {
+					mappings.each( function( model ) {
+						var mapping = new wp.ccf.views.PostFieldMapping( { model: model, parent: this, form: this.model } ).render();
+						mappingsContainer.appendChild( mapping.el );
+						this.mappingViews.push( mapping );
+					}, this );
+				} else {
+					var newMapping = new wp.ccf.models.PostFieldMapping();
+					mappings.add( newMapping );
+				}
+
+				wp.ccf.dispatcher.on( 'mainViewChange', this.fullSave, this );
+				wp.ccf.dispatcher.on( 'saveFormSettings', this.fullSave, this );
 
 				return this;
 			}
@@ -2035,13 +3154,14 @@
 			template: wp.ccf.utils.template( 'ccf-form-pane-template' ),
 			subViews: {
 				'field-sidebar': wp.ccf.views.FieldSidebar,
-				'form-settings': wp.ccf.views.FormSettings,
-				'form-notifications': wp.ccf.views.FormNotifications
+				'form-settings': wp.ccf.views.FormSettings
 			},
 
 			events: {
 				'click .save-button': 'sync',
-				'click h2': 'accordionClick',
+				'click .signup-button': 'signup',
+				'click .accordion-heading': 'accordionClick',
+				'click .form-settings-heading': 'accordionClick',
 				'click .insert-form-button': 'insertForm'
 			},
 
@@ -2053,6 +3173,27 @@
 				wp.ccf.utils.insertFormShortcode( this.model );
 
 				wp.ccf.toggle();
+			},
+
+			signup: function( event ) {
+				var email = this.el.querySelectorAll( '.email-signup-field' )[0].value;
+				var signupContainer = this.el.querySelectorAll( '.bottom .left.signup' )[0];
+				signupContainer.className = 'left signup';
+
+				if (email) {
+					$.ajax( {
+						url: '//taylorlovett.us8.list-manage.com/subscribe/post-json?u=66118f9a5b0ab0414e83f043a&amp;id=b4ed816a24&c=?',
+						method: 'post',
+						dataType: 'jsonp',
+						data: {
+							EMAIL: email
+						}
+					}).done(function() {
+						signupContainer.className = 'left signup signup-success';
+					});
+				} else {
+					signupContainer.className = 'left signup signup-error';
+				}
 			},
 
 			accordionClick: function( event ) {
@@ -2071,6 +3212,16 @@
 						section.className = section.className.replace( /expanded/i, '' );
 					}
 				});
+
+				if ( event.currentTarget.className.match( /form-settings-heading/i ) ) {
+					if ( this.el.className.match( /show-form-settings/i ) ) {
+						this.el.className = this.el.className.replace( /show-form-settings/i, '' );
+					} else {
+						this.el.className += ' show-form-settings';
+					}
+				} else {
+					this.el.className = this.el.className.replace( /show-form-settings/i, '' );
+				}
 			},
 
 			openEditField: function( field ) {
@@ -2096,13 +3247,11 @@
 
 				var $settings = $.Deferred();
 				var $field = $.Deferred();
-				var $notifications = $.Deferred();
 
 				wp.ccf.dispatcher.trigger( 'saveFormSettings', $settings );
-				wp.ccf.dispatcher.trigger( 'saveFormNotifications', $notifications );
 				wp.ccf.dispatcher.trigger( 'saveField', $field );
 
-				$.when( $settings, $field, $notifications ).then( function() {
+				$.when( $settings, $field ).then( function() {
 					var fields = SELF.model.get( 'fields' );
 					var allReqsMet = true;
 					var slugs = {};
@@ -2140,7 +3289,7 @@
 							wp.ccf.errorModal.render( messageType ).show();
 						}).done( function( response ) {
 							if (ccfSettings.single && ! ccfSettings.postId ) {
-								window.location = ccfSettings.adminUrl + 'post.php?post=' + SELF.model.get( 'ID' ) + '&action=edit#ccf-form/' + SELF.model.get( 'ID' );
+								window.location = ccfSettings.adminUrl + 'post.php?post=' + SELF.model.get( 'id' ) + '&action=edit#ccf-form/' + SELF.model.get( 'id' );
 							}
 						}).complete( function( response ) {
 							$spinner.fadeOut();
@@ -2157,7 +3306,7 @@
 
 			enableDisableInsert: function() {
 				var insertButton = this.el.querySelectorAll( '.insert-form-button' )[0];
-				if ( this.model.get( 'ID' ) ) {
+				if ( this.model.get( 'id' ) ) {
 					insertButton.removeAttribute( 'disabled' );
 				} else {
 					insertButton.setAttribute( 'disabled', 'disabled' );
@@ -2204,6 +3353,8 @@
 				window.form = SELF.model;
 
 				SELF.el.innerHTML = this.template( context );
+
+				SELF.el.className = SELF.el.className.replace( /show-form-settings/i, '' );
 
 				var fields = SELF.el.querySelectorAll( '.fields' )[0];
 
@@ -2281,7 +3432,7 @@
 
 				});
 
-				SELF.initRenderSubViews( true, true, { form: SELF.model } );
+				SELF.initRenderSubViews( false, true, { form: SELF.model } );
 
 				SELF.enableDisableInsert();
 
@@ -2831,6 +3982,7 @@
 		}
 	);
 })( jQuery, Backbone, _, ccfSettings );
+
 ( function( $, Backbone, _, ccfSettings ) {
 	'use strict';
 
@@ -2884,7 +4036,7 @@
 			if ( +form === parseInt( form ) ) {
 				var formId = parseInt( form );
 
-				form = SELF.forms.findWhere( { ID: parseInt( formId ) } );
+				form = SELF.forms.findWhere( { id: parseInt( formId ) } );
 
 				if ( ! form ) {
 					var $deferred;
@@ -2893,7 +4045,7 @@
 						$deferred = SELF.forms.formsFetching[formId];
 						form = null;
 					} else {
-						form = new wp.ccf.models.Form( { ID: formId } );
+						form = new wp.ccf.models.Form( { id: formId } );
 						$deferred = form.fetch();
 						SELF.forms.formsFetching[formId] = $deferred;
 					}
@@ -2903,7 +4055,7 @@
 							delete SELF.forms.formsFetching[formId];
 							SELF.forms.add( form );
 						} else {
-							form = SELF.forms.findWhere( { ID: formId } );
+							form = SELF.forms.findWhere( { id: formId } );
 						}
 
 						SELF.currentForm = form;
@@ -2992,7 +4144,7 @@
 
 					if ( typeof SELF.forms.formsFetching[formId] === 'undefined' ) {
 
-						var form = new wp.ccf.models.Form( { ID: formId } );
+						var form = new wp.ccf.models.Form( { id: formId } );
 						var $deferred = form.fetch();
 						SELF.forms.formsFetching[formId] = $deferred;
 						SELF._currentFormDeferred = $deferred;
@@ -3006,7 +4158,7 @@
 						SELF._currentFormDeferred = SELF.forms.formsFetching[formId];
 
 						SELF._currentFormDeferred.done( function() {
-							SELF.currentForm = SELF.forms.findWhere( { 'ID': formId } );
+							SELF.currentForm = SELF.forms.findWhere( { id: formId } );
 						});
 					}
 
