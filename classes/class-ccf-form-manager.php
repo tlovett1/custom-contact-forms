@@ -746,6 +746,31 @@ class CCF_Form_Manager {
 			</div>
 		</script>
 
+		<script type="text/html" id="ccf-simple-captcha-template">
+			<div class="accordion-section <# if ( 'basic' === startPanel ) { #>expanded<# } #>">
+				<a class="accordion-heading">Basic</a>
+				<div class="section-content">
+					<div>
+						<label for="ccf-field-label"><?php esc_html_e( 'Label:', 'custom-contact-forms' ); ?></label>
+						<input id="ccf-field-label" class="field-label" type="text" value="{{ field.label }}">
+					</div>
+					<div>
+						<label for="ccf-field-description"><?php esc_html_e( 'Description:', 'custom-contact-forms' ); ?></label>
+						<textarea id="ccf-field-description" class="field-description">{{ field.description }}</textarea>
+					</div>
+				</div>
+			</div>
+			<div class="accordion-section <# if ( 'advanced' === startPanel ) { #>expanded<# } #>">
+				<a class="accordion-heading"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></a>
+				<div class="section-content">
+					<div>
+						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
+						<input id="ccf-field-class-name" class="field-class-name" type="text" value="{{ field.className }}">
+					</div>
+				</div>
+			</div>
+		</script>
+
 		<script type="text/html" id="ccf-website-template">
 			<div class="accordion-section <# if ( 'basic' === startPanel ) { #>expanded<# } #>">
 				<a class="accordion-heading">Basic</a>
@@ -1657,6 +1682,14 @@ class CCF_Form_Manager {
 		<script type="text/html" id="ccf-recaptcha-preview-template">
 			<label>{{ field.label }} <# if ( field.required ) { #><span class="required">*</span><# } #> <# if ( field.conditionalsEnabled ) { #><span class="conditionals-enabled">if</span><# } #></label>
 			<img class="recaptcha-preview-img" src="<?php echo plugins_url( 'img/recaptcha.png', dirname( __FILE__ ) ); ?>">
+			<# if ( field.description ) { #>
+				<div class="field-description">{{ field.description }}</div>
+			<# } #>
+		</script>
+
+		<script type="text/html" id="ccf-simple-captcha-preview-template">
+			<label>{{ field.label }} <# if ( field.required ) { #><span class="required">*</span><# } #> <# if ( field.conditionalsEnabled ) { #><span class="conditionals-enabled">if</span><# } #></label>
+			<img class="recaptcha-preview-img" src="<?php echo plugins_url( 'img/simple-captcha.png', dirname( __FILE__ ) ); ?>">
 			<# if ( field.description ) { #>
 				<div class="field-description">{{ field.description }}</div>
 			<# } #>
