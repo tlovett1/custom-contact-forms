@@ -1698,8 +1698,8 @@ class CCF_Form_Manager {
 		</script>
 
 		<script type="text/html" id="ccf-simple-captcha-preview-template">
-			<label>{{ field.label }} <# if ( field.required ) { #><span class="required">*</span><# } #> <# if ( field.conditionalsEnabled ) { #><span class="conditionals-enabled">if</span><# } #></label>
-			<img class="recaptcha-preview-img" src="<?php echo plugins_url( 'img/simple-captcha.png', dirname( __FILE__ ) ); ?>">
+			<label>{{ field.label }} <# if ( field.required ) { #><span class="required">*</span><# } #></label>
+			<img class="simple-captcha-preview-img" src="<?php echo plugins_url( 'assets/img/simple-captcha.png', dirname( __FILE__ ) ); ?>">
 			<# if ( field.description ) { #>
 				<div class="field-description">{{ field.description }}</div>
 			<# } #>
@@ -2235,6 +2235,7 @@ class CCF_Form_Manager {
 				'address' => __( 'Address', 'custom-contact-forms' ),
 				'phone' => __( 'Phone', 'custom-contact-forms' ),
 				'recaptcha' => __( 'reCAPTCHA', 'custom-contact-forms' ),
+				'simple-captcha' => __( 'Simple CAPTCHA', 'custom-contact-forms' ),
 			));
 
 			wp_register_script( 'moment', plugins_url( '/bower_components/moment/moment.js', dirname( __FILE__ ) ), array(), CCF_VERSION );
@@ -2277,7 +2278,7 @@ class CCF_Form_Manager {
 				'fieldLabel' => esc_html__( 'Field Label', 'custom-contact-forms' ),
 				'thickboxTitle' => esc_html__( 'Form Submission', 'custom-contact-forms' ),
 				'pauseMessage' => esc_html__( 'This form is paused right now. Check back later!', 'custom-contact-forms' ),
-				'skipFields' => apply_filters( 'ccf_no_submission_display_fields', array( 'html', 'section-header', 'recaptcha' ) ),
+				'skipFields' => apply_filters( 'ccf_no_submission_display_fields', array( 'html', 'section-header', 'recaptcha', 'simple-captcha' ) ),
 				'choosePostField' => esc_html__( 'Choose a Post Field', 'custom-contact-forms' ),
 				'postFields' => array(
 					'single' => array(

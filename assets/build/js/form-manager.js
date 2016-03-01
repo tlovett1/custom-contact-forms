@@ -963,6 +963,24 @@
 		}
 	);
 
+	wp.ccf.models.Fields['simple-captcha'] = wp.ccf.models.Fields['simple-captcha'] || wp.ccf.models.StandardField.extend(
+		{
+			defaults: function() {
+				var defaults = {
+					type: 'recaptcha'
+				};
+
+				return _.defaults( defaults, this.constructor.__super__.defaults() );
+			},
+
+			isImmutable: true,
+
+			initialize: function() {
+				return this.constructor.__super__.initialize.apply( this, arguments );
+			}
+		}
+	);
+
 	wp.ccf.models.Fields.address = wp.ccf.models.Fields.address || wp.ccf.models.StandardField.extend(
 		{
 			defaults: function() {
@@ -1382,7 +1400,7 @@
 						if ( this.field.get( 'slug' ) !== field.get( 'slug' ) ) {
 							var type = field.get( 'type' );
 
-							if ( 'address' !== type && 'checkboxes' !== type && 'date' !== type && 'name' !== type && 'file' !== type && 'recaptcha' !== type && 'section-header' !== type && 'html' !== type ) {
+							if ( 'address' !== type && 'checkboxes' !== type && 'date' !== type && 'name' !== type && 'file' !== type && 'recaptcha' !== type && 'simple-captcha' !== type && 'section-header' !== type && 'html' !== type ) {
 								option = document.createElement( 'option' );
 								option.innerHTML = field.get( 'slug' );
 								option.value = field.get( 'slug' );
@@ -1708,7 +1726,7 @@
 				fields.each( function( field ) {
 					type = field.get( 'type' );
 
-					if ( 'html' !== type && 'section-header' !== type && 'recaptcha' !== type ) {
+					if ( 'html' !== type && 'section-header' !== type && 'recaptcha' !== type && 'simple-captcha' !== type ) {
 						variablesText += '[' + field.get( 'slug' ) + '] ';
 					}
 				} );
@@ -2130,6 +2148,27 @@
 				this.model.set( 'description', this.el.querySelectorAll( '.field-description' )[0].value );
 				this.model.set( 'siteKey', this.el.querySelectorAll( '.field-site-key' )[0].value );
 				this.model.set( 'secretKey', this.el.querySelectorAll( '.field-secret-key' )[0].value );
+				this.model.set( 'className', this.el.querySelectorAll( '.field-class-name' )[0].value );
+
+				this.constructor.__super__.saveField.apply( this, arguments );
+
+				return this;
+			}
+		}
+	);
+
+	wp.ccf.views.Fields['simple-captcha'] = wp.ccf.views.Fields['simple-captcha'] || wp.ccf.views.FieldBase.extend(
+		{
+			template: wp.ccf.utils.template( 'ccf-simple-captcha-template' ),
+
+			saveField: function() {
+				// @todo: fix this ie8 hack
+				if ( this.el.innerHTML === '' ) {
+					return;
+				}
+
+				this.model.set( 'label', this.el.querySelectorAll( '.field-label' )[0].value );
+				this.model.set( 'description', this.el.querySelectorAll( '.field-description' )[0].value );
 				this.model.set( 'className', this.el.querySelectorAll( '.field-class-name' )[0].value );
 
 				this.constructor.__super__.saveField.apply( this, arguments );

@@ -1,6 +1,3 @@
 node_modules
 .sass-cache
-tests/codeception/_output/*
-tests/codeception/acceptance/AcceptanceTester.php
-vendor
 .DS_Store

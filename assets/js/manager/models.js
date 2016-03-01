@@ -698,6 +698,24 @@
 		}
 	);
 
+	wp.ccf.models.Fields['simple-captcha'] = wp.ccf.models.Fields['simple-captcha'] || wp.ccf.models.StandardField.extend(
+		{
+			defaults: function() {
+				var defaults = {
+					type: 'recaptcha'
+				};
+
+				return _.defaults( defaults, this.constructor.__super__.defaults() );
+			},
+
+			isImmutable: true,
+
+			initialize: function() {
+				return this.constructor.__super__.initialize.apply( this, arguments );
+			}
+		}
+	);
+
 	wp.ccf.models.Fields.address = wp.ccf.models.Fields.address || wp.ccf.models.StandardField.extend(
 		{
 			defaults: function() {
