@@ -206,6 +206,7 @@
 					postFieldMappings: new wp.ccf.collections.PostFieldMappings(),
 					notifications: new wp.ccf.collections.FormNotifications(),
 					pause: false,
+					requireLoggedIn: false,
 					pauseMessage: ccfSettings.pauseMessage,
 					theme: 'none'
 				};

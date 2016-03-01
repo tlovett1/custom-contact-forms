@@ -27,6 +27,7 @@ Custom Contact Forms enables you to build forms and manage submissions the WordP
 * Multiple themes to choose from
 * No custom database tables
 * Easy form duplication
+* Only show forms to logged in users
 * Forms can show customizable completion text or redirect to a URL.
 * Temporarily pause forms with a customizable pause message.
 * Create and manage multiple notifications for each form. Notifications can send emails to one or more administrators or form submittors. Customize notification email subject, from email address, from email name, and email body. Map form fields to email subject, from name, and from email address. Easily activate and deactivate notifications.

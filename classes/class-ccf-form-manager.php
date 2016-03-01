@@ -396,6 +396,14 @@ class CCF_Form_Manager {
 				<label for="ccf_form_pause_message"><?php esc_html_e( 'Pause Message:', 'custom-contact-forms' ); ?></label>
 				<textarea class="widefat form-pause-message" id="ccf_form_pause_message" name="pause-message">{{ form.pauseMessage }}</textarea>
 			</p>
+			<p>
+				<label for="ccf_form_require_logged_in"><?php esc_html_e( 'Require User to Be Logged In:', 'custom-contact-forms' ); ?></label>
+
+				<select name="form_require_logged_in" class="form-require-logged-in" id="ccf_form_require_logged_in">
+					<option value="0"><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
+					<option value="1" <# if ( form.requireLoggedIn ) { #>selected<# } #>><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
+				</select>
+			</p>
 
 			<h3><?php esc_html_e( 'Email Notifications', 'custom-contact-forms' ); ?></h3>
 
@@ -626,7 +634,7 @@ class CCF_Form_Manager {
 					</div>
 					<div>
 						<label for="ccf-field-file-extensions"><?php esc_html_e( 'Allowed File Extensions (comma separate):', 'custom-contact-forms' ); ?></label>
-						<input id="ccf-field-file-extensions" class="field-file-extensions" type="text" value="{{ field.fileExtensions }}">
+						<input id="ccf-field-file-extensions" class="field-file-extensions" type="text" value="{{ field.fileExtensions }}" placeholder="jpg,gif,png">
 						<span class="explain"><?php _e( 'If left blank, will default to all extensions registered by WordPress. If you use a file extension or mime type not <a href="http://codex.wordpress.org/Function_Reference/get_allowed_mime_types">whitelisted by WordPress</a>, you will need to filter and manually whitelist the new extension.', 'custom-contact-forms' ); ?></span>
 					</div>
 					<div>
@@ -733,6 +741,31 @@ class CCF_Form_Manager {
 						<?php esc_html_e( 'of these conditions are true:', 'custom-contact-forms' ); ?>
 					</div>
 					<div class="conditionals <# if ( ! field.conditionalsEnabled ) { #>hide<# } #>">
+					</div>
+				</div>
+			</div>
+		</script>
+
+		<script type="text/html" id="ccf-simple-captcha-template">
+			<div class="accordion-section <# if ( 'basic' === startPanel ) { #>expanded<# } #>">
+				<a class="accordion-heading">Basic</a>
+				<div class="section-content">
+					<div>
+						<label for="ccf-field-label"><?php esc_html_e( 'Label:', 'custom-contact-forms' ); ?></label>
+						<input id="ccf-field-label" class="field-label" type="text" value="{{ field.label }}">
+					</div>
+					<div>
+						<label for="ccf-field-description"><?php esc_html_e( 'Description:', 'custom-contact-forms' ); ?></label>
+						<textarea id="ccf-field-description" class="field-description">{{ field.description }}</textarea>
+					</div>
+				</div>
+			</div>
+			<div class="accordion-section <# if ( 'advanced' === startPanel ) { #>expanded<# } #>">
+				<a class="accordion-heading"><?php esc_html_e( 'Advanced', 'custom-contact-forms' ); ?></a>
+				<div class="section-content">
+					<div>
+						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
+						<input id="ccf-field-class-name" class="field-class-name" type="text" value="{{ field.className }}">
 					</div>
 				</div>
 			</div>
@@ -1659,6 +1692,14 @@ class CCF_Form_Manager {
 		<script type="text/html" id="ccf-recaptcha-preview-template">
 			<label>{{ field.label }} <# if ( field.required ) { #><span class="required">*</span><# } #> <# if ( field.conditionalsEnabled ) { #><span class="conditionals-enabled">if</span><# } #></label>
 			<img class="recaptcha-preview-img" src="<?php echo plugins_url( 'assets/img/recaptcha.png', dirname( __FILE__ ) ); ?>">
+			<# if ( field.description ) { #>
+				<div class="field-description">{{ field.description }}</div>
+			<# } #>
+		</script>
+
+		<script type="text/html" id="ccf-simple-captcha-preview-template">
+			<label>{{ field.label }} <# if ( field.required ) { #><span class="required">*</span><# } #> <# if ( field.conditionalsEnabled ) { #><span class="conditionals-enabled">if</span><# } #></label>
+			<img class="recaptcha-preview-img" src="<?php echo plugins_url( 'img/simple-captcha.png', dirname( __FILE__ ) ); ?>">
 			<# if ( field.description ) { #>
 				<div class="field-description">{{ field.description }}</div>
 			<# } #>
