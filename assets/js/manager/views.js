@@ -1797,6 +1797,9 @@
 				var pause = this.el.querySelectorAll( '.form-pause' )[0].value;
 				this.model.set( 'pause', ( parseInt( pause ) ) ? true : false );
 
+				var requireLoggedIn = this.el.querySelectorAll( '.form-require-logged-in' )[0].value;
+				this.model.set( 'requireLoggedIn', ( parseInt( requireLoggedIn ) ) ? true : false );
+
 				var postCreation = this.el.querySelectorAll( '.form-post-creation' )[0].value;
 				this.model.set( 'postCreation', ( parseInt( postCreation ) ) ? true : false );
 

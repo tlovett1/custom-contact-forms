@@ -159,13 +159,21 @@ class CCF_Form_Renderer {
 
 		$pause = get_post_meta( $form_id, 'ccf_form_pause', true );
 
+		$require_logged_in = get_post_meta( $form_id, 'ccf_form_require_logged_in', true );
+
 		if ( empty( $fields ) ) {
 			return '';
 		}
 
 		ob_start();
 
-		if ( ! empty( $pause ) ) {
+		if ( ! empty( $require_logged_in ) && ! is_user_logged_in() ) {
+			?>
+			<div class="ccf-form-require-logged-in form-id-<?php echo (int) $form_id; ?>">
+				<?php esc_html_e( 'Log in to view this form.', 'custom-contact-forms' ); ?>
+			</div>
+			<?php
+		} elseif ( ! empty( $pause ) ) {
 			$pause_message = get_post_meta( $form_id, 'ccf_form_pause_message', true );
 			?>
 

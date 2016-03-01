@@ -396,6 +396,14 @@ class CCF_Form_Manager {
 				<label for="ccf_form_pause_message"><?php esc_html_e( 'Pause Message:', 'custom-contact-forms' ); ?></label>
 				<textarea class="widefat form-pause-message" id="ccf_form_pause_message" name="pause-message">{{ form.pauseMessage }}</textarea>
 			</p>
+			<p>
+				<label for="ccf_form_require_logged_in"><?php esc_html_e( 'Require User to Be Logged In:', 'custom-contact-forms' ); ?></label>
+
+				<select name="form_require_logged_in" class="form-require-logged-in" id="ccf_form_require_logged_in">
+					<option value="0"><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
+					<option value="1" <# if ( form.requireLoggedIn ) { #>selected<# } #>><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
+				</select>
+			</p>
 
 			<h3><?php esc_html_e( 'Email Notifications', 'custom-contact-forms' ); ?></h3>
 
