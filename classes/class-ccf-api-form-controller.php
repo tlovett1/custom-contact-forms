@@ -397,8 +397,10 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 		$clean_conditionals = array();
 
 		for ( $index = 0; $index < count( $conditionals ); $index++ ) {
-			foreach ( $conditionals[ $index ] as $conditional_key => $conditional_value ) {
-				$clean_conditionals[ $index ][ $conditional_key ] = sanitize_text_field( $conditional_value );
+			if ( ! empty( $conditionals[ $index ]['field'] ) && ! empty( $conditionals[ $index ]['compare'] ) ) {
+				foreach ( $conditionals[ $index ] as $conditional_key => $conditional_value ) {
+					$clean_conditionals[ $index ][ $conditional_key ] = sanitize_text_field( $conditional_value );
+				}
 			}
 		}
 
