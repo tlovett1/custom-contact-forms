@@ -32,6 +32,9 @@ class CCF_Form_Handler {
 			'recaptcha' => array(
 				'validator' => array( $this, 'valid_recaptcha' ),
 			),
+			'simple-captcha' => array(
+				'validator' => array( $this, 'valid_simple_captcha' ),
+			),
 			'paragraph-text' => array(
 				'sanitizer' => 'sanitize_text_field',
 				'validator' => array( $this, 'not_empty' ),
@@ -262,6 +265,25 @@ class CCF_Form_Handler {
 
 		if ( empty( $data->success ) ) {
 			return array( 'recaptcha' => esc_html__( 'Your reCAPTCHA response was incorrect.', 'custom-contact-forms' ) );
+		}
+
+		return true;
+	}
+
+	/**
+	 * Check if simple captcha response is valid
+	 *
+	 * @since  7.7
+	 * @param  string $value
+	 * @param  int $field_id
+	 * @param  boolean $required
+	 * @return boolean|array
+	 */
+	public function valid_simple_captcha( $value, $field_id, $required ) {
+		$slug = get_post_meta( $field_id, 'ccf_field_slug', true );
+
+		if ( empty( $value ) || empty( $_SESSION['ccf_simple_captcha_' . $slug] ) || empty( $_SESSION['ccf_simple_captcha_' . $slug]['code'] ) || strtolower( $_SESSION['ccf_simple_captcha_' . $slug]['code'] ) !== strtolower( trim( $value ) ) ) {
+			return array( 'simple-captcha' => esc_html__( 'Your CAPTCHA response was incorrect.', 'custom-contact-forms' ) );
 		}
 
 		return true;
@@ -551,7 +573,19 @@ class CCF_Form_Handler {
 	 * @since 6.0
 	 */
 	public function setup() {
-		add_action( 'init', array( $this, 'submit_listen' ) );
+		add_action( 'init', array( $this, 'submit_listen' ), 11 );
+		add_action( 'init', array( $this, 'start_session' ) );
+	}
+
+	/**
+	 * Start a session for captcha later
+	 *
+	 * @since  7.7
+	 */
+	public function start_session() {
+		if ( session_id() === '' ) {
+			session_start();
+		}
 	}
 
 	/**
@@ -609,7 +643,7 @@ class CCF_Form_Handler {
 		$submission = array();
 
 		$skip_fields = apply_filters( 'ccf_skip_fields', array( 'html', 'section-header' ), $form->ID );
-		$save_skip_fields = apply_filters( 'ccf_save_skip_fields', array( 'recaptcha' ), $form->ID );
+		$save_skip_fields = apply_filters( 'ccf_save_skip_fields', array( 'recaptcha', 'simple-captcha' ), $form->ID );
 		$file_ids = array();
 		$all_form_fields = array();
 

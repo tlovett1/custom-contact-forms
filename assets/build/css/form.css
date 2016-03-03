@@ -40,6 +40,8 @@
     clear: both; }
     .ccf-form-wrapper .field[data-field-type="recaptcha"] .error, .ccf-form-wrapper .field[data-field-type="file"] .error, .ccf-form-wrapper .field[data-field-type="dropdown"] .error, .ccf-form-wrapper .field[data-field-type="radio"] .error, .ccf-form-wrapper .field[data-field-type="checkboxes"] .error, .ccf-form-wrapper .field[data-field-type="date"] .error {
       float: none; }
+    .ccf-form-wrapper .field .ccf-simple-captcha-wrapper {
+      margin-bottom: 12px; }
     .ccf-form-wrapper .field .field-error-input {
       border: 1px solid #ff0000; }
     .ccf-form-wrapper .field label.main-label {

@@ -702,7 +702,8 @@
 		{
 			defaults: function() {
 				var defaults = {
-					type: 'recaptcha'
+					type: 'simple-captcha',
+					placeholder: ccfSettings.defaultSimpleCaptchaPlaceholder
 				};
 
 				return _.defaults( defaults, this.constructor.__super__.defaults() );

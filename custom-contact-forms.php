@@ -14,7 +14,7 @@
  * Include plugin reqs
  */
 
-define( 'CCF_VERSION', '7.6' );
+define( 'CCF_VERSION', '7.7' );
 
 require_once( dirname( __FILE__ ) . '/classes/class-ccf-constants.php' );
 require_once( dirname( __FILE__ ) . '/classes/class-ccf-custom-contact-forms.php' );

@@ -45,6 +45,8 @@
       clear: both;
       height: 0;
       display: block; }
+    .ccf-form-preview .field .simple-captcha-preview-img {
+      margin-bottom: 7px; }
     .ccf-form-preview .field label {
       display: block; }
     .ccf-form-preview .field .left {

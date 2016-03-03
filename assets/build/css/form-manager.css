@@ -91,6 +91,8 @@
       padding: 10px 20px; }
       .ccf-main-modal .field .preview .recaptcha-preview-img {
         margin-top: 7px; }
+      .ccf-main-modal .field .preview .simple-captcha-preview-img {
+        margin-bottom: 7px; }
       .ccf-main-modal .field .preview .field-description {
         margin-top: 3px;
         clear: left; }

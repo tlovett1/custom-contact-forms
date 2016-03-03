@@ -165,6 +165,16 @@
 		}
 	};
 
+	wp.ccf.validators['simple-captcha'] = wp.ccf.validators['simple-captcha'] || validator( function( input ) {
+		/*if ( input.value ) {
+			var re = /^http(s?)\:\/\/(([a-zA-Z0-9\-\._]+(\.[a-zA-Z0-9\-\._]+)+)|localhost)(\/?)([a-zA-Z0-9\-\.\?\,\'\/\\\+&amp;%\$#_]*)?([\d\w\.\/\%\+\-\=\&amp;\?\:\\\&quot;\'\,\|\~\;]*)$/;
+
+			if ( ! re.test( input.value ) ) {
+				this.errors[input.getAttribute( 'name' )].website = input;
+			}
+		}*/
+	});
+
 	wp.ccf.validators.phone = wp.ccf.validators.phone || validator( false, function() {
 		var phone = this.inputs[0].value;
 

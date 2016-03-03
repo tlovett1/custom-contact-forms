@@ -718,30 +718,6 @@ class CCF_Form_Manager {
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
 						<input id="ccf-field-class-name" class="field-class-name" type="text" value="{{ field.className }}">
 					</div>
-					<div>
-						<label for="ccf-field-conditionals-enabled"><?php esc_html_e( 'Enable Conditional Logic:', 'custom-contact-forms' ); ?></label>
-						<select id="ccf-field-conditionals-enabled" class="field-conditionals-enabled">
-							<option value="0"><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
-							<option value="1" <# if ( field.conditionalsEnabled ) { #>selected="selected"<# } #>><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
-						</select>
-					</div>
-					<div class="<# if ( ! field.conditionalsEnabled ) { #>hide<# } #>">
-						<select class="field-conditional-type">
-							<option value="hide"><?php esc_html_e( 'Hide', 'custom-contact-forms' ); ?></option>
-							<option <# if ( 'show' === field.conditionalType ) { #>selected="selected"<# } #> value="show"><?php esc_html_e( 'Show', 'custom-contact-forms' ); ?></option>
-						</select>
-
-						<?php esc_html_e( 'this field if', 'custom-contact-forms' ); ?>
-
-						<select class="field-conditional-fields-required">
-							<option value="all"><?php esc_html_e( 'All', 'custom-contact-forms' ); ?></option>
-							<option <# if ( 'any' === field.conditionalFieldsRequired ) { #>selected="selected"<# } #> value="any"><?php esc_html_e( 'Any', 'custom-contact-forms' ); ?></option>
-						</select>
-
-						<?php esc_html_e( 'of these conditions are true:', 'custom-contact-forms' ); ?>
-					</div>
-					<div class="conditionals <# if ( ! field.conditionalsEnabled ) { #>hide<# } #>">
-					</div>
 				</div>
 			</div>
 		</script>
@@ -766,6 +742,10 @@ class CCF_Form_Manager {
 					<div>
 						<label for="ccf-field-class-name"><?php esc_html_e( 'Class Name:', 'custom-contact-forms' ); ?></label>
 						<input id="ccf-field-class-name" class="field-class-name" type="text" value="{{ field.className }}">
+					</div>
+					<div>
+						<label for="ccf-field-placeholder"><?php esc_html_e( 'Placeholder Text:', 'custom-contact-forms' ); ?></label>
+						<input id="ccf-field-placeholder" class="field-placeholder" type="text" value="{{ field.placeholder }}">
 					</div>
 				</div>
 			</div>
@@ -1700,6 +1680,8 @@ class CCF_Form_Manager {
 		<script type="text/html" id="ccf-simple-captcha-preview-template">
 			<label>{{ field.label }} <# if ( field.required ) { #><span class="required">*</span><# } #></label>
 			<img class="simple-captcha-preview-img" src="<?php echo plugins_url( 'assets/img/simple-captcha.png', dirname( __FILE__ ) ); ?>">
+			
+			<input disabled type="text" placeholder="{{ field.placeholder }}" value="{{ field.value }}">
 			<# if ( field.description ) { #>
 				<div class="field-description">{{ field.description }}</div>
 			<# } #>
@@ -2267,6 +2249,7 @@ class CCF_Form_Manager {
 				'postsPerPage' => (int) get_option( 'posts_per_page' ),
 				'structureFieldLabels' => $structure_field_labels,
 				'specialFieldLabels' => $special_field_labels,
+				'defaultSimpleCaptchaPlaceholder' => esc_html__( 'Type the characters in the image', 'custom-contact-forms' ),
 				'maxFileSize' => floor( wp_max_upload_size() / 1000 / 1000 ),
 				'noEmailFields' => esc_html__( 'You have no email fields', 'custom-contact-forms' ),
 				'noAvailableFields' => esc_html__( 'No available fields', 'custom-contact-forms' ),
