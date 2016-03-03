@@ -64,6 +64,10 @@ For full documentation, questions, feature requests, and support concerning the 
 * New CAPTCHA option
 * Fix "0" choice input bug
 * Fix empty conditional bug
+* Reset field renderer bug fixed
+* Guide user for whitelisting file extenions in file field
+* Submit class form option
+* Logged in users only form option
 
 = 7.6 =
 * Form duplication
