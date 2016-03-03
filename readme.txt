@@ -27,6 +27,7 @@ Custom Contact Forms enables you to build forms and manage submissions the WordP
 * Multiple themes to choose from
 * No custom database tables
 * Easy form duplication
+* Multiple types of CAPTCHAs for spam blocking
 * Only show forms to logged in users
 * Forms can show customizable completion text or redirect to a URL.
 * Temporarily pause forms with a customizable pause message.
@@ -58,6 +59,11 @@ Please refer to [Github](http://github.com/tlovett1/custom-contact-forms) for de
 For full documentation, questions, feature requests, and support concerning the Custom Contact Forms plugin, please refer to [Github](http://github.com/tlovett1/custom-contact-forms).
 
 == Changelog ==
+
+= 7.7 =
+* New CAPTCHA option
+* Fix "0" choice input bug
+* Fix empty conditional bug
 
 = 7.6 =
 * Form duplication

@@ -14,7 +14,6 @@ if [ "$input_variable" == "y" ]; then
     rm -rf node_modules > /dev/null 2>&1
     rm -rf scss > /dev/null 2>&1
     rm -rf tests > /dev/null 2>&1
-    rm -rf vendor > /dev/null 2>&1
     rm -rf .sass-cache > /dev/null 2>&1
 
     rm .travis.yml > /dev/null 2>&1
