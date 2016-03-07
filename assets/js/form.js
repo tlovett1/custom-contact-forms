@@ -462,7 +462,6 @@
 					event.preventDefault();
 
 					form.target = 'ccf_form_frame_' + formId;
-					form.action = ccfSettings.ajaxurl;
 					$form.submit();
 
 					return false;
