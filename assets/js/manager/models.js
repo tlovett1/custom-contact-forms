@@ -127,7 +127,7 @@
 				return {
 					title: '',
 					content: '[all_fields]',
-					active: false,
+					active: true,
 					addresses: new wp.ccf.collections.FormNotificationAddresses(),
 					fromType: 'default',
 					fromAddress: '',

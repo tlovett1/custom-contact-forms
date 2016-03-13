@@ -241,8 +241,8 @@ class CCF_Form_Manager {
 							<label for="ccf_form_email_notification_active"><strong><?php esc_html_e( 'Activate Notification:', 'custom-contact-forms' ); ?></strong></label>
 
 							<select name="email_notification_active" class="form-email-notification-active" id="ccf_form_email_notification_active">
-								<option value="0"><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
-								<option value="1" <# if ( notification.active ) { #>selected<# } #>><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
+								<option value="1"><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
+								<option value="0" <# if ( ! notification.active ) { #>selected<# } #>><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
 							</select>
 
 							<span class="explain"><?php esc_html_e( 'Only active notifications will be sent.', 'custom-contact-forms' ); ?></span>
