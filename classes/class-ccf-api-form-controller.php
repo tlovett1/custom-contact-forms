@@ -462,7 +462,7 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 				update_post_meta( $result, 'ccf_form_buttonText', sanitize_text_field( $data['buttonText'] ) );
 			}
 
-			if ( isset( $data['buttonText'] ) ) {
+			if ( isset( $data['buttonClass'] ) ) {
 				update_post_meta( $result, 'ccf_form_buttonClass', sanitize_text_field( $data['buttonClass'] ) );
 			}
 
