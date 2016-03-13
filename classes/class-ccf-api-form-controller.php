@@ -490,6 +490,10 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 				update_post_meta( $result, 'ccf_form_pause', (bool) $data['pause'] );
 			}
 
+			if ( isset( $data['hideTitle'] ) ) {
+				update_post_meta( $result, 'ccf_form_hide_title', (bool) $data['hideTitle'] );
+			}
+
 			if ( isset( $data['requireLoggedIn'] ) ) {
 				update_post_meta( $result, 'ccf_form_require_logged_in', (bool) $data['requireLoggedIn'] );
 			}
@@ -1028,6 +1032,7 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 		$data['completionRedirectUrl'] = esc_url_raw( get_post_meta( $data['id'], 'ccf_form_completion_redirect_url', true ) );
 		$data['completionMessage'] = esc_html( get_post_meta( $data['id'], 'ccf_form_completion_message', true ) );
 		$data['pause'] = (bool) get_post_meta( $data['id'], 'ccf_form_pause', true );
+		$data['hideTitle'] = (bool) get_post_meta( $data['id'], 'ccf_form_hide_title', true );
 		$data['requireLoggedIn'] = (bool) get_post_meta( $data['id'], 'ccf_form_require_logged_in', true );
 		$data['postCreation'] = (bool) get_post_meta( $data['id'], 'ccf_form_post_creation', true );
 		$data['postCreationType'] = esc_html( get_post_meta( $data['id'], 'ccf_form_post_creation_type', true ) );

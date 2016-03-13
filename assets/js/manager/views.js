@@ -1827,6 +1827,9 @@
 				var title = this.el.querySelectorAll( '.form-title' )[0].value;
 				this.model.set( 'title', { raw: title } );
 
+				var hideTitle = this.el.querySelectorAll( '.hide-title' )[0].value;
+				this.model.set( 'hideTitle', ( parseInt( hideTitle ) ) ? true : false );
+
 				var description = this.el.querySelectorAll( '.form-description' )[0].value;
 				this.model.set( 'description', description );
 

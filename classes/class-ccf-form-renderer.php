@@ -244,15 +244,19 @@ class CCF_Form_Renderer {
 			if ( empty( $theme ) ) {
 				$theme = 'default';
 			}
+
+			$hide_title = get_post_meta( $form_id, 'ccf_form_hide_title', true );
 			?>
 
 			<div class="ccf-form-wrapper form-id-<?php echo (int) $form_id; ?>" data-form-id="<?php echo (int) $form_id; ?>">
 				<form <?php if ( $contains_file ) : ?>enctype="multipart/form-data"<?php endif; ?> class="ccf-form ccf-theme-<?php echo esc_attr( $theme ); ?>" method="post" action="" data-form-id="<?php echo (int) $form_id; ?>">
 
-					<?php $title = get_the_title( $form_id ); if ( ! empty( $title ) && apply_filters( 'ccf_show_form_title', true, $form_id ) ) : ?>
-						<div class="form-title">
-							<?php echo $title; ?>
-						</div>
+					<?php if ( empty( $hide_title ) ) : ?>
+						<?php $title = get_the_title( $form_id ); if ( ! empty( $title ) && apply_filters( 'ccf_show_form_title', true, $form_id ) ) : ?>
+							<div class="form-title">
+								<?php echo $title; ?>
+							</div>
+						<?php endif; ?>
 					<?php endif; ?>
 
 					<?php $description = get_post_meta( $form_id, 'ccf_form_description', true ); if ( ! empty( $description ) && apply_filters( 'ccf_show_form_description', true, $form_id ) ) : ?>

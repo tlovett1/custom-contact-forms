@@ -194,6 +194,7 @@
 					fields: new wp.ccf.collections.Fields(),
 					type: 'ccf_form',
 					status: 'publish',
+					hideTitle: false,
 					description: '',
 					buttonText: 'Submit Form',
 					buttonClass: '',

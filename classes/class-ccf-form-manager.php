@@ -342,6 +342,15 @@ class CCF_Form_Manager {
 			</p>
 
 			<p>
+				<label for="ccf_form_hide_title"><?php esc_html_e( 'Hide Form Title:', 'custom-contact-forms' ); ?></label>
+
+				<select name="form_hide_title" class="hide-title" id="ccf_form_hide_title">
+					<option value="0"><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
+					<option value="1" <# if ( form.hideTitle ) { #>selected<# } #>><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
+				</select>
+			</p>
+
+			<p>
 				<label for="ccf_form_description"><?php esc_html_e( 'Form Description:', 'custom-contact-forms' ); ?></label>
 				<textarea class="widefat form-description" id="ccf_form_description" name="description">{{ form.description }}</textarea>
 			</p>
