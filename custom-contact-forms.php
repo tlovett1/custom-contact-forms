@@ -14,6 +14,7 @@
  * Include plugin reqs
  */
 
+
 define( 'CCF_VERSION', '7.8' );
 
 require_once( dirname( __FILE__ ) . '/classes/class-ccf-constants.php' );
