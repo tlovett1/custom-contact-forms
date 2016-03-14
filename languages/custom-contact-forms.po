@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: Custom Contact Forms\n"
 "Report-Msgid-Bugs-To: https://github.com/tlovett1/custom-contact-forms/"
 "issues\n"
-"POT-Creation-Date: 2016-03-13 22:08-0400\n"
-"PO-Revision-Date: 2016-03-13 22:08-0400\n"
+"POT-Creation-Date: 2016-03-14 01:27-0400\n"
+"PO-Revision-Date: 2016-03-14 01:27-0400\n"
 "Last-Translator: Taylor Lovett <tlovett88@gmail.com>\n"
 "Language-Team: \n"
 "Language: en\n"
@@ -22,6 +22,12 @@ msgstr ""
 "esc_html_e;esc_html__;esc_attr__;esc_attr_e\n"
 "X-Textdomain-Support: yes\n"
 "X-Poedit-SearchPath-0: ..\n"
+
+#: ../classes/class-ccf-ads.php:130
+msgid ""
+"We need your support. Please rate Custom Contact Forms five <span alt="
+"\"f155\" class=\"dashicons dashicons-star-filled\"></span>'s"
+msgstr ""
 
 #: ../classes/class-ccf-api-form-controller.php:680
 msgid "Form not found"
