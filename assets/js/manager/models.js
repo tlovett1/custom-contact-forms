@@ -137,7 +137,16 @@
 					subjectField: '',
 					fromNameType: 'custom',
 					fromName: 'WordPress',
-					fromNameField: ''
+					fromNameField: '',
+
+					replyToType: 'default',
+					replyToAddress: '',
+					replyToField: '',
+
+
+					replyToNameType: 'custom',
+					replyToName: 'WordPress',
+					replyToNameField: ''
 				};
 			},
 

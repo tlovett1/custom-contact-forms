@@ -966,6 +966,9 @@ class CCF_Form_Handler {
 						$name = null;
 						$email = null;
 
+						$reply_to_name = null;
+						$reply_to_email = null;
+
 						$sitename = strtolower( $_SERVER['SERVER_NAME'] );
 						if ( substr( $sitename, 0, 4 ) === 'www.' ) {
 							$sitename = substr( $sitename, 4 );
@@ -1002,15 +1005,59 @@ class CCF_Form_Handler {
 							}
 						}
 
+						if ( 'custom' === $notification['replyToNameType'] ) {
+							$reply_to_name = $notification['replyToName'];
+						} else {
+							$name_field = $notification['replyToNameField'];
+
+							if ( ! empty( $name_field ) && ! empty( $submission[ $name_field ] ) ) {
+								if ( is_array( $submission[ $name_field ] ) ) {
+									if ( ! empty( $submission[ $name_field ]['first'] ) || ! empty( $submission[ $name_field ]['last'] ) ) {
+										$reply_to_name = $submission[ $name_field ]['first'] . ' ' . $submission[ $name_field ]['last'];
+									}
+								} else {
+									$reply_to_name = $submission[ $name_field ];
+								}
+							}
+						}
+
+						if ( 'custom' === $notification['replyToType'] ) {
+							$reply_to_email = $notification['replyToAddress'];
+						} elseif ( 'field' === $notification['replyToType'] ) {
+							$email_field = $notification['replyToField'];
+
+							if ( ! empty( $email_field ) && ! empty( $submission[ $email_field ] ) ) {
+								if ( is_array( $submission[ $email_field ] ) && ! empty( $submission[ $email_field ]['confirm'] ) ) {
+									$reply_to_email = $submission[ $email_field ]['confirm'];
+								} else {
+									$reply_to_email = $submission[ $email_field ];
+								}
+							}
+						}
+
+						$reply_to = '';
+
 						if ( ! empty( $name ) && ! empty( $email ) ) {
 							$headers[] = 'From: ' . sanitize_text_field( $name ) . ' <' . sanitize_email( $email ) . '>';
-							$headers[] = 'Reply-To: ' . sanitize_email( $email );
+							$reply_to = 'Reply-To: ' . sanitize_email( $email );
 						} elseif ( ! empty( $name ) && empty( $email ) ) {
 							$headers[] = 'From: ' . sanitize_text_field( $name ) . ' <' . sanitize_email( $default_from_email ) . '>';
 						} elseif ( empty( $name ) && ! empty( $email ) ) {
 							// @Todo: investigate how wp_mail handles From: email
 							$headers[] = 'From: ' . sanitize_email( $email );
-							$headers[] = 'Reply-To: ' . sanitize_email( $email );
+							$reply_to = 'Reply-To: ' . sanitize_email( $email );
+						}
+
+						if ( ! empty( $reply_to_name ) && ! empty( $reply_to_email ) ) {
+							$reply_to = 'Reply-To: ' . sanitize_text_field( $reply_to_name ) . ' <' . sanitize_email( $reply_to_email ) . '>';
+						} elseif ( ! empty( $reply_to_name ) && empty( $reply_to_email ) ) {
+							$reply_to = 'Reply-To: ' . sanitize_text_field( $reply_to_name ) . ' <' . sanitize_email( $default_from_email ) . '>';
+						} elseif ( empty( $reply_to_name ) && ! empty( $reply_to_email ) ) {
+							$reply_to = 'Reply-To: ' . sanitize_email( $reply_to_email );
+						}
+
+						if ( ! empty( $reply_to ) ) {
+							$headers[] = $reply_to;
 						}
 
 						$email_notification_subject_type = $notification['subjectType'];

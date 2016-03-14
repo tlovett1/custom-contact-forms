@@ -248,6 +248,81 @@ class CCF_Form_Manager {
 							<span class="explain"><?php esc_html_e( 'Only active notifications will be sent.', 'custom-contact-forms' ); ?></span>
 						</p>
 
+			
+
+
+
+						<p class="email-notification-setting">
+							<label for="ccf_form_email_notification_reply_to_type"><?php esc_html_e( '"Reply To" Address Type:', 'custom-contact-forms' ); ?></label>
+							<select name="email_notification_reply_to_type" class="form-email-notification-reply-to-type" id="ccf_form_email_notification_reply_to_type">
+								<option value="default"><?php esc_html_e( 'Default', 'custom-contact-forms' ); ?></option>
+								<option value="custom" <# if ( 'custom' === notification.replyToType ) { #>selected<# } #>><?php esc_html_e( 'Custom Email', 'custom-contact-forms' ); ?></option>
+								<option value="field" <# if ( 'field' === notification.replyToType ) { #>selected<# } #>><?php esc_html_e( 'Form Field', 'custom-contact-forms' ); ?></option>
+							</select>
+
+							<span class="explain"><?php esc_html_e( 'You can set the notification emails "reply to" address to be the WP default, a custom email address, or pull the address from a field in the form.', 'custom-contact-forms' ); ?></span>
+						</p>
+
+						<p class="email-notification-reply-to-address">
+							<label for="ccf_form_email_notification_reply_to_address"><?php esc_html_e( 'Custom "Reply To" Email Address:', 'custom-contact-forms' ); ?></label>
+							<input class="widefat form-email-notification-reply-to-address" id="ccf_form_email_notification_reply_to_address" name="email-notification-reply-to-address" value="{{ notification.replyToAddress }}">
+						</p>
+
+						<p class="email-notification-reply-to-field">
+							<label for="ccf_form_email_notification_reply_to_field"><?php esc_html_e( 'Pull "Reply To" Email Dynamically from Field:', 'custom-contact-forms' ); ?></label>
+							<select name="email_notification_reply_to_field" class="form-email-notification-reply-to-field" id="ccf_form_email_notification_reply_to_field">
+							</select>
+						</p>
+
+						<p class="email-notification-setting">
+							<label for="ccf_form_email_notification_reply_to_name_type"><?php esc_html_e( '"Reply To" Name Type:', 'custom-contact-forms' ); ?></label>
+							<select name="email_notification_reply_to_name_type" class="form-email-notification-reply-to-name-type" id="ccf_form_email_notification_reply_to_name_type">
+								<option value="custom"><?php esc_html_e( 'Custom Name', 'custom-contact-forms' ); ?></option>
+								<option value="field" <# if ( 'field' === notification.replyToNameType ) { #>selected<# } #>><?php esc_html_e( 'Form Field', 'custom-contact-forms' ); ?></option>
+							</select>
+
+							<span class="explain"><?php esc_html_e( 'You can set the notification emails "reply to" name to be a custom name or pull the name from a field in the form.', 'custom-contact-forms' ); ?></span>
+						</p>
+
+						<p class="email-notification-reply-to-name">
+							<label for="ccf_form_email_notification_reply_to_name"><?php esc_html_e( '"Reply To" Name:', 'custom-contact-forms' ); ?></label>
+							<input class="widefat form-email-notification-reply-to-name" id="ccf_form_email_notification_reply_to_name" name="email-notification-reply-to-name" value="{{ notification.replyToName }}">
+						</p>
+
+						<p class="email-notification-reply-to-name-field">
+							<label for="ccf_form_email_notification_reply_to_name_field"><?php esc_html_e( 'Pull "Reply To" Name Dynamically from Field:', 'custom-contact-forms' ); ?></label>
+							<select name="email_notification_reply_to_name_field" class="form-email-notification-reply-to-name-field" id="ccf_form_email_notification_reply_to_name_field">
+							</select>
+						</p>
+
+
+
+
+						<p class="email-notification-setting">
+							<label for="ccf_form_email_notification_subject_type"><?php esc_html_e( 'Email Subject Type:', 'custom-contact-forms' ); ?></label>
+							<select name="email_notification_subject_type" class="form-email-notification-subject-type" id="ccf_form_email_notification_subject_type">
+								<option value="default"><?php esc_html_e( 'Default', 'custom-contact-forms' ); ?></option>
+								<option value="custom" <# if ( 'custom' === notification.subjectType ) { #>selected<# } #>><?php esc_html_e( 'Custom Subject', 'custom-contact-forms' ); ?></option>
+								<option value="field" <# if ( 'field' === notification.subjectType ) { #>selected<# } #>><?php esc_html_e( 'Form Field', 'custom-contact-forms' ); ?></option>
+							</select>
+
+							<span class="explain"><?php esc_html_e( 'You can set the notification emails subject line to be the CCF default, custom text, or pull the subject from a field in the form.', 'custom-contact-forms' ); ?></span>
+						</p>
+
+						<p class="email-notification-subject">
+							<label for="ccf_form_email_notification_subject"><?php esc_html_e( 'Custom Email Subject:', 'custom-contact-forms' ); ?></label>
+							<input class="widefat form-email-notification-subject" id="ccf_form_email_notification_subject" name="email-notification-subject" value="{{ notification.subject }}">
+						</p>
+
+						<p class="email-notification-subject-field">
+							<label for="ccf_form_email_notification_subject_field"><?php esc_html_e( 'Pull Email Subject Dynamically from Field:', 'custom-contact-forms' ); ?></label>
+							<select name="email_notification_subject_field" class="form-email-notification-subject-field" id="ccf_form_email_notification_subject_field">
+							</select>
+						</p>
+
+
+						<p><strong><?php esc_html_e( 'We highly recommend leaving the "from" fields below as their defaults to ensure your notification emails get delivered.', 'custom-contact-forms' ); ?></strong></p>
+
 						<p class="email-notification-setting">
 							<label for="ccf_form_email_notification_from_type"><?php esc_html_e( '"From" Email Address Type:', 'custom-contact-forms' ); ?></label>
 							<select name="email_notification_from_type" class="form-email-notification-from-type" id="ccf_form_email_notification_from_type">
@@ -288,28 +363,6 @@ class CCF_Form_Manager {
 						<p class="email-notification-from-name-field">
 							<label for="ccf_form_email_notification_from_name_field"><?php esc_html_e( 'Pull "From" Name Dynamically from Field:', 'custom-contact-forms' ); ?></label>
 							<select name="email_notification_from_name_field" class="form-email-notification-from-name-field" id="ccf_form_email_notification_from_name_field">
-							</select>
-						</p>
-
-						<p class="email-notification-setting">
-							<label for="ccf_form_email_notification_subject_type"><?php esc_html_e( 'Email Subject Type:', 'custom-contact-forms' ); ?></label>
-							<select name="email_notification_subject_type" class="form-email-notification-subject-type" id="ccf_form_email_notification_subject_type">
-								<option value="default"><?php esc_html_e( 'Default', 'custom-contact-forms' ); ?></option>
-								<option value="custom" <# if ( 'custom' === notification.subjectType ) { #>selected<# } #>><?php esc_html_e( 'Custom Subject', 'custom-contact-forms' ); ?></option>
-								<option value="field" <# if ( 'field' === notification.subjectType ) { #>selected<# } #>><?php esc_html_e( 'Form Field', 'custom-contact-forms' ); ?></option>
-							</select>
-
-							<span class="explain"><?php esc_html_e( 'You can set the notification emails subject line to be the CCF default, custom text, or pull the subject from a field in the form.', 'custom-contact-forms' ); ?></span>
-						</p>
-
-						<p class="email-notification-subject">
-							<label for="ccf_form_email_notification_subject"><?php esc_html_e( 'Custom Email Subject:', 'custom-contact-forms' ); ?></label>
-							<input class="widefat form-email-notification-subject" id="ccf_form_email_notification_subject" name="email-notification-subject" value="{{ notification.subject }}">
-						</p>
-
-						<p class="email-notification-subject-field">
-							<label for="ccf_form_email_notification_subject_field"><?php esc_html_e( 'Pull Email Subject Dynamically from Field:', 'custom-contact-forms' ); ?></label>
-							<select name="email_notification_subject_field" class="form-email-notification-subject-field" id="ccf_form_email_notification_subject_field">
 							</select>
 						</p>
 					</div>
