@@ -127,7 +127,7 @@
 				return {
 					title: '',
 					content: '[all_fields]',
-					active: false,
+					active: true,
 					addresses: new wp.ccf.collections.FormNotificationAddresses(),
 					fromType: 'default',
 					fromAddress: '',
@@ -137,7 +137,16 @@
 					subjectField: '',
 					fromNameType: 'custom',
 					fromName: 'WordPress',
-					fromNameField: ''
+					fromNameField: '',
+
+					replyToType: 'default',
+					replyToAddress: '',
+					replyToField: '',
+
+
+					replyToNameType: 'custom',
+					replyToName: 'WordPress',
+					replyToNameField: ''
 				};
 			},
 
@@ -194,6 +203,7 @@
 					fields: new wp.ccf.collections.Fields(),
 					type: 'ccf_form',
 					status: 'publish',
+					hideTitle: false,
 					description: '',
 					buttonText: 'Submit Form',
 					buttonClass: '',

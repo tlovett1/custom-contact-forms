@@ -401,6 +401,8 @@
 			events: {
 				'change select.form-email-notification-from-type': 'toggleNotificationFields',
 				'change select.form-email-notification-from-name-type': 'toggleNotificationFields',
+				'change select.form-email-notification-reply-to-type': 'toggleNotificationFields',
+				'change select.form-email-notification-reply-to-name-type': 'toggleNotificationFields',
 				'change select.form-email-notification-subject-type': 'toggleNotificationFields',
 				'click .close-notification': 'changeContext',
 				'click .edit-notification': 'changeContext',
@@ -492,6 +494,10 @@
 				emailNotificationFromField.innerHTML = '';
 				emailNotificationFromField.disabled = false;
 
+				var emailNotificationReplyToField = this.el.querySelectorAll( '.form-email-notification-reply-to-field' )[0];
+				emailNotificationReplyToField.innerHTML = '';
+				emailNotificationReplyToField.disabled = false;
+
 				var emailNotificationSubjectField = this.el.querySelectorAll( '.form-email-notification-subject-field' )[0];
 				emailNotificationSubjectField.innerHTML = '';
 				emailNotificationSubjectField.disabled = false;
@@ -500,15 +506,22 @@
 				emailNotificationFromNameField.innerHTML = '';
 				emailNotificationFromNameField.disabled = false;
 
+				var emailNotificationReplyToNameField = this.el.querySelectorAll( '.form-email-notification-reply-to-name-field' )[0];
+				emailNotificationReplyToNameField.innerHTML = '';
+				emailNotificationReplyToNameField.disabled = false;
+
 				var fields = this.form.get( 'fields' ),
 					addressFieldsAdded = 0,
 					nameFieldsAdded = 0,
 					subjectFieldsAdded = 0;
 
-				var addressField = this.model.get( 'emailNotificationFromField' );
-				var subjectField = this.model.get( 'emailNotificationSubjectField' );
-				var nameField = this.model.get( 'emailNotificationFromNameField' ),
-					option;
+				var addressField = this.model.get( 'fromField' );
+				var replyToAddressField = this.model.get( 'replyToField' );
+				var subjectField = this.model.get( 'subjectField' );
+				var nameField = this.model.get( 'fromNameField' ),
+					replyToNameField = this.model.get( 'replyToNameField' ),
+					option,
+					replyToOption;
 
 				if ( fields.length >= 1 ) {
 					fields.each( function( field ) {
@@ -523,6 +536,16 @@
 
 							emailNotificationFromField.appendChild( option );
 
+							replyToOption = document.createElement( 'option' );
+							replyToOption.innerHTML = field.get( 'slug' );
+							replyToOption.value = field.get( 'slug' );
+
+							if ( field.get( 'slug' ) === replyToAddressField ) {
+								replyToOption.selected = true;
+							}
+
+							emailNotificationReplyToField.appendChild( replyToOption );
+
 							addressFieldsAdded++;
 						} if ( 'name' === field.get( 'type' ) || 'single-line-text' === field.get( 'type' ) || 'radio' === field.get( 'type' ) || 'dropdown' === field.get( 'type' ) ) {
 							option = document.createElement( 'option' );
@@ -534,6 +557,16 @@
 							}
 
 							emailNotificationFromNameField.appendChild( option );
+
+							replyToOption = document.createElement( 'option' );
+							replyToOption.innerHTML = field.get( 'slug' );
+							replyToOption.value = field.get( 'slug' );
+
+							if ( field.get( 'slug' ) === replyToNameField ) {
+								replyToOption.selected = true;
+							}
+
+							emailNotificationReplyToNameField.appendChild( replyToOption );
 
 							nameFieldsAdded++;
 						} if ( 'single-line-text' === field.get( 'type' ) || 'radio' === field.get( 'type' ) || 'dropdown' === field.get( 'type' ) ) {
@@ -560,6 +593,12 @@
 					option.value = '';
 					emailNotificationFromField.appendChild( option );
 					emailNotificationFromField.disabled = true;
+
+					option = document.createElement( 'option' );
+					option.innerHTML = ccfSettings.noEmailFields;
+					option.value = '';
+					emailNotificationReplyToField.appendChild( option );
+					emailNotificationReplyToField.disabled = true;
 				}
 
 				if ( 0 === nameFieldsAdded ) {
@@ -600,6 +639,24 @@
 
 				var emailNotificationFromNameType = this.el.querySelectorAll( '.form-email-notification-from-name-type' )[0];
 
+
+
+				var emailNotificationReplyToAddress = this.el.querySelectorAll( '.email-notification-reply-to-address' )[0];
+
+				var emailNotificationReplyToField = this.el.querySelectorAll( '.email-notification-reply-to-field' )[0];
+
+				var emailNotificationReplyToType = this.el.querySelectorAll( '.form-email-notification-reply-to-type' )[0];
+
+				var emailNotificationReplyToName = this.el.querySelectorAll( '.email-notification-reply-to-name' )[0];
+
+				var emailNotificationReplyToNameField = this.el.querySelectorAll( '.email-notification-reply-to-name-field' )[0];
+
+				var emailNotificationReplyToNameType = this.el.querySelectorAll( '.form-email-notification-reply-to-name-type' )[0];
+
+
+
+
+
 				emailNotificationFromAddress.style.display = 'none';
 				emailNotificationFromField.style.display = 'none';
 
@@ -625,6 +682,24 @@
 					emailNotificationFromName.style.display = 'block';
 				} else if ( 'field' === emailNotificationFromNameType.value ) {
 					emailNotificationFromNameField.style.display = 'block';
+				}
+
+				emailNotificationReplyToAddress.style.display = 'none';
+				emailNotificationReplyToField.style.display = 'none';
+
+				if ( 'custom' === emailNotificationReplyToType.value ) {
+					emailNotificationReplyToAddress.style.display = 'block';
+				} else if ( 'field' === emailNotificationReplyToType.value ) {
+					emailNotificationReplyToField.style.display = 'block';
+				}
+
+				emailNotificationReplyToName.style.display = 'none';
+				emailNotificationReplyToNameField.style.display = 'none';
+
+				if ( 'custom' === emailNotificationReplyToNameType.value ) {
+					emailNotificationReplyToName.style.display = 'block';
+				} else if ( 'field' === emailNotificationReplyToNameType.value ) {
+					emailNotificationReplyToNameField.style.display = 'block';
 				}
 			},
 
@@ -664,6 +739,24 @@
 
 				var emailNotificationFromNameField = this.el.querySelectorAll( '.form-email-notification-from-name-field' )[0].value;
 				this.model.set( 'fromNameField', emailNotificationFromNameField );
+
+				var emailNotificationReplyToType = this.el.querySelectorAll( '.form-email-notification-reply-to-type' )[0].value;
+				this.model.set( 'replyToType', emailNotificationReplyToType );
+
+				var emailNotificationReplyToAddress = this.el.querySelectorAll( '.form-email-notification-reply-to-address' )[0].value;
+				this.model.set( 'replyToAddress', emailNotificationReplyToAddress );
+
+				var emailNotificationReplyToField = this.el.querySelectorAll( '.form-email-notification-reply-to-field' )[0].value;
+				this.model.set( 'replyToField', emailNotificationReplyToField );
+
+				var emailNotificationReplyToNameType = this.el.querySelectorAll( '.form-email-notification-reply-to-name-type' )[0].value;
+				this.model.set( 'replyToNameType', emailNotificationReplyToNameType );
+
+				var emailNotificationReplyToName = this.el.querySelectorAll( '.form-email-notification-reply-to-name' )[0].value;
+				this.model.set( 'replyToName', emailNotificationReplyToName );
+
+				var emailNotificationReplyToNameField = this.el.querySelectorAll( '.form-email-notification-reply-to-name-field' )[0].value;
+				this.model.set( 'replyToNameField', emailNotificationReplyToNameField );
 
 				var emailNotificationSubjectType = this.el.querySelectorAll( '.form-email-notification-subject-type' )[0].value;
 				this.model.set( 'subjectType', emailNotificationSubjectType );
@@ -1826,6 +1919,9 @@
 
 				var title = this.el.querySelectorAll( '.form-title' )[0].value;
 				this.model.set( 'title', { raw: title } );
+
+				var hideTitle = this.el.querySelectorAll( '.hide-title' )[0].value;
+				this.model.set( 'hideTitle', ( parseInt( hideTitle ) ) ? true : false );
 
 				var description = this.el.querySelectorAll( '.form-description' )[0].value;
 				this.model.set( 'description', description );

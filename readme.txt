@@ -60,6 +60,11 @@ For full documentation, questions, feature requests, and support concerning the 
 
 == Changelog ==
 
+= 7.8 =
+* Hide form title setting
+* Reply to notification fields
+* Activate form notifications by default
+
 = 7.7 =
 * New CAPTCHA option
 * Fix "0" choice input bug
