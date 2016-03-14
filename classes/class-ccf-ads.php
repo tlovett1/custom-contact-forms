@@ -17,6 +17,7 @@ class CCF_Ads {
 	public function setup() {
 		add_action( 'admin_notices', array( $this, 'show_ad' ) );
 		add_action( 'init', array( $this, 'process_submission' ) );
+		add_action( 'in_admin_footer', array( $this, 'please_rate' ) );
 	}
 
 	public function process_submission() {
@@ -91,6 +92,44 @@ class CCF_Ads {
 				<?php endif; ?>
 			</div>
 		</div>
+		<?php
+	}
+
+	/**
+	 * Output please rate
+	 *
+	 * @since 6.9.4
+	 */
+	public function please_rate() {
+		global $pagenow;
+
+		if ( apply_filters( 'ccf_hide_please_rate', false ) ) {
+			return;
+		}
+
+		if ( 'edit.php' === $pagenow || 'post-new.php' === $pagenow ) {
+			if ( empty( $_GET['post_type'] ) || 'ccf_form' !== $_GET['post_type'] ) {
+				return;
+			}
+		}
+
+		if ( 'post.php' === $pagenow ) {
+			if ( 'ccf_form' !== get_post_type() ) {
+				return;
+			}
+		}
+
+		if ( 'post.php' !== $pagenow && 'edit.php' !== $pagenow && 'post-new.php' !== $pagenow ) {
+			return;
+		}
+
+		?>
+		<p class="ccf-please-rate">
+			<a href="https://wordpress.org/support/view/plugin-reviews/custom-contact-forms#postform">
+
+				<?php _e( "We need your support. Please rate Custom Contact Forms five <span alt=\"f155\" class=\"dashicons dashicons-star-filled\"></span>'s", 'custom-contact-forms' ); ?>
+			</a>
+		</p>
 		<?php
 	}
 
