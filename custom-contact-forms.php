@@ -4,7 +4,7 @@
  * Plugin URI: http://www.taylorlovett.com
  * Description: Build beautiful custom forms and manage submissions the WordPress way. View live previews of your forms while you build them. Contact forms, subscription forms, payment forms, etc.
  * Author: Taylor Lovett
- * Version: 7.8
+ * Version: 7.8.1
  * Text Domain: custom-contact-forms
  * Domain Path: /languages
  * Author URI: http://www.taylorlovett.com
@@ -15,7 +15,7 @@
  */
 
 
-define( 'CCF_VERSION', '7.8' );
+define( 'CCF_VERSION', '7.8.1' );
 
 require_once( dirname( __FILE__ ) . '/classes/class-ccf-constants.php' );
 require_once( dirname( __FILE__ ) . '/classes/class-ccf-custom-contact-forms.php' );

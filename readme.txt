@@ -60,6 +60,10 @@ For full documentation, questions, feature requests, and support concerning the 
 
 == Changelog ==
 
+= 7.8.1 =
+* Cache busy form submission URL
+* Improve field choice UI
+
 = 7.8 =
 * Hide form title setting
 * Reply to notification fields

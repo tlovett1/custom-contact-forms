@@ -1064,7 +1064,8 @@
 		{
 			defaults: function() {
 				var defaults = {
-					choices: new wp.ccf.collections.FieldChoices()
+					choices: new wp.ccf.collections.FieldChoices(),
+					useValues: false
 				};
 
 				return _.defaults( defaults, this.constructor.__super__.defaults() );
@@ -1300,10 +1301,19 @@
 				}
 
 				var label = this.el.querySelectorAll( '.choice-label' )[0].value;
-				var value = this.el.querySelectorAll( '.choice-value' )[0].value;
+
+				var valueSelector = this.el.querySelectorAll( '.choice-value' ),
+					value = '';
+				if ( valueSelector.length ) {
+					value = valueSelector[0].value;
+				}
 
 				this.model.set( 'label', label );
 				this.model.set( 'value', value );
+
+				if ( ! this.field.get( 'useValues' ) ) {
+					this.model.set( 'value', this.model.get( 'label' ) );
+				}
 
 				var selectedElement = this.el.querySelectorAll( '.choice-selected' )[0];
 				var selected = ( selectedElement.checked ) ? true : false;
@@ -1315,7 +1325,9 @@
 			},
 
 			render: function() {
-				var context = {};
+				var context = {
+					showValue: this.field.get( 'useValues' )
+				};
 				if ( this.model ) {
 					context.choice = this.model.toJSON();
 				}
@@ -2593,9 +2605,14 @@
 				choices.appendChild( view.el );
 			},
 
-			saveField: function() {
+			saveField: function( event ) {
 				// @todo: fix this ie8 hack
 				if ( this.el.innerHTML === '' ) {
+					return;
+				}
+
+				if ( event && 'field-use-values' === event.target.className && 'focusout' === event.type ) {
+					// Make sure we don't double save
 					return;
 				}
 
@@ -2613,6 +2630,15 @@
 					$( choice ).trigger( 'saveChoice' );
 				});
 
+				var oldUseValues = this.model.get( 'useValues' ),
+					useValues = ( this.el.querySelectorAll( '.field-use-values' )[0].checked ) ? true : false;
+
+				this.model.set( 'useValues', useValues );
+
+				if ( oldUseValues !== useValues ) {
+					this.render();
+				}
+
 				return this;
 
 			},
@@ -2621,6 +2647,8 @@
 				var SELF = this;
 
 				startPanel = ( startPanel ) ? startPanel : 'basic';
+
+				var useValues = this.model.get( 'useValues' );
 
 				SELF.el.innerHTML = SELF.template( { field: SELF.model.toJSON(), startPanel: startPanel } );
 

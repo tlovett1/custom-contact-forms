@@ -473,17 +473,23 @@
       .ccf-main-modal .ccf-form-pane .right-sidebar .field-html {
         height: 150px;
         width: 100%; }
-      .ccf-main-modal .ccf-form-pane .right-sidebar .repeatable-choices .choice input[type='text'] {
-        width: 100px;
-        display: inline-block; }
-      .ccf-main-modal .ccf-form-pane .right-sidebar .repeatable-choices .choice .move {
-        color: inherit;
-        cursor: move; }
-        .ccf-main-modal .ccf-form-pane .right-sidebar .repeatable-choices .choice .move:before {
+      .ccf-main-modal .ccf-form-pane .right-sidebar .toggle-use-values {
+        float: right; }
+      .ccf-main-modal .ccf-form-pane .right-sidebar .repeatable-choices {
+        clear: both; }
+        .ccf-main-modal .ccf-form-pane .right-sidebar .repeatable-choices .choice input[type='text'] {
+          width: 250px;
+          display: inline-block; }
+        .ccf-main-modal .ccf-form-pane .right-sidebar .repeatable-choices .choice .move {
+          color: inherit;
           cursor: move; }
-      .ccf-main-modal .ccf-form-pane .right-sidebar .repeatable-choices .choice .add, .ccf-main-modal .ccf-form-pane .right-sidebar .repeatable-choices .choice .delete {
-        cursor: pointer;
-        color: inherit; }
+          .ccf-main-modal .ccf-form-pane .right-sidebar .repeatable-choices .choice .move:before {
+            cursor: move; }
+        .ccf-main-modal .ccf-form-pane .right-sidebar .repeatable-choices .choice .add, .ccf-main-modal .ccf-form-pane .right-sidebar .repeatable-choices .choice .delete {
+          cursor: pointer;
+          color: inherit; }
+        .ccf-main-modal .ccf-form-pane .right-sidebar .repeatable-choices.use-values input[type='text'] {
+          width: 100px; }
   .ccf-main-modal .ccf-existing-form-pane {
     display: none;
     position: absolute;

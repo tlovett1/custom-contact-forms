@@ -345,6 +345,8 @@ class CCF_Field_Renderer {
 		$required = get_post_meta( $field_id, 'ccf_field_required', true );
 		$description = get_post_meta( $field_id, 'ccf_field_description', true );
 
+		$use_values = get_post_meta( $field_id, 'ccf_field_useValues', true );
+
 		$errors = CCF_Form_Handler::factory()->get_errors( $form_id, $slug );
 		$all_errors = CCF_Form_Handler::factory()->get_errors( $form_id );
 
@@ -376,8 +378,15 @@ class CCF_Field_Renderer {
 							$selected = 'selected';
 						}
 					}
+
+					$value = $choice['value'];
+
+					if ( empty( $use_values ) ) {
+						$value = $choice['label'];
+					}
+
 					?>
-					<option <?php echo $selected; ?> value="<?php echo esc_attr( $choice['value'] ); ?>"><?php echo esc_html( $choice['label'] ); ?></option>
+					<option <?php echo $selected; ?> value="<?php echo esc_attr( $value ); ?>"><?php echo esc_html( $choice['label'] ); ?></option>
 				<?php endforeach; ?>
 			</select>
 
