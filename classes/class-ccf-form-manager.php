@@ -1476,7 +1476,11 @@ class CCF_Form_Manager {
 			<a aria-hidden="true" data-icon="&#xe606;" class="move"></a>
 			<input class="choice-selected" <# if ( choice.selected ) { #>checked<# } #> name="selected" type="checkbox" value="1">
 			<input class="choice-label" type="text" placeholder="<?php esc_html_e( 'Label', 'custom-contact-forms' ); ?>" value="{{ choice.label }}">
-			<input class="choice-value" type="text" placeholder="<?php esc_html_e( 'Value', 'custom-contact-forms' ); ?>" value="{{ choice.value }}">
+			
+			<# if ( showValue ) { #>
+				<input class="choice-value" type="text" placeholder="<?php esc_html_e( 'Value', 'custom-contact-forms' ); ?>" value="{{ choice.value }}">
+			<# } #>
+
 			<a aria-hidden="true" data-icon="&#xe605;" class="add"></a>
 			<a aria-hidden="true" data-icon="&#xe604;" class="delete"></a>
 		</script>
@@ -1522,11 +1526,18 @@ class CCF_Form_Manager {
 						</select>
 					</div>
 					<div>
+						<div class="toggle-use-values">
+							<input class="field-use-values" type="checkbox" <# if ( field.useValues ) { #>checked<# } #>>
+
+							<?php esc_html_e( 'Use values (advanced)', 'custom-contact-forms' ); ?>
+						</div>
 						<label><?php esc_html_e( 'Manage field choices:', 'custom-contact-forms' ); ?></label>
-						<div class="repeatable-choices">
+						<div class="repeatable-choices <# if ( field.useValues ) { #>use-values<# } #>">
 						</div>
 
-						<p><?php esc_html_e( "Note: If an option does not have a \"value\", it will not be considered a valid selection if the field is required. The \"value\" is what's read, stored, and displayed in the submission.", 'custom-contact-forms' ); ?></p>
+						<# if ( field.useValues ) { #>
+							<p><?php esc_html_e( "Note: If an option does not have a \"value\", it will not be considered a valid selection if the field is required. The \"value\" is what's read, stored, and displayed in the submission.", 'custom-contact-forms' ); ?></p>
+						<# } #>
 					</div>
 				</div>
 			</div>
@@ -1589,11 +1600,18 @@ class CCF_Form_Manager {
 						</select>
 					</div>
 					<div>
+						<div class="toggle-use-values">
+							<input class="field-use-values" type="checkbox" <# if ( field.useValues ) { #>checked<# } #>>
+
+							<?php esc_html_e( 'Use values (advanced)', 'custom-contact-forms' ); ?>
+						</div>
 						<label><?php esc_html_e( 'Manage field choices:', 'custom-contact-forms' ); ?></label>
-						<div class="repeatable-choices">
+						<div class="repeatable-choices <# if ( field.useValues ) { #>use-values<# } #>">
 						</div>
 
-						<p><?php esc_html_e( "Note: If an option does not have a \"value\", it will not be considered a valid selection if the field is required. The \"value\" is what's read, stored, and displayed in the submission.", 'custom-contact-forms' ); ?></p>
+						<# if ( field.useValues ) { #>
+							<p><?php esc_html_e( "Note: If an option does not have a \"value\", it will not be considered a valid selection if the field is required. The \"value\" is what's read, stored, and displayed in the submission.", 'custom-contact-forms' ); ?></p>
+						<# } #>
 					</div>
 				</div>
 			</div>
@@ -1656,11 +1674,18 @@ class CCF_Form_Manager {
 						</select>
 					</div>
 					<div>
+						<div class="toggle-use-values">
+							<input class="field-use-values" type="checkbox" <# if ( field.useValues ) { #>checked<# } #>>
+
+							<?php esc_html_e( 'Use values (advanced)', 'custom-contact-forms' ); ?>
+						</div>
 						<label><?php esc_html_e( 'Manage field choices:', 'custom-contact-forms' ); ?></label>
-						<div class="repeatable-choices">
+						<div class="repeatable-choices <# if ( field.useValues ) { #>use-values<# } #>">
 						</div>
 
-						<p><?php esc_html_e( "Note: If an option does not have a \"value\", it will not be considered a valid selection if the field is required. The \"value\" is what's read, stored, and displayed in the submission.", 'custom-contact-forms' ); ?></p>
+						<# if ( field.useValues ) { #>
+							<p><?php esc_html_e( "Note: If an option does not have a \"value\", it will not be considered a valid selection if the field is required. The \"value\" is what's read, stored, and displayed in the submission.", 'custom-contact-forms' ); ?></p>
+						<# } #>
 					</div>
 				</div>
 			</div>

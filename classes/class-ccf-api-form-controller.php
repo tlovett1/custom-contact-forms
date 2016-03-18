@@ -93,6 +93,10 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 				'sanitize' => array( $this, 'boolval' ),
 				'escape' => array( $this, 'boolval' ),
 			),
+			'useValues' => array(
+				'sanitize' => array( $this, 'boolval' ),
+				'escape' => array( $this, 'boolval' ),
+			),
 			'showTime' => array(
 				'sanitize' => array( $this, 'boolval' ),
 				'escape' => array( $this, 'boolval' ),

@@ -799,7 +799,8 @@
 		{
 			defaults: function() {
 				var defaults = {
-					choices: new wp.ccf.collections.FieldChoices()
+					choices: new wp.ccf.collections.FieldChoices(),
+					useValues: false
 				};
 
 				return _.defaults( defaults, this.constructor.__super__.defaults() );
