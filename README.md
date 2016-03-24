@@ -69,20 +69,32 @@ form is successfully filled out. Each notification contains the following config
 
   * `[all_fields]` - Shows all your form fields
   * `[ip_address]` - Shows the IP address of the submitter
+  * `[current_date_time]` - Shows the current date and time
   * `[FIELD_SLUG]` - Each of your form fields can be inserted using their field slug.
 
 * `"To" Email Addresses` - You can send each notification to as many emails as you want. Addresses have two types: `custom` and 
 `field`. `custom` allows you to specify a specific email (such as your own). `field` will pull the email address dynamically from a form field.
+* `Reply To Email Address Type` - This allows you to set what email address is set as the notification email Reply To. `WordPress
+Default` will use the default WordPress email address. `Custom Email` will allow you to manually type in an address. `Form Field` will allow you to choose an email field within the form to dynamically pull a email address.
+
+* `Reply To Name Type` - This allows you to set the Reply To name in the notification email. `Custom Name` 
+will allow you to manually type in a name. `Form Field` will allow you to choose a name field within 
+the form to dynamically pull a name.
+
 * `"From" Email Address Type` - This allows you to set what email address the notification is sent from. `WordPress
 Default` will use the default WordPress email address. `Custom Email` will allow you to manually type in a from
 address. `Form Field` will allow you to choose an email field within the form to dynamically pull a from email
 address.
+
 * `"From" Name Type` - This allows you to set what name the notification email is sent from. `Custom Name` 
 will allow you to manually type in a from name. `Form Field` will allow you to choose a name field within 
 the form to dynamically pull a from email name.
 * `Email Subject Type` - This allows you to set what subject line is used on the notification email. `Default` 
 will use the CCF default subject. `Custom Subject` will allow you to manually type in an email subject. 
 `Form Field` will allow you to choose a field within the form to dynamically pull a subject line.
+
+* `Include File Uploads` - If this is set to yes, file uploads will be sent in notification emails. This only applies if your
+form has File Upload fields.
 
 __Note:__ In order for form notification changes to take affect, you will need to save the form.
 

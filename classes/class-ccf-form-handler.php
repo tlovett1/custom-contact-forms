@@ -727,11 +727,15 @@ class CCF_Form_Handler {
 					$form_page = null;
 				}
 
+				$uploads = array();
+
 				foreach ( $file_ids as $file_id ) {
 					wp_update_post( array(
 						'ID' => $file_id,
 						'post_parent' => $submission_id,
 					) );
+
+					$uploads[] = get_attached_file( $file_id );
 				}
 
 				do_action( 'ccf_successful_submission', $submission_id, $form_id );
@@ -1077,6 +1081,8 @@ class CCF_Form_Handler {
 							}
 						}
 
+						$include_uploads = $notification['includeUploads'];
+
 						foreach ( $notification['addresses'] as $address ) {
 
 							if ( ! empty( $address['email'] ) || ! empty( $address['field'] ) ) {
@@ -1106,9 +1112,15 @@ class CCF_Form_Handler {
 									$notification_content = apply_filters( 'ccf_email_content', $message, $form_id, $email, $form_page, $notification );
 									$notification_headers = apply_filters( 'ccf_email_headers', $headers, $form_id, $email, $form_page, $notification );
 
-									do_action( 'ccf_send_notification', $email, $subject, $notification_content, $notification_headers, $notification );
+									if ( ! $include_uploads ) {
+										$uploads = array();
+									}
 
-									wp_mail( $email, $subject, $notification_content, $notification_headers );
+									$uploads = apply_filters( 'ccf_email_uploads', $uploads, $headers, $form_id, $email, $form_page, $file_ids, $notification );
+
+									do_action( 'ccf_send_notification', $email, $subject, $notification_content, $notification_headers, $uploads, $notification );
+
+									wp_mail( $email, $subject, $notification_content, $notification_headers, $uploads );
 								}
 							}
 						}

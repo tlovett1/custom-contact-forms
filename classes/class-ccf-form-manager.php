@@ -365,6 +365,14 @@ class CCF_Form_Manager {
 							<select name="email_notification_from_name_field" class="form-email-notification-from-name-field" id="ccf_form_email_notification_from_name_field">
 							</select>
 						</p>
+
+						<p>
+							<label for="ccf_form_email_notification_include_uploads"><?php esc_html_e( 'Include File Uploads:', 'custom-contact-forms' ); ?></label>
+							<select name="email_notification_include_uploads" class="form-email-notification-include-uploads" id="ccf_form_email_notification_include_uploads">
+								<option value="1"><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
+								<option value="0" <# if ( ! notification.includeUploads ) { #>selected<# } #>><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
+							</select>
+						</p>
 					</div>
 				</td>
 			<# } #>
