@@ -600,6 +600,7 @@ class CCF_Form_CPT {
 			'exclude_from_search' => true,
 			'show_ui' => true,
 			'show_in_menu' => true,
+			'show_in_customizer' => false,
 			'query_var' => false,
 			'rewrite' => false,
 			'capability_type' => 'post',
