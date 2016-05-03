@@ -16,7 +16,9 @@ class CCF_Form_Manager {
 	public function setup() {
 		add_action( 'media_buttons', array( $this, 'action_media_buttons' ) );
 		add_action( 'admin_footer', array( $this, 'print_templates' ) );
-		add_action( 'admin_enqueue_scripts' , array( $this, 'action_admin_enqueue_scripts_css' ), 9 );
+		add_action( 'customize_controls_print_footer_scripts', array( $this, 'customize_controls_print_footer_scripts' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'action_admin_enqueue_scripts_css' ), 9 );
+		add_action( 'customize_controls_enqueue_scripts' , array( $this, 'action_admin_enqueue_scripts_css' ), 9 );
 		add_filter( 'mce_css', array( $this, 'filter_mce_css' ) );
 	}
 
@@ -40,6 +42,16 @@ class CCF_Form_Manager {
 
 		$css .= ', ' . plugins_url( $css_path, dirname( __FILE__ ) );
 		return $css;
+	}
+
+	/**
+	 * Print all Backbone templates for form manager in Customizer
+	 */
+	public function customize_controls_print_footer_scripts() {
+		global $wp_customize;
+		if ( isset( $wp_customize->posts ) ) {
+			$this->print_templates();
+		}
 	}
 
 	/**
@@ -2276,9 +2288,9 @@ class CCF_Form_Manager {
 	 * @since 6.0
 	 */
 	public function action_admin_enqueue_scripts_css() {
-		global $pagenow;
+		global $pagenow, $wp_customize;
 
-		if ( 'post.php' == $pagenow || 'post-new.php' == $pagenow ) {
+		if ( 'post.php' == $pagenow || 'post-new.php' == $pagenow || ( ! empty( $wp_customize ) && isset( $wp_customize->posts ) ) ) {
 			if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
 				$js_manager_path = '/assets/build/js/form-manager.js';
 				$js_mce_path = '/assets/js/form-mce.js';
