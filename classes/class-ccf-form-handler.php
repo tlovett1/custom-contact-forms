@@ -1102,7 +1102,7 @@ class CCF_Form_Handler {
 										$notification_content = ' '; // Hack to send email with empty body via PHPMailer
 									}
 
-									$subject = apply_filters( 'ccf_email_subject', $subject, $form_id, $email, $form_page, $notification );
+									$subject = apply_filters( 'ccf_email_subject', $subject, $form_id, $email, $form_page, $notification, $submission );
 									$notification_content = apply_filters( 'ccf_email_content', $message, $form_id, $email, $form_page, $notification );
 									$notification_headers = apply_filters( 'ccf_email_headers', $headers, $form_id, $email, $form_page, $notification );
 

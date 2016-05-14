@@ -117,18 +117,22 @@
 	wp.ccf.utils.getPrettyFieldDate = function( value, field ) {
 		var dateString = '',
 			output = '',
-			format = 'HH:mm MM/DD/YY';
+			format = 'MM/DD/YY';
 
 		if ( field && field.ccf_field_dateFormat && 'dd/mm/yyyy' === field.ccf_field_dateFormat ) {
-			format = 'HH:mm DD/MM/YY';
+			format = 'DD/MM/YY';
 		}
 
 		if ( value.hour && value.minute && value['am-pm'] ) {
 			dateString += value.hour + ':' + value.minute + ' ' + value['am-pm'];
+			format = 'HH:mm ' + format;
 		}
 
 		if ( value.date ) {
-			dateString += ' ' + value.date;
+			if ( dateString ) {
+				dateString += ' ';
+			}
+			dateString += value.date;
 		}
 
 		if ( ! dateString ) {
