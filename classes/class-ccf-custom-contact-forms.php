@@ -117,12 +117,12 @@ class CCF_Custom_Contact_Forms {
 
 				if ( ! empty( $_POST['checked'] ) ) {
 					foreach ( $_POST['checked'] as $plugin ) {
-						if ( preg_match( '#json-rest-api#i', $plugin ) ) {
+						if ( preg_match( '#(json-rest-api|wp-api|rest-api)#i', $plugin ) ) {
 							return;
 						}
 					}
 				} elseif ( ! empty( $_GET['plugin'] ) ) {
-					if ( preg_match( '#json-rest-api#i', $_GET['plugin'] ) ) {
+					if ( preg_match( '#(json-rest-api|wp-api|rest-api)#i', $_GET['plugin'] ) ) {
 						return;
 					}
 				}
