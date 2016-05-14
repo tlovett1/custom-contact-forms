@@ -129,7 +129,7 @@ class CCF_Custom_Contact_Forms {
 			}
 		}
 
-		if ( function_exists( 'create_initial_rest_routes' ) ) {
+		if ( function_exists( 'create_initial_rest_routes' ) || class_exists( 'WP_REST_Controller' ) ) {
 			return;
 		}
 
