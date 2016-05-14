@@ -128,6 +128,7 @@
 					title: '',
 					content: '[all_fields]',
 					active: true,
+					includeUploads: true,
 					addresses: new wp.ccf.collections.FormNotificationAddresses(),
 					fromType: 'default',
 					fromAddress: '',
