@@ -62,6 +62,8 @@ For full documentation, questions, feature requests, and support concerning the 
 
 = 7.8.2 = 
 * Add $submission to ccf_email_subject filter, correct "Invalid Date" issue with datepicker. Props (quayzar)[https://github.com/quayzar]
+* Fix WooCommerce conflict
+* Add support for Customize Posts plugin. Props (westonruter)[https://github.com/westonruter]
 
 = 7.8.1 =
 * Cache busy form submission URL
