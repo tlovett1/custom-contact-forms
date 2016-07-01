@@ -60,6 +60,9 @@ For full documentation, questions, feature requests, and support concerning the 
 
 == Changelog ==
 
+= 7.8.3 =
+* Fix WooCommerce conflict
+
 = 7.8.2 = 
 * Add $submission to ccf_email_subject filter, correct "Invalid Date" issue with datepicker. Props (quayzar)[https://github.com/quayzar]
 * Fix WooCommerce conflict

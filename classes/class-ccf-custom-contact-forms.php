@@ -102,6 +102,18 @@ class CCF_Custom_Contact_Forms {
 	}
 
 	/**
+	 * Manually register rest scripts
+	 *
+	 * @since  7.8.3
+	 */
+	public function rest_register_scripts_manual() {
+		wp_register_script( 'wp-api', plugins_url( 'wp-api.js', __FILE__ ), array( 'jquery', 'backbone', 'underscore' ), '1.1', true );
+
+		$settings = array( 'root' => esc_url_raw( get_rest_url() ), 'nonce' => wp_create_nonce( 'wp_rest' ) );
+		wp_localize_script( 'wp-api', 'WP_API_Settings', $settings );
+	}
+
+	/**
 	 * Right now we are including the JSON REST API (http://github.com/wp-api/wp-api) in the plugin itself
 	 * since the API is not yet stable. Eventually, the API will be moved into WP and it will no longer need
 	 * to be manually included by the plugin. See composer.json for specific information on what version of the
@@ -130,6 +142,8 @@ class CCF_Custom_Contact_Forms {
 		}
 
 		if ( function_exists( 'create_initial_rest_routes' ) || class_exists( 'WP_REST_Controller' ) ) {
+			add_action( 'wp_enqueue_scripts', array( $this, 'rest_register_scripts_manual' ) );
+			add_action( 'admin_enqueue_scripts', array( $this, 'rest_register_scripts_manual' ) );
 			return;
 		}
 
