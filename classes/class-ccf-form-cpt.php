@@ -60,6 +60,8 @@ class CCF_Form_CPT {
 			return;
 		}
 
+		$attachments = ! empty($_GET['attachments']);
+
 		$post_id = (int) $_GET['post'];
 
 		$submissions = new WP_Query( array(
@@ -74,13 +76,34 @@ class CCF_Form_CPT {
 		) );
 
 		// Todo: Unit tests
-		header( 'Content-Type: text/csv' );
-		header( 'Content-Disposition: attachment; filename=form-' . $post_id . '-submission-' . date( 'Y-m-d' ) . '.csv' );
+		$disposition_filename = 'form-' . $post_id . '-submission-' . date( 'Y-m-d' );
+		if( $attachments ){
+			header( 'Content-Type: application/zip' );
+			header( 'Content-Disposition: attachment; filename=' . $disposition_filename . '.zip' );	
+		}else{
+			header( 'Content-Type: text/csv' );
+			header( 'Content-Disposition: attachment; filename=' . $disposition_filename . '.csv' );	
+		}
 		header( 'Cache-Control: no-cache, no-store, must-revalidate' );
 		header( 'Pragma: no-cache' );
 		header( 'Expires: 0' );
 
-		$output = fopen( 'php://output', 'w' );
+		$submissions_file = '';
+		if( $attachments ){
+			$uniqid = uniqid();
+			$temp_dir = get_temp_dir() . $uniqid . '/';
+			mkdir($temp_dir);
+
+			$zip = new ZipArchive();
+			$submissions_zip_file = $temp_dir . 'submissions.zip';
+			$zip->open( $submissions_zip_file, ZipArchive::CREATE );
+
+			$submissions_file = $temp_dir . 'submissions.csv';
+			$output = fopen( $submissions_file, 'w' );
+		}else{
+			$output = fopen( 'php://output', 'w' );	
+		}
+		
 		fwrite( $output,chr( 0xEF ).chr( 0xBB ).chr( 0xBF ) );
 		if ( $submissions->have_posts() ) {
 			$last_submission_id = $submissions->posts[0];
@@ -111,7 +134,7 @@ class CCF_Form_CPT {
 				}
 			}
 
-			$headers = array_merge( array( 'date', 'ip' ), array_keys( $fields ) );
+			$headers = array_merge( array( 'id', 'date', 'ip' ), array_keys( $fields ) );
 
 			fputcsv( $output, $headers );
 
@@ -120,9 +143,14 @@ class CCF_Form_CPT {
 				$submission_ip = get_post_meta( $submission_id, 'ccf_submission_ip', true );
 
 				$row = array(
+					$submission_id,
 					get_the_time( 'Y-m-d H:i:s', $submission_id ),
 					sanitize_text_field( $submission_ip ),
 				);
+
+				if($attachments){
+					$zip->addEmptyDir( $submission_id );
+				}
 
 				foreach ( $fields as $slug => $field_array ) {
 					$type = $field_array['type'];
@@ -141,6 +169,10 @@ class CCF_Form_CPT {
 						} elseif ( 'file' === $type ) {
 
 							$row[] = $field['url'];
+							if( $attachments ){
+								$filepath = get_attached_file( $field['id'] );	
+								$zip->addFromString( "$submission_id/" . basename($filepath), file_get_contents($filepath) );
+							}
 
 						} elseif ( 'address' === $type ) {
 
@@ -190,6 +222,12 @@ class CCF_Form_CPT {
 			}
 
 			fclose( $output );
+
+			if( $attachments && ! empty($zip) ){
+				$zip->addFromString('submissions.csv', file_get_contents($submissions_file));
+				$zip->close();
+				readfile($submissions_zip_file);
+			}
 		}
 
 		exit;
