@@ -110,7 +110,17 @@
 		};
 	};
 
-	wp.ccf.validators['single-line-text'] = wp.ccf.validators['single-line-text'] || validator();
+	wp.ccf.validators['single-line-text'] = wp.ccf.validators['single-line-text'] || validator( false, function() {
+		var e = this.inputs[0].value;
+    	var re = this.inputs[0].getAttribute('data-re-validator');
+    	if (e && re){
+    		var patt = new RegExp(re);
+    		ccfSettings[this.inputs[0].getAttribute('name')] = this.inputs[0].getAttribute('data-re-validator-message');
+    		if( ! patt.test(e) ){
+    			this.errors[this.inputs[0].getAttribute('name')][this.inputs[0].getAttribute('name')] = this.wrapper.lastChild;
+    		}
+    	}
+	});
 
 	wp.ccf.validators['paragraph-text'] = wp.ccf.validators['paragraph-text'] || validator();
 

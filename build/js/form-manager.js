@@ -2086,6 +2086,8 @@
 				this.model.set( 'placeholder', this.el.querySelectorAll( '.field-placeholder' )[0].value );
 				this.model.set( 'className', this.el.querySelectorAll( '.field-class-name' )[0].value );
 				this.model.set( 'required', ( this.el.querySelectorAll( '.field-required' )[0].value == 1 ) ? true : false  );
+				this.model.set("regularExpressionValidator", this.el.querySelectorAll(".field-regular-expression-validator")[0].value),
+            	this.model.set("regularExpressionValidatorMessage", this.el.querySelectorAll(".field-regular-expression-validator-message")[0].value),
 
 				this.constructor.__super__.saveField.apply( this, arguments );
 
