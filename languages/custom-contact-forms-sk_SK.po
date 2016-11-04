@@ -1,0 +1,561 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Custom Contact Forms\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-11-04 11:53+0000\n"
+"PO-Revision-Date: 2016-11-04 12:14+0000\n"
+"Last-Translator: hanes <info@gratitude.sk>\n"
+"Language-Team: Slovak\n"
+"Language: sk-SK\n"
+"Plural-Forms: nplurals=3; plural=( n == 1 ) ? 0 : ( n >= 2 && n <= 4 ) ? 1 : "
+"2\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco - https://localise.biz/"
+
+#: classes/class-ccf-choice-cpt.php:29
+msgid "Form Field Choices"
+msgstr "Možnosti poľa"
+
+#: classes/class-ccf-form-cpt.php:276
+msgid "Form Submission Columns"
+msgstr "Stĺpce formulára"
+
+#: classes/class-ccf-form-cpt.php:325 classes/class-ccf-form-cpt.php:343 
+#: classes/class-ccf-form-cpt.php:515
+msgid "Submissions"
+msgstr "Podania"
+
+#: classes/class-ccf-form-cpt.php:339
+msgid "At a Glance"
+msgstr ""
+
+#: classes/class-ccf-form-cpt.php:340
+msgid "Preview"
+msgstr "Náhľad"
+
+#: classes/class-ccf-form-cpt.php:397
+msgid "Created on:"
+msgstr "Vytvorené:"
+
+#: classes/class-ccf-form-cpt.php:400
+msgid "Author:"
+msgstr "Autor:"
+
+#: classes/class-ccf-form-cpt.php:403
+msgid "Number of fields:"
+msgstr "Počet polí:"
+
+#: classes/class-ccf-form-cpt.php:406
+msgid "Number of submissions:"
+msgstr "Počet podaní:"
+
+#: classes/class-ccf-form-cpt.php:412
+msgid "Move to Trash"
+msgstr "Presunúť do koša"
+
+#: classes/class-ccf-form-cpt.php:413
+msgid "Duplicate"
+msgstr "Duplikovať"
+
+#: classes/class-ccf-form-cpt.php:417
+msgid "Export"
+msgstr "Exportovať"
+
+#: classes/class-ccf-form-cpt.php:446
+msgid "(No title)"
+msgstr "(Bez názvu)"
+
+#: classes/class-ccf-form-cpt.php:451
+msgid "Manage Form"
+msgstr "Spravovať formulár"
+
+#: classes/class-ccf-form-cpt.php:513
+msgid "Form Title"
+msgstr "Nadpis formulára"
+
+#: classes/class-ccf-form-cpt.php:514
+msgid "Author"
+msgstr "Autor"
+
+#: classes/class-ccf-form-cpt.php:516
+msgid "Number of Fields"
+msgstr "Počet polí"
+
+#: classes/class-ccf-form-cpt.php:517
+msgid "Form ID"
+msgstr "ID formulára"
+
+#: classes/class-ccf-form-cpt.php:518 classes/class-ccf-field-renderer.php:1056
+msgid "Date"
+msgstr "Dátum"
+
+#: classes/class-ccf-form-cpt.php:581 classes/class-ccf-form-cpt.php:593
+msgid "Forms"
+msgstr "Formuláre"
+
+#: classes/class-ccf-form-cpt.php:582
+msgid "Form"
+msgstr "Formulár"
+
+#: classes/class-ccf-form-cpt.php:583 classes/class-ccf-form-cpt.php:586
+msgid "New Form"
+msgstr "Nový formulár"
+
+#: classes/class-ccf-form-cpt.php:584
+msgid "Add New Form"
+msgstr "Pridať nový formulár"
+
+#: classes/class-ccf-form-cpt.php:585
+msgid "Edit Form"
+msgstr "Upraviť formulár"
+
+#: classes/class-ccf-form-cpt.php:587
+msgid "Forms and Submissions"
+msgstr "Formuláre a podania"
+
+#: classes/class-ccf-form-cpt.php:588
+msgid "View Form"
+msgstr "Pozrieť formluár"
+
+#: classes/class-ccf-form-cpt.php:589
+msgid "Search Forms"
+msgstr "Hľadať formuláre"
+
+#: classes/class-ccf-form-cpt.php:590
+msgid "No forms found."
+msgstr "Nenašli sa žiadne formuláre"
+
+#: classes/class-ccf-form-cpt.php:591
+msgid "No forms found in trash."
+msgstr "Žiadne formuláre v koši"
+
+#: classes/class-ccf-settings.php:76
+msgid "Enable Asset Loading Restrictions"
+msgstr "Obmedzenie načítavania js a css súborov"
+
+#: classes/class-ccf-settings.php:77
+msgid "Restrict Asset Loading To"
+msgstr "Obmedziť načítavanie súborov pre"
+
+#: classes/class-ccf-settings.php:88
+msgid ""
+"By default, Custom Contact Forms loads all it's assets (JavaScript, CSS, etc."
+") on every page of your site. The reason for this is that there is no where "
+"to determine where you use forms. Asset Page Control allows you to specify "
+"the URLs or post IDs where your CCF forms will exist. By specifying where "
+"your forms will live, assets will not be unnecessarily loaded on every page "
+"of your site."
+msgstr ""
+
+#: classes/class-ccf-settings.php:103
+msgid "No"
+msgstr "Nie"
+
+#: classes/class-ccf-settings.php:104
+msgid "Yes"
+msgstr "Áno"
+
+#: classes/class-ccf-settings.php:121 classes/class-ccf-settings.php:134
+msgid "URL or post ID"
+msgstr "URL alebo ID príspevku"
+
+#: classes/class-ccf-settings.php:122 classes/class-ccf-settings.php:135
+msgid "Restriction type:"
+msgstr "Typ obmedzenia:"
+
+#: classes/class-ccf-settings.php:124 classes/class-ccf-settings.php:137
+msgid "URL"
+msgstr "URL"
+
+#: classes/class-ccf-settings.php:125 classes/class-ccf-settings.php:138
+msgid "Post ID"
+msgstr "ID príspevku"
+
+#: classes/class-ccf-settings.php:150 classes/class-ccf-settings.php:161
+msgid "Custom Contact Forms Settings"
+msgstr "Vlastné nastavenia kontaktného formulára"
+
+#: classes/class-ccf-settings.php:150
+msgid "Settings"
+msgstr "Nastavenia"
+
+#: classes/class-ccf-custom-contact-forms.php:71
+#, php-format
+msgid ""
+"Custom Contact Forms will not work unless pretty permalinks (not default) "
+"are enabled. Please update your <a href=\"%s\">permalinks settings</a>."
+msgstr ""
+
+#: classes/class-ccf-custom-contact-forms.php:89
+#, php-format
+msgid "<a href=\"%s\">Forms and Submissions</a>"
+msgstr "Formuláre a podania"
+
+#: classes/class-ccf-form-handler.php:133 
+#: classes/class-ccf-form-handler.php:214 
+#: classes/class-ccf-form-handler.php:251 
+#: classes/class-ccf-form-handler.php:348 
+#: classes/class-ccf-form-handler.php:352 
+#: classes/class-ccf-form-handler.php:356 
+#: classes/class-ccf-form-handler.php:360 
+#: classes/class-ccf-form-handler.php:365 
+#: classes/class-ccf-form-handler.php:390 
+#: classes/class-ccf-form-handler.php:398 
+#: classes/class-ccf-form-handler.php:406 
+#: classes/class-ccf-form-handler.php:460 
+#: classes/class-ccf-form-renderer.php:99
+msgid "This field is required."
+msgstr "Toto pole je povinné."
+
+#: classes/class-ccf-form-handler.php:144
+#, php-format
+msgid "This file is too big (%d MB max)"
+msgstr "Tento súbor je príliš veľký (%d MB max)"
+
+#: classes/class-ccf-form-handler.php:148
+msgid "An upload error occurred."
+msgstr "Chyba pri nahrávaní."
+
+#: classes/class-ccf-form-handler.php:170
+msgid "File contains an invalid extension."
+msgstr "Súbor má neplatnú príponu."
+
+#: classes/class-ccf-form-handler.php:267 
+#: classes/class-ccf-form-renderer.php:106
+msgid "Your reCAPTCHA response was incorrect."
+msgstr "Vaša odpoveď na reCAPTCHU je nesprávna."
+
+#: classes/class-ccf-form-handler.php:286
+msgid "Your CAPTCHA response was incorrect."
+msgstr "Vaša odpoveď CAPTCHA je nesprávna."
+
+#: classes/class-ccf-form-handler.php:305
+msgid "This field is required"
+msgstr "Toto pole je povinné"
+
+#: classes/class-ccf-form-handler.php:310
+msgid "This phone number is too short"
+msgstr "Toto číslo je príliš krátke"
+
+#: classes/class-ccf-form-handler.php:313
+msgid "ccf_field_phoneFormat"
+msgstr ""
+
+#: classes/class-ccf-form-handler.php:316
+msgid "This phone number contains invalid characters."
+msgstr "Toto číslo obsahuje neplatné znaky"
+
+#: classes/class-ccf-form-handler.php:322
+msgid "This phone number is not 10 digits."
+msgstr "Toto číslo nemá 10 cifier"
+
+#: classes/class-ccf-form-handler.php:393 
+#: classes/class-ccf-form-handler.php:409
+msgid "This is not a valid email"
+msgstr "Toto nie je platný email"
+
+#: classes/class-ccf-form-handler.php:401 
+#: classes/class-ccf-form-renderer.php:104
+msgid "Emails do not match."
+msgstr "Emaily nesúhlasia"
+
+#: classes/class-ccf-form-handler.php:434
+msgid "First name is required."
+msgstr "Krstné meno je povinné."
+
+#: classes/class-ccf-form-handler.php:438
+msgid "Last name is required."
+msgstr "Priezvisko je povinné."
+
+#: classes/class-ccf-form-handler.php:463 
+#: classes/class-ccf-form-renderer.php:116
+msgid "This is not a valid URL. URL's must start with http(s)://"
+msgstr "Toto nie je platná URL. URL adresy musia začínať na http(s)://"
+
+#: classes/class-ccf-form-handler.php:491 
+#: classes/class-ccf-form-handler.php:523 
+#: classes/class-ccf-form-renderer.php:100
+msgid "Date is required."
+msgstr "Dátum je povinný."
+
+#: classes/class-ccf-form-handler.php:494 
+#: classes/class-ccf-form-handler.php:526 
+#: classes/class-ccf-form-renderer.php:111
+msgid "This date is not valid."
+msgstr "Tento dátum nie je platný."
+
+#: classes/class-ccf-form-handler.php:499 
+#: classes/class-ccf-form-handler.php:531 
+#: classes/class-ccf-form-renderer.php:101
+msgid "Hour is required."
+msgstr "Hodina je povinná."
+
+#: classes/class-ccf-form-handler.php:502 
+#: classes/class-ccf-form-handler.php:534 
+#: classes/class-ccf-form-renderer.php:110
+msgid "This is not a valid hour."
+msgstr "Toto nie je platná hodina."
+
+#: classes/class-ccf-form-handler.php:507 
+#: classes/class-ccf-form-handler.php:539 
+#: classes/class-ccf-form-renderer.php:102
+msgid "Minute is required."
+msgstr "Minúta je povinná:"
+
+#: classes/class-ccf-form-handler.php:510 
+#: classes/class-ccf-form-handler.php:542 
+#: classes/class-ccf-form-renderer.php:112
+msgid "This is not a valid minute."
+msgstr "Toto nie je platná minúta."
+
+#: classes/class-ccf-form-handler.php:515 
+#: classes/class-ccf-form-handler.php:547 
+#: classes/class-ccf-form-renderer.php:103
+msgid "AM/PM is required."
+msgstr "AM/PM je povinné."
+
+#: classes/class-ccf-form-handler.php:803
+msgid "Post created by form"
+msgstr "Príspevok vytvorený formulárom"
+
+#: classes/class-ccf-form-handler.php:852
+msgid "*Hidden Field*"
+msgstr "*Skryté pole*"
+
+#: classes/class-ccf-form-handler.php:924
+msgid "Form submitted from"
+msgstr "Formulár odoslaný z"
+
+#: classes/class-ccf-form-handler.php:933
+msgid "Form submitter IP"
+msgstr "IP odosielateľa formulára"
+
+#: classes/class-ccf-form-handler.php:1069
+#, php-format
+msgid "%s: Form Submission"
+msgstr "%s: Podanie formulára"
+
+#: classes/class-ccf-form-handler.php:1071
+#, php-format
+msgid " to \"%s\""
+msgstr "pre \"%s\""
+
+#: classes/class-ccf-form-handler.php:1137 
+#: classes/class-ccf-form-renderer.php:205
+msgid "Thank you for your submission."
+msgstr "Ďakujeme za vyplnenie formulára."
+
+#: classes/class-ccf-upgrader.php:37
+msgid ""
+"Did you just upgrade to a post 6.0 version of Custom Contact Forms? If so, "
+"you might need to upgrade your database to use your old forms. Please backup "
+"your database before running the upgrade."
+msgstr ""
+
+#: classes/class-ccf-upgrader.php:38
+msgid "Upgrade"
+msgstr "Aktualizovať"
+
+#: classes/class-ccf-upgrader.php:39
+msgid "Dismiss"
+msgstr "Zrušiť"
+
+#: classes/class-ccf-upgrader.php:61
+msgid "Database update complete."
+msgstr "Aktualizácia databázy hotová."
+
+#: classes/class-ccf-submission-cpt.php:41
+msgid "Form Submissions"
+msgstr "Vyplnenia formulára"
+
+#: classes/class-ccf-field-renderer.php:127
+#, php-format
+msgid "Allowed file extensions are %s. "
+msgstr "Povolené prípony súborov sú %s."
+
+#: classes/class-ccf-field-renderer.php:129
+#, php-format
+msgid "Max file size is %d MB. "
+msgstr "Max veľkosť súboru je %d MB"
+
+#: classes/class-ccf-field-renderer.php:634
+msgid "Street Address"
+msgstr "Ulica"
+
+#: classes/class-ccf-field-renderer.php:638
+msgid "Address Line 2"
+msgstr "Adresa 2"
+
+#: classes/class-ccf-field-renderer.php:645
+msgid "City"
+msgstr "Mesto"
+
+#: classes/class-ccf-field-renderer.php:658
+msgid "State"
+msgstr "Štát"
+
+#: classes/class-ccf-field-renderer.php:666
+msgid "ZIP Code"
+msgstr "PSČ"
+
+#: classes/class-ccf-field-renderer.php:676
+msgid "State / Region / Province"
+msgstr "Kraj"
+
+#: classes/class-ccf-field-renderer.php:684
+msgid "ZIP / Postal Code"
+msgstr "PSČ"
+
+#: classes/class-ccf-field-renderer.php:696
+msgid "Country"
+msgstr "Krajina"
+
+#: classes/class-ccf-field-renderer.php:874
+msgid "email@example.com"
+msgstr "email@priklad.sk"
+
+#: classes/class-ccf-field-renderer.php:886
+msgid "Email"
+msgstr "Email"
+
+#: classes/class-ccf-field-renderer.php:893
+msgid "Confirm Email"
+msgstr "Povrdenie emailu"
+
+#: classes/class-ccf-field-renderer.php:959
+msgid "First"
+msgstr "Krstné meno"
+
+#: classes/class-ccf-field-renderer.php:966
+msgid "Last"
+msgstr "Priezvisko"
+
+#: classes/class-ccf-field-renderer.php:1040 
+#: classes/class-ccf-field-renderer.php:1061
+msgid "HH"
+msgstr "HH"
+
+#: classes/class-ccf-field-renderer.php:1044 
+#: classes/class-ccf-field-renderer.php:1065
+msgid "MM"
+msgstr "MM"
+
+#: classes/class-ccf-field-renderer.php:1048 
+#: classes/class-ccf-field-renderer.php:1069
+msgid "AM"
+msgstr "AM"
+
+#: classes/class-ccf-field-renderer.php:1049 
+#: classes/class-ccf-field-renderer.php:1070
+msgid "PM"
+msgstr "PM"
+
+#: classes/class-ccf-field-cpt.php:30
+msgid "Form Fields"
+msgstr "Polia formulára"
+
+#: classes/class-ccf-ads.php:130
+msgid ""
+"We need your support. Please rate Custom Contact Forms five <span "
+"alt=\"f155\" class=\"dashicons dashicons-star-filled\"></span>'s"
+msgstr ""
+"Potrebujeme vašu podporu. Prosím ohodnoťte Custom Contact Forms piatimi "
+"<span alt=\"f155\" class=\"dashicons dashicons-star-filled\"></span>"
+
+#: classes/class-ccf-widget.php:17
+msgid "Add a custom contact form to a sidebar."
+msgstr "Pridá vlastný kontaktný formulár na sidebar."
+
+#: classes/class-ccf-widget.php:18
+msgid "Custom Contact Form"
+msgstr "Vlastný kontaktný formulár"
+
+#: classes/class-ccf-widget.php:63
+msgid "Title:"
+msgstr "Názov:"
+
+#: classes/class-ccf-widget.php:70
+msgid "Choose a form:"
+msgstr "Zvoľte formulár:"
+
+#: classes/class-ccf-widget.php:79
+msgid "Untitled"
+msgstr "Bez názvu"
+
+#: classes/class-ccf-api-form-controller.php:684
+msgid "Form not found"
+msgstr "Formulár sa nenašiel"
+
+#: classes/class-ccf-api-form-controller.php:710
+msgid "Could not create form"
+msgstr "Nepodarilo sa vytvoriť formulár"
+
+#: classes/class-ccf-api-form-controller.php:740
+msgid "Could not update form"
+msgstr "Nepodarilo sa upraviť formulár"
+
+#: classes/class-ccf-api-form-controller.php:768
+msgid "Could not delete form"
+msgstr "Nepodarilo sa odstrániť formulár"
+
+#: classes/class-ccf-api-form-controller.php:797
+msgid "Could not delete submission"
+msgstr "Nepodarilo sa odstrániť vyplnenie"
+
+#: classes/class-ccf-form-renderer.php:105
+msgid "This is not a valid email address."
+msgstr "Toto nie je platná emailová adresa"
+
+#: classes/class-ccf-form-renderer.php:108
+msgid "This is not a valid phone number."
+msgstr "Toto nie je platné telefónne číslo"
+
+#: classes/class-ccf-form-renderer.php:109
+msgid "This phone number is not 10 digits"
+msgstr "Toto telefónne číslo nemá 10 cifier"
+
+#: classes/class-ccf-form-renderer.php:113
+msgid "This is not an allowed file extension"
+msgstr "Toto nie je povolená prípona súboru"
+
+#: classes/class-ccf-form-renderer.php:114
+msgid "This file is bigger than"
+msgstr "Tento súbor je väčší než "
+
+#: classes/class-ccf-form-renderer.php:115
+msgid "An unknown error occured."
+msgstr "Vyskytla sa neznáma chyba."
+
+#: classes/class-ccf-form-renderer.php:182
+msgid "Log in to view this form."
+msgstr "Pred zobrazením formulára sa prihláste."
+
+#: classes/class-ccf-form-renderer.php:191
+msgid "This form is paused right now. Check back later!"
+msgstr "Tento formulár je pozastavený. Prosím vráťte sa neskôr!"
+
+#: classes/class-ccf-export.php:90
+msgid "Import"
+msgstr "Import"
+
+#. Name of the plugin
+msgid "Custom Contact Forms"
+msgstr "Vlastné kontaktné formuláre"
+
+#. Description of the plugin
+msgid ""
+"Build beautiful custom forms and manage submissions the WordPress way. View "
+"live previews of your forms while you build them. Contact forms, "
+"subscription forms, payment forms, etc."
+msgstr ""
+
+#. URI of the plugin
+#. Author URI of the plugin
+msgid "http://www.taylorlovett.com"
+msgstr ""
+
+#. Author of the plugin
+msgid "Taylor Lovett"
+msgstr ""
