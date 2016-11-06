@@ -180,6 +180,11 @@
 							download.className = 'ccf-submission-icon';
 							download.setAttribute( 'data-icon', '' );
 
+							var downloadWithAttachments = document.createElement( 'a' );
+							downloadWithAttachments.href = '?action=edit&post=' + parseInt( ccfSettings.postId ) + '&download_submissions=1&download_submissions_nonce=' + ccfSettings.downloadSubmissionsNonce + '&attachments=1';
+							downloadWithAttachments.className = 'ccf-submission-icon attachments';
+							downloadWithAttachments.setAttribute( 'data-icon', '' );
+
 							var screenOptionsLink = document.getElementById( 'show-settings-link' );
 							settings.onclick = function() {
 								screenOptionsLink.click();
@@ -187,6 +192,7 @@
 
 							metabox.insertBefore( settings, metabox.firstChild.nextSibling.nextSibling );
 							metabox.insertBefore( download, metabox.firstChild.nextSibling.nextSibling );
+							metabox.insertBefore( downloadWithAttachments, metabox.firstChild.nextSibling.nextSibling );
 
 							wp.ccf.createSubmissionsTable( container );
 

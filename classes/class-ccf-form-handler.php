@@ -604,6 +604,28 @@ class CCF_Form_Handler {
 		exit;
 	}
 
+	/*+
+	* Replaces field tokens on email or completition message
+	*
+	* @return string
+	*/
+	function submission_message($fields, $submission, $message){
+		foreach ( $fields as $field_id ) {
+			$field_slug = get_post_meta( $field_id, 'ccf_field_slug', true );
+
+			if ( ! empty( $field_slug ) && isset( $submission[ $field_slug ] ) ) {
+				$value = $submission[ $field_slug ];
+				if ( is_array( $value ) && isset( $value['email'] ) ) {
+					$value = $value['email'];
+				}
+
+				$message = str_ireplace( '[' . $field_slug . ']', wp_kses_post( $this->_flatten_and_concat( $value ) ), $message );
+			}
+		}
+		return $message;
+	}
+
+
 	/**
 	 * Process a form submission
 	 *
@@ -949,18 +971,7 @@ class CCF_Form_Handler {
 							$message = str_ireplace( '[form_page_url]', esc_url_raw( $form_page ), $message );
 						}
 
-						foreach ( $fields as $field_id ) {
-							$field_slug = get_post_meta( $field_id, 'ccf_field_slug', true );
-
-							if ( ! empty( $field_slug ) && isset( $submission[ $field_slug ] ) ) {
-								$value = $submission[ $field_slug ];
-								if ( is_array( $value ) && isset( $value['email'] ) ) {
-									$value = $value['email'];
-								}
-
-								$message = str_ireplace( '[' . $field_slug . ']', wp_kses_post( $this->_flatten_and_concat( $value ) ), $message );
-							}
-						}
+						$message = $this->submission_message($fields, $submission, $message);
 
 						$headers = array( 'MIME-Version: 1.0', 'Content-type: text/html; charset=utf-8' );
 						$name = null;
@@ -1119,7 +1130,7 @@ class CCF_Form_Handler {
 			if ( 'redirect' === $output['action_type'] ) {
 				$output['completion_redirect_url'] = apply_filters( 'ccf_form_completion_redirect_url', get_post_meta( $form_id, 'ccf_form_completion_redirect_url', true ), $form_id );
 			} else {
-				$output['completion_message'] = get_post_meta( $form_id, 'ccf_form_completion_message', true );
+				$output['completion_message'] = $this->submission_message($fields, $submission, get_post_meta( $form_id, 'ccf_form_completion_message', true ));
 
 				if ( empty( $output['completion_message'] ) ) {
 					$output['completion_message'] = esc_html__( 'Thank you for your submission.', 'custom-contact-forms' );

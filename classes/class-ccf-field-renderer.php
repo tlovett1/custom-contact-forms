@@ -31,6 +31,8 @@ class CCF_Field_Renderer {
 		$required = get_post_meta( $field_id, 'ccf_field_required', true );
 		$class_name = get_post_meta( $field_id, 'ccf_field_className', true );
 		$description = get_post_meta( $field_id, 'ccf_field_description', true );
+		$regular_expression_validator = get_post_meta( $field_id, 'ccf_field_regularExpressionValidator', true );
+		$regular_expression_validator_message = get_post_meta( $field_id, 'ccf_field_regularExpressionValidatorMessage', true );
 
 		$errors = CCF_Form_Handler::factory()->get_errors( $form_id, $slug );
 		$all_errors = CCF_Form_Handler::factory()->get_errors( $form_id );
@@ -51,7 +53,7 @@ class CCF_Field_Renderer {
 				<?php if ( ! empty( $required ) ) : ?><span class="required">*</span><?php endif; ?>
 				<?php echo esc_html( $label ); ?>
 			</label>
-			<input class="form-control <?php if ( ! empty( $errors ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> type="text" name="ccf_field_<?php echo esc_attr( $slug ); ?>" id="ccf_field_<?php echo esc_attr( $slug ); ?>" placeholder="<?php echo esc_attr( $placeholder ); ?>" value="<?php if ( ! empty( $post_value ) ) { echo esc_attr( $post_value ); } else { echo esc_attr( $value ); } ?>">
+			<input class="form-control <?php if ( ! empty( $errors ) ) : ?>field-error-input<?php endif; ?> field-input" <?php if ( ! empty( $required ) ) : ?>required aria-required="true"<?php endif; ?> type="text" name="ccf_field_<?php echo esc_attr( $slug ); ?>" id="ccf_field_<?php echo esc_attr( $slug ); ?>" placeholder="<?php echo esc_attr( $placeholder ); ?>" value="<?php if ( ! empty( $post_value ) ) { echo esc_attr( $post_value ); } else { echo esc_attr( $value ); } ?>"<?php echo ( ! empty( $regular_expression_validator ) ? (' data-re-validator="' . esc_attr($regular_expression_validator) . '" data-re-validator-message="' . esc_attr($regular_expression_validator_message)) . '"' : '') ?>>
 
 			<?php if ( ! empty( $description ) ) : ?>
 				<div class="field-description help-block text-muted">

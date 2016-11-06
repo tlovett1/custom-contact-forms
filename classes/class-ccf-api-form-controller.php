@@ -137,6 +137,14 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 				'sanitize' => 'sanitize_text_field',
 				'escape' => 'esc_html',
 			),
+			'regularExpressionValidator' => array(
+				'sanitize' => 'esc_attr',
+				'escape' => 'esc_attr',
+			),
+			'regularExpressionValidatorMessage' => array(
+				'sanitize' => 'esc_attr',
+				'escape' => 'esc_attr',
+			),
 		) );
 
 		$this->choice_attribute_keys = apply_filters( 'ccf_choice_attributes', array(
@@ -471,7 +479,7 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 			}
 
 			if ( isset( $data['description'] ) ) {
-				update_post_meta( $result, 'ccf_form_description', sanitize_text_field( $data['description'] ) );
+				update_post_meta( $result, 'ccf_form_description', wp_kses_post( $data['description'] ) );
 			}
 
 			if ( isset( $data['completionActionType'] ) ) {
@@ -479,7 +487,7 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 			}
 
 			if ( isset( $data['completionMessage'] ) ) {
-				update_post_meta( $result, 'ccf_form_completion_message', sanitize_text_field( $data['completionMessage'] ) );
+				update_post_meta( $result, 'ccf_form_completion_message', esc_html__( $data['completionMessage'] ) );
 			}
 
 			if ( isset( $data['completionRedirectUrl'] ) ) {
