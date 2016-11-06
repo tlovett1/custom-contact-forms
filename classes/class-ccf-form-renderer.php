@@ -195,7 +195,7 @@ class CCF_Form_Renderer {
 				<?php if ( empty( $completion_message ) ) : ?>
 					<?php esc_html_e( 'Thank you for your submission.', 'custom-contact-forms' ); ?>
 				<?php else : ?>
-					<?php echo esc_html( $completion_message ); ?>
+					<?php echo wp_kses_post( $completion_message ); ?>
 				<?php endif; ?>
 			</div>
 
@@ -261,7 +261,7 @@ class CCF_Form_Renderer {
 
 					<?php $description = get_post_meta( $form_id, 'ccf_form_description', true ); if ( ! empty( $description ) && apply_filters( 'ccf_show_form_description', true, $form_id ) ) : ?>
 						<div class="form-description">
-							<?php echo esc_html( $description ); ?>
+							<?php echo wp_kses_post( $description ); ?>
 						</div>
 					<?php endif; ?>
 
