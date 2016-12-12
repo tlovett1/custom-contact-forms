@@ -149,8 +149,17 @@ class CCF_Form_Renderer {
 	 * @return string
 	 */
 	public function get_rendered_form( $form_id ) {
-		$form = get_post( (int) $form_id );
-
+		if ( is_customize_preview() ) {
+			$form_query = new WP_Query( array(
+				'post__in' => array( $form_id ),
+				'post_type' => 'ccf_form',
+				'ignore_sticky_posts' => true,
+				'posts_per_page' => 1,
+			) );
+			$form = array_shift( $form_query->posts );
+		} else {
+			$form = get_post( $form_id );
+		}
 		if ( ! $form ) {
 			return '';
 		}

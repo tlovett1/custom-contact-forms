@@ -8,8 +8,8 @@
  * @subpackage JSON API
  */
 
-add_action( 'wp_enqueue_scripts', 'rest_register_scripts', -100 );
-add_action( 'admin_enqueue_scripts', 'rest_register_scripts', -100 );
+add_action( 'wp_enqueue_scripts', 'rest_register_scripts', 1000 );
+add_action( 'admin_enqueue_scripts', 'rest_register_scripts', 1000 );
 
 /**
  * Registers REST API JavaScript helpers.
