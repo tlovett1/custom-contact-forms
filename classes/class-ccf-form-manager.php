@@ -2329,8 +2329,8 @@ class CCF_Form_Manager {
 
 			wp_register_script( 'moment', plugins_url( '/bower_components/moment/moment.js', dirname( __FILE__ ) ), array(), CCF_VERSION );
 
-			if ( ! wp_script_is( 'wp-api', 'registered' ) ) {
-				wp_register_script( 'wp-api', plugins_url( '/wp-api/wp-api.js', dirname( __FILE__ ) ), array(), CCF_VERSION );
+			if ( ! wp_script_is( 'wp-api-ccf', 'registered' ) ) {
+				wp_register_script( 'wp-api-ccf', plugins_url( '/wp-api/wp-api.js', dirname( __FILE__ ) ), array(), CCF_VERSION );
 			}
 
 			$site_url_parsed = parse_url( site_url() );
@@ -2342,7 +2342,7 @@ class CCF_Form_Manager {
 				$api_root = site_url( 'wp-json' );
 			}
 
-			wp_enqueue_script( 'ccf-form-manager', plugins_url( $js_manager_path, dirname( __FILE__ ) ), array( 'json2', 'jquery', 'jquery-ui-core', 'jquery-ui-datepicker', 'underscore', 'backbone', 'jquery-ui-core', 'jquery-ui-draggable', 'jquery-ui-sortable', 'jquery-ui-droppable', 'wp-api', 'moment' ), CCF_VERSION, true );
+			wp_enqueue_script( 'ccf-form-manager', plugins_url( $js_manager_path, dirname( __FILE__ ) ), array( 'json2', 'jquery', 'jquery-ui-core', 'jquery-ui-datepicker', 'underscore', 'backbone', 'jquery-ui-core', 'jquery-ui-draggable', 'jquery-ui-sortable', 'jquery-ui-droppable', 'wp-api-ccf', 'moment' ), CCF_VERSION, true );
 			wp_localize_script( 'ccf-form-manager', 'ccfSettings', array(
 				'apiRoot' => $api_root,
 				'nonce' => wp_create_nonce( 'ccf_nonce' ),

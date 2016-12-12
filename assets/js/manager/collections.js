@@ -14,7 +14,7 @@
 
 	wp.ccf.collections = wp.ccf.collections || {};
 
-	wp.ccf.collections.Forms = wp.ccf.collections.Forms || wp.api.collections.Posts.extend(
+	wp.ccf.collections.Forms = wp.ccf.collections.Forms || wp.ccf.api.collections.Posts.extend(
 		{
 			model: wp.ccf.models.Form,
 
@@ -50,7 +50,7 @@
 		}
 	);
 
-	wp.ccf.collections.Fields = wp.ccf.collections.Fields || wp.api.collections.Posts.extend(
+	wp.ccf.collections.Fields = wp.ccf.collections.Fields || wp.ccf.api.collections.Posts.extend(
 		{
 			model: wp.ccf.models.Field,
 
@@ -86,7 +86,7 @@
 		}
 	);
 
-	wp.ccf.collections.Submissions = wp.ccf.collections.Submissions || wp.api.collections.Posts.extend(
+	wp.ccf.collections.Submissions = wp.ccf.collections.Submissions || wp.ccf.api.collections.Posts.extend(
 		{
 			model: wp.ccf.models.Submission,
 

@@ -107,10 +107,10 @@ class CCF_Custom_Contact_Forms {
 	 * @since  7.8.3
 	 */
 	public function rest_register_scripts_manual() {
-		wp_register_script( 'wp-api', plugins_url( 'wp-api.js', __FILE__ ), array( 'jquery', 'backbone', 'underscore' ), '1.1', true );
+		wp_enqueue_script( 'wp-api-ccf', plugins_url( 'wp-api/wp-api.js', dirname( __FILE__ ) . '../' ), array( 'jquery', 'backbone', 'underscore' ), '1.2', true );
 
 		$settings = array( 'root' => esc_url_raw( get_rest_url() ), 'nonce' => wp_create_nonce( 'wp_rest' ) );
-		wp_localize_script( 'wp-api', 'WP_API_Settings', $settings );
+		wp_localize_script( 'wp-api-ccf', 'WP_API_Settings', $settings );
 	}
 
 	/**
