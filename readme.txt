@@ -60,6 +60,9 @@ For full documentation, questions, feature requests, and support concerning the 
 
 == Changelog ==
 
+= 7.8.5 =
+* Prevent submissions from being accessible in API
+
 = 7.8.4 =
 * Fix WP 4.7 conflict
 
