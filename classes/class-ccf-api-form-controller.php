@@ -849,6 +849,16 @@ class CCF_API_Form_Controller extends WP_REST_Controller {
 	 * @return WP_Error|bool
 	 */
 	public function get_items_permissions_check( $request ) {
+		if ( ! is_user_logged_in() ) {
+			return false;
+		}
+
+		$submission_cpt = get_post_type_object( 'ccf_submission' );
+
+		if ( ! current_user_can( $submission_cpt->cap->edit_posts ) ) {
+			return false;
+		}
+
 		return true;
 	}
 
