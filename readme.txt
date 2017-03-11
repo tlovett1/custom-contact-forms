@@ -3,7 +3,7 @@ Contributors: tlovett1
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HR34W94MM53RQ
 Tags: contact form, web form, custom contact form, custom forms, captcha form, contact fields, form mailers, forms
 Requires at least: 3.9
-Tested up to: 4.5
+Tested up to: 4.8
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -59,6 +59,20 @@ Please refer to [Github](http://github.com/tlovett1/custom-contact-forms) for de
 For full documentation, questions, feature requests, and support concerning the Custom Contact Forms plugin, please refer to [Github](http://github.com/tlovett1/custom-contact-forms).
 
 == Changelog ==
+
+= 7.8.5 =
+* Prevent submissions from being accessible in API
+
+= 7.8.4 =
+* Fix WP 4.7 conflict
+
+= 7.8.3 =
+* Fix WooCommerce conflict
+
+= 7.8.2 = 
+* Add $submission to ccf_email_subject filter, correct "Invalid Date" issue with datepicker. Props (quayzar)[https://github.com/quayzar]
+* Fix WooCommerce conflict
+* Add support for Customize Posts plugin. Props (westonruter)[https://github.com/westonruter]
 
 = 7.8.1 =
 * Cache busy form submission URL

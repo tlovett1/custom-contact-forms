@@ -2,8 +2,9 @@
 	'use strict';
 
 	window.wp = window.wp || {};
+	wp.ccf = wp.ccf || {};
 
-	wp.api = {
+	wp.ccf.api = {
 		models: {},
 		collections: {},
 		utils: {}
@@ -40,7 +41,7 @@
 	 *
 	 * @param {Date} date.
 	 */
-	wp.api.utils.parseISO8601 = function( date ) {
+	wp.ccf.api.utils.parseISO8601 = function( date ) {
 		var timestamp, struct, i, k,
 			minutesOffset = 0,
 			numericKeys = [ 1, 4, 5, 6, 7, 10, 11 ];
@@ -120,13 +121,13 @@
 					return;
 				}
 
-				var timestamp = wp.api.utils.parseISO8601( response[key] );
+				var timestamp = wp.ccf.api.utils.parseISO8601( response[key] );
 				response[key] = new Date( timestamp );
 			});
 
 			// Parse the author into a User object.
 			if ( 'undefined' !== typeof response.author ) {
-				response.author = new wp.api.models.User( response.author );
+				response.author = new wp.ccf.api.models.User( response.author );
 			}
 
 			return response;
@@ -218,7 +219,7 @@
 	/**
 	 * Backbone model for single users.
 	 */
-	wp.api.models.User = BaseModel.extend(
+	wp.ccf.api.models.User = BaseModel.extend(
 		/** @lends User.prototype  */
 		{
 			idAttribute: 'id',
@@ -250,7 +251,7 @@
 	/**
 	 * Model for Taxonomy.
 	 */
-	wp.api.models.Taxonomy = BaseModel.extend(
+	wp.ccf.api.models.Taxonomy = BaseModel.extend(
 		/** @lends Taxonomy.prototype  */
 		{
 			idAttribute: 'slug',
@@ -272,7 +273,7 @@
 	/**
 	 * Backbone model for term.
 	 */
-	wp.api.models.Term = BaseModel.extend(
+	wp.ccf.api.models.Term = BaseModel.extend(
 		/** @lends Term.prototype */
 		{
 			idAttribute: 'id',
@@ -307,7 +308,7 @@
 	/**
 	 * Backbone model for single posts.
 	 */
-	wp.api.models.Post = BaseModel.extend( _.extend(
+	wp.ccf.api.models.Post = BaseModel.extend( _.extend(
 		/** @lends Post.prototype  */
 		{
 			idAttribute: 'id',
@@ -343,7 +344,7 @@
 	/**
 	 * Backbone model for pages.
 	 */
-	wp.api.models.Page = BaseModel.extend( _.extend(
+	wp.ccf.api.models.Page = BaseModel.extend( _.extend(
 		/** @lends Page.prototype  */
 		{
 			idAttribute: 'id',
@@ -379,7 +380,7 @@
 	/**
 	 * Backbone model for revisions.
 	 */
-	wp.api.models.Revision = BaseModel.extend( _.extend(
+	wp.ccf.api.models.Revision = BaseModel.extend( _.extend(
 		/** @lends Revision.prototype */
 		{
 			idAttribute: 'id',
@@ -417,7 +418,7 @@
 	/**
 	 * Backbone model for media items.
 	 */
-	wp.api.models.Media = BaseModel.extend( _.extend(
+	wp.ccf.api.models.Media = BaseModel.extend( _.extend(
 		/** @lends Media.prototype */
 		{
 			idAttribute: 'id',
@@ -458,7 +459,7 @@
 			initialize: function() {
 
 				// Todo: what of the parent model is a page?
-				this.parentModel = wp.api.models.Post;
+				this.parentModel = wp.ccf.api.models.Post;
 			}
 		}, TimeStampedMixin, HierarchicalMixin )
 	);
@@ -466,7 +467,7 @@
 	/**
 	 * Backbone model for comments.
 	 */
-	wp.api.models.Comment = BaseModel.extend( _.extend(
+	wp.ccf.api.models.Comment = BaseModel.extend( _.extend(
 		/** @lends Comment.prototype */
 		{
 			idAttribute: 'id',
@@ -511,7 +512,7 @@
 	/**
 	 * Backbone model for single post types.
 	 */
-	wp.api.models.PostType = BaseModel.extend(
+	wp.ccf.api.models.PostType = BaseModel.extend(
 		/** @lends PostType.prototype */
 		{
 			idAttribute: 'slug',
@@ -549,7 +550,7 @@
 	/**
 	 * Backbone model for a post status.
 	 */
-	wp.api.models.PostStatus = BaseModel.extend(
+	wp.ccf.api.models.PostStatus = BaseModel.extend(
 		/** @lends PostStatus.prototype */
 		{
 			idAttribute: 'slug',
@@ -715,48 +716,48 @@
 	/**
 	 * Backbone collection for posts.
 	 */
-	wp.api.collections.Posts = BaseCollection.extend(
+	wp.ccf.api.collections.Posts = BaseCollection.extend(
 		/** @lends Posts.prototype */
 		{
 			url: WP_API_Settings.root + 'wp/v2/posts',
 
-			model: wp.api.models.Post
+			model: wp.ccf.api.models.Post
 		}
 	);
 
 	/**
 	 * Backbone collection for pages.
 	 */
-	wp.api.collections.Pages = BaseCollection.extend(
+	wp.ccf.api.collections.Pages = BaseCollection.extend(
 		/** @lends Pages.prototype */
 		{
 			url: WP_API_Settings.root + 'wp/v2/pages',
 
-			model: wp.api.models.Page
+			model: wp.ccf.api.models.Page
 		}
 	);
 
 	/**
 	 * Backbone users collection.
 	 */
-	wp.api.collections.Users = BaseCollection.extend(
+	wp.ccf.api.collections.Users = BaseCollection.extend(
 		/** @lends Users.prototype */
 		{
 			url: WP_API_Settings.root + 'wp/v2/users',
 
-			model: wp.api.models.User
+			model: wp.ccf.api.models.User
 		}
 	);
 
 	/**
 	 * Backbone post statuses collection.
 	 */
-	wp.api.collections.PostStatuses = BaseCollection.extend(
+	wp.ccf.api.collections.PostStatuses = BaseCollection.extend(
 		/** @lends PostStatuses.prototype */
 		{
 			url: WP_API_Settings.root + 'wp/v2/statuses',
 
-			model: wp.api.models.PostStatus,
+			model: wp.ccf.api.models.PostStatus,
 
 			parse: function( response ) {
 				var responseArray = [];
@@ -775,22 +776,22 @@
 	/**
 	 * Backbone media library collection.
 	 */
-	wp.api.collections.MediaLibrary = BaseCollection.extend(
+	wp.ccf.api.collections.MediaLibrary = BaseCollection.extend(
 		/** @lends MediaLibrary.prototype */
 		{
 			url: WP_API_Settings.root + 'wp/v2/media',
 
-			model: wp.api.models.Media
+			model: wp.ccf.api.models.Media
 		}
 	);
 
 	/**
 	 * Backbone taxonomy collection.
 	 */
-	wp.api.collections.Taxonomies = BaseCollection.extend(
+	wp.ccf.api.collections.Taxonomies = BaseCollection.extend(
 		/** @lends Taxonomies.prototype */
 		{
-			model: wp.api.models.Taxonomy,
+			model: wp.ccf.api.models.Taxonomy,
 
 			url: WP_API_Settings.root + 'wp/v2/taxonomies'
 		}
@@ -799,10 +800,10 @@
 	/**
 	 * Backbone comment collection.
 	 */
-	wp.api.collections.Comments = BaseCollection.extend(
+	wp.ccf.api.collections.Comments = BaseCollection.extend(
 		/** @lends Comments.prototype */
 		{
-			model: wp.api.models.Comment,
+			model: wp.ccf.api.models.Comment,
 
 			/**
 			 * Return URL for collection.
@@ -816,10 +817,10 @@
 	/**
 	 * Backbone post type collection.
 	 */
-	wp.api.collections.PostTypes = BaseCollection.extend(
+	wp.ccf.api.collections.PostTypes = BaseCollection.extend(
 		/** @lends PostTypes.prototype */
 		{
-			model: wp.api.models.PostType,
+			model: wp.ccf.api.models.PostType,
 
 			url: WP_API_Settings.root + 'wp/v2/types',
 
@@ -840,12 +841,12 @@
 	/**
 	 * Backbone terms collection.
 	 *
-	 * Usage: new wp.api.collections.Terms( {}, { taxonomy: 'taxonomy-slug' } )
+	 * Usage: new wp.ccf.api.collections.Terms( {}, { taxonomy: 'taxonomy-slug' } )
 	 */
-	wp.api.collections.Terms = BaseCollection.extend(
+	wp.ccf.api.collections.Terms = BaseCollection.extend(
 		/** @lends Terms.prototype */
 		{
-			model: wp.api.models.Term,
+			model: wp.ccf.api.models.Term,
 
 			taxonomy: 'category',
 
@@ -876,12 +877,12 @@
 	/**
 	 * Backbone revisions collection.
 	 *
-	 * Usage: new wp.api.collections.Revisions( {}, { parent: POST_ID } ).
+	 * Usage: new wp.ccf.api.collections.Revisions( {}, { parent: POST_ID } ).
 	 */
-	wp.api.collections.Revisions = BaseCollection.extend(
+	wp.ccf.api.collections.Revisions = BaseCollection.extend(
 		/** @lends Revisions.prototype */
 		{
-			model: wp.api.models.Revision,
+			model: wp.ccf.api.models.Revision,
 
 			parent: null,
 

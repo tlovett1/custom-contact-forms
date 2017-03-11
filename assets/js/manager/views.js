@@ -733,6 +733,9 @@
 				var emailNotificationActive = this.el.querySelectorAll( '.form-email-notification-active' )[0].value;
 				this.model.set( 'active', ( '1' === emailNotificationActive ) ? true : false );
 
+				var emailNotificationIncludeUploads = this.el.querySelectorAll( '.form-email-notification-include-uploads' )[0].value;
+				this.model.set( 'includeUploads', ( '1' === emailNotificationIncludeUploads ) ? true : false );
+
 				var emailNotificationFromType = this.el.querySelectorAll( '.form-email-notification-from-type' )[0].value;
 				this.model.set( 'fromType', emailNotificationFromType );
 

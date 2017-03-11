@@ -16,7 +16,9 @@ class CCF_Form_Manager {
 	public function setup() {
 		add_action( 'media_buttons', array( $this, 'action_media_buttons' ) );
 		add_action( 'admin_footer', array( $this, 'print_templates' ) );
-		add_action( 'admin_enqueue_scripts' , array( $this, 'action_admin_enqueue_scripts_css' ), 9 );
+		add_action( 'customize_controls_print_footer_scripts', array( $this, 'customize_controls_print_footer_scripts' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'action_admin_enqueue_scripts_css' ), 9 );
+		add_action( 'customize_controls_enqueue_scripts' , array( $this, 'action_admin_enqueue_scripts_css' ), 9 );
 		add_filter( 'mce_css', array( $this, 'filter_mce_css' ) );
 	}
 
@@ -40,6 +42,16 @@ class CCF_Form_Manager {
 
 		$css .= ', ' . plugins_url( $css_path, dirname( __FILE__ ) );
 		return $css;
+	}
+
+	/**
+	 * Print all Backbone templates for form manager in Customizer
+	 */
+	public function customize_controls_print_footer_scripts() {
+		global $wp_customize;
+		if ( isset( $wp_customize->posts ) ) {
+			$this->print_templates();
+		}
 	}
 
 	/**
@@ -363,6 +375,14 @@ class CCF_Form_Manager {
 						<p class="email-notification-from-name-field">
 							<label for="ccf_form_email_notification_from_name_field"><?php esc_html_e( 'Pull "From" Name Dynamically from Field:', 'custom-contact-forms' ); ?></label>
 							<select name="email_notification_from_name_field" class="form-email-notification-from-name-field" id="ccf_form_email_notification_from_name_field">
+							</select>
+						</p>
+
+						<p>
+							<label for="ccf_form_email_notification_include_uploads"><?php esc_html_e( 'Include File Uploads:', 'custom-contact-forms' ); ?></label>
+							<select name="email_notification_include_uploads" class="form-email-notification-include-uploads" id="ccf_form_email_notification_include_uploads">
+								<option value="1"><?php esc_html_e( 'Yes', 'custom-contact-forms' ); ?></option>
+								<option value="0" <# if ( ! notification.includeUploads ) { #>selected<# } #>><?php esc_html_e( 'No', 'custom-contact-forms' ); ?></option>
 							</select>
 						</p>
 					</div>
@@ -2268,9 +2288,9 @@ class CCF_Form_Manager {
 	 * @since 6.0
 	 */
 	public function action_admin_enqueue_scripts_css() {
-		global $pagenow;
+		global $pagenow, $wp_customize;
 
-		if ( 'post.php' == $pagenow || 'post-new.php' == $pagenow ) {
+		if ( 'post.php' == $pagenow || 'post-new.php' == $pagenow || ( ! empty( $wp_customize ) && isset( $wp_customize->posts ) ) ) {
 			if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
 				$js_manager_path = '/assets/build/js/form-manager.js';
 				$js_mce_path = '/assets/js/form-mce.js';
@@ -2309,8 +2329,8 @@ class CCF_Form_Manager {
 
 			wp_register_script( 'moment', plugins_url( '/bower_components/moment/moment.js', dirname( __FILE__ ) ), array(), CCF_VERSION );
 
-			if ( ! wp_script_is( 'wp-api', 'registered' ) ) {
-				wp_register_script( 'wp-api', plugins_url( '/wp-api/wp-api.js', dirname( __FILE__ ) ), array(), CCF_VERSION );
+			if ( ! wp_script_is( 'wp-api-ccf', 'registered' ) ) {
+				wp_register_script( 'wp-api-ccf', plugins_url( '/wp-api/wp-api.js', dirname( __FILE__ ) ), array(), CCF_VERSION );
 			}
 
 			$site_url_parsed = parse_url( site_url() );
@@ -2322,7 +2342,7 @@ class CCF_Form_Manager {
 				$api_root = site_url( 'wp-json' );
 			}
 
-			wp_enqueue_script( 'ccf-form-manager', plugins_url( $js_manager_path, dirname( __FILE__ ) ), array( 'json2', 'jquery', 'jquery-ui-core', 'jquery-ui-datepicker', 'underscore', 'backbone', 'jquery-ui-core', 'jquery-ui-draggable', 'jquery-ui-sortable', 'jquery-ui-droppable', 'wp-api', 'moment' ), CCF_VERSION, true );
+			wp_enqueue_script( 'ccf-form-manager', plugins_url( $js_manager_path, dirname( __FILE__ ) ), array( 'json2', 'jquery', 'jquery-ui-core', 'jquery-ui-datepicker', 'underscore', 'backbone', 'jquery-ui-core', 'jquery-ui-draggable', 'jquery-ui-sortable', 'jquery-ui-droppable', 'wp-api-ccf', 'moment' ), CCF_VERSION, true );
 			wp_localize_script( 'ccf-form-manager', 'ccfSettings', array(
 				'apiRoot' => $api_root,
 				'nonce' => wp_create_nonce( 'ccf_nonce' ),

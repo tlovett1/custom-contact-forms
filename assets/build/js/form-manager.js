@@ -397,6 +397,7 @@
 					title: '',
 					content: '[all_fields]',
 					active: true,
+					includeUploads: true,
 					addresses: new wp.ccf.collections.FormNotificationAddresses(),
 					fromType: 'default',
 					fromAddress: '',
@@ -452,7 +453,7 @@
 		}
 	);
 
-	wp.ccf.models.Form = wp.ccf.models.Form || wp.api.models.Post.extend(
+	wp.ccf.models.Form = wp.ccf.models.Form || wp.ccf.api.models.Post.extend(
 		{
 
 			urlRoot: ccfSettings.apiRoot.replace( /\/$/, '' ) + '/ccf/v1/forms',
@@ -497,7 +498,7 @@
 			},
 
 			decode: function() {
-				var keys = _.keys( wp.api.models.Post.prototype.defaults );
+				var keys = _.keys( wp.ccf.api.models.Post.prototype.defaults );
 				keys = _.without( keys, 'title' );
 
 				return _modelDecode.call( this, keys );
@@ -706,7 +707,7 @@
 		}
 	);
 
-	wp.ccf.models.Submission = wp.api.models.Submission || wp.api.models.Post.extend(
+	wp.ccf.models.Submission = wp.ccf.api.models.Submission || wp.ccf.api.models.Post.extend(
 		{
 			defaults: {
 				id: null,
@@ -720,7 +721,7 @@
 		}
 	);
 
-	wp.ccf.models.Field = wp.api.models.Field || wp.api.models.Post.extend(
+	wp.ccf.models.Field = wp.ccf.api.models.Field || wp.ccf.api.models.Post.extend(
 		{
 			idAttribute: 'id',
 
@@ -756,7 +757,7 @@
 			},
 
 			decode: function() {
-				return _modelDecode.call( this, _.keys( wp.api.models.Post.prototype.defaults ) );
+				return _modelDecode.call( this, _.keys( wp.ccf.api.models.Post.prototype.defaults ) );
 			},
 
 			hasRequiredAttributes: function() {
@@ -1159,7 +1160,7 @@
 
 	wp.ccf.collections = wp.ccf.collections || {};
 
-	wp.ccf.collections.Forms = wp.ccf.collections.Forms || wp.api.collections.Posts.extend(
+	wp.ccf.collections.Forms = wp.ccf.collections.Forms || wp.ccf.api.collections.Posts.extend(
 		{
 			model: wp.ccf.models.Form,
 
@@ -1195,7 +1196,7 @@
 		}
 	);
 
-	wp.ccf.collections.Fields = wp.ccf.collections.Fields || wp.api.collections.Posts.extend(
+	wp.ccf.collections.Fields = wp.ccf.collections.Fields || wp.ccf.api.collections.Posts.extend(
 		{
 			model: wp.ccf.models.Field,
 
@@ -1231,7 +1232,7 @@
 		}
 	);
 
-	wp.ccf.collections.Submissions = wp.ccf.collections.Submissions || wp.api.collections.Posts.extend(
+	wp.ccf.collections.Submissions = wp.ccf.collections.Submissions || wp.ccf.api.collections.Posts.extend(
 		{
 			model: wp.ccf.models.Submission,
 
@@ -1999,6 +2000,9 @@
 
 				var emailNotificationActive = this.el.querySelectorAll( '.form-email-notification-active' )[0].value;
 				this.model.set( 'active', ( '1' === emailNotificationActive ) ? true : false );
+
+				var emailNotificationIncludeUploads = this.el.querySelectorAll( '.form-email-notification-include-uploads' )[0].value;
+				this.model.set( 'includeUploads', ( '1' === emailNotificationIncludeUploads ) ? true : false );
 
 				var emailNotificationFromType = this.el.querySelectorAll( '.form-email-notification-from-type' )[0].value;
 				this.model.set( 'fromType', emailNotificationFromType );

@@ -167,11 +167,11 @@ msgstr "Pays"
 #: ../classes/class-ccf-field-renderer.php:803 ../classes/class-ccf-form-manager.php:1215
 #: ../classes/class-ccf-form-manager.php:1516
 msgid "Email"
-msgstr "Mél"
+msgstr "Mail"
 
 #: ../classes/class-ccf-field-renderer.php:810 ../classes/class-ccf-form-manager.php:1219
 msgid "Confirm Email"
-msgstr "Confirmez l’adresse mél"
+msgstr "Confirmez l’adresse mail"
 
 #: ../classes/class-ccf-field-renderer.php:876 ../classes/class-ccf-form-manager.php:1087
 msgid "First"
@@ -379,11 +379,11 @@ msgstr "Ce n’est pas un numéro de téléphone à 10 chiffres"
 
 #: ../classes/class-ccf-form-handler.php:368 ../classes/class-ccf-form-handler.php:384
 msgid "This is not a valid email"
-msgstr "Ce n’est pas une adresse mél valide"
+msgstr "Ce n’est pas une adresse mail valide"
 
 #: ../classes/class-ccf-form-handler.php:376 ../classes/class-ccf-form-renderer.php:54
 msgid "Emails do not match."
-msgstr "Les adresses mél ne correspondent pas."
+msgstr "Les adresses mail ne correspondent pas."
 
 #: ../classes/class-ccf-form-handler.php:409
 msgid "First name is required."
@@ -575,15 +575,15 @@ msgstr "Notifications du formulaire"
 
 #: ../classes/class-ccf-form-manager.php:192
 msgid "Send Email Notifications:"
-msgstr "Envoyer un mél de notification :"
+msgstr "Envoyer un mail de notification :"
 
 #: ../classes/class-ccf-form-manager.php:201
 msgid "\"To\" Email Addresses (comma separated):"
-msgstr "Adresses mél de destination (séparée par une virgule) :"
+msgstr "Adresses mail de destination (séparée par une virgule) :"
 
 #: ../classes/class-ccf-form-manager.php:206
 msgid "\"From\" Email Address Type:"
-msgstr "Type d’adresse mél d’origine"
+msgstr "Type d’adresse mail d’origine"
 
 #: ../classes/class-ccf-form-manager.php:208
 msgid "WordPress Default"
@@ -591,7 +591,7 @@ msgstr "Wordpress par défaut"
 
 #: ../classes/class-ccf-form-manager.php:209
 msgid "Custom Email"
-msgstr "Mél personnalisé"
+msgstr "Mail personnalisé"
 
 #: ../classes/class-ccf-form-manager.php:210 ../classes/class-ccf-form-manager.php:231
 msgid "Form Field"
@@ -958,7 +958,7 @@ msgstr ""
 
 #: ../classes/class-ccf-form-manager.php:1541
 msgid "You have no email fields"
-msgstr "Vous n’avez pas de champ mél"
+msgstr "Vous n’avez pas de champ mail"
 
 #: ../classes/class-ccf-form-manager.php:1542
 msgid "You have no name fields"
@@ -978,7 +978,7 @@ msgstr "Ce formulaire est bloqué. Ressayer plus tard !"
 
 #: ../classes/class-ccf-form-renderer.php:55
 msgid "This is not a valid email address."
-msgstr "Ce n’est pas une adresse mél valide."
+msgstr "Ce n’est pas une adresse mail valide."
 
 #: ../classes/class-ccf-form-renderer.php:58
 msgid "This is not a valid phone number."
