@@ -966,7 +966,7 @@ class CCF_Form_Handler {
 							}
 						}
 
-						$headers = array( 'MIME-Version: 1.0', 'Content-type: text/html; charset=utf-8' );
+						$headers = array('Content-type: text/html; charset=utf-8' );
 						$name = null;
 						$email = null;
 
