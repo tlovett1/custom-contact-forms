@@ -115,7 +115,9 @@
 
 			document.getElementsByTagName( 'body' )[0].appendChild( this.instance.el );
 
-			Backbone.history.start();
+			if (!Backbone.History.started) {
+				Backbone.history.start();
+			}
 
 			return this.instance;
 		},
