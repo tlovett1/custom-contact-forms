@@ -367,12 +367,11 @@
 			format;
 
 		for ( var i = 0; i < datepickers.length; i++ ) {
-			options = {};
+			options = { minDate:0 };
 			format = datepickers[i].getAttribute( 'data-date-format');
 			if ( format ) {
 				options.dateFormat = format.replace( /yyyy/i, 'yy' );
 			}
-
 			$( datepickers[i] ).datepicker( options );
 		}
 

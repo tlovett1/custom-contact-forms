@@ -4,7 +4,7 @@
  * Plugin URI: http://www.taylorlovett.com
  * Description: Build beautiful custom forms and manage submissions the WordPress way. View live previews of your forms while you build them. Contact forms, subscription forms, payment forms, etc.
  * Author: Taylor Lovett
- * Version: 7.8.5
+ * Version: 7.8.5.1
  * Text Domain: custom-contact-forms
  * Domain Path: /languages
  * Author URI: http://www.taylorlovett.com

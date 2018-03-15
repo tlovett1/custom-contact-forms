@@ -1109,7 +1109,7 @@ class CCF_Form_Handler {
 									}
 
 									$subject = apply_filters( 'ccf_email_subject', $subject, $form_id, $email, $form_page, $notification, $submission );
-									$notification_content = apply_filters( 'ccf_email_content', $message, $form_id, $email, $form_page, $notification );
+									$notification_content = apply_filters( 'ccf_email_content', $message, $form_id, $email, $form_page, $notification, $submission );
 									$notification_headers = apply_filters( 'ccf_email_headers', $headers, $form_id, $email, $form_page, $notification );
 
 									if ( ! $include_uploads ) {
